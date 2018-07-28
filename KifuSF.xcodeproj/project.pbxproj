@@ -14,6 +14,11 @@
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
 		C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
 		C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */; };
+		C5CA7BAD210D24380052D440 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BAC210D24380052D440 /* User.swift */; };
+		C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB0210D24F50052D440 /* UserService.swift */; };
+		C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB2210D26CF0052D440 /* Constants.swift */; };
+		C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB4210D2B030052D440 /* StorageService.swift */; };
+		C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		C5A351DE210D0CE500A717D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5A351E0210D0CE500A717D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C5CA7BAC210D24380052D440 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C5CA7BB0210D24F50052D440 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		C5CA7BB2210D26CF0052D440 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C5CA7BB4210D2B030052D440 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +81,7 @@
 		C5A351D3210D0CE500A717D3 /* KifuSF */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BAF210D24CF0052D440 /* Services */,
 				C5A351E9210D0E0200A717D3 /* Views */,
 				C5A351ED210D0E5100A717D3 /* Supporting Files */,
 				C5A351EC210D0E4900A717D3 /* Extensions */,
@@ -85,6 +96,7 @@
 		C5A351E6210D0DAD00A717D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BAC210D24380052D440 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -109,6 +121,7 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -116,6 +129,7 @@
 		C5A351EC210D0E4900A717D3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -128,6 +142,15 @@
 				C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C5CA7BAF210D24CF0052D440 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA7BB0210D24F50052D440 /* UserService.swift */,
+				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -281,8 +304,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
+				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
+				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
+				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
