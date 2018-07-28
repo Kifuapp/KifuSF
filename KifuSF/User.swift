@@ -51,7 +51,7 @@ struct User: Codable {
         self.contactNumber = contactNumber
     }
     
-    init?(with snapshot: DataSnapshot) {
+    init?(from snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String: Any],
             let username = dict["username"] as? String,
             let uid = dict["uid"] as? String,
