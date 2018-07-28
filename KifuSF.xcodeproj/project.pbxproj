@@ -14,6 +14,9 @@
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
 		C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
 		C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */; };
+		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
+		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
+		E92994F0210D287300A32924 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EF210D287300A32924 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		C5A351DE210D0CE500A717D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5A351E0210D0CE500A717D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
+		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		E92994EF210D287300A32924 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +91,8 @@
 		C5A351E6210D0DAD00A717D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E92994ED210D27CC00A32924 /* Donation.swift */,
+				E92994EF210D287300A32924 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -109,6 +117,7 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E92994EB210D27C100A32924 /* DonationService.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -281,7 +290,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
+				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
+				E92994F0210D287300A32924 /* User.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
