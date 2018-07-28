@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44339C31210D13DC00E6663E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C30210D13DC00E6663E /* GradientView.swift */; };
 		C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44339C30210D13DC00E6663E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5A351D6210D0CE500A717D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				44339C30210D13DC00E6663E /* GradientView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
+				44339C31210D13DC00E6663E /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
