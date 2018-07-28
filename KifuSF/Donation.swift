@@ -10,20 +10,16 @@ import Foundation
 import FirebaseDatabase
 
 struct OpenDonation {
+    let uid: String
     let title: String
     let notes: String
-    let imageUrl: URL
+    let imageUrl: String
     let creationDate: Date
     let longitude: Double
     let laditude: Double
+    let pickUpAddress: String
     let donator: User
     
-//    init?(snapshot: DataSnapshot) {
-//        
-//    }
-}
-
-struct Donation {
     enum Status: Int {
         case Open
         case AwaitingPickup
@@ -32,6 +28,30 @@ struct Donation {
     }
     
     let status: Status
+    let volunteer: User?
+    
+    var dictValue: [String: Any] {
+        let timeAgo = self.creationDate.timeIntervalSince1970
+        return [
+            "title": title,
+            "notes": notes,
+            "imageURL": imageUrl,
+            "creation": timeAgo,
+            "longitude": longitude,
+            "laditude": laditude,
+            "pickUpAddress": pickUpAddress,
+            "donator": donator.dictValue,
+            "status": status.rawValue,
+            "volunteer": volunteer?.dictValue as Any
+        ]
+    }
+    
+//    init?(snapshot: DataSnapshot) {
+//        
+//    }
+}
+
+struct Donation {
     
     let title: String
     let notes: String
