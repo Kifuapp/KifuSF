@@ -72,6 +72,10 @@ class StatusViewController: UIViewController {
     
     @IBAction func donationGreenButtonTapped(_ sender: Any) {
     }
+    
+    @IBAction func emptyDeliveryButtonTapped(_ sender: Any) {
+        //move to items screen
+    }
     /*
     // MARK: - Navigation
 

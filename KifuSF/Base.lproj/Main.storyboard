@@ -19,9 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stripe" translatesAutoresizingMaskIntoConstraints="NO" id="Uq8-aX-ArO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="KOe-fL-CCR">
                                 <rect key="frame" x="40" y="236" width="295" height="195"/>
                                 <subviews>
@@ -81,13 +78,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Uq8-aX-ArO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2rX-OB-NJU"/>
-                            <constraint firstAttribute="bottom" secondItem="Uq8-aX-ArO" secondAttribute="bottom" id="5pW-AP-MrR"/>
                             <constraint firstAttribute="trailing" secondItem="KOe-fL-CCR" secondAttribute="trailing" constant="40" id="BeM-uV-DQH"/>
                             <constraint firstItem="KOe-fL-CCR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="fs1-D1-Fd3"/>
                             <constraint firstItem="KOe-fL-CCR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="jxQ-da-FKc"/>
-                            <constraint firstItem="Uq8-aX-ArO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mbt-4n-oUW"/>
-                            <constraint firstItem="Uq8-aX-ArO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="oJM-jg-H39"/>
                             <constraint firstItem="KOe-fL-CCR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oua-xD-276"/>
                             <constraint firstItem="KOe-fL-CCR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pFa-Tl-C9r"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KOe-fL-CCR" secondAttribute="trailing" constant="40" id="ygm-CC-uSH"/>
@@ -1748,7 +1741,7 @@
                                                                         <state key="normal" title="Deliver Now!"/>
                                                                         <connections>
                                                                             <action selector="donationGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="B9d-eR-ej1"/>
-                                                                            <segue destination="pjf-Mr-QSK" kind="presentation" animates="NO" id="J2c-k0-flE"/>
+                                                                            <action selector="emptyDeliveryButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="k9b-3j-ftq"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -1855,7 +1848,7 @@
         <scene sceneID="6iR-bp-Rd4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oH0-DB-eHv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Items" id="db3-6s-897"/>
+                    <tabBarItem key="tabBarItem" title="Items" image="ItemsIcon" id="db3-6s-897"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JWb-UG-c7d">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1880,7 +1873,7 @@
         <scene sceneID="nDk-0t-JEP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yhf-DJ-vd6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Status" id="bLn-kb-mJu"/>
+                    <tabBarItem key="tabBarItem" title="Status" image="StatusIcon" id="bLn-kb-mJu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jn4-bH-6Kx">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1908,20 +1901,33 @@
                     <view key="view" contentMode="scaleToFill" id="0nA-1b-iFf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaderboard" translatesAutoresizingMaskIntoConstraints="NO" id="QID-g3-Zpy">
+                                <rect key="frame" x="23" y="84" width="329" height="623.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QID-g3-Zpy" secondAttribute="height" multiplier="75:142" id="fil-GT-ACO"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QID-g3-Zpy" firstAttribute="leading" secondItem="QQX-iL-GcB" secondAttribute="leading" constant="23" id="eC3-bs-DTn"/>
+                            <constraint firstItem="QID-g3-Zpy" firstAttribute="top" secondItem="QQX-iL-GcB" secondAttribute="top" constant="20" id="iaj-PI-Hr4"/>
+                            <constraint firstItem="QQX-iL-GcB" firstAttribute="trailing" secondItem="QID-g3-Zpy" secondAttribute="trailing" constant="23" id="pSK-rR-Fh8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QQX-iL-GcB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Social" id="gnx-rw-TjN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMH-sd-tut" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="2471"/>
+            <point key="canvasLocation" x="949.60000000000002" y="2470.6146926536735"/>
         </scene>
         <!--Social-->
         <scene sceneID="QRT-Wg-DRD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJA-xc-gal" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Social" id="Zba-jV-QMu"/>
+                    <tabBarItem key="tabBarItem" title="Social" image="SocialIcon" id="Zba-jV-QMu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Og-yC-Krl">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1944,11 +1950,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ItemsIcon" width="26" height="26"/>
+        <image name="Leaderboard" width="3025" height="5788"/>
         <image name="Logo" width="1170" height="452"/>
         <image name="PlusSquare" width="600" height="600"/>
-        <image name="Stripe" width="2500" height="2500"/>
+        <image name="SocialIcon" width="26" height="26"/>
+        <image name="StatusIcon" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="J2c-k0-flE"/>
-    </inferredMetricsTieBreakers>
 </document>
