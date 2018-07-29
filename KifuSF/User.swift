@@ -15,9 +15,9 @@ struct User: Codable {
     let imageURL: String
     let username: String
     let contactNumber: String
-    
+
     private static var _current: User?
-    
+
     public var dictValue: [String: Any] {
         return ["username": username,
                 "uid": uid,
@@ -32,17 +32,17 @@ struct User: Codable {
         }
         return currentUser
     }
-    
+
     public static func setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
         if writeToUserDefaults {
             if let data = try? JSONEncoder().encode(user) {
                 UserDefaults.standard.set(data, forKey: "currentUser")
             }
         }
-        
+
         _current = user
     }
-    
+
     init(username: String, uid: String, imageURL: String, contributionPoints: Int, contactNumber: String) {
         self.username = username
         self.uid = uid
@@ -50,7 +50,7 @@ struct User: Codable {
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
     }
-    
+
     init?(from snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String: Any],
             let username = dict["username"] as? String,
@@ -59,13 +59,13 @@ struct User: Codable {
             let contributionPoints = dict["contributionPoints"] as? Int,
             let contactNumber = dict["contactNumber"] as? String
             else { return nil }
-        
+
         self.username = username
         self.uid = uid
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
     }
-    
-    
+
+
 }
