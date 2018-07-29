@@ -18,10 +18,10 @@ extension StorageReference {
         return Storage.storage().reference().child("images/users/\(uid)/\(timestamp).jpg")
     }
     
-//    public static func newDonationImageReference(for donation: Donation) -> StorageReference {
-//        let timestamp = dateFormatter.string(from: Date())
-//        let uid = donation.donator.uid
-//        
-//        return Storage.storage().reference().child("images/donations/\(uid)/\(timestamp).jpg")
-//    }
+    static func newDonationImageReference() -> StorageReference {
+        let timestamp = dateFormatter.string(from: Date())
+        let uid = User.current.uid
+        
+        return Storage.storage().reference().child("images/donations/\(uid)/\(timestamp).jpg")
+    }
 }

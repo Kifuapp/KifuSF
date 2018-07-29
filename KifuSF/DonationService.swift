@@ -19,34 +19,39 @@ struct DonationService {
         longitude: Double, latitude: Double, completion: @escaping (OpenDonation) -> ()) {
         
         //upload image to storage and get back url
-        let storageUrl = URL(string: "")!
-        
-        //get ref
-        let ref = Database.database().reference().child("openDonations").childByAutoId()
-        
-        //create donation and get dict value
-        let donation = OpenDonation(
-            uid: ref.key,
-            title: title,
-            notes: notes,
-            imageUrl: storageUrl.absoluteString,
-            creationDate: Date(),
-            longitude: latitude,
-            laditude: longitude,
-            pickUpAddress: pickUpAddress,
-            donator: User.current,
-            status: .Open,
-            volunteer: nil
-        )
+        let donationImageRef = StorageReference.newDonationImageReference()
+        StorageService.uploadImage(image, at: donationImageRef) { (url) in
+            guard let storageUrl = url else {
+                return assertionFailure("failed to upload image")
+            }
+            
+            //get ref for new donation
+            let ref = Database.database().reference().child("openDonations").childByAutoId()
+            
+            //create donation and get dict value
+            let donation = OpenDonation(
+                uid: ref.key,
+                title: title,
+                notes: notes,
+                imageUrl: storageUrl.absoluteString,
+                creationDate: Date(),
+                longitude: latitude,
+                laditude: longitude,
+                pickUpAddress: pickUpAddress,
+                donator: User.current,
+                status: .Open,
+                volunteer: nil
+            )
+            
+            let donationDict = donation.dictValue
+            
+            //send request
+            ref.updateChildValues(donationDict) { error, databaseRef in
                 
-        let donationDict = donation.dictValue
-        
-        //send request
-        ref.updateChildValues(donationDict) { error, databaseRef in
-            completion(donation)
+                //and return the object
+                completion(donation)
+            }
         }
-        
-        //and return the object
     }
     
     static func showTimelineDonations(completion: @escaping ([OpenDonation]) -> ()) {
@@ -60,11 +65,12 @@ struct DonationService {
                 return completion([]) //empty array
             }
             
+            
+            //map snapshot into array of donation
             let openDonations: [OpenDonation] = snapshotValue.compactMap(OpenDonation.init)
+            
+            //return
+            completion(openDonations)
         }
-        
-        //map snapshot into array of donation
-        
-        //return
     }
 }
