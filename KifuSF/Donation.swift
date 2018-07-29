@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-struct OpenDonation {
+struct Donation {
     let uid: String
     let title: String
     let notes: String
@@ -19,6 +19,7 @@ struct OpenDonation {
     let laditude: Double
     let pickUpAddress: String
     let donator: User
+    let verificationUrl: String?
     
     enum Status: Int {
         case Open
@@ -41,6 +42,7 @@ struct OpenDonation {
         static let donator = "donator"
         static let status = "status"
         static let volunteer = "volunteer"
+        static let verificationUrl = "verificationUrl"
     }
     
     var dictValue: [String: Any] {
@@ -55,7 +57,8 @@ struct OpenDonation {
             Keys.pickUpAddress: pickUpAddress,
             Keys.donator: donator.dictValue,
             Keys.status: status.rawValue,
-            Keys.volunteer: volunteer?.dictValue as Any
+            Keys.volunteer: volunteer?.dictValue as Any,
+            Keys.verificationUrl: verificationUrl as Any
         ]
     }
     
@@ -69,8 +72,9 @@ struct OpenDonation {
         laditude: Double,
         pickUpAddress: String,
         donator: User,
-        status: OpenDonation.Status,
-        volunteer: User?) {
+        status: Donation.Status,
+        volunteer: User?,
+        verificationUrl: String? = nil) {
         self.uid = uid
         self.title = title
         self.notes = notes
@@ -82,6 +86,7 @@ struct OpenDonation {
         self.donator = donator
         self.status = status
         self.volunteer = volunteer
+        self.verificationUrl = verificationUrl
     }
     
     init?(snapshot: DataSnapshot) {
@@ -124,6 +129,11 @@ struct OpenDonation {
             )
         }
         
+        var verificationUrl: String? = nil
+        if let verificationUrlValue = dict[Keys.verificationUrl] as! String? {
+            verificationUrl = verificationUrlValue
+        }
+        
         self.uid = snapshot.key
         self.title = title
         self.notes = notes
@@ -142,6 +152,7 @@ struct OpenDonation {
         self.donator = donator
         self.status = Status(rawValue: statusValue)!
         self.volunteer = volunteer
+        self.verificationUrl = verificationUrl
     }
 }
 

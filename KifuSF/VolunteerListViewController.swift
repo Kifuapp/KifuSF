@@ -10,7 +10,7 @@ import UIKit
 
 class VolunteerListViewController: UIViewController {
     
-    var donation: OpenDonation!
+    var donation: Donation!
     var volunteers = [User]() {
         didSet {
             volunteerTable.reloadData()

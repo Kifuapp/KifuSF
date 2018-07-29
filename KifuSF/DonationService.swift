@@ -16,7 +16,7 @@ struct DonationService {
         notes: String,
         image: UIImage,
         pickUpAddress: String,
-        longitude: Double, latitude: Double, completion: @escaping (OpenDonation) -> ()) {
+        longitude: Double, latitude: Double, completion: @escaping (Donation) -> ()) {
         
         //upload image to storage and get back url
         let donationImageRef = StorageReference.newDonationImageReference()
@@ -29,7 +29,7 @@ struct DonationService {
             let ref = Database.database().reference().child("openDonations").childByAutoId()
             
             //create donation and get dict value
-            let donation = OpenDonation(
+            let donation = Donation(
                 uid: ref.key,
                 title: title,
                 notes: notes,
@@ -54,7 +54,7 @@ struct DonationService {
         }
     }
     
-    static func showTimelineDonations(completion: @escaping ([OpenDonation]) -> ()) {
+    static func showTimelineDonations(completion: @escaping ([Donation]) -> ()) {
         
         //get donations ref
         let ref = Database.database().reference().child("openDonations")
@@ -67,8 +67,8 @@ struct DonationService {
             
             
             //map snapshot into array of donation
-            let openDonations: [OpenDonation] = snapshotValue.compactMap({ (snapshot) -> OpenDonation? in
-                guard let donationFromSnapshot = OpenDonation(snapshot: snapshot) else {
+            let openDonations: [Donation] = snapshotValue.compactMap({ (snapshot) -> Donation? in
+                guard let donationFromSnapshot = Donation(snapshot: snapshot) else {
                     fatalError("could not decode")
                 }
                 
@@ -91,7 +91,7 @@ struct DonationService {
         }
     }
 
-    static func showOpenDontationAndDelivery(completion: @escaping (OpenDonation?, OpenDonation?) -> ()) {
+    static func showOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> ()) {
         let ref = Database.database().reference().child("openDonations")
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -99,11 +99,11 @@ struct DonationService {
                 fatalError("could not decode")
             }
             
-            var openDelivery: OpenDonation? = nil
-            var openDonation: OpenDonation? = nil
+            var openDelivery: Donation? = nil
+            var openDonation: Donation? = nil
             
             for aDonationSnapshot in snapshots {
-                guard let aDonation = OpenDonation(snapshot: aDonationSnapshot) else {
+                guard let aDonation = Donation(snapshot: aDonationSnapshot) else {
                     fatalError("could not decode")
                 }
                 
@@ -128,7 +128,7 @@ struct DonationService {
      
      - returns: <#Sed do eiusmod tempor.#>
      */
-    static func accept(volunteer: User, for donation: OpenDonation, completion: @escaping (Bool) -> ()) {
+    static func accept(volunteer: User, for donation: Donation, completion: @escaping (Bool) -> ()) {
         //get donation ref
         let ref = Database.database().reference().child("openDonations").child(donation.uid)
         
@@ -153,15 +153,15 @@ struct DonationService {
         RequestService.deleteRequests(for: donation)
     }
     
-    static func setStatusToAwaitingDelivery(for donation: OpenDonation) {
+    static func setStatusToAwaitingDelivery(for donation: Donation) {
         
     }
     
-    static func setStatusToAwaitingApproval(for donation: OpenDonation) {
+    static func setStatusToAwaitingApproval(for donation: Donation) {
         
     }
     
-    static func remove(donation: OpenDonation) {
+    static func remove(donation: Donation) {
         
     }
 
