@@ -23,7 +23,7 @@ class DonationPostViewController: UIViewController {
         photoHelper.completionHandler = { image in
             self.itemImage.image = image
         }
-        
+
         // Do any additional setup after loading the view.
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -43,24 +43,27 @@ class DonationPostViewController: UIViewController {
         photoHelper.presentActionSheet(from: self)
     }
 
+    @IBAction func setLocationButtonTapped(_ sender: Any) {
+    }
+    
     @IBAction func donateButtonTapped(_ sender: Any) {
-        
+
         //validate if the fields are empty
         if itemNameField.text!.isEmpty || itemDescriptionTextView.text.isEmpty {
             errorLabel.text = "Fill in everything"
             return
         }
-        
+
         //validate the image is not the default image
         if itemImage.image == UIImage(named: "PlusSquare") {
             errorLabel.text = "Set the photo"
             return
         }
-        
+
         let itemTitle = itemNameField.text!
         let detailText = itemDescriptionTextView.text!
         let image = itemImage.image!
-        
+
         //TODO: Shu-Address picker, store the address string and long and lat
 
         //Post the Donation
@@ -71,7 +74,7 @@ class DonationPostViewController: UIViewController {
             pickUpAddress: "NOT IMPLEMENTED",
             longitude: 123,
             latitude: 123) { [weak self] (_) in
-                
+
                 //Then dismiss
                 self?.dismiss(animated: true, completion: nil)
         }
