@@ -1151,9 +1151,7 @@
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                                 <state key="normal" title="Cancel"/>
                                                                                 <connections>
-                                                                                    <action selector="deliveryCancelButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="sQe-nd-HeY"/>
                                                                                     <action selector="donationCancelButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="Sjb-9d-bMJ"/>
-                                                                                    <action selector="requestButtonTapped:" destination="beJ-Gr-SOD" eventType="touchUpInside" id="4y2-Rq-aVP"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -1184,9 +1182,7 @@
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                                 <state key="normal" title="Green"/>
                                                                                 <connections>
-                                                                                    <action selector="deliveryGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="WQq-Sf-SPV"/>
                                                                                     <action selector="donationGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="Pyn-lh-t7g"/>
-                                                                                    <action selector="requestButtonTapped:" destination="beJ-Gr-SOD" eventType="touchUpInside" id="W0p-Wf-yFk"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -1357,8 +1353,7 @@
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                                 <state key="normal" title="Cancel"/>
                                                                                 <connections>
-                                                                                    <action selector="donationCancelButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="VdX-f4-B4e"/>
-                                                                                    <action selector="requestButtonTapped:" destination="beJ-Gr-SOD" eventType="touchUpInside" id="Hk0-fK-Qa0"/>
+                                                                                    <action selector="deliveryCancelButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="np0-RC-rGW"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -1389,8 +1384,7 @@
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                                 <state key="normal" title="Green"/>
                                                                                 <connections>
-                                                                                    <action selector="donationGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="2uV-f3-Dyo"/>
-                                                                                    <action selector="requestButtonTapped:" destination="beJ-Gr-SOD" eventType="touchUpInside" id="5xb-c9-Axn"/>
+                                                                                    <action selector="deliveryGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="b11-lb-eWN"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
