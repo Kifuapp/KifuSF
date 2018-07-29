@@ -65,6 +65,8 @@ class RegisterFormViewController: UIViewController {
             let password = passwordTextField.text
             else { return }
         
+        //TODO: Shu-Disable register button, and keyboard
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -79,7 +81,10 @@ class RegisterFormViewController: UIViewController {
             
             UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
                 guard let user = user else { return }
-                User.setCurrent(user)
+                User.setCurrent(user, writeToUserDefaults: true)
+                
+                //succeeded regiestration
+                self.performSegue(withIdentifier: "registerToHome", sender: nil)
             })
         }
     }

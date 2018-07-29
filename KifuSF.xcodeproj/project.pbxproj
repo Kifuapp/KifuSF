@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
+		443B7B8D210D54C400CD26B5 /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
@@ -23,15 +25,19 @@
 		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
 		C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */; };
-		C5CA7BC0210D53CA0052D440 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */; };
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
+		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.debug.xcconfig"; sourceTree = "<group>"; };
 		44339C30210D13DC00E6663E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		44339C32210D2C0200E6663E /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
+		44339C36210D4C4400E6663E /* ItemPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
+		44339C38210D4D5400E6663E /* ItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		443B7B8A210D540B00CD26B5 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationPostViewController.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,9 +55,9 @@
 		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
-		C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +88,7 @@
 				C5A351D2210D0CE500A717D3 /* Products */,
 				ED844B4CC71267B714B5E09C /* Pods */,
 				6153AE97C5F4F481B572AF2D /* Frameworks */,
+				E92994F1210D58C700A32924 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,7 +127,7 @@
 		C5A351E9210D0E0200A717D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */,
+				E92994F2210D591D00A32924 /* ItemPostCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 			);
@@ -132,7 +139,10 @@
 			children = (
 				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
+				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				44339C38210D4D5400E6663E /* ItemListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
+				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -174,6 +184,14 @@
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		E92994F1210D58C700A32924 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -329,15 +347,17 @@
 			files = (
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
+				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
-				C5CA7BC0210D53CA0052D440 /* ItemPostCell.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
+				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
+				443B7B8D210D54C400CD26B5 /* DonationPostViewController.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
