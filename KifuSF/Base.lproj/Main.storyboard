@@ -2062,7 +2062,6 @@
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                         <state key="normal" title="Deliver Now!"/>
                                                                         <connections>
-                                                                            <action selector="donationGreenButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="B9d-eR-ej1"/>
                                                                             <action selector="emptyDeliveryButtonTapped:" destination="AqI-eQ-Bce" eventType="touchUpInside" id="k9b-3j-ftq"/>
                                                                         </connections>
                                                                     </button>

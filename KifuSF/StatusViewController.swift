@@ -280,7 +280,9 @@ class StatusViewController: UIViewController {
     }
 
     @IBAction func emptyDeliveryButtonTapped(_ sender: Any) {
+        
         //move to items screen
+        tabBarController!.selectedIndex = 0
     }
 
     // MARK: - Navigation

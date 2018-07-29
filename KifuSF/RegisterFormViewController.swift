@@ -9,7 +9,42 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterFormViewController: UIViewController {
+class RegisterFormViewController: UIViewController, UITextFieldDelegate {
+    
+    let plusImage = UIImage(named: "PlusSquare")
+    
+    let photoHelper = PhotoHelper()
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    private func clearErrorMessage() {
+        errorMessageLabel.text = ""
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += 190//keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    // MARK: - IBACTIONS
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var phoneAddressTextField: UITextField!
@@ -17,30 +52,6 @@ class RegisterFormViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    
-    let plusImage = UIImage(named: "PlusSquare")
-    
-    let photoHelper = PhotoHelper()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        profileImage.image = plusImage
-        photoHelper.completionHandler = { image in
-            self.profileImage.image = image
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         errorMessageLabel.text = ""
@@ -101,23 +112,21 @@ class RegisterFormViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += 190//keyboardSize.height
-            }
-        }
-    }
+    // MARK: - LIFE CYCLE
     
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
-    func isValidEmail(testStr:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+        profileImage.image = plusImage
+        photoHelper.completionHandler = { [weak self] image in
+            self?.profileImage.image = image
+            self?.clearErrorMessage()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 }
