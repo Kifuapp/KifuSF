@@ -30,7 +30,7 @@ struct OpenDonation {
     let status: Status
     let volunteer: User?
     
-    private enum Keys {
+    enum Keys {
         static let title = "title"
         static let notes = "notes"
         static let imageUrl = "imageUrl"
@@ -86,19 +86,42 @@ struct OpenDonation {
     
     init?(snapshot: DataSnapshot) {
         guard
-        let dict = snapshot.value as? [String: Any],
-        let title = dict[Keys.title] as! String?,
-        let notes = dict[Keys.notes] as! String?,
-        let imageUrl = dict[Keys.imageUrl] as! String?,
-        let creationDateTimestamp = dict[Keys.creationDate] as! TimeInterval?,
-        let longitude = dict[Keys.longitude] as! Double?,
-        let laditude = dict[Keys.longitude] as! Double?,
-        let pickUpAddress = dict[Keys.pickUpAddress] as! String?,
-        let donatorValue = dict[Keys.donator] as! [String: Any]?,
-        let statusValue = dict[Keys.status] as! Int?,
-        let volunteerValue = dict[Keys.volunteer] as! [String: Any]?
+            let dict = snapshot.value as? [String: Any],
+            let title = dict[Keys.title] as! String?,
+            let notes = dict[Keys.notes] as! String?,
+            let imageUrl = dict[Keys.imageUrl] as! String?,
+            let creationDateTimestamp = dict[Keys.creationDate] as! TimeInterval?,
+            let longitude = dict[Keys.longitude] as! Double?,
+            let laditude = dict[Keys.laditude] as! Double?,
+            let pickUpAddress = dict[Keys.pickUpAddress] as! String?,
+            
+            let donatorValue = dict[Keys.donator] as! [String: Any]?,
+            let donatorUsername = donatorValue["username"] as? String,
+            let donatorUid = donatorValue["uid"] as? String,
+            let donatorImageURL = donatorValue["imageURL"] as? String,
+            let donatorContributionPoints = donatorValue["contributionPoints"] as? Int,
+            let donatorContactNumber = donatorValue["contactNumber"] as? String,
+            
+            let statusValue = dict[Keys.status] as! Int?
         else {
             return nil
+        }
+        
+        var volunteer: User? = nil
+        if let volunteerValue = dict[Keys.volunteer] as! [String: Any]?,
+            let volunteerUsername = volunteerValue["username"] as? String,
+            let volunteerUid = volunteerValue["uid"] as? String,
+            let volunteerImageURL = volunteerValue["imageURL"] as? String,
+            let volunteerContributionPoints = volunteerValue["contributionPoints"] as? Int,
+            let volunteerContactNumber = volunteerValue["contactNumber"] as? String {
+            
+            volunteer = User(
+                username: volunteerUsername,
+                uid: volunteerUid,
+                imageURL: volunteerImageURL,
+                contributionPoints: volunteerContributionPoints,
+                contactNumber: volunteerContactNumber
+            )
         }
         
         self.uid = snapshot.key
@@ -109,21 +132,27 @@ struct OpenDonation {
         self.longitude = longitude
         self.laditude = laditude
         self.pickUpAddress = pickUpAddress
-        self.donator = User()
+        let donator = User(
+            username: donatorUsername,
+            uid: donatorUid,
+            imageURL: donatorImageURL,
+            contributionPoints: donatorContributionPoints,
+            contactNumber: donatorContactNumber
+        )
+        self.donator = donator
         self.status = Status(rawValue: statusValue)!
-        self.volunteer = User()
-        
+        self.volunteer = volunteer
     }
 }
 
-struct Donation {
-    
-    let title: String
-    let notes: String
-    let imageUrl: URL
-    let creationDate: Date
-    let longitude: Double
-    let laditude: Double
-    let donator: User
-    
-}
+//struct Donation {
+//
+//    let title: String
+//    let notes: String
+//    let imageUrl: URL
+//    let creationDate: Date
+//    let longitude: Double
+//    let laditude: Double
+//    let donator: User
+//
+//}
