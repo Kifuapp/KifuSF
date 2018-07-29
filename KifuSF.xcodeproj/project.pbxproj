@@ -19,10 +19,14 @@
 		C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB2210D26CF0052D440 /* Constants.swift */; };
 		C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB4210D2B030052D440 /* StorageService.swift */; };
 		C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */; };
+		C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C32210D2C0200E6663E /* RegisterFormViewController.swift */; };
+		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.debug.xcconfig"; sourceTree = "<group>"; };
+		44339C30210D13DC00E6663E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		44339C32210D2C0200E6663E /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,7 @@
 		C5CA7BB2210D26CF0052D440 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C5CA7BB4210D2B030052D440 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
+		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
+				44339C30210D13DC00E6663E /* GradientView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -150,6 +156,7 @@
 			children = (
 				C5CA7BB0210D24F50052D440 /* UserService.swift */,
 				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
+				C5CA7BB9210D49130052D440 /* RequestService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -306,11 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
+				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

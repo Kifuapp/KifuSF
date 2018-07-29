@@ -35,6 +35,8 @@ struct UserService {
                 return completion(newUser)
             })
         }
+        
+    
     }
     
     public static func show(forUID uid: String, completion: @escaping (User?) -> ()) {

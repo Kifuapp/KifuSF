@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterFormViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
@@ -47,6 +48,24 @@ class RegisterFormViewController: UIViewController {
         if profileImage.image == plusImage {
             errorMessageLabel.text = "Set your image"
             return
+        }
+        
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text
+            else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                return
+            }
+            
+//            guard let firUser = result?.user,
+//                let username = usernameTextField.text,
+//                let image 
+//                else { return }
+//            
+//            UserService.create(firUser: firUser, username: <#T##String#>, image: <#T##UIImage#>, contactNumber: <#T##String#>, completion: <#T##(User?) -> ()#>)
         }
     }
     
