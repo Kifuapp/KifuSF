@@ -14,6 +14,9 @@ class StatusViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        DonationService.showOpenDonation { (openDelivery) in
+            print(openDelivery)
+        }
     }
 
     override func didReceiveMemoryWarning() {

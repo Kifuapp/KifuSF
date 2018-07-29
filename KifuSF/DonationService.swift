@@ -72,6 +72,18 @@ struct DonationService {
                     fatalError("could not decode")
                 }
                 
+                //if donation is open donation of current user
+                if donationFromSnapshot.donator.uid == User.current.uid {
+                    SingletoneBadClassForUserStuff.sharedInstanceOfBadness.openDonation = donationFromSnapshot
+                    
+                //if donation is open delivery of current user
+                } else if let donationVolunteer = donationFromSnapshot.volunteer {
+                    if donationVolunteer.uid == User.current.uid {
+                        SingletoneBadClassForUserStuff.sharedInstanceOfBadness.openDelivery = donationFromSnapshot
+                    }
+                }
+                
+                
                 //only include open donations
                 if case .Open = donationFromSnapshot.status {
                     
@@ -91,6 +103,30 @@ struct DonationService {
         }
     }
 
+    static func showOpenDonation(completion: @escaping (OpenDonation?) -> ()) {
+        let ref = Database.database().reference().child("openDonations")
+        
+        let filter = ref.queryOrdered(byChild: "pickUpAddress").queryEqual(toValue: "NOT IMPLEMENTED")
+
+        filter.observeSingleEvent(of: .value) { (snapshot) in
+            guard let foundDonationSnapshot = snapshot.value as? DataSnapshot else {
+                
+                //no current donations
+                return completion(nil)
+            }
+            
+            guard let foundDonation = OpenDonation(snapshot: foundDonationSnapshot) else {
+                fatalError("failed to decode")
+            }
+            
+            completion(foundDonation)
+        }
+    }
+    
+    static func showOpenDelivery(completion: @escaping (OpenDonation?) -> ()) {
+        
+    }
+    
     static func setStatusToAwaitingPickup(for donation: OpenDonation) {
     
     }
