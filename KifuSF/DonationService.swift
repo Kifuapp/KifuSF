@@ -212,5 +212,9 @@ struct DonationService {
             completion(true)
         }
     }
+    
+    static func getDistance(for donation: Donation, completion: @escaping (String) -> ()) {
+        
+    }
 
 }
