@@ -274,7 +274,7 @@ class StatusViewController: UIViewController {
                 let donation = self.openDonation else {
                 fatalError("bad progammer 🤓")
             }
-            
+
             photoVc.donation = donation
         }
     }
@@ -282,7 +282,7 @@ class StatusViewController: UIViewController {
     @IBAction func emptyDeliveryButtonTapped(_ sender: Any) {
         //move to items screen
     }
-    
+
     // MARK: - Navigation
 
     // MARK: - LIFE CYCLE
@@ -292,9 +292,16 @@ class StatusViewController: UIViewController {
 
         //validate photo picked
         photoHelper.completionHandler = { image in
+            guard let donation = self.openDelivery else {
+                fatalError("some programmer didn't had enough sleep")
+            }
 
-             //upload the photo
-            //TODO: Backend-updload service
+            DonationService.confirmDelivery(for: donation, image: image, completion: { (success) in
+                if success {
+                    self.😱()
+                }
+                //TODO: handle error
+            })
         }
 
         updateUI()

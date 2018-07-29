@@ -193,7 +193,7 @@ struct DonationService {
             let ref = Database.database().reference().child("openDonations").child(donation.uid)
             ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in
                 if let error = error {
-                    assertionFailure("failed to update donation for confirming the delivery")
+                    assertionFailure("failed to update donation for confirming the delivery, error: \(error.localizedDescription)")
                     return completion(false)
                 }
                 completion(true)
@@ -206,7 +206,7 @@ struct DonationService {
         let ref = Database.database().reference().child("openDonations").child(donation.uid)
         ref.setValue(nil) { (error, _) in
             if let error = error {
-                assertionFailure("failed to remove donation from the branch")
+                assertionFailure("failed to remove donation from the branch, error: \(error.localizedDescription)")
                 return completion(false)
             }
             completion(true)
