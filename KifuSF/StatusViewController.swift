@@ -68,7 +68,9 @@ class StatusViewController: UIViewController {
         deliveryTextView.text = delivery.notes
 
         deliveryCancelButtonView.isHidden = false
+        deliveryCancelButtonView.backgroundColor = UIColor.redColor
         deliveryGreenButtonView.isHidden = false
+        deliveryGreenButtonView.backgroundColor = UIColor.greenColor
 
         switch delivery.status {
         case .Open:
@@ -79,6 +81,7 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             deliveryCancelButtonView.isHidden = true
+            deliveryGreenButton.backgroundColor = UIColor.blueColor
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .AwaitingDelivery:
@@ -86,7 +89,7 @@ class StatusViewController: UIViewController {
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
 
-            deliveryCancelButtonView.isHidden = false
+            deliveryCancelButtonView.backgroundColor = UIColor.blueColor
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
 
@@ -103,20 +106,23 @@ class StatusViewController: UIViewController {
 
     private func updateOpenDonationContainer() {
         guard let donation = openDonation else {
-            return assertionFailure("no open delivery to reload")
+            return assertionFailure("no open donation to reload")
         }
 
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
+        donationLabelOne.isHidden = false
+        donationLabelTwo.isHidden = false
+        donationTextView.text = ""
 
-        deliveryGreenButtonView.isHidden = false
-        deliveryCancelButtonView.isHidden = false
+        donationGreenButtonView.isHidden = false
+        donationCancelButtonView.isHidden = false
 
         switch donation.status {
         case .Open:
-            donationLabelOne.text = ""
-            donationLabelTwo.text = ""
-            donationTextView.text = ""
+            donationLabelOne.isHidden = true
+            donationLabelTwo.isHidden = true
+            donationTextView.text = donation.notes
             
             donationCancelButton.setTitle("Cancel", for: .normal)
             self.donationGreenButton.setTitle("Show Volunteers", for: .normal)

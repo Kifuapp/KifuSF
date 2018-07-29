@@ -75,7 +75,6 @@ extension ItemListViewController: UITableViewDataSource {
         let donation = openDonations[indexPath.row]
         postCell.itemName.text = donation.title
         
-        //TODO: Backend-calc the distance from current user to the donation long/lat
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         postCell.postInfo.text = "@\(donation.donator.username)"
         
