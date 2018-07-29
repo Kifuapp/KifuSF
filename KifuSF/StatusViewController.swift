@@ -7,23 +7,65 @@
 //
 
 import UIKit
+import Kingfisher
 
 class StatusViewController: UIViewController {
-
-    @IBOutlet weak var donationContainer: GradientView!
-    @IBOutlet weak var emptyDonationContainer: GradientView!
     
-    @IBOutlet weak var deliveryContainer: GradientView!
-    @IBOutlet weak var emptyDeliveryContainer: GradientView!
+    var openDonation: OpenDonation?
     
+    var openDelivery: OpenDonation?
     
-    @IBOutlet weak var donationItemName: UILabel!
-    @IBOutlet weak var donationLabelOne: UILabel!
-    @IBOutlet weak var donationLabelTwo: UILabel!
-    @IBOutlet weak var donationTextView: UITextView!
-    @IBOutlet weak var donationCancelButtonView: GradientView!
-    @IBOutlet weak var donationGreenButtonView: GradientView!
-    @IBOutlet weak var donationImage: UIImageView!
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    private func updateUI() {
+        if openDonation != nil {
+            emptyDonationContainer.isHidden = true
+            donationContainer.isHidden = false
+            
+            updateOpenDonationContainer()
+        } else {
+            emptyDonationContainer.isHidden = false
+            donationContainer.isHidden = true
+        }
+        
+        if openDelivery != nil {
+            emptyDeliveryContainer.isHidden = true
+            deliveryContainer.isHidden = false
+            
+            updateOpenDeliveryContainer()
+        } else {
+            emptyDeliveryContainer.isHidden = false
+            deliveryContainer.isHidden = true
+        }
+    }
+    
+    private func updateOpenDeliveryContainer() {
+        guard let delivery = openDelivery else {
+            return assertionFailure("no open delivery to reload")
+        }
+        
+        deliveryItemName.text = delivery.title
+        deliveryImage.kf.setImage(with: URL(string: delivery.imageUrl)!)
+        deliveryTextView.text = delivery.notes
+        
+        switch delivery.status {
+        case .Open:
+            break
+        case .AwaitingPickup:
+            deliveryLabelOne.text = delivery.pickUpAddress
+            deliveryLabelTwo.text = delivery.donator.contactNumber
+        default:
+            break
+        }
+    }
+    
+    private func updateOpenDonationContainer() {
+        
+    }
+    
+    // MARK: - IBACTIONS
     
     @IBOutlet weak var deliveryItemName: UILabel!
     @IBOutlet weak var deliveryLabelOne: UILabel!
@@ -33,28 +75,17 @@ class StatusViewController: UIViewController {
     @IBOutlet weak var deliveryGreenButtonView: GradientView!
     @IBOutlet weak var deliveryImage: UIImageView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if true { //<- change later
-            emptyDonationContainer.isHidden = true
-        } else {
-            donationContainer.isHidden = true
-        }
-        
-        if true { //<- change later
-            emptyDeliveryContainer.isHidden = true
-        } else {
-            deliveryContainer.isHidden = true
-        }
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    @IBOutlet weak var donationItemName: UILabel!
+    @IBOutlet weak var donationLabelOne: UILabel!
+    @IBOutlet weak var donationLabelTwo: UILabel!
+    @IBOutlet weak var donationTextView: UITextView!
+    @IBOutlet weak var donationCancelButtonView: GradientView!
+    @IBOutlet weak var donationGreenButtonView: GradientView!
+    @IBOutlet weak var donationImage: UIImageView!
+    
+    @IBOutlet weak var deliveryContainer: GradientView!
+    @IBOutlet weak var emptyDeliveryContainer: GradientView!
+    
     //Below: Delivery
     @IBAction func deliveryCancelButtonTapped(_ sender: Any) {
     }
@@ -62,20 +93,26 @@ class StatusViewController: UIViewController {
     @IBAction func deliveryGreenButtonTapped(_ sender: Any) {
     }
     
+    @IBOutlet weak var donationContainer: GradientView!
+    @IBOutlet weak var emptyDonationContainer: GradientView!
+    
     //Below: Donation
     @IBAction func donationCancelButtonTapped(_ sender: Any) {
     }
     
     @IBAction func donationGreenButtonTapped(_ sender: Any) {
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - LIFE CYCLE
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+            self.openDelivery = delivery
+            self.openDonation = donation
+            
+            self.updateUI()
+        }
     }
-    */
-
 }

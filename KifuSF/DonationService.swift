@@ -116,7 +116,7 @@ struct DonationService {
                 }
             }
             
-            completion(openDelivery, openDonation)
+            completion(openDonation, openDelivery)
         }
     }
     
