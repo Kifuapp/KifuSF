@@ -179,8 +179,6 @@ struct DonationService {
     
     static func confirmDelivery(for donation: Donation, image: UIImage, completion: @escaping (Bool) -> ()) {
         let imageRef = StorageReference.newDeliveryVerificationImageReference(from: donation)
-        var updatedDonation = donation
-        updatedDonation.status = .AwaitingApproval
         
         StorageService.uploadImage(image, at: imageRef) { (downloadURL) in
             guard let downloadURL = downloadURL else {
@@ -188,13 +186,31 @@ struct DonationService {
                 return completion(false)
             }
             
+            var updatedDonation = donation
+            updatedDonation.status = .AwaitingApproval
+            updatedDonation.verificationUrl = downloadURL
+            
             let ref = Database.database().reference().child("openDonations").child(donation.uid)
+            ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in
+                if let error = error {
+                    assertionFailure("failed to update donation for confirming the delivery")
+                    return completion(false)
+                }
+                completion(true)
+            })
         }
         
     }
 
-    static func remove(donation: Donation) {
-
+    static func deliveryVerified(for donation: Donation, completion: @escaping (Bool) -> ()) {
+        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        ref.setValue(nil) { (error, _) in
+            if let error = error {
+                assertionFailure("failed to remove donation from the branch")
+                return completion(false)
+            }
+            completion(true)
+        }
     }
 
 }
