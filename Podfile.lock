@@ -56,7 +56,7 @@ DEPENDENCIES:
   - LocationPicker
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -90,4 +90,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: aa379e3e442a1047d3cb0be6541fe9f2632cd126
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
