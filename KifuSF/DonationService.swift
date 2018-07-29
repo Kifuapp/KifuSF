@@ -67,10 +67,44 @@ struct DonationService {
             
             
             //map snapshot into array of donation
-            let openDonations: [OpenDonation] = snapshotValue.compactMap(OpenDonation.init)
+            let openDonations: [OpenDonation] = snapshotValue.compactMap({ (snapshot) -> OpenDonation? in
+                guard let donationFromSnapshot = OpenDonation(snapshot: snapshot) else {
+                    fatalError("could not decode")
+                }
+                
+                //only include open donations
+                if case .Open = donationFromSnapshot.status {
+                    
+                    //include donations not from current user
+                    if donationFromSnapshot.donator.uid != User.current.uid {
+                        return donationFromSnapshot
+                    } else {
+                        return nil
+                    }
+                } else {
+                    return nil
+                }
+            })
             
             //return
             completion(openDonations)
         }
     }
+
+    static func setStatusToAwaitingPickup(for donation: OpenDonation) {
+    
+    }
+    
+    static func setStatusToAwaitingDelivery(for donation: OpenDonation) {
+        
+    }
+    
+    static func setStatusToAwaitingApproval(for donation: OpenDonation) {
+        
+    }
+    
+    static func remove(donation: OpenDonation) {
+        
+    }
+
 }
