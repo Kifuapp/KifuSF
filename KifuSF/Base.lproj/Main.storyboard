@@ -799,7 +799,7 @@
         <!--Item Detail View Controller-->
         <scene sceneID="nGs-aS-lcX">
             <objects>
-                <viewController id="8H8-rv-lMn" customClass="ItemDetailViewController" customModule="KifuSF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="itemDetail" id="8H8-rv-lMn" customClass="ItemDetailViewController" customModule="KifuSF" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lpR-eD-ise">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
