@@ -17,21 +17,41 @@ class ItemListViewController: UIViewController {
             postTable.reloadData()
         }
     }
-    
-    
-    @IBOutlet weak var postTable: UITableView!
-    
     var locationManager: CLLocationManager!
     var currentLocation: CLLocationCoordinate2D?
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show detailed donation":
+                guard
+                    let cell = sender as? UITableViewCell,
+                    let indexPath = postTable.indexPath(for: cell),
+                    let vc = segue.destination as? ItemDetailViewController else {
+                        fatalError("storyboard not set up correctly")
+                }
+                
+                let selectedDonation = openDonations[indexPath.row]
+                vc.donation = selectedDonation
+            default: break
+            }
+        }
+    }
+    
+    // MARK: - IBACTIONS
+    @IBOutlet weak var postTable: UITableView!
+    
+    // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
-        
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
