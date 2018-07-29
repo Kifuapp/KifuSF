@@ -13,7 +13,7 @@ import FirebaseStorage
 
 struct StorageService {
     public static func uploadImage(_ image: UIImage, at reference: StorageReference, completion: @escaping (URL?) -> ()) {
-        guard let imageData = UIImageJPEGRepresentation(image, 0.1) else { return completion(nil) }
+        guard let imageData = UIImageJPEGRepresentation(image, 0.05) else { return completion(nil) }
         
         reference.putData(imageData, metadata: nil) { (metadata, error) in
             if let error = error {

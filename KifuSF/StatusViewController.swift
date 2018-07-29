@@ -49,6 +49,9 @@ class StatusViewController: UIViewController {
         deliveryItemName.text = delivery.title
         deliveryImage.kf.setImage(with: URL(string: delivery.imageUrl)!)
         deliveryTextView.text = delivery.notes
+        
+        deliveryGreenButton.isHidden = false
+        deliveryCancelButton.isHidden = false
 
         switch delivery.status {
         case .Open:
@@ -57,22 +60,27 @@ class StatusViewController: UIViewController {
             deliveryLabelOne.text = delivery.pickUpAddress
             deliveryLabelTwo.text = delivery.donator.contactNumber
             deliveryTextView.text = ""
+            
+            deliveryCancelButton.isHidden = true
+            deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .AwaitingDelivery:
-
             deliveryLabelOne.text = "150 Golden Gate Ave, San Francisco, CA 94102"
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
-
-            //cancel -> directions
-            // -> send validation
+            
+            deliveryCancelButton.isHidden = false
+            deliveryCancelButton.setTitle("Directions", for: .normal)
+            deliveryGreenButton.setTitle("Validate", for: .normal)
 
         case .AwaitingApproval:
             deliveryLabelOne.text = ""
             deliveryLabelTwo.text = ""
             deliveryTextView.text = ""
-
+            
             //change button to awaiting approval
+            deliveryCancelButton.isHidden = true
+            deliveryGreenButton.setTitle("Awaiting approval", for: .normal)
         }
     }
 
@@ -83,13 +91,19 @@ class StatusViewController: UIViewController {
 
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
-
+        
+        deliveryGreenButton.isHidden = false
+        deliveryCancelButton.isHidden = false
 
         switch donation.status {
         case .Open:
             donationLabelOne.text = ""
             donationLabelTwo.text = ""
             donationTextView.text = ""
+            
+            let nVolunteers = 2
+            donationCancelButton.setTitle("Cancel", for: .normal)
+            donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
         case .AwaitingPickup:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
@@ -100,6 +114,8 @@ class StatusViewController: UIViewController {
 
             //update button to "confirm pickup"
             //remove cancel button
+            donationCancelButton.isHidden = true
+            donationGreenButton.setTitle("Confirm Pickup", for: .normal)
         case .AwaitingDelivery:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
@@ -107,8 +123,11 @@ class StatusViewController: UIViewController {
 
             donationLabelOne.text = volunteer.username
             donationLabelTwo.text = volunteer.contactNumber
+            
             //update buttons to: "in delivery"
             //remove cancel button
+            donationCancelButton.isHidden = true
+            donationGreenButton.setTitle("in delivery", for: .normal)
 
         case .AwaitingApproval:
             guard let volunteer = donation.volunteer else {
@@ -120,6 +139,8 @@ class StatusViewController: UIViewController {
 
             //update button to verify delivery
             //remove cancel button
+            donationCancelButton.isHidden = true
+            donationGreenButton.setTitle("verify delivery", for: .normal)
         }
     }
 
@@ -150,6 +171,16 @@ class StatusViewController: UIViewController {
 
     //Below: Delivery
     @IBAction func deliveryCancelButtonTapped(_ sender: Any) {
+        guard let delivery = self.openDelivery else {
+            fatalError("no delivery for button action")
+        }
+//        
+//        switch delivery.status {
+//        case <#pattern#>:
+//            <#code#>
+//        default:
+//            <#code#>
+//        }
     }
 
     @IBAction func deliveryGreenButtonTapped(_ sender: Any) {
@@ -166,6 +197,12 @@ class StatusViewController: UIViewController {
     }
 
     // MARK: - LIFE CYCLE
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateUI()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
