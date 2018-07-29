@@ -29,6 +29,12 @@ class RegisterFormViewController: UIViewController {
         photoHelper.completionHandler = { image in
             self.profileImage.image = image
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +64,27 @@ class RegisterFormViewController: UIViewController {
     
     @IBAction func imageSelectionButtonTapped(_ sender: Any) {
         photoHelper.presentActionSheet(from: self)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= 190//keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += 190//keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     func isValidEmail(testStr:String) -> Bool {
