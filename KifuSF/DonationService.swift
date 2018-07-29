@@ -127,8 +127,37 @@ struct DonationService {
         
     }
     
-    static func setStatusToAwaitingPickup(for donation: OpenDonation) {
-    
+    /**
+     this sets the donation's state to awaiting pickup and remove all other unaccepted
+     requests from the requets sub-tree
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    static func accept(volunteer: User, for donation: OpenDonation, completion: @escaping (Bool) -> ()) {
+        //get donation ref
+        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        
+        var updatedDonation = donation
+        
+        //update the status of the donation
+        //set the volunteer value of the dontaion to the given user
+        updatedDonation.status = .AwaitingPickup
+        updatedDonation.volunteer = volunteer
+        
+        ref.updateChildValues(updatedDonation.dictValue) { error, _ in
+            guard error == nil else {
+                assertionFailure(error!.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(true)
+        }
+        
+        //remove all requests
+        RequestService.deleteRequests(for: donation)
     }
     
     static func setStatusToAwaitingDelivery(for donation: OpenDonation) {

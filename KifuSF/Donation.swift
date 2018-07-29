@@ -27,8 +27,8 @@ struct OpenDonation {
         case AwaitingApproval
     }
     
-    let status: Status
-    let volunteer: User?
+    var status: Status
+    var volunteer: User?
     
     enum Keys {
         static let title = "title"
