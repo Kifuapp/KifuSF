@@ -99,7 +99,7 @@ class DonationPostViewController: UIViewController {
             image: image,
             pickUpAddress: currentLocation.address,
             longitude: currentLocation.coordinate.longitude,
-            latitude: currentLocation.coordinate.longitude) { [weak self] (_) in
+            latitude: currentLocation.coordinate.latitude) { [weak self] (_) in
                 //Then dismiss
                 self?.dismiss(animated: true, completion: nil)
         }
