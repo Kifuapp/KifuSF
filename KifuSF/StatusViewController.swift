@@ -281,9 +281,16 @@ class StatusViewController: UIViewController {
         
         //validate photo picked
         photoHelper.completionHandler = { image in
+            guard let donation = self.openDelivery else {
+                fatalError("some programmer didn't had enough sleep")
+            }
             
-             //upload the photo
-            //TODO: Backend-updload service
+            DonationService.confirmDelivery(for: donation, image: image, completion: { (success) in
+                if success {
+                    self.refreshUI()
+                }
+                //TODO: handle error
+            })
         }
         
         updateUI()
