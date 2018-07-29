@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
-		443B7B8D210D54C400CD26B5 /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
+		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
+		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
-		C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
-		C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
 		C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
@@ -26,6 +25,9 @@
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
 		C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */; };
 		E90B2478210D8588009B9E0B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2477210D8588009B9E0B /* GradientView.swift */; };
+		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
+		E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
+		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
@@ -38,6 +40,8 @@
 		44339C36210D4C4400E6663E /* ItemPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		443B7B8A210D540B00CD26B5 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationPostViewController.swift; sourceTree = "<group>"; };
+		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
+		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
+				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
 				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
 				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
 			);
@@ -346,6 +352,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
+				E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */,
+				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
@@ -358,11 +367,10 @@
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
-				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
-				443B7B8D210D54C400CD26B5 /* DonationPostViewController.swift in Sources */,
-				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
+				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
+				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
