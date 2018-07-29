@@ -24,6 +24,8 @@ class StatusViewController: UIViewController {
     @IBOutlet weak var donationCancelButtonView: GradientView!
     @IBOutlet weak var donationGreenButtonView: GradientView!
     @IBOutlet weak var donationImage: UIImageView!
+    @IBOutlet weak var donationGreenButton: UIButton!
+    @IBOutlet weak var donationCancelButton: UIButton!
     
     @IBOutlet weak var deliveryItemName: UILabel!
     @IBOutlet weak var deliveryLabelOne: UILabel!
@@ -32,6 +34,8 @@ class StatusViewController: UIViewController {
     @IBOutlet weak var deliveryCancelButtonView: GradientView!
     @IBOutlet weak var deliveryGreenButtonView: GradientView!
     @IBOutlet weak var deliveryImage: UIImageView!
+    @IBOutlet weak var deliveryGreenButton: UIButton!
+    @IBOutlet weak var deliveryCancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

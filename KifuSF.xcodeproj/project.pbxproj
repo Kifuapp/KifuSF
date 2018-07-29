@@ -14,6 +14,8 @@
 		44339C39210D4D5400E6663E /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C38210D4D5400E6663E /* ItemListViewController.swift */; };
 		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
 		443B7B8D210D54C400CD26B5 /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
+		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
+		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
@@ -29,6 +31,8 @@
 		44339C38210D4D5400E6663E /* ItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		443B7B8A210D540B00CD26B5 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationPostViewController.swift; sourceTree = "<group>"; };
+		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
+		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5A351D6210D0CE500A717D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
+				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			children = (
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
 				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
 				44339C38210D4D5400E6663E /* ItemListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
 				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
@@ -205,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
+				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				44339C37210D4C4400E6663E /* ItemPostCell.swift in Sources */,
 				44339C39210D4D5400E6663E /* ItemListViewController.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
@@ -212,6 +219,7 @@
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
 				44339C35210D477700E6663E /* PhotoHelper.swift in Sources */,
 				44339C33210D2C0200E6663E /* RegisterFormViewController.swift in Sources */,
+				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 				44339C31210D13DC00E6663E /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
