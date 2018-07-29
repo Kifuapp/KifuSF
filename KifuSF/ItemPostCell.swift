@@ -15,6 +15,7 @@ class ItemPostCell: UITableViewCell {
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var postInfo: UILabel!
+    @IBOutlet weak var itemImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

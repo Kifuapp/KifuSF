@@ -997,6 +997,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="distance" destination="dsR-bI-FTg" id="xeh-9y-qFT"/>
+                                            <outlet property="itemImage" destination="wTN-9U-5FD" id="ZQQ-mS-sJq"/>
                                             <outlet property="itemName" destination="4Px-0m-zQj" id="AQM-yz-VrB"/>
                                             <outlet property="postInfo" destination="6Ve-xW-I9n" id="FKZ-qC-7fN"/>
                                         </connections>
