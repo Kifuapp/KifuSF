@@ -10,15 +10,22 @@ import UIKit
 
 class DonationPostViewController: UIViewController {
 
+    @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var itemNameField: UITextField!
+    @IBOutlet weak var itemDescriptionTextView: UITextView!
+
+    let photoHelper = PhotoHelper()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        photoHelper.completionHandler = { image in
-//            self.profileImage.image = image
-//        }
+        photoHelper.completionHandler = { image in
+            self.itemImage.image = image
+        }
         
         // Do any additional setup after loading the view.
-        
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -27,19 +34,35 @@ class DonationPostViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func imageSelectionButtonTapped(_ sender: Any) {
-        
+        photoHelper.presentActionSheet(from: self)
     }
+
+    @IBAction func donateButtonTapped(_ sender: Any) {
+        if itemNameField.text!.isEmpty || itemDescriptionTextView.text.isEmpty {
+            errorLabel.text = "Fill in everything"
+            return
+        }
+        if itemImage.image == UIImage(named: "PlusSquare") {
+            errorLabel.text = "Set the photo"
+            return
+        }
+
+        //Post Donation
+        //Then dismiss
+        dismiss(animated: true, completion: nil)
+    }
+
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
+
     /*
     // MARK: - Navigation
 
