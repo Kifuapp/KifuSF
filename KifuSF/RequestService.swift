@@ -20,4 +20,16 @@ struct RequestService {
         let ref = Database.database().reference().child("requests").child(donation.uid)
         ref.setValue(nil)
     }
+    
+    public static func retrieveVolunteers(for donation: OpenDonation, completion: @escaping ([User]) ->()) {
+        let ref = Database.database().reference().child("requests").child(donation.uid)
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let volunteersSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                fatalError("could not decode")
+            }
+            
+            let volunteers = volunteersSnapshot.compactMap(User.init)
+            completion(volunteers)
+        }
+    }
 }

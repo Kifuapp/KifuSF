@@ -685,7 +685,6 @@
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
                                                 <state key="normal" title="Set Location"/>
                                                 <connections>
-                                                    <action selector="donateButtonTapped:" destination="3Cn-Bv-vTz" eventType="touchUpInside" id="0mX-rP-Gm8"/>
                                                     <action selector="setLocationButtonTapped:" destination="3Cn-Bv-vTz" eventType="touchUpInside" id="LIf-hz-5cy"/>
                                                 </connections>
                                             </button>
@@ -1845,6 +1844,7 @@
                         <outlet property="donationTextView" destination="zOD-Ji-0pH" id="XPu-OI-dZi"/>
                         <outlet property="emptyDeliveryContainer" destination="oT1-6T-knx" id="4NF-9j-hJ4"/>
                         <outlet property="emptyDonationContainer" destination="rfu-eH-rEd" id="2ET-1o-2Tu"/>
+                        <segue destination="9vb-eY-PTu" kind="showDetail" identifier="show volunteers" id="8zX-Yn-bqf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGH-Dc-oyw" userLabel="First Responder" sceneMemberID="firstResponder"/>

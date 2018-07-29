@@ -20,7 +20,22 @@ class StatusViewController: UIViewController {
     // MARK: - RETURN VALUES
 
     // MARK: - VOID METHODS
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show volunteers":
+                guard let destination = segue.destination as? VolunteerListViewController else {
+                    fatalError("somebody didn't had enough sleep")
+                }
+                
+                destination.donation = openDonation
+            default:
+                break
+            }
+        }
+    }
+    
     private func updateUI() {
         if openDonation != nil {
             emptyDonationContainer.isHidden = true
@@ -52,8 +67,8 @@ class StatusViewController: UIViewController {
         deliveryImage.kf.setImage(with: URL(string: delivery.imageUrl)!)
         deliveryTextView.text = delivery.notes
         
-        deliveryGreenButton.isHidden = false
-        deliveryCancelButton.isHidden = false
+        deliveryCancelButtonView.isHidden = false
+        deliveryGreenButtonView.isHidden = false
 
         switch delivery.status {
         case .Open:
@@ -63,7 +78,7 @@ class StatusViewController: UIViewController {
             deliveryLabelTwo.text = delivery.donator.contactNumber
             deliveryTextView.text = ""
             
-            deliveryCancelButton.isHidden = true
+            deliveryCancelButtonView.isHidden = true
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .AwaitingDelivery:
@@ -71,7 +86,7 @@ class StatusViewController: UIViewController {
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
             
-            deliveryCancelButton.isHidden = false
+            deliveryCancelButtonView.isHidden = false
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
 
@@ -94,8 +109,8 @@ class StatusViewController: UIViewController {
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         
-        deliveryGreenButton.isHidden = false
-        deliveryCancelButton.isHidden = false
+        deliveryGreenButtonView.isHidden = false
+        deliveryCancelButtonView.isHidden = false
 
         switch donation.status {
         case .Open:
@@ -116,7 +131,7 @@ class StatusViewController: UIViewController {
 
             //update button to "confirm pickup"
             //remove cancel button
-            donationCancelButton.isHidden = true
+            donationCancelButtonView.isHidden = true
             donationGreenButton.setTitle("Confirm Pickup", for: .normal)
         case .AwaitingDelivery:
             guard let volunteer = donation.volunteer else {
@@ -128,7 +143,7 @@ class StatusViewController: UIViewController {
             
             //update buttons to: "in delivery"
             //remove cancel button
-            donationCancelButton.isHidden = true
+            donationCancelButtonView.isHidden = true
             donationGreenButton.setTitle("in delivery", for: .normal)
 
         case .AwaitingApproval:
@@ -141,7 +156,7 @@ class StatusViewController: UIViewController {
 
             //update button to verify delivery
             //remove cancel button
-            donationCancelButton.isHidden = true
+            donationCancelButtonView.isHidden = true
             donationGreenButton.setTitle("verify delivery", for: .normal)
         }
     }
@@ -237,7 +252,7 @@ class StatusViewController: UIViewController {
         
         switch donation.status {
         case .Open:
-            break
+            self.performSegue(withIdentifier: "show volunteers", sender: nil)
         case .AwaitingPickup:
             let alertConfirmPickup = UIAlertController(title: nil, message: "are you sure you want to confirm the pickup?", preferredStyle: .actionSheet)
             let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
