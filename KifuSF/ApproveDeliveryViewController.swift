@@ -28,6 +28,8 @@ class ApproveDeliveryViewController: UIViewController {
                 rewardAction.addAction(UIAlertAction(title: "Horay!", style: .default, handler: { (_) in
                     self.presentingViewController?.dismiss(animated: true)
                 }))
+                
+                self.present(rewardAction, animated: true)
             } else {
                 //TODO: display error
             }
