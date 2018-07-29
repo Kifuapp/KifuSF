@@ -276,6 +276,7 @@ class StatusViewController: UIViewController {
             }
 
             photoVc.donation = donation
+            present(photoVc, animated: true)
         }
     }
 
