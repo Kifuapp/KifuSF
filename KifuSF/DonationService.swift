@@ -24,7 +24,7 @@ struct DonationService {
         let ref = Database.database().reference().child("openDonations").childByAutoId()
         
         //create donation and get dict value
-        var donation = OpenDonation(
+        let donation = OpenDonation(
             uid: ref.key,
             title: title,
             notes: notes,
@@ -37,7 +37,7 @@ struct DonationService {
             status: .Open,
             volunteer: nil
         )
-        
+                
         let donationDict = donation.dictValue
         
         //send request
@@ -48,7 +48,22 @@ struct DonationService {
         //and return the object
     }
     
-    static func showTimelineDonations() {
+    static func showTimelineDonations(completion: @escaping ([OpenDonation]) -> ()) {
         
+        //get donations ref
+        let ref = Database.database().reference().child("openDonations")
+        
+        //download snapshot
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshotValue = snapshot.value as! [DataSnapshot]? else {
+                return completion([]) //empty array
+            }
+            
+            let openDonations: [OpenDonation] = snapshotValue.compactMap(OpenDonation.init)
+        }
+        
+        //map snapshot into array of donation
+        
+        //return
     }
 }
