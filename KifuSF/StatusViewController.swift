@@ -56,13 +56,71 @@ class StatusViewController: UIViewController {
         case .AwaitingPickup:
             deliveryLabelOne.text = delivery.pickUpAddress
             deliveryLabelTwo.text = delivery.donator.contactNumber
-        default:
-            break
+            deliveryTextView.text = ""
+            
+        case .AwaitingDelivery:
+            
+            deliveryLabelOne.text = "150 Golden Gate Ave, San Francisco, CA 94102"
+            deliveryLabelTwo.text = "415.592.2780"
+            deliveryTextView.text = ""
+            
+            //cancel -> directions
+            // -> send validation
+            
+        case .AwaitingApproval:
+            deliveryLabelOne.text = ""
+            deliveryLabelTwo.text = ""
+            deliveryTextView.text = ""
+            
+            //change button to awaiting approval
         }
     }
     
     private func updateOpenDonationContainer() {
+        guard let donation = openDonation else {
+            return assertionFailure("no open delivery to reload")
+        }
         
+        donationItemName.text = donation.title
+        donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
+
+        
+        switch donation.status {
+        case .Open:
+            donationLabelOne.text = ""
+            donationLabelTwo.text = ""
+            donationTextView.text = ""
+        case .AwaitingPickup:
+            guard let volunteer = donation.volunteer else {
+                fatalError("no volunteer found")
+            }
+            
+            donationLabelOne.text = volunteer.username
+            donationLabelTwo.text = volunteer.contactNumber
+            
+            //update button to "confirm pickup"
+            //remove cancel button
+        case .AwaitingDelivery:
+            guard let volunteer = donation.volunteer else {
+                fatalError("no volunteer found")
+            }
+            
+            donationLabelOne.text = volunteer.username
+            donationLabelTwo.text = volunteer.contactNumber
+            //update buttons to: "in delivery"
+            //remove cancel button
+        
+        case .AwaitingApproval:
+            guard let volunteer = donation.volunteer else {
+                fatalError("no volunteer found")
+            }
+            
+            donationLabelOne.text = volunteer.username
+            donationLabelTwo.text = volunteer.contactNumber
+            
+            //update button to verify delivery
+            //remove cancel button
+        }
     }
     
     // MARK: - IBACTIONS
