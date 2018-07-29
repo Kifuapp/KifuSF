@@ -581,6 +581,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ns1-iz-apn">
                                         <rect key="frame" x="0.0" y="0.0" width="264" height="61"/>
+                                        <connections>
+                                            <action selector="donateButtonTapped:" destination="3Cn-Bv-vTz" eventType="touchUpInside" id="rxi-xg-UAB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -715,16 +718,28 @@
                                 <color key="textColor" red="0.84631422550000002" green="0.49108720849999998" blue="0.5083245421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ij1-am-mkF">
+                                <rect key="frame" x="35" y="610" width="344" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="2kg-Ot-DOd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Hia-Xn-7K4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.84631422550000002" green="0.49108720849999998" blue="0.5083245421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GtP-Ui-Sd1" firstAttribute="top" secondItem="kXg-zf-T8d" secondAttribute="top" id="18l-Dy-UIk"/>
                             <constraint firstItem="hew-nw-ftb" firstAttribute="centerX" secondItem="kXg-zf-T8d" secondAttribute="centerX" id="1GW-Or-ign"/>
                             <constraint firstItem="BJL-8i-qiE" firstAttribute="trailing" secondItem="ZOl-7N-da0" secondAttribute="trailing" constant="35" id="1dG-Kn-nAN"/>
+                            <constraint firstItem="Ij1-am-mkF" firstAttribute="leading" secondItem="BJL-8i-qiE" secondAttribute="leading" constant="35" id="39Q-ED-KqV"/>
                             <constraint firstItem="PjC-Lt-neH" firstAttribute="top" secondItem="GtP-Ui-Sd1" secondAttribute="bottom" id="4SG-aK-qNp"/>
                             <constraint firstItem="hew-nw-ftb" firstAttribute="leading" secondItem="BJL-8i-qiE" secondAttribute="leading" constant="35" id="CdP-J8-o47"/>
                             <constraint firstItem="ZOl-7N-da0" firstAttribute="leading" secondItem="BJL-8i-qiE" secondAttribute="leading" constant="35" id="HZP-5G-ydv"/>
                             <constraint firstAttribute="trailing" secondItem="GtP-Ui-Sd1" secondAttribute="trailing" id="Hot-8G-YCw"/>
+                            <constraint firstItem="BJL-8i-qiE" firstAttribute="trailing" secondItem="Ij1-am-mkF" secondAttribute="trailing" constant="35" id="IVI-nO-tNs"/>
                             <constraint firstAttribute="trailing" secondItem="PjC-Lt-neH" secondAttribute="trailing" id="Ynf-AX-aSj"/>
                             <constraint firstItem="GtP-Ui-Sd1" firstAttribute="leading" secondItem="kXg-zf-T8d" secondAttribute="leading" id="asE-LW-8iJ"/>
                             <constraint firstItem="Dla-KD-WyG" firstAttribute="centerX" secondItem="kXg-zf-T8d" secondAttribute="centerX" id="egq-Rh-7xL"/>
@@ -736,11 +751,18 @@
                             <constraint firstItem="BJL-8i-qiE" firstAttribute="trailing" secondItem="hew-nw-ftb" secondAttribute="trailing" constant="35" id="vId-Fc-ldc"/>
                             <constraint firstItem="BJL-8i-qiE" firstAttribute="trailing" secondItem="Dla-KD-WyG" secondAttribute="trailing" constant="75" id="vc1-wh-s5R"/>
                             <constraint firstItem="JdW-zt-D3o" firstAttribute="centerX" secondItem="kXg-zf-T8d" secondAttribute="centerX" id="wUI-79-o1o"/>
+                            <constraint firstItem="Dla-KD-WyG" firstAttribute="top" secondItem="Ij1-am-mkF" secondAttribute="bottom" constant="21" id="wyv-yM-umr"/>
                             <constraint firstItem="JdW-zt-D3o" firstAttribute="top" secondItem="PjC-Lt-neH" secondAttribute="bottom" constant="21" id="ymb-fD-8js"/>
                             <constraint firstItem="BJL-8i-qiE" firstAttribute="bottom" secondItem="Dla-KD-WyG" secondAttribute="bottom" constant="20" id="zgw-7F-enn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BJL-8i-qiE"/>
                     </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="Ij1-am-mkF" id="qgY-Rm-olv"/>
+                        <outlet property="itemDescriptionTextView" destination="VfH-0c-z6Z" id="BCF-Ed-3Q3"/>
+                        <outlet property="itemImage" destination="g98-OC-9N0" id="LW3-EQ-EtQ"/>
+                        <outlet property="itemNameField" destination="qk4-DP-aR1" id="e22-oC-fKo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StD-Pr-tGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
