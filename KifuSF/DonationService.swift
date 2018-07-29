@@ -72,18 +72,6 @@ struct DonationService {
                     fatalError("could not decode")
                 }
                 
-                //if donation is open donation of current user
-                if donationFromSnapshot.donator.uid == User.current.uid {
-                    SingletoneBadClassForUserStuff.sharedInstanceOfBadness.openDonation = donationFromSnapshot
-                    
-                //if donation is open delivery of current user
-                } else if let donationVolunteer = donationFromSnapshot.volunteer {
-                    if donationVolunteer.uid == User.current.uid {
-                        SingletoneBadClassForUserStuff.sharedInstanceOfBadness.openDelivery = donationFromSnapshot
-                    }
-                }
-                
-                
                 //only include open donations
                 if case .Open = donationFromSnapshot.status {
                     
@@ -103,28 +91,33 @@ struct DonationService {
         }
     }
 
-    static func showOpenDonation(completion: @escaping (OpenDonation?) -> ()) {
+    static func showOpenDontationAndDelivery(completion: @escaping (OpenDonation?, OpenDonation?) -> ()) {
         let ref = Database.database().reference().child("openDonations")
         
-        let filter = ref.queryOrdered(byChild: "pickUpAddress").queryEqual(toValue: "NOT IMPLEMENTED")
-
-        filter.observeSingleEvent(of: .value) { (snapshot) in
-            guard let foundDonationSnapshot = snapshot.value as? DataSnapshot else {
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else {
+                fatalError("could not decode")
+            }
+            
+            var openDelivery: OpenDonation? = nil
+            var openDonation: OpenDonation? = nil
+            
+            for aDonationSnapshot in snapshots {
+                guard let aDonation = OpenDonation(snapshot: aDonationSnapshot) else {
+                    fatalError("could not decode")
+                }
                 
-                //no current donations
-                return completion(nil)
+                if aDonation.donator.uid == User.current.uid {
+                    openDonation = aDonation
+                } else if let donationVolunteer = aDonation.volunteer {
+                    if donationVolunteer.uid == User.current.uid {
+                        openDelivery = aDonation
+                    }
+                }
             }
             
-            guard let foundDonation = OpenDonation(snapshot: foundDonationSnapshot) else {
-                fatalError("failed to decode")
-            }
-            
-            completion(foundDonation)
+            completion(openDelivery, openDonation)
         }
-    }
-    
-    static func showOpenDelivery(completion: @escaping (OpenDonation?) -> ()) {
-        
     }
     
     /**
