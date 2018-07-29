@@ -73,7 +73,9 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var buttonViewRegister: GradientView!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
-        errorMessageLabel.text = ""
+        clearErrorMessage()
+        dismissKeyboard()
+        
         if nameTextField.text!.isEmpty || usernameTextField.text!.isEmpty || phoneAddressTextField.text!.isEmpty || emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             errorMessageLabel.text = "Fill in everything"
             return
