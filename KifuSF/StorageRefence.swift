@@ -25,5 +25,10 @@ extension StorageReference {
         return Storage.storage().reference().child("images/donations/\(uid)/\(timestamp).jpg")
     }
     
-    
+    static func newDeliveryVerificationImageReference(from donation: OpenDonation) -> StorageReference {
+        let timestamp = dateFormatter.string(from: Date())
+        let uid = donation.uid
+        
+        return Storage.storage().reference().child("images/donations/\(uid)/\(timestamp).jpg")
+    }
 }

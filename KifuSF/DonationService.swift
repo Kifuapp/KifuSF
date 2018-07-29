@@ -177,7 +177,19 @@ struct DonationService {
         
     }
     
-    static func setStatusToAwaitingApproval(for donation: OpenDonation) {
+    static func confirmDelivery(for donation: OpenDonation, image: UIImage, completion: @escaping (Bool) -> ()) {
+        let imageRef = StorageReference.newDeliveryVerificationImageReference(from: donation)
+        var updatedDonation = donation
+        updatedDonation.status = .AwaitingApproval
+        
+        StorageService.uploadImage(image, at: imageRef) { (downloadURL) in
+            guard let downloadURL = downloadURL else {
+                assertionFailure("failed to upload")
+                return completion(false)
+            }
+            
+            let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        }
         
     }
     
