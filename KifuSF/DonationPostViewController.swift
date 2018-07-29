@@ -43,6 +43,9 @@ class DonationPostViewController: UIViewController {
         photoHelper.presentActionSheet(from: self)
     }
     
+    @IBAction func setLocationButtonTapped(_ sender: Any) {
+    }
+    
     @IBAction func donateButtonTapped(_ sender: Any) {
         if itemNameField.text!.isEmpty || itemDescriptionTextView.text.isEmpty {
             errorLabel.text = "Fill in everything"

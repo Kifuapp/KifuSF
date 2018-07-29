@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pjf-Mr-QSK">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -586,7 +586,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.79576064033742333" green="0.79576064033742333" blue="0.79576064033742333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ns1-iz-apn" secondAttribute="bottom" id="5QJ-n9-ukt"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="61" id="JbB-8z-Xed"/>
@@ -728,6 +728,50 @@
                                 <color key="textColor" red="0.84631422550000002" green="0.49108720849999998" blue="0.5083245421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-oU-fG8" userLabel="Set Location Button View" customClass="GradientView" customModule="KifuSF" customModuleProvider="target">
+                                <rect key="frame" x="75" y="573" width="264" height="61"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Set Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXW-Df-4CR">
+                                        <rect key="frame" x="26" y="17" width="212" height="27"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                        <color key="textColor" red="0.99702380950000002" green="0.99404761900000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZy-bt-xWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="264" height="61"/>
+                                        <connections>
+                                            <action selector="donateButtonTapped:" destination="3Cn-Bv-vTz" eventType="touchUpInside" id="0mX-rP-Gm8"/>
+                                            <action selector="setLocationButtonTapped:" destination="3Cn-Bv-vTz" eventType="touchUpInside" id="LIf-hz-5cy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="TXW-Df-4CR" firstAttribute="centerX" secondItem="TJr-oU-fG8" secondAttribute="centerX" id="RW8-sr-LgH"/>
+                                    <constraint firstAttribute="bottom" secondItem="eZy-bt-xWL" secondAttribute="bottom" id="SAO-cQ-Xs3"/>
+                                    <constraint firstItem="eZy-bt-xWL" firstAttribute="leading" secondItem="TJr-oU-fG8" secondAttribute="leading" id="Wve-0e-VMW"/>
+                                    <constraint firstItem="eZy-bt-xWL" firstAttribute="top" secondItem="TJr-oU-fG8" secondAttribute="top" id="YPa-fU-sTb"/>
+                                    <constraint firstAttribute="trailing" secondItem="eZy-bt-xWL" secondAttribute="trailing" id="hMw-Wf-phd"/>
+                                    <constraint firstItem="TXW-Df-4CR" firstAttribute="centerY" secondItem="TJr-oU-fG8" secondAttribute="centerY" id="w6H-Us-fSi"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.97602724510000005" green="0.97286858080000005" blue="0.97918590930000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -801,7 +845,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="148" id="beJ-Gr-SOD" customClass="ItemPostCell" customModule="KifuSF" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="148" id="beJ-Gr-SOD" customClass="ItemPostCell" customModule="KifuSF" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="beJ-Gr-SOD" id="jAb-sq-PPF">
@@ -980,7 +1024,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUx-VA-cMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-890.39999999999998" y="2470.1970443349755"/>
+            <point key="canvasLocation" x="-891.304347826087" y="2470.108695652174"/>
         </scene>
         <!--Status-->
         <scene sceneID="9DY-2x-AaH">
@@ -991,22 +1035,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCt-Fh-fly">
-                                <rect key="frame" x="159" y="218" width="97" height="30"/>
+                                <rect key="frame" x="159" y="416" width="97" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New Doantion"/>
                                 <connections>
                                     <segue destination="3Cn-Bv-vTz" kind="presentation" id="mou-9F-2VQ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDL-bD-68R" customClass="GradientView" customModule="KifuSF" customModuleProvider="target">
+                                <rect key="frame" x="23" y="87" width="368" height="190"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="7TE-wJ-uCa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hDL-bD-68R" firstAttribute="centerX" secondItem="BnH-LB-L70" secondAttribute="centerX" id="A1c-d7-yCi"/>
+                            <constraint firstItem="hDL-bD-68R" firstAttribute="leading" secondItem="p5h-f1-BGR" secondAttribute="leading" constant="23" id="DZv-qr-ixC"/>
+                            <constraint firstItem="hDL-bD-68R" firstAttribute="top" secondItem="p5h-f1-BGR" secondAttribute="top" constant="23" id="Oht-oI-KTz"/>
+                            <constraint firstItem="p5h-f1-BGR" firstAttribute="trailing" secondItem="hDL-bD-68R" secondAttribute="trailing" constant="23" id="Ulm-8a-hze"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="p5h-f1-BGR"/>
                     </view>
                     <navigationItem key="navigationItem" title="Status" id="3u3-Kn-p30"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGH-Dc-oyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="25" y="2471"/>
+            <point key="canvasLocation" x="24.637681159420293" y="2470.9239130434785"/>
         </scene>
         <!--Items-->
         <scene sceneID="6iR-bp-Rd4">
