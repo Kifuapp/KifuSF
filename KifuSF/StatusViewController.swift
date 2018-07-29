@@ -14,6 +14,8 @@ class StatusViewController: UIViewController {
     var openDonation: OpenDonation?
 
     var openDelivery: OpenDonation?
+    
+    var photoHelper = PhotoHelper()
 
     // MARK: - RETURN VALUES
 
@@ -174,16 +176,36 @@ class StatusViewController: UIViewController {
         guard let delivery = self.openDelivery else {
             fatalError("no delivery for button action")
         }
-//        
-//        switch delivery.status {
-//        case <#pattern#>:
-//            <#code#>
-//        default:
-//            <#code#>
-//        }
+
+        switch delivery.status {
+        case .Open:
+            break
+        case .AwaitingPickup:
+            break
+        case .AwaitingDelivery:
+            //TODO: show directions
+            break
+        case .AwaitingApproval:
+            break
+        }
     }
 
     @IBAction func deliveryGreenButtonTapped(_ sender: Any) {
+        guard let delivery = self.openDelivery else {
+            fatalError("no delivery for button action")
+        }
+        
+        switch delivery.status {
+        case .Open:
+            break
+        case .AwaitingPickup:
+            //TODO: show directions of donator location
+            break
+        case .AwaitingDelivery:
+            photoHelper.presentActionSheet(from: self)
+        case .AwaitingApproval:
+            break
+        }
     }
 
     @IBOutlet weak var donationContainer: GradientView!
@@ -191,15 +213,58 @@ class StatusViewController: UIViewController {
 
     //Below: Donation
     @IBAction func donationCancelButtonTapped(_ sender: Any) {
+        guard let donation = self.openDonation else {
+            fatalError("no delivery for button action")
+        }
+        
+        switch donation.status {
+        case .Open:
+            //TODO: cancel button
+            break
+        case .AwaitingPickup:
+            break
+        case .AwaitingDelivery:
+            break
+        case .AwaitingApproval:
+            break
+        }
     }
 
     @IBAction func donationGreenButtonTapped(_ sender: Any) {
+        guard let donation = self.openDonation else {
+            fatalError("no delivery for button action")
+        }
+        
+        switch donation.status {
+        case .Open:
+            break
+        case .AwaitingPickup:
+            let alertConfirmPickup = UIAlertController(title: nil, message: "are you sure you want to confirm the pickup?", preferredStyle: .actionSheet)
+            let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
+                //TODO: confirm pickup
+            }
+            alertConfirmPickup.addAction(actionConfirm)
+            alertConfirmPickup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alertConfirmPickup, animated: true)
+        case .AwaitingDelivery:
+            break
+        case .AwaitingApproval:
+            //TODO: verify delivery by seguing to a photo Vc
+            break
+        }
     }
 
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //validate photo picked
+        photoHelper.completionHandler = { image in
+            
+             //upload the photo
+            //TODO: Backend-updload service
+        }
         
         updateUI()
     }
