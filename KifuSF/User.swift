@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import CoreLocation
 
 struct User: Codable {
     var contributionPoints: Int
@@ -15,6 +16,16 @@ struct User: Codable {
     let imageURL: String
     let username: String
     let contactNumber: String
+
+    var currentLocation: CLLocation? = {
+        let cl = CLLocationManager()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            return cl.location
+        } else {
+            return nil
+        }
+    }()
 
     private static var _current: User?
 
@@ -42,6 +53,14 @@ struct User: Codable {
 
         _current = user
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case contributionPoints
+        case uid
+        case imageURL
+        case username
+        case contactNumber
+    }
 
     init(username: String, uid: String, imageURL: String, contributionPoints: Int, contactNumber: String) {
         self.username = username
@@ -49,6 +68,8 @@ struct User: Codable {
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
+        
+        
     }
 
     init?(from snapshot: DataSnapshot) {

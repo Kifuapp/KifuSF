@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import LocationPicker
+import CoreLocation
 
 class DonationPostViewController: UIViewController {
 
@@ -16,6 +18,7 @@ class DonationPostViewController: UIViewController {
     @IBOutlet weak var itemDescriptionTextView: UITextView!
 
     let photoHelper = PhotoHelper()
+    var currentLocation: Location?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +26,6 @@ class DonationPostViewController: UIViewController {
         photoHelper.completionHandler = { image in
             self.itemImage.image = image
         }
-
-        // Do any additional setup after loading the view.
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -44,10 +45,30 @@ class DonationPostViewController: UIViewController {
     }
 
     @IBAction func setLocationButtonTapped(_ sender: Any) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "locationVC":
+            if let destinationVC = segue.destination as? LocationPickerViewController {
+                
+                destinationVC.showCurrentLocationInitially = true
+                destinationVC.searchBarPlaceholder = "Choose Pickup location"
+                destinationVC.mapType = .standard
+                
+                destinationVC.showCurrentLocationButton = true
+                
+                destinationVC.completion = { location in
+                   self.currentLocation = location
+                }
+            }
+        default:
+            print("unknown segue identifier")
+        }
     }
     
     @IBAction func donateButtonTapped(_ sender: Any) {
-
         //validate if the fields are empty
         if itemNameField.text!.isEmpty || itemDescriptionTextView.text.isEmpty {
             errorLabel.text = "Fill in everything"
@@ -65,34 +86,27 @@ class DonationPostViewController: UIViewController {
         let image = itemImage.image!
 
         //TODO: Shu-Address picker, store the address string and long and lat
+        
+        guard let currentLocation = currentLocation else {
+            assertionFailure("location failed")
+            return
+        }
 
         //Post the Donation
         DonationService.createDonation(
             title: itemTitle,
             notes: detailText,
             image: image,
-            pickUpAddress: "NOT IMPLEMENTED",
-            longitude: 123,
-            latitude: 123) { [weak self] (_) in
-
+            pickUpAddress: currentLocation.address,
+            longitude: currentLocation.coordinate.longitude,
+            latitude: currentLocation.coordinate.longitude) { [weak self] (_) in
                 //Then dismiss
                 self?.dismiss(animated: true, completion: nil)
         }
     }
 
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

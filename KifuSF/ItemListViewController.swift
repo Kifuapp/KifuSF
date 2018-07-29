@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import LocationPicker
 
 class ItemListViewController: UIViewController {
     
@@ -15,12 +17,21 @@ class ItemListViewController: UIViewController {
             postTable.reloadData()
         }
     }
-
+    
+    
     @IBOutlet weak var postTable: UITableView!
+    
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocationCoordinate2D?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
+        
+        
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +76,10 @@ extension ItemListViewController: UITableViewDataSource {
         postCell.distance.text = "\(1.0) miles from here"
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        postCell.delegate = self
+        UserService.calculateDistance(from: CLLocation(latitude: donation.laditude, longitude: donation.longitude), completion: { (response) in
+            postCell.distance.text = response
+        })
+        
         return postCell
     }
 }
@@ -74,13 +88,6 @@ extension ItemListViewController: UITableViewDelegate {
     
 }
 
-extension ItemListViewController: ItemPostCellDelegate {
-    func requestButtonTapped(cell: ItemPostCell) {
-        guard let indexPath = postTable.indexPath(for: cell) else {
-            return assertionFailure("index path not found")
-        }
-        
-        let selectedDonation = openDonations[indexPath.row]
-        RequestService.createRequest(for: selectedDonation)
-    }
-}
+
+
+
