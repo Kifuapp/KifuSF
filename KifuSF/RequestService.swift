@@ -11,9 +11,17 @@ import FirebaseDatabase
 
 
 struct RequestService {
-    public static func createRequest(for donation: Donation) {
+    public static func createRequest(for donation: Donation, completion: @escaping (Bool) -> ()) {
         let ref = Database.database().reference().child("requests").child(donation.uid).child(User.current.uid)
-        ref.updateChildValues(User.current.dictValue)
+        ref.updateChildValues(User.current.dictValue) { error, _ in
+            if let error = error {
+                print(error)
+                
+                return completion(false)
+            }
+            
+            completion(true)
+        }
     }
     
     public static func deleteRequests(for donation: Donation) {

@@ -96,7 +96,7 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             //change button to awaiting approval
-            deliveryCancelButton.isHidden = true
+            deliveryCancelButtonView.isHidden = true
             deliveryGreenButton.setTitle("Awaiting approval", for: .normal)
         }
     }
