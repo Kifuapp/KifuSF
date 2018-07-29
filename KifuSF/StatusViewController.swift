@@ -14,13 +14,13 @@ class StatusViewController: UIViewController {
     var openDonation: Donation?
 
     var openDelivery: Donation?
-    
+
     var photoHelper = PhotoHelper()
 
     // MARK: - RETURN VALUES
 
     // MARK: - VOID METHODS
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
@@ -28,14 +28,14 @@ class StatusViewController: UIViewController {
                 guard let destination = segue.destination as? VolunteerListViewController else {
                     fatalError("somebody didn't had enough sleep")
                 }
-                
+
                 destination.donation = openDonation
             default:
                 break
             }
         }
     }
-    
+
     private func updateUI() {
         if openDonation != nil {
             emptyDonationContainer.isHidden = true
@@ -66,7 +66,7 @@ class StatusViewController: UIViewController {
         deliveryItemName.text = delivery.title
         deliveryImage.kf.setImage(with: URL(string: delivery.imageUrl)!)
         deliveryTextView.text = delivery.notes
-        
+
         deliveryCancelButtonView.isHidden = false
         deliveryGreenButtonView.isHidden = false
 
@@ -77,7 +77,7 @@ class StatusViewController: UIViewController {
             deliveryLabelOne.text = delivery.pickUpAddress
             deliveryLabelTwo.text = delivery.donator.contactNumber
             deliveryTextView.text = ""
-            
+
             deliveryCancelButtonView.isHidden = true
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
@@ -85,7 +85,7 @@ class StatusViewController: UIViewController {
             deliveryLabelOne.text = "150 Golden Gate Ave, San Francisco, CA 94102"
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
-            
+
             deliveryCancelButtonView.isHidden = false
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
@@ -94,7 +94,7 @@ class StatusViewController: UIViewController {
             deliveryLabelOne.text = ""
             deliveryLabelTwo.text = ""
             deliveryTextView.text = ""
-            
+
             //change button to awaiting approval
             deliveryCancelButton.isHidden = true
             deliveryGreenButton.setTitle("Awaiting approval", for: .normal)
@@ -108,7 +108,7 @@ class StatusViewController: UIViewController {
 
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
-        
+
         deliveryGreenButtonView.isHidden = false
         deliveryCancelButtonView.isHidden = false
 
@@ -117,7 +117,7 @@ class StatusViewController: UIViewController {
             donationLabelOne.text = ""
             donationLabelTwo.text = ""
             donationTextView.text = ""
-            
+
             let nVolunteers = 2
             donationCancelButton.setTitle("Cancel", for: .normal)
             donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
@@ -140,7 +140,7 @@ class StatusViewController: UIViewController {
 
             donationLabelOne.text = volunteer.username
             donationLabelTwo.text = volunteer.contactNumber
-            
+
             //update buttons to: "in delivery"
             //remove cancel button
             donationCancelButtonView.isHidden = true
@@ -162,7 +162,7 @@ class StatusViewController: UIViewController {
     }
 
     // MARK: - IBACTIONS
-    
+
     @IBOutlet weak var deliveryItemName: UILabel!
     @IBOutlet weak var deliveryLabelOne: UILabel!
     @IBOutlet weak var deliveryLabelTwo: UILabel!
@@ -209,7 +209,7 @@ class StatusViewController: UIViewController {
         guard let delivery = self.openDelivery else {
             fatalError("no delivery for button action")
         }
-        
+
         switch delivery.status {
         case .Open:
             break
@@ -231,7 +231,7 @@ class StatusViewController: UIViewController {
         guard let donation = self.openDonation else {
             fatalError("no delivery for button action")
         }
-        
+
         switch donation.status {
         case .Open:
             //TODO: cancel button
@@ -249,7 +249,7 @@ class StatusViewController: UIViewController {
         guard let donation = self.openDonation else {
             fatalError("no delivery for button action")
         }
-        
+
         switch donation.status {
         case .Open:
             self.performSegue(withIdentifier: "show volunteers", sender: nil)
@@ -274,26 +274,32 @@ class StatusViewController: UIViewController {
         }
     }
 
-    // MARK: - LIFE CYCLE
+    @IBAction func emptyDeliveryButtonTapped(_ sender: Any) {
+        //move to items screen
+    }
     
+    // MARK: - Navigation
+
+    // MARK: - LIFE CYCLE
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //validate photo picked
         photoHelper.completionHandler = { image in
-            
+
              //upload the photo
             //TODO: Backend-updload service
         }
-        
+
         updateUI()
     }
-    
+
     private func refreshUI() {
         DonationService.showOpenDontationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
-            
+
             self.updateUI()
         }
     }
