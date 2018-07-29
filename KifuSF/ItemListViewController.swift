@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import LocationPicker
 
 class ItemListViewController: UIViewController {
     
@@ -15,12 +17,41 @@ class ItemListViewController: UIViewController {
             postTable.reloadData()
         }
     }
-
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocationCoordinate2D?
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show detailed donation":
+                guard
+                    let cell = sender as? UITableViewCell,
+                    let indexPath = postTable.indexPath(for: cell),
+                    let vc = segue.destination as? ItemDetailViewController else {
+                        fatalError("storyboard not set up correctly")
+                }
+                
+                let selectedDonation = openDonations[indexPath.row]
+                vc.donation = selectedDonation
+            default: break
+            }
+        }
+    }
+    
+    // MARK: - IBACTIONS
     @IBOutlet weak var postTable: UITableView!
+    
+    // MARK: - LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,22 +61,6 @@ class ItemListViewController: UIViewController {
             self?.openDonations = donations
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -60,12 +75,12 @@ extension ItemListViewController: UITableViewDataSource {
         let donation = openDonations[indexPath.row]
         postCell.itemName.text = donation.title
         
-        //TODO: Backend-calc the distance from current user to the donation long/lat
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
-        postCell.distance.text = "\(1.0) miles from here"
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        postCell.delegate = self
+        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        postCell.distance.text = distanceTitle
+        
         return postCell
     }
 }
@@ -74,13 +89,6 @@ extension ItemListViewController: UITableViewDelegate {
     
 }
 
-extension ItemListViewController: ItemPostCellDelegate {
-    func requestButtonTapped(cell: ItemPostCell) {
-        guard let indexPath = postTable.indexPath(for: cell) else {
-            return assertionFailure("index path not found")
-        }
-        
-        let selectedDonation = openDonations[indexPath.row]
-        RequestService.createRequest(for: selectedDonation)
-    }
-}
+
+
+

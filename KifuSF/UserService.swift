@@ -12,6 +12,7 @@ import Foundation
 import FirebaseAuth.FIRUser
 import FirebaseDatabase
 import FirebaseStorage
+import CoreLocation
 
 typealias FIRUser = FirebaseAuth.User
 
@@ -29,7 +30,6 @@ struct UserService {
             
             ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
                 if let error = error {
-                    assertionFailure(error.localizedDescription)
                     return completion(nil)
                 }
                 
@@ -46,6 +46,16 @@ struct UserService {
             
             return completion(user)
         }
+    }
+    
+    public static func calculateDistance(long: Double, lat: Double) -> String {
+        let location = CLLocation(latitude: lat, longitude: long)
+        if let myCurrentLocation = User.current.currentLocation {
+            let distance = myCurrentLocation.distance(from: location) / 1000 * 1.6
+            return String(format: "%.2f miles to pickup", arguments: [distance])
+        }
+        
+        return "Distance not available"
     }
     
 

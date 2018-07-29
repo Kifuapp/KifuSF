@@ -9,7 +9,60 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterFormViewController: UIViewController {
+class RegisterFormViewController: UIViewController, UITextFieldDelegate {
+    
+    let plusImage = UIImage(named: "PlusSquare")
+    
+    let photoHelper = PhotoHelper()
+    
+    /** this also disables the view's isUserInteractive */
+    private var isRegisterButtonEnabled: Bool {
+        set {
+            buttonViewRegister.alpha = newValue ? 1.0 : 0.45
+            buttonViewRegister.isUserInteractionEnabled = newValue
+            view.isUserInteractionEnabled = newValue
+        }
+        get {
+            return view.isUserInteractionEnabled
+        }
+    }
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    private func clearErrorMessage() {
+        errorMessageLabel.text = ""
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += 190//keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    // MARK: TextFieldDelegate
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.clearErrorMessage()
+    }
+    
+    // MARK: - IBACTIONS
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var phoneAddressTextField: UITextField!
@@ -17,33 +70,12 @@ class RegisterFormViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    
-    let plusImage = UIImage(named: "PlusSquare")
-    
-    let photoHelper = PhotoHelper()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        profileImage.image = plusImage
-        photoHelper.completionHandler = { image in
-            self.profileImage.image = image
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBOutlet weak var buttonViewRegister: GradientView!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
-        errorMessageLabel.text = ""
+        clearErrorMessage()
+        dismissKeyboard()
+        
         if nameTextField.text!.isEmpty || usernameTextField.text!.isEmpty || phoneAddressTextField.text!.isEmpty || emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             errorMessageLabel.text = "Fill in everything"
             return
@@ -65,11 +97,15 @@ class RegisterFormViewController: UIViewController {
             let password = passwordTextField.text
             else { return }
         
-        //TODO: Shu-Disable register button, and keyboard
+        isRegisterButtonEnabled = false
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                assertionFailure(error.localizedDescription)
+                let alert = UIAlertController(errorMessage: error.localizedDescription)
+                self.present(alert, animated: true)
+                
+                self.isRegisterButtonEnabled = true
+                
                 return
             }
             
@@ -77,10 +113,20 @@ class RegisterFormViewController: UIViewController {
                 let username = self.usernameTextField.text,
                 let contactNumber = self.phoneAddressTextField.text,
                 let image = self.profileImage.image
-                else { return }
+                else {
+                    fatalError("no user from result but no error was found or, validation failed with register button")
+            }
             
             UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
-                guard let user = user else { return }
+                guard let user = user else {
+                    let alert = UIAlertController(errorMessage: nil)
+                    self.present(alert, animated: true)
+                    
+                    self.isRegisterButtonEnabled = true
+                    
+                    return
+                }
+                
                 User.setCurrent(user, writeToUserDefaults: true)
                 
                 //succeeded regiestration
@@ -101,23 +147,21 @@ class RegisterFormViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += 190//keyboardSize.height
-            }
-        }
-    }
+    // MARK: - LIFE CYCLE
     
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
-    func isValidEmail(testStr:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+        profileImage.image = plusImage
+        photoHelper.completionHandler = { [weak self] image in
+            self?.profileImage.image = image
+            self?.clearErrorMessage()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 }

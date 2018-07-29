@@ -68,7 +68,9 @@ class StatusViewController: UIViewController {
         deliveryTextView.text = delivery.notes
 
         deliveryCancelButtonView.isHidden = false
+        deliveryCancelButtonView.backgroundColor = UIColor.redColor
         deliveryGreenButtonView.isHidden = false
+        deliveryGreenButtonView.backgroundColor = UIColor.greenColor
 
         switch delivery.status {
         case .Open:
@@ -79,6 +81,7 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             deliveryCancelButtonView.isHidden = true
+            deliveryGreenButtonView.backgroundColor = UIColor.blueColor
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .AwaitingDelivery:
@@ -86,7 +89,7 @@ class StatusViewController: UIViewController {
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
 
-            deliveryCancelButtonView.isHidden = false
+            deliveryCancelButtonView.backgroundColor = UIColor.blueColor
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
 
@@ -96,39 +99,51 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             //change button to awaiting approval
-            deliveryCancelButton.isHidden = true
+            deliveryCancelButtonView.isHidden = true
             deliveryGreenButton.setTitle("Awaiting approval", for: .normal)
         }
     }
 
     private func updateOpenDonationContainer() {
         guard let donation = openDonation else {
-            return assertionFailure("no open delivery to reload")
+            return assertionFailure("no open donation to reload")
         }
 
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)
+        donationLabelOne.isHidden = false
+        donationLabelTwo.isHidden = false
+        donationTextView.text = ""
 
-        deliveryGreenButtonView.isHidden = false
-        deliveryCancelButtonView.isHidden = false
+        donationGreenButtonView.isHidden = false
+        donationCancelButtonView.isHidden = false
 
         switch donation.status {
         case .Open:
-            donationLabelOne.text = ""
-            donationLabelTwo.text = ""
-            donationTextView.text = ""
-
-            let nVolunteers = 2
+            donationLabelOne.isHidden = true
+            donationLabelTwo.isHidden = true
+            donationTextView.text = donation.notes
+            
             donationCancelButton.setTitle("Cancel", for: .normal)
-            donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
+            self.donationGreenButton.setTitle("Show Volunteers", for: .normal)
+            
+            DonationService.getNumberOfVolunteers(for: donation) { (nVolunteers) in
+                
+                //TODO: remove observer
+                switch donation.status {
+                case .Open:
+                    self.donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
+                default: break
+                }
+            }
         case .AwaitingPickup:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
             }
-
-            donationLabelOne.text = volunteer.username
+            
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
-
+            
             //update button to "confirm pickup"
             //remove cancel button
             donationCancelButtonView.isHidden = true
@@ -138,7 +153,7 @@ class StatusViewController: UIViewController {
                 fatalError("no volunteer found")
             }
 
-            donationLabelOne.text = volunteer.username
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
 
             //update buttons to: "in delivery"
@@ -151,7 +166,7 @@ class StatusViewController: UIViewController {
                 fatalError("no volunteer found")
             }
 
-            donationLabelOne.text = volunteer.username
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
 
             //update button to verify delivery
@@ -281,7 +296,9 @@ class StatusViewController: UIViewController {
     }
 
     @IBAction func emptyDeliveryButtonTapped(_ sender: Any) {
+        
         //move to items screen
+        tabBarController!.selectedIndex = 0
     }
 
     // MARK: - Navigation
