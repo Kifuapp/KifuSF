@@ -570,7 +570,7 @@
                                                         <rect key="frame" x="12" y="0.0" width="320" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                        <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

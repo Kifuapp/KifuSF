@@ -81,7 +81,7 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             deliveryCancelButtonView.isHidden = true
-            deliveryGreenButton.backgroundColor = UIColor.blueColor
+            deliveryGreenButtonView.backgroundColor = UIColor.blueColor
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .AwaitingDelivery:
@@ -140,10 +140,10 @@ class StatusViewController: UIViewController {
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
             }
-
+            
             donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
-
+            
             //update button to "confirm pickup"
             //remove cancel button
             donationCancelButtonView.isHidden = true
