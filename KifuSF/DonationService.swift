@@ -120,6 +120,16 @@ struct DonationService {
         }
     }
 
+    static func getNumberOfVolunteers(for donation: Donation, completion: @escaping (Int) -> ()) {
+        let ref = Database.database().reference().child("requests").child(donation.uid)
+        
+        ref.observe(.value) { (dataSnapshot) in
+            let childrenCount = dataSnapshot.childrenCount
+            
+            completion(Int(childrenCount))
+        }
+    }
+    
     /**
      this sets the donation's state to awaiting pickup and remove all other unaccepted
      requests from the requets sub-tree

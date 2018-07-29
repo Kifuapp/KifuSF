@@ -117,10 +117,19 @@ class StatusViewController: UIViewController {
             donationLabelOne.text = ""
             donationLabelTwo.text = ""
             donationTextView.text = ""
-
-            let nVolunteers = 2
+            
             donationCancelButton.setTitle("Cancel", for: .normal)
-            donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
+            self.donationGreenButton.setTitle("Show Volunteers", for: .normal)
+            
+            DonationService.getNumberOfVolunteers(for: donation) { (nVolunteers) in
+                
+                //TODO: remove observer
+                switch donation.status {
+                case .Open:
+                    self.donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
+                default: break
+                }
+            }
         case .AwaitingPickup:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
