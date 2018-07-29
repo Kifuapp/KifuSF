@@ -29,7 +29,6 @@ struct UserService {
             
             ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
                 if let error = error {
-                    assertionFailure(error.localizedDescription)
                     return completion(nil)
                 }
                 

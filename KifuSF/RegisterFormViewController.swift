@@ -15,6 +15,18 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     
     let photoHelper = PhotoHelper()
     
+    /** this also disables the view's isUserInteractive */
+    private var isRegisterButtonEnabled: Bool {
+        set {
+            buttonViewRegister.alpha = newValue ? 1.0 : 0.45
+            buttonViewRegister.isUserInteractionEnabled = newValue
+            view.isUserInteractionEnabled = newValue
+        }
+        get {
+            return view.isUserInteractionEnabled
+        }
+    }
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
@@ -43,6 +55,12 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         return emailTest.evaluate(with: testStr)
     }
     
+    // MARK: TextFieldDelegate
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.clearErrorMessage()
+    }
+    
     // MARK: - IBACTIONS
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -52,6 +70,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var buttonViewRegister: GradientView!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         errorMessageLabel.text = ""
@@ -76,11 +95,15 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
             let password = passwordTextField.text
             else { return }
         
-        //TODO: Shu-Disable register button, and keyboard
+        isRegisterButtonEnabled = false
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                assertionFailure(error.localizedDescription)
+                let alert = UIAlertController(errorMessage: error.localizedDescription)
+                self.present(alert, animated: true)
+                
+                self.isRegisterButtonEnabled = true
+                
                 return
             }
             
@@ -88,10 +111,20 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
                 let username = self.usernameTextField.text,
                 let contactNumber = self.phoneAddressTextField.text,
                 let image = self.profileImage.image
-                else { return }
+                else {
+                    fatalError("no user from result but no error was found or, validation failed with register button")
+            }
             
             UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
-                guard let user = user else { return }
+                guard let user = user else {
+                    let alert = UIAlertController(errorMessage: nil)
+                    self.present(alert, animated: true)
+                    
+                    self.isRegisterButtonEnabled = true
+                    
+                    return
+                }
+                
                 User.setCurrent(user, writeToUserDefaults: true)
                 
                 //succeeded regiestration
