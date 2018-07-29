@@ -256,7 +256,12 @@ class StatusViewController: UIViewController {
         case .AwaitingPickup:
             let alertConfirmPickup = UIAlertController(title: nil, message: "are you sure you want to confirm the pickup?", preferredStyle: .actionSheet)
             let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
-                //TODO: confirm pickup
+                DonationService.confirmPickup(for: donation, completion: { (success) in
+                    if success {
+                        self.refreshUI()
+                    }
+                    //TODO: print error message
+                })
             }
             alertConfirmPickup.addAction(actionConfirm)
             alertConfirmPickup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -283,15 +288,19 @@ class StatusViewController: UIViewController {
         
         updateUI()
     }
+    
+    private func refreshUI() {
+        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+            self.openDelivery = delivery
+            self.openDonation = donation
+            
+            self.updateUI()
+        }
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
-            self.openDelivery = delivery
-            self.openDonation = donation
-
-            self.updateUI()
-        }
+        refreshUI()
     }
 }

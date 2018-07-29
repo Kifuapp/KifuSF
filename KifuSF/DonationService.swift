@@ -153,7 +153,27 @@ struct DonationService {
         RequestService.deleteRequests(for: donation)
     }
     
-    static func setStatusToAwaitingDelivery(for donation: OpenDonation) {
+    /**
+     this updates the status of a donation to the delivering process aka "awaiting delivery"
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    static func confirmPickup(for donation: OpenDonation, completion: @escaping (Bool) -> ()) {
+        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        
+        var updatedDonation = donation
+        updatedDonation.status = .AwaitingDelivery
+        
+        ref.updateChildValues(updatedDonation.dictValue) { (error, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                return completion(false)
+            }
+            completion(true)
+        }
+        
         
     }
     
