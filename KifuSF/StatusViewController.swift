@@ -10,6 +10,13 @@ import UIKit
 
 class StatusViewController: UIViewController {
 
+    @IBOutlet weak var donationContainer: GradientView!
+    @IBOutlet weak var emptyDonationContainer: GradientView!
+    
+    @IBOutlet weak var deliveryContainer: GradientView!
+    @IBOutlet weak var emptyDeliveryContainer: GradientView!
+    
+    
     @IBOutlet weak var donationItemName: UILabel!
     @IBOutlet weak var donationLabelOne: UILabel!
     @IBOutlet weak var donationLabelTwo: UILabel!
@@ -29,6 +36,17 @@ class StatusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if true { //<- change later
+            emptyDonationContainer.isHidden = true
+        } else {
+            donationContainer.isHidden = true
+        }
+        
+        if true { //<- change later
+            emptyDeliveryContainer.isHidden = true
+        } else {
+            deliveryContainer.isHidden = true
+        }
         // Do any additional setup after loading the view.
     }
 
