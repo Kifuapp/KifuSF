@@ -20,10 +20,16 @@ class RegisterFormViewController: UIViewController {
     
     let plusImage = UIImage(named: "PlusSquare")
     
+    let photoHelper = PhotoHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         profileImage.image = plusImage
+        
+        photoHelper.completionHandler = { image in
+            self.profileImage.image = image
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,6 +75,10 @@ class RegisterFormViewController: UIViewController {
         }
     }
     
+    @IBAction func imageSelectionButtonTapped(_ sender: Any) {
+        photoHelper.presentActionSheet(from: self)
+    }
+    
     func isValidEmail(testStr:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
@@ -76,6 +86,3 @@ class RegisterFormViewController: UIViewController {
         return emailTest.evaluate(with: testStr)
     }
 }
-
-
-

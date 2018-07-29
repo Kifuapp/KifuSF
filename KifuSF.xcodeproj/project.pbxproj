@@ -129,6 +129,7 @@
 			children = (
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				44339C30210D13DC00E6663E /* GradientView.swift */,
+				44339C34210D477700E6663E /* PhotoHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
