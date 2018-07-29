@@ -75,6 +75,11 @@ extension ItemListViewController: UITableViewDelegate {
 
 extension ItemListViewController: ItemPostCellDelegate {
     func requestButtonTapped(cell: ItemPostCell) {
+        guard let indexPath = postTable.indexPath(for: cell) else {
+            return assertionFailure("index path not found")
+        }
         
+        let selectedDonation = openDonations[indexPath.row]
+        RequestService.createRequest(for: selectedDonation)
     }
 }

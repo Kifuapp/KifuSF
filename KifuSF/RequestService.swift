@@ -12,7 +12,7 @@ import FirebaseDatabase
 
 struct RequestService {
     public static func createRequest(for donation: OpenDonation) {
-        let ref = Database.database().reference().child("requests").child(donation.uid)
+        let ref = Database.database().reference().child("requests").child(donation.uid).child(User.current.uid)
         ref.updateChildValues(User.current.dictValue)
     }
     
