@@ -796,6 +796,146 @@
             </objects>
             <point key="canvasLocation" x="23.199999999999999" y="3203.7481259370315"/>
         </scene>
+        <!--Approve Delivery View Controller-->
+        <scene sceneID="Lly-nQ-IJf">
+            <objects>
+                <viewController storyboardIdentifier="approveDelivery" id="fg5-15-cm3" customClass="ApproveDeliveryViewController" customModule="KifuSF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6pK-Jt-hfu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWE-Eq-rLJ" userLabel="Status Bar Cover View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.99702380950000002" green="0.99404761900000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFj-yt-hMb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="W3c-c5-Yii"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.99702380950000002" green="0.99404761900000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <textAttributes key="largeTitleTextAttributes">
+                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Approve Delivery" id="qSu-Fm-VNG">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IGX-dH-Uf4">
+                                            <color key="tintColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="fg5-15-cm3" id="RYP-LL-X8K"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YuW-sj-1Y2" userLabel="Image Frame View" customClass="GradientView" customModule="KifuSF" customModuleProvider="target">
+                                <rect key="frame" x="40" y="97" width="295" height="295"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L1q-MX-N9I">
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="295"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="L1q-MX-N9I" firstAttribute="leading" secondItem="YuW-sj-1Y2" secondAttribute="leading" id="8GW-9o-dSb"/>
+                                    <constraint firstItem="L1q-MX-N9I" firstAttribute="top" secondItem="YuW-sj-1Y2" secondAttribute="top" id="Hst-kQ-pe6"/>
+                                    <constraint firstAttribute="bottom" secondItem="L1q-MX-N9I" secondAttribute="bottom" id="Mfk-EY-vAj"/>
+                                    <constraint firstAttribute="width" secondItem="YuW-sj-1Y2" secondAttribute="height" multiplier="1:1" id="oY1-zA-H6c"/>
+                                    <constraint firstAttribute="width" secondItem="YuW-sj-1Y2" secondAttribute="height" multiplier="1:1" id="pYv-X5-TbW"/>
+                                    <constraint firstAttribute="trailing" secondItem="L1q-MX-N9I" secondAttribute="trailing" id="xDV-r8-gdY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9160276074" green="0.9160276074" blue="0.9160276074" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8p-d0-KBQ" userLabel="Send Request Button View" customClass="GradientView" customModule="KifuSF" customModuleProvider="target">
+                                <rect key="frame" x="32" y="575" width="311" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzg-XY-KG4">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="55"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
+                                        <state key="normal" title="Approve"/>
+                                        <connections>
+                                            <action selector="approveButtonTapped:" destination="fg5-15-cm3" eventType="touchUpInside" id="7Lk-tr-uTT"/>
+                                            <action selector="requestButtonTapped:" destination="8H8-rv-lMn" eventType="touchUpInside" id="zId-kQ-XVl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bzg-XY-KG4" firstAttribute="centerY" secondItem="A8p-d0-KBQ" secondAttribute="centerY" id="1Hv-qc-mYj"/>
+                                    <constraint firstItem="bzg-XY-KG4" firstAttribute="leading" secondItem="A8p-d0-KBQ" secondAttribute="leading" id="8cJ-Tm-F8Y"/>
+                                    <constraint firstAttribute="trailing" secondItem="bzg-XY-KG4" secondAttribute="trailing" id="ArN-FO-8cc"/>
+                                    <constraint firstItem="bzg-XY-KG4" firstAttribute="centerX" secondItem="A8p-d0-KBQ" secondAttribute="centerX" id="EwQ-t3-puB"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="55" id="GiP-0u-Iwk"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="Lvo-fh-myo"/>
+                                    <constraint firstAttribute="bottom" secondItem="bzg-XY-KG4" secondAttribute="bottom" id="U7I-Tc-gf7"/>
+                                    <constraint firstAttribute="height" constant="55" id="bU2-Ui-5nj"/>
+                                    <constraint firstItem="bzg-XY-KG4" firstAttribute="top" secondItem="A8p-d0-KBQ" secondAttribute="top" id="cjV-yl-G2E"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.97602724510000005" green="0.97286858080000005" blue="0.97918590930000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lFj-yt-hMb" firstAttribute="top" secondItem="ssI-kr-rw8" secondAttribute="top" id="6aL-wm-ONH"/>
+                            <constraint firstItem="YuW-sj-1Y2" firstAttribute="leading" secondItem="ssI-kr-rw8" secondAttribute="leading" constant="40" id="7uq-gn-Dnn"/>
+                            <constraint firstItem="YuW-sj-1Y2" firstAttribute="top" secondItem="lFj-yt-hMb" secondAttribute="bottom" constant="33" id="EGQ-MN-3Rr"/>
+                            <constraint firstAttribute="trailing" secondItem="MWE-Eq-rLJ" secondAttribute="trailing" id="Ggp-Aj-nsr"/>
+                            <constraint firstItem="lFj-yt-hMb" firstAttribute="top" secondItem="MWE-Eq-rLJ" secondAttribute="bottom" id="Gm3-KN-aam"/>
+                            <constraint firstItem="ssI-kr-rw8" firstAttribute="bottom" secondItem="A8p-d0-KBQ" secondAttribute="bottom" constant="37" id="HSK-iw-jVd"/>
+                            <constraint firstItem="ssI-kr-rw8" firstAttribute="trailing" secondItem="YuW-sj-1Y2" secondAttribute="trailing" constant="40" id="HTM-u3-bTR"/>
+                            <constraint firstItem="ssI-kr-rw8" firstAttribute="trailing" secondItem="A8p-d0-KBQ" secondAttribute="trailing" constant="32" id="LqP-9G-68R"/>
+                            <constraint firstItem="lFj-yt-hMb" firstAttribute="trailing" secondItem="ssI-kr-rw8" secondAttribute="trailing" id="WG7-1L-Tln"/>
+                            <constraint firstItem="MWE-Eq-rLJ" firstAttribute="top" secondItem="6pK-Jt-hfu" secondAttribute="top" id="WTl-E8-ASb"/>
+                            <constraint firstItem="A8p-d0-KBQ" firstAttribute="leading" secondItem="ssI-kr-rw8" secondAttribute="leading" constant="32" id="XzI-4R-mLu"/>
+                            <constraint firstItem="MWE-Eq-rLJ" firstAttribute="leading" secondItem="6pK-Jt-hfu" secondAttribute="leading" id="Zdh-N5-bWY"/>
+                            <constraint firstItem="lFj-yt-hMb" firstAttribute="leading" secondItem="ssI-kr-rw8" secondAttribute="leading" id="qSh-G2-VDW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssI-kr-rw8"/>
+                    </view>
+                    <connections>
+                        <outlet property="itemImage" destination="L1q-MX-N9I" id="4BY-wM-GaY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVt-al-rtT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="3894.6026986506749"/>
+        </scene>
         <!--Item Detail View Controller-->
         <scene sceneID="nGs-aS-lcX">
             <objects>
