@@ -258,7 +258,7 @@ class StatusViewController: UIViewController {
             let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
                 DonationService.confirmPickup(for: donation, completion: { (success) in
                     if success {
-                        self.refreshUI()
+                        self.😱()
                     }
                     //TODO: print error message
                 })
@@ -269,8 +269,13 @@ class StatusViewController: UIViewController {
         case .AwaitingDelivery:
             break
         case .AwaitingApproval:
-            //TODO: verify delivery by seguing to a photo Vc
-            break
+            guard
+                let photoVc = storyboard!.instantiateViewController(withIdentifier: "approveDelivery") as? ApproveDeliveryViewController,
+                let donation = self.openDonation else {
+                fatalError("bad progammer 🤓")
+            }
+            
+            photoVc.donation = donation
         }
     }
 
@@ -295,7 +300,7 @@ class StatusViewController: UIViewController {
         updateUI()
     }
 
-    private func refreshUI() {
+    private func 😱() {
         DonationService.showOpenDontationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
@@ -307,6 +312,6 @@ class StatusViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        refreshUI()
+        😱()
     }
 }

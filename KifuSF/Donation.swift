@@ -19,7 +19,7 @@ struct Donation {
     let laditude: Double
     let pickUpAddress: String
     let donator: User
-    let verificationUrl: String?
+    var verificationUrl: String?
     
     enum Status: Int {
         case Open

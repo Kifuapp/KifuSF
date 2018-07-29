@@ -188,7 +188,7 @@ struct DonationService {
             
             var updatedDonation = donation
             updatedDonation.status = .AwaitingApproval
-            updatedDonation.verificationUrl = downloadURL
+            updatedDonation.verificationUrl = downloadURL.absoluteString
             
             let ref = Database.database().reference().child("openDonations").child(donation.uid)
             ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in

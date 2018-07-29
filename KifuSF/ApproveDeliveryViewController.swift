@@ -7,36 +7,44 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ApproveDeliveryViewController: UIViewController {
+    
+    var donation: Donation!
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    // MARK: - IBACTIONS
+    
     @IBOutlet weak var itemImage: UIImageView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func approveButtonTapped(_ sender: Any) {
-        
+        DonationService.deliveryVerified(for: donation) { (success) in
+            if success {
+                self.presentingViewController?.dismiss(animated: true)
+            } else {
+                //TODO: display error
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - LIFE CYCLE
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let imageUrl = donation.verificationUrl else {
+            fatalError("missing verification url")
+        }
+        
+        itemImage.kf.setImage(with: URL(string: imageUrl)!)
     }
-    */
 
 }
