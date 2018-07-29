@@ -48,10 +48,11 @@ struct UserService {
         }
     }
     
-    public static func calculateDistance(from location: CLLocation) -> String {
+    public static func calculateDistance(long: Double, lat: Double) -> String {
+        let location = CLLocation(latitude: lat, longitude: long)
         if let myCurrentLocation = User.current.currentLocation {
-            //TODO: convert result into miles
-            return "\(myCurrentLocation.distance(from: location)) miles to pickup"
+            let distance = myCurrentLocation.distance(from: location) / 1000 * 1.6
+            return String(format: "%.2f miles to pickup", arguments: [distance])
         }
         
         return "Distance not available"

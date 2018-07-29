@@ -365,7 +365,7 @@
                                                         <rect key="frame" x="12" y="0.0" width="320" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="VkQ-s1-g6e" id="04e-XH-HKi"/>
                                                         </connections>

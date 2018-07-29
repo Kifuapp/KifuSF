@@ -135,7 +135,7 @@ class StatusViewController: UIViewController {
                 fatalError("no volunteer found")
             }
 
-            donationLabelOne.text = volunteer.username
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
 
             //update button to "confirm pickup"
@@ -147,7 +147,7 @@ class StatusViewController: UIViewController {
                 fatalError("no volunteer found")
             }
 
-            donationLabelOne.text = volunteer.username
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
 
             //update buttons to: "in delivery"
@@ -160,7 +160,7 @@ class StatusViewController: UIViewController {
                 fatalError("no volunteer found")
             }
 
-            donationLabelOne.text = volunteer.username
+            donationLabelOne.text = "@\(volunteer.username)"
             donationLabelTwo.text = volunteer.contactNumber
 
             //update button to verify delivery

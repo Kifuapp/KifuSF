@@ -32,9 +32,9 @@ class ItemDetailViewController: UIViewController {
     private func updateUI() {
         itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         itemName.text = donation.title
-        //TODO: distance
-//        itemDistance.text =
-        postDetail.text = donation.donator.username
+        
+        itemDistance.text = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        postDetail.text = "@\(donation.donator.username)"
         descriptionView.text = donation.notes
     }
     
