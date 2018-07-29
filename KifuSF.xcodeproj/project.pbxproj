@@ -22,6 +22,8 @@
 		C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C32210D2C0200E6663E /* RegisterFormViewController.swift */; };
 		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
+		C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */; };
+		C5CA7BC0210D53CA0052D440 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
 		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
+		C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,9 +115,9 @@
 		C5A351E9210D0E0200A717D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BBF210D53CA0052D440 /* ItemPostCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
-				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -121,8 +125,8 @@
 		C5A351EA210D0E1600A717D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
-				44339C38210D4D5400E6663E /* ItemListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
 			);
 			name = Controllers;
@@ -321,7 +325,9 @@
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
+				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
+				C5CA7BC0210D53CA0052D440 /* ItemPostCell.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
