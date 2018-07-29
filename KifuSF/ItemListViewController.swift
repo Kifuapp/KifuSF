@@ -10,7 +10,7 @@ import UIKit
 
 class ItemListViewController: UIViewController {
     
-    var openDonations: [OpenDonation] = [] {
+    var openDonations: [Donation] = [] {
         didSet {
             postTable.reloadData()
         }

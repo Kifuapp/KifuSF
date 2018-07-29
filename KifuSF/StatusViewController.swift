@@ -11,9 +11,9 @@ import Kingfisher
 
 class StatusViewController: UIViewController {
 
-    var openDonation: OpenDonation?
+    var openDonation: Donation?
 
-    var openDelivery: OpenDonation?
+    var openDelivery: Donation?
     
     var photoHelper = PhotoHelper()
 
