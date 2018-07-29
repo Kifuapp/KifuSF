@@ -61,8 +61,8 @@ struct DonationService {
         
         //download snapshot
         ref.observeSingleEvent(of: .value) { (snapshot) in
-            guard let snapshotValue = snapshot.value as! [DataSnapshot]? else {
-                return completion([]) //empty array
+            guard let snapshotValue = snapshot.children.allObjects as? [DataSnapshot] else {
+                fatalError("could not decode into array") //empty array
             }
             
             

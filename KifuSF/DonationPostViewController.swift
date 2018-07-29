@@ -44,18 +44,37 @@ class DonationPostViewController: UIViewController {
     }
 
     @IBAction func donateButtonTapped(_ sender: Any) {
+        
+        //validate if the fields are empty
         if itemNameField.text!.isEmpty || itemDescriptionTextView.text.isEmpty {
             errorLabel.text = "Fill in everything"
             return
         }
+        
+        //validate the image is not the default image
         if itemImage.image == UIImage(named: "PlusSquare") {
             errorLabel.text = "Set the photo"
             return
         }
+        
+        let itemTitle = itemNameField.text!
+        let detailText = itemDescriptionTextView.text!
+        let image = itemImage.image!
+        
+        //TODO: Shu-Address picker, store the address string and long and lat
 
-        //Post Donation
-        //Then dismiss
-        dismiss(animated: true, completion: nil)
+        //Post the Donation
+        DonationService.createDonation(
+            title: itemTitle,
+            notes: detailText,
+            image: image,
+            pickUpAddress: "NOT IMPLEMENTED",
+            longitude: 123,
+            latitude: 123) { [weak self] (_) in
+                
+                //Then dismiss
+                self?.dismiss(animated: true, completion: nil)
+        }
     }
 
     @objc func dismissKeyboard() {

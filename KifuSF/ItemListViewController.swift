@@ -9,12 +9,26 @@
 import UIKit
 
 class ItemListViewController: UIViewController {
+    
+    var openDonations: [OpenDonation] = [] {
+        didSet {
+            postTable.reloadData()
+        }
+    }
 
     @IBOutlet weak var postTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DonationService.showTimelineDonations { [weak self] (donations) in
+            self?.openDonations = donations
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,14 +51,18 @@ class ItemListViewController: UIViewController {
 
 extension ItemListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 //return number of posts
+        return openDonations.count //return number of posts
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let postCell = postTable.dequeueReusableCell(withIdentifier: "postCell") as! ItemPostCell
-        postCell.itemName.text = "DummyText"
+        
+        let donation = openDonations[indexPath.row]
+        postCell.itemName.text = donation.title
+        
+        //TODO: Backend-calc the distance from current user to the donation long/lat
         postCell.distance.text = "\(1.0) miles from here"
-        postCell.postInfo.text = "@\("USERNAME") - \("00:00 AM")"
+        postCell.postInfo.text = "@\(donation.donator.username)"
         
         postCell.delegate = self
         return postCell
