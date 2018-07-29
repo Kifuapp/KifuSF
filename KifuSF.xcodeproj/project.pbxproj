@@ -113,6 +113,7 @@
 			children = (
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
+				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -121,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
+				44339C38210D4D5400E6663E /* ItemListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
 			);
 			name = Controllers;
