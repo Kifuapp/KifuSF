@@ -24,9 +24,8 @@ class RegisterFormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        profileImage.image = plusImage
         
+        profileImage.image = plusImage
         photoHelper.completionHandler = { image in
             self.profileImage.image = image
         }
@@ -66,12 +65,16 @@ class RegisterFormViewController: UIViewController {
                 return
             }
             
-//            guard let firUser = result?.user,
-//                let username = usernameTextField.text,
-//                let image 
-//                else { return }
-//            
-//            UserService.create(firUser: firUser, username: <#T##String#>, image: <#T##UIImage#>, contactNumber: <#T##String#>, completion: <#T##(User?) -> ()#>)
+            guard let firUser = result?.user,
+                let username = self.usernameTextField.text,
+                let contactNumber = self.phoneAddressTextField.text,
+                let image = self.profileImage.image
+                else { return }
+            
+            UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
+                guard let user = user else { return }
+                User.setCurrent(user)
+            })
         }
     }
     

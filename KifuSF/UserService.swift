@@ -22,11 +22,12 @@ struct UserService {
         StorageService.uploadImage(image, at: imageRef) { (url) in
             guard let downloadURL = url else { return completion(nil) }
             let imageURL = downloadURL.absoluteString
+            
             let newUser = User(username: username, uid: firUser.uid, imageURL: imageURL, contributionPoints: 0, contactNumber: contactNumber)
             
             let ref = Database.database().reference().child("users").child(firUser.uid)
             
-            ref.setValue(newUser, withCompletionBlock: { (error, _) in
+            ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure(error.localizedDescription)
                     return completion(nil)

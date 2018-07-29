@@ -21,6 +21,7 @@
 		C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */; };
 		C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C32210D2C0200E6663E /* RegisterFormViewController.swift */; };
 		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
+		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		C5CA7BB4210D2B030052D440 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
 		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
+		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,9 +129,9 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				44339C30210D13DC00E6663E /* GradientView.swift */,
-				44339C34210D477700E6663E /* PhotoHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -315,6 +317,7 @@
 			files = (
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
+				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
