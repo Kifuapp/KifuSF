@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */; };
 		44339C31210D13DC00E6663E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C30210D13DC00E6663E /* GradientView.swift */; };
 		44339C33210D2C0200E6663E /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C32210D2C0200E6663E /* RegisterFormViewController.swift */; };
 		44339C35210D477700E6663E /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C34210D477700E6663E /* PhotoHelper.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		44339C30210D13DC00E6663E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		44339C32210D2C0200E6663E /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
 		44339C34210D477700E6663E /* PhotoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
 				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
 				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
 				44339C38210D4D5400E6663E /* ItemListViewController.swift */,
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
@@ -212,6 +215,7 @@
 			files = (
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
+				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
 				44339C37210D4C4400E6663E /* ItemPostCell.swift in Sources */,
 				44339C39210D4D5400E6663E /* ItemListViewController.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
