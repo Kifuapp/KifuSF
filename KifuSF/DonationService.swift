@@ -60,7 +60,7 @@ struct DonationService {
         let ref = Database.database().reference().child("openDonations")
 
         //download snapshot
-        ref.observeSingleEvent(of: .value) { (snapshot) in
+        ref.observe(.value) { (snapshot) in
             guard let snapshotValue = snapshot.children.allObjects as? [DataSnapshot] else {
                 fatalError("could not decode into array") //empty array
             }
@@ -94,7 +94,7 @@ struct DonationService {
     static func showOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> ()) {
         let ref = Database.database().reference().child("openDonations")
 
-        ref.observeSingleEvent(of: .value) { (snapshot) in
+        ref.observe(.value) { (snapshot) in
             guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else {
                 fatalError("could not decode")
             }
