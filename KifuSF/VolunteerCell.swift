@@ -9,7 +9,13 @@
 import UIKit
 
 class VolunteerCell: UITableViewCell {
+    
+    weak var delegate: VolunteerCellDelegate?
 
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +27,12 @@ class VolunteerCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    @IBAction func confirmButtonTapped(_ sender: Any) {
+        delegate?.confirmButtonTapped(cell: self)
+    }
+}
+
+protocol VolunteerCellDelegate: class {
+    func confirmButtonTapped(cell: VolunteerCell)
 }

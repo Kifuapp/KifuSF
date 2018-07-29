@@ -23,7 +23,10 @@ class VolunteerListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -46,11 +49,20 @@ extension VolunteerListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let volunteerCell = volunteerTable.dequeueReusableCell(withIdentifier: "volunteerCell")!
+        let volunteerCell = volunteerTable.dequeueReusableCell(withIdentifier: "volunteerCell") as! VolunteerCell
+        volunteerCell.delegate = self
         return volunteerCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 117
     }
+}
+
+extension VolunteerListViewController: VolunteerCellDelegate {
+    func confirmButtonTapped(cell: VolunteerCell) {
+        
+    }
+    
+    
 }
