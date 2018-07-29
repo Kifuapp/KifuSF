@@ -10,6 +10,12 @@ import UIKit
 
 class ItemDetailViewController: UIViewController {
 
+    @IBOutlet weak var itemName: UILabel!
+    @IBOutlet weak var itemDistance: UILabel!
+    @IBOutlet weak var postDetail: UILabel!
+    @IBOutlet weak var descriptionView: UITextView!
+    @IBOutlet weak var itemImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

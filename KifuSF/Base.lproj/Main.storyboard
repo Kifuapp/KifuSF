@@ -967,6 +967,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="370-AB-QyC"/>
                     </view>
+                    <connections>
+                        <outlet property="descriptionView" destination="Csp-1k-FKD" id="XSx-90-Eyi"/>
+                        <outlet property="itemDistance" destination="rs9-Eh-v0x" id="Cx2-7M-kZa"/>
+                        <outlet property="itemImage" destination="PWt-RW-vkg" id="Tff-OM-vEI"/>
+                        <outlet property="itemName" destination="YjX-dE-cmC" id="Zf4-Z6-fMm"/>
+                        <outlet property="postDetail" destination="9OP-eM-ttZ" id="gho-wJ-TZL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01X-Qr-YDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

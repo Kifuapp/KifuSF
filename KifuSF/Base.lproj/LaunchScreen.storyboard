@@ -25,19 +25,12 @@
                                     <constraint firstAttribute="width" secondItem="OIJ-Jg-ref" secondAttribute="height" multiplier="152:61" id="XSi-2s-JWG"/>
                                 </constraints>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Stripe" translatesAutoresizingMaskIntoConstraints="NO" id="k3H-0d-pah">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="k3H-0d-pah" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="F5S-zW-m3C"/>
                             <constraint firstItem="OIJ-Jg-ref" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fml-jR-6CQ"/>
-                            <constraint firstItem="k3H-0d-pah" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Fqt-Hp-ghF"/>
-                            <constraint firstItem="k3H-0d-pah" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="a4g-YV-elF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OIJ-Jg-ref" secondAttribute="trailing" constant="50" id="b0q-Fn-yzk"/>
                             <constraint firstItem="OIJ-Jg-ref" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fPr-HD-2QU"/>
-                            <constraint firstItem="k3H-0d-pah" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mic-kp-aI2"/>
                             <constraint firstItem="OIJ-Jg-ref" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="rUB-VO-NaE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,7 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="1121" height="452"/>
-        <image name="Stripe" width="2500" height="2500"/>
+        <image name="Logo" width="1170" height="452"/>
     </resources>
 </document>
