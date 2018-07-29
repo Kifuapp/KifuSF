@@ -48,13 +48,13 @@ struct UserService {
         }
     }
     
-    public static func calculateDistance(from location: CLLocation, completion: @escaping (String) -> ()) {
+    public static func calculateDistance(from location: CLLocation) -> String {
         if let myCurrentLocation = User.current.currentLocation {
             //TODO: convert result into miles
-            return completion("\(myCurrentLocation.distance(from: location)) miles to pickup")
+            return "\(myCurrentLocation.distance(from: location)) miles to pickup"
         }
         
-        completion("Distance not available")
+        return "Distance not available"
     }
     
 

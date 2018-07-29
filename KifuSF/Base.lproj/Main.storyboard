@@ -1006,7 +1006,7 @@
                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Item Detail" id="cTY-w5-o4g">
+                                    <navigationItem title="Donation Details" id="cTY-w5-o4g">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="LI7-LD-OqD">
                                             <color key="tintColor" red="0.0" green="0.59999999999999998" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
@@ -1406,7 +1406,7 @@
             </objects>
             <point key="canvasLocation" x="24.800000000000001" y="920.68965517241384"/>
         </scene>
-        <!--Items-->
+        <!--Open Donations-->
         <scene sceneID="4k6-cp-6tH">
             <objects>
                 <viewController id="VqZ-z7-6YS" customClass="ItemListViewController" customModule="KifuSF" customModuleProvider="target" sceneMemberID="viewController">
@@ -1549,7 +1549,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="68m-Re-xhe"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Items" id="DW2-xn-TMO"/>
+                    <navigationItem key="navigationItem" title="Open Donations" id="DW2-xn-TMO"/>
                     <connections>
                         <outlet property="postTable" destination="wja-H9-rhc" id="Bt3-3g-euW"/>
                     </connections>
@@ -1660,7 +1660,7 @@
                                                                                         <color key="textColor" red="0.53920628829999995" green="0.53920628829999995" blue="0.53920628829999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zOD-Ji-0pH">
+                                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOD-Ji-0pH">
                                                                                         <rect key="frame" x="0.0" y="20" width="207" height="52"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <string key="text">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </string>
@@ -1940,7 +1940,7 @@
                                                                                         <color key="textColor" red="0.53920628829999995" green="0.53920628829999995" blue="0.53920628829999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vr2-f3-dfE">
+                                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vr2-f3-dfE">
                                                                                         <rect key="frame" x="0.0" y="20" width="207" height="52"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <string key="text">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </string>

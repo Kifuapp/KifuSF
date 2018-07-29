@@ -77,12 +77,10 @@ extension ItemListViewController: UITableViewDataSource {
         
         //TODO: Backend-calc the distance from current user to the donation long/lat
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
-        postCell.distance.text = "\(1.0) miles from here"
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        UserService.calculateDistance(from: CLLocation(latitude: donation.laditude, longitude: donation.longitude), completion: { (response) in
-            postCell.distance.text = response
-        })
+        let distanceTitle = UserService.calculateDistance(from: CLLocation(latitude: donation.laditude, longitude: donation.longitude))
+        postCell.distance.text = distanceTitle
         
         return postCell
     }
