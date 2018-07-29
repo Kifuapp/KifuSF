@@ -16,7 +16,11 @@
 		C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */; };
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
-		E92994F0210D287300A32924 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EF210D287300A32924 /* User.swift */; };
+		C5CA7BAD210D24380052D440 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BAC210D24380052D440 /* User.swift */; };
+		C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB0210D24F50052D440 /* UserService.swift */; };
+		C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB2210D26CF0052D440 /* Constants.swift */; };
+		C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB4210D2B030052D440 /* StorageService.swift */; };
+		C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +36,11 @@
 		C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
-		E92994EF210D287300A32924 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C5CA7BAC210D24380052D440 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C5CA7BB0210D24F50052D440 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		C5CA7BB2210D26CF0052D440 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C5CA7BB4210D2B030052D440 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +85,7 @@
 		C5A351D3210D0CE500A717D3 /* KifuSF */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BAF210D24CF0052D440 /* Services */,
 				C5A351E9210D0E0200A717D3 /* Views */,
 				C5A351ED210D0E5100A717D3 /* Supporting Files */,
 				C5A351EC210D0E4900A717D3 /* Extensions */,
@@ -92,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				E92994ED210D27CC00A32924 /* Donation.swift */,
-				E92994EF210D287300A32924 /* User.swift */,
+				C5CA7BAC210D24380052D440 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -118,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				E92994EB210D27C100A32924 /* DonationService.swift */,
+				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -125,6 +135,7 @@
 		C5A351EC210D0E4900A717D3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -137,6 +148,15 @@
 				C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C5CA7BAF210D24CF0052D440 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA7BB0210D24F50052D440 /* UserService.swift */,
+				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -292,9 +312,14 @@
 			files = (
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
+				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
+				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
+				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C5A351D7210D0CE500A717D3 /* ViewController.swift in Sources */,
 				E92994F0210D287300A32924 /* User.swift in Sources */,
 				C5A351D5210D0CE500A717D3 /* AppDelegate.swift in Sources */,
+				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
