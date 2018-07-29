@@ -114,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
+				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
