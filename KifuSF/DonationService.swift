@@ -220,7 +220,7 @@ struct DonationService {
         
     }
 
-    static func deliveryVerified(for donation: Donation, completion: @escaping (Bool) -> ()) {
+    static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> ()) {
         let ref = Database.database().reference().child("open-donations").child(donation.uid)
         ref.setValue(nil) { (error, _) in
             if let error = error {
@@ -235,4 +235,38 @@ struct DonationService {
         
     }
 
+    static func cancel(donation: Donation, completion: @escaping (Bool) -> Void) {
+        
+        let dg = DispatchGroup()
+        var isSuccessful = true
+        
+        //remove all requests
+        dg.enter()
+        RequestService.clearRequests(for: donation) { (success) in
+            if success == false {
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        //delete the donation
+        dg.enter()
+        let refDonation = Database.database().reference()
+            .child("open-donations")
+                .child(donation.uid)
+        refDonation.setValue(nil) { error, _ in
+            if let error = error {
+                print("Error deleting donation: \(error.localizedDescription)")
+                
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        dg.notify(queue: DispatchQueue.main) {
+            completion(isSuccessful)
+        }
+    }
 }

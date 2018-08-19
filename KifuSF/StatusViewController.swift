@@ -250,7 +250,30 @@ class StatusViewController: UIViewController {
         switch donation.status {
         case .Open:
             //TODO: cancel button
-            break
+            let cancelDonationAlert = UIAlertController(
+                title: "Cancel Donation",
+                message: "Are you sure you want to cancel your open donation?",
+                preferredStyle: .alert
+            )
+            
+            let deleteDonationAction = UIAlertAction(
+                title: "Delete Donation",
+                style: .destructive) { (_) in
+                    DonationService.cancel(donation: donation, completion: { (successful) in
+                        if successful == false {
+                            //TODO: prompt error, something went wrong
+                        } else {
+                            //observe will update the UI
+                            //self.updateUI()
+                        }
+                    })
+            }
+            cancelDonationAlert.addAction(deleteDonationAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            cancelDonationAlert.addAction(cancelAction)
+            
+            present(cancelDonationAlert, animated: true)
         case .AwaitingPickup:
             break
         case .AwaitingDelivery:
