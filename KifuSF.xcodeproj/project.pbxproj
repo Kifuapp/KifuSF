@@ -36,6 +36,7 @@
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
+		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColors.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
+		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E9C10C9F210E4C6B0050FB8A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */,
+				E96F11EB21294016004D549A /* MapHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				44339C30210D13DC00E6663E /* GradientView.swift */,
 			);
@@ -384,6 +387,7 @@
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
+				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,

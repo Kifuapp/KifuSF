@@ -213,7 +213,7 @@ class StatusViewController: UIViewController {
         case .AwaitingPickup:
             break
         case .AwaitingDelivery:
-            //TODO: show directions
+            //TODO: show directions to charity. use MapHelper
             break
         case .AwaitingApproval:
             break
@@ -229,8 +229,8 @@ class StatusViewController: UIViewController {
         case .Open:
             break
         case .AwaitingPickup:
-            //TODO: show directions of donator location
-            break
+            let directionsMap = MapHelper(long: delivery.longitude, lat: delivery.laditude)
+            directionsMap.open()
         case .AwaitingDelivery:
             sendValidationPhotoHelper.presentActionSheet(from: self)
         case .AwaitingApproval:
@@ -249,7 +249,6 @@ class StatusViewController: UIViewController {
 
         switch donation.status {
         case .Open:
-            //TODO: cancel button
             let cancelDonationAlert = UIAlertController(
                 title: "Cancel Donation",
                 message: "Are you sure you want to cancel your open donation?",
@@ -261,7 +260,8 @@ class StatusViewController: UIViewController {
                 style: .destructive) { (_) in
                     DonationService.cancel(donation: donation, completion: { (successful) in
                         if successful == false {
-                            //TODO: prompt error, something went wrong
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            self.present(errorAlert, animated: true)
                         } else {
                             //observe will update the UI
                             //self.updateUI()
