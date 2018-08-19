@@ -15,7 +15,7 @@ class StatusViewController: UIViewController {
 
     var openDelivery: Donation?
 
-    var photoHelper = PhotoHelper()
+    var sendValidationPhotoHelper = PhotoHelper()
 
     // MARK: - RETURN VALUES
 
@@ -232,7 +232,7 @@ class StatusViewController: UIViewController {
             //TODO: show directions of donator location
             break
         case .AwaitingDelivery:
-            photoHelper.presentActionSheet(from: self)
+            sendValidationPhotoHelper.presentActionSheet(from: self)
         case .AwaitingApproval:
             break
         }
@@ -296,7 +296,7 @@ class StatusViewController: UIViewController {
             let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
                 DonationService.confirmPickup(for: donation, completion: { (success) in
                     if success {
-                        self.😱()
+                        self.observeChanges()
                     }
                     //TODO: print error message
                 })
@@ -332,14 +332,14 @@ class StatusViewController: UIViewController {
         super.viewDidLoad()
 
         //validate photo picked
-        photoHelper.completionHandler = { image in
+        sendValidationPhotoHelper.completionHandler = { image in
             guard let donation = self.openDelivery else {
                 fatalError("some programmer didn't had enough sleep")
             }
 
             DonationService.confirmDelivery(for: donation, image: image, completion: { (success) in
                 if success {
-                    self.😱()
+                    self.observeChanges()
                 }
                 //TODO: handle error
             })
@@ -348,7 +348,7 @@ class StatusViewController: UIViewController {
         updateUI()
     }
 
-    private func 😱() {
+    private func observeChanges() {
         DonationService.showOpenDontationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
@@ -360,6 +360,6 @@ class StatusViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        😱()
+        observeChanges()
     }
 }
