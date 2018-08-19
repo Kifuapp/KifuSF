@@ -26,7 +26,7 @@ struct DonationService {
             }
 
             //get ref for new donation
-            let ref = Database.database().reference().child("openDonations").childByAutoId()
+            let ref = Database.database().reference().child("open-donations").childByAutoId()
 
             //create donation and get dict value
             let donation = Donation(
@@ -57,7 +57,7 @@ struct DonationService {
     static func showTimelineDonations(completion: @escaping ([Donation]) -> ()) {
 
         //get donations ref
-        let ref = Database.database().reference().child("openDonations")
+        let ref = Database.database().reference().child("open-donations")
 
         //download snapshot
         ref.observe(.value) { (snapshot) in
@@ -92,7 +92,7 @@ struct DonationService {
     }
 
     static func showOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> ()) {
-        let ref = Database.database().reference().child("openDonations")
+        let ref = Database.database().reference().child("open-donations")
 
         ref.observe(.value) { (snapshot) in
             guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else {
@@ -121,7 +121,7 @@ struct DonationService {
     }
 
     static func getNumberOfVolunteers(for donation: Donation, completion: @escaping (Int) -> ()) {
-        let ref = Database.database().reference().child("requests").child(donation.uid)
+        let ref = Database.database().reference().child("donation-requests").child(donation.uid)
         
         ref.observe(.value) { (dataSnapshot) in
             let childrenCount = dataSnapshot.childrenCount
@@ -133,14 +133,10 @@ struct DonationService {
     /**
      this sets the donation's state to awaiting pickup and remove all other unaccepted
      requests from the requets sub-tree
-
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-
-     - returns: <#Sed do eiusmod tempor.#>
      */
     static func accept(volunteer: User, for donation: Donation, completion: @escaping (Bool) -> ()) {
         //get donation ref
-        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        let ref = Database.database().reference().child("open-donations").child(donation.uid)
 
         var updatedDonation = donation
 
@@ -148,30 +144,42 @@ struct DonationService {
         //set the volunteer value of the dontaion to the given user
         updatedDonation.status = .AwaitingPickup
         updatedDonation.volunteer = volunteer
-
+        
+        var isSuccessful = true
+        let dg = DispatchGroup()
+        
+        dg.enter()
         ref.updateChildValues(updatedDonation.dictValue) { error, _ in
-            guard error == nil else {
-                assertionFailure(error!.localizedDescription)
-
-                return completion(false)
+            if let error = error {
+                print("there was an error \(error.localizedDescription)")
+                
+                isSuccessful = false
             }
 
-            completion(true)
+            dg.leave()
         }
 
         //remove all requests
-        RequestService.deleteRequests(for: donation)
+        dg.enter()
+        
+        RequestService.clearRequests(for: donation) { success in
+            if success == false {
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        dg.notify(queue: DispatchQueue.main) {
+            completion(isSuccessful)
+        }
     }
 
     /**
      this updates the status of a donation to the delivering process aka "awaiting delivery"
-
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-
-     - returns: <#Sed do eiusmod tempor.#>
      */
     static func confirmPickup(for donation: Donation, completion: @escaping (Bool) -> ()) {
-        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        let ref = Database.database().reference().child("open-donations").child(donation.uid)
 
         var updatedDonation = donation
         updatedDonation.status = .AwaitingDelivery
@@ -200,7 +208,7 @@ struct DonationService {
             updatedDonation.status = .AwaitingApproval
             updatedDonation.verificationUrl = downloadURL.absoluteString
             
-            let ref = Database.database().reference().child("openDonations").child(donation.uid)
+            let ref = Database.database().reference().child("open-donations").child(donation.uid)
             ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure("failed to update donation for confirming the delivery, error: \(error.localizedDescription)")
@@ -213,7 +221,7 @@ struct DonationService {
     }
 
     static func deliveryVerified(for donation: Donation, completion: @escaping (Bool) -> ()) {
-        let ref = Database.database().reference().child("openDonations").child(donation.uid)
+        let ref = Database.database().reference().child("open-donations").child(donation.uid)
         ref.setValue(nil) { (error, _) in
             if let error = error {
                 assertionFailure("failed to remove donation from the branch, error: \(error.localizedDescription)")
