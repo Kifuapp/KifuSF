@@ -137,8 +137,8 @@
 		C5A351E6210D0DAD00A717D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E92994ED210D27CC00A32924 /* Donation.swift */,
 				C5CA7BAC210D24380052D440 /* User.swift */,
+				E92994ED210D27CC00A32924 /* Donation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -148,9 +148,9 @@
 			children = (
 				E92994F2210D591D00A32924 /* ItemPostCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
+				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
-				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -158,14 +158,10 @@
 		C5A351EA210D0E1600A717D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
-				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
-				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
-				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
-				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
-				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
-				441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */,
+				E9C9713121320AA00073CD90 /* Open Donations */,
+				E9C9713221320AAE0073CD90 /* Status */,
+				E9C9713321320AC00073CD90 /* Login-Register */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -206,8 +202,8 @@
 			children = (
 				C5CA7BB0210D24F50052D440 /* UserService.swift */,
 				E92994EB210D27C100A32924 /* DonationService.swift */,
-				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
+				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -218,6 +214,34 @@
 				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		E9C9713121320AA00073CD90 /* Open Donations */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
+				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
+			);
+			name = "Open Donations";
+			sourceTree = "<group>";
+		};
+		E9C9713221320AAE0073CD90 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
+				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
+				441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */,
+			);
+			name = Status;
+			sourceTree = "<group>";
+		};
+		E9C9713321320AC00073CD90 /* Login-Register */ = {
+			isa = PBXGroup;
+			children = (
+				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
+			);
+			name = "Login-Register";
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
