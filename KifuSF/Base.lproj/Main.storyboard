@@ -1539,19 +1539,108 @@
                                     <outlet property="delegate" destination="VqZ-z7-6YS" id="vdQ-nM-m5M"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLZ-Yg-gax">
+                                <rect key="frame" x="0.0" y="64" width="414" height="112"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8w4-Bq-bb0">
+                                        <rect key="frame" x="15" y="8" width="384" height="96"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="dRO-8u-1og">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="44"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="donation-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="JNG-Pa-alA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="JNG-Pa-alA" secondAttribute="height" multiplier="1:1" id="5yO-hd-4LI"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dj1-5O-ATX">
+                                                        <rect key="frame" x="62" y="4.6666666666666714" width="294" height="34.666666666666664"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoT-g0-fsk">
+                                                                <rect key="frame" x="0.0" y="0.0" width="294" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnq-JM-3il">
+                                                                <rect key="frame" x="0.0" y="14.333333333333327" width="294" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="misc-disclosure-template" translatesAutoresizingMaskIntoConstraints="NO" id="JBn-iC-QUd">
+                                                        <rect key="frame" x="374" y="13" width="10" height="18"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="naV-Ld-G2D">
+                                                <rect key="frame" x="0.0" y="52" width="384" height="44"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="delivery-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ax9-EN-g3t">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Ax9-EN-g3t" secondAttribute="height" multiplier="1:1" id="BkB-T0-dNq"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Gj-f4-2Ai">
+                                                        <rect key="frame" x="62" y="4.6666666666666572" width="294" height="34.666666666666664"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fj-bB-RlU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="294" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBV-7g-cML">
+                                                                <rect key="frame" x="0.0" y="14.333333333333341" width="294" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="misc-disclosure-template" translatesAutoresizingMaskIntoConstraints="NO" id="YM5-es-mjx">
+                                                        <rect key="frame" x="374" y="13" width="10" height="18"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="8w4-Bq-bb0" secondAttribute="bottom" constant="8" id="GkP-HT-son"/>
+                                    <constraint firstItem="8w4-Bq-bb0" firstAttribute="leading" secondItem="HLZ-Yg-gax" secondAttribute="leading" constant="15" id="af9-7B-Ig1"/>
+                                    <constraint firstItem="8w4-Bq-bb0" firstAttribute="top" secondItem="HLZ-Yg-gax" secondAttribute="top" constant="8" id="lK3-bo-eFP"/>
+                                    <constraint firstAttribute="trailing" secondItem="8w4-Bq-bb0" secondAttribute="trailing" constant="15" id="xcz-uO-wAA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="HLZ-Yg-gax" firstAttribute="leading" secondItem="68m-Re-xhe" secondAttribute="leading" id="63Z-n6-nyI"/>
                             <constraint firstItem="wja-H9-rhc" firstAttribute="trailing" secondItem="68m-Re-xhe" secondAttribute="trailing" id="9Qg-Hh-Yba"/>
                             <constraint firstItem="wja-H9-rhc" firstAttribute="top" secondItem="68m-Re-xhe" secondAttribute="top" id="N0p-Zi-gvF"/>
                             <constraint firstItem="wja-H9-rhc" firstAttribute="leading" secondItem="68m-Re-xhe" secondAttribute="leading" id="a4m-ns-nkD"/>
+                            <constraint firstItem="68m-Re-xhe" firstAttribute="trailing" secondItem="HLZ-Yg-gax" secondAttribute="trailing" id="dqi-Nb-eVv"/>
+                            <constraint firstItem="HLZ-Yg-gax" firstAttribute="top" secondItem="68m-Re-xhe" secondAttribute="top" id="hcK-qw-JlT"/>
                             <constraint firstItem="68m-Re-xhe" firstAttribute="bottom" secondItem="wja-H9-rhc" secondAttribute="bottom" id="hkA-xl-JMB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="68m-Re-xhe"/>
                     </view>
                     <navigationItem key="navigationItem" title="Open Donations" id="DW2-xn-TMO"/>
                     <connections>
+                        <outlet property="labelDeliveryBody" destination="cBV-7g-cML" id="t76-ma-bKH"/>
+                        <outlet property="labelDeliveryHeader" destination="2fj-bB-RlU" id="czW-Tv-Tc7"/>
+                        <outlet property="labelDonationBody" destination="Lnq-JM-3il" id="U7D-At-tNt"/>
+                        <outlet property="labelDonationHeader" destination="QoT-g0-fsk" id="fFf-Pi-o5t"/>
                         <outlet property="postTable" destination="wja-H9-rhc" id="Bt3-3g-euW"/>
+                        <outlet property="stackViewDelivery" destination="naV-Ld-G2D" id="mrg-rc-Uqc"/>
+                        <outlet property="stackViewDonation" destination="dRO-8u-1og" id="DQ4-A5-mvF"/>
+                        <outlet property="viewBanner" destination="HLZ-Yg-gax" id="mXz-ax-BZA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUx-VA-cMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2308,5 +2397,8 @@
         <image name="PlusSquare" width="600" height="600"/>
         <image name="SocialIcon" width="26" height="26"/>
         <image name="StatusIcon" width="30" height="30"/>
+        <image name="delivery-icon-1" width="44" height="44"/>
+        <image name="donation-icon-1" width="44" height="44"/>
+        <image name="misc-disclosure-template" width="10" height="18"/>
     </resources>
 </document>

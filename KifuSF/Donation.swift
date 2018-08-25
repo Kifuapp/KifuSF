@@ -26,6 +26,32 @@ struct Donation {
         case awaitingPickup
         case awaitingDelivery
         case awaitingApproval
+        
+        var stringValueForDonator: String {
+            switch self {
+            case .open:
+                return "Open"
+            case .awaitingPickup:
+                return "Awaiting your dropoff"
+            case .awaitingDelivery:
+                return "Awaiting verification photo"
+            case .awaitingApproval:
+                return "Awaiting your approval"
+            }
+        }
+        
+        var stringValueForVolunteer: String {
+            switch self {
+            case .open:
+                return "Open"
+            case .awaitingPickup:
+                return "Awaiting your pickup"
+            case .awaitingDelivery:
+                return "Awaiting your verification"
+            case .awaitingApproval:
+                return "Awaiting donator's approval"
+            }
+        }
     }
     
     var status: Status

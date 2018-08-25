@@ -12,13 +12,22 @@ import LocationPicker
 
 class ItemListViewController: UIViewController {
     
-    var openDonations: [Donation] = [] {
+    private var currentDonation: Donation?
+    
+    private enum DonationOption {
+        case none
+        case pendingDonations([Donation])
+        case deliveryingDonation(Donation)
+    }
+    private var currentDelivery: DonationOption = .none
+    
+    private var openDonations: [Donation] = [] {
         didSet {
             postTable.reloadData()
         }
     }
-    var locationManager: CLLocationManager!
-    var currentLocation: CLLocationCoordinate2D?
+    private var locationManager: CLLocationManager!
+    private var currentLocation: CLLocationCoordinate2D?
     
     // MARK: - RETURN VALUES
     
@@ -42,8 +51,51 @@ class ItemListViewController: UIViewController {
         }
     }
     
+    private func updateBanner() {
+        if let donatingDonation = self.currentDonation { 
+            stackViewDonation.isHidden = false
+            labelDonationHeader.text = "Donation - \(donatingDonation.title)"
+            labelDonationBody.text = donatingDonation.status.stringValueForDonator
+        } else {
+            stackViewDonation.isHidden = true
+        }
+        
+        switch self.currentDelivery {
+        case .none:
+            stackViewDelivery.isHidden = true
+        case .pendingDonations(let pendingDonationRequests):
+            if pendingDonationRequests.count > 0 {
+                stackViewDelivery.isHidden = false
+                labelDeliveryHeader.text = "Delivery - Pending Delivery Requests"
+                labelDeliveryBody.text = "\(pendingDonationRequests.count) open request(s)"
+            } else {
+                stackViewDelivery.isHidden = true
+            }
+        case .deliveryingDonation(let deliveryingDonation):
+            stackViewDelivery.isHidden = false
+            labelDeliveryHeader.text = "Delivery - \(deliveryingDonation.title)"
+            labelDeliveryBody.text = deliveryingDonation.status.stringValueForVolunteer
+        }
+        
+        //hide banner if both donation and deliveries are empty
+        viewBanner.isHidden = stackViewDonation.isHidden && stackViewDelivery.isHidden
+        
+        //update table view top inset
+        let topPadding = viewBanner.frame.height
+        postTable.contentInset.top = topPadding
+        postTable.scrollIndicatorInsets.top = topPadding
+    }
+    
     // MARK: - IBACTIONS
     @IBOutlet weak var postTable: UITableView!
+    
+    @IBOutlet weak var viewBanner: UIView!
+    @IBOutlet weak var stackViewDonation: UIStackView!
+    @IBOutlet weak var labelDonationHeader: UILabel!
+    @IBOutlet weak var labelDonationBody: UILabel!
+    @IBOutlet weak var stackViewDelivery: UIStackView!
+    @IBOutlet weak var labelDeliveryHeader: UILabel!
+    @IBOutlet weak var labelDeliveryBody: UILabel!
     
     // MARK: - LIFE CYCLE
     
@@ -52,6 +104,21 @@ class ItemListViewController: UIViewController {
         
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
+        
+        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+            self.currentDonation = donation
+            if delivery != nil {
+                self.currentDelivery = .deliveryingDonation(delivery!)
+                
+                self.updateBanner()
+            } else {
+                RequestService.getPendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+                    self.currentDelivery = .pendingDonations(donationsUserHadRequestedToDeliver)
+                    
+                    self.updateBanner()
+                })
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

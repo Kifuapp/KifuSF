@@ -122,4 +122,20 @@ struct RequestService {
             completion(volunteers)
         }
     }
+    
+    /**
+     Fetch all donations the user has reqeusted to deliver
+     */
+    public static func getPendingRequests(completion: @escaping ([Donation]) -> Void) {
+        let currentUserUid = User.current.uid
+        let ref = Database.database().reference().child("user-requests").child(currentUserUid)
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let donationSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
+                fatalError("could not decode")
+            }
+            
+            let requestingDonations = donationSnapshots.compactMap(Donation.init)
+            completion(requestingDonations)
+        }
+    }
 }
