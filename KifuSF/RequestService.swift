@@ -14,7 +14,7 @@ struct RequestService {
     /**
      Creates a donation request for the given donation and creates a user request for the current user
      */
-    public static func createRequest(for donation: Donation, completion: @escaping (Bool) -> ()) {
+    public static func createRequest(for donation: Donation, completion: @escaping (Bool) -> Void) {
         let currentUserUid = User.current.uid
         let refDonationRequests = Database.database().reference()
             .child("donation-requests")
@@ -94,7 +94,7 @@ struct RequestService {
             
             refDonationRequests.setValue(nil) { error, _ in
                 if let error = error {
-                    print("there was an error deleting the user requests in the donation-requests \(donation.uid): \(error.localizedDescription)")
+                    print("there was an error deleting the user requests in the donation-requests \(donation.uid): \(error.localizedDescription)") // swiftlint:disable:this line_length
                     
                     isSuccessful = false
                 }
@@ -111,7 +111,7 @@ struct RequestService {
     /**
      Fetch all the users for the given donation
      */
-    public static func retrieveVolunteers(for donation: Donation, completion: @escaping ([User]) ->()) {
+    public static func retrieveVolunteers(for donation: Donation, completion: @escaping ([User]) -> Void) {
         let ref = Database.database().reference().child("donation-requests").child(donation.uid)
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let volunteersSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {

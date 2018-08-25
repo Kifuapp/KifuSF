@@ -31,12 +31,12 @@ class ItemListViewController: UIViewController {
                 guard
                     let cell = sender as? UITableViewCell,
                     let indexPath = postTable.indexPath(for: cell),
-                    let vc = segue.destination as? ItemDetailViewController else {
+                    let itemDetailVc = segue.destination as? ItemDetailViewController else {
                         fatalError("storyboard not set up correctly")
                 }
                 
                 let selectedDonation = openDonations[indexPath.row]
-                vc.donation = selectedDonation
+                itemDetailVc.donation = selectedDonation
             default: break
             }
         }
@@ -88,7 +88,3 @@ extension ItemListViewController: UITableViewDataSource {
 extension ItemListViewController: UITableViewDelegate {
     
 }
-
-
-
-

@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 import FirebaseStorage
 
-
 struct StorageService {
-    public static func uploadImage(_ image: UIImage, at reference: StorageReference, completion: @escaping (URL?) -> ()) {
-        guard let imageData = UIImageJPEGRepresentation(image, 0.05) else { return completion(nil) }
+    public static func uploadImage(
+        _ image: UIImage,
+        at reference: StorageReference,
+        completion: @escaping (URL?) -> Void) {
+        guard let imageData = UIImageJPEGRepresentation(image, 0.05) else {
+            return completion(nil)
+        }
         
-        reference.putData(imageData, metadata: nil) { (metadata, error) in
+        reference.putData(imageData, metadata: nil) { (_, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 return completion(nil)

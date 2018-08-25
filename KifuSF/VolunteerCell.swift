@@ -27,7 +27,6 @@ class VolunteerCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
     @IBAction func confirmButtonTapped(_ sender: Any) {
         delegate?.confirmButtonTapped(cell: self)
     }

@@ -17,19 +17,30 @@ import CoreLocation
 typealias FIRUser = FirebaseAuth.User
 
 struct UserService {
-    public static func create(firUser: FIRUser, username: String, image: UIImage, contactNumber: String, completion: @escaping (User?) -> ()) {
+    public static func create(
+        firUser: FIRUser,
+        username: String,
+        image: UIImage,
+        contactNumber: String,
+        completion: @escaping (User?) -> Void) {
         let imageRef = StorageReference.newUserImageRefence(with: firUser.uid)
         
         StorageService.uploadImage(image, at: imageRef) { (url) in
             guard let downloadURL = url else { return completion(nil) }
             let imageURL = downloadURL.absoluteString
             
-            let newUser = User(username: username, uid: firUser.uid, imageURL: imageURL, contributionPoints: 0, contactNumber: contactNumber)
+            let newUser = User(
+                username: username,
+                uid: firUser.uid,
+                imageURL: imageURL,
+                contributionPoints: 0,
+                contactNumber: contactNumber
+            )
             
             let ref = Database.database().reference().child("users").child(firUser.uid)
             
             ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
-                if let error = error {
+                if error != nil {
                     return completion(nil)
                 }
                 
@@ -38,7 +49,7 @@ struct UserService {
         }
     }
     
-    public static func show(forUID uid: String, completion: @escaping (User?) -> ()) {
+    public static func show(forUID uid: String, completion: @escaping (User?) -> Void) {
         let ref = Database.database().reference().child("users").child(uid)
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -57,8 +68,4 @@ struct UserService {
         
         return "Distance not available"
     }
-    
-
 }
-
-

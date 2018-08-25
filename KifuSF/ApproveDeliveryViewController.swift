@@ -24,7 +24,11 @@ class ApproveDeliveryViewController: UIViewController {
     @IBAction func approveButtonTapped(_ sender: Any) {
         DonationService.verifyDelivery(for: donation) { (success) in
             if success {
-                let rewardAction = UIAlertController(title: "Congrats", message: "You have just completed your first donation, reward: 50 contribution points", preferredStyle: .alert)
+                let rewardAction = UIAlertController(
+                    title: "Congrats",
+                    message: "You have just completed your first donation, reward: 50 contribution points",
+                    preferredStyle: .alert
+                )
                 rewardAction.addAction(UIAlertAction(title: "Horay!", style: .default, handler: { (_) in
                     self.presentingViewController?.dismiss(animated: true)
                 }))
