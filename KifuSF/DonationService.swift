@@ -172,6 +172,8 @@ struct DonationService {
             dg.leave()
         }
         
+        //TODO: Clear other requests the accepted volunteer has made
+        
         dg.notify(queue: DispatchQueue.main) {
             completion(isSuccessful)
         }
