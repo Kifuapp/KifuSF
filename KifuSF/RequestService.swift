@@ -136,10 +136,10 @@ struct RequestService {
     /**
      Fetch all donations the user has reqeusted to deliver
      */
-    public static func getPendingRequests(completion: @escaping ([Donation]) -> Void) {
+    public static func observePendingRequests(completion: @escaping ([Donation]) -> Void) {
         let currentUserUid = User.current.uid
         let ref = Database.database().reference().child("user-requests").child(currentUserUid)
-        ref.observeSingleEvent(of: .value) { (snapshot) in
+        ref.observe(.value) { (snapshot) in
             guard let donationSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
                 fatalError("could not decode")
             }

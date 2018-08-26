@@ -10,54 +10,66 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
+private enum DonationOption {
+    case none
+    case pendingRequests([Donation])
+    case deliveringDonation(Donation)
+    
+    enum Errors: Error {
+        case invokedMethodWithWrongCase
+    }
+    
+    var isShowingPendingRequests: Bool {
+        if case .pendingRequests = self {
+            return true
+        }
+        
+        return false
+    }
+    
+    func pendingRequests() throws -> [Donation] {
+        switch self {
+        case .pendingRequests(let pendingDonations):
+            return pendingDonations
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+    
+    var isShowingCurrentDelivery: Bool {
+        if case .deliveringDonation = self {
+            return true
+        }
+        
+        return false
+    }
+    
+    func deliveringDonation() throws -> Donation {
+        switch self {
+        case .deliveringDonation(let donation):
+            return donation
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+}
+
 class ItemListViewController: UIViewController {
     
     private var currentDonation: Donation?
-    
-    private enum DonationOption {
-        case none
-        case pendingRequests([Donation])
-        case deliveringDonation(Donation)
-        
-        enum Errors: Error {
-            case invokedMethodWithWrongCase
-        }
-        
-        var isShowingPendingRequests: Bool {
-            if case .pendingRequests = self {
-                return true
-            }
-            
-            return false
-        }
-        
-        func pendingRequests() throws -> [Donation] {
-            switch self {
-            case .pendingRequests(let pendingDonations):
-                return pendingDonations
-            default:
-                throw Errors.invokedMethodWithWrongCase
-            }
-        }
-        
-        var isShowingCurrentDelivery: Bool {
-            if case .deliveringDonation = self {
-                return true
-            }
-            
-            return false
-        }
-        
-        func deliveringDonation() throws -> Donation {
-            switch self {
-            case .deliveringDonation(let donation):
-                return donation
-            default:
-                throw Errors.invokedMethodWithWrongCase
+    private var pendingRequests: [Donation] = []
+    private var currentDelivery: Donation?
+    private var currentDeliveryState: DonationOption {
+        if let donation = currentDelivery {
+            return .deliveringDonation(donation)
+        } else {
+            if pendingRequests.count == 0 {
+                return .none
+            } else {
+                return .pendingRequests(pendingRequests)
             }
         }
     }
-    private var currentDelivery: DonationOption = .none
     
     private var openDonations: [Donation] = [] {
         didSet {
@@ -89,7 +101,7 @@ class ItemListViewController: UIViewController {
                         fatalError("storyboard not set up correctly")
                 }
                 
-                pendingRequestsVc.pendingDonations = try! currentDelivery.pendingRequests() // swiftlint:disable:this force_try
+                pendingRequestsVc.pendingDonations = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
             default: break
             }
         }
@@ -98,13 +110,13 @@ class ItemListViewController: UIViewController {
     private func updateBanner() {
         if let donatingDonation = self.currentDonation { 
             stackViewDonation.isHidden = false
-            labelDonationHeader.text = "Donation - \(donatingDonation.title)"
+            labelDonationHeader.text = donatingDonation.title
             labelDonationBody.text = donatingDonation.status.stringValueForDonator
         } else {
             stackViewDonation.isHidden = true
         }
         
-        switch self.currentDelivery {
+        switch self.currentDeliveryState {
         case .none:
             stackViewDelivery.isHidden = true
         case .pendingRequests(let pendingDonationRequests):
@@ -125,6 +137,7 @@ class ItemListViewController: UIViewController {
         viewBanner.isHidden = stackViewDonation.isHidden && stackViewDelivery.isHidden
         
         //update table view top inset
+        self.view.layoutIfNeeded()
         let topPadding = viewBanner.frame.height
         postTable.contentInset.top = topPadding
         postTable.scrollIndicatorInsets.top = topPadding
@@ -152,7 +165,7 @@ class ItemListViewController: UIViewController {
             fatalError("no tab bar controller")
         }
         
-        if currentDelivery.isShowingPendingRequests {
+        if currentDeliveryState.isShowingPendingRequests {
             performSegue(withIdentifier: "show pending requests", sender: nil)
         } else {
             
@@ -174,25 +187,25 @@ class ItemListViewController: UIViewController {
         
         DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
-            if delivery != nil {
-                self.currentDelivery = .deliveringDonation(delivery!)
+            self.currentDelivery = delivery
+            
+            self.updateBanner()
+        }
+        
+        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+            if self.currentDeliveryState.isShowingCurrentDelivery == false {
+                self.pendingRequests = donationsUserHadRequestedToDeliver
                 
                 self.updateBanner()
-            } else {
-                RequestService.getPendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
-                    self.currentDelivery = .pendingRequests(donationsUserHadRequestedToDeliver)
-                    
-                    self.updateBanner()
-                })
             }
-        }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DonationService.showTimelineDonations { [weak self] (donations) in
-            self?.openDonations = donations
+        DonationService.showTimelineDonations { (donations) in
+            self.openDonations = donations
         }
     }
 
