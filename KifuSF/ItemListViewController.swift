@@ -147,6 +147,7 @@ class ItemListViewController: UIViewController {
     @IBOutlet weak var postTable: UITableView!
     
     @IBOutlet weak var viewBanner: UIView!
+    @IBOutlet weak var viewBlur: UIVisualEffectView!
     @IBOutlet weak var stackViewDonation: UIStackView!
     @IBAction func pressDonationBanner(_ sender: Any) {
         guard let tabbarVc = self.tabBarController else {
@@ -184,6 +185,9 @@ class ItemListViewController: UIViewController {
         
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        self.viewBlur.effect = blurEffect
         
         DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
