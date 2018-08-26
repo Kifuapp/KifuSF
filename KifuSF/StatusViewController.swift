@@ -334,6 +334,8 @@ class StatusViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        observeChanges()
 
         //validate photo picked
         sendValidationPhotoHelper.completionHandler = { image in
@@ -353,17 +355,11 @@ class StatusViewController: UIViewController {
     }
 
     private func observeChanges() {
-        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
 
             self.updateUI()
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        observeChanges()
     }
 }

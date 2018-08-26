@@ -37,6 +37,8 @@
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
+		E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502A21321DE000096E84 /* PendingRequestsViewController.swift */; };
+		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
 		E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColors.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
+		E984502A21321DE000096E84 /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
+		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
 		E9C10C9F210E4C6B0050FB8A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
 		E9C97130213208C90073CD90 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				E92994F2210D591D00A32924 /* ItemPostCell.swift */,
+				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
@@ -221,6 +226,7 @@
 			children = (
 				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
+				E984502A21321DE000096E84 /* PendingRequestsViewController.swift */,
 			);
 			name = "Open Donations";
 			sourceTree = "<group>";
@@ -418,9 +424,11 @@
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
+				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,
 				E90B2478210D8588009B9E0B /* GradientView.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
+				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */,

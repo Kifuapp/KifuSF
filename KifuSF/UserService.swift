@@ -17,6 +17,7 @@ import CoreLocation
 typealias FIRUser = FirebaseAuth.User
 
 struct UserService {
+    
     public static func create(
         firUser: FIRUser,
         username: String,

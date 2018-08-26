@@ -44,11 +44,40 @@ struct RequestService {
     }
     
     /**
-     removes the current user from the donation-requests and user-requests subtrees
+     removes the current user, or given userUid, from the donation-requests and user-requests subtrees
      for the given donation
      */
-    public static func cancelRequest(for donation: Donation, completion: @escaping (Bool) -> Void) {
+    public static func cancelRequest(for donation: Donation, forUserUid userUid: String = User.current.uid, completion: @escaping (Bool) -> Void) {
         
+        //remove donation from user-requests
+        let refUserRequest = Database.database().reference()
+            .child("user-requests")
+                .child(userUid)
+                    .child(donation.uid)
+        refUserRequest.setValue(nil) { error, _ in
+            guard error == nil else {
+                print("for user uid \(userUid), there was an error \(error!.localizedDescription)")
+                
+                completion(false)
+                return
+            }
+            
+            //remove user from donation-requests
+            let refDonationRequests = Database.database().reference()
+                .child("donation-requests")
+                    .child(donation.uid)
+                        .child(userUid)
+            refDonationRequests.setValue(nil) { error, _ in
+                guard error == nil else {
+                    print("there was an error deleting the user requests in the donation-requests \(donation.uid): \(error!.localizedDescription)") // swiftlint:disable:this line_length
+                    
+                    completion(false)
+                    return
+                }
+                
+                completion(true)
+            }
+        }
     }
     
     /**
@@ -56,7 +85,7 @@ struct RequestService {
      */
     public static func clearRequests(for donation: Donation, completion: @escaping (Bool) -> Void) {
         
-        //get all users that have requested to deliever
+        //get all users that have requested to deliever in the donation-requests
         let refDonationRequests = Database.database().reference()
             .child("donation-requests")
                 .child(donation.uid)
@@ -67,42 +96,23 @@ struct RequestService {
                 return completion(false)
             }
             
-            //for each user, remove the given donation from its list of requests
+            //for each user, remove the given donation from user-requests and donation-requests subtrees
             let uidOfRequestedUsers = snapshotOfUsers.map { $0.key }
-            let dgRemoveDonationFromUserRequests = DispatchGroup()
+            let dgRemoveRequests = DispatchGroup()
             var isSuccessful = true
             
             for aUserUid in uidOfRequestedUsers {
-                dgRemoveDonationFromUserRequests.enter()
-                let refUserRequest = Database.database().reference()
-                    .child("user-requests")
-                        .child(aUserUid)
-                            .child(donation.uid)
-                refUserRequest.setValue(nil) { error, _ in
-                    if let error = error {
-                        print("for user uid \(aUserUid), there was an error \(error.localizedDescription)")
-                        
+                dgRemoveRequests.enter()
+                self.cancelRequest(for: donation, forUserUid: aUserUid, completion: { (successful) in
+                    if successful == false {
                         isSuccessful = false
                     }
                     
-                    dgRemoveDonationFromUserRequests.leave()
-                }
+                    dgRemoveRequests.leave()
+                })
             }
             
-            //remove the users from the donation-requests subtree
-            dgRemoveDonationFromUserRequests.enter()
-            
-            refDonationRequests.setValue(nil) { error, _ in
-                if let error = error {
-                    print("there was an error deleting the user requests in the donation-requests \(donation.uid): \(error.localizedDescription)") // swiftlint:disable:this line_length
-                    
-                    isSuccessful = false
-                }
-                
-                dgRemoveDonationFromUserRequests.leave()
-            }
-            
-            dgRemoveDonationFromUserRequests.notify(queue: DispatchQueue.main, execute: {
+            dgRemoveRequests.notify(queue: DispatchQueue.main, execute: {
                 completion(isSuccessful)
             })
         }

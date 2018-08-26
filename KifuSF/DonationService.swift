@@ -90,10 +90,12 @@ struct DonationService {
         }
     }
 
-    static func showOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
+    static func observeOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
         let ref = Database.database().reference().child("open-donations")
 
         ref.observe(.value) { (snapshot) in
+            
+            //TODO: execute in background thread ---
             guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else {
                 fatalError("could not decode")
             }
@@ -114,6 +116,7 @@ struct DonationService {
                     }
                 }
             }
+            //TODO: execute in background thread ^^^
 
             completion(openDonation, openDelivery)
         }
@@ -235,36 +238,25 @@ struct DonationService {
 
     static func cancel(donation: Donation, completion: @escaping (Bool) -> Void) {
         
-        let dg = DispatchGroup() // swiftlint:disable:this identifier_name
-        var isSuccessful = true
-        
         //remove all requests
-        dg.enter()
         RequestService.clearRequests(for: donation) { (success) in
-            if success == false {
-                isSuccessful = false
+            guard success else {
+                return completion(false)
             }
             
-            dg.leave()
-        }
-        
-        //delete the donation
-        dg.enter()
-        let refDonation = Database.database().reference()
-            .child("open-donations")
-                .child(donation.uid)
-        refDonation.setValue(nil) { error, _ in
-            if let error = error {
-                print("Error deleting donation: \(error.localizedDescription)")
+            //delete the donation
+            let refDonation = Database.database().reference()
+                .child("open-donations")
+                    .child(donation.uid)
+            refDonation.setValue(nil) { error, _ in
+                guard error == nil else {
+                    print("Error deleting donation: \(error!.localizedDescription)")
+                    
+                    return completion(false)
+                }
                 
-                isSuccessful = false
+                completion(true)
             }
-            
-            dg.leave()
-        }
-        
-        dg.notify(queue: DispatchQueue.main) {
-            completion(isSuccessful)
         }
     }
 }

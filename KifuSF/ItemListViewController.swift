@@ -16,8 +16,46 @@ class ItemListViewController: UIViewController {
     
     private enum DonationOption {
         case none
-        case pendingDonations([Donation])
-        case deliveryingDonation(Donation)
+        case pendingRequests([Donation])
+        case deliveringDonation(Donation)
+        
+        enum Errors: Error {
+            case invokedMethodWithWrongCase
+        }
+        
+        var isShowingPendingRequests: Bool {
+            if case .pendingRequests = self {
+                return true
+            }
+            
+            return false
+        }
+        
+        func pendingRequests() throws -> [Donation] {
+            switch self {
+            case .pendingRequests(let pendingDonations):
+                return pendingDonations
+            default:
+                throw Errors.invokedMethodWithWrongCase
+            }
+        }
+        
+        var isShowingCurrentDelivery: Bool {
+            if case .deliveringDonation = self {
+                return true
+            }
+            
+            return false
+        }
+        
+        func deliveringDonation() throws -> Donation {
+            switch self {
+            case .deliveringDonation(let donation):
+                return donation
+            default:
+                throw Errors.invokedMethodWithWrongCase
+            }
+        }
     }
     private var currentDelivery: DonationOption = .none
     
@@ -46,6 +84,12 @@ class ItemListViewController: UIViewController {
                 
                 let selectedDonation = openDonations[indexPath.row]
                 itemDetailVc.donation = selectedDonation
+            case "show pending requests":
+                guard let pendingRequestsVc = segue.destination as? PendingRequestsViewController else {
+                        fatalError("storyboard not set up correctly")
+                }
+                
+                pendingRequestsVc.pendingDonations = try! currentDelivery.pendingRequests() // swiftlint:disable:this force_try
             default: break
             }
         }
@@ -63,17 +107,17 @@ class ItemListViewController: UIViewController {
         switch self.currentDelivery {
         case .none:
             stackViewDelivery.isHidden = true
-        case .pendingDonations(let pendingDonationRequests):
+        case .pendingRequests(let pendingDonationRequests):
             if pendingDonationRequests.count > 0 {
                 stackViewDelivery.isHidden = false
-                labelDeliveryHeader.text = "Delivery - Pending Delivery Requests"
+                labelDeliveryHeader.text = "Pending Delivery Requests"
                 labelDeliveryBody.text = "\(pendingDonationRequests.count) open request(s)"
             } else {
                 stackViewDelivery.isHidden = true
             }
-        case .deliveryingDonation(let deliveryingDonation):
+        case .deliveringDonation(let deliveryingDonation):
             stackViewDelivery.isHidden = false
-            labelDeliveryHeader.text = "Delivery - \(deliveryingDonation.title)"
+            labelDeliveryHeader.text = deliveryingDonation.title
             labelDeliveryBody.text = deliveryingDonation.status.stringValueForVolunteer
         }
         
@@ -91,9 +135,32 @@ class ItemListViewController: UIViewController {
     
     @IBOutlet weak var viewBanner: UIView!
     @IBOutlet weak var stackViewDonation: UIStackView!
+    @IBAction func pressDonationBanner(_ sender: Any) {
+        guard let tabbarVc = self.tabBarController else {
+            fatalError("no tab bar controller")
+        }
+        
+        //TODO: select Donation Subtab
+        tabbarVc.selectedIndex = 1
+    }
+    
     @IBOutlet weak var labelDonationHeader: UILabel!
     @IBOutlet weak var labelDonationBody: UILabel!
     @IBOutlet weak var stackViewDelivery: UIStackView!
+    @IBAction func pressDeliveryBanner(_ sender: Any) {
+        guard let tabbarVc = self.tabBarController else {
+            fatalError("no tab bar controller")
+        }
+        
+        if currentDelivery.isShowingPendingRequests {
+            performSegue(withIdentifier: "show pending requests", sender: nil)
+        } else {
+            
+            //TODO: select Delivery Subtab
+            tabbarVc.selectedIndex = 1
+        }
+    }
+    
     @IBOutlet weak var labelDeliveryHeader: UILabel!
     @IBOutlet weak var labelDeliveryBody: UILabel!
     
@@ -105,15 +172,15 @@ class ItemListViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
         
-        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             if delivery != nil {
-                self.currentDelivery = .deliveryingDonation(delivery!)
+                self.currentDelivery = .deliveringDonation(delivery!)
                 
                 self.updateBanner()
             } else {
                 RequestService.getPendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
-                    self.currentDelivery = .pendingDonations(donationsUserHadRequestedToDeliver)
+                    self.currentDelivery = .pendingRequests(donationsUserHadRequestedToDeliver)
                     
                     self.updateBanner()
                 })
