@@ -10,19 +10,175 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
+private enum DonationOption {
+    case none
+    case pendingRequests([Donation])
+    case deliveringDonation(Donation)
+    
+    enum Errors: Error {
+        case invokedMethodWithWrongCase
+    }
+    
+    var isShowingPendingRequests: Bool {
+        if case .pendingRequests = self {
+            return true
+        }
+        
+        return false
+    }
+    
+    func pendingRequests() throws -> [Donation] {
+        switch self {
+        case .pendingRequests(let pendingDonations):
+            return pendingDonations
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+    
+    var isShowingCurrentDelivery: Bool {
+        if case .deliveringDonation = self {
+            return true
+        }
+        
+        return false
+    }
+    
+    func deliveringDonation() throws -> Donation {
+        switch self {
+        case .deliveringDonation(let donation):
+            return donation
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+}
+
 class ItemListViewController: UIViewController {
     
-    var openDonations: [Donation] = [] {
+    private var currentDonation: Donation?
+    private var pendingRequests: [Donation] = []
+    private var currentDelivery: Donation?
+    private var currentDeliveryState: DonationOption {
+        if let donation = currentDelivery {
+            return .deliveringDonation(donation)
+        } else {
+            if pendingRequests.count == 0 {
+                return .none
+            } else {
+                return .pendingRequests(pendingRequests)
+            }
+        }
+    }
+    
+    private var openDonations: [Donation] = [] {
         didSet {
             postTable.reloadData()
         }
     }
+    private var locationManager: CLLocationManager!
+    private var currentLocation: CLLocationCoordinate2D?
     
+    // MARK: - RETURN VALUES
     
+    // MARK: - VOID METHODS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show detailed donation":
+                guard
+                    let cell = sender as? UITableViewCell,
+                    let indexPath = postTable.indexPath(for: cell),
+                    let itemDetailVc = segue.destination as? ItemDetailViewController else {
+                        fatalError("storyboard not set up correctly")
+                }
+                
+                let selectedDonation = openDonations[indexPath.row]
+                itemDetailVc.donation = selectedDonation
+            case "show pending requests":
+                guard let pendingRequestsVc = segue.destination as? PendingRequestsViewController else {
+                        fatalError("storyboard not set up correctly")
+                }
+                
+                pendingRequestsVc.pendingDonations = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
+            default: break
+            }
+        }
+    }
+    
+    private func updateBanner() {
+        if let donatingDonation = self.currentDonation { 
+            stackViewDonation.isHidden = false
+            labelDonationHeader.text = donatingDonation.title
+            labelDonationBody.text = donatingDonation.status.stringValueForDonator
+        } else {
+            stackViewDonation.isHidden = true
+        }
+        
+        switch self.currentDeliveryState {
+        case .none:
+            stackViewDelivery.isHidden = true
+        case .pendingRequests(let pendingDonationRequests):
+            if pendingDonationRequests.count > 0 {
+                stackViewDelivery.isHidden = false
+                labelDeliveryHeader.text = "Pending Delivery Requests"
+                labelDeliveryBody.text = "\(pendingDonationRequests.count) open request(s)"
+            } else {
+                stackViewDelivery.isHidden = true
+            }
+        case .deliveringDonation(let deliveryingDonation):
+            stackViewDelivery.isHidden = false
+            labelDeliveryHeader.text = deliveryingDonation.title
+            labelDeliveryBody.text = deliveryingDonation.status.stringValueForVolunteer
+        }
+        
+        //hide banner if both donation and deliveries are empty
+        viewBanner.isHidden = stackViewDonation.isHidden && stackViewDelivery.isHidden
+        
+        //update table view top inset
+        self.view.layoutIfNeeded()
+        let topPadding = viewBanner.frame.height
+        postTable.contentInset.top = topPadding
+        postTable.scrollIndicatorInsets.top = topPadding
+    }
+    
+    // MARK: - IBACTIONS
     @IBOutlet weak var postTable: UITableView!
     
-    var locationManager: CLLocationManager!
-    var currentLocation: CLLocationCoordinate2D?
+    @IBOutlet weak var viewBanner: UIView!
+    @IBOutlet weak var viewBlur: UIVisualEffectView!
+    @IBOutlet weak var stackViewDonation: UIStackView!
+    @IBAction func pressDonationBanner(_ sender: Any) {
+        guard let tabbarVc = self.tabBarController else {
+            fatalError("no tab bar controller")
+        }
+        
+        //TODO: select Donation Subtab
+        tabbarVc.selectedIndex = 1
+    }
+    
+    @IBOutlet weak var labelDonationHeader: UILabel!
+    @IBOutlet weak var labelDonationBody: UILabel!
+    @IBOutlet weak var stackViewDelivery: UIStackView!
+    @IBAction func pressDeliveryBanner(_ sender: Any) {
+        guard let tabbarVc = self.tabBarController else {
+            fatalError("no tab bar controller")
+        }
+        
+        if currentDeliveryState.isShowingPendingRequests {
+            performSegue(withIdentifier: "show pending requests", sender: nil)
+        } else {
+            
+            //TODO: select Delivery Subtab
+            tabbarVc.selectedIndex = 1
+        }
+    }
+    
+    @IBOutlet weak var labelDeliveryHeader: UILabel!
+    @IBOutlet weak var labelDeliveryBody: UILabel!
+    
+    // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,33 +186,32 @@ class ItemListViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
         
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        self.viewBlur.effect = blurEffect
         
-
+        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
+            self.currentDonation = donation
+            self.currentDelivery = delivery
+            
+            self.updateBanner()
+        }
+        
+        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+            if self.currentDeliveryState.isShowingCurrentDelivery == false {
+                self.pendingRequests = donationsUserHadRequestedToDeliver
+                
+                self.updateBanner()
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DonationService.showTimelineDonations { [weak self] (donations) in
-            self?.openDonations = donations
+        DonationService.showTimelineDonations { (donations) in
+            self.openDonations = donations
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -71,14 +226,11 @@ extension ItemListViewController: UITableViewDataSource {
         let donation = openDonations[indexPath.row]
         postCell.itemName.text = donation.title
         
-        //TODO: Backend-calc the distance from current user to the donation long/lat
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
-        postCell.distance.text = "\(1.0) miles from here"
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        UserService.calculateDistance(from: CLLocation(latitude: donation.laditude, longitude: donation.longitude), completion: { (response) in
-            postCell.distance.text = response
-        })
+        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        postCell.distance.text = distanceTitle
         
         return postCell
     }
@@ -87,7 +239,3 @@ extension ItemListViewController: UITableViewDataSource {
 extension ItemListViewController: UITableViewDelegate {
     
 }
-
-
-
-

@@ -61,9 +61,8 @@ extension VolunteerListViewController: UITableViewDataSource {
         let volunteer = volunteers[indexPath.row]
         
         volunteerCell.userName.text = "Contribution Points: \(121)"
-        volunteerCell.name.text = volunteer.username
+        volunteerCell.name.text = "@\(volunteer.username)"
         volunteerCell.userImage.kf.setImage(with: URL(string: volunteer.imageURL)!)
-        
         
         return volunteerCell
     }
@@ -90,5 +89,3 @@ extension VolunteerListViewController: VolunteerCellDelegate {
         }
     }
 }
-
-

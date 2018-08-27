@@ -117,13 +117,13 @@ import UIKit
         let fromColors = self.gradientLayer?.colors
         let toColors: [AnyObject] = [ newTopColor.cgColor, newBottomColor.cgColor]
         self.gradientLayer?.colors = toColors
-        let animation : CABasicAnimation = CABasicAnimation(keyPath: "colors")
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "colors")
         animation.fromValue = fromColors
         animation.toValue = toColors
         animation.duration = duration
         animation.isRemovedOnCompletion = true
         animation.fillMode = kCAFillModeForwards
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.gradientLayer?.add(animation, forKey:"animateGradient")
+        self.gradientLayer?.add(animation, forKey: "animateGradient")
     }
 }

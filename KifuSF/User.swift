@@ -18,10 +18,10 @@ struct User: Codable {
     let contactNumber: String
 
     var currentLocation: CLLocation? = {
-        let cl = CLLocationManager()
+        let coreLocation = CLLocationManager()
         
         if CLLocationManager.locationServicesEnabled() {
-            return cl.location
+            return coreLocation.location
         } else {
             return nil
         }
@@ -68,8 +68,6 @@ struct User: Codable {
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
-        
-        
     }
 
     init?(from snapshot: DataSnapshot) {
@@ -87,6 +85,4 @@ struct User: Codable {
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
     }
-
-
 }

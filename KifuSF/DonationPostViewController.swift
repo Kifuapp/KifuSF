@@ -27,7 +27,10 @@ class DonationPostViewController: UIViewController {
             self.itemImage.image = image
         }
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIInputViewController.dismissKeyboard)
+        )
         view.addGestureRecognizer(tap)
     }
 
@@ -99,7 +102,7 @@ class DonationPostViewController: UIViewController {
             image: image,
             pickUpAddress: currentLocation.address,
             longitude: currentLocation.coordinate.longitude,
-            latitude: currentLocation.coordinate.longitude) { [weak self] (_) in
+            latitude: currentLocation.coordinate.latitude) { [weak self] (_) in
                 //Then dismiss
                 self?.dismiss(animated: true, completion: nil)
         }

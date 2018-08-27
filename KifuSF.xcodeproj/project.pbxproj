@@ -32,9 +32,14 @@
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D6210D0CE500A717D3 /* ViewController.swift */; };
 		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
+		E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B247E210E1DAE009B9E0B /* UIAlertController.swift */; };
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
+		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
+		E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502A21321DE000096E84 /* PendingRequestsViewController.swift */; };
+		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
+		E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,9 +71,15 @@
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		E90B2477210D8588009B9E0B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
+		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
+		E984502A21321DE000096E84 /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
+		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
+		E9C10C9F210E4C6B0050FB8A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
+		E9C97130213208C90073CD90 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +106,7 @@
 		C5A351C8210D0CE500A717D3 = {
 			isa = PBXGroup;
 			children = (
+				E9C97130213208C90073CD90 /* .swiftlint.yml */,
 				C5A351D3210D0CE500A717D3 /* KifuSF */,
 				C5A351D2210D0CE500A717D3 /* Products */,
 				ED844B4CC71267B714B5E09C /* Pods */,
@@ -129,8 +141,8 @@
 		C5A351E6210D0DAD00A717D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E92994ED210D27CC00A32924 /* Donation.swift */,
 				C5CA7BAC210D24380052D440 /* User.swift */,
+				E92994ED210D27CC00A32924 /* Donation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -139,10 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				E92994F2210D591D00A32924 /* ItemPostCell.swift */,
+				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
+				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
-				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -150,14 +163,10 @@
 		C5A351EA210D0E1600A717D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
 				C5A351D6210D0CE500A717D3 /* ViewController.swift */,
-				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
-				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
-				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
-				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
-				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
-				441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */,
+				E9C9713121320AA00073CD90 /* Open Donations */,
+				E9C9713221320AAE0073CD90 /* Status */,
+				E9C9713321320AC00073CD90 /* Login-Register */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */,
+				E96F11EB21294016004D549A /* MapHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				44339C30210D13DC00E6663E /* GradientView.swift */,
 			);
@@ -176,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
+				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
+				E9C10C9F210E4C6B0050FB8A /* UIColors.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -195,8 +207,8 @@
 			children = (
 				C5CA7BB0210D24F50052D440 /* UserService.swift */,
 				E92994EB210D27C100A32924 /* DonationService.swift */,
-				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
+				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -207,6 +219,35 @@
 				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		E9C9713121320AA00073CD90 /* Open Donations */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
+				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
+				E984502A21321DE000096E84 /* PendingRequestsViewController.swift */,
+			);
+			name = "Open Donations";
+			sourceTree = "<group>";
+		};
+		E9C9713221320AAE0073CD90 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
+				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
+				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
+				441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */,
+			);
+			name = Status;
+			sourceTree = "<group>";
+		};
+		E9C9713321320AC00073CD90 /* Login-Register */ = {
+			isa = PBXGroup;
+			children = (
+				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
+			);
+			name = "Login-Register";
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -231,6 +272,7 @@
 				C5A351CF210D0CE500A717D3 /* Resources */,
 				220E483AD5828192C0765A81 /* [CP] Embed Pods Frameworks */,
 				7873416786DDA1F9C9B07047 /* [CP] Copy Pods Resources */,
+				E93D082B212CDA0800AEC9B4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -353,6 +395,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E93D082B212CDA0800AEC9B4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -364,18 +419,23 @@
 				E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
+				E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
+				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,
 				E90B2478210D8588009B9E0B /* GradientView.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
+				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
+				E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
+				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
@@ -528,7 +588,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

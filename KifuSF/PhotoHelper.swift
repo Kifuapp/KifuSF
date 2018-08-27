@@ -18,11 +18,18 @@ class PhotoHelper: NSObject {
     
     func presentActionSheet(from viewController: UIViewController) {
         // 1
-        let alertController = UIAlertController(title: nil, message: "Where do you want to get your picture from?", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(
+            title: nil,
+            message: "Where do you want to get your picture from?",
+            preferredStyle: .actionSheet
+        )
         
         // 2
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let capturePhotoAction = UIAlertAction(title: "Take Photo", style: .default, handler: { [unowned self] action in
+            let capturePhotoAction = UIAlertAction(
+                title: "Take Photo",
+                style: .default,
+                handler: { [unowned self] _ in
                 self.presentImagePickerController(with: .camera, from: viewController)
             })
             
@@ -30,7 +37,10 @@ class PhotoHelper: NSObject {
         }
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let uploadAction = UIAlertAction(title: "Upload from Library", style: .default, handler: { [unowned self] action in
+            let uploadAction = UIAlertAction(
+                title: "Upload from Library",
+                style: .default,
+                handler: { [unowned self] _ in
                 self.presentImagePickerController(with: .photoLibrary, from: viewController)
             })
             
@@ -45,7 +55,9 @@ class PhotoHelper: NSObject {
         viewController.present(alertController, animated: true)
     }
     
-    func presentImagePickerController(with sourceType: UIImagePickerControllerSourceType, from viewController: UIViewController) {
+    func presentImagePickerController(
+        with sourceType: UIImagePickerControllerSourceType,
+        from viewController: UIViewController) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
@@ -55,7 +67,9 @@ class PhotoHelper: NSObject {
 }
 
 extension PhotoHelper: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String: Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             completionHandler?(selectedImage)
         }
