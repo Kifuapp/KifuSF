@@ -76,6 +76,7 @@ class ItemListViewController: UIViewController {
             postTable.reloadData()
         }
     }
+    
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocationCoordinate2D?
     
@@ -166,6 +167,7 @@ class ItemListViewController: UIViewController {
             fatalError("no tab bar controller")
         }
         
+        
         if currentDeliveryState.isShowingPendingRequests {
             performSegue(withIdentifier: "show pending requests", sender: nil)
         } else {
@@ -182,6 +184,7 @@ class ItemListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()

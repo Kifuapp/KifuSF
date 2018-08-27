@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.setCurrent(user)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "tabBar")
+            let initialVC = storyboard.instantiateViewController(withIdentifier: "initialTabBar")
             
             window?.rootViewController = initialVC
             window?.makeKeyAndVisible()
