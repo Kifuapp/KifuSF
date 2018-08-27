@@ -37,7 +37,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y != 0{
+            if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y += 190//keyboardSize.height
             }
         }
@@ -48,10 +48,10 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func isValidEmail(testStr:String) -> Bool {
+    func isValidEmail(testStr: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
     }
     
@@ -72,11 +72,15 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var buttonViewRegister: GradientView!
     
-    @IBAction func registerButtonTapped(_ sender: Any) {
+    @IBAction func registerButtonTapped(_ sender: Any) { // swiftlint:disable:this function_body_length
         clearErrorMessage()
         dismissKeyboard()
         
-        if nameTextField.text!.isEmpty || usernameTextField.text!.isEmpty || phoneAddressTextField.text!.isEmpty || emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+        if nameTextField.text!.isEmpty ||
+            usernameTextField.text!.isEmpty ||
+            phoneAddressTextField.text!.isEmpty ||
+            emailTextField.text!.isEmpty ||
+            passwordTextField.text!.isEmpty {
             errorMessageLabel.text = "Fill in everything"
             return
         }
@@ -117,7 +121,12 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
                     fatalError("no user from result but no error was found or, validation failed with register button")
             }
             
-            UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
+            UserService.create(
+                firUser: firUser,
+                username: username,
+                image: image,
+                contactNumber:
+                contactNumber, completion: { (user) in
                 guard let user = user else {
                     let alert = UIAlertController(errorMessage: nil)
                     self.present(alert, animated: true)
@@ -141,7 +150,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y == 0{
+            if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= 190//keyboardSize.height
             }
         }
@@ -158,10 +167,23 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
             self?.clearErrorMessage()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(RegisterFormViewController.keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(RegisterFormViewController.keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIInputViewController.dismissKeyboard)
+        )
         view.addGestureRecognizer(tap)
     }
 }

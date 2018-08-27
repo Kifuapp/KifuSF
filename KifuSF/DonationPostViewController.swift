@@ -27,7 +27,10 @@ class DonationPostViewController: UIViewController {
             self.itemImage.image = image
         }
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIInputViewController.dismissKeyboard)
+        )
         view.addGestureRecognizer(tap)
     }
 

@@ -22,10 +22,36 @@ struct Donation {
     var verificationUrl: String?
     
     enum Status: Int {
-        case Open
-        case AwaitingPickup
-        case AwaitingDelivery
-        case AwaitingApproval
+        case open
+        case awaitingPickup
+        case awaitingDelivery
+        case awaitingApproval
+        
+        var stringValueForDonator: String {
+            switch self {
+            case .open:
+                return "Open"
+            case .awaitingPickup:
+                return "Awaiting your dropoff"
+            case .awaitingDelivery:
+                return "Awaiting verification photo"
+            case .awaitingApproval:
+                return "Awaiting your approval"
+            }
+        }
+        
+        var stringValueForVolunteer: String {
+            switch self {
+            case .open:
+                return "Open"
+            case .awaitingPickup:
+                return "Awaiting your pickup"
+            case .awaitingDelivery:
+                return "Awaiting your verification"
+            case .awaitingApproval:
+                return "Awaiting donator's approval"
+            }
+        }
     }
     
     var status: Status
@@ -89,7 +115,7 @@ struct Donation {
         self.verificationUrl = verificationUrl
     }
     
-    init?(snapshot: DataSnapshot) {
+    init?(snapshot: DataSnapshot) { // swiftlint:disable:this function_body_length
         guard
             let dict = snapshot.value as? [String: Any],
             let title = dict[Keys.title] as! String?,
@@ -112,7 +138,7 @@ struct Donation {
             return nil
         }
         
-        var volunteer: User? = nil
+        var volunteer: User?
         if let volunteerValue = dict[Keys.volunteer] as! [String: Any]?,
             let volunteerUsername = volunteerValue["username"] as? String,
             let volunteerUid = volunteerValue["uid"] as? String,
@@ -129,7 +155,7 @@ struct Donation {
             )
         }
         
-        var verificationUrl: String? = nil
+        var verificationUrl: String?
         if let verificationUrlValue = dict[Keys.verificationUrl] as! String? {
             verificationUrl = verificationUrlValue
         }

@@ -64,7 +64,6 @@ extension VolunteerListViewController: UITableViewDataSource {
         volunteerCell.name.text = "@\(volunteer.username)"
         volunteerCell.userImage.kf.setImage(with: URL(string: volunteer.imageURL)!)
         
-        
         return volunteerCell
     }
     
@@ -90,5 +89,3 @@ extension VolunteerListViewController: VolunteerCellDelegate {
         }
     }
 }
-
-

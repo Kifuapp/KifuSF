@@ -15,7 +15,7 @@ class StatusViewController: UIViewController {
 
     var openDelivery: Donation?
 
-    var photoHelper = PhotoHelper()
+    var sendValidationPhotoHelper = PhotoHelper()
 
     // MARK: - RETURN VALUES
 
@@ -73,9 +73,9 @@ class StatusViewController: UIViewController {
         deliveryGreenButtonView.backgroundColor = UIColor.greenColor
 
         switch delivery.status {
-        case .Open:
+        case .open:
             break
-        case .AwaitingPickup:
+        case .awaitingPickup:
             deliveryLabelOne.text = delivery.pickUpAddress
             deliveryLabelTwo.text = delivery.donator.contactNumber
             deliveryTextView.text = ""
@@ -84,7 +84,7 @@ class StatusViewController: UIViewController {
             deliveryGreenButtonView.backgroundColor = UIColor.blueColor
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
-        case .AwaitingDelivery:
+        case .awaitingDelivery:
             deliveryLabelOne.text = "150 Golden Gate Ave, San Francisco, CA 94102"
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
@@ -93,7 +93,7 @@ class StatusViewController: UIViewController {
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
 
-        case .AwaitingApproval:
+        case .awaitingApproval:
             deliveryLabelOne.text = ""
             deliveryLabelTwo.text = ""
             deliveryTextView.text = ""
@@ -104,7 +104,7 @@ class StatusViewController: UIViewController {
         }
     }
 
-    private func updateOpenDonationContainer() {
+    private func updateOpenDonationContainer() { // swiftlint:disable:this function_body_length
         guard let donation = openDonation else {
             return assertionFailure("no open donation to reload")
         }
@@ -119,7 +119,7 @@ class StatusViewController: UIViewController {
         donationCancelButtonView.isHidden = false
 
         switch donation.status {
-        case .Open:
+        case .open:
             donationLabelOne.isHidden = true
             donationLabelTwo.isHidden = true
             donationTextView.text = donation.notes
@@ -131,12 +131,12 @@ class StatusViewController: UIViewController {
                 
                 //TODO: remove observer
                 switch donation.status {
-                case .Open:
+                case .open:
                     self.donationGreenButton.setTitle("\(nVolunteers) Volunteers", for: .normal)
                 default: break
                 }
             }
-        case .AwaitingPickup:
+        case .awaitingPickup:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
             }
@@ -148,7 +148,7 @@ class StatusViewController: UIViewController {
             //remove cancel button
             donationCancelButtonView.isHidden = true
             donationGreenButton.setTitle("Confirm Pickup", for: .normal)
-        case .AwaitingDelivery:
+        case .awaitingDelivery:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
             }
@@ -161,7 +161,7 @@ class StatusViewController: UIViewController {
             donationCancelButtonView.isHidden = true
             donationGreenButton.setTitle("in delivery", for: .normal)
 
-        case .AwaitingApproval:
+        case .awaitingApproval:
             guard let volunteer = donation.volunteer else {
                 fatalError("no volunteer found")
             }
@@ -208,14 +208,14 @@ class StatusViewController: UIViewController {
         }
 
         switch delivery.status {
-        case .Open:
+        case .open:
             break
-        case .AwaitingPickup:
+        case .awaitingPickup:
             break
-        case .AwaitingDelivery:
-            //TODO: show directions
+        case .awaitingDelivery:
+            //TODO: show directions to charity. use MapHelper
             break
-        case .AwaitingApproval:
+        case .awaitingApproval:
             break
         }
     }
@@ -226,14 +226,14 @@ class StatusViewController: UIViewController {
         }
 
         switch delivery.status {
-        case .Open:
+        case .open:
             break
-        case .AwaitingPickup:
-            //TODO: show directions of donator location
-            break
-        case .AwaitingDelivery:
-            photoHelper.presentActionSheet(from: self)
-        case .AwaitingApproval:
+        case .awaitingPickup:
+            let directionsMap = MapHelper(long: delivery.longitude, lat: delivery.laditude)
+            directionsMap.open()
+        case .awaitingDelivery:
+            sendValidationPhotoHelper.presentActionSheet(from: self)
+        case .awaitingApproval:
             break
         }
     }
@@ -248,14 +248,37 @@ class StatusViewController: UIViewController {
         }
 
         switch donation.status {
-        case .Open:
-            //TODO: cancel button
+        case .open:
+            let cancelDonationAlert = UIAlertController(
+                title: "Cancel Donation",
+                message: "Are you sure you want to cancel your open donation?",
+                preferredStyle: .alert
+            )
+            
+            let deleteDonationAction = UIAlertAction(
+                title: "Delete Donation",
+                style: .destructive) { (_) in
+                    DonationService.cancel(donation: donation, completion: { (successful) in
+                        if successful == false {
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            self.present(errorAlert, animated: true)
+                        } else {
+                            //observe will update the UI
+                            //self.updateUI()
+                        }
+                    })
+            }
+            cancelDonationAlert.addAction(deleteDonationAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            cancelDonationAlert.addAction(cancelAction)
+            
+            present(cancelDonationAlert, animated: true)
+        case .awaitingPickup:
             break
-        case .AwaitingPickup:
+        case .awaitingDelivery:
             break
-        case .AwaitingDelivery:
-            break
-        case .AwaitingApproval:
+        case .awaitingApproval:
             break
         }
     }
@@ -266,14 +289,18 @@ class StatusViewController: UIViewController {
         }
 
         switch donation.status {
-        case .Open:
+        case .open:
             self.performSegue(withIdentifier: "show volunteers", sender: nil)
-        case .AwaitingPickup:
-            let alertConfirmPickup = UIAlertController(title: nil, message: "are you sure you want to confirm the pickup?", preferredStyle: .actionSheet)
+        case .awaitingPickup:
+            let alertConfirmPickup = UIAlertController(
+                title: nil,
+                message: "are you sure you want to confirm the pickup?",
+                preferredStyle: .actionSheet
+            )
             let actionConfirm = UIAlertAction(title: "Confirm Pickup", style: .destructive) { (_) in
                 DonationService.confirmPickup(for: donation, completion: { (success) in
                     if success {
-                        self.😱()
+                        self.observeChanges()
                     }
                     //TODO: print error message
                 })
@@ -281,11 +308,11 @@ class StatusViewController: UIViewController {
             alertConfirmPickup.addAction(actionConfirm)
             alertConfirmPickup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alertConfirmPickup, animated: true)
-        case .AwaitingDelivery:
+        case .awaitingDelivery:
             break
-        case .AwaitingApproval:
+        case .awaitingApproval:
             guard
-                let photoVc = storyboard!.instantiateViewController(withIdentifier: "approveDelivery") as? ApproveDeliveryViewController,
+                let photoVc = storyboard!.instantiateViewController(withIdentifier: "approveDelivery") as? ApproveDeliveryViewController, // swiftlint:disable:this line_length
                 let donation = self.openDonation else {
                 fatalError("bad progammer 🤓")
             }
@@ -307,16 +334,18 @@ class StatusViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        observeChanges()
 
         //validate photo picked
-        photoHelper.completionHandler = { image in
+        sendValidationPhotoHelper.completionHandler = { image in
             guard let donation = self.openDelivery else {
                 fatalError("some programmer didn't had enough sleep")
             }
 
             DonationService.confirmDelivery(for: donation, image: image, completion: { (success) in
                 if success {
-                    self.😱()
+                    self.observeChanges()
                 }
                 //TODO: handle error
             })
@@ -325,18 +354,12 @@ class StatusViewController: UIViewController {
         updateUI()
     }
 
-    private func 😱() {
-        DonationService.showOpenDontationAndDelivery { (donation, delivery) in
+    private func observeChanges() {
+        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
 
             self.updateUI()
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        😱()
     }
 }
