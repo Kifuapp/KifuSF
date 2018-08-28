@@ -1,5 +1,5 @@
 //
-//  Enum+CasableVars.swift
+//  Enum+SwitchlessCases.swift
 //  KifuSF
 //
 //  Created by Erick Sanchez on 8/27/18.
@@ -8,4 +8,4 @@
 
 import Foundation
 
-protocol CasableVars { }
+protocol SwitchlessCases { }

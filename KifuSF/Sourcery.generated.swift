@@ -3,7 +3,7 @@
 
 
 
-// MARK: DonationOption CasableVars
+// MARK: DonationOption SwitchlessCases
 extension DonationOption {
     enum Errors: Error {
         case invokedMethodWithWrongCase

@@ -10,7 +10,8 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
-enum DonationOption: CasableVars {
+enum DonationOption: SwitchlessCases {
+    
     // sourcery: case_skip
     case none
     

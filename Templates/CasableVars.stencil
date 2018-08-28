@@ -1,5 +1,5 @@
-{% for type in types.implementing.CasableVars|enum %}
-// MARK: {{ type.name }} CasableVars
+{% for type in types.implementing.SwitchlessCases|enum %}
+// MARK: {{ type.name }} SwitchlessCases
 extension {{ type.name }} {
 {% if type.hasAssociatedValues %}
     enum Errors: Error {
