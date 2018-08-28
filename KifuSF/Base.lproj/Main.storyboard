@@ -1738,7 +1738,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="dRO-8u-1og">
                                                 <rect key="frame" x="0.0" y="0.0" width="384" height="45"/>
                                                 <subviews>
-                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="donation-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="JNG-Pa-alA">
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="DonationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JNG-Pa-alA">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="JNG-Pa-alA" secondAttribute="height" multiplier="1:1" id="5yO-hd-4LI"/>
@@ -1761,7 +1761,7 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="misc-disclosure-template" translatesAutoresizingMaskIntoConstraints="NO" id="JBn-iC-QUd">
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="DisclosureIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JBn-iC-QUd">
                                                         <rect key="frame" x="374" y="13.666666666666671" width="10" height="18"/>
                                                         <color key="tintColor" name="Primary"/>
                                                     </imageView>
@@ -1774,7 +1774,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="naV-Ld-G2D">
                                                 <rect key="frame" x="0.0" y="53" width="384" height="45"/>
                                                 <subviews>
-                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="delivery-icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ax9-EN-g3t">
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="DeliveryIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ax9-EN-g3t">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Ax9-EN-g3t" secondAttribute="height" multiplier="1:1" id="BkB-T0-dNq"/>
@@ -1797,7 +1797,7 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="misc-disclosure-template" translatesAutoresizingMaskIntoConstraints="NO" id="YM5-es-mjx">
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="DisclosureIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YM5-es-mjx">
                                                         <rect key="frame" x="374" y="13.666666666666657" width="10" height="18"/>
                                                         <color key="tintColor" name="Primary"/>
                                                     </imageView>
@@ -1833,6 +1833,11 @@
                             <constraint firstItem="68m-Re-xhe" firstAttribute="bottom" secondItem="wja-H9-rhc" secondAttribute="bottom" id="hkA-xl-JMB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="68m-Re-xhe"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="wja-H9-rhc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Open Donations" id="KOx-lx-xeV"/>
                     <connections>
@@ -2614,15 +2619,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="DeliveryIcon" width="45" height="45"/>
+        <image name="DisclosureIcon" width="10" height="18"/>
+        <image name="DonationIcon" width="45" height="45"/>
         <image name="ItemsIcon" width="26" height="26"/>
         <image name="Leaderboard" width="3025" height="5788"/>
         <image name="Logo" width="1170" height="452"/>
         <image name="PlusSquare" width="600" height="600"/>
         <image name="SocialIcon" width="26" height="26"/>
         <image name="StatusIcon" width="30" height="30"/>
-        <image name="delivery-icon-1" width="45" height="45"/>
-        <image name="donation-icon-1" width="45" height="45"/>
-        <image name="misc-disclosure-template" width="10" height="18"/>
         <namedColor name="Primary">
             <color red="0.0" green="0.60000002384185791" blue="0.2669999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

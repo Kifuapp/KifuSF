@@ -20,8 +20,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        tabBarItem.image = UIImage(named: "BoxIcon")
         
         navigationController?.tabBarItem.image = UIImage(named: "BoxIcon")
         navigationController?.tabBarItem.title = "Home"
@@ -35,9 +33,6 @@ class HomeViewController: UIViewController {
         donationsTableView.delegate = self
         
         donationsTableView.separatorStyle = .none
-        donationsTableView.allowsSelection = false
-        
-        
         
         var bounds = navigationController!.navigationBar.bounds
         bounds.size.height += 20
@@ -50,6 +45,16 @@ class HomeViewController: UIViewController {
         
         self.navigationController?.navigationBar.addSubview(visualEffectView)
         visualEffectView.layer.zPosition = -1
+        
+        if let widgetView = Bundle.main.loadNibNamed("KFWidgetView", owner: self, options: nil)?.first as? KFWidgetView {
+            view.addSubview(widgetView)
+            
+            widgetView.translatesAutoresizingMaskIntoConstraints = false
+            
+            widgetView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+            widgetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+            widgetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        }
         
     }
     
@@ -75,8 +80,7 @@ extension HomeViewController: UITableViewDataSource {
         guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: "donationCell") as? DonationTableViewCell else {
             fatalError("unknown donation table view cell")
         }
-        
-        
+
         return donationCell
     }
     

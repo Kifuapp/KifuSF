@@ -25,6 +25,7 @@ class DonationTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.clipsToBounds = false
+        self.selectionStyle = .none
         
         contentView.clipsToBounds = false
         contentView.backgroundColor = UIColor.kfGray
@@ -52,8 +53,14 @@ class DonationTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        containerView?.backgroundColor = selected ? .kfHighlight : .kfWhite
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        containerView?.backgroundColor = highlighted ? .kfHighlight : .kfWhite
     }
 
 }

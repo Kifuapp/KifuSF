@@ -15,10 +15,13 @@
 		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
+		C510A4D8213599D500E8FC78 /* KFDonationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */; };
 		C560B7E521346DB1008A9DF1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C560B7E421346DB1008A9DF1 /* Home.storyboard */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7E9213477D8008A9DF1 /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E8213477D8008A9DF1 /* DonationTableViewCell.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
+		C560B7ED2135754C008A9DF1 /* KFWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C560B7EC2135754C008A9DF1 /* KFWidgetView.xib */; };
+		C560B7EF213579F1008A9DF1 /* KFWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EE213579F1008A9DF1 /* KFWidgetView.swift */; };
 		C5983C1E2134643F00303ABB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5983C1D2134643F00303ABB /* HomeViewController.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
@@ -43,7 +46,7 @@
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502A21321DE000096E84 /* PendingRequestsViewController.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
-		E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColors.swift */; };
+		E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,10 +61,13 @@
 		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFDonationTableViewCell.xib; sourceTree = "<group>"; };
 		C560B7E421346DB1008A9DF1 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Pods/Home.storyboard; sourceTree = SOURCE_ROOT; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7E8213477D8008A9DF1 /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		C560B7EC2135754C008A9DF1 /* KFWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFWidgetView.xib; sourceTree = "<group>"; };
+		C560B7EE213579F1008A9DF1 /* KFWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFWidgetView.swift; sourceTree = "<group>"; };
 		C5983C1D2134643F00303ABB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +92,7 @@
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E984502A21321DE000096E84 /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
-		E9C10C9F210E4C6B0050FB8A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
+		E9C10C9F210E4C6B0050FB8A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E9C97130213208C90073CD90 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,8 +120,11 @@
 		C560B7E321346AA0008A9DF1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				C560B7E421346DB1008A9DF1 /* Home.storyboard */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
+				C560B7EC2135754C008A9DF1 /* KFWidgetView.xib */,
+				C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -180,8 +189,8 @@
 				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
-				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				C560B7E8213477D8008A9DF1 /* DonationTableViewCell.swift */,
+				C560B7EE213579F1008A9DF1 /* KFWidgetView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -213,7 +222,7 @@
 			children = (
 				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
 				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
-				E9C10C9F210E4C6B0050FB8A /* UIColors.swift */,
+				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
 				C560B7E62134732B008A9DF1 /* UIFont.swift */,
 				C560B7EA21353623008A9DF1 /* CALayer.swift */,
 			);
@@ -354,6 +363,8 @@
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
 				C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */,
+				C510A4D8213599D500E8FC78 /* KFDonationTableViewCell.xib in Resources */,
+				C560B7ED2135754C008A9DF1 /* KFWidgetView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +470,7 @@
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
-				E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */,
+				E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
@@ -473,6 +484,7 @@
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,
 				44339C35210D477700E6663E /* (null) in Sources */,
+				C560B7EF213579F1008A9DF1 /* KFWidgetView.swift in Sources */,
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 			);
