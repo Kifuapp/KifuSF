@@ -9,7 +9,12 @@
 import Foundation
 import FirebaseDatabase
 
-struct Donation {
+struct Donation: Equatable {
+    
+    static func == (lhs: Donation, rhs: Donation) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+    
     let uid: String
     let title: String
     let notes: String
