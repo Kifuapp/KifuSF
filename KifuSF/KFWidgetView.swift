@@ -23,13 +23,10 @@ class KFWidgetView: UIView {
     
     @IBOutlet weak var donationDisclosureImageView: UIImageView!
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    static let nibName = "KFWidgetView"
+    
+    var dataSource: KFWidgetViewDataSource?
+    var delegate: KFWidgetViewDelegate?
     
     override func awakeFromNib() {
         deliveryTitleLabel.font = UIFont.kfBody1
@@ -46,6 +43,16 @@ class KFWidgetView: UIView {
         
         deliveryDisclosureImageView.tintColor = UIColor.kfPrimary
         donationDisclosureImageView.tintColor = UIColor.kfPrimary
+        
     }
 
+}
+
+protocol KFWidgetViewDataSource {
+    
+    
+}
+
+protocol KFWidgetViewDelegate {
+    
 }

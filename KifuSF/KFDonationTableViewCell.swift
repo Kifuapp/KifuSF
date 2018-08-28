@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonationTableViewCell: UITableViewCell {
+class KFDonationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView!
     
@@ -20,6 +20,9 @@ class DonationTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
+    
+    static let nibName = "KFDonationTableViewCell"
+    static let reuseIdentifier = "donationCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +52,8 @@ class DonationTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.kfBody2
         descriptionLabel.textColor = UIColor.kfBody2
         descriptionLabel.numberOfLines = 2
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

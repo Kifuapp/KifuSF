@@ -20,42 +20,10 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.tabBarItem.image = UIImage(named: "BoxIcon")
-        navigationController?.tabBarItem.title = "Home"
-        navigationItem.title = "Donations"
-        
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
-        
-        donationsTableView.dataSource = self
-        donationsTableView.delegate = self
-        
-        donationsTableView.separatorStyle = .none
-        
-        var bounds = navigationController!.navigationBar.bounds
-        bounds.size.height += 20
-        bounds.origin.y -= 20
-        
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        visualEffectView.isUserInteractionEnabled = false
-        visualEffectView.frame = bounds
-        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        self.navigationController?.navigationBar.addSubview(visualEffectView)
-        visualEffectView.layer.zPosition = -1
-        
-        if let widgetView = Bundle.main.loadNibNamed("KFWidgetView", owner: self, options: nil)?.first as? KFWidgetView {
-            view.addSubview(widgetView)
-            
-            widgetView.translatesAutoresizingMaskIntoConstraints = false
-            
-            widgetView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-            widgetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-            widgetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        }
-        
+
+        setUpWidgetView()
+        setUpDonationTableView()
+        setUpNavBar()
     }
     
     
@@ -77,7 +45,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: "donationCell") as? DonationTableViewCell else {
+        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFDonationTableViewCell.reuseIdentifier) as? KFDonationTableViewCell else {
             fatalError("unknown donation table view cell")
         }
 
