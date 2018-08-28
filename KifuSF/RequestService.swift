@@ -44,10 +44,17 @@ struct RequestService {
     }
     
     /**
-     removes the current user, or given userUid, from the donation-requests and user-requests subtrees
-     for the given donation
+     removes the current user, or given userUid, from the given donation in the
+     donation-requests and user-requests subtrees
+     
+     - Remark: used when the current user cancels their request from the given donation.
+     Also, when the given donation clears its requests.
      */
-    public static func cancelRequest(for donation: Donation, forUserUid userUid: String = User.current.uid, completion: @escaping (Bool) -> Void) {
+    public static func cancelRequest(for donation: Donation, completion: @escaping (Bool) -> Void) {
+        self.cancelRequest(for: donation, forUserUid: User.current.uid, completion: completion)
+    }
+    
+    private static func cancelRequest(for donation: Donation, forUserUid userUid: String, completion: @escaping (Bool) -> Void) {
         
         //remove donation from user-requests
         let refUserRequest = Database.database().reference()
@@ -81,7 +88,41 @@ struct RequestService {
     }
     
     /**
+     removes all requests for the given user from the user-requests. Then, removes
+     the given user from the donation-requests
+     
+     - Remark: when the given userUid was accepted as a volunteer of a donation
+     */
+    public static func clearRequests(for user: User, completion: @escaping (Bool) -> Void) {
+        
+        //fetch donations from user-requests from the given uid
+        self.fetchPendingRequests(for: user) { (donationsToCancel) in
+            
+            //for each donation, cancel the request
+            let dg = DispatchGroup() // swiftlint:disable:this identifier_name
+            var isSuccessful = true
+            
+            for aDonation in donationsToCancel {
+                dg.enter()
+                RequestService.cancelRequest(for: aDonation, forUserUid: user.uid, completion: { (success) in
+                    if success == false {
+                        isSuccessful = false
+                    }
+                    
+                    dg.leave()
+                })
+            }
+            
+            dg.notify(queue: DispatchQueue.main, execute: {
+                completion(isSuccessful)
+            })
+        }
+    }
+    
+    /**
      Removes all users from the donation-request sub tree and removes the donation from all user's user-request
+     
+     - Remark: when a volunteer is selected or when the donation is canceled
      */
     public static func clearRequests(for donation: Donation, completion: @escaping (Bool) -> Void) {
         
@@ -134,7 +175,22 @@ struct RequestService {
     }
     
     /**
-     Fetch all donations the user has reqeusted to deliver
+     Fetch all donations the user given has reqeusted to deliver
+     */
+    public static func fetchPendingRequests(for user: User, completion: @escaping ([Donation]) -> Void) {
+        let ref = Database.database().reference().child("user-requests").child(user.uid)
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let donationSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
+                fatalError("could not decode")
+            }
+            
+            let requestingDonations = donationSnapshots.compactMap(Donation.init)
+            completion(requestingDonations)
+        }
+    }
+    
+    /**
+     Observe all donations the user has reqeusted to deliver
      */
     public static func observePendingRequests(completion: @escaping ([Donation]) -> Void) {
         let currentUserUid = User.current.uid

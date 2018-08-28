@@ -137,6 +137,10 @@ struct DonationService {
      requests from the requets sub-tree
      */
     static func accept(volunteer: User, for donation: Donation, completion: @escaping (Bool) -> Void) {
+        //
+        // - warning: each request is fired independant of one another
+        //
+        
         //get donation ref
         let ref = Database.database().reference().child("open-donations").child(donation.uid)
 
@@ -172,7 +176,16 @@ struct DonationService {
             dg.leave()
         }
         
-        //TODO: Clear other requests the accepted volunteer has made
+        //clear other requests the accepted volunteer has made
+        dg.enter()
+        
+        RequestService.clearRequests(for: volunteer) { (success) in
+            if success == false {
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
         
         dg.notify(queue: DispatchQueue.main) {
             completion(isSuccessful)
