@@ -20,9 +20,9 @@ extension UIFont {
         case heavy = "AvenirNext-Heavy"
         case medium = "AvenirNext-Medium"
         case italic = "AvenirNext-Italic"
-        case ultraLightItalic = "UltraLightItalic"
-        case boldItalic = "BoldItalic"
-        case regular = "Regular"
+        case ultraLightItalic = "AvenirNext-UltraLightItalic"
+        case boldItalic = "AvenirNext-BoldItalic"
+        case regular = "AvenirNext-Regular"
         case demiBoldItalic = "AvenirNext-DemiBoldItalic"
 
         

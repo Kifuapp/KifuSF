@@ -18,8 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         FirebaseApp.configure()
         setInitalViewController()
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
+        UITabBar.appearance().tintColor = UIColor.kfPrimary
         
         return true
     }

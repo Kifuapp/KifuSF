@@ -24,9 +24,30 @@ class DonationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleLabel.font = UIFont.kfHeader1
+        self.clipsToBounds = false
         
-        // Initialization code
+        contentView.clipsToBounds = false
+        contentView.backgroundColor = UIColor.kfGray
+        
+        containerView.backgroundColor = UIColor.kfWhite
+        containerView.layer.cornerRadius = CALayer.kfCornerRadius
+        containerView.layer.setUpShadow()
+        
+        donationImageContainerView.layer.setUpShadow()
+        donationImage.layer.cornerRadius = CALayer.kfCornerRadius
+        
+        titleLabel.font = UIFont.kfHeader1
+        titleLabel.textColor = UIColor.kfHeader1
+        
+        usernameLabel.font = UIFont.kfSubheader3
+        usernameLabel.textColor = UIColor.kfSubheader3
+        
+        distanceLabel.font = UIFont.kfBody1
+        distanceLabel.textColor = UIColor.kfBody1
+        
+        descriptionLabel.font = UIFont.kfBody2
+        descriptionLabel.textColor = UIColor.kfBody2
+        descriptionLabel.numberOfLines = 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

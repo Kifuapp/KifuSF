@@ -21,13 +21,36 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        tabBarItem.image = UIImage(named: "BoxIcon")
+        
+        navigationController?.tabBarItem.image = UIImage(named: "BoxIcon")
         navigationController?.tabBarItem.title = "Home"
         navigationItem.title = "Donations"
+        
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
         
         donationsTableView.dataSource = self
         donationsTableView.delegate = self
         
         donationsTableView.separatorStyle = .none
+        donationsTableView.allowsSelection = false
+        
+        
+        
+        var bounds = navigationController!.navigationBar.bounds
+        bounds.size.height += 20
+        bounds.origin.y -= 20
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.isUserInteractionEnabled = false
+        visualEffectView.frame = bounds
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        visualEffectView.layer.zPosition = -1
+        
     }
     
     
@@ -54,12 +77,11 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         
-        
         return donationCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return 152
     }
     
     

@@ -18,6 +18,7 @@
 		C560B7E521346DB1008A9DF1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C560B7E421346DB1008A9DF1 /* Home.storyboard */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7E9213477D8008A9DF1 /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E8213477D8008A9DF1 /* DonationTableViewCell.swift */; };
+		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
 		C5983C1E2134643F00303ABB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5983C1D2134643F00303ABB /* HomeViewController.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		C560B7E421346DB1008A9DF1 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Pods/Home.storyboard; sourceTree = SOURCE_ROOT; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7E8213477D8008A9DF1 /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
+		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		C5983C1D2134643F00303ABB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
 				E9C10C9F210E4C6B0050FB8A /* UIColors.swift */,
 				C560B7E62134732B008A9DF1 /* UIFont.swift */,
+				C560B7EA21353623008A9DF1 /* CALayer.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,
 				44339C35210D477700E6663E /* (null) in Sources */,
+				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
