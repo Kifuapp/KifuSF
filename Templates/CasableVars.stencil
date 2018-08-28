@@ -1,9 +1,18 @@
 {% for type in types.implementing.CasableVars|enum %}
 // MARK: {{ type.name }} CasableVars
 extension {{ type.name }} {
+{% if type.hasAssociatedValues %}
+    enum Errors: Error {
+        case invokedMethodWithWrongCase
+    }
+{% endif %}
 
-{% for case in type.cases %}
+{% for case in type.cases|!annotated:"case_skip" %}
+    {% if case|annotated:"case_name" %}
+    var {{ case.annotations.case_name }}: Bool {
+    {% else %}
     var is{{ case.name|upperFirstLetter }}: Bool {
+    {% endif %}
         switch self {
         case .{{ case.name }}:
             return true
@@ -12,6 +21,21 @@ extension {{ type.name }} {
         }
     }
 
+    {% if case.hasAssociatedValue %}
+        {% if case.associatedValues.count > 1 %}
+    func {{ case.name }}() throws -> ({% for assValue in case.associatedValues %}{{ assValue.typeName }}{% if not forloop.last %}, {% endif %}{% endfor %}) {
+        {% else %}
+    func {{ case.name }}() throws -> {% for assValue in case.associatedValues %}{{ assValue.typeName }}{% endfor %} {
+        {% endif %}
+        switch self {
+        case .{{ case.name }}(let value):
+            return value
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+
+    {% endif %}
 {% endfor %}
 }
 {% endfor %}

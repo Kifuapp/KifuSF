@@ -1,6 +1,17 @@
+# types and code imported by your project target
 sources:
 - ./KifuSF
+
+# stencil templates NOT imported by your project target
 templates:
 - ./Templates
+
+# after generation, import into project target
 output:
   ./KifuSF/Sourcery.generated.swift
+
+# add as a run script to project
+# ./Pods/Sourcery/bin/sourcery --config ./.sourcery.yml
+
+# use the following to update on new changes to template files
+# ./Pods/Sourcery/bin/sourcery --watch --config ./.sourcery.yml

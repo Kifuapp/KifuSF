@@ -3,24 +3,45 @@
 
 
 
-// MARK: DeliveryDonationState CasableVars
-extension DeliveryDonationState {
+// MARK: DonationOption CasableVars
+extension DonationOption {
+    enum Errors: Error {
+        case invokedMethodWithWrongCase
+    }
 
-    var isDonationIsNotAlreadyRequested: Bool {
+    var isShowingPendingRequests: Bool {
         switch self {
-        case .donationIsNotAlreadyRequested:
+        case .pendingRequests:
             return true
         default:
             return false
         }
     }
 
-    var isUserAlreadyHasAnOpenDelivery: Bool {
+    func pendingRequests() throws -> [Donation] {
         switch self {
-        case .userAlreadyHasAnOpenDelivery:
+        case .pendingRequests(let value):
+            return value
+        default:
+            throw Errors.invokedMethodWithWrongCase
+        }
+    }
+
+    var isShowingCurrentDelivery: Bool {
+        switch self {
+        case .deliveringDonation:
             return true
         default:
             return false
+        }
+    }
+
+    func deliveringDonation() throws -> Donation {
+        switch self {
+        case .deliveringDonation(let value):
+            return value
+        default:
+            throw Errors.invokedMethodWithWrongCase
         }
     }
 
