@@ -10,49 +10,17 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
-//private enum DonationOption {
-//    case none
-//    case pendingRequests([Donation])
-//    case deliveringDonation(Donation)
-//    
-//    enum Errors: Error {
-//        case invokedMethodWithWrongCase
-//    }
-//    
-//    var isShowingPendingRequests: Bool {
-//        if case .pendingRequests = self {
-//            return true
-//        }
-//        
-//        return false
-//    }
-//    
-//    func pendingRequests() throws -> [Donation] {
-//        switch self {
-//        case .pendingRequests(let pendingDonations):
-//            return pendingDonations
-//        default:
-//            throw Errors.invokedMethodWithWrongCase
-//        }
-//    }
-//    
-//    var isShowingCurrentDelivery: Bool {
-//        if case .deliveringDonation = self {
-//            return true
-//        }
-//        
-//        return false
-//    }
-//    
-//    func deliveringDonation() throws -> Donation {
-//        switch self {
-//        case .deliveringDonation(let donation):
-//            return donation
-//        default:
-//            throw Errors.invokedMethodWithWrongCase
-//        }
-//    }
-//}
+enum DonationOption: SwitchlessCases {
+    
+    // sourcery: case_skip
+    case none
+    
+    // sourcery: case_name = "isShowingPendingRequests"
+    case pendingRequests([Donation])
+    
+    // sourcery: case_name = "isShowingCurrentDelivery"
+    case deliveringDonation(Donation)
+}
 
 class ItemListViewController: UIViewController {
     
