@@ -1,0 +1,17 @@
+{% for type in types.implementing.CasableVars|enum %}
+// MARK: {{ type.name }} CasableVars
+extension {{ type.name }} {
+
+{% for case in type.cases %}
+    var is{{ case.name|upperFirstLetter }}: Bool {
+        switch self {
+        case .{{ case.name }}:
+            return true
+        default:
+            return false
+        }
+    }
+
+{% endfor %}
+}
+{% endfor %}

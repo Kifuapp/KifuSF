@@ -1,0 +1,6 @@
+sources:
+- ./KifuSF
+templates:
+- ./Templates
+output:
+  ./KifuSF/Sourcery.generated.swift

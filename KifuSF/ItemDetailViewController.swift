@@ -8,9 +8,16 @@
 
 import UIKit
 
+enum DeliveryDonationState: CasableVars {
+    case donationIsNotAlreadyRequested
+    case userAlreadyHasAnOpenDelivery
+}
+
 class ItemDetailViewController: UIViewController {
     
     var donation: Donation!
+    
+    var userHasAlreadyRequestedDonation: DeliveryDonationState = .donationIsNotAlreadyRequested
     
     /** this also disables the view's isUserInteractive */
     private var isRequestButtonEnabled: Bool {
