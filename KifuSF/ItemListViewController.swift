@@ -97,6 +97,22 @@ class ItemListViewController: UIViewController {
                 
                 let selectedDonation = openDonations[indexPath.row]
                 itemDetailVc.donation = selectedDonation
+                
+                //update if the user already has requested this donation or
+                //already has a current deliever
+                if currentDeliveryState.isShowingPendingRequests {
+                    
+                    //selected donation is the same as the current delivery
+                    let pendingRequests = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
+                    if pendingRequests.contains(selectedDonation) {
+                        itemDetailVc.userHasAlreadyRequestedDonation = .donationIsAlreadyRequested
+                    } else {
+                        itemDetailVc.userHasAlreadyRequestedDonation = .donationIsNotAlreadyRequested
+                    }
+                    
+                } else if currentDeliveryState.isShowingCurrentDelivery {
+                    itemDetailVc.userHasAlreadyRequestedDonation = .userAlreadyHasAnOpenDelivery
+                }
             case "show pending requests":
                 guard let pendingRequestsVc = segue.destination as? PendingRequestsViewController else {
                         fatalError("storyboard not set up correctly")
