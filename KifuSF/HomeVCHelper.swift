@@ -9,11 +9,23 @@
 import Foundation
 import UIKit
 
+enum DonationOption: SwitchlessCases {
+    
+    // sourcery: case_skip
+    case none
+    
+    // sourcery: case_name = "isShowingPendingRequests"
+    case pendingRequests([Donation])
+    
+    // sourcery: case_name = "isShowingCurrentDelivery"
+    case deliveringDonation(Donation)
+}
+
 extension HomeViewController {
     
     func setUpWidgetView() {
         guard let widgetView = Bundle.main.loadNibNamed(KFWidgetView.nibName, owner: self, options: nil)?.first as? KFWidgetView else {
-            assertionFailure("could not load widget view")
+            assertionFailure(KFErrorMessage.nibFileNotFound)
             return
         }
         
@@ -37,9 +49,11 @@ extension HomeViewController {
     }
     
     func setUpNavBar() {
-        navigationController?.tabBarItem.image = UIImage(named: "BoxIcon")
+        navigationController?.tabBarItem.image = KFImage.boxIcon
         navigationController?.tabBarItem.title = "Home"
-        navigationController?.navigationItem.title = "Donations"
+        title = "Home"
+        
+        
         
         //MARK: Some random attempt to create the same blur effect between widget view and nav bar
         

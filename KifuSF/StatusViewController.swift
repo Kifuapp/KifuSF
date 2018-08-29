@@ -355,7 +355,7 @@ class StatusViewController: UIViewController {
     }
 
     private func observeChanges() {
-        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
 

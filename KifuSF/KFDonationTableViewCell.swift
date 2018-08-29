@@ -13,7 +13,7 @@ class KFDonationTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var donationImageContainerView: UIView!
-    @IBOutlet weak var donationImage: UIImageView!
+    @IBOutlet weak var donationImageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -37,8 +37,11 @@ class KFDonationTableViewCell: UITableViewCell {
         containerView.layer.cornerRadius = CALayer.kfCornerRadius
         containerView.layer.setUpShadow()
         
+        donationImageContainerView.backgroundColor = UIColor.clear
         donationImageContainerView.layer.setUpShadow()
-        donationImage.layer.cornerRadius = CALayer.kfCornerRadius
+        
+        donationImageView.contentMode = .scaleAspectFill
+        donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         
         titleLabel.font = UIFont.kfHeader1
         titleLabel.textColor = UIColor.kfHeader1

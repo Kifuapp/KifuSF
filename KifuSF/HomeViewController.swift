@@ -18,12 +18,29 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private var currentDonation: Donation?
+    private var pendingRequests: [Donation] = []
+    private var currentDelivery: Donation?
+    private var currentDeliveryState: DonationOption {
+        if let donation = currentDelivery {
+            return .deliveringDonation(donation)
+        } else {
+            if pendingRequests.count == 0 {
+                return .none
+            } else {
+                return .pendingRequests(pendingRequests)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpWidgetView()
         setUpDonationTableView()
         setUpNavBar()
+        setUpFirebase()
+        
     }
     
     
@@ -34,19 +51,38 @@ class HomeViewController: UIViewController {
         DonationService.showTimelineDonations { (donations) in
             self.openDonations = donations
         }
+    
+    }
+    
+    func setUpFirebase() {
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
+            self.currentDonation = donation
+            self.currentDelivery = delivery
+            
+            //TODO: update widget view
+        }
+        
+        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+            if self.currentDeliveryState.isShowingCurrentDelivery == false {
+                self.pendingRequests = donationsUserHadRequestedToDeliver
+                
+                //TODO: update widget view
+            }
+        })
     }
 
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return openDonations.count
         return 10
+        
+        //TODO: return the actual amount of cells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFDonationTableViewCell.reuseIdentifier) as? KFDonationTableViewCell else {
-            fatalError("unknown donation table view cell")
+            fatalError(KFErrorMessage.unknownCell)
         }
 
         return donationCell
@@ -61,4 +97,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: KFSegue.showDetailedDonation, sender: self)
+    }
 }

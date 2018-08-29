@@ -10,17 +10,7 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
-enum DonationOption: SwitchlessCases {
-    
-    // sourcery: case_skip
-    case none
-    
-    // sourcery: case_name = "isShowingPendingRequests"
-    case pendingRequests([Donation])
-    
-    // sourcery: case_name = "isShowingCurrentDelivery"
-    case deliveringDonation(Donation)
-}
+
 
 class ItemListViewController: UIViewController {
     
@@ -176,7 +166,7 @@ class ItemListViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         self.viewBlur.effect = blurEffect
         
-        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             self.currentDelivery = delivery
             

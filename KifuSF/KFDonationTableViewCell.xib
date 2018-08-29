@@ -28,7 +28,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qx-00-jul">
                                         <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 102" translatesAutoresizingMaskIntoConstraints="NO" id="QpS-uL-bYZ">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dog" translatesAutoresizingMaskIntoConstraints="NO" id="QpS-uL-bYZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
                                             </imageView>
                                         </subviews>
@@ -104,14 +104,14 @@
                 <outlet property="containerView" destination="edq-5w-uhu" id="SyW-Zz-1fw"/>
                 <outlet property="descriptionLabel" destination="1E5-R9-20A" id="GlK-pR-Cpp"/>
                 <outlet property="distanceLabel" destination="hNj-pO-0Sf" id="QNq-mm-DcR"/>
-                <outlet property="donationImage" destination="QpS-uL-bYZ" id="tse-Nm-o8g"/>
                 <outlet property="donationImageContainerView" destination="5qx-00-jul" id="9J6-Fa-HQy"/>
+                <outlet property="donationImageView" destination="QpS-uL-bYZ" id="tse-Nm-o8g"/>
                 <outlet property="titleLabel" destination="Kw0-SI-SoH" id="tMV-Wc-nh0"/>
                 <outlet property="usernameLabel" destination="zow-Js-h6F" id="51s-01-vTU"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Image 102" width="100" height="100"/>
+        <image name="Dog" width="1900" height="1266"/>
     </resources>
 </document>
