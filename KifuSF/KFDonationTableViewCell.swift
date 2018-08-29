@@ -43,20 +43,12 @@ class KFDonationTableViewCell: UITableViewCell {
         donationImageView.contentMode = .scaleAspectFill
         donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         
-        titleLabel.font = UIFont.kfHeader1
-        titleLabel.textColor = UIColor.kfHeader1
+        titleLabel.setUp(for: .header1)
+        usernameLabel.setUp(for: .subheader3)
+        distanceLabel.setUp(for: .body1)
         
-        usernameLabel.font = UIFont.kfSubheader3
-        usernameLabel.textColor = UIColor.kfSubheader3
-        
-        distanceLabel.font = UIFont.kfBody1
-        distanceLabel.textColor = UIColor.kfBody1
-        
-        descriptionLabel.font = UIFont.kfBody2
-        descriptionLabel.textColor = UIColor.kfBody2
+        descriptionLabel.setUp(for: .body2)
         descriptionLabel.numberOfLines = 2
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

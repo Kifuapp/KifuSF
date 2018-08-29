@@ -25,8 +25,12 @@ class DetailedDonationViewController: UIViewController {
         requestDeliveryButton.backgroundColor = UIColor.kfPrimary
         requestDeliveryButton.layer.cornerRadius = CALayer.kfCornerRadius
         requestDeliveryButton.setTitle("Request Delivery", for: .normal)
+        requestDeliveryButton.titleLabel?.textColor = UIColor.kfButton
+        requestDeliveryButton.titleLabel?.font = UIFont.kfButton
         
         title = "Donation"
+        view.backgroundColor = UIColor.kfWhite
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: KFImage.flagIcon,
                                                                                   style: .plain,
                                                                                   target: self,

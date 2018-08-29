@@ -22,9 +22,10 @@ struct KFSegue {
 }
 
 struct KFErrorMessage {
-    static let unknownCell: String = "unknown donation table view cell"
-    static let imageNotFound: String = "could not load image"
-    static let nibFileNotFound: String = "could not load nib file"
+    static let unknownCell = "unknown donation table view cell"
+    static let imageNotFound = "could not load image"
+    static let nibFileNotFound = "could not load nib file"
+    static let textStyleNotFount = "could not load text style"
 }
 
 struct KFImage {
@@ -44,3 +45,4 @@ struct KFImage {
         return image
     }()
 }
+

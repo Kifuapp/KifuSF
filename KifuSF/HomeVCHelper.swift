@@ -51,6 +51,8 @@ extension HomeViewController {
     func setUpNavBar() {
         navigationController?.tabBarItem.image = KFImage.boxIcon
         navigationController?.tabBarItem.title = "Home"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createDonation))
         title = "Home"
         
         

@@ -86,6 +86,23 @@ extension UIFont {
         
         return body2
     }()
+    
+    static let kfButton: UIFont = {
+        guard let button = UIFont(name: FontStyle.medium.name(), size: 18) else {
+            fatalError("Font problemo")
+        }
+        
+        return button
+    }()
+    
+    static let fonts: [String: UIFont] = ["header1": kfHeader1,
+                                          "header2": kfHeader2,
+                                          "subheader1": kfSubheader1,
+                                          "subheader2": kfSubheader2,
+                                          "subheader3": kfSubheader3,
+                                          "body1": kfBody1,
+                                          "body2": kfBody2,
+                                          "button": kfButton]
 }
 
 

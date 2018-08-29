@@ -70,6 +70,10 @@ class HomeViewController: UIViewController {
             }
         })
     }
+    
+    @objc func createDonation() {
+        //TODO: segue to create donation VC
+    }
 
 }
 

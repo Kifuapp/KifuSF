@@ -40,6 +40,9 @@
 		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
 		C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */; };
+		C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404C2136ED4400ECC819 /* UILabel.swift */; };
+		C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404F2136EF8200ECC819 /* UITextView.swift */; };
+		C5DD40522136F05900ECC819 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD40512136F05900ECC819 /* Enums.swift */; };
 		E90B2478210D8588009B9E0B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2477210D8588009B9E0B /* GradientView.swift */; };
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
@@ -94,6 +97,9 @@
 		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		C5DD404C2136ED4400ECC819 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		C5DD404F2136EF8200ECC819 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		C5DD40512136F05900ECC819 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E90B2477210D8588009B9E0B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 				E96F11EB21294016004D549A /* MapHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				44339C30210D13DC00E6663E /* GradientView.swift */,
+				C5DD40512136F05900ECC819 /* Enums.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -248,9 +255,7 @@
 				E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */,
 				E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */,
 				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
-				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
-				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
-				C560B7E62134732B008A9DF1 /* UIFont.swift */,
+				C5DD404E2136ED4900ECC819 /* UIKit */,
 				C560B7EA21353623008A9DF1 /* CALayer.swift */,
 			);
 			name = Extensions;
@@ -276,6 +281,18 @@
 				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		C5DD404E2136ED4900ECC819 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
+				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
+				C560B7E62134732B008A9DF1 /* UIFont.swift */,
+				C5DD404C2136ED4400ECC819 /* UILabel.swift */,
+				C5DD404F2136EF8200ECC819 /* UITextView.swift */,
+			);
+			name = UIKit;
 			sourceTree = "<group>";
 		};
 		E92994F1210D58C700A32924 /* Recovered References */ = {
@@ -526,13 +543,16 @@
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
+				C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */,
 				E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
+				C5DD40522136F05900ECC819 /* Enums.swift in Sources */,
 				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				C560B7E9213477D8008A9DF1 /* KFDonationTableViewCell.swift in Sources */,
 				C5983C1E2134643F00303ABB /* HomeViewController.swift in Sources */,
+				C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */,
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,

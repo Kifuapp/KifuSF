@@ -29,21 +29,14 @@ class KFWidgetView: UIView {
     var delegate: KFWidgetViewDelegate?
     
     override func awakeFromNib() {
-        deliveryTitleLabel.font = UIFont.kfBody1
-        deliveryTitleLabel.textColor = UIColor.kfBody1
         
-        deliverySubtitleLabel.font = UIFont.kfHeader2
-        deliverySubtitleLabel.textColor = UIColor.kfHeader2
-        
-        donationTitleLabel.font = UIFont.kfBody1
-        donationTitleLabel.textColor = UIColor.kfBody1
-        
-        donationSubtitleLabel.font = UIFont.kfHeader2
-        donationSubtitleLabel.textColor = UIColor.kfHeader2
+        deliveryTitleLabel.setUp(for: .body1)
+        deliverySubtitleLabel.setUp(for: .header2)
+        donationTitleLabel.setUp(for: .body1)
+        donationSubtitleLabel.setUp(for: .header2)
         
         deliveryDisclosureImageView.tintColor = UIColor.kfPrimary
         donationDisclosureImageView.tintColor = UIColor.kfPrimary
-        
     }
 
 }

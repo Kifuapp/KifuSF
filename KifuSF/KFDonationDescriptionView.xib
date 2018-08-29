@@ -64,7 +64,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PQt-Q9-rCZ" secondAttribute="bottom" id="aMf-K0-rNz"/>
                                                         <constraint firstItem="PQt-Q9-rCZ" firstAttribute="top" secondItem="eIY-dE-teY" secondAttribute="top" id="ihz-qQ-rXg"/>
@@ -98,7 +97,6 @@ current location</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="CVP-3k-Ere" firstAttribute="leading" secondItem="iw1-ir-iWH" secondAttribute="leading" id="50u-1A-RXJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="CVP-3k-Ere" secondAttribute="trailing" id="7z8-QD-Iig"/>
