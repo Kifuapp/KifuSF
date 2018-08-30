@@ -67,7 +67,7 @@ struct DonationService {
 
             //map snapshot into array of donation
             let openDonations: [Donation] = snapshotValue.compactMap({ (snapshot) -> Donation? in
-                guard let donationFromSnapshot = Donation(snapshot: snapshot) else {
+                guard let donationFromSnapshot = Donation(from: snapshot) else {
                     fatalError("could not decode")
                 }
 
@@ -104,7 +104,7 @@ struct DonationService {
             var openDonation: Donation?
 
             for aDonationSnapshot in snapshots {
-                guard let aDonation = Donation(snapshot: aDonationSnapshot) else {
+                guard let aDonation = Donation(from: aDonationSnapshot) else {
                     fatalError("could not decode")
                 }
 

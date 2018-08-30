@@ -120,7 +120,7 @@ struct Donation: Equatable {
         self.verificationUrl = verificationUrl
     }
     
-    init?(snapshot: DataSnapshot) { // swiftlint:disable:this function_body_length
+    init?(from snapshot: DataSnapshot) { // swiftlint:disable:this function_body_length
         guard
             let dict = snapshot.value as? [String: Any],
             let title = dict[Keys.title] as! String?,

@@ -41,6 +41,9 @@
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502A21321DE000096E84 /* PendingRequestsViewController.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
+		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
+		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
+		E98B003A2137946D008FD75A /* KeyedProperties.stencil in Resources */ = {isa = PBXBuildFile; fileRef = E98B00392137946D008FD75A /* KeyedProperties.stencil */; };
 		E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColors.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +87,9 @@
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E984502A21321DE000096E84 /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
+		E98B003521378F68008FD75A /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
+		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		E98B00392137946D008FD75A /* KeyedProperties.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = KeyedProperties.stencil; sourceTree = "<group>"; };
 		E9C10C9F210E4C6B0050FB8A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
 		E9C97130213208C90073CD90 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 			children = (
 				C5CA7BAC210D24380052D440 /* User.swift */,
 				E92994ED210D27CC00A32924 /* Donation.swift */,
+				E98B0037213791D6008FD75A /* Report.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -219,6 +226,7 @@
 				E92994EB210D27C100A32924 /* DonationService.swift */,
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
 				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
+				E98B003521378F68008FD75A /* ReportingService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				E9439F7121350F0600261370 /* CasableVars.stencil */,
+				E98B00392137946D008FD75A /* KeyedProperties.stencil */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -340,6 +349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98B003A2137946D008FD75A /* KeyedProperties.stencil in Resources */,
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
@@ -451,11 +461,13 @@
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
 				E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
+				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				E98B003621378F68008FD75A /* ReportingService.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,

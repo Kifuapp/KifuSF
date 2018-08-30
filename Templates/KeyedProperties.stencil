@@ -1,0 +1,10 @@
+{% for type in types.implementing.KeyedProperties %}
+// MARK: {{ type.name }} KeyedProperties
+extension {{ type.name }} {
+    enum Keys {
+    {% for var in type.variables|stored|!annotated:"var_skip" %}
+        static let {{ var.name }} = "{{ var.name|camelToSnakeCase|replace:"_","-" }}"
+    {% endfor %}
+    }
+}
+{% endfor %}

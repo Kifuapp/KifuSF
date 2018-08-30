@@ -46,3 +46,17 @@ extension DonationOption {
     }
 
 }
+
+
+// MARK: Report KeyedProperties
+extension Report {
+    enum Keys {
+        static let uid = "uid"
+        static let donation = "donation"
+        static let user = "user"
+        static let flag = "flag"
+        static let message = "message"
+        static let author = "author"
+        static let creatationDate = "creatation-date"
+    }
+}
