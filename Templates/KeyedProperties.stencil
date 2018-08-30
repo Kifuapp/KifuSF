@@ -1,5 +1,13 @@
+// MARK: KeyedStoredProperties
+
+// ## Available annoations:
+// //   sourcery: var_skip
+// var uid: String
+//
+// //   sourcery: key_name = "url"
+// var imageUrl: URL
 {% for type in types.implementing.KeyedStoredProperties %}
-// MARK: {{ type.name }} KeyedStoredProperties
+
 extension {{ type.name }} {
     enum Keys {
     {% for var in type.variables|stored|!annotated:"var_skip" %}

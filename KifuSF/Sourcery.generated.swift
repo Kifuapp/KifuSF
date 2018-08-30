@@ -2,8 +2,15 @@
 // DO NOT EDIT
 
 
+// MARK: SwitchlessCases
 
-// MARK: Donation.Status SwitchlessCases
+// ## Available annoations:
+// //   sourcery: case_skip
+// case uid
+//
+// //   sourcery: case_name = "url"
+// case imageUrl
+
 extension Donation.Status {
 
     var isOpen: Bool {
@@ -43,7 +50,6 @@ extension Donation.Status {
     }
 
 }
-// MARK: DonationOption SwitchlessCases
 extension DonationOption {
     enum Errors: Error {
         case invokedMethodWithWrongCase
@@ -87,8 +93,15 @@ extension DonationOption {
 
 }
 
+// MARK: KeyedStoredProperties
 
-// MARK: Donation KeyedStoredProperties
+// ## Available annoations:
+// //   sourcery: var_skip
+// var uid: String
+//
+// //   sourcery: key_name = "url"
+// var imageUrl: URL
+
 extension Donation {
     enum Keys {
         static let uid = "uid"
@@ -107,7 +120,7 @@ extension Donation {
         static let volunteer = "volunteer"
     }
 }
-// MARK: Report KeyedStoredProperties
+
 extension Report {
     enum Keys {
         static let uid = "uid"
@@ -119,7 +132,7 @@ extension Report {
         static let creatationDate = "creatation-date"
     }
 }
-// MARK: User KeyedStoredProperties
+
 extension User {
     enum Keys {
         static let contributionPoints = "contribution-points"

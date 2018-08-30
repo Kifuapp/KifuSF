@@ -1,5 +1,13 @@
+// MARK: SwitchlessCases
+
+// ## Available annoations:
+// //   sourcery: case_skip
+// case uid
+//
+// //   sourcery: case_name = "url"
+// case imageUrl
+
 {% for type in types.implementing.SwitchlessCases|enum %}
-// MARK: {{ type.name }} SwitchlessCases
 extension {{ type.name }} {
 {% if type.hasAssociatedValues %}
     enum Errors: Error {
