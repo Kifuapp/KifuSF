@@ -53,5 +53,45 @@ struct ReportingService {
         userMessage: String,
         completion: @escaping (Bool) -> Void) {
         
+        //ref for report
+        let refReport = Database.database().reference().child("reports").childByAutoId()
+        
+        //create report
+        let report = Report(flag: user, for: flaggingType, message: userMessage, uid: refReport.key)
+        
+        //set value
+        refReport.setValue(report.dictValue) { (error, _) in
+            guard error == nil else {
+                assertionFailure(error!.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            var flaggedUser = user
+            flaggedUser.flag(with: report)
+            
+            //update donation using DonationService
+            UserService.update(user: flaggedUser, completion: { (success) in
+                guard success else {
+                    assertionFailure("there was an error updating donation: \(user)")
+                    
+                    return completion(false)
+                }
+                
+                completion(true)
+            })
+        }
+        
+    }
+    
+    static func showReport(from reportUid: String, completion: @escaping(Report?) -> Void) {
+        let refReport = Database.database().reference().child("reports").child(reportUid)
+        refReport.observeSingleEvent(of: .value) { (snapshot) in
+            guard let report = Report(from: snapshot) else {
+                return completion(nil)
+            }
+            
+            completion(report)
+        }
     }
 }

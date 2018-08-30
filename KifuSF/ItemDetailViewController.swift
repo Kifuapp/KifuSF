@@ -109,13 +109,6 @@ class ItemDetailViewController: UIViewController {
     
     @IBAction func requestButtonTapped(_ sender: Any) {
         self.isRequestButtonEnabled = false
-        
-        ReportingService.createReport(for: donation, flaggingType: .flaggedNotes, userMessage: "i don't linke") { (success) in
-            print(success)
-            self.isRequestButtonEnabled = true
-        }
-        
-        return print()
         RequestService.createRequest(for: donation) { success in
             if success {
                 self.navigationController!.popViewController(animated: true)

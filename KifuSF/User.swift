@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 import CoreLocation
 
-struct User: Codable {
+struct User: Codable, KeyedStoredProperties {
     
     enum CodingKeys: String, CodingKey {
         case contributionPoints
@@ -44,11 +44,15 @@ struct User: Codable {
     }()
     
     public var dictValue: [String: Any] {
-        return ["username": username,
-                "uid": uid,
-                "imageURL": imageURL,
-                "contributionPoints": contributionPoints,
-                "contactNumber": contactNumber]
+        return [
+            Keys.username: username,
+            Keys.uid: uid,
+            Keys.imageURL: imageURL,
+            Keys.contributionPoints: contributionPoints,
+            Keys.contactNumber: contactNumber,
+            Keys.flag: flag?.rawValue as Any,
+            Keys.flaggedReportUid: flaggedReportUid as Any
+        ]
     }
     
     public static var current: User {
@@ -69,12 +73,20 @@ struct User: Codable {
     }
     
     init?(from snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any],
-            let username = dict["username"] as? String,
-            let uid = dict["uid"] as? String,
-            let imageURL = dict["imageURL"] as? String,
-            let contributionPoints = dict["contributionPoints"] as? Int,
-            let contactNumber = dict["contactNumber"] as? String
+        guard let dict = snapshot.value as? [String: Any] else {
+            return nil
+        }
+        
+        self.init(from: dict)
+    }
+    
+    init?(from dictionary: [String: Any]) {
+        guard
+            let username = dictionary[Keys.username] as? String,
+            let uid = dictionary[Keys.uid] as? String,
+            let imageURL = dictionary[Keys.imageURL] as? String,
+            let contributionPoints = dictionary[Keys.contributionPoints] as? Int,
+            let contactNumber = dictionary[Keys.contactNumber] as? String
             else { return nil }
         
         self.username = username
@@ -82,6 +94,14 @@ struct User: Codable {
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
+        
+        //flagging
+        if let flagInt = dictionary[Keys.flag] as? Int,
+            let flag = FlaggedContentType(rawValue: flagInt),
+            let flaggedReportUid = dictionary[Keys.flaggedReportUid] as? String {
+            self.flag = flag
+            self.flaggedReportUid = flaggedReportUid
+        }
     }
     
     // MARK: - RETURN VALUES

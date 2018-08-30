@@ -108,6 +108,14 @@ class StatusViewController: UIViewController {
         guard let donation = openDonation else {
             return assertionFailure("no open donation to reload")
         }
+        
+        //TODO: Flagging, use this method to get the flag report from the donation.flaggedReportUid
+        if let uid = donation.flaggedReportUid {
+            ReportingService.showReport(from: uid) { (report) in
+                dump(report)
+            }
+        }
+        //---
 
         donationItemName.text = donation.title
         donationImage.kf.setImage(with: URL(string: donation.imageUrl)!)

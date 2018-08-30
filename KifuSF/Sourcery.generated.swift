@@ -119,3 +119,16 @@ extension Report {
         static let creatationDate = "creatation-date"
     }
 }
+// MARK: User KeyedStoredProperties
+extension User {
+    enum Keys {
+        static let contributionPoints = "contribution-points"
+        static let uid = "uid"
+        static let imageURL = "image-url"
+        static let username = "username"
+        static let contactNumber = "contact-number"
+        static let flag = "flag"
+        static let flaggedReportUid = "flagged-report-uid"
+        static let currentLocation = "current-location"
+    }
+}

@@ -71,20 +71,20 @@ struct Report: KeyedStoredProperties {
         self.creatationDate = Date()
     }
     
-    init?(snapshot: DataSnapshot) {
+    init?(from snapshot: DataSnapshot) {
         guard
             let dict = snapshot.value as? [String: Any],
             let uid = dict[Keys.uid] as? String,
             let flagInt = dict[Keys.flag] as? Int,
             let flag = FlaggedContentType(rawValue: flagInt),
             let message = dict[Keys.message] as? String,
-            let authorSnapshot = dict[Keys.author] as? DataSnapshot,
+            let authorSnapshot = dict[Keys.author] as? [String: Any],
             let author = User(from: authorSnapshot),
             let creatationTimestamp = dict[Keys.creatationDate] as? TimeInterval else {
                 return nil
         }
         
-        if let flaggedUserSnapshot = dict[Keys.user] as? DataSnapshot {
+        if let flaggedUserSnapshot = dict[Keys.user] as? [String: Any] {
             guard let flaggedUser = User(from: flaggedUserSnapshot) else {
                 assertionFailure("snapshot was not valid: \(flaggedUserSnapshot)")
                 
@@ -93,7 +93,7 @@ struct Report: KeyedStoredProperties {
             
             self.donation = nil
             self.user = flaggedUser
-        } else if let flaggedDonationSnapshot = dict[Keys.donation] as? DataSnapshot {
+        } else if let flaggedDonationSnapshot = dict[Keys.donation] as? [String: Any] {
             guard let flaggedDonation = Donation(from: flaggedDonationSnapshot) else {
                 assertionFailure("snapshot was not valid: \(flaggedDonationSnapshot)")
                 
