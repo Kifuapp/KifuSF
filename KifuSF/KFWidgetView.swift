@@ -30,10 +30,10 @@ class KFWidgetView: UIView {
     
     override func awakeFromNib() {
         
-        deliveryTitleLabel.setUp(for: .body1)
-        deliverySubtitleLabel.setUp(for: .header2)
-        donationTitleLabel.setUp(for: .body1)
-        donationSubtitleLabel.setUp(for: .header2)
+        deliveryTitleLabel.setUp(with: .body1)
+        deliverySubtitleLabel.setUp(with: .header2)
+        donationTitleLabel.setUp(with: .body1)
+        donationSubtitleLabel.setUp(with: .header2)
         
         deliveryDisclosureImageView.tintColor = UIColor.kfPrimary
         donationDisclosureImageView.tintColor = UIColor.kfPrimary

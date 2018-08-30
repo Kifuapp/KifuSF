@@ -44,5 +44,15 @@ struct KFImage {
         
         return image
     }()
+    
+    static let plusIcon: UIImage = {
+        guard let image = UIImage(named: "PlusIcon") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
+    
+    
 }
 

@@ -48,27 +48,27 @@ extension UIFont {
     }()
     
     static let kfSubheader1: UIFont = {
-        guard let subheade1 = UIFont(name: FontStyle.demiBold.name(), size: 20) else {
+        guard let subheader1 = UIFont(name: FontStyle.demiBold.name(), size: 20) else {
             fatalError("Font problemo")
         }
         
-        return subheade1
+        return subheader1
     }()
     
     static let kfSubheader2: UIFont = {
-        guard let subheade2 = UIFont(name: FontStyle.medium.name(), size: 20) else {
+        guard let subheader2 = UIFont(name: FontStyle.medium.name(), size: 20) else {
             fatalError("Font problemo")
         }
         
-        return subheade2
+        return subheader2
     }()
     
     static let kfSubheader3: UIFont = {
-        guard let subheade3 = UIFont(name: FontStyle.medium.name(), size: 14) else {
+        guard let subheader3 = UIFont(name: FontStyle.medium.name(), size: 14) else {
             fatalError("Font problemo")
         }
         
-        return subheade3
+        return subheader3
     }()
     
     static let kfBody1: UIFont = {

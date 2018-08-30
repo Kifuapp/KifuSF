@@ -33,17 +33,15 @@ class KFDonationDescriptionView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = CALayer.kfCornerRadius
         
-        titleLabel.setUp(for: .header1)
-        bodyOfTitleLabel.setUp(for: .body1)
-        subtitleLabel.setUp(for: .subheader1)
+        titleLabel.setUp(with: .header1)
+        bodyOfTitleLabel.setUp(with: .body1)
+        subtitleLabel.setUp(with: .subheader1)
         
-        bodyOfSubtitleLabel.setUp(for: .body1)
+        bodyOfSubtitleLabel.setUp(with: .body1)
         bodyOfSubtitleLabel.numberOfLines = 2
         
-        descriptionLabel.setUp(for: .subheader1)
-        
-        descriptionTextView.setUp(for: .body2)
-        descriptionTextView.backgroundColor = UIColor.clear
+        descriptionLabel.setUp(with: .subheader1)
+        descriptionTextView.setUp(with: .body2, andColor: .clear)
     }
     
 }

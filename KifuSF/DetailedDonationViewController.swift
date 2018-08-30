@@ -22,11 +22,9 @@ class DetailedDonationViewController: UIViewController {
         
         setUpDonationDescription()
         
-        requestDeliveryButton.backgroundColor = UIColor.kfPrimary
-        requestDeliveryButton.layer.cornerRadius = CALayer.kfCornerRadius
-        requestDeliveryButton.setTitle("Request Delivery", for: .normal)
-        requestDeliveryButton.titleLabel?.textColor = UIColor.kfButton
-        requestDeliveryButton.titleLabel?.font = UIFont.kfButton
+
+        requestDeliveryButton.setTitle("Request Delivery", for: .normal)        
+        requestDeliveryButton.setUp(with: .button, andColor: .kfPrimary)
         
         title = "Donation"
         view.backgroundColor = UIColor.kfWhite

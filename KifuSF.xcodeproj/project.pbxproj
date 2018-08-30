@@ -43,6 +43,10 @@
 		C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404C2136ED4400ECC819 /* UILabel.swift */; };
 		C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404F2136EF8200ECC819 /* UITextView.swift */; };
 		C5DD40522136F05900ECC819 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD40512136F05900ECC819 /* Enums.swift */; };
+		C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */; };
+		C5DD405C2137F42E00ECC819 /* CreateDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405B2137F42E00ECC819 /* CreateDonationViewController.swift */; };
+		C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405E21381AD100ECC819 /* UIButton.swift */; };
+		C5DD406121382C5000ECC819 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD406021382C5000ECC819 /* UITextField.swift */; };
 		E90B2478210D8588009B9E0B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2477210D8588009B9E0B /* GradientView.swift */; };
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
@@ -100,6 +104,10 @@
 		C5DD404C2136ED4400ECC819 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C5DD404F2136EF8200ECC819 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C5DD40512136F05900ECC819 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDonation.storyboard; sourceTree = "<group>"; };
+		C5DD405B2137F42E00ECC819 /* CreateDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController.swift; sourceTree = "<group>"; };
+		C5DD405E21381AD100ECC819 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		C5DD406021382C5000ECC819 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		E90B2477210D8588009B9E0B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
@@ -152,6 +160,7 @@
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				C560B7E421346DB1008A9DF1 /* Home.storyboard */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
+				C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -233,6 +242,7 @@
 				E9C9713221320AAE0073CD90 /* Status */,
 				E9C9713321320AC00073CD90 /* Login-Register */,
 				C5983C1F2134644A00303ABB /* Home */,
+				C5DD405D2137F43D00ECC819 /* CreateDonation */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -291,8 +301,18 @@
 				C560B7E62134732B008A9DF1 /* UIFont.swift */,
 				C5DD404C2136ED4400ECC819 /* UILabel.swift */,
 				C5DD404F2136EF8200ECC819 /* UITextView.swift */,
+				C5DD405E21381AD100ECC819 /* UIButton.swift */,
+				C5DD406021382C5000ECC819 /* UITextField.swift */,
 			);
 			name = UIKit;
+			sourceTree = "<group>";
+		};
+		C5DD405D2137F43D00ECC819 /* CreateDonation */ = {
+			isa = PBXGroup;
+			children = (
+				C5DD405B2137F42E00ECC819 /* CreateDonationViewController.swift */,
+			);
+			name = CreateDonation;
 			sourceTree = "<group>";
 		};
 		E92994F1210D58C700A32924 /* Recovered References */ = {
@@ -418,6 +438,7 @@
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
 				C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */,
+				C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */,
 				C510A4D8213599D500E8FC78 /* KFDonationTableViewCell.xib in Resources */,
 				C560B7ED2135754C008A9DF1 /* KFWidgetView.xib in Resources */,
 			);
@@ -525,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
+				C5DD405C2137F42E00ECC819 /* CreateDonationViewController.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C50515C9213694F900718AE5 /* DetailedDonationViewController.swift in Sources */,
@@ -532,8 +554,10 @@
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				C5DD406121382C5000ECC819 /* UITextField.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
+				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,
 				C510A4DA21359E1800E8FC78 /* HomeVCHelper.swift in Sources */,
 				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,
 				E90B2478210D8588009B9E0B /* GradientView.swift in Sources */,

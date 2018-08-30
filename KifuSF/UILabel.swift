@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UILabel {
-    func setUp(for style: TextStyle) {
+    func setUp(with style: TextStyle) {
         let textStyle = style.retrieve()
         
         self.font = textStyle.font

@@ -10,10 +10,15 @@ import Foundation
 import UIKit
 
 extension UITextView {
-    func setUp(for style: TextStyle) {
+    func setUp(with style: TextStyle) {
         let textStyle = style.retrieve()
         
         self.font = textStyle.font
         self.textColor = textStyle.color
+    }
+    
+    func setUp(with style: TextStyle, andColor color: UIColor) {
+        setUp(with: style)
+        backgroundColor = color
     }
 }

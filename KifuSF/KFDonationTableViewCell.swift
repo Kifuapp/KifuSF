@@ -43,11 +43,11 @@ class KFDonationTableViewCell: UITableViewCell {
         donationImageView.contentMode = .scaleAspectFill
         donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         
-        titleLabel.setUp(for: .header1)
-        usernameLabel.setUp(for: .subheader3)
-        distanceLabel.setUp(for: .body1)
+        titleLabel.setUp(with: .header1)
+        usernameLabel.setUp(with: .subheader3)
+        distanceLabel.setUp(with: .body1)
         
-        descriptionLabel.setUp(for: .body2)
+        descriptionLabel.setUp(with: .body2)
         descriptionLabel.numberOfLines = 2
     }
 
@@ -62,5 +62,7 @@ class KFDonationTableViewCell: UITableViewCell {
         
         containerView?.backgroundColor = highlighted ? .kfHighlight : .kfWhite
     }
+    
+    
 
 }

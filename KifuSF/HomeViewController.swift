@@ -48,13 +48,16 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //TODO: retrieve open donations in viewDidLoad maybe?
+        /*
         DonationService.showTimelineDonations { (donations) in
             self.openDonations = donations
         }
+        */
     
     }
     
     func setUpFirebase() {
+        /*
         DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             self.currentDelivery = delivery
@@ -69,10 +72,20 @@ class HomeViewController: UIViewController {
                 //TODO: update widget view
             }
         })
+        */
     }
     
     @objc func createDonation() {
         //TODO: segue to create donation VC
+        
+        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
+        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
+            
+            present(createDonationVC, animated: true)
+        } else {
+            print("error")
+        }
+        
     }
 
 }
