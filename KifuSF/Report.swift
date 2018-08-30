@@ -22,7 +22,7 @@ enum FlaggedContentType: Int {
     case flaggedCommunication
 }
 
-struct Report: KeyedProperties {
+struct Report: KeyedStoredProperties {
     let uid: String
     let donation: Donation?
     let user: User?

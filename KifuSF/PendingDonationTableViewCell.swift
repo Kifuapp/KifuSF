@@ -22,7 +22,7 @@ class PendingDonationTableViewCell: ItemPostCell {
         itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         postInfo.text = "@\(donation.donator.username)"
         
-        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.latitude)
         distance.text = distanceTitle
     }
 

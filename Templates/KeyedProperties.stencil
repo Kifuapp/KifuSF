@@ -1,9 +1,13 @@
-{% for type in types.implementing.KeyedProperties %}
-// MARK: {{ type.name }} KeyedProperties
+{% for type in types.implementing.KeyedStoredProperties %}
+// MARK: {{ type.name }} KeyedStoredProperties
 extension {{ type.name }} {
     enum Keys {
     {% for var in type.variables|stored|!annotated:"var_skip" %}
+        {% if var|annotated:"key_name" %}
+        static let {{ var.name }} = "{{ var.annotations.key_name|camelToSnakeCase|replace:"_","-" }}"
+        {% else %}
         static let {{ var.name }} = "{{ var.name|camelToSnakeCase|replace:"_","-" }}"
+        {% endif %}
     {% endfor %}
     }
 }

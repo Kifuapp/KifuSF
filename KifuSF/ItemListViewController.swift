@@ -213,7 +213,7 @@ extension ItemListViewController: UITableViewDataSource {
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.latitude)
         postCell.distance.text = distanceTitle
         
         return postCell

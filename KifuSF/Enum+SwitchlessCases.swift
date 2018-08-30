@@ -10,4 +10,4 @@ import Foundation
 
 protocol SwitchlessCases { }
 
-protocol KeyedProperties { }
+protocol KeyedStoredProperties { }

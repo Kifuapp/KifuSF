@@ -229,7 +229,7 @@ class StatusViewController: UIViewController {
         case .open:
             break
         case .awaitingPickup:
-            let directionsMap = MapHelper(long: delivery.longitude, lat: delivery.laditude)
+            let directionsMap = MapHelper(long: delivery.longitude, lat: delivery.latitude)
             directionsMap.open()
         case .awaitingDelivery:
             sendValidationPhotoHelper.presentActionSheet(from: self)

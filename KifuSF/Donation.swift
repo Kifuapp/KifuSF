@@ -9,11 +9,9 @@
 import Foundation
 import FirebaseDatabase
 
-struct Donation: Equatable {
+struct Donation: KeyedStoredProperties {
     
-    static func == (lhs: Donation, rhs: Donation) -> Bool {
-        return lhs.uid == rhs.uid
-    }
+    // MARK: - VARS
     
     let uid: String
     let title: String
@@ -21,12 +19,17 @@ struct Donation: Equatable {
     let imageUrl: String
     let creationDate: Date
     let longitude: Double
-    let laditude: Double
+    let latitude: Double
     let pickUpAddress: String
     let donator: User
     var verificationUrl: String?
     
-    enum Status: Int {
+    //check out this post on why Report cannot be a stored property in Donation
+    //https://medium.com/@leandromperez/bidirectional-associations-using-value-types-in-swift-548840734047
+    var flag: FlaggedContentType?
+    var flaggedReportUid: String?
+    
+    enum Status: Int, SwitchlessCases {
         case open
         case awaitingPickup
         case awaitingDelivery
@@ -62,20 +65,6 @@ struct Donation: Equatable {
     var status: Status
     var volunteer: User?
     
-    enum Keys {
-        static let title = "title"
-        static let notes = "notes"
-        static let imageUrl = "imageUrl"
-        static let creationDate = "creationDate"
-        static let longitude = "longitude"
-        static let laditude = "laditude"
-        static let pickUpAddress = "pickUpAddress"
-        static let donator = "donator"
-        static let status = "status"
-        static let volunteer = "volunteer"
-        static let verificationUrl = "verificationUrl"
-    }
-    
     var dictValue: [String: Any] {
         let timeAgo = self.creationDate.timeIntervalSince1970
         return [
@@ -84,12 +73,14 @@ struct Donation: Equatable {
             Keys.imageUrl: imageUrl,
             Keys.creationDate: timeAgo,
             Keys.longitude: longitude,
-            Keys.laditude: laditude,
+            Keys.latitude: latitude,
             Keys.pickUpAddress: pickUpAddress,
             Keys.donator: donator.dictValue,
             Keys.status: status.rawValue,
             Keys.volunteer: volunteer?.dictValue as Any,
-            Keys.verificationUrl: verificationUrl as Any
+            Keys.verificationUrl: verificationUrl as Any,
+            Keys.flag: flag?.rawValue as Any,
+            Keys.flaggedReportUid: flaggedReportUid as Any
         ]
     }
     
@@ -112,7 +103,7 @@ struct Donation: Equatable {
         self.imageUrl = imageUrl
         self.creationDate = creationDate
         self.longitude = longitude
-        self.laditude = laditude
+        self.latitude = laditude
         self.pickUpAddress = pickUpAddress
         self.donator = donator
         self.status = status
@@ -128,7 +119,7 @@ struct Donation: Equatable {
             let imageUrl = dict[Keys.imageUrl] as! String?,
             let creationDateTimestamp = dict[Keys.creationDate] as! TimeInterval?,
             let longitude = dict[Keys.longitude] as! Double?,
-            let laditude = dict[Keys.laditude] as! Double?,
+            let laditude = dict[Keys.latitude] as! Double?,
             let pickUpAddress = dict[Keys.pickUpAddress] as! String?,
             
             let donatorValue = dict[Keys.donator] as! [String: Any]?,
@@ -139,8 +130,8 @@ struct Donation: Equatable {
             let donatorContactNumber = donatorValue["contactNumber"] as? String,
             
             let statusValue = dict[Keys.status] as! Int?
-        else {
-            return nil
+            else {
+                return nil
         }
         
         var volunteer: User?
@@ -171,7 +162,7 @@ struct Donation: Equatable {
         self.imageUrl = imageUrl
         self.creationDate = Date(timeIntervalSince1970: creationDateTimestamp)
         self.longitude = longitude
-        self.laditude = laditude
+        self.latitude = laditude
         self.pickUpAddress = pickUpAddress
         let donator = User(
             username: donatorUsername,
@@ -184,17 +175,33 @@ struct Donation: Equatable {
         self.status = Status(rawValue: statusValue)!
         self.volunteer = volunteer
         self.verificationUrl = verificationUrl
+        
+        //flagging
+        if let flagInt = dict[Keys.flag] as? Int,
+            let flag = FlaggedContentType(rawValue: flagInt),
+            let flaggedReportUid = dict[Keys.flaggedReportUid] as? String {
+            self.flag = flag
+            self.flaggedReportUid = flaggedReportUid
+        }
     }
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
+    mutating func flag(with report: Report) {
+        self.flag = report.flag
+        self.flaggedReportUid = report.uid
+    }
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
 }
 
-//struct Donation {
-//
-//    let title: String
-//    let notes: String
-//    let imageUrl: URL
-//    let creationDate: Date
-//    let longitude: Double
-//    let laditude: Double
-//    let donator: User
-//
-//}
+extension Donation: Equatable {
+    
+    static func == (lhs: Donation, rhs: Donation) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+}
