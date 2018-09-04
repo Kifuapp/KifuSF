@@ -10,48 +10,16 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
-private enum DonationOption {
+enum DonationOption: SwitchlessCases {
+    
+    // sourcery: case_skip
     case none
+    
+    // sourcery: case_name = "isShowingPendingRequests"
     case pendingRequests([Donation])
+    
+    // sourcery: case_name = "isShowingCurrentDelivery"
     case deliveringDonation(Donation)
-    
-    enum Errors: Error {
-        case invokedMethodWithWrongCase
-    }
-    
-    var isShowingPendingRequests: Bool {
-        if case .pendingRequests = self {
-            return true
-        }
-        
-        return false
-    }
-    
-    func pendingRequests() throws -> [Donation] {
-        switch self {
-        case .pendingRequests(let pendingDonations):
-            return pendingDonations
-        default:
-            throw Errors.invokedMethodWithWrongCase
-        }
-    }
-    
-    var isShowingCurrentDelivery: Bool {
-        if case .deliveringDonation = self {
-            return true
-        }
-        
-        return false
-    }
-    
-    func deliveringDonation() throws -> Donation {
-        switch self {
-        case .deliveringDonation(let donation):
-            return donation
-        default:
-            throw Errors.invokedMethodWithWrongCase
-        }
-    }
 }
 
 class ItemListViewController: UIViewController {
@@ -96,6 +64,22 @@ class ItemListViewController: UIViewController {
                 
                 let selectedDonation = openDonations[indexPath.row]
                 itemDetailVc.donation = selectedDonation
+                
+                //update if the user already has requested this donation or
+                //already has a current deliever
+                if currentDeliveryState.isShowingPendingRequests {
+                    
+                    //selected donation is the same as the current delivery
+                    let pendingRequests = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
+                    if pendingRequests.contains(selectedDonation) {
+                        itemDetailVc.userHasAlreadyRequestedDonation = .donationIsAlreadyRequested
+                    } else {
+                        itemDetailVc.userHasAlreadyRequestedDonation = .donationIsNotAlreadyRequested
+                    }
+                    
+                } else if currentDeliveryState.isShowingCurrentDelivery {
+                    itemDetailVc.userHasAlreadyRequestedDonation = .userAlreadyHasAnOpenDelivery
+                }
             case "show pending requests":
                 guard let pendingRequestsVc = segue.destination as? PendingRequestsViewController else {
                         fatalError("storyboard not set up correctly")
@@ -229,7 +213,7 @@ extension ItemListViewController: UITableViewDataSource {
         postCell.itemImage.kf.setImage(with: URL(string: donation.imageUrl)!)
         postCell.postInfo.text = "@\(donation.donator.username)"
         
-        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.laditude)
+        let distanceTitle = UserService.calculateDistance(long: donation.longitude, lat: donation.latitude)
         postCell.distance.text = distanceTitle
         
         return postCell

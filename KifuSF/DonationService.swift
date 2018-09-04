@@ -54,6 +54,24 @@ struct DonationService {
         }
     }
 
+    /**
+     update the given donation in the open-donations subtree if the donation.
+     
+     - ToDo: write a cloud function to update denormalized instances of the given donation
+     */
+    static func update(donation: Donation, completion: @escaping (Bool) -> Void) {
+        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
+        refDonation.updateChildValues(donation.dictValue) { (error, _) in
+            guard error == nil else {
+                assertionFailure(error!.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(true)
+        }
+    }
+    
     static func showTimelineDonations(completion: @escaping ([Donation]) -> Void) {
 
         //get donations ref
@@ -67,7 +85,7 @@ struct DonationService {
 
             //map snapshot into array of donation
             let openDonations: [Donation] = snapshotValue.compactMap({ (snapshot) -> Donation? in
-                guard let donationFromSnapshot = Donation(snapshot: snapshot) else {
+                guard let donationFromSnapshot = Donation(from: snapshot) else {
                     fatalError("could not decode")
                 }
 
@@ -104,7 +122,7 @@ struct DonationService {
             var openDonation: Donation?
 
             for aDonationSnapshot in snapshots {
-                guard let aDonation = Donation(snapshot: aDonationSnapshot) else {
+                guard let aDonation = Donation(from: aDonationSnapshot) else {
                     fatalError("could not decode")
                 }
 
@@ -137,6 +155,10 @@ struct DonationService {
      requests from the requets sub-tree
      */
     static func accept(volunteer: User, for donation: Donation, completion: @escaping (Bool) -> Void) {
+        //
+        // - warning: each request is fired independant of one another
+        //
+        
         //get donation ref
         let ref = Database.database().reference().child("open-donations").child(donation.uid)
 
@@ -165,6 +187,17 @@ struct DonationService {
         dg.enter()
         
         RequestService.clearRequests(for: donation) { success in
+            if success == false {
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        //clear other requests the accepted volunteer has made
+        dg.enter()
+        
+        RequestService.clearRequests(for: volunteer) { (success) in
             if success == false {
                 isSuccessful = false
             }
