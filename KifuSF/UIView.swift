@@ -10,10 +10,10 @@ import UIKit.UIView
 
 extension UIView {
     func highlight() {
-        
+        backgroundColor = UIColor.kfHighlight
     }
     
     func unhighlight() {
-        
+        backgroundColor = UIColor.clear
     }
 }

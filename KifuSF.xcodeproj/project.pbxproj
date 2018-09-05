@@ -19,7 +19,6 @@
 		C50515C72136927200718AE5 /* KFDonationDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C62136927200718AE5 /* KFDonationDescriptionView.swift */; };
 		C50515C9213694F900718AE5 /* DetailedDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */; };
 		C510A4D8213599D500E8FC78 /* KFDonationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */; };
-		C510A4DA21359E1800E8FC78 /* HomeVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510A4D921359E1800E8FC78 /* HomeVCHelper.swift */; };
 		C560B7E521346DB1008A9DF1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C560B7E421346DB1008A9DF1 /* Home.storyboard */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7E9213477D8008A9DF1 /* KFDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E8213477D8008A9DF1 /* KFDonationTableViewCell.swift */; };
@@ -79,7 +78,6 @@
 		C50515C62136927200718AE5 /* KFDonationDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFDonationDescriptionView.swift; sourceTree = "<group>"; };
 		C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDonationViewController.swift; sourceTree = "<group>"; };
 		C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFDonationTableViewCell.xib; sourceTree = "<group>"; };
-		C510A4D921359E1800E8FC78 /* HomeVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCHelper.swift; sourceTree = "<group>"; };
 		C560B7E421346DB1008A9DF1 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Pods/Home.storyboard; sourceTree = SOURCE_ROOT; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7E8213477D8008A9DF1 /* KFDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFDonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -149,11 +147,20 @@
 		C510A4DB21359EDD00E8FC78 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				C560B7EC2135754C008A9DF1 /* KFWidgetView.xib */,
+				C54FDBD421402A0900BC89B8 /* KFWidget */,
 				C510A4D7213599D500E8FC78 /* KFDonationTableViewCell.xib */,
 				C50515C421368FD700718AE5 /* KFDonationDescriptionView.xib */,
 			);
 			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		C54FDBD421402A0900BC89B8 /* KFWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C560B7EC2135754C008A9DF1 /* KFWidgetView.xib */,
+				C560B7EE213579F1008A9DF1 /* KFWidgetView.swift */,
+			);
+			name = KFWidget;
 			sourceTree = "<group>";
 		};
 		C560B7E321346AA0008A9DF1 /* Storyboards */ = {
@@ -171,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				C5983C1D2134643F00303ABB /* HomeViewController.swift */,
-				C510A4D921359E1800E8FC78 /* HomeVCHelper.swift */,
 				C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */,
 			);
 			name = Home;
@@ -231,7 +237,6 @@
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 				C560B7E8213477D8008A9DF1 /* KFDonationTableViewCell.swift */,
-				C560B7EE213579F1008A9DF1 /* KFWidgetView.swift */,
 				C50515C62136927200718AE5 /* KFDonationDescriptionView.swift */,
 			);
 			name = Views;
@@ -561,7 +566,6 @@
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,
-				C510A4DA21359E1800E8FC78 /* HomeVCHelper.swift in Sources */,
 				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,
 				E90B2478210D8588009B9E0B /* GradientView.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,

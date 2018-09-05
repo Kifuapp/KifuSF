@@ -8,12 +8,31 @@
 
 import UIKit
 
+protocol KFPWidgetInfo {
+    var title: String { get }
+    var subtitle: String { get }
+}
+
 class KFWidgetView: UIView {
     
     enum TouchedViewType {
         case donation(UIView)
         case delivery(UIView)
-        case none
+        
+        func backgroundView() -> UIView {
+            switch self {
+            case .donation(let view):
+                return view
+            case .delivery(let view):
+                return view
+                
+            }
+        }
+    }
+    
+    public struct KFMWidgetInfo: KFPWidgetInfo {
+        let title: String
+        let subtitle: String
     }
     
     @IBOutlet weak var containerStackView: UIStackView!
@@ -38,7 +57,15 @@ class KFWidgetView: UIView {
     var delegate: KFWidgetViewDelegate?
 
     var lastTouchLocation: CGPoint?
-    var touchedView: TouchedViewType?
+    var touchedViewType: TouchedViewType? {
+        willSet {
+            touchedViewType?.backgroundView().unhighlight()
+        }
+        
+        didSet {
+            touchedViewType?.backgroundView().highlight()
+        }
+    }
     
     override func awakeFromNib() {
         
@@ -57,70 +84,59 @@ class KFWidgetView: UIView {
         containerStackView.addGestureRecognizer(longPress)
     }
 
-    
-
     @objc func updateWidgetView(_ sender: UILongPressGestureRecognizer) {
-//        let touchLocation = sender.location(in: containerStackView)
-//        lastTouchLocation = touchLocation
-//        
-//        switch sender.state {
-//        case .began:
-//            updateState(for: touchLocation)
-//            
-//        case .changed:
-//            updateState(for: touchLocation)
-//
-//        case .ended:
-//            updateState(for: touchLocation)
-//
-//        default:
-//            break
-//        }
-    }
-    
-//    func updateState(for location: CGPoint) {
-//        if deliveryStackView.frame.contains(location)  {
-//            touchedView = .delivery
-//            highlight(deliveryBackgroundView)
-//            unhighlightView(donationBackgroundView)
-//        } else {
-//            touchedView = .donation
-//            highlight(donationBackgroundView)
-//            unhighlightView(deliveryBackgroundView)
-//        }
-//    }
-//
-//    func updateHighlightedViews() {
-//        switch touchedView {
-//        case .delivery:
-//            <#code#>
-//        case .donation:
-//
-//        case .none:
-//
-//        default:
-//            <#code#>
-//        }
-//    }
-    
-    func highlight(_ view: UIView) {
-        view.backgroundColor = UIColor.kfHighlight
-    }
+        let touchLocation = sender.location(in: containerStackView)
+        lastTouchLocation = touchLocation
+        
+        switch sender.state {
+        case .began:
+            updateState(for: touchLocation)
+            
+        case .changed:
+            updateState(for: touchLocation)
 
-    func unhighlightView(_ view: UIView) {
-        view.backgroundColor = UIColor.clear
+        case .ended:
+            updateState(for: touchLocation)
+            if let type = touchedViewType {
+                delegate?.widgetView(self, didSelectCellForType: type)
+            }
+            touchedViewType = nil
+            
+        default:
+            break
+        }
+    }
+    
+    func updateState(for location: CGPoint) {
+        if deliveryStackView.frame.contains(location)  {
+            touchedViewType = .delivery(deliveryBackgroundView)
+        } else {
+            touchedViewType = .donation(donationBackgroundView)
+        }
+    }
+    
+    func updateInfo() {
+        if let deliveryInfo = dataSource?.widgetView(self, cellInfoForType: .delivery(deliveryBackgroundView)) {
+            deliveryTitleLabel.text = "Delivery - \(deliveryInfo.title)"
+            deliverySubtitleLabel.text = deliveryInfo.subtitle
+        }
+        
+        if let donationInfo = dataSource?.widgetView(self, cellInfoForType: .donation(donationBackgroundView)) {
+            donationTitleLabel.text = "Donation - \(donationInfo.title)"
+            donationSubtitleLabel.text = donationInfo.subtitle
+        }
+    }
+    
+    func reloadData() {
+        updateInfo()
     }
 
 }
 
 protocol KFWidgetViewDataSource {
-//    func donationDescription() -> KFMDEscription
-//    func deliveryDescription() -> KFMDEscription
+    func widgetView(_ widgetView: KFWidgetView, cellInfoForType type: KFWidgetView.TouchedViewType) -> KFPWidgetInfo
 }
 
-@objc protocol KFWidgetViewDelegate {
-    func didSelectDelivery()
-    func didSelectDonation()
-    @objc optional func didHighlightDelivery()
-    @objc optional func didHighlightDonation()
+protocol KFWidgetViewDelegate {
+    func widgetView(_ widgetView: KFWidgetView, didSelectCellForType type: KFWidgetView.TouchedViewType)
 }
