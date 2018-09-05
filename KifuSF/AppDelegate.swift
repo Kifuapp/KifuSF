@@ -20,7 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        setInitalViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(withIdentifier: "initialTabBar")
+        
+        window?.rootViewController = initialVC
+        window?.makeKeyAndVisible()
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = UIColor.kfPrimary

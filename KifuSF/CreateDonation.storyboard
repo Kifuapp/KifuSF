@@ -23,19 +23,19 @@
                                 <rect key="frame" x="16" y="16" width="343" height="571"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="H0a-WH-TQy">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="130"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="h60-xR-R3I">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlusIcon" translatesAutoresizingMaskIntoConstraints="NO" id="o68-Np-EfD">
-                                                        <rect key="frame" x="41" y="41" width="48" height="48"/>
+                                                        <rect key="frame" x="36" y="36" width="48" height="48"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="o68-Np-EfD" firstAttribute="centerY" secondItem="h60-xR-R3I" secondAttribute="centerY" id="5fQ-7G-H5F"/>
-                                                    <constraint firstAttribute="height" constant="130" id="7os-Vc-ssY"/>
+                                                    <constraint firstAttribute="height" constant="120" id="7os-Vc-ssY"/>
                                                     <constraint firstItem="o68-Np-EfD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="h60-xR-R3I" secondAttribute="leading" id="PTW-Pp-MEo"/>
                                                     <constraint firstAttribute="width" secondItem="h60-xR-R3I" secondAttribute="height" multiplier="1:1" id="QnP-o3-wj6"/>
                                                     <constraint firstItem="o68-Np-EfD" firstAttribute="centerX" secondItem="h60-xR-R3I" secondAttribute="centerX" id="ePP-RI-22a"/>
@@ -45,7 +45,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DkV-v1-woX">
-                                                <rect key="frame" x="146" y="0.0" width="197" height="130"/>
+                                                <rect key="frame" x="136" y="0.0" width="207" height="120"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smE-c2-z8S">
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="24"/>
@@ -54,7 +54,7 @@
                                                         </constraints>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGO-qC-t7T">
-                                                        <rect key="frame" x="0.0" y="32" width="167.5" height="81.5"/>
+                                                        <rect key="frame" x="0.0" y="32" width="200" height="61"/>
                                                         <string key="text">Clothing, sealed and fresh
 food, toilet paper, etc.
 </string>
@@ -63,14 +63,14 @@ food, toilet paper, etc.
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yof-kY-i5v">
-                                                        <rect key="frame" x="0.0" y="121.5" width="197" height="8.5"/>
+                                                        <rect key="frame" x="0.0" y="101" width="197" height="19"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xjX-k1-4iu">
-                                        <rect key="frame" x="0.0" y="146" width="343" height="157"/>
+                                        <rect key="frame" x="0.0" y="136" width="343" height="157"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2O-Ev-bqH">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -98,7 +98,7 @@ food, toilet paper, etc.
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Stv-mp-zGM">
-                                        <rect key="frame" x="0.0" y="319" width="343" height="157"/>
+                                        <rect key="frame" x="0.0" y="309" width="343" height="176"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zz6-iG-xLj">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -107,13 +107,12 @@ food, toilet paper, etc.
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWz-Zf-dcd">
-                                                <rect key="frame" x="0.0" y="28.5" width="343" height="128.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="343" height="147.5"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jff-YX-epY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="129"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jff-YX-epY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="147.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
@@ -127,14 +126,14 @@ food, toilet paper, etc.
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3je-BU-oTZ">
-                                        <rect key="frame" x="0.0" y="492" width="343" height="79"/>
+                                        <rect key="frame" x="0.0" y="501" width="343" height="70"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rj1-Pn-Oaw">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5B-f0-8cw">
-                                                <rect key="frame" x="0.0" y="57" width="343" height="22"/>
+                                                <rect key="frame" x="0.0" y="48" width="343" height="22"/>
                                             </button>
                                         </subviews>
                                     </stackView>

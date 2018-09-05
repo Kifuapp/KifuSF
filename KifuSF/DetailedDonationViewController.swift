@@ -10,7 +10,6 @@ import UIKit
 
 class DetailedDonationViewController: UIViewController {
     
-    
     @IBOutlet weak var requestDeliveryButton: UIButton!
     
     @IBAction func requestDeliveryButtonPressed(_ sender: Any) {

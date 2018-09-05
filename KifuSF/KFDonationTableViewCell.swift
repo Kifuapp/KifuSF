@@ -63,6 +63,5 @@ class KFDonationTableViewCell: UITableViewCell {
         containerView?.backgroundColor = highlighted ? .kfHighlight : .kfWhite
     }
     
-    
 
 }

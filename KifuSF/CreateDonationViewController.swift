@@ -29,7 +29,40 @@ class CreateDonationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpUI()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
+    }
+    
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+                self.view.frame.origin.y -= keyboardSize.height
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+                self.view.frame.origin.y += keyboardSize.height
+        
+        }
+    }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
+
+extension CreateDonationViewController {
+    func setUpUI() {
         title = "Create Donation"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
         
@@ -46,8 +79,8 @@ class CreateDonationViewController: UIViewController {
         let tintableImage = KFImage.plusIcon.withRenderingMode(.alwaysTemplate)
         donationImageView.image = tintableImage
         donationImageView.tintColor = .kfPrimary
-
-        donationInfoButton.setTitle("  What to donate?", with: .subheader1)
+        
+        donationInfoButton.setTitle("  Donating?", with: .subheader1)
         donationInfoLabel.setUp(with: .body1)
         donationTitleLabel.setUp(with: .subheader1)
         
@@ -58,10 +91,10 @@ class CreateDonationViewController: UIViewController {
         donationTextField.backgroundColor = .clear
         donationTextField.borderStyle = .none
         donationTextField.placeholder = "Keep it simple, only a few words"
-        donationTextField.setUp(with: .body1, andColor: .clear)
+        donationTextField.setUp(with: .subheader2, andColor: .clear)
         
         descriptionTitleLabel.setUp(with: .subheader1)
-        descriptionTextView.setUp(with: .body1, andColor: .clear)
+        descriptionTextView.setUp(with: .subheader2, andColor: .clear)
         
         descriptionTextViewContainerView.backgroundColor = .kfWhite
         descriptionTextViewContainerView.layer.setUpShadow()
@@ -70,15 +103,7 @@ class CreateDonationViewController: UIViewController {
         pickupAddressButton.setUp(with: .button, andColor: .kfInformative)
         pickupAddressButton.setTitle("Choose Pick-up address", for: .normal)
         
-        infoPickupAddressButton.setTitle("  What's this?", with: .button)
+        infoPickupAddressButton.setTitle("  How it works?", with: .button)
         infoPickupAddressButton.tintColor = UIColor.kfInformative
     }
-    
-    @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-
-
 }

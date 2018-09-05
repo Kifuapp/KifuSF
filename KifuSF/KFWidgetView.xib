@@ -27,6 +27,17 @@
                     <color key="backgroundColor" name="WhiteColor"/>
                     <blurEffect style="light"/>
                 </visualEffectView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mYQ-5w-GyQ">
+                    <rect key="frame" x="0.0" y="0.0" width="605" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZU-M6-TOl">
+                            <rect key="frame" x="0.0" y="0.0" width="605" height="64"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqd-0j-NoP">
+                            <rect key="frame" x="0.0" y="64" width="605" height="64"/>
+                        </view>
+                    </subviews>
+                </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zia-VS-cLR">
                     <rect key="frame" x="0.0" y="0.0" width="605" height="128"/>
                     <subviews>
@@ -165,6 +176,10 @@
             </subviews>
             <constraints>
                 <constraint firstItem="zia-VS-cLR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6sJ-L9-fke"/>
+                <constraint firstAttribute="bottom" secondItem="mYQ-5w-GyQ" secondAttribute="bottom" id="B7w-DZ-zia"/>
+                <constraint firstItem="mYQ-5w-GyQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DAf-fN-YIl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mYQ-5w-GyQ" secondAttribute="trailing" id="LNH-qa-Kwd"/>
+                <constraint firstItem="mYQ-5w-GyQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="M5q-47-UdM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xck-uQ-FZX" secondAttribute="trailing" id="NqX-Us-3Np"/>
                 <constraint firstItem="zia-VS-cLR" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="SkW-xw-d9E"/>
                 <constraint firstItem="Xck-uQ-FZX" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Szb-yP-KLf"/>
@@ -176,10 +191,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="containerStackView" destination="zia-VS-cLR" id="uOL-yq-X8M"/>
+                <outlet property="deliveryBackgroundView" destination="eZU-M6-TOl" id="gWq-h0-dqw"/>
                 <outlet property="deliveryDisclosureImageView" destination="rzz-CZ-c6e" id="h3y-uN-ari"/>
                 <outlet property="deliveryStackView" destination="ZPC-qw-X11" id="qk1-NM-2JV"/>
                 <outlet property="deliverySubtitleLabel" destination="alT-1h-HsJ" id="UEP-fb-24T"/>
                 <outlet property="deliveryTitleLabel" destination="4GJ-BG-dKO" id="uKt-Df-zyf"/>
+                <outlet property="donationBackgroundView" destination="nqd-0j-NoP" id="ozo-Su-Shd"/>
                 <outlet property="donationDisclosureImageView" destination="0Xi-p1-Fgr" id="zCz-n3-ksX"/>
                 <outlet property="donationStackView" destination="9Rt-jC-eVn" id="JPH-P2-lDT"/>
                 <outlet property="donationSubtitleLabel" destination="ZvY-LT-NjB" id="c98-xT-4oF"/>

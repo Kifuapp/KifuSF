@@ -33,6 +33,8 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private var lastSelectedCell: KFDonationTableViewCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,7 +89,26 @@ class HomeViewController: UIViewController {
         }
         
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let id = segue.identifier else {
+            fatalError(KFErrorMessage.unknownIdentifier)
+        }
+        
+        switch id {
+        case KFSegue.showDetailedDonation:
+            
+            //TODO: fix this crap
+            
+            if let cell = lastSelectedCell {
+                cell.setSelected(false, animated: true)
+            }
+        default:
+            fatalError(KFErrorMessage.unknownIdentifier)
+        }
+    }
+    
+    
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -115,6 +136,12 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = donationsTableView.cellForRow(at: indexPath) as? KFDonationTableViewCell else {
+            fatalError(KFErrorMessage.unknownCell)
+        }
+        lastSelectedCell = cell
+        
         performSegue(withIdentifier: KFSegue.showDetailedDonation, sender: self)
     }
+    
 }

@@ -26,6 +26,7 @@ struct KFErrorMessage {
     static let imageNotFound = "could not load image"
     static let nibFileNotFound = "could not load nib file"
     static let textStyleNotFount = "could not load text style"
+    static let unknownIdentifier = "unknown identifier"
 }
 
 struct KFImage {

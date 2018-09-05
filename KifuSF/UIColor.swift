@@ -18,7 +18,7 @@ extension UIColor {
     static let kfInformative: UIColor = #colorLiteral(red: 0.1882352941, green: 0.737254902, blue: 0.9294117647, alpha: 1)
     static let kfGray: UIColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
     static let kfWhite: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    static let kfHighlight: UIColor = #colorLiteral(red: 0.8509803922, green: 0.8509803922, blue: 0.8509803922, alpha: 1)
+    static let kfHighlight: UIColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
     
     
     static let kfShadow: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)
