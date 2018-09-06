@@ -17,9 +17,6 @@ struct KFUserInterface {
     }
 }
 
-struct KFSegue {
-    static let showDetailedDonation = "showDetailedDonation"
-}
 
 struct KFErrorMessage {
     static let unknownCell = "unknown donation table view cell"
@@ -29,31 +26,5 @@ struct KFErrorMessage {
     static let unknownIdentifier = "unknown identifier"
 }
 
-struct KFImage {
-    static let flagIcon: UIImage = {
-        guard let image = UIImage(named: "FlagIcon") else {
-            fatalError(KFErrorMessage.imageNotFound)
-        }
-        
-        return image
-    }()
-    
-    static let boxIcon: UIImage = {
-        guard let image = UIImage(named: "BoxIcon") else {
-            fatalError(KFErrorMessage.imageNotFound)
-        }
-        
-        return image
-    }()
-    
-    static let plusIcon: UIImage = {
-        guard let image = UIImage(named: "PlusIcon") else {
-            fatalError(KFErrorMessage.imageNotFound)
-        }
-        
-        return image
-    }()
-    
-    
-}
+
 

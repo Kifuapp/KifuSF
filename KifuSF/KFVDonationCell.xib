@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="donationCell" rowHeight="243" id="jmZ-s2-def" customClass="KFVDonationCell" customModule="KifuSF" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="donationCell" rowHeight="152" id="jmZ-s2-def" customClass="KFVDonationCell" customModule="KifuSF" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="563" height="209"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jmZ-s2-def" id="L6k-bh-eg1">
@@ -47,16 +47,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="113.5" height="28.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Toilet Paper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw0-SI-SoH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="gxa-Lo-0i7"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="2.4 Miles Away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNj-pO-0Sf">
-                                                        <rect key="frame" x="0.0" y="24" width="113.5" height="4.5"/>
+                                                        <rect key="frame" x="0.0" y="20.5" width="113.5" height="8"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>

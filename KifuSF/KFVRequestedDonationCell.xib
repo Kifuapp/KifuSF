@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="requestedDonationCell" rowHeight="243" id="qYV-v5-Ihb" customClass="KFVRequestedDonationCell" customModule="KifuSF" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="requestedDonationCell" rowHeight="152" id="qYV-v5-Ihb" customClass="KFVRequestedDonationCell" customModule="KifuSF" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="563" height="209"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qYV-v5-Ihb" id="h7Y-eW-sod">
@@ -48,9 +48,6 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Toilet Paper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHz-eg-9Ur">
                                                         <rect key="frame" x="0.0" y="0.0" width="113.5" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="Id1-oK-6cl"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -64,11 +61,14 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-J5-pHt">
-                                                <rect key="frame" x="0.0" y="60.5" width="300" height="108"/>
+                                                <rect key="frame" x="0.0" y="60.5" width="306.5" height="108"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1H-MF-Okt">
-                                                        <rect key="frame" x="0.0" y="78" width="300" height="30"/>
+                                                        <rect key="frame" x="0.0" y="78" width="306.5" height="30"/>
                                                         <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="cancelButtonPressed:" destination="qYV-v5-Ihb" eventType="touchUpInside" id="5I9-V5-zYx"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -78,6 +78,10 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="b1y-J5-pHt" secondAttribute="trailing" id="iSi-2P-3OB"/>
+                                            <constraint firstItem="b1y-J5-pHt" firstAttribute="leading" secondItem="aZC-lb-b1N" secondAttribute="leading" id="tOI-6y-jbG"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -98,11 +102,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="containerView" destination="cEp-fP-aIE" id="Klu-hP-G8s"/>
-                <outlet property="distanceLabel" destination="Q8k-l5-Z3k" id="JrL-N3-20t"/>
-                <outlet property="donationImageContainerView" destination="V77-ii-pWc" id="fVA-ue-DuL"/>
-                <outlet property="donationImageView" destination="E1n-Xn-wq7" id="dSb-D6-hry"/>
-                <outlet property="titleLabel" destination="IHz-eg-9Ur" id="Id0-5L-c3Y"/>
+                <outlet property="cancelButton" destination="v1H-MF-Okt" id="pUC-fC-SQp"/>
+                <outlet property="containerView" destination="cEp-fP-aIE" id="dBf-iT-bgu"/>
+                <outlet property="distanceLabel" destination="Q8k-l5-Z3k" id="3Bk-Pd-jn9"/>
+                <outlet property="donationImageContainerView" destination="V77-ii-pWc" id="Giq-12-j0G"/>
+                <outlet property="donationImageView" destination="E1n-Xn-wq7" id="vjb-ny-l6o"/>
+                <outlet property="titleLabel" destination="IHz-eg-9Ur" id="3CQ-G7-OLk"/>
             </connections>
             <point key="canvasLocation" x="127.5" y="59.5"/>
         </tableViewCell>

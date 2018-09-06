@@ -97,7 +97,6 @@ class HomeViewController: UIViewController {
         
         let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
         if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-            
             present(createDonationVC, animated: true)
         } else {
             print("error")
@@ -111,7 +110,7 @@ class HomeViewController: UIViewController {
         }
         
         switch id {
-        case KFSegue.showDetailedDonation:
+        case UIStoryboardSegue.kfShowDetailedDonation:
             
             //TODO: fix this crap
             
@@ -155,7 +154,7 @@ extension HomeViewController: UITableViewDelegate {
         }
         lastSelectedCell = cell
         
-        performSegue(withIdentifier: KFSegue.showDetailedDonation, sender: self)
+        performSegue(withIdentifier: UIStoryboardSegue.kfShowDetailedDonation, sender: self)
     }
     
 }
@@ -183,6 +182,12 @@ extension HomeViewController: KFPWidgetDelegate {
             print("Donation widget pressed")
         case .delivery(_):
             print("Delivery widget pressed")
+            let createDonationStoryboard = UIStoryboard(name: "RequestedDonations", bundle: nil)
+            if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
+                present(createDonationVC, animated: true)
+            } else {
+                print("error")
+            }
         }
     }
     
@@ -217,20 +222,15 @@ extension HomeViewController {
         
         donationsTableView.separatorStyle = .none
         
-        let donationTableViewCell = UINib(nibName: KFVDonationCell.nibName, bundle: nil)
-        donationsTableView.register(donationTableViewCell, forCellReuseIdentifier: KFVDonationCell.reuseIdentifier)
-        
         donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
     }
     
     func setUpNavBar() {
-        navigationController?.tabBarItem.image = KFImage.boxIcon
+        navigationController?.tabBarItem.image = .kfBoxIcon
         navigationController?.tabBarItem.title = "Home"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createDonation))
         title = "Home"
-        
-        
         
         //MARK: Some random attempt to create the same blur effect between widget view and nav bar
         

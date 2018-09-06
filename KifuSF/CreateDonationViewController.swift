@@ -41,17 +41,13 @@ class CreateDonationViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-                self.view.frame.origin.y -= keyboardSize.height
-            
+            self.view.frame.origin.y -= keyboardSize.height
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-                self.view.frame.origin.y += keyboardSize.height
-        
+            self.view.frame.origin.y += keyboardSize.height
         }
     }
     
@@ -76,7 +72,7 @@ extension CreateDonationViewController {
         donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         donationImageView.contentMode = .scaleAspectFill
         
-        let tintableImage = KFImage.plusIcon.withRenderingMode(.alwaysTemplate)
+        let tintableImage = UIImage.kfPlusIcon.withRenderingMode(.alwaysTemplate)
         donationImageView.image = tintableImage
         donationImageView.tintColor = .kfPrimary
         

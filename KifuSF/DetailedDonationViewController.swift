@@ -28,10 +28,10 @@ class DetailedDonationViewController: UIViewController {
         title = "Donation"
         view.backgroundColor = UIColor.kfWhite
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: KFImage.flagIcon,
-                                                                                  style: .plain,
-                                                                                  target: self,
-                                                                                  action: #selector(flagButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(flagButtonPressed))
     }
     
     
