@@ -45,8 +45,8 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var lastSelectedCell: KFDonationTableViewCell?
-    private var widgetView: KFWidgetView?
+    private var lastSelectedCell: KFVDonationCell?
+    private var widgetView: KFVWidget?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +126,7 @@ class HomeViewController: UIViewController {
     
 }
 
+//MARK: UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -134,7 +135,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFDonationTableViewCell.reuseIdentifier) as? KFDonationTableViewCell else {
+        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFVDonationCell.reuseIdentifier) as? KFVDonationCell else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -144,14 +145,12 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 152
     }
-    
-    
 }
 
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = donationsTableView.cellForRow(at: indexPath) as? KFDonationTableViewCell else {
+        guard let cell = donationsTableView.cellForRow(at: indexPath) as? KFVDonationCell else {
             fatalError(KFErrorMessage.unknownCell)
         }
         lastSelectedCell = cell
@@ -161,21 +160,24 @@ extension HomeViewController: UITableViewDelegate {
     
 }
 
-extension HomeViewController: KFWidgetViewDataSource {
-    func widgetView(_ widgetView: KFWidgetView, cellInfoForType type: KFWidgetView.TouchedViewType) -> KFPWidgetInfo {
+//MARK: KFPWidgetDataSource
+extension HomeViewController: KFPWidgetDataSource {
+    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo {
         switch type {
         case .donation(_):
-            return KFWidgetView.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
+            return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
         case .delivery(_):
-            return KFWidgetView.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
+            return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
         }
     }
     
     
 }
 
-extension HomeViewController: KFWidgetViewDelegate {
-    func widgetView(_ widgetView: KFWidgetView, didSelectCellForType type: KFWidgetView.TouchedViewType) {
+//MARK: KFPWidgetDelegate
+extension HomeViewController: KFPWidgetDelegate {
+    func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
+        
         switch type {
         case .donation(_):
             print("Donation widget pressed")
@@ -190,7 +192,7 @@ extension HomeViewController: KFWidgetViewDelegate {
 extension HomeViewController {
     
     func setUpWidgetView() {
-        guard let widgetView = Bundle.main.loadNibNamed(KFWidgetView.nibName, owner: self, options: nil)?.first as? KFWidgetView else {
+        guard let widgetView = Bundle.main.loadNibNamed(KFVWidget.nibName, owner: self, options: nil)?.first as? KFVWidget else {
             assertionFailure(KFErrorMessage.nibFileNotFound)
             return
         }
@@ -215,8 +217,10 @@ extension HomeViewController {
         
         donationsTableView.separatorStyle = .none
         
-        let donationTableViewCell = UINib(nibName: KFDonationTableViewCell.nibName, bundle: nil)
-        donationsTableView.register(donationTableViewCell, forCellReuseIdentifier: KFDonationTableViewCell.reuseIdentifier)
+        let donationTableViewCell = UINib(nibName: KFVDonationCell.nibName, bundle: nil)
+        donationsTableView.register(donationTableViewCell, forCellReuseIdentifier: KFVDonationCell.reuseIdentifier)
+        
+        donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
     }
     
     func setUpNavBar() {

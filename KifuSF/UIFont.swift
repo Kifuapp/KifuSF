@@ -6,9 +6,7 @@
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
+import UIKit.UIFont
 
 extension UIFont {
     private enum FontStyle: String {

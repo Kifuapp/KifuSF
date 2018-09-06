@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIAlertController
 
 extension UIAlertController {
     convenience init(title: String = "Oops!", errorMessage: String?, dismissTitle: String = "Dismiss") {

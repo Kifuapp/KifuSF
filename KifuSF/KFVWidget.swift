@@ -8,12 +8,10 @@
 
 import UIKit
 
-protocol KFPWidgetInfo {
-    var title: String { get }
-    var subtitle: String { get }
-}
 
-class KFWidgetView: UIView {
+
+//MARK: KFVWidget
+final class KFVWidget: UIView {
     
     enum TouchedViewType {
         case donation(UIView)
@@ -35,29 +33,29 @@ class KFWidgetView: UIView {
         let subtitle: String
     }
     
-    @IBOutlet weak var containerStackView: UIStackView!
-    @IBOutlet weak var deliveryStackView: UIStackView!
-    @IBOutlet weak var donationStackView: UIStackView!
+    @IBOutlet private weak var containerStackView: UIStackView!
+    @IBOutlet private weak var deliveryStackView: UIStackView!
+    @IBOutlet private weak var donationStackView: UIStackView!
     
-    @IBOutlet weak var deliveryTitleLabel: UILabel!
-    @IBOutlet weak var deliverySubtitleLabel: UILabel!
-    @IBOutlet weak var deliveryBackgroundView: UIView!
+    @IBOutlet private weak var deliveryTitleLabel: UILabel!
+    @IBOutlet private weak var deliverySubtitleLabel: UILabel!
+    @IBOutlet private weak var deliveryBackgroundView: UIView!
     
-    @IBOutlet weak var deliveryDisclosureImageView: UIImageView!
+    @IBOutlet private weak var deliveryDisclosureImageView: UIImageView!
     
-    @IBOutlet weak var donationTitleLabel: UILabel!
-    @IBOutlet weak var donationSubtitleLabel: UILabel!
-    @IBOutlet weak var donationBackgroundView: UIView!
+    @IBOutlet private weak var donationTitleLabel: UILabel!
+    @IBOutlet private weak var donationSubtitleLabel: UILabel!
+    @IBOutlet private weak var donationBackgroundView: UIView!
     
-    @IBOutlet weak var donationDisclosureImageView: UIImageView!
+    @IBOutlet private weak var donationDisclosureImageView: UIImageView!
     
-    static let nibName = "KFWidgetView"
+    static let nibName = "KFVWidget"
     
-    var dataSource: KFWidgetViewDataSource?
-    var delegate: KFWidgetViewDelegate?
+    weak var dataSource: KFPWidgetDataSource?
+    weak var delegate: KFPWidgetDelegate?
 
-    var lastTouchLocation: CGPoint?
-    var touchedViewType: TouchedViewType? {
+    private var lastTouchLocation: CGPoint?
+    private var touchedViewType: TouchedViewType? {
         willSet {
             touchedViewType?.backgroundView().unhighlight()
         }
@@ -84,7 +82,7 @@ class KFWidgetView: UIView {
         containerStackView.addGestureRecognizer(longPress)
     }
 
-    @objc func updateWidgetView(_ sender: UILongPressGestureRecognizer) {
+    @objc private func updateWidgetView(_ sender: UILongPressGestureRecognizer) {
         let touchLocation = sender.location(in: containerStackView)
         lastTouchLocation = touchLocation
         
@@ -107,7 +105,7 @@ class KFWidgetView: UIView {
         }
     }
     
-    func updateState(for location: CGPoint) {
+    private func updateState(for location: CGPoint) {
         if deliveryStackView.frame.contains(location)  {
             touchedViewType = .delivery(deliveryBackgroundView)
         } else {
@@ -115,7 +113,7 @@ class KFWidgetView: UIView {
         }
     }
     
-    func updateInfo() {
+    private func updateInfo() {
         if let deliveryInfo = dataSource?.widgetView(self, cellInfoForType: .delivery(deliveryBackgroundView)) {
             deliveryTitleLabel.text = "Delivery - \(deliveryInfo.title)"
             deliverySubtitleLabel.text = deliveryInfo.subtitle
@@ -133,10 +131,12 @@ class KFWidgetView: UIView {
 
 }
 
-protocol KFWidgetViewDataSource {
-    func widgetView(_ widgetView: KFWidgetView, cellInfoForType type: KFWidgetView.TouchedViewType) -> KFPWidgetInfo
+//MARK: KFPWidgetDataSource
+protocol KFPWidgetDataSource: class {
+    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo
 }
 
-protocol KFWidgetViewDelegate {
-    func widgetView(_ widgetView: KFWidgetView, didSelectCellForType type: KFWidgetView.TouchedViewType)
+//MARK: KFPWidgetDelegate
+protocol KFPWidgetDelegate: class {
+    func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType)
 }

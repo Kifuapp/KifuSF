@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
-import Foundation
-import UIKit
+
+import UIKit.UITextField
 
 extension UITextField {
     func setUp(with style: TextStyle) {

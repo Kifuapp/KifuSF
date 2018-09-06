@@ -11,6 +11,7 @@ import UIKit
 class DetailedDonationViewController: UIViewController {
     
     @IBOutlet weak var requestDeliveryButton: UIButton!
+    @IBOutlet weak var donationTableView: UITableView!
     
     @IBAction func requestDeliveryButtonPressed(_ sender: Any) {
         
@@ -19,9 +20,8 @@ class DetailedDonationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpDonationDescription()
+        setUpDonationTableView()
         
-
         requestDeliveryButton.setTitle("Request Delivery", for: .normal)        
         requestDeliveryButton.setUp(with: .button, andColor: .kfPrimary)
         
@@ -39,19 +39,25 @@ class DetailedDonationViewController: UIViewController {
         //TODO: flagging
     }
     
-    func setUpDonationDescription() {
-        guard let donationDescription = Bundle.main.loadNibNamed(KFDonationDescriptionView.nibName, owner: self, options: nil)?.first as? KFDonationDescriptionView else {
-            assertionFailure(KFErrorMessage.nibFileNotFound)
-            return
-        }
-        
-        view.addSubview(donationDescription)
-        
-        donationDescription.translatesAutoresizingMaskIntoConstraints = false
-        
-        donationDescription.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        donationDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        donationDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+    func setUpDonationTableView() {
+        donationTableView.registerTableViewCell(for: KFVDonationDescriptionCell.self)
+        donationTableView.dataSource = self
     }
 
+}
+
+extension DetailedDonationViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = donationTableView.dequeueReusableCell(withIdentifier: KFVDonationDescriptionCell.reuseIdentifier, for: indexPath) as? KFVDonationDescriptionCell else {
+            fatalError(KFErrorMessage.unknownCell)
+        }
+        
+        return cell
+    }
+    
+    
 }

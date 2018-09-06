@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFDonationTableViewCell: UITableViewCell {
+class KFVDonationCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView!
     
@@ -16,13 +16,9 @@ class KFDonationTableViewCell: UITableViewCell {
     @IBOutlet weak var donationImageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    static let nibName = "KFDonationTableViewCell"
-    static let reuseIdentifier = "donationCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,11 +40,10 @@ class KFDonationTableViewCell: UITableViewCell {
         donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         
         titleLabel.setUp(with: .header1)
-        usernameLabel.setUp(with: .subheader3)
         distanceLabel.setUp(with: .body1)
         
         descriptionLabel.setUp(with: .body2)
-        descriptionLabel.numberOfLines = 2
+        descriptionLabel.numberOfLines = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,6 +57,11 @@ class KFDonationTableViewCell: UITableViewCell {
         
         containerView?.backgroundColor = highlighted ? .kfHighlight : .kfWhite
     }
-    
-
 }
+
+extension KFVDonationCell: KFPRegistableCell {
+    static var reuseIdentifier = "donationCell"
+    static var nibName = "KFVDonationCell"
+}
+
+
