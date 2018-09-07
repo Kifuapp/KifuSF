@@ -51,18 +51,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpWidgetView()
+        
         setUpDonationTableView()
+        setUpWidgetView()
         setUpNavBar()
         setUpFirebase()
-        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        widgetView?.reloadData()
+//        widgetView?.reloadData()
         
         //TODO: retrieve open donations in viewDidLoad maybe?
         /*
@@ -79,14 +79,14 @@ class HomeViewController: UIViewController {
             self.currentDonation = donation
             self.currentDelivery = delivery
             
-            //TODO: update widget view
+             widgetView?.reloadData()
         }
         
         RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
             if self.currentDeliveryState.isShowingCurrentDelivery == false {
                 self.pendingRequests = donationsUserHadRequestedToDeliver
                 
-                //TODO: update widget view
+                 widgetView?.reloadData()
             }
         })
         */
@@ -161,7 +161,7 @@ extension HomeViewController: UITableViewDelegate {
 
 //MARK: KFPWidgetDataSource
 extension HomeViewController: KFPWidgetDataSource {
-    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo {
+    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo? {
         switch type {
         case .donation(_):
             return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
@@ -175,6 +175,11 @@ extension HomeViewController: KFPWidgetDataSource {
 
 //MARK: KFPWidgetDelegate
 extension HomeViewController: KFPWidgetDelegate {
+    func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
+        donationsTableView.contentInset.top = height + 8
+        donationsTableView.scrollIndicatorInsets.top = height + 8
+    }
+    
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
         
         switch type {
@@ -190,8 +195,6 @@ extension HomeViewController: KFPWidgetDelegate {
             }
         }
     }
-    
-    
 }
 
 extension HomeViewController {
@@ -214,6 +217,8 @@ extension HomeViewController {
         widgetView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         widgetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         widgetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        
+        widgetView.reloadData()
     }
     
     func setUpDonationTableView() {
@@ -221,6 +226,10 @@ extension HomeViewController {
         donationsTableView.delegate = self
         
         donationsTableView.separatorStyle = .none
+        donationsTableView.backgroundColor = UIColor.kfGray
+        
+        donationsTableView.contentInset.bottom = 8
+        donationsTableView.scrollIndicatorInsets.bottom = 8
         
         donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
     }

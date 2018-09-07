@@ -29,10 +29,10 @@ class KFVRequestedDonationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.clipsToBounds = false
         self.selectionStyle = .none
+        layer.masksToBounds = false
+        containerView.layer.masksToBounds = false
         
-        contentView.clipsToBounds = false
         contentView.backgroundColor = UIColor.kfGray
         
         containerView.backgroundColor = UIColor.kfWhite

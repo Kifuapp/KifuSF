@@ -115,14 +115,29 @@ final class KFVWidget: UIView {
     
     private func updateInfo() {
         if let deliveryInfo = dataSource?.widgetView(self, cellInfoForType: .delivery(deliveryBackgroundView)) {
+            deliveryStackView.isHidden = false
+            deliveryBackgroundView.isHidden = false
+            
             deliveryTitleLabel.text = "Delivery - \(deliveryInfo.title)"
             deliverySubtitleLabel.text = deliveryInfo.subtitle
+        } else {
+            deliveryStackView.isHidden = true
+            deliveryBackgroundView.isHidden = true
         }
         
         if let donationInfo = dataSource?.widgetView(self, cellInfoForType: .donation(donationBackgroundView)) {
+            donationStackView.isHidden = false
+            donationBackgroundView.isHidden = false
+            
             donationTitleLabel.text = "Donation - \(donationInfo.title)"
             donationSubtitleLabel.text = donationInfo.subtitle
+        } else {
+            donationStackView.isHidden = true
+            donationBackgroundView.isHidden = true
         }
+        
+        self.layoutIfNeeded()
+        delegate?.widgetView(self, heightDidChange: frame.height)
     }
     
     func reloadData() {
@@ -133,10 +148,11 @@ final class KFVWidget: UIView {
 
 //MARK: KFPWidgetDataSource
 protocol KFPWidgetDataSource: class {
-    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo
+    func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo?
 }
 
 //MARK: KFPWidgetDelegate
 protocol KFPWidgetDelegate: class {
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType)
+    func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat)
 }

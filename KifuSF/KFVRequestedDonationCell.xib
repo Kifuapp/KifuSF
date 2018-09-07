@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEp-fP-aIE">
-                        <rect key="frame" x="24" y="16" width="515" height="192.5"/>
+                        <rect key="frame" x="24" y="8" width="515" height="192.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eqc-Dq-NDk">
                                 <rect key="frame" x="12" y="12" width="491" height="168.5"/>
@@ -95,10 +95,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="cEp-fP-aIE" secondAttribute="bottom" id="Kyz-sR-vDZ"/>
+                    <constraint firstAttribute="bottom" secondItem="cEp-fP-aIE" secondAttribute="bottom" constant="8" id="Kyz-sR-vDZ"/>
                     <constraint firstAttribute="trailing" secondItem="cEp-fP-aIE" secondAttribute="trailing" constant="24" id="Twv-5s-QBE"/>
                     <constraint firstItem="cEp-fP-aIE" firstAttribute="leading" secondItem="h7Y-eW-sod" secondAttribute="leading" constant="24" id="eOw-uX-qUN"/>
-                    <constraint firstItem="cEp-fP-aIE" firstAttribute="top" secondItem="h7Y-eW-sod" secondAttribute="top" constant="16" id="wXu-Lt-vcl"/>
+                    <constraint firstItem="cEp-fP-aIE" firstAttribute="top" secondItem="h7Y-eW-sod" secondAttribute="top" constant="8" id="wXu-Lt-vcl"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
