@@ -53,24 +53,40 @@ struct DonationService {
             }
         }
     }
-
-    /**
-     update the given donation in the open-donations subtree if the donation.
-     
-     - ToDo: write a cloud function to update denormalized instances of the given donation
-     */
-    static func update(donation: Donation, completion: @escaping (Bool) -> Void) {
+    
+    static func attach(report: Report, to donation: Donation, completion: @escaping (Bool) -> Void) {
         let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
-        refDonation.updateChildValues(donation.dictValue) { (error, _) in
-            guard error == nil else {
-                assertionFailure(error!.localizedDescription)
-                
+        let updatedDict: [String: Any] = [
+            Donation.Keys.flaggedReportUid: report.uid,
+            Donation.Keys.flag: report.flag.rawValue
+        ]
+        refDonation.updateChildValues(updatedDict) { error, _ in
+            if let error = error {
+                assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
                 return completion(false)
             }
             
             completion(true)
         }
     }
+
+    /**
+     update the given donation in the open-donations subtree if the donation.
+     
+     - ToDo: write a cloud function to update denormalized instances of the given donation
+     */
+//    static func update(donation: Donation, completion: @escaping (Bool) -> Void) {
+//        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
+//        refDonation.updateChildValues(donation.dictValue) { (error, _) in
+//            guard error == nil else {
+//                assertionFailure(error!.localizedDescription)
+//
+//                return completion(false)
+//            }
+//
+//            completion(true)
+//        }
+//    }
     
     static func showTimelineDonations(completion: @escaping ([Donation]) -> Void) {
 
