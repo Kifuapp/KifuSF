@@ -72,7 +72,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PureLayout (3.1)
   - Sourcery (0.13.1)
+  - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -82,7 +84,9 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - Kingfisher (~> 4.0)
   - LocationPicker
+  - PureLayout
   - Sourcery
+  - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -102,7 +106,9 @@ SPEC REPOS:
     - leveldb-library
     - LocationPicker
     - nanopb
+    - PureLayout
     - Sourcery
+    - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Firebase: 75ea9e232eefa158c1049028030b8f661a2ccb62
@@ -121,8 +127,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   LocationPicker: d91f9fe50493d8058391fe1408aa2a8db49a584d
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PureLayout: 7fba48da8b04f0a1fea33d3424b016e958d33ac0
   Sourcery: 9ef51b8777516f204d82996441f293813158d0d7
+  XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 56fb35d14cc78049dba35dc0a0c00cf0bb137ef6
+PODFILE CHECKSUM: 03686cdf2f1f039fcbe0161dfdc21820c58631fd
 
 COCOAPODS: 1.5.3

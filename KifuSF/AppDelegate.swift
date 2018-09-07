@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = UIColor.kfPrimary
+        
         UITabBar.appearance().tintColor = UIColor.kfPrimary
         
         return true

@@ -16,4 +16,8 @@ protocol KFPRegistableCell {
     static var reuseIdentifier: String { get }
 }
 
+protocol Identifiable {
+    
+}
+
 

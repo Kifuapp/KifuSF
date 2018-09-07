@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PureLayout
 
 class KFVDonationCell: UITableViewCell {
 
@@ -20,42 +21,42 @@ class KFVDonationCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    let descriptorView = KFVDonationInfo()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        
+        contentView.addSubview(descriptorView)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        descriptorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
+        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
+        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
         
         self.selectionStyle = .none
         layer.masksToBounds = false
-        containerView.layer.masksToBounds = false
-        
         contentView.backgroundColor = UIColor.kfGray
-        
-        containerView.backgroundColor = UIColor.kfWhite
-        containerView.layer.cornerRadius = CALayer.kfCornerRadius
-        containerView.layer.setUpShadow()
-        
-        donationImageContainerView.backgroundColor = UIColor.clear
-        donationImageContainerView.layer.setUpShadow()
-        
-        donationImageView.contentMode = .scaleAspectFill
-        donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
-        
-        titleLabel.setUp(with: .header1)
-        distanceLabel.setUp(with: .body1)
-        
-        descriptionLabel.setUp(with: .body2)
-        descriptionLabel.numberOfLines = 0
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        containerView?.backgroundColor = selected ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = selected ? .kfHighlight : .kfWhite
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        containerView?.backgroundColor = highlighted ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = highlighted ? .kfHighlight : .kfWhite
     }
 }
 

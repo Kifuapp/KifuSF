@@ -56,6 +56,7 @@ class HomeViewController: UIViewController {
         setUpWidgetView()
         setUpNavBar()
         setUpFirebase()
+        
     }
     
     
@@ -139,10 +140,6 @@ extension HomeViewController: UITableViewDataSource {
         }
 
         return donationCell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 152
     }
 }
 
@@ -231,7 +228,8 @@ extension HomeViewController {
         donationsTableView.contentInset.bottom = 8
         donationsTableView.scrollIndicatorInsets.bottom = 8
         
-        donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
+//        donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
+        donationsTableView.register(KFVDonationCell.self, forCellReuseIdentifier: KFVDonationCell.reuseIdentifier)
     }
     
     func setUpNavBar() {

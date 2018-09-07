@@ -14,5 +14,7 @@ target 'KifuSF' do
   pod 'Kingfisher', '~> 4.0'
   pod 'LocationPicker'
   pod 'Sourcery'
+  pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'PureLayout'
 
 end

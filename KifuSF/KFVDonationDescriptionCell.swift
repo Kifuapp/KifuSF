@@ -28,6 +28,7 @@ class KFVDonationDescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         backgroundColor = UIColor.clear
         
         donationImageContainerView.layer.setUpShadow()
@@ -48,7 +49,8 @@ class KFVDonationDescriptionCell: UITableViewCell {
         bodyOfSubtitleLabel.numberOfLines = 2
         
         descriptionLabel.setUp(with: .subheader1)
-        descriptionTextView.setUp(with: .body2, andColor: .clear)
+//        descriptionTextView.setUp(with: .body2, andColor: .clear)
+        descriptionTextView.textColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         
         statisticStackView.heightAnchor.constraint(equalToConstant: deliveryCountLabel.requiredHeight * 1.25).isActive = true
     }
