@@ -54,6 +54,14 @@ struct RequestService {
         self.cancelRequest(for: donation, forUserUid: User.current.uid, completion: completion)
     }
     
+    
+    /**
+     removes the current user, or given userUid, from the given donation in the
+     donation-requests and user-requests subtrees
+     
+     - Remark: used when the current user cancels their request from the given donation.
+     Also, when the given donation clears its requests.
+     */
     private static func cancelRequest(for donation: Donation, forUserUid userUid: String, completion: @escaping (Bool) -> Void) {
         
         //remove donation from user-requests
@@ -120,7 +128,8 @@ struct RequestService {
     }
     
     /**
-     Removes all users from the donation-request sub tree and removes the donation from all user's user-request
+     Removes all requets from the given donation from the donation-request sub tree. Then, removes
+     the given donation from the user-requests for each user who requested to deliver the donation
      
      - Remark: when a volunteer is selected or when the donation is canceled
      */

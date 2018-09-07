@@ -173,7 +173,13 @@ struct DonationService {
         let dg = DispatchGroup() // swiftlint:disable:this identifier_name
         
         dg.enter()
-        ref.updateChildValues(updatedDonation.dictValue) { error, _ in
+        
+        //update only the keys needed to conform to db write rules
+        let updatedDict: [String: Any] = [
+            Donation.Keys.status: updatedDonation.status.rawValue,
+            Donation.Keys.volunteer: volunteer.dictValue
+        ]
+        ref.updateChildValues(updatedDict) { error, _ in
             if let error = error {
                 print("there was an error \(error.localizedDescription)")
                 
@@ -218,8 +224,12 @@ struct DonationService {
 
         var updatedDonation = donation
         updatedDonation.status = .awaitingDelivery
-
-        ref.updateChildValues(updatedDonation.dictValue) { (error, _) in
+        
+        //update only the keys needed to conform to db write rules
+        let updatedDict: [String: Any] = [
+            Donation.Keys.status: updatedDonation.status.rawValue
+        ]
+        ref.updateChildValues(updatedDict) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 return completion(false)
@@ -243,7 +253,13 @@ struct DonationService {
             updatedDonation.verificationUrl = downloadURL.absoluteString
             
             let ref = Database.database().reference().child("open-donations").child(donation.uid)
-            ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in
+            
+            //update only the keys needed to conform to db write rules
+            let updatedDict: [String: Any] = [
+                Donation.Keys.status: updatedDonation.status.rawValue,
+                Donation.Keys.verificationUrl: updatedDonation.verificationUrl!
+            ]
+            ref.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure("failed to update donation for confirming the delivery, error: \(error.localizedDescription)") // swiftlint:disable:this line_length
                     return completion(false)
@@ -251,7 +267,6 @@ struct DonationService {
                 completion(true)
             })
         }
-        
     }
 
     static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> Void) {
