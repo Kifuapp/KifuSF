@@ -11,14 +11,15 @@ import PureLayout
 
 class KFVSticky<T: UIView>: UIView {
     
-    let stickySide: ALEdge?
+    var stickySide: ALEdge?
     let contentView = T()
-    
+    var anchors = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         stickySide = nil
         
         super.init(frame: frame)
+        addSubview(contentView)
         setupLayoutConstraints()
     }
     
@@ -26,27 +27,35 @@ class KFVSticky<T: UIView>: UIView {
         self.stickySide = stickySide
         
         super.init(frame: UIScreen.main.bounds)
+        addSubview(contentView)
         setupLayoutConstraints()
     }
     
     func setupLayoutConstraints() {
-        addSubview(contentView)
-        
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        anchors = [
         contentView.autoPinEdge(toSuperviewEdge: .top,
                                 withInset: 0,
-                                relation: (stickySide?.opositeSide() == .top) ? .greaterThanOrEqual : .equal)
+                                relation: (stickySide?.opositeSide() == .top) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .leading,
                                 withInset: 0,
-                                relation: (stickySide?.opositeSide() == .leading) ? .greaterThanOrEqual : .equal)
+                                relation: (stickySide?.opositeSide() == .leading) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .trailing,
                                 withInset: 0,
-                                relation: (stickySide?.opositeSide() == .trailing) ? .greaterThanOrEqual : .equal)
+                                relation: (stickySide?.opositeSide() == .trailing) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .bottom,
                                 withInset: 0,
                                 relation: (stickySide?.opositeSide() == .bottom) ? .greaterThanOrEqual : .equal)
+        ]
+    }
+    
+    func updateStickySide(to side: ALEdge? = nil) {
+        self.stickySide = side
+        
+        NSLayoutConstraint.deactivate(anchors)
+        setupLayoutConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {

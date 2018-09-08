@@ -21,7 +21,7 @@ class KFVDonationCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    let descriptorView = KFVDonationInfo()
+    let descriptorView = KFVVolunteerInfo()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

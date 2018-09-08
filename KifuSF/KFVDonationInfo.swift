@@ -15,7 +15,6 @@ class KFVDonationInfo: KFVDescriptor {
         super.setupLayoutConstraints()
         
         infoStackView.addArrangedSubview(descriptionTextView)
-        descriptionTextView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
     override func setUpStyling() {

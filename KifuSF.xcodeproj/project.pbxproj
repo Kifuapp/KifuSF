@@ -25,6 +25,8 @@
 		C50182F82142E76E00257412 /* KFVImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F72142E76E00257412 /* KFVImage.swift */; };
 		C50182FA2142FB1B00257412 /* KFVSticky.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F92142FB1B00257412 /* KFVSticky.swift */; };
 		C50182FC21430FE800257412 /* KFVDonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FB21430FE800257412 /* KFVDonationInfo.swift */; };
+		C50182FE2143B8F600257412 /* KFVStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FD2143B8F600257412 /* KFVStatistics.swift */; };
+		C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */; };
 		C50515C521368FD700718AE5 /* KFVDonationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */; };
 		C50515C72136927200718AE5 /* KFVDonationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */; };
 		C50515C9213694F900718AE5 /* DetailedDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */; };
@@ -102,6 +104,8 @@
 		C50182F72142E76E00257412 /* KFVImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVImage.swift; sourceTree = "<group>"; };
 		C50182F92142FB1B00257412 /* KFVSticky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVSticky.swift; sourceTree = "<group>"; };
 		C50182FB21430FE800257412 /* KFVDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDonationInfo.swift; sourceTree = "<group>"; };
+		C50182FD2143B8F600257412 /* KFVStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVStatistics.swift; sourceTree = "<group>"; };
+		C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVVolunteerInfo.swift; sourceTree = "<group>"; };
 		C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVDonationDescriptionCell.xib; sourceTree = "<group>"; };
 		C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDonationDescriptionCell.swift; sourceTree = "<group>"; };
 		C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDonationViewController.swift; sourceTree = "<group>"; };
@@ -196,10 +200,12 @@
 				C54FDBD521403F3100BC89B8 /* KFDonationCell */,
 				C54FDBD62141717C00BC89B8 /* KFDescriptionCell */,
 				C54FDBDF2141991D00BC89B8 /* KFRequestedDonationCell */,
+				C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */,
 				C50182F92142FB1B00257412 /* KFVSticky.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
 				C50182F72142E76E00257412 /* KFVImage.swift */,
 				C50182FB21430FE800257412 /* KFVDonationInfo.swift */,
+				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C50182F02142AD4E00257412 /* KFCDelivery.swift in Sources */,
 				C50515C72136927200718AE5 /* KFVDonationDescriptionCell.swift in Sources */,
+				C50182FE2143B8F600257412 /* KFVStatistics.swift in Sources */,
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
@@ -696,6 +703,7 @@
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				C54FDBD82141756000BC89B8 /* UITableView.swift in Sources */,
 				C560B7E9213477D8008A9DF1 /* KFVDonationCell.swift in Sources */,
+				C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */,
 				C50182E62141B1D400257412 /* UIImage.swift in Sources */,
 				C54FDBDA2141761400BC89B8 /* Protocols.swift in Sources */,
 				C5983C1E2134643F00303ABB /* HomeViewController.swift in Sources */,

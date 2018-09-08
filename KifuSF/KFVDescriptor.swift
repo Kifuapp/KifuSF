@@ -64,8 +64,8 @@ class KFVDescriptor: UIView {
         contentsStackView.addArrangedSubview(topStackView)
         
 //        imageView.autoMatch(.height, to: .width, of: imageView)
-        imageView.autoSetDimension(.height, toSize: 100)
-        imageView.autoSetDimension(.width, toSize: 100)
+        imageView.autoSetDimension(.height, toSize: 112)
+        imageView.autoSetDimension(.width, toSize: 112)
         
         contentsStackView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
         contentsStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)

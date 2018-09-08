@@ -32,4 +32,20 @@ extension UIImage {
         
         return image
     }()
+    
+    static let kfDeliveryIcon: UIImage = {
+        guard let image = UIImage(named: "DeliveryIcon") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
+    
+    static let kfDonationIcon: UIImage = {
+        guard let image = UIImage(named: "DonationIcon") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
 }
