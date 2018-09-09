@@ -40,7 +40,7 @@ class KFVVolunteerInfo: KFVDescriptor {
         confirmationButton.contentView.showsTouchWhenHighlighted = true
         
         
-        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
         confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
 
         

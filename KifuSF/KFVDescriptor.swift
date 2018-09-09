@@ -92,8 +92,8 @@ class KFVDescriptor: UIView {
         subtitleLabel.contentView.adjustsFontForContentSizeCategory = true
         
         //TODO: remove this
-        subtitleLabel.contentView.text = "2.4 Miles Away"
-        titleLabel.text = "Toilet Paper"
+        subtitleLabel.contentView.text = "Reputation 78%"
+        titleLabel.text = "@Torcky"
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -26,12 +26,10 @@ class KFVDonationCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
         contentView.addSubview(descriptorView)
         
         translatesAutoresizingMaskIntoConstraints = false
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
-        
         
         descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
         descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
