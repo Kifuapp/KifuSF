@@ -40,7 +40,7 @@ class DetailedDonationViewController: UIViewController {
     }
     
     func setUpDonationTableView() {
-        donationTableView.registerTableViewCell(for: KFVDonationDescriptionCell.self)
+//        donationTableView.registerTableViewCell(for: KFVDonationDescriptionCell.self)
         donationTableView.dataSource = self
     }
 
@@ -52,7 +52,7 @@ extension DetailedDonationViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = donationTableView.dequeueReusableCell(withIdentifier: KFVDonationDescriptionCell.reuseIdentifier, for: indexPath) as? KFVDonationDescriptionCell else {
+        guard let cell = donationTableView.dequeueReusableCell(withIdentifier: KFVDonationDescriptionCell.id, for: indexPath) as? KFVDonationDescriptionCell else {
             fatalError(KFErrorMessage.unknownCell)
         }
         

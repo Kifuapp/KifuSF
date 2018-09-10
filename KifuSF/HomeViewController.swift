@@ -22,7 +22,7 @@ enum DonationOption: SwitchlessCases {
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var donationsTableView: UITableView!
+    let donationsTableView = UITableView()
     
     private var openDonations: [Donation] = [] {
         didSet {
@@ -135,11 +135,11 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFVDonationCell.reuseIdentifier) as? KFVDonationCell else {
+        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFVDonationCell.id) as? KFVDonationCell else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
-        return donationCell
+        return UITableViewCell()
     }
 }
 
@@ -211,9 +211,9 @@ extension HomeViewController {
         
         widgetView.translatesAutoresizingMaskIntoConstraints = false
         
-        widgetView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        widgetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        widgetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        widgetView.autoPinEdge(toSuperviewEdge: .top)
+        widgetView.autoPinEdge(toSuperviewEdge: .leading)
+        widgetView.autoPinEdge(toSuperviewEdge: .trailing)
         
         widgetView.reloadData()
     }
@@ -229,31 +229,11 @@ extension HomeViewController {
         donationsTableView.scrollIndicatorInsets.bottom = 8
         
 //        donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
-        donationsTableView.register(KFVDonationCell.self, forCellReuseIdentifier: KFVDonationCell.reuseIdentifier)
+        donationsTableView.register(KFVDonationCell.self, forCellReuseIdentifier: KFVDonationCell.id)
     }
     
     func setUpNavBar() {
-        navigationController?.tabBarItem.image = .kfBoxIcon
-        navigationController?.tabBarItem.title = "Home"
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createDonation))
         title = "Home"
-        
-        //MARK: Some random attempt to create the same blur effect between widget view and nav bar
-        
-        //        self.navigationController?.navigationBar.isTranslucent = true
-        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //
-        //        var bounds = navigationController!.navigationBar.bounds
-        //        bounds.size.height += 20
-        //        bounds.origin.y -= 20
-        //
-        //        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        //        visualEffectView.isUserInteractionEnabled = false
-        //        visualEffectView.frame = bounds
-        //        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //
-        //        self.navigationController?.navigationBar.addSubview(visualEffectView)
-        //        visualEffectView.layer.zPosition = -1
     }
 }

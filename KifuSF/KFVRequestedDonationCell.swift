@@ -57,7 +57,7 @@ protocol KFPRequestedDonationCellDelegate: class {
     func didPressButton()
 }
 
-extension KFVRequestedDonationCell: KFPRegistableCell {
-    static var nibName: String = "KFVRequestedDonationCell"
-    static var reuseIdentifier: String = "requestedDonationCell"
+extension KFVRequestedDonationCell: KFPIdentifiable {
+
+    static var id = "requestedDonationCell"
 }

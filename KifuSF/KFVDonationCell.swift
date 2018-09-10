@@ -58,9 +58,6 @@ class KFVDonationCell: UITableViewCell {
     }
 }
 
-extension KFVDonationCell: KFPRegistableCell {
-    static var reuseIdentifier = "donationCell"
-    static var nibName = "KFVDonationCell"
-}
+
 
 

@@ -33,6 +33,8 @@
 		C50515C521368FD700718AE5 /* KFVDonationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */; };
 		C50515C72136927200718AE5 /* KFVDonationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */; };
 		C50515C9213694F900718AE5 /* DetailedDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */; };
+		C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD782146F73A00A5195B /* KFCTabBar.swift */; };
+		C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */; };
 		C510A4D8213599D500E8FC78 /* KFVDonationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C510A4D7213599D500E8FC78 /* KFVDonationCell.xib */; };
 		C54FDBD82141756000BC89B8 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBD72141756000BC89B8 /* UITableView.swift */; };
 		C54FDBDA2141761400BC89B8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBD92141761400BC89B8 /* Protocols.swift */; };
@@ -115,6 +117,8 @@
 		C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVDonationDescriptionCell.xib; sourceTree = "<group>"; };
 		C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDonationDescriptionCell.swift; sourceTree = "<group>"; };
 		C50515C8213694F900718AE5 /* DetailedDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDonationViewController.swift; sourceTree = "<group>"; };
+		C505BD782146F73A00A5195B /* KFCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCTabBar.swift; sourceTree = "<group>"; };
+		C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCTableViewWithRoundedCells.swift; sourceTree = "<group>"; };
 		C510A4D7213599D500E8FC78 /* KFVDonationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVDonationCell.xib; sourceTree = "<group>"; };
 		C54FDBD72141756000BC89B8 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		C54FDBD92141761400BC89B8 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C501830121447B7300257412 /* KFVPendingDonation.swift */,
 				C501830321447FD900257412 /* KFVRoundedCell.swift */,
+				C505BD782146F73A00A5195B /* KFCTabBar.swift */,
+				C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
 				C5DD405C2137F42E00ECC819 /* CreateDonationViewController.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
+				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C54FDBDE2141991700BC89B8 /* KFVRequestedDonationCell.swift in Sources */,
@@ -733,6 +740,7 @@
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
+				C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */,
 				44339C39210D4D5400E6663E /* (null) in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,

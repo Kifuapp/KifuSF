@@ -18,7 +18,8 @@ class KFCRequestedDonations: UIViewController {
         title = "Requested Donations"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
 
-        requestedDonationsTableView.registerTableViewCell(for: KFVRequestedDonationCell.self)
+//        requestedDonationsTableView.registerTableViewCell(for: KFVRequestedDonationCell.self)
+        requestedDonationsTableView.register(KFVRequestedDonationCell.self, forCellReuseIdentifier: KFVRequestedDonationCell.id)
         requestedDonationsTableView.dataSource = self
         requestedDonationsTableView.rowHeight = 152
     }
@@ -35,7 +36,7 @@ extension KFCRequestedDonations: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let requestedDonationCell = requestedDonationsTableView.dequeueReusableCell(withIdentifier: KFVRequestedDonationCell.reuseIdentifier, for: indexPath) as? KFVRequestedDonationCell else {
+        guard let requestedDonationCell = requestedDonationsTableView.dequeueReusableCell(withIdentifier: KFVRequestedDonationCell.id, for: indexPath) as? KFVRequestedDonationCell else {
             fatalError(KFErrorMessage.unknownCell)
         }
         

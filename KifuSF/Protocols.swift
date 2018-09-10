@@ -10,14 +10,8 @@
 
 import Foundation
 
-
-protocol KFPRegistableCell {
-    static var nibName: String { get }
-    static var reuseIdentifier: String { get }
-}
-
-protocol Identifiable {
-    
+protocol KFPIdentifiable {
+    static var id: String { get }
 }
 
 

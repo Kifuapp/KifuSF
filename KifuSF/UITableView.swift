@@ -8,9 +8,4 @@
 
 import UIKit.UITableView
 
-extension UITableView {
-    func registerTableViewCell(for class: KFPRegistableCell.Type) {
-        let nib = UINib(nibName: `class`.nibName, bundle: nil)
-        self.register(nib, forCellReuseIdentifier: `class`.reuseIdentifier)
-    }
-}
+
