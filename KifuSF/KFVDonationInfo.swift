@@ -9,7 +9,7 @@
 import UIKit
 
 class KFVDonationInfo: KFVDescriptor {
-    let descriptionTextView = KFVSticky<UILabel>(stickySide: .top)
+    let descriptionTextView = KFVSticky<UILabel>(stickySide: .bottom)
     
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
@@ -20,12 +20,12 @@ class KFVDonationInfo: KFVDescriptor {
     override func setUpStyling() {
         super.setUpStyling()
         
-        descriptionTextView.contentView.font = UIFont.preferredFont(forTextStyle: .caption2)
+        descriptionTextView.contentView.font = UIFont.preferredFont(forTextStyle: .caption1)
         descriptionTextView.contentView.textColor = UIColor.kfBody
         descriptionTextView.contentView.numberOfLines = 2
         descriptionTextView.contentView.adjustsFontForContentSizeCategory = true
         
         //TODO: remove this
-        descriptionTextView.contentView.text = "Devices/56F1BA86 -7CB9-4C 2D-BC2 9-804F75 F579D4/data/Containers/Shared/SystemGroupsystemgroup.com.apple.configurationprofiles2018-09-07 22:54:00.966633+0300 KifuSF[42551:1514708] [MC] Reading from private effective user settings."
+        descriptionTextView.contentView.text = "Pick-Up Hours between 10AM - 5PM"
     }
 }

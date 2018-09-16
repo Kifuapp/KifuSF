@@ -9,9 +9,11 @@
 import UIKit
 
 class KFVVolunteerInfo: KFVDescriptor {
-    let statisticsView = KFVStatistics()
     
+    let statisticsView = KFVStatistics()
     let confirmationButton = KFVSticky<UIButton>(stickySide: .bottom)
+    
+    weak var delegate: KFPVolunteerInfoCellDelegate?
     
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
@@ -34,16 +36,23 @@ class KFVVolunteerInfo: KFVDescriptor {
     override func setUpStyling() {
         super.setUpStyling()
         
+        confirmationButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
+        
         confirmationButton.contentView.setTitle("Confirm", for: .normal)
         confirmationButton.contentView.backgroundColor = .kfPrimary
         confirmationButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         confirmationButton.contentView.showsTouchWhenHighlighted = true
         
-        
         confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
         confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
-
-        
-        //TODO: remove this
     }
+    
+    @objc func confirmationButtonPressed() {
+        delegate?.didPressButton()
+    }
+}
+
+
+protocol KFPVolunteerInfoCellDelegate: class {
+    func didPressButton()
 }

@@ -11,6 +11,10 @@ import UIKit
 class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
     let descriptorView = T()
     
+    static var identifier: String {
+        return String(describing: T.self)
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -44,8 +48,4 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension KFVDonationCell: KFPIdentifiable {
-    static var id = "defaultRoundedCell"
 }

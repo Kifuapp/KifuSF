@@ -24,7 +24,7 @@ class KFVRequestedDonationCell: UITableViewCell {
         delegate?.didPressButton()
     }
     
-    weak var delegate: KFPRequestedDonationCellDelegate?
+    weak var delegate: KFPPendingDonationCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,10 +51,6 @@ class KFVRequestedDonationCell: UITableViewCell {
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.setUp(with: .button, andColor: .kfDestructive)
     }
-}
-
-protocol KFPRequestedDonationCellDelegate: class {
-    func didPressButton()
 }
 
 extension KFVRequestedDonationCell: KFPIdentifiable {

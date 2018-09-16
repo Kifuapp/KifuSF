@@ -8,8 +8,11 @@
 
 import UIKit
 
-class KDFPendingDonation: KFVDescriptor {
-    let cancelButton = KFVSticky<UIButton>()
+class KFVPendingDonation: KFVDescriptor {
+    
+    let cancelButton = KFVSticky<UIButton>(stickySide: .bottom)
+    
+    weak var delegate: KFPPendingDonationCellDelegate?
     
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
@@ -28,11 +31,22 @@ class KDFPendingDonation: KFVDescriptor {
     override func setUpStyling() {
         super.setUpStyling()
         
+        cancelButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        
         cancelButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         cancelButton.contentView.backgroundColor = UIColor.kfDestructive
+        cancelButton.contentView.showsTouchWhenHighlighted = true
         
         cancelButton.contentView.setTitle("Cancel", for: .normal)
-        cancelButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        cancelButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cancelButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
+    
+    @objc func cancelButtonPressed() {
+        delegate?.didPressButton()
+    }
+}
+
+protocol KFPPendingDonationCellDelegate: class {
+    func didPressButton()
 }

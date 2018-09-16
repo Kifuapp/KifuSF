@@ -19,7 +19,7 @@ class KFVDescriptor: UIView {
     let infoStackView = UIStackView()
     
     let titleLabel = UILabel()
-    let subtitleLabel = KFVSticky<UILabel>(stickySide: .top)
+    let subtitleLabel = KFVSticky<UILabel>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,7 +63,6 @@ class KFVDescriptor: UIView {
         
         contentsStackView.addArrangedSubview(topStackView)
         
-//        imageView.autoMatch(.height, to: .width, of: imageView)
         imageView.autoSetDimension(.height, toSize: 112)
         imageView.autoSetDimension(.width, toSize: 112)
         
@@ -92,8 +91,8 @@ class KFVDescriptor: UIView {
         subtitleLabel.contentView.adjustsFontForContentSizeCategory = true
         
         //TODO: remove this
-        subtitleLabel.contentView.text = "Reputation 78%"
-        titleLabel.text = "@Torcky"
+        subtitleLabel.contentView.text = "5 Miles Away"
+        titleLabel.text = "Dog"
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

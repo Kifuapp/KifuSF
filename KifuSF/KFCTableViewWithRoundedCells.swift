@@ -10,18 +10,21 @@ import UIKit
 
 class KFCTableViewWithRoundedCells: UIViewController {
     
-
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.separatorStyle = .none
-
+//        tableView.dataSource = self
+        
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.kfGray
+        
+        tableView.contentInset.bottom = 8
+        tableView.scrollIndicatorInsets.bottom = 8
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.autoPinEdgesToSuperviewEdges()
     }
-
-
 }

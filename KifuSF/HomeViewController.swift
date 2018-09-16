@@ -20,13 +20,11 @@ enum DonationOption: SwitchlessCases {
     case deliveringDonation(Donation)
 }
 
-class HomeViewController: UIViewController {
-    
-    let donationsTableView = UITableView()
+class HomeViewController: KFCTableViewWithRoundedCells {
     
     private var openDonations: [Donation] = [] {
         didSet {
-            donationsTableView.reloadData()
+            tableView.reloadData()
         }
     }
     
@@ -45,12 +43,15 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var lastSelectedCell: KFVDonationCell?
+    private var lastSelectedCell: KFVRoundedCell<KFVDonationInfo>?
     private var widgetView: KFVWidget?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         
         setUpDonationTableView()
         setUpWidgetView()
@@ -62,6 +63,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         
 //        widgetView?.reloadData()
         
@@ -135,18 +137,18 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = donationsTableView.dequeueReusableCell(withIdentifier: KFVDonationCell.id) as? KFVDonationCell else {
+        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier) as? KFVRoundedCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
-        return UITableViewCell()
+        return donationCell
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = donationsTableView.cellForRow(at: indexPath) as? KFVDonationCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? KFVRoundedCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
         lastSelectedCell = cell
@@ -173,8 +175,8 @@ extension HomeViewController: KFPWidgetDataSource {
 //MARK: KFPWidgetDelegate
 extension HomeViewController: KFPWidgetDelegate {
     func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
-        donationsTableView.contentInset.top = height + 8
-        donationsTableView.scrollIndicatorInsets.top = height + 8
+        tableView.contentInset.top = height + 8
+        tableView.scrollIndicatorInsets.top = height + 8
     }
     
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
@@ -182,14 +184,15 @@ extension HomeViewController: KFPWidgetDelegate {
         switch type {
         case .donation(_):
             print("Donation widget pressed")
+            
+            let pendingDonationsVC = KFCPendingDonations()
+            navigationController?.pushViewController(pendingDonationsVC, animated: true)
+            
         case .delivery(_):
             print("Delivery widget pressed")
-            let createDonationStoryboard = UIStoryboard(name: "RequestedDonations", bundle: nil)
-            if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-                present(createDonationVC, animated: true)
-            } else {
-                print("error")
-            }
+            
+            let volunteersListVC = KFCVolunteerList()
+            navigationController?.pushViewController(volunteersListVC, animated: true)
         }
     }
 }
@@ -208,28 +211,21 @@ extension HomeViewController {
         widgetView.delegate = self
         
         view.addSubview(widgetView)
-        
+
         widgetView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         widgetView.autoPinEdge(toSuperviewEdge: .top)
         widgetView.autoPinEdge(toSuperviewEdge: .leading)
         widgetView.autoPinEdge(toSuperviewEdge: .trailing)
-        
+
         widgetView.reloadData()
     }
     
     func setUpDonationTableView() {
-        donationsTableView.dataSource = self
-        donationsTableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        donationsTableView.separatorStyle = .none
-        donationsTableView.backgroundColor = UIColor.kfGray
-        
-        donationsTableView.contentInset.bottom = 8
-        donationsTableView.scrollIndicatorInsets.bottom = 8
-        
-//        donationsTableView.registerTableViewCell(for: KFVDonationCell.self)
-        donationsTableView.register(KFVDonationCell.self, forCellReuseIdentifier: KFVDonationCell.id)
+        tableView.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
     }
     
     func setUpNavBar() {
