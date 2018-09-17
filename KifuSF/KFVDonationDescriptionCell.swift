@@ -27,6 +27,8 @@ class KFVDonationDescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    static var id = "donationDescriptionCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = UIColor.clear
@@ -54,8 +56,4 @@ class KFVDonationDescriptionCell: UITableViewCell {
         
         statisticStackView.heightAnchor.constraint(equalToConstant: deliveryCountLabel.requiredHeight * 1.25).isActive = true
     }
-}
-
-extension KFVDonationDescriptionCell: KFPIdentifiable {
-    static var id = "donationDescriptionCell"
 }

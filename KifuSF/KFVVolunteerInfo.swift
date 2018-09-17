@@ -43,7 +43,7 @@ class KFVVolunteerInfo: KFVDescriptor {
         confirmationButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         confirmationButton.contentView.showsTouchWhenHighlighted = true
         
-        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     

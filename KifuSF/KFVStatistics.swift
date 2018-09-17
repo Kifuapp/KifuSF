@@ -68,7 +68,7 @@ class KFVStatistics: UIView {
         
         deliveryCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         deliveryCountLabel.numberOfLines = 1
-        deliveryCountLabel.textColor = UIColor.kfBody
+        deliveryCountLabel.textColor = UIColor.kfSubtitle
         deliveryCountLabel.adjustsFontForContentSizeCategory = true
         
         donationImageView.image = UIImage.kfDonationIcon
@@ -77,7 +77,7 @@ class KFVStatistics: UIView {
         
         donationCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         donationCountLabel.numberOfLines = 1
-        donationCountLabel.textColor = UIColor.kfBody
+        donationCountLabel.textColor = UIColor.kfSubtitle
         donationCountLabel.adjustsFontForContentSizeCategory = true
         
         

@@ -8,22 +8,11 @@
 
 import UIKit
 
-class DetailedDonationViewController: UIViewController {
-    
-    @IBOutlet weak var requestDeliveryButton: UIButton!
-    @IBOutlet weak var donationTableView: UITableView!
-    
-    @IBAction func requestDeliveryButtonPressed(_ sender: Any) {
-        
-    }
+class DetailedDonationViewController: KFCModularTableView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpDonationTableView()
-        
-        requestDeliveryButton.setTitle("Request Delivery", for: .normal)        
-        requestDeliveryButton.setUp(with: .button, andColor: .kfPrimary)
         
         title = "Donation"
         view.backgroundColor = UIColor.kfWhite
@@ -38,26 +27,6 @@ class DetailedDonationViewController: UIViewController {
     @objc func flagButtonPressed() {
         //TODO: flagging
     }
-    
-    func setUpDonationTableView() {
-//        donationTableView.registerTableViewCell(for: KFVDonationDescriptionCell.self)
-        donationTableView.dataSource = self
-    }
 
-}
 
-extension DetailedDonationViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = donationTableView.dequeueReusableCell(withIdentifier: KFVDonationDescriptionCell.id, for: indexPath) as? KFVDonationDescriptionCell else {
-            fatalError(KFErrorMessage.unknownCell)
-        }
-        
-        return cell
-    }
-    
-    
 }

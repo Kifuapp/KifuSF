@@ -12,19 +12,27 @@ import PureLayout
 class KFVSticky<T: UIView>: UIView {
     
     var stickySide: ALEdge?
+    var offset: CGFloat?
+    
     let contentView = T()
     var anchors = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         stickySide = nil
+        offset = nil
         
         super.init(frame: frame)
         addSubview(contentView)
         setupLayoutConstraints()
     }
     
-    init(stickySide: ALEdge) {
+    convenience init(stickySide: ALEdge) {
+        self.init(stickySide: stickySide, withOffset: nil)
+    }
+    
+    init(stickySide: ALEdge, withOffset offset: CGFloat?) {
         self.stickySide = stickySide
+        self.offset = offset
         
         super.init(frame: UIScreen.main.bounds)
         addSubview(contentView)
@@ -35,18 +43,20 @@ class KFVSticky<T: UIView>: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        let offset = self.offset ?? 0
+        
         anchors = [
         contentView.autoPinEdge(toSuperviewEdge: .top,
-                                withInset: 0,
+                                withInset: (stickySide == .top) ? offset : 0,
                                 relation: (stickySide?.opositeSide() == .top) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .leading,
-                                withInset: 0,
+                                withInset: (stickySide == .leading) ? offset : 0,
                                 relation: (stickySide?.opositeSide() == .leading) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .trailing,
-                                withInset: 0,
+                                withInset: (stickySide == .trailing) ? offset : 0,
                                 relation: (stickySide?.opositeSide() == .trailing) ? .greaterThanOrEqual : .equal),
         contentView.autoPinEdge(toSuperviewEdge: .bottom,
-                                withInset: 0,
+                                withInset: (stickySide == .bottom) ? offset : 0,
                                 relation: (stickySide?.opositeSide() == .bottom) ? .greaterThanOrEqual : .equal)
         ]
     }

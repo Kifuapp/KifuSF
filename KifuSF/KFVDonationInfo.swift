@@ -9,7 +9,7 @@
 import UIKit
 
 class KFVDonationInfo: KFVDescriptor {
-    let descriptionTextView = KFVSticky<UILabel>(stickySide: .bottom)
+    let descriptionTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 6)
     
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
@@ -20,7 +20,7 @@ class KFVDonationInfo: KFVDescriptor {
     override func setUpStyling() {
         super.setUpStyling()
         
-        descriptionTextView.contentView.font = UIFont.preferredFont(forTextStyle: .caption1)
+        descriptionTextView.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         descriptionTextView.contentView.textColor = UIColor.kfBody
         descriptionTextView.contentView.numberOfLines = 2
         descriptionTextView.contentView.adjustsFontForContentSizeCategory = true

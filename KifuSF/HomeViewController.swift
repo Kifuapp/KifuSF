@@ -151,9 +151,11 @@ extension HomeViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? KFVRoundedCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
+        
         lastSelectedCell = cell
         
-        performSegue(withIdentifier: UIStoryboardSegue.kfShowDetailedDonation, sender: self)
+        let detailedOpenDonationVC = DetailedDonationViewController()
+        navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
     
 }

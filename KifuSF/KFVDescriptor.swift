@@ -15,6 +15,7 @@ class KFVDescriptor: UIView {
     let topStackView = UIStackView()
     
     let imageView = KFVImage()
+    var imageConstraints = [NSLayoutConstraint]()
     
     let infoStackView = UIStackView()
     
@@ -63,8 +64,8 @@ class KFVDescriptor: UIView {
         
         contentsStackView.addArrangedSubview(topStackView)
         
-        imageView.autoSetDimension(.height, toSize: 112)
-        imageView.autoSetDimension(.width, toSize: 112)
+        imageConstraints.append(imageView.autoSetDimension(.height, toSize: 112))
+        imageConstraints.append(imageView.autoSetDimension(.width, toSize: 112))
         
         contentsStackView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
         contentsStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
@@ -87,12 +88,12 @@ class KFVDescriptor: UIView {
         
         subtitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleLabel.contentView.numberOfLines = 0
-        subtitleLabel.contentView.textColor = UIColor.kfBody
+        subtitleLabel.contentView.textColor = UIColor.kfSubtitle
         subtitleLabel.contentView.adjustsFontForContentSizeCategory = true
         
         //TODO: remove this
         subtitleLabel.contentView.text = "5 Miles Away"
-        titleLabel.text = "Dog"
+        titleLabel.text = "Toilet Paper"
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
