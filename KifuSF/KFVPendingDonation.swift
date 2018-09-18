@@ -45,6 +45,13 @@ class KFVPendingDonation: KFVDescriptor {
     @objc func cancelButtonPressed() {
         delegate?.didPressButton()
     }
+    
+    func reloadData(for data: KFMPendingDonation) {
+        imageView.imageView.kf.setImage(with: data.imageURL)
+        
+        titleLabel.text = data.title
+        subtitleLabel.contentView.text = "\(data.distance) Miles away"
+    }
 }
 
 protocol KFPPendingDonationCellDelegate: class {

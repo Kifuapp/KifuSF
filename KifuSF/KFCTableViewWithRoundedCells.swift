@@ -23,8 +23,13 @@ class KFCTableViewWithRoundedCells: UIViewController {
         tableView.contentInset.bottom = 8
         tableView.scrollIndicatorInsets.bottom = 8
         
+        tableView.contentInset.top = 8
+        tableView.scrollIndicatorInsets.top = 8
+        
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.autoPinEdgesToSuperviewEdges()
+        
+        view.layoutIfNeeded()
     }
 }

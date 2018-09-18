@@ -50,6 +50,16 @@ class KFVVolunteerInfo: KFVDescriptor {
     @objc func confirmationButtonPressed() {
         delegate?.didPressButton()
     }
+    
+    func reloadData(for data: KFMVolunteerInfo) {
+        imageView.imageView.kf.setImage(with: data.imageURL)
+        
+        titleLabel.text = "@\(data.username)"
+        subtitleLabel.contentView.text = "\(data.userReputation)%"
+        
+        statisticsView.donationCountLabel.text = "\(data.userDonationsCount)"
+        statisticsView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+    }
 }
 
 

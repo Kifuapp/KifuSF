@@ -20,6 +20,11 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
         tableView.dataSource = self
         tableView.allowsSelection = false
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 }
 
 extension KFCVolunteerList: UITableViewDataSource {
@@ -33,6 +38,9 @@ extension KFCVolunteerList: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
+        //TODO: self explanatory
+        let newData = KFMVolunteerInfo(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, username: "Pondorasti", userReputation: 100, userDonationsCount: 99, userDeliveriesCount: 99)
+        volunteerInfoCell.descriptorView.reloadData(for: newData)
         volunteerInfoCell.descriptorView.delegate = self
         
         return volunteerInfoCell

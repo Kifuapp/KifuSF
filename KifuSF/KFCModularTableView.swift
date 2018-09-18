@@ -11,7 +11,7 @@ import UIKit
 class KFCModularTableView: UIViewController {
     
     enum CellTypes { // view model
-        case donationDescription, donationSteps, deliverySteps, entityInfo, destinationMap
+        case openDonationDescription, inProgressDonationDescription, donationSteps, deliverySteps, entityInfo, destinationMap
     }
     
     let tableView = UITableView()
@@ -23,8 +23,8 @@ class KFCModularTableView: UIViewController {
         tableView.backgroundColor = UIColor.kfWhite
         
         tableView.dataSource = self
-        tableView.register(KFVModularCell<KFVDonationDescription>.self,
-                           forCellReuseIdentifier: KFVModularCell<KFVDonationDescription>.identifier)
+        tableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,14 +36,23 @@ class KFCModularTableView: UIViewController {
     func reloadData() {
         items = [KFPModularTableViewItem]()
         
-        if let donationDescriptionItem = retrieveDonationDescriptionItem() {
-            items.append(donationDescriptionItem)
+        if let openDonationDescriptionItem = retrieveOpenDonationDescriptionItem() {
+            items.append(openDonationDescriptionItem)
         }
     }
     
-    func retrieveDonationDescriptionItem() -> KFPModularTableViewItem? {
-        return KFVMDonationDescriptionItem(donationTitle: "Toilet Paper", username: "Pondorasti", creationDate: "12.12.12", userReputation: 79, userDonationsCount: 12, userDeliveriesCount: 12, distance: 2.4, description: "woof woof")
+    func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+        return nil
     }
+    
+    func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
+        return nil
+    }
+    
+    func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
+        return nil
+    }
+
 }
 
 extension KFCModularTableView: UITableViewDataSource {
@@ -59,14 +68,14 @@ extension KFCModularTableView: UITableViewDataSource {
         let item = items[indexPath.section]
         
         switch item.type {
-        case .donationDescription:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVDonationDescription>.identifier,
-                                                           for: indexPath) as? KFVModularCell<KFVDonationDescription>,
-                let castedItem = item as? KFVMDonationDescriptionItem else {
+        case .openDonationDescription:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier,
+                                                           for: indexPath) as? KFVModularCell<KFVOpenDonationDescription>,
+                let castedItem = item as? KFMOpenDonationDescriptionItem else {
                 fatalError(KFErrorMessage.unknownCell)
             }
             
-            cell.descriptorView.update(for: castedItem)
+            cell.descriptorView.reloadData(for: castedItem)
             return cell
             
         default:

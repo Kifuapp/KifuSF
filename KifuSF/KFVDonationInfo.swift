@@ -24,8 +24,12 @@ class KFVDonationInfo: KFVDescriptor {
         descriptionTextView.contentView.textColor = UIColor.kfBody
         descriptionTextView.contentView.numberOfLines = 2
         descriptionTextView.contentView.adjustsFontForContentSizeCategory = true
-        
-        //TODO: remove this
-        descriptionTextView.contentView.text = "Pick-Up Hours between 10AM - 5PM"
+    }
+    
+    func reloadData(for data: KFMDonationInfo) {
+        imageView.imageView.kf.setImage(with: data.imageURL)
+        titleLabel.text = data.title
+        subtitleLabel.contentView.text = "\(data.distance) Miles away"
+        descriptionTextView.contentView.text = data.description
     }
 }

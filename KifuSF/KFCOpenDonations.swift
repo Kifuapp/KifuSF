@@ -20,7 +20,7 @@ enum DonationOption: SwitchlessCases {
     case deliveringDonation(Donation)
 }
 
-class HomeViewController: KFCTableViewWithRoundedCells {
+class KFCOpenDonations: KFCTableViewWithRoundedCells {
     
     private var openDonations: [Donation] = [] {
         didSet {
@@ -129,7 +129,7 @@ class HomeViewController: KFCTableViewWithRoundedCells {
 }
 
 //MARK: UITableViewDataSource
-extension HomeViewController: UITableViewDataSource {
+extension KFCOpenDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
         
@@ -140,12 +140,16 @@ extension HomeViewController: UITableViewDataSource {
         guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier) as? KFVRoundedCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
+        
+        //TODO: self explanatory
+        let newData = KFMDonationInfo(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Doggo", distance: 12.3, description: "woof woof")
+        donationCell.descriptorView.reloadData(for: newData)
 
         return donationCell
     }
 }
 
-extension HomeViewController: UITableViewDelegate {
+extension KFCOpenDonations: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? KFVRoundedCell<KFVDonationInfo> else {
@@ -154,14 +158,14 @@ extension HomeViewController: UITableViewDelegate {
         
         lastSelectedCell = cell
         
-        let detailedOpenDonationVC = DetailedDonationViewController()
+        let detailedOpenDonationVC = KFCDetailedDonation()
         navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
     
 }
 
 //MARK: KFPWidgetDataSource
-extension HomeViewController: KFPWidgetDataSource {
+extension KFCOpenDonations: KFPWidgetDataSource {
     func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo? {
         switch type {
         case .donation(_):
@@ -175,7 +179,7 @@ extension HomeViewController: KFPWidgetDataSource {
 }
 
 //MARK: KFPWidgetDelegate
-extension HomeViewController: KFPWidgetDelegate {
+extension KFCOpenDonations: KFPWidgetDelegate {
     func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
         tableView.contentInset.top = height + 8
         tableView.scrollIndicatorInsets.top = height + 8
@@ -187,19 +191,19 @@ extension HomeViewController: KFPWidgetDelegate {
         case .donation(_):
             print("Donation widget pressed")
             
-            let pendingDonationsVC = KFCPendingDonations()
-            navigationController?.pushViewController(pendingDonationsVC, animated: true)
+            let volunteersListVC = KFCVolunteerList()
+            navigationController?.pushViewController(volunteersListVC, animated: true)
             
         case .delivery(_):
             print("Delivery widget pressed")
             
-            let volunteersListVC = KFCVolunteerList()
-            navigationController?.pushViewController(volunteersListVC, animated: true)
+            let pendingDonationsVC = KFCPendingDonations()
+            navigationController?.pushViewController(pendingDonationsVC, animated: true)
         }
     }
 }
 
-extension HomeViewController {
+extension KFCOpenDonations {
     
     func setUpWidgetView() {
         guard let widgetView = Bundle.main.loadNibNamed(KFVWidget.nibName, owner: self, options: nil)?.first as? KFVWidget else {

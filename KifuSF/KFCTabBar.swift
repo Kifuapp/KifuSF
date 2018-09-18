@@ -12,14 +12,24 @@ class KFCTabBar: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        tabBar.isTranslucent
+
         tabBar.tintColor = UIColor.kfPrimary
         
-        let homeViewController = HomeViewController()
-        homeViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage.kfBoxIcon, tag: 0)
+        let homeVC = KFCOpenDonations()
+        homeVC.tabBarItem = UITabBarItem(title: "Home", image: .kfBoxIcon, tag: 0)
         
-        viewControllers = [homeViewController]
+        let statusVC = KFCStatus()
+        statusVC.tabBarItem = UITabBarItem(title: "Status", image: .kfBoxIcon, tag: 1)
+        
+        viewControllers = [homeVC, statusVC]
+        
+        let leaderBoardStoryboard = UIStoryboard(name: "Leaderboard", bundle: nil)
+        if let initialLeaderboardVC = leaderBoardStoryboard.instantiateInitialViewController() {
+            initialLeaderboardVC.tabBarItem = UITabBarItem(title: "Leaderboard", image: .kfBoxIcon, tag: 2)
+            
+            viewControllers?.append(initialLeaderboardVC)
+        }
+        
         viewControllers = viewControllers?.map { UINavigationController(rootViewController: $0) }
     }
 

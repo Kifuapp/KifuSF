@@ -19,15 +19,18 @@ class KFVModularCell<T: KFVDescriptor>: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(descriptorView)
+        contentView.backgroundColor = .kfWhite
         
         translatesAutoresizingMaskIntoConstraints = false
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptorView.autoPinEdgesToSuperviewEdges()
+        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
         
         self.selectionStyle = .none
         layer.masksToBounds = false
-        contentView.backgroundColor = UIColor.kfGray
     }
     
     required init?(coder aDecoder: NSCoder) {

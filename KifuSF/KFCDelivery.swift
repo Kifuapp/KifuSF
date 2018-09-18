@@ -9,21 +9,24 @@
 import UIKit
 import XLPagerTabStrip
 
-class KFCDelivery: UIViewController {
-
-    @IBOutlet weak var deliveryTableView: UITableView!
-    @IBOutlet weak var dynamicButton: UIButton!
+class KFCDelivery: KFCModularTableView {
     
     var itemInfo: IndicatorInfo?
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        title = "Delivery"
+        view.backgroundColor = UIColor.kfWhite
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(flagButtonPressed))
+    }
+    
+    @objc func flagButtonPressed() {
+        //TODO: flagging
     }
 }
 

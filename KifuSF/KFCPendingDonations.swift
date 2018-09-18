@@ -33,6 +33,9 @@ extension KFCPendingDonations: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
+        //TODO: self-explanatory
+        let newData = KFMPendingDonation(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Doggo", distance: 3.14)
+        pendingDonationCell.descriptorView.reloadData(for: newData)
         pendingDonationCell.descriptorView.delegate = self
         
         return pendingDonationCell
