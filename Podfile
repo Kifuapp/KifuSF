@@ -13,6 +13,8 @@ target 'KifuSF' do
   pod 'Firebase/Storage'
   pod 'Kingfisher', '~> 4.0'
   pod 'LocationPicker'
+  pod 'GoogleSignIn'
+  
   
   pod 'Sourcery'
 

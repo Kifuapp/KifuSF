@@ -14,6 +14,10 @@
 		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
 		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
+		7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A49CFBF213E3BDD001A48FD /* Login.storyboard */; };
+		7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */; };
+		7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */; };
+		7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC721434EAC001A48FD /* LoginViewController.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A49CFBF213E3BDD001A48FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthViewController.swift; sourceTree = "<group>"; };
+		7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectMissingInfoViewController.swift; sourceTree = "<group>"; };
+		7A49CFC721434EAC001A48FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5A351D6210D0CE500A717D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +179,7 @@
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
+				7A49CFBF213E3BDD001A48FD /* Login.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -273,6 +282,9 @@
 			isa = PBXGroup;
 			children = (
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
+				7A49CFC721434EAC001A48FD /* LoginViewController.swift */,
+				7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */,
+				7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */,
 			);
 			name = "Login-Register";
 			sourceTree = "<group>";
@@ -351,6 +363,7 @@
 			files = (
 				E98B003A2137946D008FD75A /* KeyedProperties.stencil in Resources */,
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
+				7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
 				C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */,
@@ -367,8 +380,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -376,8 +391,10 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -396,10 +413,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -458,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */,
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
 				E90B247A210D8F48009B9E0B /* ViewController.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
@@ -483,10 +503,12 @@
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
+				7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
 				44339C39210D4D5400E6663E /* (null) in Sources */,
+				7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,
 				44339C35210D477700E6663E /* (null) in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
@@ -635,7 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8U3L6K9JA6;
+				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,7 +676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8U3L6K9JA6;
+				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

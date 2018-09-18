@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     
     let plusImage = UIImage(named: "PlusSquare")
@@ -71,7 +72,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var buttonViewRegister: GradientView!
-    
+    //TODO: Add a manual seque to new storyboard 
     @IBAction func registerButtonTapped(_ sender: Any) { // swiftlint:disable:this function_body_length
         clearErrorMessage()
         dismissKeyboard()
@@ -103,6 +104,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         
         isRegisterButtonEnabled = false
         
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 let alert = UIAlertController(errorMessage: error.localizedDescription)
@@ -127,7 +129,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
                 image: image,
                 contactNumber:
                 contactNumber, completion: { (user) in
-                guard let user = user else {
+                guard let _ = user else {
                     let alert = UIAlertController(errorMessage: nil)
                     self.present(alert, animated: true)
                     
@@ -136,10 +138,10 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                User.setCurrent(user, writeToUserDefaults: true)
+//                User.setCurrent(user, writeToUserDefaults: true)
                 
                 //succeeded regiestration
-                self.performSegue(withIdentifier: "registerToHome", sender: nil)
+                self.performSegue(withIdentifier: "show two factor auth", sender: nil)
             })
         }
     }
