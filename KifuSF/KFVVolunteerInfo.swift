@@ -55,7 +55,7 @@ class KFVVolunteerInfo: KFVDescriptor {
         imageView.imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = "@\(data.username)"
-        subtitleLabel.contentView.text = "\(data.userReputation)%"
+        subtitleLabel.contentView.text = "Reputation: \(data.userReputation)%"
         
         statisticsView.donationCountLabel.text = "\(data.userDonationsCount)"
         statisticsView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"

@@ -66,6 +66,7 @@ final class KFVWidget: UIView {
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         
         deliveryTitleLabel.setUp(with: .body1)
         deliverySubtitleLabel.setUp(with: .header2)

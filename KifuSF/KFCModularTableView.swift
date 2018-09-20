@@ -11,7 +11,8 @@ import UIKit
 class KFCModularTableView: UIViewController {
     
     enum CellTypes { // view model
-        case openDonationDescription, inProgressDonationDescription, donationSteps, deliverySteps, entityInfo, destinationMap
+        case openDonationDescription
+        case inProgressDonationDescription, donationSteps, deliverySteps, entityInfo, destinationMap
     }
     
     let tableView = UITableView()
@@ -25,6 +26,10 @@ class KFCModularTableView: UIViewController {
         tableView.dataSource = self
         tableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
+        tableView.register(KFVModularCell<KFVProgress>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVProgress>.identifier)
+        
+        tableView.register(UINib(nibName: "KFVProgress", bundle: nil), forCellReuseIdentifier: "KFVProgress")
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,9 +44,17 @@ class KFCModularTableView: UIViewController {
         if let openDonationDescriptionItem = retrieveOpenDonationDescriptionItem() {
             items.append(openDonationDescriptionItem)
         }
+        
+        if let progressItem = retrieveProgressItem() {
+            items.append(progressItem)
+        }
     }
     
     func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+        return nil
+    }
+    
+    func retrieveProgressItem() -> KFPModularTableViewItem? {
         return nil
     }
     
@@ -77,6 +90,11 @@ extension KFCModularTableView: UITableViewDataSource {
             
             cell.descriptorView.reloadData(for: castedItem)
             return cell
+            
+        case .donationSteps:
+           let cell = tableView.dequeueReusableCell(withIdentifier: "KFVProgress", for: indexPath)
+            
+           return cell
             
         default:
             fatalError(KFErrorMessage.unknownCell)

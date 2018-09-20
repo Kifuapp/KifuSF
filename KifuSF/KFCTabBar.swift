@@ -12,8 +12,6 @@ class KFCTabBar: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tabBar.tintColor = UIColor.kfPrimary
         
         let homeVC = KFCOpenDonations()
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: .kfBoxIcon, tag: 0)

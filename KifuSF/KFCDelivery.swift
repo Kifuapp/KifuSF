@@ -11,31 +11,24 @@ import XLPagerTabStrip
 
 class KFCDelivery: KFCModularTableView {
     
-    var itemInfo: IndicatorInfo?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Delivery"
         view.backgroundColor = UIColor.kfWhite
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(flagButtonPressed))
     }
     
-    @objc func flagButtonPressed() {
-        //TODO: flagging
+    override func retrieveProgressItem() -> KFPModularTableViewItem? {
+        return KFMProgress()
     }
+    
+    override func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+        return KFMOpenDonationDescriptionItem(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", username: "Pondorasti", creationDate: "12.12.12", userReputation: 79, userDonationsCount: 12, userDeliveriesCount: 12, distance: 5, description: "woof woof")
+    } 
 }
 
 extension KFCDelivery: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        guard let info = itemInfo else {
-            fatalError("problem")
-        }
-        
-        return info
+        return IndicatorInfo(title: "Delivery")
     }
 }
