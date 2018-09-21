@@ -656,6 +656,7 @@
 			baseConfigurationReference = 2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
@@ -665,6 +666,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -675,6 +677,7 @@
 			baseConfigurationReference = F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
@@ -684,6 +687,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
