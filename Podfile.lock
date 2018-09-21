@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.7.3)
   - Firebase/Auth (5.7.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.3)
@@ -20,7 +21,7 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
     - GoogleUtilities/MethodSwizzler (~> 5.2.0)
     - GoogleUtilities/Network (~> 5.2)
-    - GoogleUtilities/NSData+zlib (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
   - FirebaseAuth (5.0.3):
     - FirebaseAuthInterop (~> 1.0)
@@ -45,21 +46,21 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
     - GoogleUtilities/MethodSwizzler (~> 5.2.0)
     - GoogleUtilities/Network (~> 5.2)
-    - GoogleUtilities/NSData+zlib (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
   - GoogleSignIn (4.2.0):
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GoogleToolboxForMac/Defines (2.1.4)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4):
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
     - GoogleToolboxForMac/DebugUtils (= 2.1.4)
     - GoogleToolboxForMac/Defines (= 2.1.4)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.4)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
   - GoogleUtilities/AppDelegateSwizzler (5.2.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -71,9 +72,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/Network (5.2.2):
     - GoogleUtilities/Logger
-    - GoogleUtilities/NSData+zlib
+    - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - GoogleUtilities/NSData+zlib (5.2.2)
+  - "GoogleUtilities/NSData+zlib (5.2.2)"
   - GoogleUtilities/Reachability (5.2.2):
     - GoogleUtilities/Logger
   - GTMOAuth2 (1.1.6):
@@ -86,11 +87,17 @@ PODS:
   - Kingfisher (4.9.0)
   - leveldb-library (1.20)
   - LocationPicker (1.2.0)
+  - Moya (11.0.2):
+    - Moya/Core (= 11.0.2)
+  - Moya/Core (11.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Result (3.2.4)
   - Sourcery (0.14.0)
 
 DEPENDENCIES:
@@ -102,9 +109,37 @@ DEPENDENCIES:
   - GoogleSignIn
   - Kingfisher (~> 4.0)
   - LocationPicker
+  - Moya
   - Sourcery
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - FirebaseStorage
+    - FirebaseUI
+    - GoogleAppMeasurement
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMOAuth2
+    - GTMSessionFetcher
+    - Kingfisher
+    - leveldb-library
+    - LocationPicker
+    - Moya
+    - nanopb
+    - Result
+    - Sourcery
+
 SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Firebase: 734a4f92957aa6c40e7ae3fda3d9359e1890aa87
   FirebaseAnalytics: 993577e91157feb40945abedd6ab346d8a4b6ac8
   FirebaseAuth: 657a25e4be044d2d333663ebf515a861c5a59cd7
@@ -123,9 +158,11 @@ SPEC CHECKSUMS:
   Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   LocationPicker: d91f9fe50493d8058391fe1408aa2a8db49a584d
+  Moya: a725035953bc1c0eb1be505ab903984501d82440
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   Sourcery: 51332d15c2fc40e4ac5956e149a5d95607c63154
 
-PODFILE CHECKSUM: 06d22a18c6d7915ac58230e373076e560aa89629
+PODFILE CHECKSUM: 26e5009a20ef0b787c86425064fc77f248743d91
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

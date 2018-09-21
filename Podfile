@@ -14,7 +14,7 @@ target 'KifuSF' do
   pod 'Kingfisher', '~> 4.0'
   pod 'LocationPicker'
   pod 'GoogleSignIn'
-  
+  pod 'Moya'
   
   pod 'Sourcery'
 
