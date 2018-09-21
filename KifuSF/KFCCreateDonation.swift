@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateDonationViewController: UIViewController {
+class KFCCreateDonation: UIViewController {
 
     @IBOutlet weak var donationImageContainerView: UIView!
     @IBOutlet weak var donationImageView: UIImageView!
@@ -34,8 +34,6 @@ class CreateDonationViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        
     }
     
     
@@ -57,7 +55,7 @@ class CreateDonationViewController: UIViewController {
 }
 
 
-extension CreateDonationViewController {
+extension KFCCreateDonation {
     func setUpUI() {
         title = "Create Donation"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))

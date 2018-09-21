@@ -20,7 +20,7 @@ class KFVDescriptor: UIView {
     let infoStackView = UIStackView()
     
     let titleLabel = UILabel()
-    let subtitleLabel = KFVSticky<UILabel>()
+    let subtitleStickyLabel = KFVSticky<UILabel>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +47,7 @@ class KFVDescriptor: UIView {
         infoStackView.spacing = 0
         
         infoStackView.addArrangedSubview(titleLabel)
-        infoStackView.addArrangedSubview(subtitleLabel)
+        infoStackView.addArrangedSubview(subtitleStickyLabel)
         
         topStackView.axis = .horizontal
         topStackView.alignment = .fill
@@ -73,7 +73,7 @@ class KFVDescriptor: UIView {
         contentsStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
         
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        subtitleLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
     func setUpStyling() {
@@ -86,14 +86,10 @@ class KFVDescriptor: UIView {
         titleLabel.textColor = UIColor.kfTitle
         titleLabel.adjustsFontForContentSizeCategory = true
         
-        subtitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        subtitleLabel.contentView.numberOfLines = 0
-        subtitleLabel.contentView.textColor = UIColor.kfSubtitle
-        subtitleLabel.contentView.adjustsFontForContentSizeCategory = true
-        
-        //TODO: remove this
-        subtitleLabel.contentView.text = "5 Miles Away"
-        titleLabel.text = "Toilet Paper"
+        subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        subtitleStickyLabel.contentView.numberOfLines = 0
+        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        subtitleStickyLabel.contentView.adjustsFontForContentSizeCategory = true
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -9,7 +9,7 @@
 import UIKit
 
 class KFVDonationInfo: KFVDescriptor {
-    let descriptionTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 6)
+    let descriptionTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
     
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
@@ -29,7 +29,7 @@ class KFVDonationInfo: KFVDescriptor {
     func reloadData(for data: KFMDonationInfo) {
         imageView.imageView.kf.setImage(with: data.imageURL)
         titleLabel.text = data.title
-        subtitleLabel.contentView.text = "\(data.distance) Miles away"
+        subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
         descriptionTextView.contentView.text = data.description
     }
 }

@@ -23,14 +23,14 @@ class KFVVolunteerInfo: KFVDescriptor {
         infoStackView.addArrangedSubview(confirmationButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        subtitleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
+        subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         statisticsView.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         confirmationButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
         confirmationButton.autoPinEdge(toSuperviewEdge: .leading)
         confirmationButton.autoPinEdge(toSuperviewEdge: .trailing)
         
-        subtitleLabel.updateStickySide()
+        subtitleStickyLabel.updateStickySide()
     }
     
     override func setUpStyling() {
@@ -42,20 +42,23 @@ class KFVVolunteerInfo: KFVDescriptor {
         confirmationButton.contentView.backgroundColor = .kfPrimary
         confirmationButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         confirmationButton.contentView.showsTouchWhenHighlighted = true
+
+//        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        confirmationButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
         
-        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func confirmationButtonPressed() {
         delegate?.didPressButton()
+        confirmationButton.contentView.isHighlighted = true
     }
     
     func reloadData(for data: KFMVolunteerInfo) {
         imageView.imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = "@\(data.username)"
-        subtitleLabel.contentView.text = "Reputation: \(data.userReputation)%"
+        subtitleStickyLabel.contentView.text = "Reputation: \(data.userReputation)%"
         
         statisticsView.donationCountLabel.text = "\(data.userDonationsCount)"
         statisticsView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"

@@ -21,7 +21,7 @@ class KFVPendingDonation: KFVDescriptor {
         infoStackView.addArrangedSubview(cancelButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        subtitleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
+        subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         cancelButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
         cancelButton.autoPinEdge(toSuperviewEdge: .leading)
@@ -50,7 +50,7 @@ class KFVPendingDonation: KFVDescriptor {
         imageView.imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = data.title
-        subtitleLabel.contentView.text = "\(data.distance) Miles away"
+        subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
     }
 }
 

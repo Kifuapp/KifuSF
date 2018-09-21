@@ -1,21 +1,18 @@
 //
-//  KFVDonationDescription.swift
+//  KFVInProgressDonationDescription.swift
 //  KifuSF
 //
-//  Created by Alexandru Turcanu on 17/09/2018.
+//  Created by Alexandru Turcanu on 21/09/2018.
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
 import UIKit
 
-class KFVOpenDonationDescription: KFVDescriptor {
-    
-    let statisticsView = KFVSticky<KFVStatistics>(stickySide: .top)
-    let secondSubtitleLabel = KFVSticky<UILabel>()
+class KFVInProgressDonationDescription: KFVDescriptor {
     
     let statusStackView = UIStackView()
     let statusTitleLabel = UILabel()
-    let statusDescription = UILabel()
+    let statusDescriptionStickyLabel = KFVSticky<UILabel>(stickySide: .top)
     
     let donationDescriptionStackView = UIStackView()
     let donationDescriptionTitleLabel = UILabel()
@@ -24,12 +21,13 @@ class KFVOpenDonationDescription: KFVDescriptor {
     override func setupLayoutConstraints() {
         super.setupLayoutConstraints()
         
-        infoStackView.addArrangedSubview(secondSubtitleLabel)
-        infoStackView.addArrangedSubview(statisticsView)
-        infoStackView.spacing = 2
+        subtitleStickyLabel.updateStickySide(to: .top)
+        subtitleStickyLabel.contentView.text = " "
+        
+        infoStackView.spacing = 0
         
         statusStackView.addArrangedSubview(statusTitleLabel)
-        statusStackView.addArrangedSubview(statusDescription)
+        statusStackView.addArrangedSubview(statusDescriptionStickyLabel)
         statusStackView.axis = .vertical
         statusStackView.spacing = 2
         
@@ -38,18 +36,18 @@ class KFVOpenDonationDescription: KFVDescriptor {
         donationDescriptionStackView.axis = .vertical
         donationDescriptionStackView.spacing = 2
         
-        contentsStackView.addArrangedSubview(statusStackView)
+        infoStackView.addArrangedSubview(statusStackView)
         contentsStackView.addArrangedSubview(donationDescriptionStackView)
         
-        titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        statisticsView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
         for constraint in imageConstraints {
             constraint.constant = 128
         }
         
-        subtitleStickyLabel.updateStickySide()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusStackView.translatesAutoresizingMaskIntoConstraints =  false
+        
+        subtitleStickyLabel.autoSetDimension(.height, toSize: 8)
     }
     
     override func setUpStyling() {
@@ -58,21 +56,16 @@ class KFVOpenDonationDescription: KFVDescriptor {
         layer.cornerRadius = 0
         layer.shadowOpacity = 0
         
-        secondSubtitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        secondSubtitleLabel.contentView.numberOfLines = 0
-        secondSubtitleLabel.contentView.textColor = UIColor.kfSubtitle
-        secondSubtitleLabel.contentView.adjustsFontForContentSizeCategory = true
-        
         statusTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         statusTitleLabel.numberOfLines = 0
         statusTitleLabel.textColor = UIColor.kfTitle
         statusTitleLabel.adjustsFontForContentSizeCategory = true
-        statusTitleLabel.text = "Distance"
+        statusTitleLabel.text = "Status"
         
-        statusDescription.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        statusDescription.numberOfLines = 0
-        statusDescription.textColor = UIColor.kfSubtitle
-        statusDescription.adjustsFontForContentSizeCategory = true
+        statusDescriptionStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        statusDescriptionStickyLabel.contentView.numberOfLines = 0
+        statusDescriptionStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        statusDescriptionStickyLabel.contentView.adjustsFontForContentSizeCategory = true
         
         donationDescriptionTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         donationDescriptionTitleLabel.numberOfLines = 0
@@ -86,18 +79,12 @@ class KFVOpenDonationDescription: KFVDescriptor {
         donationDescriptionContentLabel.adjustsFontForContentSizeCategory = true
     }
     
-    func reloadData(for data: KFMOpenDonationDescriptionItem) {
+    func reloadData(for data: KFMInProgressDonationDescription) {
         imageView.imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = data.title
-        subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"
         
-        secondSubtitleLabel.contentView.text = "Reputation \(data.userReputation)%"
-        
-        statisticsView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
-        
-        statusDescription.text = "\(data.distance) Miles away from your current location"
+        statusDescriptionStickyLabel.contentView.text = data.statusDescription
         donationDescriptionContentLabel.text = data.description
     }
 }
