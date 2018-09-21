@@ -18,8 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         FirebaseApp.configure()
-        setInitalViewController()
+        
+        //TODO: log-in / sign-up logic
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        window?.rootViewController = KFCTabBar()
+        window?.makeKeyAndVisible()
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
+        UINavigationBar.appearance().tintColor = .kfPrimary
+        UINavigationBar.appearance().barTintColor = .kfWhite
+        UINavigationBar.appearance().isTranslucent = false
+        
+        UITabBar.appearance().tintColor = .kfPrimary
+        UITabBar.appearance().barTintColor = .kfWhite
+        UITabBar.appearance().isTranslucent = false
         
         return true
     }
@@ -32,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.setCurrent(user)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "tabBar")
+            let initialVC = storyboard.instantiateViewController(withIdentifier: "initialTabBar")
             
             window?.rootViewController = initialVC
             window?.makeKeyAndVisible()

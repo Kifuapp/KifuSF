@@ -10,17 +10,7 @@ import UIKit
 import CoreLocation
 import LocationPicker
 
-enum DonationOption: SwitchlessCases {
-    
-    // sourcery: case_skip
-    case none
-    
-    // sourcery: case_name = "isShowingPendingRequests"
-    case pendingRequests([Donation])
-    
-    // sourcery: case_name = "isShowingCurrentDelivery"
-    case deliveringDonation(Donation)
-}
+
 
 class ItemListViewController: UIViewController {
     
@@ -44,6 +34,7 @@ class ItemListViewController: UIViewController {
             postTable.reloadData()
         }
     }
+    
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocationCoordinate2D?
     
@@ -150,6 +141,7 @@ class ItemListViewController: UIViewController {
             fatalError("no tab bar controller")
         }
         
+        
         if currentDeliveryState.isShowingPendingRequests {
             performSegue(withIdentifier: "show pending requests", sender: nil)
         } else {
@@ -167,13 +159,14 @@ class ItemListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
         
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         self.viewBlur.effect = blurEffect
         
-        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             self.currentDelivery = delivery
             

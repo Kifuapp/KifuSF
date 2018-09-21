@@ -108,7 +108,7 @@ struct DonationService {
         }
     }
 
-    static func observeOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
+    static func observeOpenDonationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
         let ref = Database.database().reference().child("open-donations")
 
         ref.observe(.value) { (snapshot) in

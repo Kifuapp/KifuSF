@@ -68,9 +68,9 @@ class StatusViewController: UIViewController {
         deliveryTextView.text = delivery.notes
 
         deliveryCancelButtonView.isHidden = false
-        deliveryCancelButtonView.backgroundColor = UIColor.redColor
+        deliveryCancelButtonView.backgroundColor = UIColor.red
         deliveryGreenButtonView.isHidden = false
-        deliveryGreenButtonView.backgroundColor = UIColor.greenColor
+        deliveryGreenButtonView.backgroundColor = UIColor.green
 
         switch delivery.status {
         case .open:
@@ -81,7 +81,7 @@ class StatusViewController: UIViewController {
             deliveryTextView.text = ""
 
             deliveryCancelButtonView.isHidden = true
-            deliveryGreenButtonView.backgroundColor = UIColor.blueColor
+            deliveryGreenButtonView.backgroundColor = UIColor.blue
             deliveryGreenButton.setTitle("Directions", for: .normal)
 
         case .awaitingDelivery:
@@ -89,7 +89,7 @@ class StatusViewController: UIViewController {
             deliveryLabelTwo.text = "415.592.2780"
             deliveryTextView.text = ""
 
-            deliveryCancelButtonView.backgroundColor = UIColor.blueColor
+            deliveryCancelButtonView.backgroundColor = UIColor.blue
             deliveryCancelButton.setTitle("Directions", for: .normal)
             deliveryGreenButton.setTitle("Validate", for: .normal)
 
@@ -363,7 +363,7 @@ class StatusViewController: UIViewController {
     }
 
     private func observeChanges() {
-        DonationService.observeOpenDontationAndDelivery { (donation, delivery) in
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.openDelivery = delivery
             self.openDonation = donation
 
