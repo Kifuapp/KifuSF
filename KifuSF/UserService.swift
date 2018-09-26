@@ -60,23 +60,39 @@ struct UserService {
         }
     }
     
-    /**
-     update the given user in the user subtree
-     
-     - ToDo: write a cloud function to update denormalized instances of the given user
-     */
-    static func update(user: User, completion: @escaping (Bool) -> Void) {
-        let refDonation = Database.database().reference().child("users").child(user.uid)
-        refDonation.updateChildValues(user.dictValue) { (error, _) in
-            guard error == nil else {
-                assertionFailure(error!.localizedDescription)
-                
+    static func attach(report: Report, to user: User, completion: @escaping (Bool) -> Void) {
+        let refUser = Database.database().reference().child("users").child(user.uid)
+        let updatedDict: [String: Any] = [
+            User.Keys.flaggedReportUid: report.uid,
+            User.Keys.flag: report.flag.rawValue
+        ]
+        refUser.updateChildValues(updatedDict) { error, _ in
+            if let error = error {
+                assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
                 return completion(false)
             }
             
             completion(true)
         }
     }
+    
+    /**
+     update the given user in the user subtree
+     
+     - ToDo: write a cloud function to update denormalized instances of the given user
+     */
+//    static func update(user: User, completion: @escaping (Bool) -> Void) {
+//        let refDonation = Database.database().reference().child("users").child(user.uid)
+//        refDonation.updateChildValues(user.dictValue) { (error, _) in
+//            guard error == nil else {
+//                assertionFailure(error!.localizedDescription)
+//                
+//                return completion(false)
+//            }
+//            
+//            completion(true)
+//        }
+//    }
     
     public static func calculateDistance(long: Double, lat: Double) -> String {
         let location = CLLocation(latitude: lat, longitude: long)

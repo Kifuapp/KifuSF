@@ -31,18 +31,11 @@ struct ReportingService {
                 return completion(false)
             }
             
-            var flaggedDonation = donation
-            flaggedDonation.flag(with: report)
-            
             //update donation using DonationService
-            DonationService.update(donation: flaggedDonation, completion: { (success) in
-                guard success else {
-                    assertionFailure("there was an error updating donation: \(donation)")
-                    
-                    return completion(false)
-                }
+            DonationService.attach(report: report, to: donation, completion: { (success) in
+                assert(success, "there was an error updating donation: \(donation)")
                 
-                completion(true)
+                completion(success)
             })
         }
     }
@@ -67,11 +60,8 @@ struct ReportingService {
                 return completion(false)
             }
             
-            var flaggedUser = user
-            flaggedUser.flag(with: report)
-            
             //update donation using DonationService
-            UserService.update(user: flaggedUser, completion: { (success) in
+            UserService.attach(report: report, to: user, completion: { (success) in
                 guard success else {
                     assertionFailure("there was an error updating donation: \(user)")
                     
