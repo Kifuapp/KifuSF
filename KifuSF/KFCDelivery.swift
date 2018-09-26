@@ -15,15 +15,14 @@ class KFCDelivery: KFCModularTableView {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.kfWhite
-        
     }
     
     override func retrieveProgressItem() -> KFPModularTableViewItem? {
-        return KFMProgress()
+        return KFMProgress(currentStep: .stepOne, ofType: .delivery)
     }
     
-    override func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
-        return KFMOpenDonationDescriptionItem(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", username: "Pondorasti", creationDate: "12.12.12", userReputation: 79, userDonationsCount: 12, userDeliveriesCount: 12, distance: 5, description: "woof woof")
+    override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
+        return KFMInProgressDonationDescription(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", statusDescription: "Picking up Item", description: "woof woof")
     } 
 }
 

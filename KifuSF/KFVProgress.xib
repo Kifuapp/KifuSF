@@ -43,7 +43,7 @@
                                                 <constraint firstAttribute="height" constant="8" id="8co-0E-DbV"/>
                                             </constraints>
                                         </view>
-                                        <stackView opaque="NO" alpha="0.75" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qso-KN-XJN">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qso-KN-XJN">
                                             <rect key="frame" x="0.0" y="8" width="240" height="68"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o03-IN-ghC">
@@ -64,7 +64,7 @@
                                                 </view>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" alpha="0.75" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jof-jU-Grq">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jof-jU-Grq">
                                             <rect key="frame" x="0.0" y="76" width="240" height="68.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db9-mW-IPp">
@@ -149,12 +149,16 @@
             <connections>
                 <outlet property="currentStepImageView" destination="EOn-cJ-jpp" id="hLf-J6-HpZ"/>
                 <outlet property="currentStepLabel" destination="5ra-52-ZYs" id="xrw-eE-fgk"/>
+                <outlet property="stepFourStackView" destination="rmR-Hl-ztX" id="cGP-Nr-BSp"/>
                 <outlet property="stepFourTitleLabel" destination="z4N-KV-7Gt" id="wBc-3q-1xh"/>
                 <outlet property="stepOneDescriptionLabel" destination="YJG-I6-DBk" id="Od3-07-u9x"/>
+                <outlet property="stepOneStackView" destination="Qso-KN-XJN" id="6eC-3S-Uqs"/>
                 <outlet property="stepOneTitleLabel" destination="o03-IN-ghC" id="pd8-6G-ATO"/>
                 <outlet property="stepThreeDescriptionLabel" destination="g92-NI-2DP" id="6jc-Tr-Vy0"/>
+                <outlet property="stepThreeStackView" destination="rdF-HR-1Xq" id="Nlw-JL-Bji"/>
                 <outlet property="stepThreeTitleLabel" destination="D3n-03-xE1" id="DdU-1y-XCJ"/>
                 <outlet property="stepTwoDescriptionLabel" destination="4Ev-78-Tkf" id="KsG-0o-VI4"/>
+                <outlet property="stepTwoStackView" destination="Jof-jU-Grq" id="yf3-9h-h3e"/>
                 <outlet property="stepTwoTitleLabel" destination="Db9-mW-IPp" id="KMA-du-ZcM"/>
             </connections>
             <point key="canvasLocation" x="260" y="224.4377811094453"/>

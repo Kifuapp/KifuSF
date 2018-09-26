@@ -11,8 +11,8 @@ import UIKit
 class KFCModularTableView: UIViewController {
     
     enum CellTypes { // view model
-        case openDonationDescription
-        case inProgressDonationDescription, donationSteps, deliverySteps, entityInfo, destinationMap
+        case openDonationDescription, progress // done
+        case inProgressDonationDescription, entityInfo, destinationMap
     }
     
     let tableView = UITableView()
@@ -21,13 +21,14 @@ class KFCModularTableView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.allowsSelection = false
         tableView.backgroundColor = UIColor.kfWhite
         
         tableView.dataSource = self
         tableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
-        tableView.register(KFVModularCell<KFVProgress>.self,
-                           forCellReuseIdentifier: KFVModularCell<KFVProgress>.identifier)
+        tableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier)
         
         tableView.register(UINib(nibName: "KFVProgress", bundle: nil), forCellReuseIdentifier: "KFVProgress")
         
@@ -45,12 +46,22 @@ class KFCModularTableView: UIViewController {
             items.append(openDonationDescriptionItem)
         }
         
+        if let inProgressDonationDescriptionItem = retrieveInProgressDonationDescription() {
+            items.append(inProgressDonationDescriptionItem)
+        }
+        
         if let progressItem = retrieveProgressItem() {
             items.append(progressItem)
         }
+        
+        tableView.reloadData()
     }
     
     func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+        return nil
+    }
+    
+    func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
         return nil
     }
     
@@ -91,10 +102,24 @@ extension KFCModularTableView: UITableViewDataSource {
             cell.descriptorView.reloadData(for: castedItem)
             return cell
             
-        case .donationSteps:
-           let cell = tableView.dequeueReusableCell(withIdentifier: "KFVProgress", for: indexPath)
+        case .inProgressDonationDescription:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier,
+                                                           for: indexPath) as? KFVModularCell<KFVInProgressDonationDescription>,
+                let castedItem = item as? KFMInProgressDonationDescription else {
+                    fatalError(KFErrorMessage.unknownCell)
+            }
             
-           return cell
+            cell.descriptorView.reloadData(for: castedItem)
+            return cell
+            
+        case .progress:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "KFVProgress", for: indexPath) as? KFVProgress,
+                let castedItem = item as? KFMProgress else {
+                fatalError(KFErrorMessage.unknownCell)
+            }
+            
+            cell.reloadData(for: castedItem)
+            return cell
             
         default:
             fatalError(KFErrorMessage.unknownCell)
