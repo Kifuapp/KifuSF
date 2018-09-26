@@ -66,33 +66,32 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         tableView.reloadData()
         
 //        widgetView?.reloadData()
-        
-        //TODO: retrieve open donations in viewDidLoad maybe?
-        /*
-        DonationService.showTimelineDonations { (donations) in
-            self.openDonations = donations
-        }
-        */
     
     }
     
     func setUpFirebase() {
-        /*
-        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
-            self.currentDonation = donation
-            self.currentDelivery = delivery
-            
-             widgetView?.reloadData()
+        
+        //TODO: retrieve open donations in viewDidLoad maybe?
+        DonationService.showTimelineDonations { (donations) in
+            self.openDonations = donations
         }
         
-        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
-            if self.currentDeliveryState.isShowingCurrentDelivery == false {
-                self.pendingRequests = donationsUserHadRequestedToDeliver
-                
-                 widgetView?.reloadData()
-            }
-        })
-        */
+        //TODO: populate widgets
+//
+//        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
+//            self.currentDonation = donation
+//            self.currentDelivery = delivery
+//
+//            widgetView?.reloadData()
+//        }
+//
+//        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+//            if self.currentDeliveryState.isShowingCurrentDelivery == false {
+//                self.pendingRequests = donationsUserHadRequestedToDeliver
+//
+//                widgetView?.reloadData()
+//            }
+//        })
     }
     
     @objc func createDonation() {
@@ -131,9 +130,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 //MARK: UITableViewDataSource
 extension KFCOpenDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-        
-        //TODO: return the actual amount of cells
+        return self.openDonations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,8 +138,15 @@ extension KFCOpenDonations: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
-        //TODO: self explanatory
-        let newData = KFMDonationInfo(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Doggo", distance: 12.3, description: "woof woof")
+        let openDonation = self.openDonations[indexPath.row]
+        
+        //TODO: populate distance
+        let newData = KFMDonationInfo(
+            imageURL: openDonation.imageUrl,
+            title: openDonation.title,
+            distance: 12.3,
+            description: openDonation.notes
+        )
         donationCell.descriptorView.reloadData(for: newData)
 
         return donationCell
@@ -169,6 +173,7 @@ extension KFCOpenDonations: KFPWidgetDataSource {
     func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo? {
         switch type {
         case .donation(_):
+            //TODO: erick-populate Widget view
             return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
         case .delivery(_):
             return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
@@ -191,12 +196,14 @@ extension KFCOpenDonations: KFPWidgetDelegate {
         case .donation(_):
             print("Donation widget pressed")
             
+            //TODO: erick-send volunteer list to vc
             let volunteersListVC = KFCVolunteerList()
             navigationController?.pushViewController(volunteersListVC, animated: true)
             
         case .delivery(_):
             print("Delivery widget pressed")
             
+            //TODO: erick-send pending donations to vc
             let pendingDonationsVC = KFCPendingDonations()
             navigationController?.pushViewController(pendingDonationsVC, animated: true)
         }
