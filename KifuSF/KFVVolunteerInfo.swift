@@ -11,24 +11,24 @@ import UIKit
 class KFVVolunteerInfo: KFVDescriptor {
     
     let statisticsView = KFVStatistics()
-    let confirmationButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let confirmationStickyButton = KFVSticky<UIButton>(stickySide: .bottom)
     
     weak var delegate: KFPVolunteerInfoCellDelegate?
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
-        confirmationButton.translatesAutoresizingMaskIntoConstraints = false
+    override func setUpLayoutConstraints() {
+        super.setUpLayoutConstraints()
+        confirmationStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
         infoStackView.addArrangedSubview(statisticsView)
-        infoStackView.addArrangedSubview(confirmationButton)
+        infoStackView.addArrangedSubview(confirmationStickyButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         statisticsView.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        confirmationButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
+        confirmationStickyButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
-        confirmationButton.autoPinEdge(toSuperviewEdge: .leading)
-        confirmationButton.autoPinEdge(toSuperviewEdge: .trailing)
+        confirmationStickyButton.autoPinEdge(toSuperviewEdge: .leading)
+        confirmationStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
         
         subtitleStickyLabel.updateStickySide()
     }
@@ -36,22 +36,21 @@ class KFVVolunteerInfo: KFVDescriptor {
     override func setUpStyling() {
         super.setUpStyling()
         
-        confirmationButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
+        confirmationStickyButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
         
-        confirmationButton.contentView.setTitle("Confirm", for: .normal)
-        confirmationButton.contentView.backgroundColor = .kfPrimary
-        confirmationButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        confirmationButton.contentView.showsTouchWhenHighlighted = true
-
-//        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        confirmationButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
         
-        confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
+        confirmationStickyButton.contentView.backgroundColor = .kfPrimary
+        confirmationStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
+        confirmationStickyButton.contentView.showsTouchWhenHighlighted = true
+        
+        confirmationStickyButton.contentView.setTitle("Confirm", for: .normal)
+        confirmationStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
+        confirmationStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func confirmationButtonPressed() {
         delegate?.didPressButton()
-        confirmationButton.contentView.isHighlighted = true
+        confirmationStickyButton.contentView.isHighlighted = true
     }
     
     func reloadData(for data: KFMVolunteerInfo) {

@@ -18,8 +18,8 @@ class KFVInProgressDonationDescription: KFVDescriptor {
     let donationDescriptionTitleLabel = UILabel()
     let donationDescriptionContentLabel = UILabel()
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
+    override func setUpLayoutConstraints() {
+        super.setUpLayoutConstraints()
         
         subtitleStickyLabel.updateStickySide(to: .top)
         subtitleStickyLabel.contentView.text = " "

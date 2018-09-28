@@ -10,36 +10,36 @@ import UIKit
 
 class KFVPendingDonation: KFVDescriptor {
     
-    let cancelButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let cancelStickyButton = KFVSticky<UIButton>(stickySide: .bottom)
     
     weak var delegate: KFPPendingDonationCellDelegate?
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+    override func setUpLayoutConstraints() {
+        super.setUpLayoutConstraints()
+        cancelStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
-        infoStackView.addArrangedSubview(cancelButton)
+        infoStackView.addArrangedSubview(cancelStickyButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        cancelButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
+        cancelStickyButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
-        cancelButton.autoPinEdge(toSuperviewEdge: .leading)
-        cancelButton.autoPinEdge(toSuperviewEdge: .trailing)
+        cancelStickyButton.autoPinEdge(toSuperviewEdge: .leading)
+        cancelStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
     }
     
     override func setUpStyling() {
         super.setUpStyling()
         
-        cancelButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        cancelStickyButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         
-        cancelButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        cancelButton.contentView.backgroundColor = UIColor.kfDestructive
-        cancelButton.contentView.showsTouchWhenHighlighted = true
+        cancelStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
+        cancelStickyButton.contentView.backgroundColor = UIColor.kfDestructive
+        cancelStickyButton.contentView.showsTouchWhenHighlighted = true
         
-        cancelButton.contentView.setTitle("Cancel", for: .normal)
-        cancelButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        cancelButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
+        cancelStickyButton.contentView.setTitle("Cancel", for: .normal)
+        cancelStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
+        cancelStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func cancelButtonPressed() {

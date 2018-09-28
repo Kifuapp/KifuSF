@@ -11,8 +11,8 @@ import UIKit
 class KFCModularTableView: UIViewController {
     
     enum CellTypes { // view model
-        case openDonationDescription, progress // done
-        case inProgressDonationDescription, entityInfo, destinationMap
+        case openDonationDescription, progress, entityInfo, inProgressDonationDescription, collaboratorInfo // done
+        case destinationMap
     }
     
     let tableView = UITableView()
@@ -23,12 +23,18 @@ class KFCModularTableView: UIViewController {
         
         tableView.allowsSelection = false
         tableView.backgroundColor = UIColor.kfWhite
+        tableView.contentInset.top = 0
+        tableView.scrollIndicatorInsets.top = 0
         
         tableView.dataSource = self
         tableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
         tableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier)
+        tableView.register(KFVModularCell<KFVEntityInfo>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVEntityInfo>.identifier)
+        tableView.register(KFVModularCell<KFVCollaboratorInfo>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVCollaboratorInfo>.identifier)
         
         tableView.register(UINib(nibName: "KFVProgress", bundle: nil), forCellReuseIdentifier: "KFVProgress")
         
@@ -54,6 +60,14 @@ class KFCModularTableView: UIViewController {
             items.append(progressItem)
         }
         
+        if let entityInfoItem = retrieveEntityInfoItem() {
+            items.append(entityInfoItem)
+        }
+        
+        if let collaboratorInfoItem = retrieveCollaboratorInfoItem() {
+            items.append(collaboratorInfoItem)
+        }
+        
         tableView.reloadData()
     }
     
@@ -70,6 +84,10 @@ class KFCModularTableView: UIViewController {
     }
     
     func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
+        return nil
+    }
+    
+    func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
         return nil
     }
     
@@ -119,6 +137,26 @@ extension KFCModularTableView: UITableViewDataSource {
             }
             
             cell.reloadData(for: castedItem)
+            return cell
+            
+        case .entityInfo:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVEntityInfo>.identifier,
+                                                           for: indexPath) as? KFVModularCell<KFVEntityInfo>,
+                let castedItem = item as? KFMEntityInfo else {
+                    fatalError(KFErrorMessage.unknownCell)
+            }
+            
+            cell.descriptorView.reloadData(for: castedItem)
+            return cell
+            
+        case .collaboratorInfo:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVCollaboratorInfo>.identifier,
+                                                           for: indexPath) as? KFVModularCell<KFVCollaboratorInfo>,
+                let castedItem = item as? KFMCollaboratorInfo else {
+                    fatalError(KFErrorMessage.unknownCell)
+            }
+            
+            cell.descriptorView.reloadData(for: castedItem)
             return cell
             
         default:

@@ -24,8 +24,8 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
         
         descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
-        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
-        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
+        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
         descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
         
         self.selectionStyle = .none

@@ -28,14 +28,14 @@ class KFVDescriptor: UIView {
         addSubview(contentsStackView)
         
         setUpStyling()
-        setupLayoutConstraints()
+        setUpLayoutConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupLayoutConstraints() {
+    func setUpLayoutConstraints() {
         layer.masksToBounds = false
         
         translatesAutoresizingMaskIntoConstraints = false
