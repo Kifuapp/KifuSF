@@ -10,13 +10,12 @@ import Foundation
 import UIKit
 
 struct KFUserInterface {
-    struct tabBarTitle {
+    struct TabBarTitle {
         static let indexOne: String = "Home"
         static let indexTwo: String = "Status"
         static let indexThree: String = "Social"
     }
 }
-
 
 struct KFErrorMessage {
     static let unknownCell = "unknown donation table view cell"
@@ -25,6 +24,3 @@ struct KFErrorMessage {
     static let textStyleNotFount = "could not load text style"
     static let unknownIdentifier = "unknown identifier"
 }
-
-
-

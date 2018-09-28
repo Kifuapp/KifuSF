@@ -22,7 +22,7 @@ class KFCDelivery: KFCModularTableView {
     }
     
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
-        return KFMInProgressDonationDescription(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", statusDescription: "Picking up Item", description: "woof woof")
+        return KFMInProgressDonationDescription(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", statusDescription: "Picking up Item", description: "woof woof") // swiftlint:disable:this line_length
     } 
 }
 

@@ -141,7 +141,7 @@ extension KFCOpenDonations: UITableViewDataSource {
         
         //TODO: populate distance
         let newData = KFMDonationInfo(
-            imageURL: openDonation.imageUrl,
+            imageURL: URL(string: openDonation.imageUrl)!,
             title: openDonation.title,
             distance: 12.3,
             description: openDonation.notes
@@ -178,7 +178,7 @@ extension KFCOpenDonations: KFPWidgetDataSource {
             
             let donationStatusTitle = donation.status.stringValueForDonator
             
-            return (title: donation.title, subtitle: donationStatusTitle)
+            return ((title: donation.title, subtitle: donationStatusTitle) as! KFPWidgetInfo)
         case .delivery(_):
             switch self.currentDeliveryState {
             case .none:
@@ -186,11 +186,11 @@ extension KFCOpenDonations: KFPWidgetDataSource {
             case .pendingRequests(let pendingDonations):
                 let nRequests = pendingDonations.count
                 
-                return (title: "Your Delivery", subtitle: "Pending Requests (\(nRequests))")
+                return ((title: "Your Delivery", subtitle: "Pending Requests (\(nRequests))") as! KFPWidgetInfo)
             case .deliveringDonation(let delivery):
                 let deliveryStatusTitle = delivery.status.stringValueForVolunteer
                 
-                return (title: delivery.title, subtitle: deliveryStatusTitle)
+                return ((title: delivery.title, subtitle: deliveryStatusTitle) as! KFPWidgetInfo)
             }
         }
     }
@@ -211,6 +211,7 @@ extension KFCOpenDonations: KFPWidgetDelegate {
             
             //TODO: erick-send volunteer list to vc
             let volunteersListVC = KFCVolunteerList()
+            
             navigationController?.pushViewController(volunteersListVC, animated: true)
             
         case .delivery(_):

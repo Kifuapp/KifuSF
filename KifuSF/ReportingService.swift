@@ -21,7 +21,7 @@ struct ReportingService {
         let refReport = Database.database().reference().child("reports").childByAutoId()
         
         //create report
-        let report = Report(flag: donation, for: flaggingType, message: userMessage, uid: refReport.key)
+        let report = Report(flag: donation, for: flaggingType, message: userMessage, uid: refReport.key!)
         
         //set value
         refReport.setValue(report.dictValue) { (error, _) in
@@ -50,7 +50,7 @@ struct ReportingService {
         let refReport = Database.database().reference().child("reports").childByAutoId()
         
         //create report
-        let report = Report(flag: user, for: flaggingType, message: userMessage, uid: refReport.key)
+        let report = Report(flag: user, for: flaggingType, message: userMessage, uid: refReport.key!)
         
         //set value
         refReport.setValue(report.dictValue) { (error, _) in

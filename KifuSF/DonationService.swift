@@ -30,7 +30,7 @@ struct DonationService {
 
             //create donation and get dict value
             let donation = Donation(
-                uid: ref.key,
+                uid: ref.key!,
                 title: title,
                 notes: notes,
                 imageUrl: storageUrl.absoluteString,
