@@ -10,6 +10,18 @@ import UIKit
 
 class KFCVolunteerList: KFCTableViewWithRoundedCells {
     
+    // MARK: - VARS
+    
+    var volunteers: [User]!
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,17 +35,11 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
         tableView.dataSource = self
         tableView.allowsSelection = false
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
 }
 
 extension KFCVolunteerList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-        //TODO: erick-return actual amount
+        return volunteers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,15 +49,23 @@ extension KFCVolunteerList: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
-        //TODO: erick-self explanatory
-        fatalError("\(#function) not implemented")
-//        let newData = KFMVolunteerInfo(imageURL: URL(
-//        string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
-//        username: "Pondorasti", userReputation: 100, userDonationsCount: 99, userDeliveriesCount: 99)
-//        volunteerInfoCell.descriptorView.reloadData(for: newData)
-//        volunteerInfoCell.descriptorView.delegate = self
-//
-//        return volunteerInfoCell
+        let volunteer = self.volunteers[indexPath.row]
+        
+        //TODO: alex-fetch reputation values from User Class
+        let volunteerRep: Double = 0
+        let volunteerDonationCount: Int = 0
+        let volunteerDeliveryCount: Int = 0
+        let data = KFMVolunteerInfo(
+            imageURL: URL(string: volunteer.imageURL)!,
+            username: volunteer.username,
+            userReputation: volunteerRep,
+            userDonationsCount: volunteerDonationCount,
+            userDeliveriesCount: volunteerDeliveryCount
+        )
+        
+        volunteerInfoCell.descriptorView.reloadData(for: data)
+        
+        return volunteerInfoCell
     }
 }
 

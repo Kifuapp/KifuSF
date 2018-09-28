@@ -10,12 +10,27 @@ import UIKit
 
 class KFCPendingDonations: KFCTableViewWithRoundedCells {
     
+    // MARK: - VARS
+    
+    var donations: [Donation]!
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Requested Donations"
         
-        tableView.register(KFVRoundedCell<KFVPendingDonation>.self, forCellReuseIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier)
+        tableView.register(
+            KFVRoundedCell<KFVPendingDonation>.self,
+            forCellReuseIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier
+        )
         
         tableView.dataSource = self
         tableView.allowsSelection = false
@@ -33,9 +48,14 @@ extension KFCPendingDonations: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
-        //TODO: self-explanatory
-        let newData = KFMPendingDonation(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Doggo", distance: 3.14)
-        pendingDonationCell.descriptorView.reloadData(for: newData)
+        let donation = self.donations[indexPath.row]
+        let donationDistance: Double = 0
+        let data = KFMPendingDonation(
+            imageURL: URL(string: donation.imageUrl)!,
+            title: donation.title,
+            distance: donationDistance
+        )
+        pendingDonationCell.descriptorView.reloadData(for: data)
         pendingDonationCell.descriptorView.delegate = self
         
         return pendingDonationCell

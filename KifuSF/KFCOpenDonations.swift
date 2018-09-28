@@ -206,20 +206,35 @@ extension KFCOpenDonations: KFPWidgetDelegate {
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
         
         switch type {
-        case .donation(_):
-            print("Donation widget pressed")
+        case .donation:
+            guard let donation = self.currentDonation else {
+                fatalError("the widget view needs to be hidden if there is no current donation")
+            }
             
-            //TODO: erick-send volunteer list to vc
-            let volunteersListVC = KFCVolunteerList()
+            //fetch user objects for the given donation
+            RequestService.retrieveVolunteers(for: donation) { (volunteers) in
+                let volunteersListVC = KFCVolunteerList()
+                volunteersListVC.volunteers = volunteers
+                self.navigationController?.pushViewController(volunteersListVC, animated: true)
+            }
             
-            navigationController?.pushViewController(volunteersListVC, animated: true)
-            
-        case .delivery(_):
-            print("Delivery widget pressed")
-            
-            //TODO: erick-send pending donations to vc
-            let pendingDonationsVC = KFCPendingDonations()
-            navigationController?.pushViewController(pendingDonationsVC, animated: true)
+        case .delivery:
+            switch self.currentDeliveryState {
+            case .pendingRequests(let pendingDonations):
+                let pendingDonationsVC = KFCPendingDonations()
+                pendingDonationsVC.donations = pendingDonations
+                navigationController?.pushViewController(pendingDonationsVC, animated: true)
+            case .deliveringDonation:
+                
+                //TODO: question-should selecting this only switch tabs?
+                guard let tabbarVc = self.tabBarController else {
+                    fatalError("no tab bar controller in this vc")
+                }
+                
+                tabbarVc.selectedIndex = 1
+            case .none:
+                fatalError("widget view should be hidden if there are no pending requests or a current delivery")
+            }
         }
     }
 }
