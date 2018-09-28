@@ -71,7 +71,6 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     
     func setUpFirebase() {
         
-        //TODO: retrieve open donations in viewDidLoad maybe?
         DonationService.showTimelineDonations { (donations) in
             self.openDonations = donations
         }
@@ -173,14 +172,28 @@ extension KFCOpenDonations: KFPWidgetDataSource {
     func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo? {
         switch type {
         case .donation(_):
-            //TODO: erick-populate Widget view
-            return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
+            guard let donation = self.currentDonation else {
+                return nil
+            }
+            
+            let donationStatusTitle = donation.status.stringValueForDonator
+            
+            return (title: donation.title, subtitle: donationStatusTitle)
         case .delivery(_):
-            return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
+            switch self.currentDeliveryState {
+            case .none:
+                return nil
+            case .pendingRequests(let pendingDonations):
+                let nRequests = pendingDonations.count
+                
+                return (title: "Your Delivery", subtitle: "Pending Requests (\(nRequests))")
+            case .deliveringDonation(let delivery):
+                let deliveryStatusTitle = delivery.status.stringValueForVolunteer
+                
+                return (title: delivery.title, subtitle: deliveryStatusTitle)
+            }
         }
     }
-    
-    
 }
 
 //MARK: KFPWidgetDelegate

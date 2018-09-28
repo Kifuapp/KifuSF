@@ -30,7 +30,7 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
 extension KFCVolunteerList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
-        //TODO: return actual amount
+        //TODO: erick-return actual amount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,7 +38,7 @@ extension KFCVolunteerList: UITableViewDataSource {
             fatalError(KFErrorMessage.unknownCell)
         }
         
-        //TODO: self explanatory
+        //TODO: erick-self explanatory
         let newData = KFMVolunteerInfo(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, username: "Pondorasti", userReputation: 100, userDonationsCount: 99, userDeliveriesCount: 99)
         volunteerInfoCell.descriptorView.reloadData(for: newData)
         volunteerInfoCell.descriptorView.delegate = self
@@ -51,6 +51,6 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton() {
         print("cancel button pressed")
         
-        //TODO: hook up with firebase
+        //TODO: erick-hook up with firebase
     }
 }
