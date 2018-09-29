@@ -11,9 +11,18 @@ import UIKit
 class KFVVolunteerInfo: KFVDescriptor {
     
     let statisticsView = KFVStatistics()
-    let confirmationStickyButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let confirmationStickyButton = KFVSticky<KFVButton>(stickySide: .bottom)
+    var indexPath: IndexPath?
     
     weak var delegate: KFPVolunteerInfoCellDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setUpLayoutConstraints() {
         super.setUpLayoutConstraints()
@@ -38,19 +47,20 @@ class KFVVolunteerInfo: KFVDescriptor {
         
         confirmationStickyButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
         
-        
-        confirmationStickyButton.contentView.backgroundColor = .kfPrimary
-        confirmationStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        confirmationStickyButton.contentView.showsTouchWhenHighlighted = true
+//        confirmationStickyButton.contentView.backgroundColor = .kfPrimary
+//        confirmationStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
+//        confirmationStickyButton.contentView.showsTouchWhenHighlighted = true
         
         confirmationStickyButton.contentView.setTitle("Confirm", for: .normal)
-        confirmationStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
-        confirmationStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
+//        confirmationStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
+//        confirmationStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func confirmationButtonPressed() {
-        delegate?.didPressButton()
-        confirmationStickyButton.contentView.isHighlighted = true
+        guard let indexPath = indexPath else {
+            fatalError()
+        }
+        delegate?.didPressButton(for: indexPath)
     }
     
     func reloadData(for data: KFMVolunteerInfo) {
@@ -66,5 +76,5 @@ class KFVVolunteerInfo: KFVDescriptor {
 
 
 protocol KFPVolunteerInfoCellDelegate: class {
-    func didPressButton()
+    func didPressButton(for indexPath: IndexPath)
 }

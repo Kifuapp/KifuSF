@@ -31,6 +31,7 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
         self.selectionStyle = .none
         layer.masksToBounds = false
         contentView.backgroundColor = UIColor.kfGray
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

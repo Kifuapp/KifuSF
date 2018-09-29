@@ -43,14 +43,15 @@ extension KFCVolunteerList: UITableViewDataSource {
         volunteerInfoCell.descriptorView.reloadData(for: newData)
         volunteerInfoCell.descriptorView.delegate = self
         
+        volunteerInfoCell.descriptorView.indexPath = indexPath
+        
         return volunteerInfoCell
     }
 }
 
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
-    func didPressButton() {
-        print("cancel button pressed")
-        
+    func didPressButton(for indexPath: IndexPath) {
         //TODO: hook up with firebase
+        print(indexPath.row)
     }
 }
