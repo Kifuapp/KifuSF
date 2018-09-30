@@ -35,7 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    @IBOutlet weak var facebookButton: UIButton!
     
     private var isLoginButtonsEnabled: Bool {
         set {
@@ -46,8 +45,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             googleButton.alpha = newValue ? 1.0 : 0.45
             googleButton.isUserInteractionEnabled = newValue
             
-            facebookButton.alpha = newValue ? 1.0 : 0.45
-            facebookButton.isUserInteractionEnabled = newValue
             
             view.isUserInteractionEnabled = newValue
            
@@ -113,6 +110,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             action: #selector(UIInputViewController.dismissKeyboard)
         )
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSignInWithGoogle(notification:)), name: .userDidLoginWithGoogle, object: nil)
+        
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
         view.addGestureRecognizer(tap)
@@ -173,15 +173,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
     
     
+ 
+
+    
     @IBAction func googleButtonPressed(_ sender: Any) {
     }
     
-    
-    @IBAction func facebookButtonPressed(_ sender: Any) {
-    }
-    
-    
-    @IBAction func signUpButtonPressed(_ sender: Any) {
+    @objc func onDidSignInWithGoogle(notification: Notification){
+        
     }
     
 

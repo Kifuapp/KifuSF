@@ -18,6 +18,7 @@
 		7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */; };
 		7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */; };
 		7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC721434EAC001A48FD /* LoginViewController.swift */; };
+		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthViewController.swift; sourceTree = "<group>"; };
 		7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectMissingInfoViewController.swift; sourceTree = "<group>"; };
 		7A49CFC721434EAC001A48FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5A351D6210D0CE500A717D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
 				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
 				E9C10C9F210E4C6B0050FB8A /* UIColors.swift */,
+				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
+				7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				E9C10CA0210E4C6B0050FB8A /* UIColors.swift in Sources */,
@@ -672,7 +676,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -693,7 +697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8de-63-A2y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8de-63-A2y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,15 +30,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5Z-mx-DoX">
-                                <rect key="frame" x="139" y="531" width="82" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Facebook"/>
-                                <connections>
-                                    <action selector="facebookButtonPressed:" destination="8de-63-A2y" eventType="touchUpInside" id="PXf-uq-evC"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5aO-rI-qdT">
                                 <rect key="frame" x="132" y="239" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -54,15 +46,6 @@
                                     <action selector="loginButtonPressed:" destination="8de-63-A2y" eventType="touchUpInside" id="quy-T9-Scv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfk-2i-qIx">
-                                <rect key="frame" x="135" y="585" width="91" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign Up Here"/>
-                                <connections>
-                                    <action selector="signUpButtonPressed:" destination="8de-63-A2y" eventType="touchUpInside" id="N50-Fg-b1L"/>
-                                    <segue destination="AHu-0f-EpP" kind="show" id="KKE-qK-sKs"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXk-Ie-daB">
                                 <rect key="frame" x="0.0" y="358" width="375" height="24"/>
                                 <constraints>
@@ -76,7 +59,19 @@
                                 <rect key="frame" x="144" y="465" width="73" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <connections>
+                                    <action selector="googleButtonPressed:" destination="8de-63-A2y" eventType="valueChanged" id="aXh-rL-izk"/>
+                                </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfk-2i-qIx">
+                                <rect key="frame" x="135" y="553" width="91" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign Up Here"/>
+                                <connections>
+                                    <action selector="signUpButtonPressed:" destination="8de-63-A2y" eventType="touchUpInside" id="N50-Fg-b1L"/>
+                                    <segue destination="AHu-0f-EpP" kind="show" id="KKE-qK-sKs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ksC-jX-7L3"/>
@@ -84,7 +79,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="5aO-rI-qdT" id="oiy-nY-X8d"/>
                         <outlet property="errorMessage" destination="xXk-Ie-daB" id="UpL-N4-A1P"/>
-                        <outlet property="facebookButton" destination="P5Z-mx-DoX" id="rvd-Mm-jQb"/>
                         <outlet property="googleButton" destination="dMn-hs-ULc" id="J96-l5-ggi"/>
                         <outlet property="loginButton" destination="MJp-Rz-0OB" id="vjG-Bl-TcC"/>
                         <outlet property="loginImage" destination="y4z-f1-gY7" id="5xZ-wJ-oqS"/>
