@@ -15,8 +15,6 @@ class KFCTableViewWithRoundedCells: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.dataSource = self
-        
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.kfGray
         

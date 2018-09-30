@@ -10,6 +10,9 @@ import UIKit
 
 class KFCPendingDonations: KFCTableViewWithRoundedCells {
     
+    //TODO: remove this
+    var numberOfRows = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +27,7 @@ class KFCPendingDonations: KFCTableViewWithRoundedCells {
 
 extension KFCPendingDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return numberOfRows
         //TODO: return actual amount
     }
     
@@ -43,9 +46,11 @@ extension KFCPendingDonations: UITableViewDataSource {
 }
 
 extension KFCPendingDonations: KFPPendingDonationCellDelegate {
-    func didPressButton() {
-        print("cancel button pressed")
-
-        //TODO: hook up with firebase
+    func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>) {
+        let indexPath = tableView.indexPath(for: sender)
+        
+        print(indexPath)
+        numberOfRows -= 1
+        tableView.deleteRows(at: [indexPath!], with: .fade)
     }
 }

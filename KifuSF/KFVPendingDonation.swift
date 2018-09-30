@@ -10,7 +10,9 @@ import UIKit
 
 class KFVPendingDonation: KFVDescriptor {
     
-    let cancelStickyButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let cancelStickyButton = KFVSticky<KFVButton>(stickySide: .bottom)
+    
+    var indexPath: IndexPath?
     
     weak var delegate: KFPPendingDonationCellDelegate?
     
@@ -32,18 +34,17 @@ class KFVPendingDonation: KFVDescriptor {
         super.setUpStyling()
         
         cancelStickyButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
-        
-        cancelStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        cancelStickyButton.contentView.backgroundColor = UIColor.kfDestructive
-        cancelStickyButton.contentView.showsTouchWhenHighlighted = true
-        
+        cancelStickyButton.contentView.setMainBackgroundColor(.kfDestructive)
         cancelStickyButton.contentView.setTitle("Cancel", for: .normal)
-        cancelStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
-        cancelStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func cancelButtonPressed() {
-        delegate?.didPressButton()
+        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVPendingDonation> else {
+            //TODO: fix this
+            fatalError("you are using this view the wrong way :]")
+        }
+        
+        delegate?.didPressButton(tableViewCell)
     }
     
     func reloadData(for data: KFMPendingDonation) {
@@ -55,5 +56,5 @@ class KFVPendingDonation: KFVDescriptor {
 }
 
 protocol KFPPendingDonationCellDelegate: class {
-    func didPressButton()
+    func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>)
 }

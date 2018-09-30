@@ -10,19 +10,25 @@ import UIKit
 
 class KFVButton: UIButton {
     
-    var mainBackgroundColor = UIColor.kfPrimary
-    var mainTitleColor = UIColor.kfWhite
+    private(set) var mainBackgroundColor = UIColor.kfPrimary
+    private(set) var mainTitleColor = UIColor.kfWhite
+    private(set) var currentState = AnimationState.idle {
+        didSet {
+            updateBackgroundColor()
+            updateAnimator()
+        }
+    }
     
     var buttonAnimator: UIViewPropertyAnimator?
     
     enum AnimationState {
-        case shrinking, expanding
+        case shrinking, expanding, idle
         
         func getScale() -> CGFloat {
             switch self {
             case .shrinking:
                 return 0.98
-            case .expanding:
+            case .expanding, .idle:
                 return 1
             }
         }
@@ -60,7 +66,7 @@ class KFVButton: UIButton {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        buttonAnimator = createAnimator(forState: .shrinking)
+        currentState = .shrinking
         buttonAnimator?.startAnimation()
     }
     
@@ -72,9 +78,10 @@ class KFVButton: UIButton {
             return
         }
         
+        //TODO: make this animation uniform
         if !frame.contains(touchLocation)  {
             buttonAnimator?.stopAnimation(true)
-            buttonAnimator = createAnimator(forState: .expanding)
+            currentState = .expanding
             buttonAnimator?.startAnimation()
         }
     }
@@ -84,18 +91,25 @@ class KFVButton: UIButton {
         print("touch cancellled")
     }
     
-    private func createAnimator(forState state: AnimationState) -> UIViewPropertyAnimator {
-        let animator = UIViewPropertyAnimator(duration: 0.05, curve: .linear, animations: { [unowned self] in
-            self.transform = CGAffineTransform(scaleX: state.getScale(), y: state.getScale())
-            
-            switch state {
-            case .shrinking:
-                self.backgroundColor = self.mainBackgroundColor.darker(by: 5)
-            case .expanding:
-                self.backgroundColor = self.mainBackgroundColor
-            }
+    private func updateAnimator() {
+        let animator = UIViewPropertyAnimator(duration: 0.025, curve: .linear, animations: { [unowned self] in
+            self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
         })
         
-        return animator
+        buttonAnimator = animator
+    }
+    
+    private func updateBackgroundColor() {
+        switch currentState {
+        case .shrinking:
+            self.backgroundColor = self.mainBackgroundColor.darker(by: 5)
+        case .expanding, .idle:
+            self.backgroundColor = self.mainBackgroundColor
+        }
+    }
+    
+    func setMainBackgroundColor(_ color: UIColor) {
+        mainBackgroundColor = color
+        updateBackgroundColor()
     }
 }

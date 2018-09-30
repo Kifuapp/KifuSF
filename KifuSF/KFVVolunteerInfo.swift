@@ -46,21 +46,15 @@ class KFVVolunteerInfo: KFVDescriptor {
         super.setUpStyling()
         
         confirmationStickyButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
-        
-//        confirmationStickyButton.contentView.backgroundColor = .kfPrimary
-//        confirmationStickyButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-//        confirmationStickyButton.contentView.showsTouchWhenHighlighted = true
-        
         confirmationStickyButton.contentView.setTitle("Confirm", for: .normal)
-//        confirmationStickyButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
-//        confirmationStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func confirmationButtonPressed() {
-        guard let indexPath = indexPath else {
-            fatalError()
+        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVVolunteerInfo> else {
+            fatalError("you are using this view the wrong way :]")
         }
-        delegate?.didPressButton(for: indexPath)
+        
+        delegate?.didPressButton(tableViewCell)
     }
     
     func reloadData(for data: KFMVolunteerInfo) {
@@ -76,5 +70,5 @@ class KFVVolunteerInfo: KFVDescriptor {
 
 
 protocol KFPVolunteerInfoCellDelegate: class {
-    func didPressButton(for indexPath: IndexPath)
+    func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>)
 }
