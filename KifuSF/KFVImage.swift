@@ -29,9 +29,6 @@ class KFVImage: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         imageView.autoPinEdgesToSuperviewEdges()
-        
-        //TODO: remove this
-        imageView.image = UIImage(named: "Dog")
     }
     
     

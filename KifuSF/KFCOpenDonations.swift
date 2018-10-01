@@ -24,7 +24,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     
     private var openDonations: [Donation] = [] {
         didSet {
-            tableView.reloadData()
+            tableViewWithRoundedCells.reloadData()
         }
     }
     
@@ -49,8 +49,8 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableViewWithRoundedCells.dataSource = self
+        tableViewWithRoundedCells.delegate = self
         
         
         setUpDonationTableView()
@@ -63,7 +63,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        tableViewWithRoundedCells.reloadData()
         
 //        widgetView?.reloadData()
         
@@ -181,8 +181,8 @@ extension KFCOpenDonations: KFPWidgetDataSource {
 //MARK: KFPWidgetDelegate
 extension KFCOpenDonations: KFPWidgetDelegate {
     func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
-        tableView.contentInset.top = height + 8
-        tableView.scrollIndicatorInsets.top = height + 8
+        tableViewWithRoundedCells.contentInset.top = height + 8
+        tableViewWithRoundedCells.scrollIndicatorInsets.top = height + 8
     }
     
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
@@ -228,10 +228,10 @@ extension KFCOpenDonations {
     }
     
     func setUpDonationTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableViewWithRoundedCells.dataSource = self
+        tableViewWithRoundedCells.delegate = self
         
-        tableView.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
+        tableViewWithRoundedCells.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
     }
     
     func setUpNavBar() {

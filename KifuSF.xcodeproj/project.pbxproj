@@ -60,6 +60,7 @@
 		C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC22162752A00B180B3 /* KFVDestinationMap.swift */; };
 		C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */; };
 		C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */; };
+		C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */; };
 		C5983C1E2134643F00303ABB /* KFCOpenDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5983C1D2134643F00303ABB /* KFCOpenDonations.swift */; };
 		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
@@ -157,6 +158,7 @@
 		C58D9EC22162752A00B180B3 /* KFVDestinationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDestinationMap.swift; sourceTree = "<group>"; };
 		C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDestinationMap.swift; sourceTree = "<group>"; };
 		C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVUserInfo.swift; sourceTree = "<group>"; };
+		C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMUserInfo.swift; sourceTree = "<group>"; };
 		C5983C1D2134643F00303ABB /* KFCOpenDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCOpenDonations.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -338,11 +340,9 @@
 		C560B7E321346AA0008A9DF1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				C50182EA2142AC0400257412 /* Status.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */,
-				C5B0E1A921517BF600A8412C /* Leaderboard.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -378,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */,
+				C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */,
 			);
 			name = KFUserInfo;
 			sourceTree = "<group>";
@@ -508,6 +509,8 @@
 		C5B0E1A021501A6700A8412C /* Junk */ = {
 			isa = PBXGroup;
 			children = (
+				C50182EA2142AC0400257412 /* Status.storyboard */,
+				C5B0E1A921517BF600A8412C /* Leaderboard.storyboard */,
 				C54284132152BD0700373586 /* GradientView.swift */,
 				E9C9713321320AC00073CD90 /* Login-Register */,
 				E9C9713121320AA00073CD90 /* Open Donations */,
@@ -830,6 +833,7 @@
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */,
 				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
+				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,
 				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,

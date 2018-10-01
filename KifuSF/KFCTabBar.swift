@@ -19,15 +19,10 @@ class KFCTabBar: UITabBarController {
         let statusVC = KFCStatus()
         statusVC.tabBarItem = UITabBarItem(title: "Status", image: .kfBoxIcon, tag: 1)
         
-        viewControllers = [homeVC, statusVC]
+        let leaderboardVC = KFCLeaderboard()
+        leaderboardVC.tabBarItem = UITabBarItem(title: "Status", image: .kfBoxIcon, tag: 2)
         
-        let leaderBoardStoryboard = UIStoryboard(name: "Leaderboard", bundle: nil)
-        if let initialLeaderboardVC = leaderBoardStoryboard.instantiateInitialViewController() {
-            initialLeaderboardVC.tabBarItem = UITabBarItem(title: "Leaderboard", image: .kfBoxIcon, tag: 2)
-            
-            viewControllers?.append(initialLeaderboardVC)
-        }
-        
+        viewControllers = [homeVC, statusVC, leaderboardVC]
         viewControllers = viewControllers?.map { UINavigationController(rootViewController: $0) }
     }
 

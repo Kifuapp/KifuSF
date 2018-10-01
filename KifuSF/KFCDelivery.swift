@@ -52,7 +52,7 @@ class KFCDelivery: KFCModularTableView {
     }
     
     override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
-        return KFMCollaboratorInfo(name: "Alexandru Turcanu", username: "Pondorasti", userReputation: 100.0, userDonationsCount: 99, userDeliveriesCount: 99)
+        return KFMCollaboratorInfo(profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, name: "Alexandru Turcanu", username: "Pondorasti", userReputation: 100.0, userDonationsCount: 99, userDeliveriesCount: 99)
     }
     
     override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {

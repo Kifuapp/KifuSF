@@ -18,15 +18,15 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
         
         title = "Volunteers"
         
-        tableView.register(KFVRoundedCell<KFVVolunteerInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier)
+        tableViewWithRoundedCells.register(KFVRoundedCell<KFVVolunteerInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier)
         
-        tableView.dataSource = self
-        tableView.allowsSelection = false
+        tableViewWithRoundedCells.dataSource = self
+        tableViewWithRoundedCells.allowsSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        tableViewWithRoundedCells.reloadData()
     }
 }
 
@@ -55,10 +55,10 @@ extension KFCVolunteerList: UITableViewDataSource {
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
         //TODO: hook up with firebase
-        let indexPath = tableView.indexPath(for: sender)
+        let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
         
         print(indexPath)
         numberOfRows -= 1
-        tableView.deleteRows(at: [indexPath!], with: .fade)
+        tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
     }
 }

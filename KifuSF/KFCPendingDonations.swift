@@ -18,10 +18,10 @@ class KFCPendingDonations: KFCTableViewWithRoundedCells {
         
         title = "Requested Donations"
         
-        tableView.register(KFVRoundedCell<KFVPendingDonation>.self, forCellReuseIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier)
+        tableViewWithRoundedCells.register(KFVRoundedCell<KFVPendingDonation>.self, forCellReuseIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier)
         
-        tableView.dataSource = self
-        tableView.allowsSelection = false
+        tableViewWithRoundedCells.dataSource = self
+        tableViewWithRoundedCells.allowsSelection = false
     }
 }
 
@@ -47,10 +47,10 @@ extension KFCPendingDonations: UITableViewDataSource {
 
 extension KFCPendingDonations: KFPPendingDonationCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>) {
-        let indexPath = tableView.indexPath(for: sender)
+        let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
         
         print(indexPath)
         numberOfRows -= 1
-        tableView.deleteRows(at: [indexPath!], with: .fade)
+        tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
     }
 }

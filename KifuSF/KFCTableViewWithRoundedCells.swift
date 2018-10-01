@@ -10,23 +10,24 @@ import UIKit
 
 class KFCTableViewWithRoundedCells: UIViewController {
     
-    let tableView = UITableView()
+    let tableViewWithRoundedCells = UITableView()
+    var tableViewWithRoundedCellsConstraints = [NSLayoutConstraint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.kfGray
+        tableViewWithRoundedCells.separatorStyle = .none
+        tableViewWithRoundedCells.backgroundColor = UIColor.kfGray
         
-        tableView.contentInset.bottom = 8
-        tableView.scrollIndicatorInsets.bottom = 8
+        tableViewWithRoundedCells.contentInset.bottom = 8
+        tableViewWithRoundedCells.scrollIndicatorInsets.bottom = 8
         
-        tableView.contentInset.top = 8
-        tableView.scrollIndicatorInsets.top = 8
+        tableViewWithRoundedCells.contentInset.top = 8
+        tableViewWithRoundedCells.scrollIndicatorInsets.top = 8
         
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.autoPinEdgesToSuperviewEdges()
+        view.addSubview(tableViewWithRoundedCells)
+        tableViewWithRoundedCells.translatesAutoresizingMaskIntoConstraints = false
+        tableViewWithRoundedCellsConstraints = tableViewWithRoundedCells.autoPinEdgesToSuperviewEdges()
         
         view.layoutIfNeeded()
     }

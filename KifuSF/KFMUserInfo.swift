@@ -1,15 +1,14 @@
 //
-//  KFMCollaborator.swift
+//  KFMUserInfo.swift
 //  KifuSF
 //
-//  Created by Alexandru Turcanu on 28/09/2018.
+//  Created by Alexandru Turcanu on 01/10/2018.
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
 import Foundation
 
-class KFMCollaboratorInfo: KFPModularTableViewItem {
-    var type: KFCModularTableView.CellTypes = .collaboratorInfo
+class KFMUserInfo {
     
     var profileImageURL: URL
     var username: String
