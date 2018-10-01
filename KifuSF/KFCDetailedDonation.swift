@@ -15,7 +15,7 @@ class KFCDetailedDonation: KFCModularTableView {
         
         title = "Donation"
         view.backgroundColor = UIColor.kfWhite
-        tableView.separatorStyle = .none
+        modularTableView.separatorStyle = .none
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
                                                             style: .plain,

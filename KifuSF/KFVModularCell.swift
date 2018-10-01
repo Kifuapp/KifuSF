@@ -24,10 +24,10 @@ class KFVModularCell<T: UIView>: UITableViewCell {
         translatesAutoresizingMaskIntoConstraints = false
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 4)
         descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
         descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8)
-        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4)
         
         self.selectionStyle = .none
         layer.masksToBounds = false

@@ -10,10 +10,13 @@ import UIKit
 
 class KFVCollaboratorInfo: KFVDescriptor {
     
+    let headlineLabel = UILabel()
     let descriptionLabel = UILabel()
     let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     
     override func setUpLayoutConstraints() {
+        contentsStackView.addArrangedSubview(headlineLabel)
+        
         super.setUpLayoutConstraints()
         
         infoStackView.addArrangedSubview(descriptionLabel)
@@ -32,10 +35,17 @@ class KFVCollaboratorInfo: KFVDescriptor {
         
         layer.shadowOpacity = 0
         
+        headlineLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        headlineLabel.numberOfLines = 0
+        headlineLabel.textColor = UIColor.kfTitle
+        headlineLabel.adjustsFontForContentSizeCategory = true
+        
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = UIColor.kfSubtitle
         descriptionLabel.adjustsFontForContentSizeCategory = true
+        
+        headlineLabel.text = "Collaborator Info"
     }
     
     func reloadData(for data: KFMCollaboratorInfo) {

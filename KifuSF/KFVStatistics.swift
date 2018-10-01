@@ -79,11 +79,6 @@ class KFVStatistics: UIView {
         donationCountLabel.numberOfLines = 1
         donationCountLabel.textColor = UIColor.kfSubtitle
         donationCountLabel.adjustsFontForContentSizeCategory = true
-        
-        
-        //TODO: remove this
-        deliveryCountLabel.text = "12"
-        donationCountLabel.text = "12"
     }
     
 }

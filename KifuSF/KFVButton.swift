@@ -34,18 +34,20 @@ class KFVButton: UIButton {
         }
     }
     
-    init() {
-        super.init(frame: CGRect())
-        
-        setUpStyling()
+    convenience init() {
+        self.init(frame: CGRect())
     }
     
-    init(backgroundColor: UIColor, andTitle title: String) {
-        super.init(frame: CGRect())
+    convenience init(backgroundColor: UIColor, andTitle title: String) {
+        self.init(frame: CGRect())
         
         mainBackgroundColor = backgroundColor
+        updateBackgroundColor()
         setTitle(title, for: .normal)
-        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: CGRect())
         setUpStyling()
     }
     
@@ -79,7 +81,7 @@ class KFVButton: UIButton {
         }
         
         //TODO: make this animation uniform
-        if !frame.contains(touchLocation)  {
+        if !bounds.contains(touchLocation)  {
             buttonAnimator?.stopAnimation(true)
             currentState = .expanding
             buttonAnimator?.startAnimation()
@@ -102,9 +104,9 @@ class KFVButton: UIButton {
     private func updateBackgroundColor() {
         switch currentState {
         case .shrinking:
-            self.backgroundColor = self.mainBackgroundColor.darker(by: 5)
+            backgroundColor = mainBackgroundColor.darker(by: 5)
         case .expanding, .idle:
-            self.backgroundColor = self.mainBackgroundColor
+            backgroundColor = mainBackgroundColor
         }
     }
     

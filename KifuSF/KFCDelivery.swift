@@ -8,13 +8,35 @@
 
 import UIKit
 import XLPagerTabStrip
+import CoreLocation
 
 class KFCDelivery: KFCModularTableView {
+    
+    let dynamicButton = KFVButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    
+    override func loadView() {
+        super.loadView()
+        
+        view.addSubview(dynamicButton)
+        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
+        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.kfWhite
+        
+        dynamicButton.layer.setUpShadow()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        modularTableView.contentInset.bottom = dynamicButton.frame.height + 16
+        modularTableView.scrollIndicatorInsets.bottom = dynamicButton.frame.height + 16
     }
     
     override func retrieveProgressItem() -> KFPModularTableViewItem? {
@@ -31,6 +53,10 @@ class KFCDelivery: KFCModularTableView {
     
     override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
         return KFMCollaboratorInfo(name: "Alexandru Turcanu", username: "Pondorasti", userReputation: 100.0, userDonationsCount: 99, userDeliveriesCount: 99)
+    }
+    
+    override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
+        return KFMDestinationMap(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
     }
 }
 

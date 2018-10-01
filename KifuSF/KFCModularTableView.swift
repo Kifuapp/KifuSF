@@ -10,37 +10,44 @@ import UIKit
 
 class KFCModularTableView: UIViewController {
     
-    enum CellTypes { // view model
-        case openDonationDescription, progress, entityInfo, inProgressDonationDescription, collaboratorInfo // done
-        case destinationMap
+    enum CellTypes {
+        case openDonationDescription, progress, entityInfo, inProgressDonationDescription, collaboratorInfo, destinationMap // done
     }
     
-    let tableView = UITableView()
+    
+    let modularTableView = UITableView()
+    var modularTableViewConstraints = [NSLayoutConstraint]()
     var items = [KFPModularTableViewItem]()
+    
+    override func loadView() {
+        super.loadView()
+        
+        view.addSubview(modularTableView)
+        modularTableView.translatesAutoresizingMaskIntoConstraints = false
+        modularTableViewConstraints = modularTableView.autoPinEdgesToSuperviewEdges()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.allowsSelection = false
-        tableView.backgroundColor = UIColor.kfWhite
-        tableView.contentInset.top = 0
-        tableView.scrollIndicatorInsets.top = 0
+        modularTableView.allowsSelection = false
+        modularTableView.backgroundColor = UIColor.kfWhite
+        modularTableView.contentInset.top = 0
+        modularTableView.scrollIndicatorInsets.top = 0
         
-        tableView.dataSource = self
-        tableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
+        modularTableView.dataSource = self
+        modularTableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
-        tableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
+        modularTableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier)
-        tableView.register(KFVModularCell<KFVEntityInfo>.self,
+        modularTableView.register(KFVModularCell<KFVEntityInfo>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVEntityInfo>.identifier)
-        tableView.register(KFVModularCell<KFVCollaboratorInfo>.self,
+        modularTableView.register(KFVModularCell<KFVCollaboratorInfo>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVCollaboratorInfo>.identifier)
+        modularTableView.register(KFVModularCell<KFVDestinationMap>.self,
+                           forCellReuseIdentifier: KFVModularCell<KFVDestinationMap>.identifier)
         
-        tableView.register(UINib(nibName: "KFVProgress", bundle: nil), forCellReuseIdentifier: "KFVProgress")
-        
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.autoPinEdgesToSuperviewEdges()
+        modularTableView.register(UINib(nibName: "KFVProgress", bundle: nil), forCellReuseIdentifier: "KFVProgress")
         
         reloadData()
     }
@@ -68,7 +75,11 @@ class KFCModularTableView: UIViewController {
             items.append(collaboratorInfoItem)
         }
         
-        tableView.reloadData()
+        if let destinationMapItem = retrieveDestinationMapItem() {
+            items.append(destinationMapItem)
+        }
+        
+        modularTableView.reloadData()
     }
     
     func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
@@ -157,6 +168,16 @@ extension KFCModularTableView: UITableViewDataSource {
             }
             
             cell.descriptorView.reloadData(for: castedItem)
+            return cell
+            
+        case .destinationMap:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVDestinationMap>.identifier,
+                                                           for: indexPath) as? KFVModularCell<KFVDestinationMap>,
+                let castedItem = item as? KFMDestinationMap else {
+                    fatalError(KFErrorMessage.unknownCell)
+            }
+            
+            
             return cell
             
         default:
