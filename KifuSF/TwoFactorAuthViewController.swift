@@ -9,6 +9,8 @@
 import UIKit
 
 class TwoFactorAuthViewController: UIViewController {
+    
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -18,6 +18,85 @@ typealias FIRUser = FirebaseAuth.User
 
 struct UserService {
     
+    static func login(email: String, password: String, completion: @escaping (User?) -> Void) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                
+                return completion(nil)
+            }
+            
+            guard let firUser = result?.user else {
+                fatalError("no user from result but no error was found or, validation failed with register button")
+            }
+            
+            UserService.show(forUID: firUser.uid, completion: { (user) in
+                completion(user)
+            })
+        }
+    }
+    
+    struct SignInProviderInfo {
+        let displayName: String?
+        let email: String?
+        let phoneNumber: String?
+        let photoUrl: URL?
+    }
+    
+    static func login(
+        with credentials: AuthCredential,
+        completion: @escaping (User?) -> Void,
+        newUserHandler: @escaping (SignInProviderInfo) -> Void) {
+        
+        Auth.auth().signInAndRetrieveData(with: credentials) { (result, error) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(nil)
+            }
+            
+            guard let firUser = result?.user else {
+                fatalError("no user from result but no error was found or, validation failed with register button")
+            }
+            
+            let phoneNumber = firUser.phoneNumber
+            let displayName = firUser.displayName
+            let photoUrl = firUser.photoURL
+            let email = firUser.email
+            
+            UserService.show(forUID: firUser.uid, completion: { (user) in
+                if let existingUser = user {
+                    completion(user)
+                } else {
+                    let providerInfo = SignInProviderInfo(
+                        displayName: displayName,
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        photoUrl: photoUrl
+                    )
+                    newUserHandler(providerInfo)
+                }
+            })
+        }
+    }
+    
+    private static func handleLoginResult(result: AuthDataResult?, error: Error?, completion: @escaping (User?) -> Void) {
+        if let error = error {
+            assertionFailure(error.localizedDescription)
+            
+            return completion(nil)
+        }
+        
+        guard let firUser = result?.user else {
+            fatalError("no user from result but no error was found or, validation failed with register button")
+        }
+        
+        UserService.show(forUID: firUser.uid, completion: { (user) in
+            completion(user)
+        })
+    }
+    
     public static func create(
         firUser: FIRUser,
         username: String,

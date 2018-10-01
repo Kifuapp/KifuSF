@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var googleButton: UIView!
+    @IBOutlet weak var googleButton: GIDSignInButton!
     
     @IBOutlet weak var errorMessage: UILabel!
     
@@ -56,6 +56,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
     
     // MARK: - VOID METHODS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "toTFASegue":
+                guard let vc = segue.destination as? TwoFactorAuthViewController,
+                    let user = sender as? User else {
+                    fatalError("storyboard not set up correclty")
+                }
+                
+                vc.user = user
+            default: break
+            }
+        }
+    }
     
     private func clearErrorMessage() {
         errorMessage.text = ""
@@ -110,11 +125,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             action: #selector(UIInputViewController.dismissKeyboard)
         )
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidSignInWithGoogle(notification:)), name: .userDidLoginWithGoogle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidSignInWithGoogle(notification:)), name: .userDidLoginWithGoogle, object: nil)
         
         
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
+        
         view.addGestureRecognizer(tap)
         
     }
@@ -140,48 +155,49 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             let password = passwordTextField.text
             else { return }
         
-         isLoginButtonsEnabled = false
+//         isLoginButtonsEnabled = false
         
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            if let error = error {
+        UserService.login(email: email, password: password) { (user) in
+            guard let user = user else {
                 self.errorMessage.text = "Incorrect password or email"
-                self.isLoginButtonsEnabled = true
-            }
-            guard let firUser = result?.user else{
-                fatalError("no user from result but no error was found or, validation failed with register button")
-            }
-            
-            UserService.show(forUID: firUser.uid, completion: { (user) in
-                guard let user = user else {
-                    self.errorMessage.text = "Incorrect password or email"
-                    self.isLoginButtonsEnabled = true
-                    return }
+//                self.isLoginButtonsEnabled = true
                 
-//                  User.setCurrent(user, writeToUserDefaults: true)
-                  self.performSegue(withIdentifier: "toTFASegue", sender: nil)
-            })
-          
+                return
+            }
             
-            
-            
-            
-            
-           
+            self.performSegue(withIdentifier: "toTFASegue", sender: user)
         }
-        
-        
     }
-    
-    
- 
 
     
     @IBAction func googleButtonPressed(_ sender: Any) {
-    }
-    
-    @objc func onDidSignInWithGoogle(notification: Notification){
+        GIDSignIn.sharedInstance().signIn()
         
+        //         isLoginButtonsEnabled = false
     }
     
-
+    @objc func onDidSignInWithGoogle(notification: Notification) {
+        guard let credential = notification.userInfo?["credentials"] as? AuthCredential else {
+            return assertionFailure("no AuthCredential found")
+        }
+        
+        UserService.login(with: credential, completion: { (user) in
+            guard let existingUser = user else {
+                let errorAlert = UIAlertController(errorMessage: nil)
+                self.present(errorAlert, animated: true)
+                
+                return ()
+            }
+            
+            User.setCurrent(existingUser, writeToUserDefaults: true)
+            
+            //TODO: alex-present Home Vc
+            self.performSegue(withIdentifier: "toHome", sender: nil)
+            
+        }, newUserHandler: { providerInfo in
+            
+            //TODO: alex-present registration screen with auto filled in values
+            self.performSegue(withIdentifier: "toRegistration", sender: providerInfo)
+        })
+    }
 }

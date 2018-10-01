@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8de-63-A2y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8de-63-A2y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,14 +54,6 @@
                                 <color key="textColor" red="0.84631422550000002" green="0.49108720849999998" blue="0.5083245421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dMn-hs-ULc" customClass="GIDSignInButton">
-                                <rect key="frame" x="144" y="465" width="73" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <connections>
-                                    <action selector="googleButtonPressed:" destination="8de-63-A2y" eventType="valueChanged" id="aXh-rL-izk"/>
-                                </connections>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfk-2i-qIx">
                                 <rect key="frame" x="135" y="553" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -72,6 +63,15 @@
                                     <segue destination="AHu-0f-EpP" kind="show" id="KKE-qK-sKs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehz-o3-3eJ">
+                                <rect key="frame" x="135" y="474" width="91" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Google"/>
+                                <connections>
+                                    <action selector="googleButtonPressed:" destination="8de-63-A2y" eventType="touchUpInside" id="zVM-d3-Rqg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ksC-jX-7L3"/>
@@ -79,7 +79,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="5aO-rI-qdT" id="oiy-nY-X8d"/>
                         <outlet property="errorMessage" destination="xXk-Ie-daB" id="UpL-N4-A1P"/>
-                        <outlet property="googleButton" destination="dMn-hs-ULc" id="J96-l5-ggi"/>
                         <outlet property="loginButton" destination="MJp-Rz-0OB" id="vjG-Bl-TcC"/>
                         <outlet property="loginImage" destination="y4z-f1-gY7" id="5xZ-wJ-oqS"/>
                         <outlet property="passwordTextField" destination="2Ma-am-Hcp" id="fh1-lL-kYG"/>
