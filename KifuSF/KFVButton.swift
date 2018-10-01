@@ -53,6 +53,7 @@ class KFVButton: UIButton {
     
     private func setUpStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
+        layer.setUpShadow()
         
         titleLabel?.font.withSize(UIFont.buttonFontSize)
         titleLabel?.adjustsFontForContentSizeCategory = true

@@ -28,8 +28,6 @@ class KFCDonation: KFCModularTableView {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.kfWhite
-        
-        dynamicButton.layer.setUpShadow()
     }
     
     override func viewDidAppear(_ animated: Bool) {
