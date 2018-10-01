@@ -134,6 +134,12 @@ struct RequestService {
      - Remark: when a volunteer is selected or when the donation is canceled
      */
     public static func clearRequests(for donation: Donation, completion: @escaping (Bool) -> Void) {
+        /**
+         fetches all of the users for the given donation and invokes self.cancelRequest
+         for each user that requested to pick up the donation. This will remove
+         the given donation from the user's list of donations and the donation's
+         list of users.
+         */
         
         //get all users that have requested to deliever in the donation-requests
         let refDonationRequests = Database.database().reference()

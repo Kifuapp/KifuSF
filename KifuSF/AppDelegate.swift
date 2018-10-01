@@ -21,6 +21,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        let dg = DispatchGroup()
+        dg.enter()
+        DispatchQueue.global().async {
+            try! Auth.auth().signOut() // swiftlint:disable:this force_try
+            
+            Auth.auth().signIn(withEmail: "e@g.com", password: "password", completion: { (result, error) in
+                if let error = error {
+                    fatalError(error.localizedDescription)
+                }
+                
+                guard let firUser = result?.user
+                    else {
+                        fatalError("no user from result but no error was found or, validation failed with register button")
+                }
+                
+                UserService.show(forUID: firUser.uid, completion: { (user) in
+                    guard let user = user else {
+                        fatalError("no user found when signing in")
+                    }
+                    
+                    User.setCurrent(user, writeToUserDefaults: true)
+                    
+                    dg.leave()
+                })
+            })
+        }
+        
+        dg.wait()
+        
         //TODO: log-in / sign-up logic
         
         window = UIWindow(frame: UIScreen.main.bounds)
