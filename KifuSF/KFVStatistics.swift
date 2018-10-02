@@ -12,11 +12,11 @@ class KFVStatistics: UIView, Configurable {
     let contentStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fillEqually)
     
     let deliveryStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
-    let deliveryIconView = KFIconView(image: .kfDeliveryIcon)
+    let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
     let deliveryCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     let donationStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
-    let donationIconView = KFIconView(image: .kfDonationIcon)
+    let donationIconView = KFVIcon(image: .kfDonationIcon)
     let donationCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     override init(frame: CGRect) {

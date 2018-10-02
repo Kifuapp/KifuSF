@@ -49,7 +49,6 @@ extension KFCPendingDonations: KFPPendingDonationCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>) {
         let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
         
-        print(indexPath)
         numberOfRows -= 1
         tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
     }

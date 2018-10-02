@@ -14,7 +14,6 @@ class KFVSticky<T: UIView>: UIView, Configurable {
     private(set) var stickySide: ALEdge?
     
     private var _offset: CGFloat?
-    
     var offset: CGFloat {
         get {
             return _offset ?? 0

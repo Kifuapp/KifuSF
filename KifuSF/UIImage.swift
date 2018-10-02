@@ -50,7 +50,7 @@ extension UIImage {
     }()
     
     static let kfDeliveryIcon: UIImage = {
-        guard let image = UIImage(named: "DeliveryIcon") else {
+        guard let image = UIImage(named: "DeliveryIcon")?.withRenderingMode(.alwaysTemplate) else {
             fatalError(KFErrorMessage.imageNotFound)
         }
         
@@ -58,7 +58,15 @@ extension UIImage {
     }()
     
     static let kfDonationIcon: UIImage = {
-        guard let image = UIImage(named: "DonationIcon") else {
+        guard let image = UIImage(named: "DonationIcon")?.withRenderingMode(.alwaysTemplate) else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
+    
+    static let kfDisclosureIcon: UIImage = {
+        guard let image = UIImage(named: "DisclosureIcon")?.withRenderingMode(.alwaysTemplate) else {
             fatalError(KFErrorMessage.imageNotFound)
         }
         

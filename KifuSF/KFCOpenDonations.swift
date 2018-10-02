@@ -208,7 +208,6 @@ extension KFCOpenDonations {
         
         view.addSubview(widgetView)
         configureWidgetViewLayoutConstraints()
-        
 
         widgetView.reloadData()
     }

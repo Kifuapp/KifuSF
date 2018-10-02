@@ -56,8 +56,7 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
         //TODO: hook up with firebase
         let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
-        
-        print(indexPath)
+
         numberOfRows -= 1
         tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
     }

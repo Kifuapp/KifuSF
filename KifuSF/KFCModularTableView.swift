@@ -178,9 +178,6 @@ extension KFCModularTableView: UITableViewDataSource {
             
             
             return cell
-            
-        default:
-            fatalError(KFErrorMessage.unknownCell)
         }
     }
 }

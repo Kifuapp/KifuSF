@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-//MARK: KFVWidget
 final class KFVWidget: UIView, Configurable {
     
     enum TouchedViewType {
@@ -32,35 +29,34 @@ final class KFVWidget: UIView, Configurable {
     let deliveryStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
     let deliveryContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
     
-    let deliveryEmptyView = UIView()
-    let deliveryIconView = KFIconView(image: .kfDeliveryIcon)
+    let deliveryLeftEmptyView = UIView()
+    let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
     
     let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
     let deliveryTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let deliverySubtitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
-    let deliveryDisclosureImageView = UIImageView()
+    let deliveryDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    let deliveryRightEmptyView = UIView()
     let deliverySpacer = UIView()
     
     let donationStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
     let donationContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
     
-    let donationEmptyView = UIView()
-    let donationIconView = KFIconView(image: .kfDonationIcon)
+    let donationLeftEmptyView = UIView()
+    let donationIconView = KFVIcon(image: .kfDonationIcon)
     
     let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
     let donationTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let donationSubtitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
-    let donationDisclosureImageView = UIImageView()
+    let donationDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    let donationRightEmptyView = UIView()
     let donationSpacer = UIView()
-    
-    static let nibName = "KFVWidget"
     
     weak var dataSource: KFPWidgetDataSource?
     weak var delegate: KFPWidgetDelegate?
-
-    private var lastTouchLocation: CGPoint?
+    
     private var touchedViewType: TouchedViewType? {
         didSet {
             switch touchedViewType {
@@ -74,7 +70,6 @@ final class KFVWidget: UIView, Configurable {
                 donationBackgroundView.backgroundColor = UIColor.kfWhite
                 deliveryBackgroundView.backgroundColor = UIColor.kfWhite
             }
-            
         }
     }
     
@@ -103,39 +98,81 @@ final class KFVWidget: UIView, Configurable {
     }
     
     func configureLayoutConstraints() {
-        configureDeliveryViewLayout()
-        configureDonationViewLayout()
-        configureStackViewsLayout()
+        configureDeliveryStackViewLayout()
+        configureDonationStackViewLayout()
+        configureOuterStackViewsLayout()
         
         addSubview(backgroundsStackView)
         addSubview(containerStackView)
         
-        deliveryEmptyView.translatesAutoresizingMaskIntoConstraints = false
-        donationEmptyView.translatesAutoresizingMaskIntoConstraints = false
+        deliveryTextBodyStackView.setContentHuggingPriority(.init(250), for: .horizontal)
+        donationTextBodyStackView.setContentHuggingPriority(.init(250), for: .horizontal)
         
-        deliveryEmptyView.autoSetDimension(.width, toSize: 0)
-        donationEmptyView.autoSetDimension(.width, toSize: 0)
-        
-        deliverySpacer.translatesAutoresizingMaskIntoConstraints = false
-        donationSpacer.translatesAutoresizingMaskIntoConstraints = false
-        
-        deliverySpacer.autoSetDimension(.height, toSize: 0.5)
-        donationSpacer.autoSetDimension(.height, toSize: 0.5)
-        
+        configureEmptyViewsConstraints()
+        configureSpacersConstraints()
         configureIconsConstraints()
         configureTextPadding()
         configureStackViewsPadding()
     }
     
+    private func configureEmptyViewsConstraints() {
+        configureDeliveryEmptyViewConstraints()
+        configureDonationEmptyViewConstraints()
+    }
+    
+    private func configureDeliveryEmptyViewConstraints() {
+        deliveryLeftEmptyView.translatesAutoresizingMaskIntoConstraints = false
+        deliveryRightEmptyView.translatesAutoresizingMaskIntoConstraints = false
+        
+        deliveryLeftEmptyView.autoSetDimension(.width, toSize: 0)
+        deliveryRightEmptyView.autoSetDimension(.width, toSize: 0)
+    }
+    
+    private func configureDonationEmptyViewConstraints() {
+        donationLeftEmptyView.translatesAutoresizingMaskIntoConstraints = false
+        donationRightEmptyView.translatesAutoresizingMaskIntoConstraints = false
+        
+        donationLeftEmptyView.autoSetDimension(.width, toSize: 0)
+        donationRightEmptyView.autoSetDimension(.width, toSize: 0)
+    }
+    
+    private func configureSpacersConstraints() {
+        deliverySpacer.translatesAutoresizingMaskIntoConstraints = false
+        donationSpacer.translatesAutoresizingMaskIntoConstraints = false
+        
+        deliverySpacer.autoSetDimension(.height, toSize: 0.5)
+        donationSpacer.autoSetDimension(.height, toSize: 0.5)
+    }
+    
     private func configureIconsConstraints() {
         deliveryIconView.translatesAutoresizingMaskIntoConstraints = false
-        donationIconView.translatesAutoresizingMaskIntoConstraints = false
+        deliveryDisclosureImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        donationIconView.translatesAutoresizingMaskIntoConstraints = false
+        donationDisclosureImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        configureAspectRatioForIcons()
+        configureSameSizeForIcons()
+    }
+    
+    private func configureAspectRatioForIcons() {
+        //aspect ratio 1:1 for all icons
+        deliveryDisclosureImageView.autoMatch(.height, to: .width, of: deliveryDisclosureImageView)
+        donationDisclosureImageView.autoMatch(.height, to: .width, of: donationDisclosureImageView)
+        
+        deliveryIconView.autoMatch(.height, to: .width, of: deliveryIconView)
+        donationIconView.autoMatch(.height, to: .width, of: donationIconView)
+    }
+    
+    private func configureSameSizeForIcons() {
+        //makes the width and height of all the icons to be bonded, therefore making all icons to have the same size
+        deliveryDisclosureImageView.autoMatch(.height, to: .height, of: deliveryIconView)
+        donationDisclosureImageView.autoMatch(.height, to: .height, of: donationIconView)
         donationIconView.autoMatch(.height, to: .height, of: deliveryIconView)
-        donationIconView.autoMatch(.width, to: .width, of: deliveryIconView)
     }
     
     private func configureTextPadding() {
+        //makes the textBodyStackViews to be centered by adding some padding
         deliveryTextBodyStackView.translatesAutoresizingMaskIntoConstraints = false
         donationTextBodyStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -147,14 +184,15 @@ final class KFVWidget: UIView, Configurable {
     }
     
     private func configureStackViewsPadding() {
+        //pins the outer stackviews to the edge
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
-        containerStackView.autoPinEdgesToSuperviewEdges()
-        
         backgroundsStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerStackView.autoPinEdgesToSuperviewEdges()
         backgroundsStackView.autoPinEdgesToSuperviewEdges()
     }
     
-    private func configureStackViewsLayout() {
+    private func configureOuterStackViewsLayout() {
         containerStackView.addArrangedSubview(deliveryStackView)
         containerStackView.addArrangedSubview(donationStackView)
         
@@ -162,33 +200,44 @@ final class KFVWidget: UIView, Configurable {
         backgroundsStackView.addArrangedSubview(donationBackgroundView)
     }
     
-    private func configureDeliveryViewLayout() {
+    private func configureDeliveryStackViewLayout() {
         deliveryTextBodyStackView.addArrangedSubview(deliveryTitleLabel)
         deliveryTextBodyStackView.addArrangedSubview(deliverySubtitleLabel)
         
-        deliveryContentsStackView.addArrangedSubview(deliveryEmptyView)
-        deliveryContentsStackView.addArrangedSubview(deliveryIconView)
-        deliveryContentsStackView.addArrangedSubview(deliveryTextBodyStackView)
-        deliveryContentsStackView.addArrangedSubview(deliveryDisclosureImageView)
+        configureContentDeliveryStackViewLayout()
         
         deliveryStackView.addArrangedSubview(deliveryContentsStackView)
         deliveryStackView.addArrangedSubview(deliverySpacer)
     }
     
-    private func configureDonationViewLayout() {
+    private func configureContentDeliveryStackViewLayout() {
+        deliveryContentsStackView.addArrangedSubview(deliveryLeftEmptyView)
+        deliveryContentsStackView.addArrangedSubview(deliveryIconView)
+        deliveryContentsStackView.addArrangedSubview(deliveryTextBodyStackView)
+        deliveryContentsStackView.addArrangedSubview(deliveryDisclosureImageView)
+        deliveryContentsStackView.addArrangedSubview(deliveryRightEmptyView)
+    }
+    
+    private func configureDonationStackViewLayout() {
         donationTextBodyStackView.addArrangedSubview(donationTitleLabel)
         donationTextBodyStackView.addArrangedSubview(donationSubtitleLabel)
         
-        donationContentsStackView.addArrangedSubview(donationEmptyView)
-        donationContentsStackView.addArrangedSubview(donationIconView)
-        donationContentsStackView.addArrangedSubview(donationTextBodyStackView)
-        donationContentsStackView.addArrangedSubview(donationDisclosureImageView)
+        configureContentDonationStackViewLayout()
         
         donationStackView.addArrangedSubview(donationContentsStackView)
         donationStackView.addArrangedSubview(donationSpacer)
     }
     
+    private func configureContentDonationStackViewLayout() {
+        donationContentsStackView.addArrangedSubview(donationLeftEmptyView)
+        donationContentsStackView.addArrangedSubview(donationIconView)
+        donationContentsStackView.addArrangedSubview(donationTextBodyStackView)
+        donationContentsStackView.addArrangedSubview(donationDisclosureImageView)
+        donationContentsStackView.addArrangedSubview(donationRightEmptyView)
+    }
+    
     func configureStyling() {
+        //TODO: fix the color literal, but in the future no rush here
         deliverySpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
         donationSpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
         
@@ -204,23 +253,18 @@ final class KFVWidget: UIView, Configurable {
 
     @objc private func updateWidgetView(_ sender: UILongPressGestureRecognizer) {
         let touchLocation = sender.location(in: containerStackView)
-        lastTouchLocation = touchLocation
         
         switch sender.state {
-        case .began:
-            updateState(for: touchLocation)
-            
-        case .changed:
+        case .began, .changed:
             updateState(for: touchLocation)
 
         case .ended:
             updateState(for: touchLocation)
             //TODO: check if it's inside
-            if let type = touchedViewType {
+            if let type = touchedViewType, containerStackView.frame.contains(touchLocation), touchLocation.x != 0 {
                 delegate?.widgetView(self, didSelectCellForType: type)
+                touchedViewType = nil
             }
-            touchedViewType = nil
-            
         default:
             break
         }
@@ -229,8 +273,10 @@ final class KFVWidget: UIView, Configurable {
     private func updateState(for location: CGPoint) {
         if deliveryStackView.frame.contains(location)  {
             touchedViewType = .delivery
-        } else {
+        } else if donationStackView.frame.contains(location) {
             touchedViewType = .donation
+        } else {
+            touchedViewType = nil
         }
     }
     

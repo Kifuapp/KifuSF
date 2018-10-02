@@ -1,5 +1,5 @@
 //
-//  KFIconView.swift
+//  KFVIcon.swift
 //  KifuSF
 //
 //  Created by Alexandru Turcanu on 02/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFIconView: UIImageView {
+class KFVIcon: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,6 +18,7 @@ class KFIconView: UIImageView {
         self.init(frame: CGRect.zero)
         
         self.image = image
+        tintColor = .kfPrimary
         contentMode = .scaleAspectFit
         adjustsImageSizeForAccessibilityContentSizeCategory = true
     }

@@ -22,6 +22,7 @@ class KFCLeaderboard: KFCTableViewWithRoundedCells {
         
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.isScrollEnabled = false
+        tableViewWithRoundedCells.allowsSelection = false
         tableViewWithRoundedCells.register(KFVRoundedCell<KFVUserInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVUserInfo>.identifier)
     }
 }
