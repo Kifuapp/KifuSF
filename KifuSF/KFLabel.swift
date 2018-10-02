@@ -12,13 +12,21 @@ class KFLabel: UILabel {
 
     convenience init() {
         self.init(frame: CGRect.zero)
+    }
+    
+    convenience init(font: UIFont, textColor: UIColor) {
+        self.init()
         
-        font.withSize(UIFont.buttonFontSize)
-        adjustsFontForContentSizeCategory = true
+        self.font = font
+        self.textColor = textColor
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        font.withSize(UIFont.buttonFontSize)
+        adjustsFontForContentSizeCategory = true
+        numberOfLines = 0
     }
     
     required init?(coder aDecoder: NSCoder) {

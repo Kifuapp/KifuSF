@@ -9,22 +9,20 @@
 import UIKit
 
 class KFVStatistics: UIView, Configurable {
-    let contentStackView = UIStackView()
+    let contentStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fillEqually)
     
-    let deliveryStackView = UIStackView()
-    let deliveryImageView = UIImageView()
-    let deliveryCountLabel = UILabel()
+    let deliveryStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
+    let deliveryIconView = KFIconView(image: .kfDeliveryIcon)
+    let deliveryCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
-    let donationStackView = UIStackView()
-    let donationImageView = UIImageView()
-    let donationCountLabel = UILabel()
+    let donationStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
+    let donationIconView = KFIconView(image: .kfDonationIcon)
+    let donationCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubview(contentStackView)
-        
-        configureStyling()
         configureLayoutConstraints()
     }
     
@@ -33,52 +31,20 @@ class KFVStatistics: UIView, Configurable {
     }
     
     func configureLayoutConstraints() {
-        deliveryStackView.axis = .horizontal
-        deliveryStackView.alignment = .fill
-        deliveryStackView.spacing = 4
+        configureStackViewsLayout()
         
-        deliveryStackView.addArrangedSubview(deliveryImageView)
-        deliveryStackView.addArrangedSubview(deliveryCountLabel)
-        
-        donationStackView.axis = .horizontal
-        donationStackView.alignment = .fill
-        donationStackView.spacing = 4
-        
-        donationStackView.addArrangedSubview(donationImageView)
-        donationStackView.addArrangedSubview(donationCountLabel)
-        
-        contentStackView.axis = .horizontal
-        contentStackView.alignment = .fill
-        contentStackView.distribution = .fillEqually
-        contentStackView.spacing = 16
-        
-        contentStackView.addArrangedSubview(deliveryStackView)
-        contentStackView.addArrangedSubview(donationStackView)
-        
-        translatesAutoresizingMaskIntoConstraints = false
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         contentStackView.autoPinEdgesToSuperviewEdges()
     }
     
-    func configureStyling() {
-        deliveryImageView.image = UIImage.kfDeliveryIcon
-        deliveryImageView.contentMode = .scaleAspectFit
-        deliveryImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+    private func configureStackViewsLayout() {
+        deliveryStackView.addArrangedSubview(deliveryIconView)
+        deliveryStackView.addArrangedSubview(deliveryCountLabel)
         
-        deliveryCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        deliveryCountLabel.numberOfLines = 1
-        deliveryCountLabel.textColor = UIColor.kfSubtitle
-        deliveryCountLabel.adjustsFontForContentSizeCategory = true
+        donationStackView.addArrangedSubview(donationIconView)
+        donationStackView.addArrangedSubview(donationCountLabel)
         
-        donationImageView.image = UIImage.kfDonationIcon
-        donationImageView.contentMode = .scaleAspectFit
-        donationImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        
-        donationCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        donationCountLabel.numberOfLines = 1
-        donationCountLabel.textColor = UIColor.kfSubtitle
-        donationCountLabel.adjustsFontForContentSizeCategory = true
+        contentStackView.addArrangedSubview(deliveryStackView)
+        contentStackView.addArrangedSubview(donationStackView)
     }
-    
 }

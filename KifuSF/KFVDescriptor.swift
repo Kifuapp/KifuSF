@@ -11,16 +11,18 @@ import PureLayout
 
 class KFVDescriptor: UIView, Configurable {
     
-    let contentsStackView = UIStackView()
-    let topStackView = UIStackView()
+    let contentsStackView = UIStackView(axis: .vertical, alignment: .fill,
+                                        spacing: KFPadding.StackView, distribution: .fill)
+    let topStackView = UIStackView(axis: .horizontal, alignment: .fill,
+                                   spacing: KFPadding.StackView, distribution: .fill)
     
     let imageView = KFVImage()
     var imageConstraints = [NSLayoutConstraint]()
     
-    let infoStackView = UIStackView()
+    let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
     
-    let titleLabel = UILabel()
-    let subtitleStickyLabel = KFVSticky<UILabel>()
+    let titleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let subtitleStickyLabel = KFVSticky<KFLabel>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,66 +39,56 @@ class KFVDescriptor: UIView, Configurable {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        if isAccessibilityCategory != previousTraitCollection?.preferredContentSizeCategory.isAccessibilityCategory {
+        if isAccessibilityCategory {
             topStackView.axis = .vertical
             //TODO: finish this
+        } else {
+            topStackView.axis = .horizontal
         }
     }
     
     func configureStyling() {
+        configureDescriptorStyling()
+        configureSubtitleStickyLabelStyling()
+    }
+    
+    private func configureSubtitleStickyLabelStyling() {
+        subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
+    }
+    private func configureDescriptorStyling() {
         backgroundColor = UIColor.kfWhite
+        layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()
-        
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        titleLabel.numberOfLines = 0
-        titleLabel.textColor = UIColor.kfTitle
-        titleLabel.adjustsFontForContentSizeCategory = true
-        
-        subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        subtitleStickyLabel.contentView.numberOfLines = 0
-        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
-        subtitleStickyLabel.contentView.adjustsFontForContentSizeCategory = true
     }
     
     func configureLayoutConstraints() {
-        layer.masksToBounds = false
+        configureStackViewsLayout()
+        configureContentsStackViewConstraints()
         
-        translatesAutoresizingMaskIntoConstraints = false
-        contentsStackView.translatesAutoresizingMaskIntoConstraints = false
+        imageConstraints.append(imageView.autoSetDimension(.height, toSize: KFPadding.SmallPictureLength))
+        imageConstraints.append(imageView.autoSetDimension(.width, toSize: KFPadding.SmallPictureLength))
         
-        infoStackView.axis = .vertical
-        infoStackView.alignment = .leading
-        infoStackView.distribution = .fill
-        infoStackView.spacing = 0
-        
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+    }
+    
+    private func configureStackViewsLayout() {
         infoStackView.addArrangedSubview(titleLabel)
         infoStackView.addArrangedSubview(subtitleStickyLabel)
-        
-        topStackView.axis = .horizontal
-        topStackView.alignment = .fill
-        topStackView.distribution = .fill
-        topStackView.spacing = 16
         
         topStackView.addArrangedSubview(imageView)
         topStackView.addArrangedSubview(infoStackView)
         
-        contentsStackView.axis = .vertical
-        contentsStackView.alignment = .fill
-        contentsStackView.distribution = .fill
-        contentsStackView.spacing = 16
-        
         contentsStackView.addArrangedSubview(topStackView)
-        
-        imageConstraints.append(imageView.autoSetDimension(.height, toSize: 112))
-        imageConstraints.append(imageView.autoSetDimension(.width, toSize: 112))
-        
-        contentsStackView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
-        contentsStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
-        contentsStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8)
-        contentsStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
-        
-        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+    }
+    
+    private func configureContentsStackViewConstraints() {
+        contentsStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentsStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.ContentView)
+        contentsStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.ContentView)
+        contentsStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.ContentView)
+        contentsStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: KFPadding.ContentView)
     }
 }

@@ -91,6 +91,7 @@ class KFButton: UIButton, Configurable {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
+        //TODO: Finish this part
         print("touch cancellled")
     }
     

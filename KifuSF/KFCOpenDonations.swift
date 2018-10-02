@@ -44,7 +44,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
     
     private var lastSelectedCell: KFVRoundedCell<KFVDonationInfo>?
-    private var widgetView: KFVWidget?
+    private var widgetView = KFVWidget()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +53,10 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         tableViewWithRoundedCells.delegate = self
         
         
-        setUpDonationTableView()
-        setUpWidgetView()
-        setUpNavBar()
-        setUpFirebase()
+        configureDonationTableView()
+        configureWidgetView()
+        configureNavBar()
+        configureFirebase()
         
     }
     
@@ -76,7 +76,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     
     }
     
-    func setUpFirebase() {
+    func configureFirebase() {
         /*
         DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
@@ -161,40 +161,37 @@ extension KFCOpenDonations: UITableViewDelegate {
         let detailedOpenDonationVC = KFCDetailedDonation()
         navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
-    
 }
 
 //MARK: KFPWidgetDataSource
 extension KFCOpenDonations: KFPWidgetDataSource {
     func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo? {
         switch type {
-        case .donation(_):
+        case .donation:
             return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
-        case .delivery(_):
+        case .delivery:
             return KFVWidget.KFMWidgetInfo(title: "Toilet Paper", subtitle: "Current Step")
         }
     }
-    
-    
 }
 
 //MARK: KFPWidgetDelegate
 extension KFCOpenDonations: KFPWidgetDelegate {
     func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
-        tableViewWithRoundedCells.contentInset.top = height + 8
-        tableViewWithRoundedCells.scrollIndicatorInsets.top = height + 8
+        tableViewWithRoundedCells.contentInset.top = height + KFPadding.ContentView
+        tableViewWithRoundedCells.scrollIndicatorInsets.top = height + KFPadding.ContentView
     }
     
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
         
         switch type {
-        case .donation(_):
+        case .donation:
             print("Donation widget pressed")
             
             let volunteersListVC = KFCVolunteerList()
             navigationController?.pushViewController(volunteersListVC, animated: true)
             
-        case .delivery(_):
+        case .delivery:
             print("Delivery widget pressed")
             
             let pendingDonationsVC = KFCPendingDonations()
@@ -205,36 +202,33 @@ extension KFCOpenDonations: KFPWidgetDelegate {
 
 extension KFCOpenDonations {
     
-    func setUpWidgetView() {
-        guard let widgetView = Bundle.main.loadNibNamed(KFVWidget.nibName, owner: self, options: nil)?.first as? KFVWidget else {
-            assertionFailure(KFErrorMessage.nibFileNotFound)
-            return
-        }
-        
-        self.widgetView = widgetView
-        
+    func configureWidgetView() {
         widgetView.dataSource = self
         widgetView.delegate = self
         
         view.addSubview(widgetView)
-
-        widgetView.translatesAutoresizingMaskIntoConstraints = false
-
-        widgetView.autoPinEdge(toSuperviewEdge: .top)
-        widgetView.autoPinEdge(toSuperviewEdge: .leading)
-        widgetView.autoPinEdge(toSuperviewEdge: .trailing)
+        configureWidgetViewLayoutConstraints()
+        
 
         widgetView.reloadData()
     }
     
-    func setUpDonationTableView() {
+    func configureWidgetViewLayoutConstraints() {
+        widgetView.translatesAutoresizingMaskIntoConstraints = false
+        
+        widgetView.autoPinEdge(toSuperviewEdge: .top)
+        widgetView.autoPinEdge(toSuperviewEdge: .leading)
+        widgetView.autoPinEdge(toSuperviewEdge: .trailing)
+    }
+    
+    func configureDonationTableView() {
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.delegate = self
         
         tableViewWithRoundedCells.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
     }
     
-    func setUpNavBar() {
+    func configureNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createDonation))
         title = "Home"
     }
