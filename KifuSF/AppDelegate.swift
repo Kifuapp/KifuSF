@@ -12,8 +12,7 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-    
-    
+        
     var window: UIWindow?
     
     func application(
@@ -42,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             window?.rootViewController = initialVC
             window?.makeKeyAndVisible()
-        }
-        else{
+        } else {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let initialVC = storyboard.instantiateViewController(withIdentifier: "kfLogin")
             window?.rootViewController = initialVC
@@ -51,23 +49,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(
+            url,
+            sourceApplication: options[.sourceApplication] as? String,
+            annotation: [:])
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-       
         if let error = error {
-            
-            return
+            return assertionFailure(error.localizedDescription)
         }
         
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        let credentialDict = ["credentials": credential] as [String:Any]
+        let credentialDict = ["credentials": credential] as [String: Any]
         NotificationCenter.default.post(name: .userDidLoginWithGoogle, object: nil, userInfo: credentialDict)
     }
     
@@ -75,10 +76,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
        
     }
-    
-
-    
 }
-
-
-

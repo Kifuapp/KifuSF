@@ -9,7 +9,6 @@
 import UIKit
 import FirebaseAuth
 
-
 class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     
     let plusImage = UIImage(named: "PlusSquare")
@@ -72,8 +71,9 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var buttonViewRegister: GradientView!
+    
     //TODO: Add a manual seque to new storyboard
-    @IBAction func registerButtonTapped(_ sender: Any) { // swiftlint:disable:this function_body_length
+    @IBAction func registerButtonTapped(_ sender: Any) {
         clearErrorMessage()
         dismissKeyboard()
         
@@ -108,8 +108,13 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         isRegisterButtonEnabled = false
         
         UserService.register(
-            with: "", username: username, image: image, contactNumber: contactNumber, email: email, password: password) { (user) in
-            if let _ = user {
+            with: "",
+            username: username,
+            image: image,
+            contactNumber: contactNumber,
+            email: email,
+            password: password) { (user) in
+            if user != nil {
                 
                 //succeeded regiestration
                 //TODO: alex-this needs to present the validate phone number Vc
@@ -167,4 +172,3 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
     }
 }
-

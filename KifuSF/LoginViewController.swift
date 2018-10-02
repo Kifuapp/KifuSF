@@ -11,15 +11,9 @@ import FirebaseAuth
 import Firebase
 import GoogleSignIn
 
-class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate   {
-
-    
-    
+class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
     
     let kifuLogoImage = UIImage(named: "Logo")
-    
-   
-
     
     @IBOutlet weak var loginImage: UIImageView!
     
@@ -35,20 +29,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    
     private var isLoginButtonsEnabled: Bool {
         set {
             loginButton.alpha = newValue ? 1.0 : 0.45
             loginButton.isUserInteractionEnabled = newValue
-           
-           
+            
             googleButton.alpha = newValue ? 1.0 : 0.45
             googleButton.isUserInteractionEnabled = newValue
             
-            
             view.isUserInteractionEnabled = newValue
-           
-            
         }
         get {
             return view.isUserInteractionEnabled
@@ -61,12 +50,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         if let identifier = segue.identifier {
             switch identifier {
             case "toTFASegue":
-                guard let vc = segue.destination as? TwoFactorAuthViewController,
+                guard let verifyVc = segue.destination as? TwoFactorAuthViewController,
                     let user = sender as? User else {
                     fatalError("storyboard not set up correclty")
                 }
                 
-                vc.user = user
+                verifyVc.user = user
             default: break
             }
         }
@@ -100,8 +89,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         self.clearErrorMessage()
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,17 +111,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             target: self,
             action: #selector(UIInputViewController.dismissKeyboard)
         )
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidSignInWithGoogle(notification:)), name: .userDidLoginWithGoogle, object: nil)
-        
-        
-        GIDSignIn.sharedInstance().uiDelegate = self
-        
         view.addGestureRecognizer(tap)
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onDidSignInWithGoogle(notification:)),
+            name: .userDidLoginWithGoogle,
+            object: nil
+        )
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
-   
     //TODO: Add segue to other storyboard
     @IBAction func loginButtonPressed(_ sender: Any) {
    
@@ -168,7 +156,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             self.performSegue(withIdentifier: "toTFASegue", sender: user)
         }
     }
-
     
     @IBAction func googleButtonPressed(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()

@@ -27,7 +27,14 @@ struct UserService {
      
      - parameter user: if this is given back as nil, something went wrong while registering the user
      */
-    static func register(with name: String, username: String, image: UIImage, contactNumber: String, email: String, password: String, completion: @escaping (_ user: User?) -> Void) {
+    static func register( // swiftlint:disable:this function_parameter_count
+        with name: String,
+        username: String,
+        image: UIImage,
+        contactNumber: String,
+        email: String,
+        password: String,
+        completion: @escaping (_ user: User?) -> Void) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {

@@ -54,7 +54,10 @@ struct RequestService {
         self.cancelRequest(for: donation, forUserUid: User.current.uid, completion: completion)
     }
     
-    private static func cancelRequest(for donation: Donation, forUserUid userUid: String, completion: @escaping (Bool) -> Void) {
+    private static func cancelRequest(
+        for donation: Donation,
+        forUserUid userUid: String,
+        completion: @escaping (Bool) -> Void) {
         
         //remove donation from user-requests
         let refUserRequest = Database.database().reference()
