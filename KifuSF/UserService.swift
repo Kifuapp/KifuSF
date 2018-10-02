@@ -18,12 +18,52 @@ typealias FIRUser = FirebaseAuth.User
 
 struct UserService {
     
-    static func login(email: String, password: String, completion: @escaping (User?) -> Void) {
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter name: is the full name of the user
+     - parameter contactNumber: is the user's phone number as shown XXXYYYZZZZ
+     - parameter password: is six or more characters long
+     
+     - parameter user: if this is given back as nil, something went wrong while registering the user
+     */
+    static func register(with name: String, username: String, image: UIImage, contactNumber: String, email: String, password: String, completion: @escaping (_ user: User?) -> Void) {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                //TODO: return errors for unexected error, duplicate email, duplicate username
+                return completion(nil)
+            }
+            
+            guard let firUser = result?.user else {
+                fatalError("no user from result but no error was found")
+            }
+            
+            UserService.create(
+                firUser: firUser,
+                username: username,
+                image: image,
+                contactNumber:
+                contactNumber, completion: { (user) in
+                    completion(user)
+            })
+        }
+    }
+    
+    /**
+     Login a Kifu user
+     
+     - parameter user: if this is given back as nil, no user was found
+     */
+    static func login(email: String, password: String, completion: @escaping (_ user: User?) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print(error.localizedDescription)
                 
+                //TODO: return errors for unexected error, account not found, wrong password
                 return completion(nil)
             }
             
@@ -44,15 +84,27 @@ struct UserService {
         let photoUrl: URL?
     }
     
+    /**
+     Use this to login after collecting credentials from a sign-in provider such as Google.
+     
+     - parameter credentials: object retrieved after the user has signed in from a provider.
+     Listen to the `userDidLoginWithGoogle` notification to collect this credential
+     in NotificationCenter.default
+     - parameter completion: given an error or the existing user
+     - parameter user: exsiting user or nil if an error has occurred
+     - parameter newUserHandler: when the user is authenticated but not in our database
+     - parameter providerInfo: the information that was given back from the provider
+     */
     static func login(
         with credentials: AuthCredential,
-        completion: @escaping (User?) -> Void,
-        newUserHandler: @escaping (SignInProviderInfo) -> Void) {
+        completion: @escaping (_ user: User?) -> Void,
+        newUserHandler: @escaping (_ providerInfo: SignInProviderInfo) -> Void) {
         
         Auth.auth().signInAndRetrieveData(with: credentials) { (result, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 
+                //TODO: return errors for unexected error
                 return completion(nil)
             }
             
@@ -66,7 +118,7 @@ struct UserService {
             let email = firUser.email
             
             UserService.show(forUID: firUser.uid, completion: { (user) in
-                if let existingUser = user {
+                if user != nil {
                     completion(user)
                 } else {
                     let providerInfo = SignInProviderInfo(
@@ -81,23 +133,7 @@ struct UserService {
         }
     }
     
-    private static func handleLoginResult(result: AuthDataResult?, error: Error?, completion: @escaping (User?) -> Void) {
-        if let error = error {
-            assertionFailure(error.localizedDescription)
-            
-            return completion(nil)
-        }
-        
-        guard let firUser = result?.user else {
-            fatalError("no user from result but no error was found or, validation failed with register button")
-        }
-        
-        UserService.show(forUID: firUser.uid, completion: { (user) in
-            completion(user)
-        })
-    }
-    
-    public static func create(
+    private static func create(
         firUser: FIRUser,
         username: String,
         image: UIImage,

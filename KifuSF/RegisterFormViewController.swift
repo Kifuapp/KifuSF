@@ -72,7 +72,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var buttonViewRegister: GradientView!
-    //TODO: Add a manual seque to new storyboard 
+    //TODO: Add a manual seque to new storyboard
     @IBAction func registerButtonTapped(_ sender: Any) { // swiftlint:disable:this function_body_length
         clearErrorMessage()
         dismissKeyboard()
@@ -99,50 +99,28 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         }
         
         guard let email = emailTextField.text,
-            let password = passwordTextField.text
+            let password = passwordTextField.text,
+            let username = self.usernameTextField.text,
+            let contactNumber = self.phoneAddressTextField.text,
+            let image = self.profileImage.image
             else { return }
         
         isRegisterButtonEnabled = false
         
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                let alert = UIAlertController(errorMessage: error.localizedDescription)
+        UserService.register(
+            with: "", username: username, image: image, contactNumber: contactNumber, email: email, password: password) { (user) in
+            if let _ = user {
+                
+                //succeeded regiestration
+                //TODO: alex-this needs to present the validate phone number Vc
+                self.performSegue(withIdentifier: "show two factor auth", sender: nil)
+                
+            } else {
+                let alert = UIAlertController(errorMessage: nil)
                 self.present(alert, animated: true)
                 
                 self.isRegisterButtonEnabled = true
-                
-                return
             }
-            
-            guard let firUser = result?.user,
-                let username = self.usernameTextField.text,
-                let contactNumber = self.phoneAddressTextField.text,
-                let image = self.profileImage.image
-                else {
-                    fatalError("no user from result but no error was found or, validation failed with register button")
-            }
-            
-            UserService.create(
-                firUser: firUser,
-                username: username,
-                image: image,
-                contactNumber:
-                contactNumber, completion: { (user) in
-                guard let _ = user else {
-                    let alert = UIAlertController(errorMessage: nil)
-                    self.present(alert, animated: true)
-                    
-                    self.isRegisterButtonEnabled = true
-                    
-                    return
-                }
-                
-//                User.setCurrent(user, writeToUserDefaults: true)
-                
-                //succeeded regiestration
-                self.performSegue(withIdentifier: "show two factor auth", sender: nil)
-            })
         }
     }
     
@@ -189,3 +167,4 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
     }
 }
+
