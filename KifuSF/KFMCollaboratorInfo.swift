@@ -9,15 +9,15 @@
 import Foundation
 
 class KFMCollaboratorInfo: KFPModularTableViewItem {
-    var type: KFCModularTableView.CellTypes = .collaboratorInfo
+    let type: KFCModularTableView.CellTypes = .collaboratorInfo
     
-    var profileImageURL: URL
-    var username: String
-    var name: String
+    let profileImageURL: URL
+    let username: String
+    let name: String
     
-    var userReputation: Double
-    var userDonationsCount: Int
-    var userDeliveriesCount: Int
+    let userReputation: Double
+    let userDonationsCount: Int
+    let userDeliveriesCount: Int
     
     init(profileImageURL: URL, name: String,
          username: String, userReputation: Double,

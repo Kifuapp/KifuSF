@@ -9,16 +9,16 @@
 import Foundation
 
 class KFMEntityInfo: KFPModularTableViewItem {
-    var type: KFCModularTableView.CellTypes = .entityInfo
+    let type: KFCModularTableView.CellTypes = .entityInfo
     
     enum EntityType: String {
         case charity, donator, deliverer
     }
     
-    var name: String
-    var phoneNumber: String
-    var address: String
-    var entityType: EntityType
+    let name: String
+    let phoneNumber: String
+    let address: String
+    let entityType: EntityType
     
     init(name: String, phoneNumber: String, address: String, entityType: EntityType) {
         self.name = name

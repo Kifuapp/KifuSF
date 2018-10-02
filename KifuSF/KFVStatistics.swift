@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVStatistics: UIView {
+class KFVStatistics: UIView, Configurable {
     let contentStackView = UIStackView()
     
     let deliveryStackView = UIStackView()
@@ -24,15 +24,15 @@ class KFVStatistics: UIView {
         
         addSubview(contentStackView)
         
-        setUpStyling()
-        setupLayoutConstraints()
+        configureStyling()
+        configureLayoutConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupLayoutConstraints() {
+    func configureLayoutConstraints() {
         deliveryStackView.axis = .horizontal
         deliveryStackView.alignment = .fill
         deliveryStackView.spacing = 4
@@ -61,7 +61,7 @@ class KFVStatistics: UIView {
         contentStackView.autoPinEdgesToSuperviewEdges()
     }
     
-    func setUpStyling() {
+    func configureStyling() {
         deliveryImageView.image = UIImage.kfDeliveryIcon
         deliveryImageView.contentMode = .scaleAspectFit
         deliveryImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true

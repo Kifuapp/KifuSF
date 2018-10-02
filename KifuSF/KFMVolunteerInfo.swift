@@ -10,12 +10,12 @@ import Foundation
 
 class KFMVolunteerInfo {
     
-    var imageURL: URL
-    var username: String
+    let imageURL: URL
+    let username: String
     
-    var userReputation: Double
-    var userDonationsCount: Int
-    var userDeliveriesCount: Int
+    let userReputation: Double
+    let userDonationsCount: Int
+    let userDeliveriesCount: Int
     
     init(imageURL: URL, username: String,
         userReputation: Double, userDonationsCount: Int,

@@ -11,7 +11,7 @@ import UIKit
 class KFVVolunteerInfo: KFVDescriptor {
     
     let statisticsView = KFVStatistics()
-    let confirmationStickyButton = KFVSticky<KFVButton>(stickySide: .bottom)
+    let confirmationStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
     var indexPath: IndexPath?
     
     weak var delegate: KFPVolunteerInfoCellDelegate?
@@ -24,8 +24,8 @@ class KFVVolunteerInfo: KFVDescriptor {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setUpLayoutConstraints() {
-        super.setUpLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         confirmationStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
         infoStackView.addArrangedSubview(statisticsView)
@@ -42,8 +42,8 @@ class KFVVolunteerInfo: KFVDescriptor {
         subtitleStickyLabel.updateStickySide()
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
         confirmationStickyButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
         confirmationStickyButton.contentView.setTitle("Confirm", for: .normal)

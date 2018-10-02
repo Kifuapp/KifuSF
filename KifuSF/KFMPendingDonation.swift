@@ -10,9 +10,9 @@ import Foundation
 
 class KFMPendingDonation {
     
-    var imageURL: URL
-    var title: String
-    var distance: Double
+    let imageURL: URL
+    let title: String
+    let distance: Double
     
     init(imageURL: URL, title: String, distance: Double) {
         

@@ -36,18 +36,32 @@ final class KFVWidget: UIView {
     @IBOutlet private weak var containerStackView: UIStackView!
     @IBOutlet private weak var deliveryStackView: UIStackView!
     @IBOutlet private weak var donationStackView: UIStackView!
-    
+
     @IBOutlet private weak var deliveryTitleLabel: UILabel!
     @IBOutlet private weak var deliverySubtitleLabel: UILabel!
     @IBOutlet private weak var deliveryBackgroundView: UIView!
-    
+
     @IBOutlet private weak var deliveryDisclosureImageView: UIImageView!
-    
+
     @IBOutlet private weak var donationTitleLabel: UILabel!
     @IBOutlet private weak var donationSubtitleLabel: UILabel!
     @IBOutlet private weak var donationBackgroundView: UIView!
-    
+
     @IBOutlet private weak var donationDisclosureImageView: UIImageView!
+    
+//    let containerStackView = UIStackView()
+//
+//    let deliveryStackView = UIStackView()
+//    let deliveryTitleLabel = UILabel()
+//    let deliverySubtitleLabel = UILabel()
+//    let deliveryDisclosureImageView = UIImageView()
+//
+//    let donationStackView = UIStackView()
+//    let donationTitleLabel = UILabel()
+//    let donationSubtitleLabel = UILabel()
+//    let donationDisclosureImageView = UIImageView()
+    
+    let spacer = UIView()
     
     static let nibName = "KFVWidget"
     

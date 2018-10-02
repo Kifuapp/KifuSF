@@ -12,8 +12,8 @@ class KFVUserInfo: KFVDescriptor {
     let descriptionLabel = UILabel()
     let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     
-    override func setUpLayoutConstraints() {
-        super.setUpLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         
         infoStackView.addArrangedSubview(descriptionLabel)
         infoStackView.addArrangedSubview(statisticsStickyView)
@@ -26,8 +26,8 @@ class KFVUserInfo: KFVDescriptor {
         subtitleStickyLabel.updateStickySide()
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         descriptionLabel.numberOfLines = 0

@@ -14,7 +14,6 @@ class KFCModularTableView: UIViewController {
         case openDonationDescription, progress, entityInfo, inProgressDonationDescription, collaboratorInfo, destinationMap // done
     }
     
-    
     let modularTableView = UITableView()
     var modularTableViewConstraints = [NSLayoutConstraint]()
     var items = [KFPModularTableViewItem]()

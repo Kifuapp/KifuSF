@@ -12,22 +12,19 @@ import CoreLocation
 
 class KFCDelivery: KFCModularTableView {
     
-    let dynamicButton = KFVButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    private let dynamicButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     override func loadView() {
         super.loadView()
         
         view.addSubview(dynamicButton)
-        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
-        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        configureLayoutConstraints()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.kfWhite
+        configureStyling()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,5 +58,23 @@ class KFCDelivery: KFCModularTableView {
 extension KFCDelivery: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Delivery")
+    }
+}
+
+//MARK: Styling & LayoutConstraints
+extension KFCDelivery {
+    private func configureLayoutConstraints() {
+        configureDynamicButtonConstraints()
+    }
+    
+    private func configureStyling() {
+        view.backgroundColor = UIColor.kfWhite
+    }
+    
+    private func configureDynamicButtonConstraints() {
+        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
+        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
     }
 }

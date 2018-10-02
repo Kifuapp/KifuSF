@@ -10,14 +10,14 @@ import UIKit
 
 class KFVPendingDonation: KFVDescriptor {
     
-    let cancelStickyButton = KFVSticky<KFVButton>(stickySide: .bottom)
+    let cancelStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
     
     var indexPath: IndexPath?
     
     weak var delegate: KFPPendingDonationCellDelegate?
     
-    override func setUpLayoutConstraints() {
-        super.setUpLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         cancelStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
         infoStackView.addArrangedSubview(cancelStickyButton)
@@ -30,12 +30,14 @@ class KFVPendingDonation: KFVDescriptor {
         cancelStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
         cancelStickyButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         cancelStickyButton.contentView.setMainBackgroundColor(.kfDestructive)
         cancelStickyButton.contentView.setTitle("Cancel", for: .normal)
+        cancelStickyButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        cancelStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func cancelButtonPressed() {

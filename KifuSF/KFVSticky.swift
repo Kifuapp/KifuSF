@@ -9,21 +9,32 @@
 import UIKit
 import PureLayout
 
-class KFVSticky<T: UIView>: UIView {
+class KFVSticky<T: UIView>: UIView, Configurable {
     
-    var stickySide: ALEdge?
-    var offset: CGFloat?
+    private(set) var stickySide: ALEdge?
+    
+    private var _offset: CGFloat?
+    
+    var offset: CGFloat {
+        get {
+            return _offset ?? 0
+        }
+        
+        set {
+            _offset = newValue
+        }
+    }
     
     let contentView = T()
-    var anchors = [NSLayoutConstraint]()
+    var layoutConstraints = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         stickySide = nil
-        offset = nil
+        _offset = nil
         
         super.init(frame: frame)
         addSubview(contentView)
-        setupLayoutConstraints()
+        configureLayoutConstraints()
     }
     
     convenience init(stickySide: ALEdge) {
@@ -32,20 +43,17 @@ class KFVSticky<T: UIView>: UIView {
     
     init(stickySide: ALEdge, withOffset offset: CGFloat?) {
         self.stickySide = stickySide
-        self.offset = offset
+        self._offset = offset
         
         super.init(frame: UIScreen.main.bounds)
         addSubview(contentView)
-        setupLayoutConstraints()
+        configureLayoutConstraints()
     }
     
-    func setupLayoutConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
+    func configureLayoutConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        let offset = self.offset ?? 0
-        
-        anchors = [
+        layoutConstraints = [
         contentView.autoPinEdge(toSuperviewEdge: .top,
                                 withInset: (stickySide == .top) ? offset : 0,
                                 relation: (stickySide?.opositeSide() == .top) ? .greaterThanOrEqual : .equal),
@@ -61,11 +69,12 @@ class KFVSticky<T: UIView>: UIView {
         ]
     }
     
+    
     func updateStickySide(to side: ALEdge? = nil) {
         self.stickySide = side
         
-        NSLayoutConstraint.deactivate(anchors)
-        setupLayoutConstraints()
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        configureLayoutConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,23 +83,4 @@ class KFVSticky<T: UIView>: UIView {
     
     //MARK: I have no idea who wrote this code 🤷‍♂️... definitly not me 🤥
     //FIXED: removed the ugly function, no need for somebody else to see it
-}
-
-extension ALEdge {
-    func opositeSide() -> ALEdge {
-        switch self {
-        case .bottom:
-            return .top
-        case .top:
-            return .bottom
-        case .trailing:
-            return .leading
-        case .leading:
-            return .trailing
-        case .left:
-            return .right
-        case .right:
-            return .left
-        }
-    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class KFCDetailedDonation: KFCModularTableView {
     
-    let dynamicButton = KFVButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    let dynamicButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
     
     override func viewDidLoad() {
         super.viewDidLoad()

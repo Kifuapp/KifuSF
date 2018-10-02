@@ -11,20 +11,21 @@ import UIKit
 class KFVDonationInfo: KFVDescriptor {
     let descriptionStickyTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
     
-    override func setUpLayoutConstraints() {
-        super.setUpLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         
         infoStackView.addArrangedSubview(descriptionStickyTextView)
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+     override func configureStyling() {
+        super.configureStyling()
         
         descriptionStickyTextView.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         descriptionStickyTextView.contentView.textColor = UIColor.kfBody
         descriptionStickyTextView.contentView.numberOfLines = 2
         descriptionStickyTextView.contentView.adjustsFontForContentSizeCategory = true
     }
+    
     
     func reloadData(for data: KFMDonationInfo) {
         imageView.imageView.kf.setImage(with: data.imageURL)
@@ -33,3 +34,4 @@ class KFVDonationInfo: KFVDescriptor {
         descriptionStickyTextView.contentView.text = data.description
     }
 }
+

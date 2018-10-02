@@ -9,13 +9,13 @@
 import Foundation
 
 class KFMInProgressDonationDescription: KFPModularTableViewItem {
-    var type: KFCModularTableView.CellTypes = .inProgressDonationDescription
+    let type: KFCModularTableView.CellTypes = .inProgressDonationDescription
     
-    var imageURL: URL
-    var title: String
+    let imageURL: URL
+    let title: String
     
-    var statusDescription: String
-    var description: String
+    let statusDescription: String
+    let description: String
     
     init(imageURL: URL, title: String, statusDescription: String, description: String) {
         

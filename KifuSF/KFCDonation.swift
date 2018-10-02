@@ -12,7 +12,7 @@ import CoreLocation
 
 class KFCDonation: KFCModularTableView {
     
-    let dynamicButton = KFVButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    let dynamicButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     override func loadView() {
         super.loadView()

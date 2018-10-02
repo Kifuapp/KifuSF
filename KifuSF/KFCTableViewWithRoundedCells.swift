@@ -16,6 +16,20 @@ class KFCTableViewWithRoundedCells: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(tableViewWithRoundedCells)
+        
+        configureLayoutConstraints()
+        configureStyling()
+        
+        view.layoutIfNeeded()
+    }
+    
+    func configureLayoutConstraints() {
+        tableViewWithRoundedCells.translatesAutoresizingMaskIntoConstraints = false
+        tableViewWithRoundedCellsConstraints = tableViewWithRoundedCells.autoPinEdgesToSuperviewEdges()
+    }
+    
+    func configureStyling() {
         tableViewWithRoundedCells.separatorStyle = .none
         tableViewWithRoundedCells.backgroundColor = UIColor.kfGray
         
@@ -24,11 +38,5 @@ class KFCTableViewWithRoundedCells: UIViewController {
         
         tableViewWithRoundedCells.contentInset.top = 8
         tableViewWithRoundedCells.scrollIndicatorInsets.top = 8
-        
-        view.addSubview(tableViewWithRoundedCells)
-        tableViewWithRoundedCells.translatesAutoresizingMaskIntoConstraints = false
-        tableViewWithRoundedCellsConstraints = tableViewWithRoundedCells.autoPinEdgesToSuperviewEdges()
-        
-        view.layoutIfNeeded()
     }
 }

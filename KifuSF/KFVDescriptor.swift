@@ -9,7 +9,7 @@
 import UIKit
 import PureLayout
 
-class KFVDescriptor: UIView {
+class KFVDescriptor: UIView, Configurable {
     
     let contentsStackView = UIStackView()
     let topStackView = UIStackView()
@@ -27,15 +27,39 @@ class KFVDescriptor: UIView {
         
         addSubview(contentsStackView)
         
-        setUpStyling()
-        setUpLayoutConstraints()
+        configureStyling()
+        configureLayoutConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpLayoutConstraints() {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        if isAccessibilityCategory != previousTraitCollection?.preferredContentSizeCategory.isAccessibilityCategory {
+            topStackView.axis = .vertical
+            //TODO: finish this
+        }
+    }
+    
+    func configureStyling() {
+        backgroundColor = UIColor.kfWhite
+        layer.cornerRadius = CALayer.kfCornerRadius
+        layer.setUpShadow()
+        
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.numberOfLines = 0
+        titleLabel.textColor = UIColor.kfTitle
+        titleLabel.adjustsFontForContentSizeCategory = true
+        
+        subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        subtitleStickyLabel.contentView.numberOfLines = 0
+        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        subtitleStickyLabel.contentView.adjustsFontForContentSizeCategory = true
+    }
+    
+    func configureLayoutConstraints() {
         layer.masksToBounds = false
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -74,29 +98,5 @@ class KFVDescriptor: UIView {
         
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-    }
-    
-    func setUpStyling() {
-        backgroundColor = UIColor.kfWhite
-        layer.cornerRadius = CALayer.kfCornerRadius
-        layer.setUpShadow()
-        
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        titleLabel.numberOfLines = 0
-        titleLabel.textColor = UIColor.kfTitle
-        titleLabel.adjustsFontForContentSizeCategory = true
-        
-        subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        subtitleStickyLabel.contentView.numberOfLines = 0
-        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
-        subtitleStickyLabel.contentView.adjustsFontForContentSizeCategory = true
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        if isAccessibilityCategory != previousTraitCollection?.preferredContentSizeCategory.isAccessibilityCategory {
-            topStackView.axis = .vertical
-            //TODO: finish this
-        }
     }
 }

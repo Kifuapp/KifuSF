@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVButton: UIButton {
+class KFButton: UIButton, Configurable {
     
     private(set) var mainBackgroundColor = UIColor.kfPrimary
     private(set) var mainTitleColor = UIColor.kfWhite
@@ -48,14 +48,14 @@ class KFVButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: CGRect())
-        setUpStyling()
+        configureStyling()
     }
     
-    private func setUpStyling() {
+    func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()
         
-        titleLabel?.font.withSize(UIFont.buttonFontSize)
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         titleLabel?.adjustsFontForContentSizeCategory = true
         
         backgroundColor = mainBackgroundColor

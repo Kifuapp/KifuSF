@@ -25,6 +25,22 @@ extension UIImage {
         return image
     }()
     
+    static let kfStatusIcon: UIImage = {
+        guard let image = UIImage(named: "StatusIcon") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
+    
+    static let kfLeaderboardIcon: UIImage = {
+        guard let image = UIImage(named: "LeaderboardIcon") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
+    
     static let kfPlusIcon: UIImage = {
         guard let image = UIImage(named: "PlusIcon") else {
             fatalError(KFErrorMessage.imageNotFound)
