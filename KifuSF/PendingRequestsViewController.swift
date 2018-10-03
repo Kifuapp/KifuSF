@@ -48,7 +48,10 @@ class PendingRequestsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pending donation cell", for: indexPath) as! PendingDonationTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "pending donation cell",
+            for: indexPath
+            ) as! PendingDonationTableViewCell
         
         let donation = pendingDonations[indexPath.row]
         cell.configure(donation)
