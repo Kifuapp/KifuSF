@@ -173,7 +173,6 @@
 		C5DD405E21381AD100ECC819 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C5DD406021382C5000ECC819 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCVolunteerList.swift; sourceTree = "<group>"; };
-		E90B2477210D8588009B9E0B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
@@ -437,7 +436,6 @@
 			children = (
 				E92994F2210D591D00A32924 /* ItemPostCell.swift */,
 				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
-				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
 			);
 			name = Views;

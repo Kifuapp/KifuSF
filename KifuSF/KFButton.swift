@@ -49,6 +49,8 @@ class KFButton: UIButton, Configurable {
     override init(frame: CGRect) {
         super.init(frame: CGRect())
         configureStyling()
+        
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configureStyling() {

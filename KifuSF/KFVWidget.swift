@@ -166,8 +166,8 @@ final class KFVWidget: UIView, Configurable {
     
     private func configureSameSizeForIcons() {
         //makes the width and height of all the icons to be bonded, therefore making all icons to have the same size
-        deliveryDisclosureImageView.autoMatch(.height, to: .height, of: deliveryIconView)
-        donationDisclosureImageView.autoMatch(.height, to: .height, of: donationIconView)
+        deliveryDisclosureImageView.autoMatch(.height, to: .height, of: deliveryIconView, withMultiplier: 0.75)
+        donationDisclosureImageView.autoMatch(.height, to: .height, of: donationIconView, withMultiplier: 0.75)
         donationIconView.autoMatch(.height, to: .height, of: deliveryIconView)
     }
     
