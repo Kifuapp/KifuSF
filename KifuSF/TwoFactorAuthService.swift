@@ -22,8 +22,10 @@ struct TwoFactorAuthService {
      Once user has enter their phone number, use this method to send the given
      number a code.
      
+     - parameter number: must be in the following format WXXXYYYZZZ, where W is the
+     country code, XXX is the area, YYYZZZZ is the phone number
      - parameter completion: if successful, an object containing required info
-     will be sent back. Otherwise, nil.
+     to validate the code will be sent back. Otherwise, nil.
      
      - Attention: the returned object in the closure is required to be sent when
      the code needs to be verified when using +validate(code:authy:!)

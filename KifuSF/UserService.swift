@@ -49,7 +49,7 @@ struct UserService {
             }
             
             UserService.create(
-                firUser: firUser,
+                uid: firUser.uid,
                 username: username,
                 image: image,
                 contactNumber:
@@ -85,6 +85,7 @@ struct UserService {
     }
     
     struct SignInProviderInfo {
+        let uid: String
         let displayName: String?
         let email: String?
         let phoneNumber: String?
@@ -129,6 +130,7 @@ struct UserService {
                     completion(user)
                 } else {
                     let providerInfo = SignInProviderInfo(
+                        uid: firUser.uid,
                         displayName: displayName,
                         email: email,
                         phoneNumber: phoneNumber,
@@ -140,13 +142,38 @@ struct UserService {
         }
     }
     
+    /**
+     After collecting the missing information about the user after signing in from
+     a provider, use this method to push the information to the database
+     
+     - parameter uid: given from the SignInProviderInfo from `static func login(credentials:completion:newUserHandler:)`
+     */
+    static func completeSigninProviderLogin(// swiftlint:disable:this function_parameter_count
+        withUid uid: String,
+        name: String,
+        username: String,
+        image: UIImage,
+        contactNumber: String,
+        email: String,
+        password: String,
+        completion: @escaping (_ user: User?) -> Void) {
+        
+        self.create(
+            uid: uid,
+            username: username,
+            image: image,
+            contactNumber: contactNumber,
+            completion: completion
+        )
+    }
+    
     private static func create(
-        firUser: FIRUser,
+        uid: String,
         username: String,
         image: UIImage,
         contactNumber: String,
         completion: @escaping (User?) -> Void) {
-        let imageRef = StorageReference.newUserImageRefence(with: firUser.uid)
+        let imageRef = StorageReference.newUserImageRefence(with: uid)
         
         StorageService.uploadImage(image, at: imageRef) { (url) in
             guard let downloadURL = url else { return completion(nil) }
@@ -154,13 +181,13 @@ struct UserService {
             
             let newUser = User(
                 username: username,
-                uid: firUser.uid,
+                uid: uid,
                 imageURL: imageURL,
                 contributionPoints: 0,
                 contactNumber: contactNumber
             )
             
-            let ref = Database.database().reference().child("users").child(firUser.uid)
+            let ref = Database.database().reference().child("users").child(uid)
             
             ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
                 if error != nil {
