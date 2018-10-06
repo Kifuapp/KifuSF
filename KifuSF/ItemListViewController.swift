@@ -61,7 +61,8 @@ class ItemListViewController: UIViewController {
                 if currentDeliveryState.isShowingPendingRequests {
                     
                     //selected donation is the same as the current delivery
-                    let pendingRequests = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
+                    let pendingRequests =
+                        try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
                     if pendingRequests.contains(selectedDonation) {
                         itemDetailVc.userHasAlreadyRequestedDonation = .donationIsAlreadyRequested
                     } else {
@@ -76,7 +77,8 @@ class ItemListViewController: UIViewController {
                         fatalError("storyboard not set up correctly")
                 }
                 
-                pendingRequestsVc.pendingDonations = try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
+                pendingRequestsVc.pendingDonations =
+                    try! currentDeliveryState.pendingRequests() // swiftlint:disable:this force_try
             default: break
             }
         }

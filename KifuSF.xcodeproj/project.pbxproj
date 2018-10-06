@@ -9,11 +9,16 @@
 /* Begin PBXBuildFile section */
 		441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */; };
 		441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */; };
-		44339C35210D477700E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
-		44339C39210D4D5400E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		44339C35210D477700E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		44339C39210D4D5400E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
 		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
+		7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A49CFBF213E3BDD001A48FD /* Login.storyboard */; };
+		7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */; };
+		7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */; };
+		7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC721434EAC001A48FD /* LoginViewController.swift */; };
+		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C50182E62141B1D400257412 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E52141B1D400257412 /* UIImage.swift */; };
 		C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E72141B24C00257412 /* UIStoryboardSegue.swift */; };
@@ -82,6 +87,8 @@
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
 		E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B247E210E1DAE009B9E0B /* UIAlertController.swift */; };
+		E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92527C621548E65004556E0 /* TwoFactorAuthService.swift */; };
+		E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92527C82154A40D004556E0 /* TwoFactorAuthService+Moya.swift */; };
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
@@ -107,6 +114,11 @@
 		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A49CFBF213E3BDD001A48FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthViewController.swift; sourceTree = "<group>"; };
+		7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectMissingInfoViewController.swift; sourceTree = "<group>"; };
+		7A49CFC721434EAC001A48FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C50182E52141B1D400257412 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C50182E72141B24C00257412 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
 		C50182EA2142AC0400257412 /* Status.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
@@ -175,6 +187,8 @@
 		C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCVolunteerList.swift; sourceTree = "<group>"; };
 		E90B2477210D8588009B9E0B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		E92527C621548E65004556E0 /* TwoFactorAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthService.swift; sourceTree = "<group>"; };
+		E92527C82154A40D004556E0 /* TwoFactorAuthService+Moya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TwoFactorAuthService+Moya.swift"; sourceTree = "<group>"; };
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
@@ -406,6 +420,9 @@
 				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
+				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
+				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
+				7A49CFBF213E3BDD001A48FD /* Login.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -442,6 +459,9 @@
 				C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */,
 				C5DD404E2136ED4900ECC819 /* UIKit */,
 				C560B7EA21353623008A9DF1 /* CALayer.swift */,
+				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
+				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
+				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -512,6 +532,8 @@
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
 				C5CA7BB4210D2B030052D440 /* StorageService.swift */,
 				E98B003521378F68008FD75A /* ReportingService.swift */,
+				E92527C621548E65004556E0 /* TwoFactorAuthService.swift */,
+				E92527C82154A40D004556E0 /* TwoFactorAuthService+Moya.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -594,6 +616,9 @@
 			isa = PBXGroup;
 			children = (
 				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
+				7A49CFC721434EAC001A48FD /* LoginViewController.swift */,
+				7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */,
+				7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */,
 			);
 			name = "Login-Register";
 			sourceTree = "<group>";
@@ -673,6 +698,7 @@
 				E98B003A2137946D008FD75A /* KeyedProperties.stencil in Resources */,
 				C5B0E1AA21517BF600A8412C /* Leaderboard.storyboard in Resources */,
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
+				7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */,
 				C50182EB2142AC0400257412 /* Status.storyboard in Resources */,
 				C50515C521368FD700718AE5 /* KFVDonationDescriptionCell.xib in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
@@ -694,22 +720,32 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -727,10 +763,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -790,6 +828,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C50182FA2142FB1B00257412 /* KFVSticky.swift in Sources */,
+				7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */,
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
 				C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */,
 				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
@@ -807,6 +846,7 @@
 				C50E472F21518692008A8C36 /* KFMDonationInfo.swift in Sources */,
 				C50182F22142AF5300257412 /* UIStoryboard.swift in Sources */,
 				C5DD406121382C5000ECC819 /* UITextField.swift in Sources */,
+				E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */,
@@ -823,6 +863,7 @@
 				C54284162152BFAD00373586 /* KFCDonation.swift in Sources */,
 				C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */,
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
+				7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */,
 				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */,
@@ -831,6 +872,8 @@
 				E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */,
 				C50E472D2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift in Sources */,
 				C58B05D2213DBD380086124B /* UIView.swift in Sources */,
+				E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */,
+				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
@@ -851,15 +894,17 @@
 				C50182F82142E76E00257412 /* KFVImage.swift in Sources */,
 				C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */,
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
+				7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
 				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
 				C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */,
-				44339C39210D4D5400E6663E /* (null) in Sources */,
+				44339C39210D4D5400E6663E /* BuildFile in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
+				7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,
 				C5475D0F21556ADB006BA324 /* KFVInProgressDonationDescription.swift in Sources */,
-				44339C35210D477700E6663E /* (null) in Sources */,
+				44339C35210D477700E6663E /* BuildFile in Sources */,
 				C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */,
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
@@ -1008,15 +1053,14 @@
 			baseConfigurationReference = 2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1027,15 +1071,14 @@
 			baseConfigurationReference = F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
