@@ -20,10 +20,18 @@ enum FlaggedContentType: Int {
     //Flagging the user
     case flaggedPhoneNumber = 100
     case flaggedCommunication
+    
+    var title: String {
+        switch self {
+        default:
+            //TODO: erick-switch cases
+            fatalError()
+        }
+    }
 }
 
 struct Report: KeyedStoredProperties {
-    let uid: String
+    let uid: String! = nil
     let donation: Donation?
     let user: User?
     
@@ -51,8 +59,7 @@ struct Report: KeyedStoredProperties {
         return dict
     }
     
-    init(flag donation: Donation, for flagType: FlaggedContentType, message: String, uid: String) {
-        self.uid = uid
+    init(flag donation: Donation, for flagType: FlaggedContentType, message: String) {
         self.user = nil
         self.donation = donation
         self.flag = flagType
@@ -61,8 +68,7 @@ struct Report: KeyedStoredProperties {
         self.creatationDate = Date()
     }
     
-    init(flag user: User, for flagType: FlaggedContentType, message: String, uid: String) {
-        self.uid = uid
+    init(flag user: User, for flagType: FlaggedContentType, message: String) {
         self.user = user
         self.donation = nil
         self.flag = flagType
