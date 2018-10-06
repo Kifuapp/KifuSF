@@ -9,21 +9,21 @@
 import Foundation
 
 class KFMOpenDonationDescriptionItem: KFPModularTableViewItem {
-    var type: KFCModularTableView.CellTypes = .openDonationDescription
+    let type: KFCModularTableView.CellTypes = .openDonationDescription
     
-    var imageURL: URL
-    var title: String
-    var username: String
+    let imageURL: URL
+    let title: String
+    let username: String
     
-    var timestamp: String
+    let timestamp: String
     
-    var userReputation: Double
-    var userDonationsCount: Int
-    var userDeliveriesCount: Int
+    let userReputation: Double
+    let userDonationsCount: Int
+    let userDeliveriesCount: Int
     
-    var distance: Double
+    let distance: Double
     
-    var description: String
+    let description: String
     
     init(imageURL: URL, title: String, username: String,
          creationDate: String, userReputation: Double, userDonationsCount: Int,

@@ -11,47 +11,50 @@ import UIKit
 class KFVVolunteerInfo: KFVDescriptor {
     
     let statisticsView = KFVStatistics()
-    let confirmationButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let confirmationStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
+    var indexPath: IndexPath?
     
     weak var delegate: KFPVolunteerInfoCellDelegate?
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
-        confirmationButton.translatesAutoresizingMaskIntoConstraints = false
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
+        confirmationStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
         infoStackView.addArrangedSubview(statisticsView)
-        infoStackView.addArrangedSubview(confirmationButton)
+        infoStackView.addArrangedSubview(confirmationStickyButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         statisticsView.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        confirmationButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
+        confirmationStickyButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
-        confirmationButton.autoPinEdge(toSuperviewEdge: .leading)
-        confirmationButton.autoPinEdge(toSuperviewEdge: .trailing)
+        confirmationStickyButton.autoPinEdge(toSuperviewEdge: .leading)
+        confirmationStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
         
         subtitleStickyLabel.updateStickySide()
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
-        confirmationButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
-        
-        confirmationButton.contentView.setTitle("Confirm", for: .normal)
-        confirmationButton.contentView.backgroundColor = .kfPrimary
-        confirmationButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        confirmationButton.contentView.showsTouchWhenHighlighted = true
-
-//        confirmationButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        confirmationButton.contentView.titleLabel?.font.withSize(UIFont.buttonFontSize)
-        
-        confirmationButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
+        confirmationStickyButton.contentView.addTarget(self, action: #selector(confirmationButtonPressed), for: .touchUpInside)
+        confirmationStickyButton.contentView.setTitle("Confirm", for: .normal)
     }
     
     @objc func confirmationButtonPressed() {
-        delegate?.didPressButton()
-        confirmationButton.contentView.isHighlighted = true
+        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVVolunteerInfo> else {
+            fatalError("you are using this view the wrong way :]")
+        }
+        
+        delegate?.didPressButton(tableViewCell)
     }
     
     func reloadData(for data: KFMVolunteerInfo) {
@@ -67,5 +70,5 @@ class KFVVolunteerInfo: KFVDescriptor {
 
 
 protocol KFPVolunteerInfoCellDelegate: class {
-    func didPressButton()
+    func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>)
 }

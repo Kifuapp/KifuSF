@@ -10,40 +10,43 @@ import UIKit
 
 class KFVPendingDonation: KFVDescriptor {
     
-    let cancelButton = KFVSticky<UIButton>(stickySide: .bottom)
+    let cancelStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
+    
+    var indexPath: IndexPath?
     
     weak var delegate: KFPPendingDonationCellDelegate?
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
+        cancelStickyButton.translatesAutoresizingMaskIntoConstraints = false
         
-        infoStackView.addArrangedSubview(cancelButton)
+        infoStackView.addArrangedSubview(cancelStickyButton)
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        cancelButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
+        cancelStickyButton.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
-        cancelButton.autoPinEdge(toSuperviewEdge: .leading)
-        cancelButton.autoPinEdge(toSuperviewEdge: .trailing)
+        cancelStickyButton.autoPinEdge(toSuperviewEdge: .leading)
+        cancelStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
-        cancelButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
-        
-        cancelButton.contentView.layer.cornerRadius = CALayer.kfCornerRadius
-        cancelButton.contentView.backgroundColor = UIColor.kfDestructive
-        cancelButton.contentView.showsTouchWhenHighlighted = true
-        
-        cancelButton.contentView.setTitle("Cancel", for: .normal)
-        cancelButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        cancelButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
+        cancelStickyButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        cancelStickyButton.contentView.setMainBackgroundColor(.kfDestructive)
+        cancelStickyButton.contentView.setTitle("Cancel", for: .normal)
+        cancelStickyButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        cancelStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true
     }
     
     @objc func cancelButtonPressed() {
-        delegate?.didPressButton()
+        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVPendingDonation> else {
+            //TODO: fix this
+            fatalError("you are using this view the wrong way :]")
+        }
+        
+        delegate?.didPressButton(tableViewCell)
     }
     
     func reloadData(for data: KFMPendingDonation) {
@@ -55,5 +58,5 @@ class KFVPendingDonation: KFVDescriptor {
 }
 
 protocol KFPPendingDonationCellDelegate: class {
-    func didPressButton()
+    func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>)
 }

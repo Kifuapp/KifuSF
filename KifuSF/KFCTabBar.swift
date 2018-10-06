@@ -17,17 +17,12 @@ class KFCTabBar: UITabBarController {
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: .kfBoxIcon, tag: 0)
         
         let statusVC = KFCStatus()
-        statusVC.tabBarItem = UITabBarItem(title: "Status", image: .kfBoxIcon, tag: 1)
+        statusVC.tabBarItem = UITabBarItem(title: "Status", image: .kfStatusIcon, tag: 1)
         
-        viewControllers = [homeVC, statusVC]
+        let leaderboardVC = KFCLeaderboard()
+        leaderboardVC.tabBarItem = UITabBarItem(title: "Leaderboard", image: .kfLeaderboardIcon, tag: 2)
         
-        let leaderBoardStoryboard = UIStoryboard(name: "Leaderboard", bundle: nil)
-        if let initialLeaderboardVC = leaderBoardStoryboard.instantiateInitialViewController() {
-            initialLeaderboardVC.tabBarItem = UITabBarItem(title: "Leaderboard", image: .kfBoxIcon, tag: 2)
-            
-            viewControllers?.append(initialLeaderboardVC)
-        }
-        
+        viewControllers = [homeVC, statusVC, leaderboardVC]
         viewControllers = viewControllers?.map { UINavigationController(rootViewController: $0) }
     }
 

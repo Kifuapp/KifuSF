@@ -10,73 +10,44 @@ import UIKit
 
 class KFVInProgressDonationDescription: KFVDescriptor {
     
-    let statusStackView = UIStackView()
-    let statusTitleLabel = UILabel()
+    let statusStackView = UIStackView(axis: .vertical)
+    let statusTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let statusDescriptionStickyLabel = KFVSticky<UILabel>(stickySide: .top)
     
-    let donationDescriptionStackView = UIStackView()
-    let donationDescriptionTitleLabel = UILabel()
-    let donationDescriptionContentLabel = UILabel()
+    let donationDescriptionStackView = UIStackView(axis: .vertical)
+    let donationDescriptionTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let donationDescriptionContentLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         
         subtitleStickyLabel.updateStickySide(to: .top)
-        subtitleStickyLabel.contentView.text = " "
-        
-        infoStackView.spacing = 0
+        subtitleStickyLabel.autoSetDimension(.height, toSize: KFPadding.ContentView)
         
         statusStackView.addArrangedSubview(statusTitleLabel)
         statusStackView.addArrangedSubview(statusDescriptionStickyLabel)
-        statusStackView.axis = .vertical
-        statusStackView.spacing = 2
         
         donationDescriptionStackView.addArrangedSubview(donationDescriptionTitleLabel)
         donationDescriptionStackView.addArrangedSubview(donationDescriptionContentLabel)
-        donationDescriptionStackView.axis = .vertical
-        donationDescriptionStackView.spacing = 2
         
         infoStackView.addArrangedSubview(statusStackView)
         contentsStackView.addArrangedSubview(donationDescriptionStackView)
         
-        
-        for constraint in imageConstraints {
-            constraint.constant = 128
-        }
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusStackView.translatesAutoresizingMaskIntoConstraints =  false
-        
-        subtitleStickyLabel.autoSetDimension(.height, toSize: 8)
+        let _ = imageConstraints.map() { $0.constant = 128 }
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
         layer.cornerRadius = 0
         layer.shadowOpacity = 0
         
-        statusTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        statusTitleLabel.numberOfLines = 0
-        statusTitleLabel.textColor = UIColor.kfTitle
-        statusTitleLabel.adjustsFontForContentSizeCategory = true
         statusTitleLabel.text = "Status"
+        donationDescriptionTitleLabel.text = "Description"
+        subtitleStickyLabel.contentView.text = " "
         
         statusDescriptionStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        statusDescriptionStickyLabel.contentView.numberOfLines = 0
         statusDescriptionStickyLabel.contentView.textColor = UIColor.kfSubtitle
-        statusDescriptionStickyLabel.contentView.adjustsFontForContentSizeCategory = true
-        
-        donationDescriptionTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        donationDescriptionTitleLabel.numberOfLines = 0
-        donationDescriptionTitleLabel.textColor = UIColor.kfTitle
-        donationDescriptionTitleLabel.adjustsFontForContentSizeCategory = true
-        donationDescriptionTitleLabel.text = "Description"
-        
-        donationDescriptionContentLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        donationDescriptionContentLabel.numberOfLines = 0
-        donationDescriptionContentLabel.textColor = UIColor.kfSubtitle
-        donationDescriptionContentLabel.adjustsFontForContentSizeCategory = true
     }
     
     func reloadData(for data: KFMInProgressDonationDescription) {

@@ -9,10 +9,10 @@
 import Foundation
 
 class KFMDonationInfo {
-    var imageURL: URL
-    var title: String
-    var distance: Double
-    var description: String
+    let imageURL: URL
+    let title: String
+    let distance: Double
+    let description: String
     
     init(imageURL: URL, title: String, distance: Double, description: String) {
         self.imageURL = imageURL

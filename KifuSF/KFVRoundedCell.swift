@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
+class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell, Configurable {
     let descriptorView = T()
     
     static var identifier: String {
@@ -20,17 +20,27 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell {
         
         contentView.addSubview(descriptorView)
         
-        translatesAutoresizingMaskIntoConstraints = false
-        descriptorView.translatesAutoresizingMaskIntoConstraints = false
-        
-        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
-        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
-        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
-        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
-        
+        configureStyling()
+        configureLayoutConstraints()
+    }
+    
+    func configureLayoutConstraints() {
+        configureDescriptorViewLayoutConstraints()
+    }
+    
+    func configureStyling() {
         self.selectionStyle = .none
         layer.masksToBounds = false
         contentView.backgroundColor = UIColor.kfGray
+    }
+    
+    func configureDescriptorViewLayoutConstraints() {
+        descriptorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class KFVOpenDonationDescription: KFVDescriptor {
     
-    let statisticsView = KFVSticky<KFVStatistics>(stickySide: .top)
+    let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     let secondSubtitleLabel = KFVSticky<UILabel>()
     
     let statusStackView = UIStackView()
@@ -21,11 +22,11 @@ class KFVOpenDonationDescription: KFVDescriptor {
     let donationDescriptionTitleLabel = UILabel()
     let donationDescriptionContentLabel = UILabel()
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         
         infoStackView.addArrangedSubview(secondSubtitleLabel)
-        infoStackView.addArrangedSubview(statisticsView)
+        infoStackView.addArrangedSubview(statisticsStickyView)
         infoStackView.spacing = 2
         
         statusStackView.addArrangedSubview(statusTitleLabel)
@@ -43,7 +44,7 @@ class KFVOpenDonationDescription: KFVDescriptor {
         
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
-        statisticsView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
+        statisticsStickyView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
         for constraint in imageConstraints {
             constraint.constant = 128
@@ -52,8 +53,8 @@ class KFVOpenDonationDescription: KFVDescriptor {
         subtitleStickyLabel.updateStickySide()
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+    override func configureStyling() {
+        super.configureStyling()
         
         layer.cornerRadius = 0
         layer.shadowOpacity = 0
@@ -88,14 +89,14 @@ class KFVOpenDonationDescription: KFVDescriptor {
     
     func reloadData(for data: KFMOpenDonationDescriptionItem) {
         imageView.imageView.kf.setImage(with: data.imageURL)
-        
+    
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"
         
         secondSubtitleLabel.contentView.text = "Reputation \(data.userReputation)%"
         
-        statisticsView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+        statisticsStickyView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
+        statisticsStickyView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
         
         statusDescription.text = "\(data.distance) Miles away from your current location"
         donationDescriptionContentLabel.text = data.description

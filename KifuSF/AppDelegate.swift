@@ -21,8 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
-
-        //TODO: log-in / sign-up logic
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        window?.rootViewController = KFCTabBar()
+        window?.makeKeyAndVisible()
 
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = .kfPrimary
@@ -35,12 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-
-        setInitalViewController()
+        
+        if Auth.auth().currentUser != nil,
+            let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
+            let user = try? JSONDecoder().decode(User.self, from: userData) {
+            
+            User.setCurrent(user)
+        }
 
         return true
     }
 
+    //TODO: alex-login logic
     private func setInitalViewController() {
         if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,

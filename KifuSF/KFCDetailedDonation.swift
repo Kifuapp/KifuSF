@@ -10,12 +10,20 @@ import UIKit
 
 class KFCDetailedDonation: KFCModularTableView {
     
+    let dynamicButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Donation"
         view.backgroundColor = UIColor.kfWhite
-        tableView.separatorStyle = .none
+        modularTableView.separatorStyle = .none
+        
+        view.addSubview(dynamicButton)
+        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
+        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
                                                             style: .plain,

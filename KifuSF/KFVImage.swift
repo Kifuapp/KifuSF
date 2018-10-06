@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVImage: UIView {
+class KFVImage: UIView, Configurable {
 
     let imageView = UIImageView()
     
@@ -17,20 +17,23 @@ class KFVImage: UIView {
         
         addSubview(imageView)
         
+        configureStyling()
+        configureLayoutConstraints()
+    }
+    
+    func configureLayoutConstraints() {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.autoPinEdgesToSuperviewEdges()
+    }
+    
+    func configureStyling() {
+        //TODO: decide on the shadow
         layer.setUpShadow()
         backgroundColor = UIColor.clear
         imageView.clipsToBounds = true
         
         imageView.layer.cornerRadius = CALayer.kfCornerRadius
         imageView.contentMode = .scaleAspectFill
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.autoPinEdgesToSuperviewEdges()
-        
-        //TODO: remove this
-        imageView.image = UIImage(named: "Dog")
     }
     
     

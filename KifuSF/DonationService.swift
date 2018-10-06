@@ -88,7 +88,7 @@ struct DonationService {
 //        }
 //    }
     
-    static func showTimelineDonations(completion: @escaping ([Donation]) -> Void) {
+    static func observeTimelineDonations(completion: @escaping ([Donation]) -> Void) {
 
         //get donations ref
         let ref = Database.database().reference().child("open-donations")

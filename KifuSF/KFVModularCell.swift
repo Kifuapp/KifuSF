@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVModularCell<T: UIView>: UITableViewCell {
+class KFVModularCell<T: UIView>: UITableViewCell, Configurable {
     let descriptorView = T()
     
     static var identifier: String {
@@ -19,17 +19,23 @@ class KFVModularCell<T: UIView>: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(descriptorView)
-        contentView.backgroundColor = .kfWhite
         
-        translatesAutoresizingMaskIntoConstraints = false
+        configureStyling()
+        configureLayoutConstraints()
+    }
+    
+    func configureLayoutConstraints() {
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 4)
         descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
         descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8)
-        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
-        
-        self.selectionStyle = .none
+        descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4)
+    }
+    
+    func configureStyling() {
+        contentView.backgroundColor = .kfWhite
+        selectionStyle = .none
         layer.masksToBounds = false
     }
     

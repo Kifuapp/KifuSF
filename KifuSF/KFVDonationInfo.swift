@@ -9,27 +9,29 @@
 import UIKit
 
 class KFVDonationInfo: KFVDescriptor {
-    let descriptionTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
+    let descriptionStickyTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
     
-    override func setupLayoutConstraints() {
-        super.setupLayoutConstraints()
+    override func configureLayoutConstraints() {
+        super.configureLayoutConstraints()
         
-        infoStackView.addArrangedSubview(descriptionTextView)
+        infoStackView.addArrangedSubview(descriptionStickyTextView)
     }
     
-    override func setUpStyling() {
-        super.setUpStyling()
+     override func configureStyling() {
+        super.configureStyling()
         
-        descriptionTextView.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        descriptionTextView.contentView.textColor = UIColor.kfBody
-        descriptionTextView.contentView.numberOfLines = 2
-        descriptionTextView.contentView.adjustsFontForContentSizeCategory = true
+        descriptionStickyTextView.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        descriptionStickyTextView.contentView.textColor = UIColor.kfBody
+        descriptionStickyTextView.contentView.numberOfLines = 2
+        descriptionStickyTextView.contentView.adjustsFontForContentSizeCategory = true
     }
+    
     
     func reloadData(for data: KFMDonationInfo) {
         imageView.imageView.kf.setImage(with: data.imageURL)
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
-        descriptionTextView.contentView.text = data.description
+        descriptionStickyTextView.contentView.text = data.description
     }
 }
+

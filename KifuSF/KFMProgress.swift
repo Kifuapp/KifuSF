@@ -18,10 +18,10 @@ class KFMProgress: KFPModularTableViewItem {
         case stepOne, stepTwo, stepThree, stepFour
     }
     
-    var type: KFCModularTableView.CellTypes = .progress
+    let type: KFCModularTableView.CellTypes = .progress
     
-    var actionType: ItemType
-    var currentStep: Step
+    let actionType: ItemType
+    let currentStep: Step
     
     init(currentStep: Step, ofType actionType: ItemType) {
         self.currentStep = currentStep

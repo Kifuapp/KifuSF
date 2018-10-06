@@ -7,22 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */; };
-		441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */; };
-		44339C35210D477700E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		44339C39210D4D5400E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8A210D540B00CD26B5 /* StatusViewController.swift */; };
-		44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */; };
+		441BE51E210DAE24004A6A7A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		44339C35210D477700E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		44339C39210D4D5400E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A49CFBF213E3BDD001A48FD /* Login.storyboard */; };
-		7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */; };
-		7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */; };
-		7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CFC721434EAC001A48FD /* LoginViewController.swift */; };
 		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C50182E62141B1D400257412 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E52141B1D400257412 /* UIImage.swift */; };
 		C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E72141B24C00257412 /* UIStoryboardSegue.swift */; };
-		C50182EB2142AC0400257412 /* Status.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50182EA2142AC0400257412 /* Status.storyboard */; };
 		C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EC2142AC9A00257412 /* KFCStatus.swift */; };
 		C50182F02142AD4E00257412 /* KFCDelivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EF2142AD4E00257412 /* KFCDelivery.swift */; };
 		C50182F22142AF5300257412 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F12142AF5300257412 /* UIStoryboard.swift */; };
@@ -34,8 +27,6 @@
 		C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */; };
 		C501830221447B7300257412 /* KFVPendingDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C501830121447B7300257412 /* KFVPendingDonation.swift */; };
 		C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C501830321447FD900257412 /* KFVRoundedCell.swift */; };
-		C50515C521368FD700718AE5 /* KFVDonationDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */; };
-		C50515C72136927200718AE5 /* KFVDonationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */; };
 		C50515C9213694F900718AE5 /* KFCDetailedDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C8213694F900718AE5 /* KFCDetailedDonation.swift */; };
 		C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD782146F73A00A5195B /* KFCTabBar.swift */; };
 		C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */; };
@@ -43,7 +34,6 @@
 		C50E472F21518692008A8C36 /* KFMDonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E472E21518692008A8C36 /* KFMDonationInfo.swift */; };
 		C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */; };
 		C50E473521518977008A8C36 /* KFMPendingDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E473421518977008A8C36 /* KFMPendingDonation.swift */; };
-		C54284142152BD0700373586 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284132152BD0700373586 /* GradientView.swift */; };
 		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
@@ -55,27 +45,38 @@
 		C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
-		C560B7ED2135754C008A9DF1 /* KFVWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = C560B7EC2135754C008A9DF1 /* KFVWidget.xib */; };
 		C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EE213579F1008A9DF1 /* KFVWidget.swift */; };
 		C58B05D2213DBD380086124B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58B05D1213DBD380086124B /* UIView.swift */; };
+		C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */; };
+		C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */; };
+		C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB6215E209C00B180B3 /* KFVCollaboratorInfo.swift */; };
+		C58D9EB9215E20A500B180B3 /* KFMCollaboratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB8215E20A500B180B3 /* KFMCollaboratorInfo.swift */; };
+		C58D9EBD216008D900B180B3 /* KFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EBC216008D900B180B3 /* KFButton.swift */; };
+		C58D9EC02162650000B180B3 /* KFCLeaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EBF216264FF00B180B3 /* KFCLeaderboard.swift */; };
+		C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC22162752A00B180B3 /* KFVDestinationMap.swift */; };
+		C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */; };
+		C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */; };
+		C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */; };
+		C58D9ECC2163553600B180B3 /* KFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECB2163553600B180B3 /* KFLabel.swift */; };
+		C58D9ECE21635E3A00B180B3 /* PureLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECD21635E3A00B180B3 /* PureLayout.swift */; };
+		C58D9ED0216361E800B180B3 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECF216361E800B180B3 /* Protocols.swift */; };
+		C58D9ED22163AC3A00B180B3 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ED12163AC3A00B180B3 /* UIStackView.swift */; };
+		C58D9ED42163AD7D00B180B3 /* KFPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ED32163AD7D00B180B3 /* KFPadding.swift */; };
+		C58D9ED62163B09300B180B3 /* KFVIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ED52163B09300B180B3 /* KFVIcon.swift */; };
 		C5983C1E2134643F00303ABB /* KFCOpenDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5983C1D2134643F00303ABB /* KFCOpenDonations.swift */; };
-		C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351D8210D0CE500A717D3 /* Main.storyboard */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
 		C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
 		C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E19D21501A1B00A8412C /* KFVOpenDonationDescription.swift */; };
 		C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E1A121501AC800A8412C /* KFCModularTableView.swift */; };
 		C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E1A32150262B00A8412C /* KFVModularCell.swift */; };
-		C5B0E1AA21517BF600A8412C /* Leaderboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5B0E1A921517BF600A8412C /* Leaderboard.storyboard */; };
 		C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */; };
 		C5CA7BAD210D24380052D440 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BAC210D24380052D440 /* User.swift */; };
 		C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB0210D24F50052D440 /* UserService.swift */; };
 		C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB2210D26CF0052D440 /* Constants.swift */; };
 		C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB4210D2B030052D440 /* StorageService.swift */; };
 		C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */; };
-		C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44339C32210D2C0200E6663E /* RegisterFormViewController.swift */; };
 		C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BB9210D49130052D440 /* RequestService.swift */; };
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
-		C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */; };
 		C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404C2136ED4400ECC819 /* UILabel.swift */; };
 		C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404F2136EF8200ECC819 /* UITextView.swift */; };
 		C5DD40522136F05900ECC819 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD40512136F05900ECC819 /* Enums.swift */; };
@@ -85,7 +86,6 @@
 		C5DD406121382C5000ECC819 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD406021382C5000ECC819 /* UITextField.swift */; };
 		C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */; };
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
-		E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */; };
 		E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B247E210E1DAE009B9E0B /* UIAlertController.swift */; };
 		E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92527C621548E65004556E0 /* TwoFactorAuthService.swift */; };
 		E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92527C82154A40D004556E0 /* TwoFactorAuthService+Moya.swift */; };
@@ -95,7 +95,6 @@
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
-		E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502A21321DE000096E84 /* PendingRequestsViewController.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
 		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
@@ -105,13 +104,7 @@
 
 /* Begin PBXFileReference section */
 		2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.debug.xcconfig"; sourceTree = "<group>"; };
-		441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
-		441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveDeliveryViewController.swift; sourceTree = "<group>"; };
-		44339C32210D2C0200E6663E /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
 		44339C36210D4C4400E6663E /* ItemPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
-		443B7B8A210D540B00CD26B5 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
-		443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationPostViewController.swift; sourceTree = "<group>"; };
-		44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A49CFBF213E3BDD001A48FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -121,7 +114,6 @@
 		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C50182E52141B1D400257412 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C50182E72141B24C00257412 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
-		C50182EA2142AC0400257412 /* Status.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Status.storyboard; sourceTree = "<group>"; };
 		C50182EC2142AC9A00257412 /* KFCStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCStatus.swift; sourceTree = "<group>"; };
 		C50182EF2142AD4E00257412 /* KFCDelivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDelivery.swift; sourceTree = "<group>"; };
 		C50182F12142AF5300257412 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
@@ -133,8 +125,6 @@
 		C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVVolunteerInfo.swift; sourceTree = "<group>"; };
 		C501830121447B7300257412 /* KFVPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVPendingDonation.swift; sourceTree = "<group>"; };
 		C501830321447FD900257412 /* KFVRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVRoundedCell.swift; sourceTree = "<group>"; };
-		C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVDonationDescriptionCell.xib; sourceTree = "<group>"; };
-		C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDonationDescriptionCell.swift; sourceTree = "<group>"; };
 		C50515C8213694F900718AE5 /* KFCDetailedDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDetailedDonation.swift; sourceTree = "<group>"; };
 		C505BD782146F73A00A5195B /* KFCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCTabBar.swift; sourceTree = "<group>"; };
 		C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCTableViewWithRoundedCells.swift; sourceTree = "<group>"; };
@@ -142,7 +132,6 @@
 		C50E472E21518692008A8C36 /* KFMDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDonationInfo.swift; sourceTree = "<group>"; };
 		C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMVolunteerInfo.swift; sourceTree = "<group>"; };
 		C50E473421518977008A8C36 /* KFMPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMPendingDonation.swift; sourceTree = "<group>"; };
-		C54284132152BD0700373586 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
@@ -154,20 +143,33 @@
 		C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPendingDonations.swift; sourceTree = "<group>"; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
-		C560B7EC2135754C008A9DF1 /* KFVWidget.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVWidget.xib; sourceTree = "<group>"; };
 		C560B7EE213579F1008A9DF1 /* KFVWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVWidget.swift; sourceTree = "<group>"; };
 		C58B05D1213DBD380086124B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVEntityInfo.swift; sourceTree = "<group>"; };
+		C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMEntityInfo.swift; sourceTree = "<group>"; };
+		C58D9EB6215E209C00B180B3 /* KFVCollaboratorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVCollaboratorInfo.swift; sourceTree = "<group>"; };
+		C58D9EB8215E20A500B180B3 /* KFMCollaboratorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMCollaboratorInfo.swift; sourceTree = "<group>"; };
+		C58D9EBC216008D900B180B3 /* KFButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KFButton.swift; sourceTree = "<group>"; };
+		C58D9EBF216264FF00B180B3 /* KFCLeaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLeaderboard.swift; sourceTree = "<group>"; };
+		C58D9EC22162752A00B180B3 /* KFVDestinationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDestinationMap.swift; sourceTree = "<group>"; };
+		C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDestinationMap.swift; sourceTree = "<group>"; };
+		C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVUserInfo.swift; sourceTree = "<group>"; };
+		C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMUserInfo.swift; sourceTree = "<group>"; };
+		C58D9ECB2163553600B180B3 /* KFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFLabel.swift; sourceTree = "<group>"; };
+		C58D9ECD21635E3A00B180B3 /* PureLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureLayout.swift; sourceTree = "<group>"; };
+		C58D9ECF216361E800B180B3 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		C58D9ED12163AC3A00B180B3 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		C58D9ED32163AD7D00B180B3 /* KFPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPadding.swift; sourceTree = "<group>"; };
+		C58D9ED52163B09300B180B3 /* KFVIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVIcon.swift; sourceTree = "<group>"; };
 		C5983C1D2134643F00303ABB /* KFCOpenDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCOpenDonations.swift; sourceTree = "<group>"; };
 		C5A351D1210D0CE500A717D3 /* KifuSF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KifuSF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5A351D4210D0CE500A717D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C5A351D9210D0CE500A717D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5A351DB210D0CE500A717D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5A351DE210D0CE500A717D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5A351E0210D0CE500A717D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5B0E19D21501A1B00A8412C /* KFVOpenDonationDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVOpenDonationDescription.swift; sourceTree = "<group>"; };
 		C5B0E1A121501AC800A8412C /* KFCModularTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCModularTableView.swift; sourceTree = "<group>"; };
 		C5B0E1A32150262B00A8412C /* KFVModularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVModularCell.swift; sourceTree = "<group>"; };
-		C5B0E1A921517BF600A8412C /* Leaderboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Leaderboard.storyboard; sourceTree = "<group>"; };
 		C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5CA7BAC210D24380052D440 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C5CA7BB0210D24F50052D440 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 		C5CA7BB6210D2BD80052D440 /* StorageRefence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRefence.swift; sourceTree = "<group>"; };
 		C5CA7BB9210D49130052D440 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
-		C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		C5DD404C2136ED4400ECC819 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C5DD404F2136EF8200ECC819 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C5DD40512136F05900ECC819 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -196,7 +197,6 @@
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
-		E984502A21321DE000096E84 /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
 		E98B003521378F68008FD75A /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
 		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -234,6 +234,9 @@
 				C54284152152BFAD00373586 /* KFCDonation.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
+				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
+				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
+				C58D9EC1216274E100B180B3 /* DestinationMapView */,
 			);
 			name = Status;
 			sourceTree = "<group>";
@@ -241,6 +244,8 @@
 		C50E472721517D4E008A8C36 /* Leaderboard */ = {
 			isa = PBXGroup;
 			children = (
+				C58D9EBF216264FF00B180B3 /* KFCLeaderboard.swift */,
+				C58D9EC62162990400B180B3 /* KFUserInfo */,
 			);
 			name = Leaderboard;
 			sourceTree = "<group>";
@@ -285,14 +290,16 @@
 			isa = PBXGroup;
 			children = (
 				C54FDBD421402A0900BC89B8 /* KFWidget */,
-				C54FDBD62141717C00BC89B8 /* KFDescriptionCell */,
 				C5B0E1A62150264300A8412C /* KFRoundedTable */,
 				C5B0E1A52150263100A8412C /* KFModularTable */,
 				C505BD782146F73A00A5195B /* KFCTabBar.swift */,
 				C50182F92142FB1B00257412 /* KFVSticky.swift */,
 				C50182F72142E76E00257412 /* KFVImage.swift */,
+				C58D9ED52163B09300B180B3 /* KFVIcon.swift */,
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
+				C58D9EBC216008D900B180B3 /* KFButton.swift */,
+				C58D9ECB2163553600B180B3 /* KFLabel.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -319,20 +326,10 @@
 		C54FDBD421402A0900BC89B8 /* KFWidget */ = {
 			isa = PBXGroup;
 			children = (
-				C560B7EC2135754C008A9DF1 /* KFVWidget.xib */,
 				C560B7EE213579F1008A9DF1 /* KFVWidget.swift */,
 				C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */,
 			);
 			name = KFWidget;
-			sourceTree = "<group>";
-		};
-		C54FDBD62141717C00BC89B8 /* KFDescriptionCell */ = {
-			isa = PBXGroup;
-			children = (
-				C50515C421368FD700718AE5 /* KFVDonationDescriptionCell.xib */,
-				C50515C62136927200718AE5 /* KFVDonationDescriptionCell.swift */,
-			);
-			name = KFDescriptionCell;
 			sourceTree = "<group>";
 		};
 		C54FDBEC2141A7D000BC89B8 /* PendingDonations */ = {
@@ -347,13 +344,46 @@
 		C560B7E321346AA0008A9DF1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				C50182EA2142AC0400257412 /* Status.storyboard */,
 				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
-				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
 				C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */,
-				C5B0E1A921517BF600A8412C /* Leaderboard.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */,
+				C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */,
+			);
+			name = KFEntityInfo;
+			sourceTree = "<group>";
+		};
+		C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C58D9EB6215E209C00B180B3 /* KFVCollaboratorInfo.swift */,
+				C58D9EB8215E20A500B180B3 /* KFMCollaboratorInfo.swift */,
+			);
+			name = KFCollaboratorInfo;
+			sourceTree = "<group>";
+		};
+		C58D9EC1216274E100B180B3 /* DestinationMapView */ = {
+			isa = PBXGroup;
+			children = (
+				C58D9EC22162752A00B180B3 /* KFVDestinationMap.swift */,
+				C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */,
+			);
+			name = DestinationMapView;
+			sourceTree = "<group>";
+		};
+		C58D9EC62162990400B180B3 /* KFUserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */,
+				C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */,
+			);
+			name = KFUserInfo;
 			sourceTree = "<group>";
 		};
 		C5983C1F2134644A00303ABB /* Home */ = {
@@ -420,8 +450,6 @@
 				E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */,
 				E90B2477210D8588009B9E0B /* GradientView.swift */,
 				44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */,
-				C5A351D8210D0CE500A717D3 /* Main.storyboard */,
-				C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */,
 				7A49CFBF213E3BDD001A48FD /* Login.storyboard */,
 			);
 			name = Views;
@@ -432,10 +460,10 @@
 			children = (
 				C5983C1F2134644A00303ABB /* Home */,
 				C50182EE2142ACA600257412 /* Status */,
+				C50E472721517D4E008A8C36 /* Leaderboard */,
 				C5DD405D2137F43D00ECC819 /* CreateDonation */,
 				C54FDBEC2141A7D000BC89B8 /* PendingDonations */,
 				C5F78C84214E82F900B5395E /* VolunteerList */,
-				C50E472721517D4E008A8C36 /* Leaderboard */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -447,6 +475,8 @@
 				E96F11EB21294016004D549A /* MapHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
 				C5DD40512136F05900ECC819 /* Enums.swift */,
+				C58D9ECF216361E800B180B3 /* Protocols.swift */,
+				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -462,6 +492,7 @@
 				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
 				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
 				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
+				C58D9ECD21635E3A00B180B3 /* PureLayout.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -489,10 +520,6 @@
 		C5B0E1A021501A6700A8412C /* Junk */ = {
 			isa = PBXGroup;
 			children = (
-				C54284132152BD0700373586 /* GradientView.swift */,
-				E9C9713321320AC00073CD90 /* Login-Register */,
-				E9C9713121320AA00073CD90 /* Open Donations */,
-				E9C9713221320AAE0073CD90 /* Status */,
 			);
 			name = Junk;
 			sourceTree = "<group>";
@@ -541,8 +568,6 @@
 		C5DD404E2136ED4900ECC819 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
-				E9C10C9F210E4C6B0050FB8A /* UIColor.swift */,
 				C560B7E62134732B008A9DF1 /* UIFont.swift */,
 				C5DD404C2136ED4400ECC819 /* UILabel.swift */,
 				C5DD404F2136EF8200ECC819 /* UITextView.swift */,
@@ -553,6 +578,7 @@
 				C50182E52141B1D400257412 /* UIImage.swift */,
 				C50182E72141B24C00257412 /* UIStoryboardSegue.swift */,
 				C50182F12142AF5300257412 /* UIStoryboard.swift */,
+				C58D9ED12163AC3A00B180B3 /* UIStackView.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -578,6 +604,9 @@
 			isa = PBXGroup;
 			children = (
 				44339C36210D4C4400E6663E /* ItemPostCell.swift */,
+				7A49CFC721434EAC001A48FD /* LoginViewController.swift */,
+				7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */,
+				7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -589,38 +618,6 @@
 				E98B00392137946D008FD75A /* KeyedProperties.stencil */,
 			);
 			path = Templates;
-			sourceTree = "<group>";
-		};
-		E9C9713121320AA00073CD90 /* Open Donations */ = {
-			isa = PBXGroup;
-			children = (
-				C5CA7BBD210D53C20052D440 /* ItemListViewController.swift */,
-				441BE51B210DA928004A6A7A /* ItemDetailViewController.swift */,
-				E984502A21321DE000096E84 /* PendingRequestsViewController.swift */,
-			);
-			name = "Open Donations";
-			sourceTree = "<group>";
-		};
-		E9C9713221320AAE0073CD90 /* Status */ = {
-			isa = PBXGroup;
-			children = (
-				443B7B8A210D540B00CD26B5 /* StatusViewController.swift */,
-				443B7B8C210D54C400CD26B5 /* DonationPostViewController.swift */,
-				44EE8F0F210D866200F387A3 /* VolunteerListViewController.swift */,
-				441BE51D210DAE24004A6A7A /* ApproveDeliveryViewController.swift */,
-			);
-			name = Status;
-			sourceTree = "<group>";
-		};
-		E9C9713321320AC00073CD90 /* Login-Register */ = {
-			isa = PBXGroup;
-			children = (
-				44339C32210D2C0200E6663E /* RegisterFormViewController.swift */,
-				7A49CFC721434EAC001A48FD /* LoginViewController.swift */,
-				7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */,
-				7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */,
-			);
-			name = "Login-Register";
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -646,7 +643,6 @@
 				220E483AD5828192C0765A81 /* [CP] Embed Pods Frameworks */,
 				7873416786DDA1F9C9B07047 /* [CP] Copy Pods Resources */,
 				E93D082B212CDA0800AEC9B4 /* Run Script (SwiftLint) */,
-				E9439F6F21350AE100261370 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -696,17 +692,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98B003A2137946D008FD75A /* KeyedProperties.stencil in Resources */,
-				C5B0E1AA21517BF600A8412C /* Leaderboard.storyboard in Resources */,
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
 				7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */,
-				C50182EB2142AC0400257412 /* Status.storyboard in Resources */,
-				C50515C521368FD700718AE5 /* KFVDonationDescriptionCell.xib in Resources */,
+				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
-				C5A351DA210D0CE500A717D3 /* Main.storyboard in Resources */,
 				C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */,
 				C5475D0921542084006BA324 /* KFVProgress.xib in Resources */,
-				C560B7ED2135754C008A9DF1 /* KFVWidget.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,20 +797,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		E9439F6F21350AE100261370 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Pods/Sourcery/bin/sourcery --config ./.sourcery.yml";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -828,10 +807,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C50182FA2142FB1B00257412 /* KFVSticky.swift in Sources */,
-				7A49CFC821434EAC001A48FD /* LoginViewController.swift in Sources */,
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
 				C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */,
-				E90B247B210D8F48009B9E0B /* DonationPostViewController.swift in Sources */,
 				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
@@ -851,20 +828,21 @@
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */,
 				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
+				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,
-				E984502B21321DE000096E84 /* PendingRequestsViewController.swift in Sources */,
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C50E473521518977008A8C36 /* KFMPendingDonation.swift in Sources */,
 				C50182F02142AD4E00257412 /* KFCDelivery.swift in Sources */,
-				C50515C72136927200718AE5 /* KFVDonationDescriptionCell.swift in Sources */,
 				C50182FE2143B8F600257412 /* KFVStatistics.swift in Sources */,
 				C54284162152BFAD00373586 /* KFCDonation.swift in Sources */,
+				C58D9ED0216361E800B180B3 /* Protocols.swift in Sources */,
+				C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */,
 				C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */,
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */,
-				C5CA7BBE210D53C20052D440 /* ItemListViewController.swift in Sources */,
+				C58D9EC02162650000B180B3 /* KFCLeaderboard.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */,
 				C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */,
@@ -877,35 +855,40 @@
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
+				C58D9EBD216008D900B180B3 /* KFButton.swift in Sources */,
 				C50182F62142E3F100257412 /* KFVDescriptor.swift in Sources */,
+				C58D9ED62163B09300B180B3 /* KFVIcon.swift in Sources */,
 				C5DD40522136F05900ECC819 /* Enums.swift in Sources */,
-				443B7B8B210D540B00CD26B5 /* StatusViewController.swift in Sources */,
+				C58D9ECC2163553600B180B3 /* KFLabel.swift in Sources */,
 				C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */,
-				C54284142152BD0700373586 /* GradientView.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
-				C5CA7BB8210D431D0052D440 /* RegisterFormViewController.swift in Sources */,
+				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
 				C5475D1121556EA1006BA324 /* KFMInProgressDonationDescription.swift in Sources */,
+				C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */,
+				C58D9EB9215E20A500B180B3 /* KFMCollaboratorInfo.swift in Sources */,
 				C54FDBD82141756000BC89B8 /* UITableView.swift in Sources */,
 				C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */,
 				C501830221447B7300257412 /* KFVPendingDonation.swift in Sources */,
 				C50182E62141B1D400257412 /* UIImage.swift in Sources */,
+				C58D9ED22163AC3A00B180B3 /* UIStackView.swift in Sources */,
 				C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */,
 				C5983C1E2134643F00303ABB /* KFCOpenDonations.swift in Sources */,
 				C50182F82142E76E00257412 /* KFVImage.swift in Sources */,
 				C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */,
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
-				7A49CFC4213E3ED6001A48FD /* TwoFactorAuthViewController.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
-				44EE8F10210D866200F387A3 /* VolunteerListViewController.swift in Sources */,
-				441BE51C210DA928004A6A7A /* ItemDetailViewController.swift in Sources */,
+				C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */,
+				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
 				C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */,
-				44339C39210D4D5400E6663E /* BuildFile in Sources */,
+				44339C39210D4D5400E6663E /* (null) in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
-				7A49CFC6213E3F04001A48FD /* CollectMissingInfoViewController.swift in Sources */,
-				441BE51E210DAE24004A6A7A /* ApproveDeliveryViewController.swift in Sources */,
+				441BE51E210DAE24004A6A7A /* (null) in Sources */,
+				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
+				C58D9ED42163AD7D00B180B3 /* KFPadding.swift in Sources */,
 				C5475D0F21556ADB006BA324 /* KFVInProgressDonationDescription.swift in Sources */,
-				44339C35210D477700E6663E /* BuildFile in Sources */,
+				44339C35210D477700E6663E /* (null) in Sources */,
 				C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */,
+				C58D9ECE21635E3A00B180B3 /* PureLayout.swift in Sources */,
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 				C5475D0C21542796006BA324 /* KFMProgress.swift in Sources */,
@@ -915,14 +898,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C5A351D8210D0CE500A717D3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C5A351D9210D0CE500A717D3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1057,7 +1032,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1075,7 +1053,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
