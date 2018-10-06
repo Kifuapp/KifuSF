@@ -181,22 +181,25 @@ extension KFCOpenDonations: KFPWidgetDataSource {
             guard let donation = self.currentDonation else {
                 return nil
             }
-
-            let donationStatusTitle = donation.status.stringValueForDonator
-
-            return ((title: donation.title, subtitle: donationStatusTitle) as! KFPWidgetInfo)
+            
+            let descriptor = KFMWidgetDescriptor(for: donation)
+            
+            return descriptor.forDonator()
         case .delivery:
             switch self.currentDeliveryState {
             case .none:
                 return nil
             case .pendingRequests(let pendingDonations):
                 let nRequests = pendingDonations.count
-
-                return ((title: "Your Delivery", subtitle: "Pending Requests (\(nRequests))") as! KFPWidgetInfo)
+                
+                return KFMWidgetDescriptor.Descriptor(
+                    title: "Your Delivery",
+                    subtitle: "Pending Requests (\(nRequests))"
+                )
             case .deliveringDonation(let delivery):
-                let deliveryStatusTitle = delivery.status.stringValueForVolunteer
-
-                return ((title: delivery.title, subtitle: deliveryStatusTitle) as! KFPWidgetInfo)
+                let descriptor = KFMWidgetDescriptor(for: delivery)
+                
+                return descriptor.forVolunteer()
             }
         }
     }

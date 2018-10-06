@@ -10,9 +10,6 @@ import UIKit
 
 class KFCVolunteerList: KFCTableViewWithRoundedCells {
 
-    //TODO: remove this
-    var numberOfRows = 20
-
     var volunteers: [User]!
 
     override func viewDidLoad() {
@@ -37,9 +34,6 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
 
 extension KFCVolunteerList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows
-
-        //TODO: erick-return actual amount
         return volunteers.count
     }
 
@@ -76,8 +70,6 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
         //TODO: erick-hook up with firebase
         let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
-
-        numberOfRows -= 1
         tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
     }
 }
