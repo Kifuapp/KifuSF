@@ -100,6 +100,8 @@ class KFFlaggerStack: NSObject {
         }
     }
     
+    
+    
     // MARK: - IBACTIONS
     
     // MARK: - LIFE CYCLE
