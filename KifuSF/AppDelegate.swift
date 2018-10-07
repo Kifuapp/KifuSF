@@ -30,11 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = .kfPrimary
-        UINavigationBar.appearance().barTintColor = .kfWhite
+        UINavigationBar.appearance().barTintColor = .kfSuperWhite
         UINavigationBar.appearance().isTranslucent = false
         
         UITabBar.appearance().tintColor = .kfPrimary
-        UITabBar.appearance().barTintColor = .kfWhite
+        UITabBar.appearance().barTintColor = .kfSuperWhite
         UITabBar.appearance().isTranslucent = false
         
         return true

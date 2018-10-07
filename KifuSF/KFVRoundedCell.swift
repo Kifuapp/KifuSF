@@ -46,13 +46,13 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell, Configurable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        descriptorView.backgroundColor = selected ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = selected ? .kfHighlight : .kfSuperWhite
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        descriptorView.backgroundColor = highlighted ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = highlighted ? .kfHighlight : .kfSuperWhite
     }
     
     required init?(coder aDecoder: NSCoder) {

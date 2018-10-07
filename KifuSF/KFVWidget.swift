@@ -61,14 +61,14 @@ final class KFVWidget: UIView, Configurable {
         didSet {
             switch touchedViewType {
             case .donation?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite.darker(by: 5)
+                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite
             case .delivery?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
+                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite
+                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite.darker(by: 5)
             case .none:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite
+                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite
             }
         }
     }

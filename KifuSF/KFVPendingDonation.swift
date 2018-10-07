@@ -28,6 +28,7 @@ class KFVPendingDonation: KFVDescriptor {
         
         cancelStickyButton.autoPinEdge(toSuperviewEdge: .leading)
         cancelStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
+        cancelStickyButton.contentView.heightConstraint.isActive = false
     }
     
     override func configureStyling() {

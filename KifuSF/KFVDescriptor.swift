@@ -57,7 +57,7 @@ class KFVDescriptor: UIView, Configurable {
         subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
     }
     private func configureDescriptorStyling() {
-        backgroundColor = UIColor.kfWhite
+        backgroundColor = UIColor.kfSuperWhite
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()

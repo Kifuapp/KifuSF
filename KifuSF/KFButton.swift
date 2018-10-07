@@ -11,13 +11,15 @@ import UIKit
 class KFButton: UIButton, Configurable {
     
     private(set) var mainBackgroundColor = UIColor.kfPrimary
-    private(set) var mainTitleColor = UIColor.kfWhite
+    private(set) var mainTitleColor = UIColor.kfSuperWhite
     private(set) var currentState = AnimationState.idle {
         didSet {
             updateBackgroundColor()
             updateAnimator()
         }
     }
+    
+    private(set) var heightConstraint: NSLayoutConstraint!
     
     var buttonAnimator: UIViewPropertyAnimator?
     
@@ -27,7 +29,7 @@ class KFButton: UIButton, Configurable {
         func getScale() -> CGFloat {
             switch self {
             case .shrinking:
-                return 0.98
+                return 0.99
             case .expanding, .idle:
                 return 1
             }
@@ -49,8 +51,14 @@ class KFButton: UIButton, Configurable {
     override init(frame: CGRect) {
         super.init(frame: CGRect())
         configureStyling()
+        configureLayoutConstraints()
         
+        
+    }
+    
+    func configureLayoutConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
+        heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
     }
     
     func configureStyling() {
@@ -58,6 +66,7 @@ class KFButton: UIButton, Configurable {
         layer.setUpShadow()
         
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        
         titleLabel?.adjustsFontForContentSizeCategory = true
         
         backgroundColor = mainBackgroundColor

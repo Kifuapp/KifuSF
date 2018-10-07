@@ -62,7 +62,7 @@ extension KFCCreateDonation {
         
         view.backgroundColor = .kfGray
         
-        donationImageContainerView.backgroundColor = UIColor.kfWhite
+        donationImageContainerView.backgroundColor = UIColor.kfSuperWhite
         donationImageContainerView.layer.setUpShadow()
         donationImageContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         
@@ -78,7 +78,7 @@ extension KFCCreateDonation {
         donationInfoLabel.setUp(with: .body1)
         donationTitleLabel.setUp(with: .subheader1)
         
-        donationTextFieldContainerView.backgroundColor = .kfWhite
+        donationTextFieldContainerView.backgroundColor = .kfSuperWhite
         donationTextFieldContainerView.layer.setUpShadow()
         donationTextFieldContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         
@@ -90,7 +90,7 @@ extension KFCCreateDonation {
         descriptionTitleLabel.setUp(with: .subheader1)
         descriptionTextView.setUp(with: .subheader2, andColor: .clear)
         
-        descriptionTextViewContainerView.backgroundColor = .kfWhite
+        descriptionTextViewContainerView.backgroundColor = .kfSuperWhite
         descriptionTextViewContainerView.layer.setUpShadow()
         descriptionTextViewContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         

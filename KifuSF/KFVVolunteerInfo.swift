@@ -38,6 +38,7 @@ class KFVVolunteerInfo: KFVDescriptor {
         
         confirmationStickyButton.autoPinEdge(toSuperviewEdge: .leading)
         confirmationStickyButton.autoPinEdge(toSuperviewEdge: .trailing)
+        confirmationStickyButton.contentView.heightConstraint.isActive = false
         
         subtitleStickyLabel.updateStickySide()
     }

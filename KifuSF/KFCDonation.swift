@@ -27,7 +27,7 @@ class KFCDonation: KFCModularTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.kfSuperWhite
     }
     
     override func viewDidAppear(_ animated: Bool) {

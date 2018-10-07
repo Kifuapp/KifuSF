@@ -28,7 +28,6 @@ class KFVImage: UIView, Configurable {
     
     func configureStyling() {
         //TODO: decide on the shadow
-        layer.setUpShadow()
         backgroundColor = UIColor.clear
         imageView.clipsToBounds = true
         

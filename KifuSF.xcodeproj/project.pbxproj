@@ -43,6 +43,8 @@
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
 		C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EE213579F1008A9DF1 /* KFVWidget.swift */; };
+		C564187A216A089F00664DDB /* KFCRegisterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5641879216A089F00664DDB /* KFCRegisterForm.swift */; };
+		C564187C216A456400664DDB /* KFCFrontPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564187B216A456400664DDB /* KFCFrontPage.swift */; };
 		C58B05D2213DBD380086124B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58B05D1213DBD380086124B /* UIView.swift */; };
 		C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */; };
 		C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */; };
@@ -131,6 +133,8 @@
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		C560B7EE213579F1008A9DF1 /* KFVWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVWidget.swift; sourceTree = "<group>"; };
+		C5641879216A089F00664DDB /* KFCRegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCRegisterForm.swift; sourceTree = "<group>"; };
+		C564187B216A456400664DDB /* KFCFrontPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCFrontPage.swift; sourceTree = "<group>"; };
 		C58B05D1213DBD380086124B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVEntityInfo.swift; sourceTree = "<group>"; };
 		C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMEntityInfo.swift; sourceTree = "<group>"; };
@@ -339,6 +343,15 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		C564185A2169FE2400664DDB /* Login/Register */ = {
+			isa = PBXGroup;
+			children = (
+				C5641879216A089F00664DDB /* KFCRegisterForm.swift */,
+				C564187B216A456400664DDB /* KFCFrontPage.swift */,
+			);
+			name = Login/Register;
+			sourceTree = "<group>";
+		};
 		C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +457,7 @@
 		C5A351EA210D0E1600A717D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C564185A2169FE2400664DDB /* Login/Register */,
 				C5983C1F2134644A00303ABB /* Home */,
 				C50182EE2142ACA600257412 /* Status */,
 				C50E472721517D4E008A8C36 /* Leaderboard */,
@@ -777,6 +791,7 @@
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C50515C9213694F900718AE5 /* KFCDetailedDonation.swift in Sources */,
+				C564187C216A456400664DDB /* KFCFrontPage.swift in Sources */,
 				E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
@@ -813,6 +828,7 @@
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
 				C58D9EBD216008D900B180B3 /* KFButton.swift in Sources */,
+				C564187A216A089F00664DDB /* KFCRegisterForm.swift in Sources */,
 				C50182F62142E3F100257412 /* KFVDescriptor.swift in Sources */,
 				C58D9ED62163B09300B180B3 /* KFVIcon.swift in Sources */,
 				C5DD40522136F05900ECC819 /* Enums.swift in Sources */,
