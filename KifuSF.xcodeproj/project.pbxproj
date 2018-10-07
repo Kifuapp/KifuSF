@@ -17,7 +17,7 @@
 		C50182F02142AD4E00257412 /* KFCDelivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EF2142AD4E00257412 /* KFCDelivery.swift */; };
 		C50182F22142AF5300257412 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F12142AF5300257412 /* UIStoryboard.swift */; };
 		C50182F62142E3F100257412 /* KFVDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F52142E3F100257412 /* KFVDescriptor.swift */; };
-		C50182F82142E76E00257412 /* KFVImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F72142E76E00257412 /* KFVImage.swift */; };
+		C50182F82142E76E00257412 /* KFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F72142E76E00257412 /* KFImage.swift */; };
 		C50182FA2142FB1B00257412 /* KFVSticky.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F92142FB1B00257412 /* KFVSticky.swift */; };
 		C50182FC21430FE800257412 /* KFVDonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FB21430FE800257412 /* KFVDonationInfo.swift */; };
 		C50182FE2143B8F600257412 /* KFVStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FD2143B8F600257412 /* KFVStatistics.swift */; };
@@ -107,7 +107,7 @@
 		C50182EF2142AD4E00257412 /* KFCDelivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDelivery.swift; sourceTree = "<group>"; };
 		C50182F12142AF5300257412 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		C50182F52142E3F100257412 /* KFVDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDescriptor.swift; sourceTree = "<group>"; };
-		C50182F72142E76E00257412 /* KFVImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVImage.swift; sourceTree = "<group>"; };
+		C50182F72142E76E00257412 /* KFImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFImage.swift; sourceTree = "<group>"; };
 		C50182F92142FB1B00257412 /* KFVSticky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVSticky.swift; sourceTree = "<group>"; };
 		C50182FB21430FE800257412 /* KFVDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVDonationInfo.swift; sourceTree = "<group>"; };
 		C50182FD2143B8F600257412 /* KFVStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVStatistics.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				C5B0E1A52150263100A8412C /* KFModularTable */,
 				C505BD782146F73A00A5195B /* KFCTabBar.swift */,
 				C50182F92142FB1B00257412 /* KFVSticky.swift */,
-				C50182F72142E76E00257412 /* KFVImage.swift */,
+				C50182F72142E76E00257412 /* KFImage.swift */,
 				C58D9ED52163B09300B180B3 /* KFVIcon.swift */,
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
@@ -346,8 +346,8 @@
 		C564185A2169FE2400664DDB /* Login/Register */ = {
 			isa = PBXGroup;
 			children = (
-				C5641879216A089F00664DDB /* KFCRegisterForm.swift */,
 				C564187B216A456400664DDB /* KFCFrontPage.swift */,
+				C5641879216A089F00664DDB /* KFCRegisterForm.swift */,
 			);
 			name = Login/Register;
 			sourceTree = "<group>";
@@ -701,22 +701,32 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -734,10 +744,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -846,7 +858,7 @@
 				C58D9ED22163AC3A00B180B3 /* UIStackView.swift in Sources */,
 				C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */,
 				C5983C1E2134643F00303ABB /* KFCOpenDonations.swift in Sources */,
-				C50182F82142E76E00257412 /* KFVImage.swift in Sources */,
+				C50182F82142E76E00257412 /* KFImage.swift in Sources */,
 				C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */,
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,

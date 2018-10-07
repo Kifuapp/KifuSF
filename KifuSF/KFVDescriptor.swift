@@ -45,6 +45,8 @@ class KFVDescriptor: UIView, Configurable {
         } else {
             topStackView.axis = .horizontal
         }
+        
+        
     }
     
     func configureStyling() {

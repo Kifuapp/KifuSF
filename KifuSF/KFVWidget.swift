@@ -95,6 +95,9 @@ final class KFVWidget: UIView, Configurable {
             deliverySubtitleLabel.isHidden = false
             donationSubtitleLabel.isHidden = false
         }
+        
+        layoutIfNeeded()
+        delegate?.widgetView(self, heightDidChange: frame.height)
     }
     
     func configureLayoutConstraints() {

@@ -16,5 +16,7 @@ target 'KifuSF' do
   pod 'Sourcery'
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'PureLayout'
-
+  pod 'GoogleSignIn'
+  pod 'Moya'
+  
 end

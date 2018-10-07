@@ -11,19 +11,24 @@ import PureLayout
 
 class KFCRegisterForm: UIViewController, Configurable {
     
-    var scrollView = UIScrollView()
+    let contentsScrollView = UIScrollView()
     
-    var stackView = UIStackView()
+    let outerStackView = UIStackView()
     
-    var someText = KFLabel(font: UIFont.preferredFont(forTextStyle: .title2), textColor: UIColor.kfTitle)
+    let topStackView = UIStackView()
+    let profileImageView = KFVImage()
     
-    var firstTextField = UITextField()
-    var secondTextField = UITextField()
-    var thirdTextField = UITextField()
+    let trailingStackView = UIStackView()
+    let fullNameTextField = UITextField()
+    let usernameTextField = UITextField()
     
-    var initialScrollViewContentInsetBottom: CGFloat!
+    let phoneNumberTextField = UITextField()
+    let emailTextField = UITextField()
+    let passwordTextField = UITextField()
     
-    var button = KFButton(backgroundColor: .kfPrimary, andTitle: "Next")
+    let errorLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .caption1), textColor: .kfDestructive)
+    
+    let nextButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Next")
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
@@ -49,33 +54,28 @@ class KFCRegisterForm: UIViewController, Configurable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(stackView)
+        view.addSubview(contentsScrollView)
+        contentsScrollView.addSubview(outerStackView)
 
         configureStyling()
         configureLayoutConstraints()
         
-        firstTextField.delegate = self
-        secondTextField.delegate = self
-        thirdTextField.delegate = self
+        phoneNumberTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
-        initialScrollViewContentInsetBottom = scrollView.contentInset.bottom
     }
     
     func configureStyling() {
         view.backgroundColor = .kfGray
         
-        scrollView.keyboardDismissMode = .onDrag
+        contentsScrollView.keyboardDismissMode = .onDrag
         
-        firstTextField.backgroundColor = .white
-        secondTextField.backgroundColor = .white
-        thirdTextField.backgroundColor = .white
+        phoneNumberTextField.backgroundColor = .white
+        emailTextField.backgroundColor = .white
+        passwordTextField.backgroundColor = .white
         
-        someText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta consequat augue malesuada porttitor. Maecenas semper luctus tincidunt. Mauris sagittis ex vel nunc accumsan consequat. Vestibulum non turpis ultrices, consectetur velit at, posuere augue. Aliquam sit amet tincidunt tellus, at aliquam libero. Duis auctor odio eget turpis consectetur posuere. Mauris consequat scelerisque sapien. Sed tempus urna tortor, nec volutpat elit fermentum ac. Ut blandit quam libero, eu varius elit placerat ut. Duis vitae eleifend diam. Nunc sed metus vitae felis accumsan placerat. Etiam ultrices auctor euismod. Donec vel tellus arcu."
-        
-        
+        errorLabel.text = "Complete all fields"
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -83,35 +83,34 @@ class KFCRegisterForm: UIViewController, Configurable {
         let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let adjustmentHeight = (keyboardFrame.height + 20)
         
-        scrollView.contentInset.bottom += adjustmentHeight
-        scrollView.scrollIndicatorInsets.bottom += adjustmentHeight
+        contentsScrollView.contentInset.bottom += adjustmentHeight
+        contentsScrollView.scrollIndicatorInsets.bottom += adjustmentHeight
     }
     
     
     //TODO: this method gets called twice find out why
     @objc func keyboardWillHide(_ notification: Notification) {
-        scrollView.contentInset.bottom = 0
-        scrollView.scrollIndicatorInsets.bottom = 0
+        contentsScrollView.contentInset.bottom = 0
+        contentsScrollView.scrollIndicatorInsets.bottom = 0
     }
     
     func configureLayoutConstraints() {
+        outerStackView.axis = .vertical
+        outerStackView.spacing = 16
         
-        stackView.axis = .vertical
-        stackView.spacing = 16
+        outerStackView.addArrangedSubview(errorLabel)
+        outerStackView.addArrangedSubview(phoneNumberTextField)
+        outerStackView.addArrangedSubview(emailTextField)
+        outerStackView.addArrangedSubview(passwordTextField)
+        outerStackView.addArrangedSubview(nextButton)
         
-        stackView.addArrangedSubview(someText)
-        stackView.addArrangedSubview(firstTextField)
-        stackView.addArrangedSubview(secondTextField)
-        stackView.addArrangedSubview(thirdTextField)
-        stackView.addArrangedSubview(button)
+        contentsScrollView.translatesAutoresizingMaskIntoConstraints = false
+        outerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        contentsScrollView.autoPinEdgesToSuperviewEdges()
+        outerStackView.autoPinEdgesToSuperviewEdges()
         
-        scrollView.autoPinEdgesToSuperviewEdges()
-        stackView.autoPinEdgesToSuperviewEdges()
-        
-        stackView.autoMatch(.width, to: .width, of: view)
+        outerStackView.autoMatch(.width, to: .width, of: view)
     }
 }
 

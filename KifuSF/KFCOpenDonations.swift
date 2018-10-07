@@ -98,7 +98,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     @objc func createDonation() {
         //TODO: segue to create donation VC
         
-        let registerFormVC = KFCRegisterForm()
+        let registerFormVC = KFCFrontPage()
         
         navigationController?.pushViewController(registerFormVC, animated: true)
         
@@ -187,7 +187,6 @@ extension KFCOpenDonations: KFPWidgetDelegate {
     }
     
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
-        
         switch type {
         case .donation:
             print("Donation widget pressed")
