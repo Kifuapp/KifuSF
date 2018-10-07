@@ -18,5 +18,7 @@ target 'KifuSF' do
   pod 'PureLayout'
   pod 'GoogleSignIn'
   pod 'Moya'
+  pod 'GoogleSignIn'
+  pod 'Moya'
   
 end
