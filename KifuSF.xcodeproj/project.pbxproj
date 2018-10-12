@@ -102,6 +102,7 @@
 		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
 		E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */; };
+		E9BA57A9217161F6002A1C37 /* URL+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA57A8217161F6002A1C37 /* URL+Images.swift */; };
 		E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,7 @@
 		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		E98B00392137946D008FD75A /* KeyedProperties.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = KeyedProperties.stencil; sourceTree = "<group>"; };
 		E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMWidgetDescriptor.swift; sourceTree = "<group>"; };
+		E9BA57A8217161F6002A1C37 /* URL+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Images.swift"; sourceTree = "<group>"; };
 		E9C10C9F210E4C6B0050FB8A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,6 +520,7 @@
 				E90B247E210E1DAE009B9E0B /* UIAlertController.swift */,
 				C564187D216A86BA00664DDB /* UIColor.swift */,
 				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
+				E9BA57A8217161F6002A1C37 /* URL+Images.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				E96F11EC21294016004D549A /* MapHelper.swift in Sources */,
 				C5CA7BAD210D24380052D440 /* User.swift in Sources */,
 				C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */,
+				E9BA57A9217161F6002A1C37 /* URL+Images.swift in Sources */,
 				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
 				C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */,
 				44339C39210D4D5400E6663E /* (null) in Sources */,

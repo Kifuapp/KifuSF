@@ -90,20 +90,23 @@ class KFCDetailedDonation: KFCModularTableView {
     }
 
     @objc func flagButtonPressed() {
-        //TODO: flagging
+        //TODO: alex-flagging
     }
 
     override func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+        let imageUrl = URL(string: donation.imageUrl) ?? URL.brokenUrlImage
+        let donator = donation.donator
+        
         return KFMOpenDonationDescriptionItem(
-            imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
-            title: "Toilet Paper Toileti",
-            username: "Pondorasti",
-            creationDate: "12.12.12",
-            userReputation: 79,
-            userDonationsCount: 12,
-            userDeliveriesCount: 12,
-            distance: 5,
-            description: "woof woof"
+            imageURL: imageUrl,
+            title: donation.title,
+            username: donator.username,
+            creationDate: String(describing: donation.creationDate), //TODO: format date
+            userReputation: 22, //TODO: alex-reputation
+            userDonationsCount: 12, //TODO: alex-reputation
+            userDeliveriesCount: 12, //TODO: alex-reputation
+            distance: 5, //TODO: erick-distance
+            description: donation.notes
         )
     }
 }
