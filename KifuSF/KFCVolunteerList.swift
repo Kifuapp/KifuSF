@@ -21,7 +21,6 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
           KFVRoundedCell<KFVVolunteerInfo>.self,
           forCellReuseIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier
           )
-
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.allowsSelection = false
     }

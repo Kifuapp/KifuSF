@@ -32,10 +32,19 @@ class KFCCreateDonation: UIViewController {
         
         setUpUI()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
-    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -54,15 +63,18 @@ class KFCCreateDonation: UIViewController {
     }
 }
 
-
 extension KFCCreateDonation {
     func setUpUI() {
         title = "Create Donation"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(dismissVC)
+        )
         
         view.backgroundColor = .kfGray
         
-        donationImageContainerView.backgroundColor = UIColor.kfWhite
+        donationImageContainerView.backgroundColor = UIColor.kfSuperWhite
         donationImageContainerView.layer.setUpShadow()
         donationImageContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         
@@ -78,7 +90,7 @@ extension KFCCreateDonation {
         donationInfoLabel.setUp(with: .body1)
         donationTitleLabel.setUp(with: .subheader1)
         
-        donationTextFieldContainerView.backgroundColor = .kfWhite
+        donationTextFieldContainerView.backgroundColor = .kfSuperWhite
         donationTextFieldContainerView.layer.setUpShadow()
         donationTextFieldContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         
@@ -90,7 +102,7 @@ extension KFCCreateDonation {
         descriptionTitleLabel.setUp(with: .subheader1)
         descriptionTextView.setUp(with: .subheader2, andColor: .clear)
         
-        descriptionTextViewContainerView.backgroundColor = .kfWhite
+        descriptionTextViewContainerView.backgroundColor = .kfSuperWhite
         descriptionTextViewContainerView.layer.setUpShadow()
         descriptionTextViewContainerView.layer.cornerRadius = CALayer.kfCornerRadius
         

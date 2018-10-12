@@ -11,6 +11,7 @@ target 'KifuSF' do
   pod 'FirebaseUI/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+
   pod 'Kingfisher', '~> 4.0'
   pod 'LocationPicker'
   pod 'GoogleSignIn'
@@ -19,5 +20,7 @@ target 'KifuSF' do
   pod 'Sourcery'
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'PureLayout'
+  pod 'GoogleSignIn'
+  pod 'Moya'
 
 end

@@ -12,7 +12,7 @@ class KFCPendingDonations: KFCTableViewWithRoundedCells {
 
     //TODO: remove this
     var numberOfRows = 20
-    
+
     var donations: [Donation]!
 
     override func viewDidLoad() {

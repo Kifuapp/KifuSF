@@ -17,7 +17,7 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         title = "Status"
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = .kfSuperWhite
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -80,8 +80,8 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     }
     
     private func setUpTopBar() {
-        settings.style.buttonBarBackgroundColor = .kfWhite
-        settings.style.buttonBarItemBackgroundColor = .kfWhite
+        settings.style.buttonBarBackgroundColor = .kfSuperWhite
+        settings.style.buttonBarItemBackgroundColor = .kfSuperWhite
         settings.style.selectedBarBackgroundColor = .kfPrimary
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
         settings.style.selectedBarHeight = 2.0

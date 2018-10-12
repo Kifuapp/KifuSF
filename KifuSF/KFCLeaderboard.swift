@@ -9,17 +9,17 @@
 import UIKit
 
 class KFCLeaderboard: KFCTableViewWithRoundedCells {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Leaderboard"
         view.backgroundColor = .kfGray
-        
+
 //        let _ = tableViewWithRoundedCellsConstraints.map() { $0.autoRemove() }
 //        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .top)
 //        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .leading)
 //        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .trailing)
-        
+
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.isScrollEnabled = false
         tableViewWithRoundedCells.allowsSelection = false
@@ -31,12 +31,12 @@ extension KFCLeaderboard: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVUserInfo>.identifier) as? KFVRoundedCell<KFVUserInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
-        
+
         //TODO: self explanatory
         let newData = KFMUserInfo(
             profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
@@ -47,7 +47,7 @@ extension KFCLeaderboard: UITableViewDataSource {
             userDeliveriesCount: 99
         )
         donationCell.descriptorView.reloadData(for: newData)
-        
+
         return donationCell
     }
 }

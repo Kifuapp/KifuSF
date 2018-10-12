@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
-        
+
         window = UIWindow(frame: UIScreen.main.bounds)
         
         window?.rootViewController = KFCTabBar()
@@ -29,20 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = .kfPrimary
-        UINavigationBar.appearance().barTintColor = .kfWhite
+        UINavigationBar.appearance().barTintColor = .kfSuperWhite
         UINavigationBar.appearance().isTranslucent = false
 
         UITabBar.appearance().tintColor = .kfPrimary
-        UITabBar.appearance().barTintColor = .kfWhite
+        UITabBar.appearance().barTintColor = .kfSuperWhite
         UITabBar.appearance().isTranslucent = false
-        
+
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
+
         if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
             let user = try? JSONDecoder().decode(User.self, from: userData) {
-            
+
             User.setCurrent(user)
         }
 

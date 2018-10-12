@@ -39,15 +39,27 @@ class KFCDelivery: KFCModularTableView {
     }
 
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
-        return KFMInProgressDonationDescription(imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, title: "Toilet Paper", statusDescription: "Picking up Item", description: "woof woof") // swiftlint:disable:this line_length
+        return KFMInProgressDonationDescription(
+            imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
+            title: "Toilet Paper",
+            statusDescription: "Picking up Item",
+            description: "woof woof"
+        )
     }
 
     override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
-        return KFMEntityInfo(name: "Make School", phoneNumber: "+1 (415) 814-0980", address: "1547 Mission St San Francisco, CA  94103", entityType: .charity) // swiftlint:disable:this line_length
+        return KFMEntityInfo(name: "Make School", phoneNumber: "+1 (415) 814-0980", address: "1547 Mission St San Francisco, CA  94103", entityType: .charity)
     }
 
     override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
-        return KFMCollaboratorInfo(profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, name: "Alexandru Turcanu", username: "Pondorasti", userReputation: 100.0, userDonationsCount: 99, userDeliveriesCount: 99) // swiftlint:disable:this line_length
+        return KFMCollaboratorInfo(
+            profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
+            name: "Alexandru Turcanu",
+            username: "Pondorasti",
+            userReputation: 100.0,
+            userDonationsCount: 99,
+            userDeliveriesCount: 99
+        )
     }
 
     override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
@@ -68,7 +80,7 @@ extension KFCDelivery {
     }
 
     private func configureStyling() {
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.kfSuperWhite
     }
 
     private func configureDynamicButtonConstraints() {

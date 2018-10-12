@@ -69,16 +69,11 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 
     }
 
-
     func configureFirebase() {
-        DonationService.observeTimelineDonations { (donations) in
-            self.openDonations = donations
-        }
-        
         DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             self.currentDelivery = delivery
-            
+
             self.widgetView.reloadData()
         }
 
@@ -181,9 +176,9 @@ extension KFCOpenDonations: KFPWidgetDataSource {
             guard let donation = self.currentDonation else {
                 return nil
             }
-            
+
             let descriptor = KFMWidgetDescriptor(for: donation)
-            
+
             return descriptor.forDonator()
         case .delivery:
             switch self.currentDeliveryState {
@@ -191,14 +186,14 @@ extension KFCOpenDonations: KFPWidgetDataSource {
                 return nil
             case .pendingRequests(let pendingDonations):
                 let nRequests = pendingDonations.count
-                
+
                 return KFMWidgetDescriptor.Descriptor(
                     title: "Your Delivery",
                     subtitle: "Pending Requests (\(nRequests))"
                 )
             case .deliveringDonation(let delivery):
                 let descriptor = KFMWidgetDescriptor(for: delivery)
-                
+
                 return descriptor.forVolunteer()
             }
         }

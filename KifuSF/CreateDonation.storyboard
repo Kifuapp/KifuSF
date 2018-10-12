@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uLB-ai-xSt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,15 +14,15 @@
         <scene sceneID="aJ6-VB-FxD">
             <objects>
                 <viewController id="vg0-Nz-AVU" customClass="KFCCreateDonation" customModule="KifuSF" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="UqF-46-qrG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="UqF-46-qrG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-dt-js0">
-                                <rect key="frame" x="16" y="16" width="568" height="504"/>
+                                <rect key="frame" x="16" y="16" width="343" height="571"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="H0a-WH-TQy">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="h60-xR-R3I">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -40,7 +44,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DkV-v1-woX">
-                                                <rect key="frame" x="136" y="0.0" width="432" height="120"/>
+                                                <rect key="frame" x="136" y="0.0" width="207" height="120"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smE-c2-z8S">
                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="24"/>
@@ -65,19 +69,19 @@ food, toilet paper, etc.
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xjX-k1-4iu">
-                                        <rect key="frame" x="0.0" y="136" width="568" height="100"/>
+                                        <rect key="frame" x="0.0" y="136" width="343" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2O-Ev-bqH">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-NO-EEt">
-                                                <rect key="frame" x="0.0" y="28.5" width="568" height="71.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="343" height="71.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eFV-7h-K3K">
-                                                        <rect key="frame" x="4" y="4" width="560" height="63.5"/>
+                                                        <rect key="frame" x="4" y="4" width="335" height="63.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -93,19 +97,19 @@ food, toilet paper, etc.
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Stv-mp-zGM">
-                                        <rect key="frame" x="0.0" y="252" width="568" height="176"/>
+                                        <rect key="frame" x="0.0" y="252" width="343" height="176"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zz6-iG-xLj">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWz-Zf-dcd">
-                                                <rect key="frame" x="0.0" y="28.5" width="568" height="147.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="343" height="147.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jff-YX-epY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="568" height="147.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="147.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -121,14 +125,14 @@ food, toilet paper, etc.
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3je-BU-oTZ">
-                                        <rect key="frame" x="0.0" y="444" width="568" height="60"/>
+                                        <rect key="frame" x="0.0" y="444" width="343" height="127"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rj1-Pn-Oaw">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="97"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5B-f0-8cw">
-                                                <rect key="frame" x="0.0" y="38" width="568" height="22"/>
+                                                <rect key="frame" x="0.0" y="105" width="343" height="22"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -163,6 +167,54 @@ food, toilet paper, etc.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCf-aP-NQy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3624.8000000000002" y="168.6656671664168"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nCK-A5-Yaa">
+            <objects>
+                <viewController id="qZZ-Ei-jjg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="slq-yG-iWN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="wtd-h3-Q3F">
+                                <rect key="frame" x="16" y="587" width="343" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmV-qA-5sH">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EpL-Qp-VwU">
+                                        <rect key="frame" x="0.0" y="46" width="343" height="18"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already an user?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeG-d5-Hvk">
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="18"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sign in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1go-LU-JWR">
+                                                <rect key="frame" x="114.5" y="0.0" width="228.5" height="18"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7uF-06-YxW" firstAttribute="bottom" secondItem="wtd-h3-Q3F" secondAttribute="bottom" constant="16" id="ED1-bI-FhV"/>
+                            <constraint firstItem="wtd-h3-Q3F" firstAttribute="leading" secondItem="7uF-06-YxW" secondAttribute="leading" constant="16" id="oqQ-ai-NKu"/>
+                            <constraint firstItem="7uF-06-YxW" firstAttribute="trailing" secondItem="wtd-h3-Q3F" secondAttribute="trailing" constant="16" id="wdt-Nl-TXb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7uF-06-YxW"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JdQ-g4-AeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4530" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Rk-te-pbl">

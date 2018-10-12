@@ -10,33 +10,33 @@ import UIKit
 import PureLayout
 
 class KFVDescriptor: UIView, Configurable {
-    
+
     let contentsStackView = UIStackView(axis: .vertical, alignment: .fill,
                                         spacing: KFPadding.StackView, distribution: .fill)
     let topStackView = UIStackView(axis: .horizontal, alignment: .fill,
                                    spacing: KFPadding.StackView, distribution: .fill)
-    
+
     let imageView = KFVImage()
     var imageConstraints = [NSLayoutConstraint]()
-    
+
     let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
-    
+
     let titleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let subtitleStickyLabel = KFVSticky<KFLabel>()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addSubview(contentsStackView)
-        
+
         configureStyling()
         configureLayoutConstraints()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         if isAccessibilityCategory {
@@ -46,44 +46,44 @@ class KFVDescriptor: UIView, Configurable {
             topStackView.axis = .horizontal
         }
     }
-    
+
     func configureStyling() {
         configureDescriptorStyling()
         configureSubtitleStickyLabelStyling()
     }
-    
+
     private func configureSubtitleStickyLabelStyling() {
         subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
     }
     private func configureDescriptorStyling() {
-        backgroundColor = UIColor.kfWhite
+        backgroundColor = UIColor.kfSuperWhite
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()
     }
-    
+
     func configureLayoutConstraints() {
         configureStackViewsLayout()
         configureContentsStackViewConstraints()
-        
+
         imageConstraints.append(imageView.autoSetDimension(.height, toSize: KFPadding.SmallPictureLength))
         imageConstraints.append(imageView.autoSetDimension(.width, toSize: KFPadding.SmallPictureLength))
-        
+
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
-    
+
     private func configureStackViewsLayout() {
         infoStackView.addArrangedSubview(titleLabel)
         infoStackView.addArrangedSubview(subtitleStickyLabel)
-        
+
         topStackView.addArrangedSubview(imageView)
         topStackView.addArrangedSubview(infoStackView)
-        
+
         contentsStackView.addArrangedSubview(topStackView)
     }
-    
+
     private func configureContentsStackViewConstraints() {
         contentsStackView.translatesAutoresizingMaskIntoConstraints = false
         contentsStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.ContentView)

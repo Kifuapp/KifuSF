@@ -10,26 +10,35 @@ import UIKit
 import MapKit
 import PureLayout
 
-class KFVDestinationMap: UIView {
+class KFVDestinationMap: UIView, Configurable {
     let mapView = MKMapView()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addSubview(mapView)
-        
+
+        configureStyling()
+        configureLayoutConstraints()
+    }
+
+    func configureLayoutConstraints() {
         mapView.clipsToBounds = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
+
         mapView.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
         mapView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8)
         mapView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8)
         mapView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
+
         mapView.autoSetDimension(.height, toSize: 200)
-        
-        mapView.layer.cornerRadius = CALayer.kfCornerRadius
-        layer.setUpShadow()
     }
-    
+
+    func configureStyling() {
+        mapView.layer.cornerRadius = CALayer.kfCornerRadius
+    }
+
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
