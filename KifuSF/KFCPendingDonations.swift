@@ -10,9 +10,6 @@ import UIKit
 
 class KFCPendingDonations: KFCTableViewWithRoundedCells {
 
-    //TODO: remove this
-    var numberOfRows = 20
-
     var donations: [Donation]!
 
     override func viewDidLoad() {
@@ -32,12 +29,14 @@ class KFCPendingDonations: KFCTableViewWithRoundedCells {
 
 extension KFCPendingDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows
-        //TODO: return actual amount
+        return donations.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let pendingDonationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier, for: indexPath) as? KFVRoundedCell<KFVPendingDonation> else {
+        guard let pendingDonationCell = tableView.dequeueReusableCell(
+            withIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier,
+            for: indexPath
+            ) as? KFVRoundedCell<KFVPendingDonation> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -57,9 +56,24 @@ extension KFCPendingDonations: UITableViewDataSource {
 
 extension KFCPendingDonations: KFPPendingDonationCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>) {
-        let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
-
-        numberOfRows -= 1
-        tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
+        guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {
+            return assertionFailure("no cell found")
+        }
+        
+        let selectedDonation = self.donations[indexPath.row]
+        sender.descriptorView.cancelStickyButton.contentView.isEnabled = false
+        
+        RequestService.cancelRequest(for: selectedDonation) { (isSuccessfull) in
+            if isSuccessfull {
+                guard let index = self.donations.firstIndex(where: { $0.uid == selectedDonation.uid }) else {
+                    return assertionFailure("donation to delete not found")
+                }
+                
+                self.donations.remove(at: index)
+                self.tableViewWithRoundedCells.reloadData()
+            } else {
+                sender.descriptorView.cancelStickyButton.contentView.isEnabled = true
+            }
+        }
     }
 }
