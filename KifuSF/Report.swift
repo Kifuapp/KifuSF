@@ -31,7 +31,7 @@ enum FlaggedContentType: Int {
 }
 
 struct Report: KeyedStoredProperties {
-    let uid: String! = nil
+    let uid: String
     let donation: Donation?
     let user: User?
     
@@ -59,7 +59,8 @@ struct Report: KeyedStoredProperties {
         return dict
     }
     
-    init(flag donation: Donation, for flagType: FlaggedContentType, message: String) {
+    init(flag donation: Donation, for flagType: FlaggedContentType, message: String, uid: String) {
+        self.uid = uid
         self.user = nil
         self.donation = donation
         self.flag = flagType
@@ -68,7 +69,8 @@ struct Report: KeyedStoredProperties {
         self.creatationDate = Date()
     }
     
-    init(flag user: User, for flagType: FlaggedContentType, message: String) {
+    init(flag user: User, for flagType: FlaggedContentType, message: String, uid: String) {
+        self.uid = uid
         self.user = user
         self.donation = nil
         self.flag = flagType

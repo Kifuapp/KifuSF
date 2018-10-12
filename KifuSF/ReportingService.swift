@@ -11,11 +11,15 @@ import FirebaseDatabase
 
 struct ReportingService {
     
+    /**
+     Creates and uploads the new report while also update the donation's properties
+     with the new report info.
+     */
     static func createReport(
         for donation: Donation,
         flaggingType: FlaggedContentType,
         userMessage: String,
-        completion: @escaping (Bool) -> Void) {
+        completion: @escaping (Report?) -> Void) {
         
         //ref for report
         let refReport = Database.database().reference().child("reports").childByAutoId()
@@ -28,14 +32,14 @@ struct ReportingService {
             guard error == nil else {
                 assertionFailure(error!.localizedDescription)
                 
-                return completion(false)
+                return completion(nil)
             }
             
             //update donation using DonationService
             DonationService.attach(report: report, to: donation, completion: { (success) in
                 assert(success, "there was an error updating donation: \(donation)")
                 
-                completion(success)
+                completion(report)
             })
         }
     }
@@ -44,7 +48,7 @@ struct ReportingService {
         for user: User,
         flaggingType: FlaggedContentType,
         userMessage: String,
-        completion: @escaping (Bool) -> Void) {
+        completion: @escaping (Report?) -> Void) {
         
         //ref for report
         let refReport = Database.database().reference().child("reports").childByAutoId()
@@ -57,7 +61,7 @@ struct ReportingService {
             guard error == nil else {
                 assertionFailure(error!.localizedDescription)
                 
-                return completion(false)
+                return completion(nil)
             }
             
             //update donation using DonationService
@@ -65,10 +69,10 @@ struct ReportingService {
                 guard success else {
                     assertionFailure("there was an error updating donation: \(user)")
                     
-                    return completion(false)
+                    return completion(nil)
                 }
                 
-                completion(true)
+                completion(report)
             })
         }
         
