@@ -21,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
+        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
+        if Auth.auth().currentUser != nil,
+            let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
+            let user = try? JSONDecoder().decode(User.self, from: userData) {
+            
+            User.setCurrent(user)
+        }
 
         window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -35,16 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UITabBar.appearance().tintColor = .kfPrimary
         UITabBar.appearance().barTintColor = .kfSuperWhite
         UITabBar.appearance().isTranslucent = false
-
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
-
-        if Auth.auth().currentUser != nil,
-            let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
-            let user = try? JSONDecoder().decode(User.self, from: userData) {
-
-            User.setCurrent(user)
-        }
 
         return true
     }

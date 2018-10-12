@@ -88,23 +88,14 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
             
             self.widgetView.reloadData()
         }
-
-        //TODO: populate widgets
-//
-//        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
-//            self.currentDonation = donation
-//            self.currentDelivery = delivery
-//
-//            widgetView?.reloadData()
-//        }
-//
-//        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
-//            if self.currentDeliveryState.isShowingCurrentDelivery == false {
-//                self.pendingRequests = donationsUserHadRequestedToDeliver
-//
-//                widgetView?.reloadData()
-//            }
-//        })
+        
+        RequestService.observePendingRequests(completion: { (donationsUserHadRequestedToDeliver) in
+            if self.currentDeliveryState.isShowingCurrentDelivery == false {
+                self.pendingRequests = donationsUserHadRequestedToDeliver
+                
+                self.widgetView.reloadData()
+            }
+        })
     }
 
     @objc func createDonation() {
@@ -175,7 +166,18 @@ extension KFCOpenDonations: UITableViewDelegate {
 
         lastSelectedCell = cell
 
+        let selectedDonation = self.openDonations[indexPath.row]
         let detailedOpenDonationVC = KFCDetailedDonation()
+        detailedOpenDonationVC.donation = selectedDonation
+        
+        switch self.currentDeliveryState {
+        case .pendingRequests(let requestedDonations):
+            if requestedDonations.contains(selectedDonation) {
+                detailedOpenDonationVC.hasUserAlreadyRequested = true
+            }
+        default:
+            break
+        }
         navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
 }

@@ -9,8 +9,61 @@
 import UIKit
 
 class KFCDetailedDonation: KFCModularTableView {
-
-    let dynamicButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    
+    // MARK: - VARS
+    
+    var donation: Donation!
+    
+    var hasUserAlreadyRequested: Bool = false {
+        didSet {
+            if hasUserAlreadyRequested {
+                self.actionButton.setMainBackgroundColor(.kfDestructive)
+                self.actionButton.setTitle("Cancel Reqeust", for: .normal)
+            } else {
+                self.actionButton.setMainBackgroundColor(.kfPrimary)
+                self.actionButton.setTitle("Request Item", for: .normal)
+            }
+        }
+    }
+    
+    /** this can say Reqeust Item or Cancel Request */
+    private let actionButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
+    // MARK: - IBACTIONS
+    
+    @objc func pressActionButton(_ sender: Any) {
+        actionButton.isEnabled = false
+        
+        if hasUserAlreadyRequested {
+            RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
+                self.actionButton.isEnabled = true
+                
+                if isSuccessful {
+                    self.hasUserAlreadyRequested = false
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    self.present(errorAlert, animated: true)
+                }
+            }
+        } else {
+            RequestService.createRequest(for: self.donation) { (isSuccessful) in
+                self.actionButton.isEnabled = true
+                
+                if isSuccessful {
+                    self.hasUserAlreadyRequested = true
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    self.present(errorAlert, animated: true)
+                }
+            }
+        }
+    }
+    
+    // MARK: - LIFE CYCLE
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +72,16 @@ class KFCDetailedDonation: KFCModularTableView {
         view.backgroundColor = UIColor.kfSuperWhite
         modularTableView.separatorStyle = .none
 
-        view.addSubview(dynamicButton)
-        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
-        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        view.addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        actionButton.addTarget(
+            self,
+            action: #selector(pressActionButton(_:)),
+            for: .touchUpInside
+        )
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
                                                             style: .plain,
