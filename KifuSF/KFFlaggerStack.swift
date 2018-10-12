@@ -89,14 +89,18 @@ class KFFlaggerStack: NSObject {
         viewController.present(reportAlert, animated: true)
     }
     
-    private func createReport(with message: String, completion: (_ successful: Bool) -> Void) {
+    private func createReport(with message: String, completion: @escaping (_ successful: Bool) -> Void) {
         guard let flaggedItem = self.flaggedItem else {
             return assertionFailure("no flagg item selected")
         }
         
-        let report: Report
         if let donation = self.donation {
-            report = Report(flag: donation, for: flaggedItem, message: message)
+            ReportingService.createReport(
+                for: donation,
+                flaggingType: flaggedItem,
+                userMessage: message) { (successful) in
+                    completion(successful != nil)
+            }
         }
     }
     
