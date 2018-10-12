@@ -102,7 +102,6 @@
 		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
 		E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */; };
-		E9A8906F2168465500E71E8D /* KFFlaggerStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8906E2168465500E71E8D /* KFFlaggerStack.swift */; };
 		E9C10CA0210E4C6B0050FB8A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C10C9F210E4C6B0050FB8A /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -209,7 +208,6 @@
 		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		E98B00392137946D008FD75A /* KeyedProperties.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = KeyedProperties.stencil; sourceTree = "<group>"; };
 		E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMWidgetDescriptor.swift; sourceTree = "<group>"; };
-		E9A8906E2168465500E71E8D /* KFFlaggerStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFFlaggerStack.swift; sourceTree = "<group>"; };
 		E9C10C9F210E4C6B0050FB8A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -503,7 +501,6 @@
 				C5DD40512136F05900ECC819 /* Enums.swift */,
 				C58D9ECF216361E800B180B3 /* Protocols.swift */,
 				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
-				E9A8906E2168465500E71E8D /* KFFlaggerStack.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -841,7 +838,6 @@
 				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
-				E9A8906F2168465500E71E8D /* KFFlaggerStack.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,

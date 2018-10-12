@@ -16,13 +16,15 @@ struct DonationService {
         notes: String,
         image: UIImage,
         pickUpAddress: String,
-        longitude: Double, latitude: Double, completion: @escaping (Donation) -> Void) {
+        longitude: Double, latitude: Double, completion: @escaping (Donation?) -> Void) {
 
         //upload image to storage and get back url
         let donationImageRef = StorageReference.newDonationImageReference()
         StorageService.uploadImage(image, at: donationImageRef) { (url) in
             guard let storageUrl = url else {
-                return assertionFailure("failed to upload image")
+                assertionFailure("failed to upload image")
+                
+                return completion(nil)
             }
 
             //get ref for new donation
@@ -46,9 +48,13 @@ struct DonationService {
             let donationDict = donation.dictValue
 
             //send request
-            ref.updateChildValues(donationDict) { _, _ in
-
-                //and return the object
+            ref.updateChildValues(donationDict) { error, _ in
+                if let error = error {
+                    assertionFailure(error.localizedDescription)
+                    
+                    return completion(nil)
+                }
+                
                 completion(donation)
             }
         }

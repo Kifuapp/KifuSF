@@ -48,6 +48,14 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        UserService.login(email: "e@g.com", password: "password") { (user) in
+//            guard let user = user else {
+//                return
+//            }
+//
+//            User.setCurrent(user, writeToUserDefaults: true)
+//        }
 
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.delegate = self
@@ -70,10 +78,14 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
 
     func configureFirebase() {
+        DonationService.observeTimelineDonations { (donations) in
+            self.openDonations = donations
+        }
+        
         DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
             self.currentDonation = donation
             self.currentDelivery = delivery
-
+            
             self.widgetView.reloadData()
         }
 
