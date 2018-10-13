@@ -9,6 +9,8 @@
 import UIKit
 
 class KFCVolunteerList: KFCTableViewWithRoundedCells {
+    
+    var donation: Donation!
 
     var volunteers: [User]!
 
@@ -45,7 +47,7 @@ extension KFCVolunteerList: UITableViewDataSource {
 
         let volunteer = self.volunteers[indexPath.row]
 
-        //TODO: alex-fetch reputation values from User Class
+        //TODO: alex-reputation values from User Class
         let volunteerRep: Double = 0
         let volunteerDonationCount: Int = 0
         let volunteerDeliveryCount: Int = 0
@@ -58,6 +60,7 @@ extension KFCVolunteerList: UITableViewDataSource {
         )
 
         volunteerInfoCell.descriptorView.reloadData(for: data)
+        volunteerInfoCell.descriptorView.delegate = self
 
         volunteerInfoCell.descriptorView.indexPath = indexPath
 
@@ -67,8 +70,22 @@ extension KFCVolunteerList: UITableViewDataSource {
 
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
-        //TODO: erick-hook up with firebase
-        let indexPath = tableViewWithRoundedCells.indexPath(for: sender)
-        tableViewWithRoundedCells.deleteRows(at: [indexPath!], with: .fade)
+        guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {
+            return assertionFailure("no cell found")
+        }
+        
+        let selectedVolunteer = self.volunteers[indexPath.row]
+        tableViewWithRoundedCells.isUserInteractionEnabled = false
+        
+        DonationService.accept(volunteer: selectedVolunteer, for: self.donation) { (isSuccessfull) in
+            if isSuccessfull {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                let errorAlert = UIAlertController(errorMessage: nil)
+                self.present(errorAlert, animated: true)
+                
+                self.tableViewWithRoundedCells.isUserInteractionEnabled = false
+            }
+        }
     }
 }

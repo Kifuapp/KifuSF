@@ -233,6 +233,7 @@ extension KFCOpenDonations: KFPWidgetDelegate {
             RequestService.retrieveVolunteers(for: donation) { (volunteers) in
                 let volunteersListVC = KFCVolunteerList()
                 volunteersListVC.volunteers = volunteers
+                volunteersListVC.donation = donation
                 self.navigationController?.pushViewController(volunteersListVC, animated: true)
             }
 
