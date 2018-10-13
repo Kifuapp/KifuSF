@@ -12,7 +12,9 @@ import CoreGraphics
 struct KFPadding {
     static let ContentView: CGFloat = 8.0
     static let StackView: CGFloat = 16.0
+    static let SuperView: CGFloat = 16.0
     static let Body: CGFloat = 4.0
+    static let BigSpacing: CGFloat = 24.0
     
     static let SmallPictureLength: CGFloat = 112
 }

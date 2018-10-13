@@ -11,6 +11,8 @@ import GoogleSignIn
 
 class KFCFrontPage: UIViewController, Configurable {
     
+    let logoImageView = UIImageView(image: UIImage.kfLogo)
+    
     let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
     let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
@@ -24,14 +26,29 @@ class KFCFrontPage: UIViewController, Configurable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.addSubview(logoImageView)
         view.addSubview(bottomStackView)
         
         configureStyling()
         configureLayoutConstraints()
+        
+        registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func registerButtonPressed() {
+        navigationController?.pushViewController(KFCRegisterForm(), animated: true)
+        registerButton.resetState()
+        
+    }
+    
+    @objc func logInButtonTapped() {
+        navigationController?.pushViewController(KFCLogin(), animated: true)
     }
     
     func configureStyling() {
         view.backgroundColor = .kfWhite
+        
+        logoImageView.contentMode = .scaleAspectFit
         
         googleSignInButton.style = .wide
         
@@ -43,26 +60,41 @@ class KFCFrontPage: UIViewController, Configurable {
     }
     
     func configureLayoutConstraints() {
+        configureConstraintsForLogoImageView()
+        
+        configureLayoutForLabelsStackView()
+        configureLayoutForBottomStackView()
+        configureConstraintsForBottomStackView()
+        
+        signInLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logInButtonTapped)))
+    }
+    
+    private func configureConstraintsForLogoImageView() {
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        logoImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
+        logoImageView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        logoImageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+    }
+    
+    private func configureLayoutForLabelsStackView() {
         labelsStackView.addArrangedSubview(oldUserLabel)
         labelsStackView.addArrangedSubview(signInLabel)
-        
+    }
+    
+    private func configureLayoutForBottomStackView() {
         bottomStackView.addArrangedSubview(registerButton)
         bottomStackView.addArrangedSubview(googleSignInButton)
         bottomStackView.addArrangedSubview(labelsStackView)
-        
+    }
+    
+    private func configureConstraintsForBottomStackView() {
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
         
         bottomStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
         bottomStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
         bottomStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-        
-        signInLabel.setContentHuggingPriority(.init(249), for: .horizontal)
-        
-        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logInButtonTapped)))
-    }
-    
-    @objc func logInButtonTapped() {
-        print("poof")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

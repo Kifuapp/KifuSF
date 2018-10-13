@@ -63,7 +63,6 @@ class KFButton: UIButton, Configurable {
     
     func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
-        layer.setUpShadow()
         
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         
@@ -107,17 +106,28 @@ class KFButton: UIButton, Configurable {
     }
     
     private func updateAnimator() {
-        let animator = UIViewPropertyAnimator(duration: 0.025, curve: .linear, animations: { [unowned self] in
-            self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
-        })
-        
-        buttonAnimator = animator
+        switch currentState {
+        case .idle:
+            transform = .identity
+            buttonAnimator = nil
+            
+        default:
+            let animator = UIViewPropertyAnimator(duration: 0.025, curve: .linear, animations: { [unowned self] in
+                self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
+            })
+            
+            buttonAnimator = animator
+        }
+    }
+    
+    func resetState() {
+        currentState = .idle
     }
     
     private func updateBackgroundColor() {
         switch currentState {
         case .shrinking:
-            backgroundColor = mainBackgroundColor.darker(by: 5)
+            backgroundColor = mainBackgroundColor.darker()
         case .expanding, .idle:
             backgroundColor = mainBackgroundColor
         }
