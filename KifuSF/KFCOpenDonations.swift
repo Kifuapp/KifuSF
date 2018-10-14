@@ -98,16 +98,16 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     @objc func createDonation() {
         //TODO: segue to create donation VC
         
-        let registerFormVC = KFCFrontPage()
+//        let registerFormVC = KFCFrontPage()
+//
+//        navigationController?.pushViewController(registerFormVC, animated: true)
         
-        navigationController?.pushViewController(registerFormVC, animated: true)
-        
-//        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
-//        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-//            present(createDonationVC, animated: true)
-//        } else {
-//            print("error")
-//        }
+        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
+        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
+            present(createDonationVC, animated: true)
+        } else {
+            print("error")
+        }
         
     }
     

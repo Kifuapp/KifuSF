@@ -16,13 +16,13 @@ class KFVDescriptor: UIView, Configurable {
     let topStackView = UIStackView(axis: .horizontal, alignment: .fill,
                                    spacing: KFPadding.StackView, distribution: .fill)
     
-    let imageView = KFVImage()
+    let imageView = UIImageView()
     var imageConstraints = [NSLayoutConstraint]()
     
     let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
     
-    let titleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let subtitleStickyLabel = KFVSticky<KFLabel>()
+    let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let subtitleStickyLabel = KFVSticky<UILabel>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,11 +52,14 @@ class KFVDescriptor: UIView, Configurable {
     func configureStyling() {
         configureDescriptorStyling()
         configureSubtitleStickyLabelStyling()
+        
+        imageView.makeItKifuStyle()
     }
     
     private func configureSubtitleStickyLabelStyling() {
         subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        subtitleStickyLabel.contentView.makeItKifuStyle()
     }
     private func configureDescriptorStyling() {
         backgroundColor = UIColor.kfSuperWhite

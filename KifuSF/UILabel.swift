@@ -26,4 +26,19 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.height
     }
+    
+    convenience init(font: UIFont, textColor: UIColor) {
+        self.init()
+        
+        self.font = font
+        self.textColor = textColor
+        makeItKifuStyle()
+    }
+
+    func makeItKifuStyle() {
+        font.withSize(UIFont.buttonFontSize)
+        adjustsFontForContentSizeCategory = true
+        numberOfLines = 0
+    }
+    
 }

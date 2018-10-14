@@ -28,7 +28,7 @@ class KFVDonationInfo: KFVDescriptor {
     
     
     func reloadData(for data: KFMDonationInfo) {
-        imageView.imageView.kf.setImage(with: data.imageURL)
+        imageView.kf.setImage(with: data.imageURL)
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
         descriptionStickyTextView.contentView.text = data.description

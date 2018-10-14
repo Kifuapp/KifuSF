@@ -11,12 +11,12 @@ import UIKit
 class KFVInProgressDonationDescription: KFVDescriptor {
     
     let statusStackView = UIStackView(axis: .vertical)
-    let statusTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let statusDescriptionStickyLabel = KFVSticky<UILabel>(stickySide: .top)
     
     let donationDescriptionStackView = UIStackView(axis: .vertical)
-    let donationDescriptionTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let donationDescriptionContentLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let donationDescriptionContentLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     override func configureLayoutConstraints() {
         super.configureLayoutConstraints()
@@ -51,7 +51,7 @@ class KFVInProgressDonationDescription: KFVDescriptor {
     }
     
     func reloadData(for data: KFMInProgressDonationDescription) {
-        imageView.imageView.kf.setImage(with: data.imageURL)
+        imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = data.title
         

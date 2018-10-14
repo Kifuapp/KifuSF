@@ -51,7 +51,7 @@ class KFVPendingDonation: KFVDescriptor {
     }
     
     func reloadData(for data: KFMPendingDonation) {
-        imageView.imageView.kf.setImage(with: data.imageURL)
+        imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"

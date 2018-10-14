@@ -33,8 +33,8 @@ final class KFVWidget: UIView, Configurable {
     let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
     
     let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    let deliveryTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let deliverySubtitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     let deliveryDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
     let deliveryRightEmptyView = UIView()
@@ -47,8 +47,8 @@ final class KFVWidget: UIView, Configurable {
     let donationIconView = KFVIcon(image: .kfDonationIcon)
     
     let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    let donationTitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let donationSubtitleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     let donationDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
     let donationRightEmptyView = UIView()

@@ -33,6 +33,11 @@
 		C50E472F21518692008A8C36 /* KFMDonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E472E21518692008A8C36 /* KFMDonationInfo.swift */; };
 		C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */; };
 		C50E473521518977008A8C36 /* KFMPendingDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E473421518977008A8C36 /* KFMPendingDonation.swift */; };
+		C53D92B82171E42500AE3882 /* KFCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B72171E42500AE3882 /* KFCLogin.swift */; };
+		C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B92171E46700AE3882 /* UIViewController.swift */; };
+		C53D92BC21724B2900AE3882 /* KFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* KFTextField.swift */; };
+		C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BD217341FB00AE3882 /* UIScrollView.swift */; };
+		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
@@ -60,7 +65,6 @@
 		C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */; };
 		C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */; };
 		C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */; };
-		C58D9ECC2163553600B180B3 /* KFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECB2163553600B180B3 /* KFLabel.swift */; };
 		C58D9ECE21635E3A00B180B3 /* PureLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECD21635E3A00B180B3 /* PureLayout.swift */; };
 		C58D9ED0216361E800B180B3 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ECF216361E800B180B3 /* Protocols.swift */; };
 		C58D9ED22163AC3A00B180B3 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9ED12163AC3A00B180B3 /* UIStackView.swift */; };
@@ -130,6 +134,11 @@
 		C50E472E21518692008A8C36 /* KFMDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDonationInfo.swift; sourceTree = "<group>"; };
 		C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMVolunteerInfo.swift; sourceTree = "<group>"; };
 		C50E473421518977008A8C36 /* KFMPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMPendingDonation.swift; sourceTree = "<group>"; };
+		C53D92B72171E42500AE3882 /* KFCLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLogin.swift; sourceTree = "<group>"; };
+		C53D92B92171E46700AE3882 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		C53D92BB21724B2900AE3882 /* KFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFTextField.swift; sourceTree = "<group>"; };
+		C53D92BD217341FB00AE3882 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
+		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
@@ -157,7 +166,6 @@
 		C58D9EC4216275CF00B180B3 /* KFMDestinationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDestinationMap.swift; sourceTree = "<group>"; };
 		C58D9EC72162991C00B180B3 /* KFVUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVUserInfo.swift; sourceTree = "<group>"; };
 		C58D9EC921629A9A00B180B3 /* KFMUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMUserInfo.swift; sourceTree = "<group>"; };
-		C58D9ECB2163553600B180B3 /* KFLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFLabel.swift; sourceTree = "<group>"; };
 		C58D9ECD21635E3A00B180B3 /* PureLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureLayout.swift; sourceTree = "<group>"; };
 		C58D9ECF216361E800B180B3 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		C58D9ED12163AC3A00B180B3 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
@@ -293,7 +301,7 @@
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
 				C58D9EBC216008D900B180B3 /* KFButton.swift */,
-				C58D9ECB2163553600B180B3 /* KFLabel.swift */,
+				C53D92BB21724B2900AE3882 /* KFTextField.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 			children = (
 				C564187B216A456400664DDB /* KFCFrontPage.swift */,
 				C5641879216A089F00664DDB /* KFCRegisterForm.swift */,
+				C53D92B72171E42500AE3882 /* KFCLogin.swift */,
 			);
 			name = Login/Register;
 			sourceTree = "<group>";
@@ -593,6 +602,9 @@
 				C50182E72141B24C00257412 /* UIStoryboardSegue.swift */,
 				C50182F12142AF5300257412 /* UIStoryboard.swift */,
 				C58D9ED12163AC3A00B180B3 /* UIStackView.swift */,
+				C53D92B92171E46700AE3882 /* UIViewController.swift */,
+				C53D92BD217341FB00AE3882 /* UIScrollView.swift */,
+				C53D92BF2173438300AE3882 /* UIImageView.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -840,6 +852,7 @@
 				C564187E216A86BA00664DDB /* UIColor.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */,
 				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
+				C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */,
 				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,
@@ -849,6 +862,7 @@
 				C50182F02142AD4E00257412 /* KFCDelivery.swift in Sources */,
 				C50182FE2143B8F600257412 /* KFVStatistics.swift in Sources */,
 				C54284162152BFAD00373586 /* KFCDonation.swift in Sources */,
+				C53D92B82171E42500AE3882 /* KFCLogin.swift in Sources */,
 				C58D9ED0216361E800B180B3 /* Protocols.swift in Sources */,
 				C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */,
 				C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */,
@@ -860,7 +874,9 @@
 				C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */,
 				C50182FC21430FE800257412 /* KFVDonationInfo.swift in Sources */,
 				C50E472D2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift in Sources */,
+				C53D92C02173438300AE3882 /* UIImageView.swift in Sources */,
 				C58B05D2213DBD380086124B /* UIView.swift in Sources */,
+				C53D92BC21724B2900AE3882 /* KFTextField.swift in Sources */,
 				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
@@ -870,10 +886,10 @@
 				C50182F62142E3F100257412 /* KFVDescriptor.swift in Sources */,
 				C58D9ED62163B09300B180B3 /* KFVIcon.swift in Sources */,
 				C5DD40522136F05900ECC819 /* Enums.swift in Sources */,
-				C58D9ECC2163553600B180B3 /* KFLabel.swift in Sources */,
 				C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
+				C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */,
 				C5475D1121556EA1006BA324 /* KFMInProgressDonationDescription.swift in Sources */,
 				C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */,
 				C58D9EB9215E20A500B180B3 /* KFMCollaboratorInfo.swift in Sources */,

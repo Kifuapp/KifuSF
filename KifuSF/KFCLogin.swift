@@ -18,14 +18,14 @@ class KFCLogin: UIViewController, Configurable {
     let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
     let emailStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let emailLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let emailTextField = KFTextField()
+    let emailLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let emailTextField = KFTextField(textContentType: .emailAddress, returnKeyType: .next, placeholder: "me@example.com")
     
     let passwordStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let passwordLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let passwordTextField = KFTextField()
+    let passwordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let passwordTextField = KFTextField(textContentType: .password, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
     
-    let forgotPasswordLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     
     let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
 
@@ -64,20 +64,33 @@ class KFCLogin: UIViewController, Configurable {
         let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let adjustmentHeight = (keyboardFrame.height + 20)
         
-        contentScrollView.contentInset.bottom = adjustmentHeight
-        contentScrollView.scrollIndicatorInsets.bottom = adjustmentHeight
+        contentScrollView.updateBottomPadding(adjustmentHeight)
     }
     
     //TODO: this method gets called twice find out why
     @objc func keyboardWillHide(_ notification: Notification) {
-        contentScrollView.contentInset.bottom = 0
-        contentScrollView.scrollIndicatorInsets.bottom = 0
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
     
     func configureGestures() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(keyboardTap)
+        
+        let forgotPasswordTapped = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordButtonTapped))
+        forgotPasswordTapped.cancelsTouchesInView = false
+        forgotPasswordLabel.addGestureRecognizer(forgotPasswordTapped)
+        
+        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func logInButtonTapped() {
+        print("log in")
+    }
+    
+    //TODO: show an ui alert
+    @objc func forgotPasswordButtonTapped() {
+        print("forgot password")
     }
     
     @objc func dismissKeyboard() {
@@ -93,33 +106,17 @@ class KFCLogin: UIViewController, Configurable {
         title = "Log In"
         view.backgroundColor = .kfSuperWhite
         
-        contentScrollView.keyboardDismissMode = .onDrag
+        contentScrollView.keyboardDismissMode = .interactive
         contentScrollView.alwaysBounceVertical = true
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
         
         emailLabel.text = "Email"
-        configureStylingForEmailTextField()
-        
         passwordLabel.text = "Password"
-        configureStylingForPasswordTextField()
         
         forgotPasswordLabel.text = "Forgot Password?"
         forgotPasswordLabel.textAlignment = .right
+        forgotPasswordLabel.isUserInteractionEnabled = true
 
-    }
-    
-    func configureStylingForEmailTextField() {
-        emailTextField.contentView.textContentType = UITextContentType.emailAddress
-        emailTextField.contentView.enablesReturnKeyAutomatically = true
-        emailTextField.contentView.returnKeyType = .next
-        emailTextField.contentView.placeholder = "Email"
-    }
-    
-    func configureStylingForPasswordTextField() {
-        passwordTextField.contentView.textContentType = UITextContentType.password
-        passwordTextField.contentView.enablesReturnKeyAutomatically = true
-        passwordTextField.contentView.returnKeyType = .done
-        passwordTextField.contentView.isSecureTextEntry = true
-        passwordTextField.contentView.placeholder = "Password"
     }
     
     func configureLayoutConstraints() {
@@ -185,6 +182,7 @@ extension KFCLogin: UITextFieldDelegate {
             passwordTextField.contentView.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
+            logInButtonTapped()
         }
         
         return true

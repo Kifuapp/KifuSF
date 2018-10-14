@@ -20,8 +20,8 @@ class KFCFrontPage: UIViewController, Configurable {
     
     let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     
-    let oldUserLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    let signInLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
+    let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class KFCFrontPage: UIViewController, Configurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = .kfSuperWhite
         
         logoImageView.contentMode = .scaleAspectFit
         
