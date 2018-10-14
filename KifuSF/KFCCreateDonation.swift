@@ -40,7 +40,7 @@ class KFCCreateDonation: UIViewController {
     private func validateInput() -> Bool {
         
         //validate if the fields are empty
-        if donationTextField.text!.isEmpty || descriptionTextView.text.isEmpty {
+        if donationTextField.text?.isEmpty ?? false || descriptionTextView.text.isEmpty {
             return false
         }
         
@@ -94,10 +94,10 @@ class KFCCreateDonation: UIViewController {
                 return print("no location selected")
             }
             
-            //TODO: alex-present a loading indicator while uploading the donation
+            //TODO: alex-present a loading indicator while uploading the donation and disable the view
             
             guard
-                let itemTitle = self.donationTitleLabel.text,
+                let itemTitle = self.donationTextField.text,
                 let detailText = self.descriptionTextView.text,
                 let image = self.donationImageView.image else {
                     return assertionFailure("missing input before uploading")
@@ -112,6 +112,8 @@ class KFCCreateDonation: UIViewController {
                 longitude: location.coordinate.longitude,
                 latitude: location.coordinate.longitude) { donation in
                     if donation == nil {
+                        //TODO: alex-remove the loading indicator
+                        
                         let errorAlert = UIAlertController(errorMessage: nil)
                         self.present(errorAlert, animated: true)
                     } else {
@@ -119,6 +121,7 @@ class KFCCreateDonation: UIViewController {
                     }
             }
         }
+        
         self.navigationController?.pushViewController(locationPicker, animated: true)
     }
     
