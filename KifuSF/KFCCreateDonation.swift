@@ -70,7 +70,7 @@ extension KFCCreateDonation {
         donationImageView.layer.cornerRadius = CALayer.kfCornerRadius
         donationImageView.contentMode = .scaleAspectFill
         
-        let tintableImage = UIImage.kfPlusIcon.withRenderingMode(.alwaysTemplate)
+        let tintableImage = UIImage.kfPlusImage.withRenderingMode(.alwaysTemplate)
         donationImageView.image = tintableImage
         donationImageView.tintColor = .kfPrimary
         

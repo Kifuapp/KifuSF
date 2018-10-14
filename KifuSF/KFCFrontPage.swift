@@ -36,13 +36,13 @@ class KFCFrontPage: UIViewController, Configurable {
     }
     
     @objc func registerButtonPressed() {
-        navigationController?.pushViewController(KFCRegisterForm(), animated: true)
+        navigationController?.pushViewController(KFCDisclaimer(), animated: true)
         registerButton.resetState()
         
     }
     
     @objc func logInButtonTapped() {
-        navigationController?.pushViewController(KFCLogin(), animated: true)
+        navigationController?.pushViewController(KFCPhoneNumberValidation(), animated: true)
     }
     
     func configureStyling() {

@@ -41,8 +41,8 @@ extension UIImage {
         return image
     }()
     
-    static let kfPlusIcon: UIImage = {
-        guard let image = UIImage(named: "PlusIcon") else {
+    static let kfPlusImage: UIImage = {
+        guard let image = UIImage(named: "PlusImage") else {
             fatalError(KFErrorMessage.imageNotFound)
         }
         

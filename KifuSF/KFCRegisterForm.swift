@@ -22,7 +22,7 @@ class KFCRegisterForm: UIViewController, Configurable {
     let profileImageLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     
     let horizontalImageStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let profileImageView = UIImageView()
+    let profileImageView = UIImageView(image: .kfPlusImage)
     let profileImageSpacer = UIView()
     
     let fullNameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
@@ -47,7 +47,7 @@ class KFCRegisterForm: UIViewController, Configurable {
     
     let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .caption1), textColor: .kfDestructive)
     
-    let nextButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Next")
+    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -92,11 +92,19 @@ class KFCRegisterForm: UIViewController, Configurable {
         keyboardTap.cancelsTouchesInView = false
         view.addGestureRecognizer(keyboardTap)
         
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        let profileImageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageTap.cancelsTouchesInView = false
+        profileImageView.addGestureRecognizer(profileImageTap)
+        
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
-    @objc func nextButtonTapped() {
-        print("next")
+    @objc func profileImageTapped() {
+        print("tapp")
+    }
+    
+    @objc func continueButtonTapped() {
+        print("continue")
     }
     
     @objc func dismissKeyboard() {
@@ -111,8 +119,8 @@ class KFCRegisterForm: UIViewController, Configurable {
         contentScrollView.alwaysBounceVertical = true
         contentScrollView.updateBottomPadding(KFPadding.StackView)
         
-        profileImageView.image = UIImage.kfPlusIcon
-        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.makeItKifuStyle()
+        profileImageView.isUserInteractionEnabled = true
         
         profileImageLabel.text = "Profile Image"
         fullNameLabel.text = "Full Name"
@@ -126,7 +134,6 @@ class KFCRegisterForm: UIViewController, Configurable {
         phoneNumberTextField.setTag(2)
         emailTextField.setTag(3)
         passwordTextField.setTag(4)
-        
         
         errorLabel.text = "Complete all fields"
         errorLabel.textAlignment = .center
@@ -190,7 +197,7 @@ class KFCRegisterForm: UIViewController, Configurable {
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(upperStackView)
-        outerStackView.addArrangedSubview(nextButton)
+        outerStackView.addArrangedSubview(continueButton)
     }
     
     func configureLayoutForUpperStackView() {
@@ -255,7 +262,7 @@ extension KFCRegisterForm: UITextFieldDelegate {
         case 4:
             passwordTextField.contentView.becomeFirstResponder()
         case 5:
-            nextButtonTapped()
+            continueButtonTapped()
             fallthrough
         default:
             textField.resignFirstResponder()

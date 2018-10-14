@@ -27,8 +27,8 @@
                                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="h60-xR-R3I">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlusIcon" translatesAutoresizingMaskIntoConstraints="NO" id="o68-Np-EfD">
-                                                        <rect key="frame" x="36" y="36" width="48" height="48"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlusImage" translatesAutoresizingMaskIntoConstraints="NO" id="o68-Np-EfD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -242,6 +242,6 @@ food, toilet paper, etc.
         </scene>
     </scenes>
     <resources>
-        <image name="PlusIcon" width="48" height="48"/>
+        <image name="PlusImage" width="130" height="130"/>
     </resources>
 </document>

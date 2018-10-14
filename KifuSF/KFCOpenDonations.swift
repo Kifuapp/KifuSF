@@ -60,7 +60,6 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableViewWithRoundedCells.reloadData()
@@ -98,16 +97,16 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     @objc func createDonation() {
         //TODO: segue to create donation VC
         
-//        let registerFormVC = KFCFrontPage()
-//
-//        navigationController?.pushViewController(registerFormVC, animated: true)
+        let registerFormVC = KFCFrontPage()
+
+        navigationController?.pushViewController(registerFormVC, animated: true)
         
-        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
-        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-            present(createDonationVC, animated: true)
-        } else {
-            print("error")
-        }
+//        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
+//        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
+//            present(createDonationVC, animated: true)
+//        } else {
+//            print("error")
+//        }
         
     }
     

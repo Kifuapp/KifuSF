@@ -11,9 +11,11 @@ import Foundation
 protocol Configurable {
     func configureStyling()
     func configureLayoutConstraints()
+    func configureGestures()
 }
 
 extension Configurable {
     func configureStyling() { }
     func configureLayoutConstraints() { }
+    func configureGestures() { }
 }
