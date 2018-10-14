@@ -228,13 +228,26 @@ extension KFCOpenDonations: KFPWidgetDelegate {
             guard let donation = self.currentDonation else {
                 fatalError("the widget view needs to be hidden if there is no current donation")
             }
-
-            //fetch user objects for the given donation
-            RequestService.retrieveVolunteers(for: donation) { (volunteers) in
-                let volunteersListVC = KFCVolunteerList()
-                volunteersListVC.volunteers = volunteers
-                volunteersListVC.donation = donation
-                self.navigationController?.pushViewController(volunteersListVC, animated: true)
+            
+            
+            switch donation.status {
+            case .open:
+                
+                //fetch user objects for the given donation
+                RequestService.retrieveVolunteers(for: donation) { (volunteers) in
+                    let volunteersListVC = KFCVolunteerList()
+                    volunteersListVC.volunteers = volunteers
+                    volunteersListVC.donation = donation
+                    self.navigationController?.pushViewController(volunteersListVC, animated: true)
+                }
+            default:
+                
+                //TODO: question-should selecting this only switch tabs?
+                guard let tabbarVc = self.tabBarController else {
+                    fatalError("no tab bar controller in this vc")
+                }
+                
+                tabbarVc.selectedIndex = 1
             }
 
         case .delivery:
