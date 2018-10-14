@@ -20,6 +20,17 @@ enum FlaggedContentType: Int {
     //Flagging the user
     case flaggedPhoneNumber = 100
     case flaggedCommunication
+    
+    func getDescription() -> String {
+        switch self {
+        case .flaggedImage:
+            return "image"
+        case .flaggedPickupLocation:
+            return "wrong pickup location"
+        default:
+            return "poof"
+        }
+    }
 }
 
 struct Report: KeyedStoredProperties {

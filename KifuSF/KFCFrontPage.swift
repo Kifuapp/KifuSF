@@ -42,7 +42,7 @@ class KFCFrontPage: UIViewController, Configurable {
     }
     
     @objc func logInButtonTapped() {
-        navigationController?.pushViewController(KFCPhoneNumberValidation(), animated: true)
+        navigationController?.pushViewController(KFCFlagging(), animated: true)
     }
     
     func configureStyling() {

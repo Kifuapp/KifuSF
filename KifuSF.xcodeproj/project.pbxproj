@@ -39,6 +39,7 @@
 		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C53D92C221735F4600AE3882 /* KFCDisclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C121735F4600AE3882 /* KFCDisclaimer.swift */; };
 		C53D92C421736C4400AE3882 /* KFCPhoneNumberValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */; };
+		C53D92C621738F0C00AE3882 /* KFCFlagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C521738F0C00AE3882 /* KFCFlagging.swift */; };
 		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
@@ -141,6 +142,7 @@
 		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C53D92C121735F4600AE3882 /* KFCDisclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDisclaimer.swift; sourceTree = "<group>"; };
 		C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPhoneNumberValidation.swift; sourceTree = "<group>"; };
+		C53D92C521738F0C00AE3882 /* KFCFlagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCFlagging.swift; sourceTree = "<group>"; };
 		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				C5DD405D2137F43D00ECC819 /* CreateDonation */,
 				C54FDBEC2141A7D000BC89B8 /* PendingDonations */,
 				C5F78C84214E82F900B5395E /* VolunteerList */,
+				C53D92C521738F0C00AE3882 /* KFCFlagging.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 				C5475D0C21542796006BA324 /* KFMProgress.swift in Sources */,
+				C53D92C621738F0C00AE3882 /* KFCFlagging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
