@@ -22,6 +22,24 @@ class KFCDonation: KFCModularTableView {
     
     private func updateUI() {
         reloadData()
+        
+        //update the actionButton
+        actionButton.isHidden = false
+        
+        if let donation = self.donation {
+            switch donation.status {
+            case .open:
+                actionButton.setTitle("Edit Donation", for: .normal)
+            case .awaitingPickup:
+                actionButton.setTitle("Confirm Drop Off", for: .normal)
+            case .awaitingDelivery:
+                actionButton.isHidden = true
+            case .awaitingApproval:
+                actionButton.setTitle("View Confirmation", for: .normal)
+            }
+        } else {
+            actionButton.setTitle("Post a New Donation", for: .normal)
+        }
     }
 
     override func loadView() {
@@ -32,6 +50,11 @@ class KFCDonation: KFCModularTableView {
         actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
         actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
         actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        actionButton.addTarget(
+            self,
+            action: #selector(pressActionButton(_:)),
+            for: .touchUpInside
+        )
     }
 
     override func viewDidLoad() {
@@ -64,7 +87,7 @@ class KFCDonation: KFCModularTableView {
     }
 
     override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
-        guard let delivery = self.delivery else {
+        guard let delivery = self.donation else {
             return nil
         }
         
@@ -96,6 +119,66 @@ class KFCDonation: KFCModularTableView {
         )
         
         return KFMDestinationMap(coordinate: location)
+    }
+    
+    @objc func pressActionButton(_ sender: Any) {
+        if let donation = self.donation {
+            switch donation.status {
+            case .open:
+                
+                //TODO: edit the donation
+                break
+            case .awaitingPickup:
+                
+                //Confirm drop off
+                self.confirmDropOff(for: donation)
+            case .awaitingDelivery:
+                assertionFailure("action button should not be tappable here")
+            case .awaitingApproval:
+                self.viewConfirmationImage(for: donation)
+            }
+        } else {
+            
+            //present new donation editor
+            let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
+            if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
+                present(createDonationVC, animated: true)
+            } else {
+                assertionFailure("error")
+            }
+        }
+    }
+    
+    private func confirmDropOff(for donation: Donation) {
+        let confirmDropOffAlert = UIAlertController(
+            title: "Confirm Drop Off",
+            message: "Are you sure you want to confirm the drop off of this item?",
+            preferredStyle: .actionSheet
+        )
+        let confirmAction = UIAlertAction(title: "Confirm Drop Off", style: .destructive) { _ in
+            DonationService.confirmPickup(for: donation, completion: { (isSuccessful) in
+                if isSuccessful {
+                    
+                    //update the status and the UI
+                    self.donation?.status = .awaitingDelivery
+                    self.updateUI()
+                } else {
+                    let alertError = UIAlertController(errorMessage: nil)
+                    self.present(alertError, animated: true)
+                }
+            })
+        }
+        confirmDropOffAlert.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        confirmDropOffAlert.addAction(cancelAction)
+        
+        self.present(confirmDropOffAlert, animated: true)
+    }
+    
+    private func viewConfirmationImage(for donation: Donation) {
+        
+        //TODO: alex-present the donation verification image vc
+        
     }
 }
 

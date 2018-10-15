@@ -110,7 +110,7 @@ class KFCCreateDonation: UIViewController {
                 image: image,
                 pickUpAddress: location.address,
                 longitude: location.coordinate.longitude,
-                latitude: location.coordinate.longitude) { donation in
+                latitude: location.coordinate.latitude) { donation in
                     if donation == nil {
                         //TODO: alex-remove the loading indicator
                         

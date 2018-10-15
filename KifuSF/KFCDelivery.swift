@@ -17,33 +17,85 @@ class KFCDelivery: KFCModularTableView {
             updateUI()
         }
     }
-
-    private let dynamicButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    
+    private let actionButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    
+    private lazy var photoHelper: PhotoHelper = {
+        let helper = PhotoHelper()
+        helper.completionHandler = { [weak self] image in
+            guard let unwrappedSelf = self else {
+                return
+            }
+            
+            guard let delivery = unwrappedSelf.delivery else {
+                return assertionFailure("shouldn't select an image without a delivery")
+            }
+            
+            //TODO: alex-show loading indicator
+            
+            DonationService.confirmDelivery(for: delivery, image: image, completion: { (isSuccessful) in
+                //TODO: alex-dismiss loading indicator
+                
+                if isSuccessful {
+                    unwrappedSelf.delivery?.status = .awaitingApproval
+                    unwrappedSelf.updateUI()
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    unwrappedSelf.present(errorAlert, animated: true)
+                }
+            })
+        }
+        
+        return helper
+    }()
     
     private func updateUI() {
         reloadData()
+        
+        //update the actionButton
+        actionButton.isHidden = false
+        
+        if let delivery = self.delivery {
+            switch delivery.status {
+            case .open:
+                assertionFailure("there shouldn't be a delivery as open here")
+            case .awaitingPickup:
+                actionButton.setTitle("Directions", for: .normal)
+            case .awaitingDelivery:
+                actionButton.setTitle("Directions", for: .normal)
+            case .awaitingApproval:
+                actionButton.isHidden = true
+            }
+        } else {
+            actionButton.setTitle("View Open Donations", for: .normal)
+        }
     }
-
+    
     override func loadView() {
         super.loadView()
-
-        view.addSubview(dynamicButton)
+        
+        view.addSubview(actionButton)
         configureLayoutConstraints()
+        actionButton.addTarget(
+            self,
+            action: #selector(pressActionButton(_:)),
+            for: .touchUpInside
+        )
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureStyling()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        modularTableView.contentInset.bottom = dynamicButton.frame.height + 16
-        modularTableView.scrollIndicatorInsets.bottom = dynamicButton.frame.height + 16
+        
+        modularTableView.contentInset.bottom = actionButton.frame.height + 16
+        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
     }
-
+    
     override func retrieveProgressItem() -> KFPModularTableViewItem? {
         guard let deliveryStep = self.delivery?.status.step else {
             return nil
@@ -51,7 +103,7 @@ class KFCDelivery: KFCModularTableView {
         
         return KFMProgress(currentStep: deliveryStep, ofType: .delivery)
     }
-
+    
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
         guard let deliveryDescription = self.delivery?.inProgressDescriptionForVolunteer else {
             return nil
@@ -59,7 +111,7 @@ class KFCDelivery: KFCModularTableView {
         
         return deliveryDescription
     }
-
+    
     override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
         guard let delivery = self.delivery else {
             return nil
@@ -73,7 +125,7 @@ class KFCDelivery: KFCModularTableView {
             entityType: .charity
         )
     }
-
+    
     override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
         guard let donatorInfo = self.delivery?.donator.collaboratorInfo else {
             return nil
@@ -81,7 +133,7 @@ class KFCDelivery: KFCModularTableView {
         
         return donatorInfo
     }
-
+    
     override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
         guard let delivery = self.delivery else {
             return nil
@@ -103,6 +155,48 @@ class KFCDelivery: KFCModularTableView {
         
         return KFMDestinationMap(coordinate: location)
     }
+    
+    @objc func pressActionButton(_ sender: Any) {
+        if let delivery = self.delivery {
+            switch delivery.status {
+            case .open, .awaitingApproval:
+                assertionFailure("delivery should not have this status")
+            case .awaitingPickup:
+                
+                //Directions to pick up loation
+                self.openDirectionsToPickUpLocation(for: delivery)
+            case .awaitingDelivery:
+                
+                //Directions to charity
+//                self.openDirectionsToCharity(for: delivery)
+                
+                self.presentConfirmationImage(for: delivery)
+            }
+            
+        } else {
+            guard let tabBar = self.tabBarController else {
+                return assertionFailure("no tabbar found")
+            }
+            
+            tabBar.selectedIndex = 0
+        }
+    }
+    
+    private func openDirectionsToPickUpLocation(for delivery: Donation) {
+        let map = MapHelper(long: delivery.longitude, lat: delivery.latitude)
+        map.open()
+    }
+    
+    private func presentConfirmationImage(for deliver: Donation) {
+        photoHelper.presentActionSheet(from: self)
+    }
+    
+    private func openDirectionsToCharity(for delivery: Donation) {
+        
+        //TODO: erick-find charity location
+        let map = MapHelper(long: delivery.longitude, lat: delivery.latitude)
+        map.open()
+    }
 }
 
 extension KFCDelivery: IndicatorInfoProvider {
@@ -116,15 +210,16 @@ extension KFCDelivery {
     private func configureLayoutConstraints() {
         configureDynamicButtonConstraints()
     }
-
+    
     private func configureStyling() {
         view.backgroundColor = UIColor.kfSuperWhite
     }
-
+    
     private func configureDynamicButtonConstraints() {
-        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
-        dynamicButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        dynamicButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
     }
 }
+
