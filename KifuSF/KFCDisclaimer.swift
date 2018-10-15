@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFCDisclaimer: UIViewController, Configurable {
+class KFCDisclaimer: UIViewController, UIConfigurable {
     
     let contentScrollView = UIScrollView()
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)

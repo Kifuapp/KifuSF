@@ -9,7 +9,7 @@
 import UIKit
 import PureLayout
 
-class KFCRegisterForm: UIViewController, Configurable {
+class KFCRegisterForm: UIViewController, UIConfigurable {
     
     let contentScrollView = UIScrollView()
     
@@ -27,30 +27,30 @@ class KFCRegisterForm: UIViewController, Configurable {
     
     let fullNameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let fullNameLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let fullNameTextField = KFTextField(textContentType: .name, returnKeyType: .next, placeholder: "+12345678")
+    let fullNameTextFieldContainer = KFTextFieldContainer(textContentType: .name, returnKeyType: .next, placeholder: "Kifu SF")
     
     let usernameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let usernameLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let usernameTextField = KFTextField(textContentType: .username, returnKeyType: .next, placeholder: "@Username")
+    let usernameTextFieldContainer = KFTextFieldContainer(textContentType: .nickname, returnKeyType: .next, placeholder: "@Username")
     
     let phoneNumberStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let phoneNumberLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let phoneNumberTextField = KFTextField(textContentType: .telephoneNumber, returnKeyType: .next, placeholder: "+12345678")
+    let phoneNumberTextFieldContainer = KFTextFieldContainer(textContentType: .telephoneNumber, returnKeyType: .next, placeholder: "+12345678")
     
     let emailStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let emailLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let emailTextField = KFTextField(textContentType: .emailAddress, returnKeyType: .next, placeholder: "me@example.com")
+    let emailTextFieldContainer = KFTextFieldContainer(textContentType: .username, returnKeyType: .next, keyboardType: .emailAddress, placeholder: "me@example.com")
     
     let passwordStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let passwordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let passwordTextField = KFTextField(textContentType: .password, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
+    let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .newPassword, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
     
     let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .caption1), textColor: .kfDestructive)
     
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow(_:)),
                                                name: .UIKeyboardWillShow, object: nil)
@@ -80,11 +80,11 @@ class KFCRegisterForm: UIViewController, Configurable {
     }
     
     func configureTextFieldDelegates() {
-        fullNameTextField.contentView.delegate = self
-        usernameTextField.contentView.delegate = self
-        phoneNumberTextField.contentView.delegate = self
-        emailTextField.contentView.delegate = self
-        passwordTextField.contentView.delegate = self
+        fullNameTextFieldContainer.textField.delegate = self
+        usernameTextFieldContainer.textField.delegate = self
+        phoneNumberTextFieldContainer.textField.delegate = self
+        emailTextFieldContainer.textField.delegate = self
+        passwordTextFieldContainer.textField.delegate = self
     }
     
     func configureGestures() {
@@ -129,11 +129,11 @@ class KFCRegisterForm: UIViewController, Configurable {
         emailLabel.text = "Email"
         passwordLabel.text = "Password"
         
-        fullNameTextField.setTag(0)
-        usernameTextField.setTag(1)
-        phoneNumberTextField.setTag(2)
-        emailTextField.setTag(3)
-        passwordTextField.setTag(4)
+        fullNameTextFieldContainer.setTag(0)
+        usernameTextFieldContainer.setTag(1)
+        phoneNumberTextFieldContainer.setTag(2)
+        emailTextFieldContainer.setTag(3)
+        passwordTextFieldContainer.setTag(4)
         
         errorLabel.text = "Complete all fields"
         errorLabel.textAlignment = .center
@@ -187,6 +187,7 @@ class KFCRegisterForm: UIViewController, Configurable {
         outerStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.SuperView)
         outerStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.SuperView)
         outerStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.SuperView)
+        
         outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
     }
     
@@ -224,27 +225,27 @@ class KFCRegisterForm: UIViewController, Configurable {
     
     func configureLayoutForFullNameStackView() {
         fullNameStackView.addArrangedSubview(fullNameLabel)
-        fullNameStackView.addArrangedSubview(fullNameTextField)
+        fullNameStackView.addArrangedSubview(fullNameTextFieldContainer)
     }
     
     func configureLayoutForUsernameStackView() {
         usernameStackView.addArrangedSubview(usernameLabel)
-        usernameStackView.addArrangedSubview(usernameTextField)
+        usernameStackView.addArrangedSubview(usernameTextFieldContainer)
     }
     
     func configureLayoutForPhoneNumberStackView() {
         phoneNumberStackView.addArrangedSubview(phoneNumberLabel)
-        phoneNumberStackView.addArrangedSubview(phoneNumberTextField)
+        phoneNumberStackView.addArrangedSubview(phoneNumberTextFieldContainer)
     }
     
     func configureLayoutForEmailStackView() {
         emailStackView.addArrangedSubview(emailLabel)
-        emailStackView.addArrangedSubview(emailTextField)
+        emailStackView.addArrangedSubview(emailTextFieldContainer)
     }
     
     func configureLayoutForPasswordStackView() {
         passwordStackView.addArrangedSubview(passwordLabel)
-        passwordStackView.addArrangedSubview(passwordTextField)
+        passwordStackView.addArrangedSubview(passwordTextFieldContainer)
     }
 }
 
@@ -254,13 +255,13 @@ extension KFCRegisterForm: UITextFieldDelegate {
         
         switch nextTextFieldTag {
         case 1:
-            usernameTextField.contentView.becomeFirstResponder()
+            usernameTextFieldContainer.textField.becomeFirstResponder()
         case 2:
-            phoneNumberTextField.contentView.becomeFirstResponder()
+            phoneNumberTextFieldContainer.textField.becomeFirstResponder()
         case 3:
-            emailTextField.contentView.becomeFirstResponder()
+            emailTextFieldContainer.textField.becomeFirstResponder()
         case 4:
-            passwordTextField.contentView.becomeFirstResponder()
+            passwordTextFieldContainer.textField.becomeFirstResponder()
         case 5:
             continueButtonTapped()
             fallthrough

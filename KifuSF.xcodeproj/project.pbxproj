@@ -32,9 +32,10 @@
 		C50E472F21518692008A8C36 /* KFMDonationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E472E21518692008A8C36 /* KFMDonationInfo.swift */; };
 		C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */; };
 		C50E473521518977008A8C36 /* KFMPendingDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E473421518977008A8C36 /* KFMPendingDonation.swift */; };
+		C515B2302175257100051FFD /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C515B22F2175257100051FFD /* AuthenticationServices.framework */; };
 		C53D92B82171E42500AE3882 /* KFCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B72171E42500AE3882 /* KFCLogin.swift */; };
 		C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B92171E46700AE3882 /* UIViewController.swift */; };
-		C53D92BC21724B2900AE3882 /* KFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* KFTextField.swift */; };
+		C53D92BC21724B2900AE3882 /* KFTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */; };
 		C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BD217341FB00AE3882 /* UIScrollView.swift */; };
 		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C53D92C221735F4600AE3882 /* KFCDisclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C121735F4600AE3882 /* KFCDisclaimer.swift */; };
@@ -135,9 +136,11 @@
 		C50E472E21518692008A8C36 /* KFMDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDonationInfo.swift; sourceTree = "<group>"; };
 		C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMVolunteerInfo.swift; sourceTree = "<group>"; };
 		C50E473421518977008A8C36 /* KFMPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMPendingDonation.swift; sourceTree = "<group>"; };
+		C515B22E21751C6E00051FFD /* KifuSF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KifuSF.entitlements; sourceTree = "<group>"; };
+		C515B22F2175257100051FFD /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		C53D92B72171E42500AE3882 /* KFCLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLogin.swift; sourceTree = "<group>"; };
 		C53D92B92171E46700AE3882 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		C53D92BB21724B2900AE3882 /* KFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFTextField.swift; sourceTree = "<group>"; };
+		C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFTextFieldContainer.swift; sourceTree = "<group>"; };
 		C53D92BD217341FB00AE3882 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C53D92C121735F4600AE3882 /* KFCDisclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDisclaimer.swift; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C515B2302175257100051FFD /* AuthenticationServices.framework in Frameworks */,
 				ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +235,7 @@
 		6153AE97C5F4F481B572AF2D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C515B22F2175257100051FFD /* AuthenticationServices.framework */,
 				75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */,
 			);
 			name = Frameworks;
@@ -304,7 +309,7 @@
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
 				C58D9EBC216008D900B180B3 /* KFButton.swift */,
-				C53D92BB21724B2900AE3882 /* KFTextField.swift */,
+				C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 		C5A351ED210D0E5100A717D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C515B22E21751C6E00051FFD /* KifuSF.entitlements */,
 				C5A351D4210D0CE500A717D3 /* AppDelegate.swift */,
 				C5A351E0210D0CE500A717D3 /* Info.plist */,
 				C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */,
@@ -694,6 +700,14 @@
 				TargetAttributes = {
 					C5A351D0210D0CE500A717D3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.AutoFillCredentialProvider = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -882,7 +896,7 @@
 				C50E472D2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift in Sources */,
 				C53D92C02173438300AE3882 /* UIImageView.swift in Sources */,
 				C58B05D2213DBD380086124B /* UIView.swift in Sources */,
-				C53D92BC21724B2900AE3882 /* KFTextField.swift in Sources */,
+				C53D92BC21724B2900AE3882 /* KFTextFieldContainer.swift in Sources */,
 				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
@@ -1062,6 +1076,7 @@
 			baseConfigurationReference = 2246EBA8F123A0E424596355 /* Pods-KifuSF.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;
@@ -1084,6 +1099,7 @@
 			baseConfigurationReference = F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UALV34MRH2;

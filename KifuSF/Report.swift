@@ -24,9 +24,9 @@ enum FlaggedContentType: Int {
     func getDescription() -> String {
         switch self {
         case .flaggedImage:
-            return "image"
+            return "Inapropiate Image"
         case .flaggedPickupLocation:
-            return "wrong pickup location"
+            return "Wrong pickup location"
         default:
             return "poof"
         }

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import PureLayout
 
-class KFVDestinationMap: UIView, Configurable {
+class KFVDestinationMap: UIView, UIConfigurable {
     let mapView = MKMapView()
     
     override init(frame: CGRect) {

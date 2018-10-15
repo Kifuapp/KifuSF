@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class KFVWidget: UIView, Configurable {
+final class KFVWidget: UIView, UIConfigurable {
     
     enum TouchedViewType {
         case donation

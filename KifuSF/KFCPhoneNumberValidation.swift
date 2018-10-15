@@ -14,7 +14,7 @@ class KFCPhoneNumberValidation: UIViewController {
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
-    let authenticationCodeTextField = KFTextField(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let authenticationCodeTextFieldContainer = KFTextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     
@@ -56,7 +56,7 @@ class KFCPhoneNumberValidation: UIViewController {
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(informationLabel)
-        outerStackView.addArrangedSubview(authenticationCodeTextField)
+        outerStackView.addArrangedSubview(authenticationCodeTextFieldContainer)
         outerStackView.addArrangedSubview(continueButton)
     }
     

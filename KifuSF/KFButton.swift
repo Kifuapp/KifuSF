@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFButton: UIButton, Configurable {
+class KFButton: UIButton, UIConfigurable {
     
     private(set) var mainBackgroundColor = UIColor.kfPrimary
     private(set) var mainTitleColor = UIColor.kfSuperWhite

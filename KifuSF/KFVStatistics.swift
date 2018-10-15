@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVStatistics: UIView, Configurable {
+class KFVStatistics: UIView, UIConfigurable {
     let contentStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fillEqually)
     
     let deliveryStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)

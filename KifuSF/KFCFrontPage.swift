@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class KFCFrontPage: UIViewController, Configurable {
+class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
     
     let logoImageView = UIImageView(image: UIImage.kfLogo)
     
@@ -33,16 +33,19 @@ class KFCFrontPage: UIViewController, Configurable {
         configureLayoutConstraints()
         
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
     }
     
     @objc func registerButtonPressed() {
-        navigationController?.pushViewController(KFCDisclaimer(), animated: true)
+        navigationController?.pushViewController(KFCRegisterForm(), animated: true)
         registerButton.resetState()
         
     }
     
     @objc func logInButtonTapped() {
-        navigationController?.pushViewController(KFCFlagging(), animated: true)
+        navigationController?.pushViewController(KFCLogin(), animated: true)
     }
     
     func configureStyling() {
@@ -111,5 +114,4 @@ class KFCFrontPage: UIViewController, Configurable {
             signInLabel.numberOfLines = 1
         }
     }
-
 }

@@ -9,7 +9,7 @@
 import UIKit
 import PureLayout
 
-class KFVDescriptor: UIView, Configurable {
+class KFVDescriptor: UIView, UIConfigurable {
     
     let contentsStackView = UIStackView(axis: .vertical, alignment: .fill,
                                         spacing: KFPadding.StackView, distribution: .fill)

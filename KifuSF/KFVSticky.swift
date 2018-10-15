@@ -9,7 +9,7 @@
 import UIKit
 import PureLayout
 
-class KFVSticky<T: UIView>: UIView, Configurable {
+class KFVSticky<T: UIView>: UIView, UIConfigurable {
     
     private(set) var stickySide: ALEdge?
     

@@ -8,14 +8,17 @@
 
 import UIKit
 
-class KFCFlagging: UIViewController, Configurable {
+class KFCFlagging: UIViewController, UIConfigurable {
     
     let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title3), textColor: .kfSubtitle)
     let flaggingOptionsTableView = UITableView()
     
     var flaggableItems = [FlaggedContentType]()
     
-    convenience init(flaggableItems: [FlaggedContentType]) {
+    var userToReport: User? = nil
+    var donationToReport: Donation? = nil
+    
+    convenience init(flaggableItems: [FlaggedContentType], user: User? = nil, donation: Donation? = nil) {
         self.init()
         
         self.flaggableItems = flaggableItems
