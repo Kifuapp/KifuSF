@@ -11,8 +11,18 @@ import XLPagerTabStrip
 import CoreLocation
 
 class KFCDelivery: KFCModularTableView {
+    
+    var delivery: Donation? {
+        didSet {
+            updateUI()
+        }
+    }
 
     private let dynamicButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    
+    private func updateUI() {
+        reloadData()
+    }
 
     override func loadView() {
         super.loadView()
@@ -35,35 +45,63 @@ class KFCDelivery: KFCModularTableView {
     }
 
     override func retrieveProgressItem() -> KFPModularTableViewItem? {
-        return KFMProgress(currentStep: .stepOne, ofType: .delivery)
+        guard let deliveryStep = self.delivery?.status.step else {
+            return nil
+        }
+        
+        return KFMProgress(currentStep: deliveryStep, ofType: .delivery)
     }
 
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
-        return KFMInProgressDonationDescription(
-            imageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
-            title: "Toilet Paper",
-            statusDescription: "Picking up Item",
-            description: "woof woof"
-        )
+        guard let deliveryDescription = self.delivery?.inProgressDescriptionForVolunteer else {
+            return nil
+        }
+        
+        return deliveryDescription
     }
 
     override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
-        return KFMEntityInfo(name: "Make School", phoneNumber: "+1 (415) 814-0980", address: "1547 Mission St San Francisco, CA  94103", entityType: .charity)
-    }
-
-    override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
-        return KFMCollaboratorInfo(
-            profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
-            name: "Alexandru Turcanu",
-            username: "Pondorasti",
-            userReputation: 100.0,
-            userDonationsCount: 99,
-            userDeliveriesCount: 99
+        guard let delivery = self.delivery else {
+            return nil
+        }
+        
+        //TODO: erick-collect info of what charity was selected for the donation
+        return KFMEntityInfo(
+            name: "Make School",
+            phoneNumber: "+1 (415) 814-0980",
+            address: "1547 Mission St San Francisco, CA  94103",
+            entityType: .charity
         )
     }
 
+    override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
+        guard let donatorInfo = self.delivery?.donator.collaboratorInfo else {
+            return nil
+        }
+        
+        return donatorInfo
+    }
+
     override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
-        return KFMDestinationMap(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+        guard let delivery = self.delivery else {
+            return nil
+        }
+        
+        let location: CLLocationCoordinate2D
+        if delivery.status.isAwaitingPickup {
+            location = CLLocationCoordinate2D(
+                latitude: delivery.latitude,
+                longitude: delivery.longitude
+            )
+        } else if delivery.status.isAwaitingDelivery {
+            
+            //TODO: get location of selected charity of donation
+            return nil
+        } else {
+            return nil
+        }
+        
+        return KFMDestinationMap(coordinate: location)
     }
 }
 

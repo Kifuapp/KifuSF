@@ -27,6 +27,8 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
                                                             action: #selector(flagButtonPressed))
         setUpTopBar()
         setUpLayout()
+        setUpFirebase()
+        
         super.viewDidLoad()
     }
     
@@ -97,6 +99,72 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = .kfTitle
             newCell?.label.textColor = .kfPrimary
+        }
+    }
+
+    private func setUpFirebase() {
+        guard
+            let deliveryVc = controllerArray[0] as? KFCDelivery,
+            let donationVc = controllerArray[1] as? KFCDonation else {
+                fatalError("either the indexes of these elements in this array are out of order or the class types have changed for one of the view controllers")
+        }
+        
+        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
+            deliveryVc.delivery = delivery
+            donationVc.donation = donation
+        }
+    }
+
+}
+
+extension User {
+    var collaboratorInfo: KFMCollaboratorInfo {
+        
+        //TODO: alex-reputation points
+        return KFMCollaboratorInfo(
+            profileImageURL: URL(string: self.imageURL) ?? URL.brokenUrlImage,
+            name: self.username, //TODO: erick-collect their full name
+            username: self.username,
+            userReputation: 0,
+            userDonationsCount: 0,
+            userDeliveriesCount: 0
+        )
+    }
+}
+
+extension Donation {
+    var inProgressDescriptionForDonator: KFMInProgressDonationDescription {
+        return KFMInProgressDonationDescription(
+            imageURL: URL(string: self.imageUrl) ?? URL.brokenUrlImage,
+            title: self.title,
+            statusDescription: self.status.stringValueForDonator,
+            description: self.notes
+        )
+    }
+    
+    var inProgressDescriptionForVolunteer: KFMInProgressDonationDescription {
+        return KFMInProgressDonationDescription(
+            imageURL: URL(string: self.imageUrl) ?? URL.brokenUrlImage,
+            title: self.title,
+            statusDescription: self.status.stringValueForVolunteer,
+            description: self.notes
+        )
+    }
+}
+
+extension Donation.Status {
+    var step: KFMProgress.Step {
+        switch self {
+        case .awaitingPickup:
+            return .stepOne
+        case .awaitingDelivery:
+            return .stepTwo
+        case .awaitingApproval:
+            return .stepThree
+//        case .awaitingFeedback: ???
+//            return .stepFour
+        default:
+            fatalError("no other steps are available for \(self)")
         }
     }
 }
