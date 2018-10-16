@@ -30,7 +30,10 @@ class KFCLoading: UIViewController {
     func present() {
         let window = UIWindow.applicationAlertWindow
         
-        window.rootViewController = self
+        //if the loading is shown for less than 0.25 seconds, the user will not see the loading indicator
+        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { [weak self] _ in
+            window.rootViewController = self
+        }
         window.makeKey()
         window.isHidden = false
     }

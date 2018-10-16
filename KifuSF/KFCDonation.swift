@@ -128,8 +128,18 @@ class KFCDonation: KFCModularTableView {
             switch donation.status {
             case .open:
                 
-                //TODO: View Requests
-                break
+                let loading = KFCLoading(style: .whiteLarge)
+               loading.present()
+                
+                //fetch user objects for the given donation
+                RequestService.retrieveVolunteers(for: donation) { (volunteers) in
+                    loading.dismiss {
+                        let volunteersListVC = KFCVolunteerList()
+                        volunteersListVC.volunteers = volunteers
+                        volunteersListVC.donation = donation
+                        self.navigationController?.pushViewController(volunteersListVC, animated: true)
+                    }
+                }
             case .awaitingPickup:
                 
                 //Confirm drop off
