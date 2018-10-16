@@ -32,16 +32,19 @@ class KFCDelivery: KFCModularTableView {
             }
             
             //TODO: alex-show loading indicator
+            let loadingVc = KFCLoading(style: .whiteLarge)
+            loadingVc.present()
             
             DonationService.confirmDelivery(for: delivery, image: image, completion: { (isSuccessful) in
                 //TODO: alex-dismiss loading indicator
-                
-                if isSuccessful {
-                    unwrappedSelf.delivery?.status = .awaitingApproval
-                    unwrappedSelf.updateUI()
-                } else {
-                    let errorAlert = UIAlertController(errorMessage: nil)
-                    unwrappedSelf.present(errorAlert, animated: true)
+                loadingVc.dismiss {
+                    if isSuccessful {
+                        unwrappedSelf.delivery?.status = .awaitingApproval
+                        unwrappedSelf.updateUI()
+                    } else {
+                        let errorAlert = UIAlertController(errorMessage: nil)
+                        unwrappedSelf.present(errorAlert, animated: true)
+                    }
                 }
             })
         }

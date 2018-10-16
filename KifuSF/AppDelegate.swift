@@ -14,6 +14,8 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    
+    var alertWindow: UIWindow?
 
     func application(
         _ application: UIApplication,
@@ -33,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         window?.rootViewController = KFCTabBar()
         window?.makeKeyAndVisible()
 
@@ -96,5 +98,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     //TODO: Handle disconnect logic
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
 
+    }
+}
+
+extension UIWindow {
+    static var applicationAlertWindow: UIWindow {
+        
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("¯\\_(ツ)_/¯")
+        }
+        
+        let alertWindow: UIWindow
+        if let window = appDelegate.alertWindow {
+            alertWindow = window
+        } else {
+            
+            guard let appDelegateWindow = appDelegate.window else {
+                fatalError("¯\\_(ツ)_/¯")
+            }
+            
+            alertWindow = UIWindow(frame: appDelegateWindow.bounds)
+            appDelegate.alertWindow = alertWindow
+            alertWindow.windowLevel = UIWindowLevelAlert + 1
+        }
+        
+        return alertWindow
     }
 }

@@ -17,6 +17,8 @@ class KFCCreateDonation: UIViewController {
     
     private lazy var imagePicker = PhotoHelper()
     
+    private var pickupLocation: Location?
+    
     // MARK: - RETURN VALUES
     
     // MARK: - METHODS
@@ -94,32 +96,7 @@ class KFCCreateDonation: UIViewController {
                 return print("no location selected")
             }
             
-            //TODO: alex-present a loading indicator while uploading the donation and disable the view
-            
-            guard
-                let itemTitle = self.donationTextField.text,
-                let detailText = self.descriptionTextView.text,
-                let image = self.donationImageView.image else {
-                    return assertionFailure("missing input before uploading")
-            }
-            
-            //Post the Donation
-            DonationService.createDonation(
-                title: itemTitle,
-                notes: detailText,
-                image: image,
-                pickUpAddress: location.address,
-                longitude: location.coordinate.longitude,
-                latitude: location.coordinate.latitude) { donation in
-                    if donation == nil {
-                        //TODO: alex-remove the loading indicator
-                        
-                        let errorAlert = UIAlertController(errorMessage: nil)
-                        self.present(errorAlert, animated: true)
-                    } else {
-                        self.presentingViewController?.dismiss(animated: true, completion: nil)
-                    }
-            }
+            self.pickupLocation = location
         }
         
         self.navigationController?.pushViewController(locationPicker, animated: true)
@@ -146,6 +123,44 @@ class KFCCreateDonation: UIViewController {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let location = self.pickupLocation {
+            
+            //TODO: alex-present a loading indicator while uploading the donation and disable the view
+            let loadingVc = KFCLoading(style: .whiteLarge)
+            loadingVc.present()
+            
+            guard
+                let itemTitle = self.donationTextField.text,
+                let detailText = self.descriptionTextView.text,
+                let image = self.donationImageView.image else {
+                    return assertionFailure("missing input before uploading")
+            }
+            
+            //Post the Donation
+            DonationService.createDonation(
+                title: itemTitle,
+                notes: detailText,
+                image: image,
+                pickUpAddress: location.address,
+                longitude: location.coordinate.longitude,
+                latitude: location.coordinate.latitude) { donation in
+                    loadingVc.dismiss {
+                        if donation == nil {
+                            //TODO: alex-remove the loading indicator
+                            
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            self.present(errorAlert, animated: true)
+                        } else {
+                            self.presentingViewController?.dismiss(animated: true, completion: nil)
+                        }
+                    }
+            }
+        }
     }
 }
 
