@@ -14,8 +14,14 @@ class KFMProgress: KFPModularTableViewItem {
         case donation, delivery
     }
     
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - case stepNone: this is used when the displaying the donation when there is
+     no voluneteer
+     */
     enum Step: Int {
-        case stepOne, stepTwo, stepThree, stepFour
+        case stepOne = 0, stepTwo, stepThree, stepFour, stepNone
     }
     
     let type: KFCModularTableView.CellTypes = .progress

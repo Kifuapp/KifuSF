@@ -29,7 +29,7 @@ class KFCDonation: KFCModularTableView {
         if let donation = self.donation {
             switch donation.status {
             case .open:
-                actionButton.setTitle("Edit Donation", for: .normal)
+                actionButton.setTitle("View Requests", for: .normal)
             case .awaitingPickup:
                 actionButton.setTitle("Confirm Drop Off", for: .normal)
             case .awaitingDelivery:
@@ -71,7 +71,9 @@ class KFCDonation: KFCModularTableView {
     }
 
     override func retrieveProgressItem() -> KFPModularTableViewItem? {
-        guard let donationStep = self.donation?.status.step else {
+        guard
+            let donationStep = self.donation?.status.step,
+            donationStep != .stepNone else {
             return nil
         }
         
@@ -126,7 +128,7 @@ class KFCDonation: KFCModularTableView {
             switch donation.status {
             case .open:
                 
-                //TODO: edit the donation
+                //TODO: View Requests
                 break
             case .awaitingPickup:
                 

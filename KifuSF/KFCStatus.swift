@@ -155,6 +155,8 @@ extension Donation {
 extension Donation.Status {
     var step: KFMProgress.Step {
         switch self {
+        case .open:
+            return .stepNone
         case .awaitingPickup:
             return .stepOne
         case .awaitingDelivery:
