@@ -22,3 +22,4 @@ enum TextStyle: String {
         return (font, color)
     }
 }
+

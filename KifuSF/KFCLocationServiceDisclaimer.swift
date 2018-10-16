@@ -7,23 +7,23 @@
 //
 
 import UIKit
+import CoreLocation
 
-class KFCDisclaimer: UIViewController, UIConfigurable {
+class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
     
     let contentScrollView = UIScrollView()
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
+    let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
+    
     let activateLocationButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    
+    let locationManager = CLLocationManager()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(contentScrollView)
-        contentScrollView.addSubview(outerStackView)
-        
         configureStyling()
         configureLayoutConstraints()
         configureGestures()
@@ -35,11 +35,11 @@ class KFCDisclaimer: UIViewController, UIConfigurable {
     }
     
     @objc func continueButtonTapped() {
-        print("continue")
+        print(locationManager.location)
     }
     
     @objc func activateLocationButtonTapped() {
-        print("I want to know where you live")
+        locationManager.requestWhenInUseAuthorization()
     }
     
     func configureStyling() {
@@ -47,11 +47,20 @@ class KFCDisclaimer: UIViewController, UIConfigurable {
         
         contentScrollView.alwaysBounceVertical = true
         
-        title = "Terms and Conditions"
-        disclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app. \n\nBy continuing you agree to our Terms and Privacy Policy"
+        title = "Location Privacy"
+        locationServiceDisclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app."
+        
+        if !CLLocationManager.locationServicesEnabled() {
+            continueButton.isUserInteractionEnabled = false
+        } else {
+            activateLocationButton.isUserInteractionEnabled = false
+        }
     }
     
     func configureLayoutConstraints() {
+        
+        view.addSubview(contentScrollView)
+        contentScrollView.addSubview(outerStackView)
         
         configureLayoutForOuterStackView()
         
@@ -60,7 +69,7 @@ class KFCDisclaimer: UIViewController, UIConfigurable {
     }
     
     func configureLayoutForOuterStackView() {
-        outerStackView.addArrangedSubview(disclaimerLabel)
+        outerStackView.addArrangedSubview(locationServiceDisclaimerLabel)
         outerStackView.addArrangedSubview(activateLocationButton)
         outerStackView.addArrangedSubview(continueButton)
     }

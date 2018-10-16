@@ -34,7 +34,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to calculate the distance between the nearast pick-up places.</string>
+	<string>We need your location to calculate the distance between the nearast pick-up places and you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>

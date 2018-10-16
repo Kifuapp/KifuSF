@@ -12,10 +12,12 @@ protocol UIConfigurable {
     func configureStyling()
     func configureLayoutConstraints()
     func configureGestures()
+    func configureDelegates()
 }
 
 extension UIConfigurable {
     func configureStyling() { }
     func configureLayoutConstraints() { }
     func configureGestures() { }
+    func configureDelegates() { }
 }

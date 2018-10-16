@@ -9,7 +9,7 @@
 import UIKit
 import PureLayout
 
-class KFCRegisterForm: UIViewController, UIConfigurable {
+class KFCRegisterForm: UIViewController {
     
     let contentScrollView = UIScrollView()
     
@@ -24,6 +24,8 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
     let horizontalImageStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let profileImageView = UIImageView(image: .kfPlusImage)
     let profileImageSpacer = UIView()
+    
+    let profileImageHelper = PhotoHelper()
     
     let fullNameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let fullNameLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
@@ -45,9 +47,9 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
     let passwordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .newPassword, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
     
-    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .caption1), textColor: .kfDestructive)
+    let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
     
-    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,40 +77,98 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
         configureStyling()
         configureLayoutConstraints()
         
-        configureTextFieldDelegates()
+        configureDelegates()
         configureGestures()
+        
+        profileImageHelper.completionHandler = { [unowned self] (image) in
+            self.profileImageView.image = image
+        }
     }
     
-    func configureTextFieldDelegates() {
+    @objc func profileImageTapped() {
+        profileImageHelper.presentActionSheet(from: self)
+        print("tapp")
+    }
+    
+    @objc func continueButtonTapped() {
+        guard let fullName = fullNameTextFieldContainer.textField.text,
+            let username = usernameTextFieldContainer.textField.text,
+            let image = profileImageView.image,
+            let contactNumber = phoneNumberTextFieldContainer.textField.text,
+            let email = emailTextFieldContainer.textField.text,
+            let password = passwordTextFieldContainer.textField.text else {
+                let errorAlertController = UIAlertController(errorMessage: "Please complete all the fields")
+                return present(errorAlertController, animated: true)
+        }
+        
+        UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user) in
+            
+            guard let user = user else {
+                let errorAlertController = UIAlertController(errorMessage: "Something went wrong while creating your account")
+                return self.present(errorAlertController, animated: true)
+            }
+            
+            User.setCurrent(user, writeToUserDefaults: false)
+            
+            
+            let disclaimerViewController = UINavigationController(rootViewController: KFCLocationServiceDisclaimer())
+            self.view.window?.setRootViewController(disclaimerViewController)
+        }
+        
+        
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let adjustmentHeight = (keyboardFrame.height + 20)
+        
+        contentScrollView.updateBottomPadding(adjustmentHeight)
+    }
+    
+    //TODO: this method gets called twice find out why
+    @objc func keyboardWillHide(_ notification: Notification) {
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
+    }
+}
+
+extension KFCRegisterForm: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTextFieldTag = textField.tag + 1
+        
+        switch nextTextFieldTag {
+        case 1:
+            usernameTextFieldContainer.textField.becomeFirstResponder()
+        case 2:
+            phoneNumberTextFieldContainer.textField.becomeFirstResponder()
+        case 3:
+            emailTextFieldContainer.textField.becomeFirstResponder()
+        case 4:
+            passwordTextFieldContainer.textField.becomeFirstResponder()
+        case 5:
+            continueButtonTapped()
+            fallthrough
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+}
+
+extension KFCRegisterForm: UIConfigurable {
+    
+    func configureDelegates() {
         fullNameTextFieldContainer.textField.delegate = self
         usernameTextFieldContainer.textField.delegate = self
         phoneNumberTextFieldContainer.textField.delegate = self
         emailTextFieldContainer.textField.delegate = self
         passwordTextFieldContainer.textField.delegate = self
-    }
-    
-    func configureGestures() {
-        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        keyboardTap.cancelsTouchesInView = false
-        view.addGestureRecognizer(keyboardTap)
-        
-        let profileImageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
-        profileImageTap.cancelsTouchesInView = false
-        profileImageView.addGestureRecognizer(profileImageTap)
-        
-        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func profileImageTapped() {
-        print("tapp")
-    }
-    
-    @objc func continueButtonTapped() {
-        print("continue")
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     func configureStyling() {
@@ -135,21 +195,19 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
         emailTextFieldContainer.setTag(3)
         passwordTextFieldContainer.setTag(4)
         
-        errorLabel.text = "Complete all fields"
-        errorLabel.textAlignment = .center
+        disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
-        let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let adjustmentHeight = (keyboardFrame.height + 20)
+    func configureGestures() {
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(keyboardTap)
         
-        contentScrollView.updateBottomPadding(adjustmentHeight)
-    }
-    
-    //TODO: this method gets called twice find out why
-    @objc func keyboardWillHide(_ notification: Notification) {
-        contentScrollView.updateBottomPadding(KFPadding.StackView)
+        let profileImageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageTap.cancelsTouchesInView = false
+        profileImageView.addGestureRecognizer(profileImageTap)
+        
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
     func configureLayoutConstraints() {
@@ -203,7 +261,7 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
     
     func configureLayoutForUpperStackView() {
         upperStackView.addArrangedSubview(inputStackView)
-        upperStackView.addArrangedSubview(errorLabel)
+        upperStackView.addArrangedSubview(disclaimerLabel)
     }
     
     func configureLayoutForInputStackView() {
@@ -246,29 +304,5 @@ class KFCRegisterForm: UIViewController, UIConfigurable {
     func configureLayoutForPasswordStackView() {
         passwordStackView.addArrangedSubview(passwordLabel)
         passwordStackView.addArrangedSubview(passwordTextFieldContainer)
-    }
-}
-
-extension KFCRegisterForm: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let nextTextFieldTag = textField.tag + 1
-        
-        switch nextTextFieldTag {
-        case 1:
-            usernameTextFieldContainer.textField.becomeFirstResponder()
-        case 2:
-            phoneNumberTextFieldContainer.textField.becomeFirstResponder()
-        case 3:
-            emailTextFieldContainer.textField.becomeFirstResponder()
-        case 4:
-            passwordTextFieldContainer.textField.becomeFirstResponder()
-        case 5:
-            continueButtonTapped()
-            fallthrough
-        default:
-            textField.resignFirstResponder()
-        }
-        
-        return true
     }
 }

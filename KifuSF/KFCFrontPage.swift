@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
+class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
     
     let logoImageView = UIImageView(image: UIImage.kfLogo)
     
@@ -25,9 +25,6 @@ class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.addSubview(logoImageView)
-        view.addSubview(bottomStackView)
         
         configureStyling()
         configureLayoutConstraints()
@@ -35,7 +32,6 @@ class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         
         GIDSignIn.sharedInstance().uiDelegate = self
-        
     }
     
     @objc func registerButtonPressed() {
@@ -48,7 +44,26 @@ class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
         navigationController?.pushViewController(KFCLogin(), animated: true)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        if isAccessibilityCategory {
+            labelsStackView.axis = .vertical
+            
+            oldUserLabel.numberOfLines = 0
+            signInLabel.numberOfLines = 0
+        } else {
+            labelsStackView.axis = .horizontal
+            
+            oldUserLabel.numberOfLines = 1
+            signInLabel.numberOfLines = 1
+        }
+    }
+}
+
+extension KFCFrontPage: UIConfigurable {
+    
     func configureStyling() {
+        title = "Front Page"
         view.backgroundColor = .kfSuperWhite
         
         logoImageView.contentMode = .scaleAspectFit
@@ -63,6 +78,9 @@ class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
     }
     
     func configureLayoutConstraints() {
+        view.addSubview(logoImageView)
+        view.addSubview(bottomStackView)
+        
         configureConstraintsForLogoImageView()
         
         configureLayoutForLabelsStackView()
@@ -97,21 +115,6 @@ class KFCFrontPage: UIViewController, UIConfigurable, GIDSignInUIDelegate {
         
         bottomStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
         bottomStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        bottomStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        if isAccessibilityCategory {
-            labelsStackView.axis = .vertical
-            
-            oldUserLabel.numberOfLines = 0
-            signInLabel.numberOfLines = 0
-        } else {
-            labelsStackView.axis = .horizontal
-            
-            oldUserLabel.numberOfLines = 1
-            signInLabel.numberOfLines = 1
-        }
+        bottomStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
     }
 }

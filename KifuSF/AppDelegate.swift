@@ -25,38 +25,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        setInitalViewController()
-        
-        //TODO: log-in / sign-up logic
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = KFCTabBar()
-        window?.makeKeyAndVisible()
-        
+        setInitalViewController()
         configureStyling()
         
         return true
     }
     
     private func setInitalViewController() {
+        //TODO: if user does not have a verified account than go to the 2FA screens
+        //TODO: if location service is disabled prompt the required activation screen
+        
         if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
             let user = try? JSONDecoder().decode(User.self, from: userData) {
             
             User.setCurrent(user)
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "initialTabBar")
-            
-            window?.rootViewController = initialVC
-            window?.makeKeyAndVisible()
+            window?.setRootViewController(KFCTabBar())
         } else {
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "kfLogin")
-            window?.rootViewController = initialVC
-            window?.makeKeyAndVisible()
+            window?.setRootViewController(UINavigationController(rootViewController: KFCLocationServiceDisclaimer()))
         }
+        
+        window?.makeKeyAndVisible()
     }
     
     func application(
@@ -100,3 +92,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
        
     }
 }
+
