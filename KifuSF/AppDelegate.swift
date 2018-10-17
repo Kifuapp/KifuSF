@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
             
             window?.setRootViewController(KFCTabBar())
         } else {
-            window?.setRootViewController(UINavigationController(rootViewController: KFCLocationServiceDisclaimer()))
+            window?.setRootViewController(UINavigationController(rootViewController: KFCFrontPage()))
         }
         
         window?.makeKeyAndVisible()

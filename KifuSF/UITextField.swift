@@ -10,6 +10,10 @@
 import UIKit.UITextField
 
 extension UITextField {
+    enum ValidatorType {
+        case phoneNumber
+    }
+    
     func setUp(with style: TextStyle) {
         let textStyle = style.retrieve()
         

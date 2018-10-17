@@ -34,14 +34,11 @@ struct UserService {
         contactNumber: String,
         email: String,
         password: String,
-        completion: @escaping (_ user: User?) -> Void) {
+        completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                assertionFailure(error.localizedDescription)
-                
-                //TODO: return errors for unexected error, duplicate email, duplicate username
-                return completion(nil)
+                return completion(nil, error)
             }
             
             guard let firUser = result?.user else {
@@ -54,7 +51,7 @@ struct UserService {
                 image: image,
                 contactNumber:
                 contactNumber, completion: { (user) in
-                    completion(user)
+                    completion(user, nil)
             })
         }
     }

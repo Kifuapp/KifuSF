@@ -8,6 +8,8 @@
 
 import UIKit
 import PureLayout
+import FirebaseAuth
+
 
 class KFCRegisterForm: UIViewController {
     
@@ -26,6 +28,7 @@ class KFCRegisterForm: UIViewController {
     let profileImageSpacer = UIView()
     
     let profileImageHelper = PhotoHelper()
+    var userSelectedProfileImage: Bool? = nil
     
     let fullNameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let fullNameLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
@@ -48,6 +51,7 @@ class KFCRegisterForm: UIViewController {
     let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .newPassword, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
     
     let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
     
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
     
@@ -82,6 +86,7 @@ class KFCRegisterForm: UIViewController {
         
         profileImageHelper.completionHandler = { [unowned self] (image) in
             self.profileImageView.image = image
+            self.userSelectedProfileImage = true
         }
     }
     
@@ -94,6 +99,7 @@ class KFCRegisterForm: UIViewController {
         guard let fullName = fullNameTextFieldContainer.textField.text,
             let username = usernameTextFieldContainer.textField.text,
             let image = profileImageView.image,
+            let _ = userSelectedProfileImage,
             let contactNumber = phoneNumberTextFieldContainer.textField.text,
             let email = emailTextFieldContainer.textField.text,
             let password = passwordTextFieldContainer.textField.text else {
@@ -101,20 +107,50 @@ class KFCRegisterForm: UIViewController {
                 return present(errorAlertController, animated: true)
         }
         
-        UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user) in
+        //TODO: create validation factory/object
+        
+        //TODO: check for unique username
+        
+        
+        
+        UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
             
             guard let user = user else {
-                let errorAlertController = UIAlertController(errorMessage: "Something went wrong while creating your account")
-                return self.present(errorAlertController, animated: true)
+                
+                //check if we have an error when the user is nil
+                guard let error = error,
+                    let errorCode = AuthErrorCode(rawValue: (error._code)) else {
+                    fatalError("somebody is dumb")
+                }
+                
+                
+                //TODO:decouple error code from closure
+                switch errorCode {
+                case .weakPassword:
+                    self.errorLabel.text = "Password should contain atleast 6 characters."
+                case .emailAlreadyInUse:
+                    self.errorLabel.text = "This email is already in use."
+                case .missingEmail:
+                    self.errorLabel.text = "Missing email."
+                case .invalidEmail:
+                    self.errorLabel.text = "This email is invalid"
+                default:
+                    self.errorLabel.text = "Something went wront, please try again."
+                }
+                
+                self.errorLabel.isHidden = false
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.view.layoutIfNeeded()
+                })
+                
+                return
             }
             
             User.setCurrent(user, writeToUserDefaults: false)
             
-            
             let disclaimerViewController = UINavigationController(rootViewController: KFCLocationServiceDisclaimer())
-            self.view.window?.setRootViewController(disclaimerViewController)
+            self.present(disclaimerViewController, animated: true)
         }
-        
         
         
     }
@@ -172,7 +208,7 @@ extension KFCRegisterForm: UIConfigurable {
     }
     
     func configureStyling() {
-        title = "Register Form"
+        
         view.backgroundColor = .kfSuperWhite
         
         contentScrollView.keyboardDismissMode = .interactive
@@ -182,12 +218,8 @@ extension KFCRegisterForm: UIConfigurable {
         profileImageView.makeItKifuStyle()
         profileImageView.isUserInteractionEnabled = true
         
-        profileImageLabel.text = "Profile Image"
-        fullNameLabel.text = "Full Name"
-        usernameLabel.text = "Username"
-        phoneNumberLabel.text = "Phone Number"
-        emailLabel.text = "Email"
-        passwordLabel.text = "Password"
+        errorLabel.isHidden = true
+        errorLabel.textAlignment = .center
         
         fullNameTextFieldContainer.setTag(0)
         usernameTextFieldContainer.setTag(1)
@@ -195,6 +227,17 @@ extension KFCRegisterForm: UIConfigurable {
         emailTextFieldContainer.setTag(3)
         passwordTextFieldContainer.setTag(4)
         
+        configureText()
+    }
+    
+    func configureText() {
+        title = "Register Form"
+        profileImageLabel.text = "Profile Image"
+        fullNameLabel.text = "Full Name"
+        usernameLabel.text = "Username"
+        phoneNumberLabel.text = "Phone Number"
+        emailLabel.text = "Email"
+        passwordLabel.text = "Password"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
     }
     
@@ -256,6 +299,7 @@ extension KFCRegisterForm: UIConfigurable {
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(upperStackView)
+        outerStackView.addArrangedSubview(errorLabel)
         outerStackView.addArrangedSubview(continueButton)
     }
     

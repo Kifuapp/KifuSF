@@ -35,7 +35,10 @@ class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
     }
     
     @objc func continueButtonTapped() {
-        print(locationManager.location)
+        let disclaimerViewController = UINavigationController(rootViewController: KFCPhoneNumberValidation())
+        disclaimerViewController.modalPresentationStyle = .currentContext
+        present(disclaimerViewController, animated: true)
+//        self.view.window?.setRootViewController(disclaimerViewController)
     }
     
     @objc func activateLocationButtonTapped() {

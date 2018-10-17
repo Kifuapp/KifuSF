@@ -36,7 +36,6 @@ class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
     
     @objc func registerButtonPressed() {
         navigationController?.pushViewController(KFCRegisterForm(), animated: true)
-        registerButton.resetState()
         
     }
     

@@ -31,22 +31,23 @@ class KFButton: UIButton, UIConfigurable {
     private(set) var heightConstraint: NSLayoutConstraint!
     
     var buttonAnimator: UIViewPropertyAnimator?
+    var autoReset = true
     
     enum AnimationState {
-        case shrinking, expanding, idle, pressed, disabled
+        case shrinking, idle, pressed, disabled
         
         func getScale() -> CGFloat {
             switch self {
             case .shrinking, .pressed:
                 return 0.99
-            case .expanding, .idle, .disabled:
+            case .idle, .disabled:
                 return 1
             }
         }
         
         func isInteractable() -> Bool {
             switch self {
-            case .shrinking, .expanding, .idle:
+            case .shrinking, .idle:
                 return true
             default:
                 return false
@@ -114,10 +115,10 @@ class KFButton: UIButton, UIConfigurable {
         //TODO: make this animation uniform
         if !bounds.contains(touchLocation)  {
             buttonAnimator?.stopAnimation(true)
-            currentState = .expanding
+            currentState = .idle
             buttonAnimator?.startAnimation()
         } else {
-            currentState = .pressed
+            currentState = autoReset ? .idle : .pressed
         }
         
         super.touchesEnded(touches, with: event)
@@ -153,7 +154,7 @@ class KFButton: UIButton, UIConfigurable {
         switch currentState {
         case .shrinking, .pressed:
             backgroundColor = mainBackgroundColor.darker()
-        case .expanding, .idle:
+        case .idle:
             backgroundColor = mainBackgroundColor
         case .disabled:
             UIView.animate(withDuration: KFButton.animationDuration) { [unowned self] in

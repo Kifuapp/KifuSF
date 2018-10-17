@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import Moya
 
 class KFCPhoneNumberValidation: UIViewController {
 
     let contentScrollView = UIScrollView()
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
     let authenticationCodeTextFieldContainer = KFTextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    
+    var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
     
     
     override func viewDidLoad() {
@@ -27,6 +33,10 @@ class KFCPhoneNumberValidation: UIViewController {
         configureStyling()
         configureLayoutConstraints()
         configureGestures()
+        
+//        TwoFactorAuthService.sendTextMessage(to: "+40752033353") { [unowned self] (authy) in
+//            self.authentificator = authy
+//        }
     }
     
     func configureGestures() {
@@ -34,7 +44,22 @@ class KFCPhoneNumberValidation: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        print("continue")
+        
+        guard let code = authenticationCodeTextFieldContainer.textField.text,
+            let authy = authentificator else {
+            return
+        }
+        
+        TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (succes) in
+            if succes {
+                let mainViewControllers = KFCTabBar()
+                self.present(mainViewControllers, animated: true)
+            } else {
+                //TODO: show error
+            }
+        }
+        
+        
     }
     
     func configureStyling() {
@@ -44,19 +69,27 @@ class KFCPhoneNumberValidation: UIViewController {
         
         title = "Phone Number Validation"
         informationLabel.text = "Almost Done! We've sent a message to your phone number that contains a 4 digit code. Please enter the code below in verify your phone number."
+        noCodeLabel.text = "Didn't get code?"
+        noCodeLabel.textAlignment = .right
     }
     
     func configureLayoutConstraints() {
         
+        configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
         
         configureConstraintsForContentScrollView()
         configureConstraintsForOuterStackView()
     }
     
+    func configureLayoutForUpperStackView() {
+        upperStackView.addArrangedSubview(informationLabel)
+        upperStackView.addArrangedSubview(authenticationCodeTextFieldContainer)
+        upperStackView.addArrangedSubview(noCodeLabel)
+    }
+    
     func configureLayoutForOuterStackView() {
-        outerStackView.addArrangedSubview(informationLabel)
-        outerStackView.addArrangedSubview(authenticationCodeTextFieldContainer)
+        outerStackView.addArrangedSubview(upperStackView)
         outerStackView.addArrangedSubview(continueButton)
     }
     
