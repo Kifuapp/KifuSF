@@ -196,6 +196,25 @@ struct UserService {
         }
     }
     
+    static func retrieveAuthErrorMessage(for error: Error) -> String {
+        guard let errorCode = AuthErrorCode(rawValue: (error._code)) else {
+            return "Something went wront, please try again."
+        }
+        
+        switch errorCode {
+        case .weakPassword:
+            return "Password should contain atleast 6 characters."
+        case .emailAlreadyInUse:
+            return "This email is already in use."
+        case .missingEmail:
+            return "Missing email."
+        case .invalidEmail:
+            return "This email is invalid"
+        default:
+            return "Something went wront, please try again."
+        }
+    }
+    
     public static func show(forUID uid: String, completion: @escaping (User?) -> Void) {
         let ref = Database.database().reference().child("users").child(uid)
         
@@ -213,6 +232,8 @@ struct UserService {
      */
     static func update(user: User, completion: @escaping (Bool) -> Void) {
         let refDonation = Database.database().reference().child("users").child(user.uid)
+        
+        
         refDonation.updateChildValues(user.dictValue) { (error, _) in
             guard error == nil else {
                 assertionFailure(error!.localizedDescription)

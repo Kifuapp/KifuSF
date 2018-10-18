@@ -28,7 +28,7 @@ class KFCRegisterForm: UIViewController {
     let profileImageSpacer = UIView()
     
     let profileImageHelper = PhotoHelper()
-    var userSelectedProfileImage: Bool? = nil
+    var userSelectedAProfileImage: Bool? = nil
     
     let fullNameStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     let fullNameLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
@@ -86,64 +86,40 @@ class KFCRegisterForm: UIViewController {
         
         profileImageHelper.completionHandler = { [unowned self] (image) in
             self.profileImageView.image = image
-            self.userSelectedProfileImage = true
+            self.userSelectedAProfileImage = true
         }
     }
     
     @objc func profileImageTapped() {
         profileImageHelper.presentActionSheet(from: self)
-        print("tapp")
     }
     
     @objc func continueButtonTapped() {
-        guard let fullName = fullNameTextFieldContainer.textField.text,
-            let username = usernameTextFieldContainer.textField.text,
-            let image = profileImageView.image,
-            let _ = userSelectedProfileImage,
-            let contactNumber = phoneNumberTextFieldContainer.textField.text,
-            let email = emailTextFieldContainer.textField.text,
-            let password = passwordTextFieldContainer.textField.text else {
+        //unwrap all values and make sure the string is not empty
+        guard let image = profileImageView.image,
+            let _ = userSelectedAProfileImage,
+            let fullName = fullNameTextFieldContainer.textField.text, fullName.count != 0,
+            let username = usernameTextFieldContainer.textField.text, username.count != 0,
+            let contactNumber = phoneNumberTextFieldContainer.textField.text, contactNumber.count != 0,
+            let email = emailTextFieldContainer.textField.text, email.count != 0,
+            let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
                 let errorAlertController = UIAlertController(errorMessage: "Please complete all the fields")
                 return present(errorAlertController, animated: true)
         }
         
-        //TODO: create validation factory/object
-        
+        //TODO: maybe validate phone number
         //TODO: check for unique username
-        
-        
         
         UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
             
+            //error handling
             guard let user = user else {
-                
                 //check if we have an error when the user is nil
-                guard let error = error,
-                    let errorCode = AuthErrorCode(rawValue: (error._code)) else {
-                    fatalError("somebody is dumb")
+                guard let error = error else {
+                    fatalError(KFErrorMessage.seriousBug)
                 }
-                
-                
-                //TODO:decouple error code from closure
-                switch errorCode {
-                case .weakPassword:
-                    self.errorLabel.text = "Password should contain atleast 6 characters."
-                case .emailAlreadyInUse:
-                    self.errorLabel.text = "This email is already in use."
-                case .missingEmail:
-                    self.errorLabel.text = "Missing email."
-                case .invalidEmail:
-                    self.errorLabel.text = "This email is invalid"
-                default:
-                    self.errorLabel.text = "Something went wront, please try again."
-                }
-                
-                self.errorLabel.isHidden = false
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.view.layoutIfNeeded()
-                })
-                
-                return
+
+                return self.showError(error)
             }
             
             User.setCurrent(user, writeToUserDefaults: false)
@@ -153,6 +129,17 @@ class KFCRegisterForm: UIViewController {
         }
         
         
+    }
+    
+    private func showError(_ error: Error) {
+        
+        errorLabel.isHidden = false
+        errorLabel.text = UserService.retrieveAuthErrorMessage(for: error)
+        UIView.animate(withDuration: 0.25, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        })
+        
+        continueButton.resetState()
     }
     
     @objc func dismissKeyboard() {
@@ -211,15 +198,15 @@ extension KFCRegisterForm: UIConfigurable {
         
         view.backgroundColor = .kfSuperWhite
         
-        contentScrollView.keyboardDismissMode = .interactive
-        contentScrollView.alwaysBounceVertical = true
-        contentScrollView.updateBottomPadding(KFPadding.StackView)
+        configureContentScrollView()
         
         profileImageView.makeItKifuStyle()
         profileImageView.isUserInteractionEnabled = true
         
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center
+        
+        continueButton.autoReset = false
         
         fullNameTextFieldContainer.setTag(0)
         usernameTextFieldContainer.setTag(1)
@@ -228,6 +215,12 @@ extension KFCRegisterForm: UIConfigurable {
         passwordTextFieldContainer.setTag(4)
         
         configureText()
+    }
+    
+    func configureContentScrollView() {
+        contentScrollView.keyboardDismissMode = .interactive
+        contentScrollView.alwaysBounceVertical = true
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
     
     func configureText() {
