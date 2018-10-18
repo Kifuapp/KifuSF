@@ -33,18 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             User.setCurrent(user)
         }
-        
-//        UserService.register(
-//            with: "Volunteer2",
-//            username: "Volts2",
-//            image: #imageLiteral(resourceName: "DonationIcon"),
-//            contactNumber: "7071234321",
-//            email: "e2@g.com",
-//            password: "password") { (user) in
-//                if let user = user {
-//                    User.setCurrent(user, writeToUserDefaults: true)
-//                }
-//        }
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
