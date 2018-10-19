@@ -13,6 +13,8 @@ class KFCTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: check if for location acces
+        
         let homeVC = KFCOpenDonations()
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: .kfBoxIcon, tag: 0)
         

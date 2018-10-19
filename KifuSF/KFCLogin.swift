@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFCLogin: UIViewController, UIConfigurable {
+class KFCLogin: UIViewController {
     
     let contentScrollView = UIScrollView()
     
@@ -26,6 +26,7 @@ class KFCLogin: UIViewController, UIConfigurable {
     let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .password, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
     
     let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
     
     let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
 
@@ -39,7 +40,7 @@ class KFCLogin: UIViewController, UIConfigurable {
         configureLayoutConstraints()
         
         configureGestures()
-        configureTextFieldDelegates()
+        configureDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +68,6 @@ class KFCLogin: UIViewController, UIConfigurable {
         contentScrollView.updateBottomPadding(adjustmentHeight)
     }
     
-    //TODO: this method gets called twice find out why
     @objc func keyboardWillHide(_ notification: Notification) {
         contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
@@ -85,38 +85,121 @@ class KFCLogin: UIViewController, UIConfigurable {
     }
     
     @objc func logInButtonTapped() {
-        print("log in")
+        
+        guard let email = emailTextFieldContainer.textField.text, email.count != 0,
+            let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
+                return showErrorMessage("Please complete all the fields")
+        }
+        
+        UserService.login(email: email, password: password) { (user, error) in
+            guard let user = user else {
+                //check if we have an error when the user is nil
+                guard let error = error else {
+                    fatalError(KFErrorMessage.seriousBug)
+                }
+                
+                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                return self.showErrorMessage(errorMessage)
+            }
+            
+            User.setCurrent(user, writeToUserDefaults: true)
+            
+            //TODO: if account not verified show KFCPhoneNumberValidation
+            
+            if User.current.isVerified {
+                let mainViewControllers = KFCTabBar()
+                self.present(mainViewControllers, animated: true)
+            } else {
+                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                self.present(phoneNumberValidationViewController, animated: true)
+            }
+            
+        }
     }
     
-    //TODO: show an ui alert
     @objc func forgotPasswordButtonTapped() {
-        print("forgot password")
+        let ac = UIAlertController(title: "Reset Password", message: "Type your email that is linked to your account and you will receive an email to reset your password", preferredStyle: .alert)
+        
+        ac.addTextField()
+        ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
+            guard let email = ac.textFields?.first?.text else {
+                return
+            }
+            
+            UserService.resetPassword(for: email, completion: { (succes) in
+                //TODO: maybe handle error
+                print(succes)
+            })
+        }))
+        
+        present(ac, animated: true)
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    private func configureTextFieldDelegates() {
+    private func showErrorMessage(_ errorMessage: String) {
+        
+        errorLabel.isHidden = false
+        errorLabel.text = errorMessage
+        UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        })
+        
+        logInButton.resetState()
+    }
+
+}
+
+extension KFCLogin: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == emailTextFieldContainer.textField {
+            passwordTextFieldContainer.textField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+            logInButtonTapped()
+        }
+        
+        return true
+        
+    }
+}
+
+extension KFCLogin: UIConfigurable {
+    
+    func configureDelegates() {
         emailTextFieldContainer.textField.delegate = self
         passwordTextFieldContainer.textField.delegate = self
     }
     
     func configureStyling() {
         title = "Log In"
-        view.backgroundColor = .kfSuperWhite
-        
-        contentScrollView.keyboardDismissMode = .interactive
-        contentScrollView.alwaysBounceVertical = true
-        contentScrollView.updateBottomPadding(KFPadding.StackView)
-        
         emailLabel.text = "Email"
         passwordLabel.text = "Password"
         
+        configureContentScrollViewStyling()
+        configureForgotPasswordLabelStyling()
+        
+        view.backgroundColor = .kfSuperWhite
+        
+        logInButton.autoReset = false
+        
+        errorLabel.textAlignment = .center
+    }
+    
+    func configureContentScrollViewStyling() {
+        contentScrollView.keyboardDismissMode = .interactive
+        contentScrollView.alwaysBounceVertical = true
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
+    }
+    
+    func configureForgotPasswordLabelStyling() {
         forgotPasswordLabel.text = "Forgot Password?"
         forgotPasswordLabel.textAlignment = .right
         forgotPasswordLabel.isUserInteractionEnabled = true
-
     }
     
     func configureLayoutConstraints() {
@@ -139,6 +222,7 @@ class KFCLogin: UIViewController, UIConfigurable {
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(upperStackView)
+        outerStackView.addArrangedSubview(errorLabel)
         outerStackView.addArrangedSubview(logInButton)
     }
     
@@ -171,21 +255,5 @@ class KFCLogin: UIViewController, UIConfigurable {
     func configureConstraintsForContentScrollView() {
         contentScrollView.translatesAutoresizingMaskIntoConstraints = false
         contentScrollView.autoPinEdgesToSuperviewEdges()
-    }
-
-}
-
-extension KFCLogin: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if textField == emailTextFieldContainer.textField {
-            passwordTextFieldContainer.textField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-            logInButtonTapped()
-        }
-        
-        return true
-        
     }
 }

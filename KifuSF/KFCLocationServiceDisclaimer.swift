@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
+class KFCLocationServiceDisclaimer: UIViewController {
     
     let contentScrollView = UIScrollView()
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
@@ -20,7 +20,6 @@ class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     let locationManager = CLLocationManager()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +28,22 @@ class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
         configureGestures()
     }
     
-    func configureGestures() {
-        activateLocationButton.addTarget(self, action: #selector(activateLocationButtonTapped), for: .touchUpInside)
-        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-    }
-    
     @objc func continueButtonTapped() {
-        let disclaimerViewController = UINavigationController(rootViewController: KFCPhoneNumberValidation())
+        let disclaimerViewController = KFCPhoneNumberValidation()
         disclaimerViewController.modalPresentationStyle = .currentContext
         present(disclaimerViewController, animated: true)
-//        self.view.window?.setRootViewController(disclaimerViewController)
     }
     
     @objc func activateLocationButtonTapped() {
         locationManager.requestWhenInUseAuthorization()
+    }
+}
+
+extension KFCLocationServiceDisclaimer: UIConfigurable {
+    
+    func configureGestures() {
+        activateLocationButton.addTarget(self, action: #selector(activateLocationButtonTapped), for: .touchUpInside)
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
     func configureStyling() {
@@ -92,5 +93,4 @@ class KFCLocationServiceDisclaimer: UIViewController, UIConfigurable {
         contentScrollView.translatesAutoresizingMaskIntoConstraints = false
         contentScrollView.autoPinEdgesToSuperviewEdges()
     }
-    
 }

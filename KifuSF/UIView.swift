@@ -9,6 +9,9 @@
 import UIKit.UIView
 
 extension UIView {
+    
+    static let microInteractionDuration: Double = 0.25
+    
     func highlight() {
         backgroundColor = UIColor.kfHighlight
     }

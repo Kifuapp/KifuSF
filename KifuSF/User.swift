@@ -18,15 +18,18 @@ struct User: Codable, KeyedStoredProperties {
         case imageURL
         case username
         case contactNumber
+        case isVerified
     }
     
     // MARK: - VARS
     
-    var contributionPoints: Int
     let uid: String
     let imageURL: String
     let username: String
     let contactNumber: String
+    
+    var isVerified: Bool
+    var contributionPoints: Int
     
     //check out this post on why Report cannot be a stored property in Donation
     //https://medium.com/@leandromperez/bidirectional-associations-using-value-types-in-swift-548840734047
@@ -50,6 +53,7 @@ struct User: Codable, KeyedStoredProperties {
             Keys.imageURL: imageURL,
             Keys.contributionPoints: contributionPoints,
             Keys.contactNumber: contactNumber,
+            Keys.isVerified: isVerified,
             Keys.flag: flag?.rawValue as Any,
             Keys.flaggedReportUid: flaggedReportUid as Any
         ]
@@ -64,12 +68,13 @@ struct User: Codable, KeyedStoredProperties {
     
     private static var _current: User?
     
-    init(username: String, uid: String, imageURL: String, contributionPoints: Int, contactNumber: String) {
+    init(username: String, uid: String, imageURL: String, contributionPoints: Int, contactNumber: String, isVerified: Bool) {
         self.username = username
         self.uid = uid
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
+        self.isVerified = isVerified
     }
     
     init?(from snapshot: DataSnapshot) {
@@ -86,7 +91,8 @@ struct User: Codable, KeyedStoredProperties {
             let uid = dictionary[Keys.uid] as? String,
             let imageURL = dictionary[Keys.imageURL] as? String,
             let contributionPoints = dictionary[Keys.contributionPoints] as? Int,
-            let contactNumber = dictionary[Keys.contactNumber] as? String
+            let contactNumber = dictionary[Keys.contactNumber] as? String,
+            let isVerified = dictionary[Keys.isVerified] as? Bool
             else { return nil }
         
         self.username = username
@@ -94,6 +100,7 @@ struct User: Codable, KeyedStoredProperties {
         self.imageURL = imageURL
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
+        self.isVerified = isVerified
         
         //flagging
         if let flagInt = dictionary[Keys.flag] as? Int,

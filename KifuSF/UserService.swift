@@ -61,14 +61,11 @@ struct UserService {
      
      - parameter user: if this is given back as nil, no user was found
      */
-    static func login(email: String, password: String, completion: @escaping (_ user: User?) -> Void) {
+    static func login(email: String, password: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print(error.localizedDescription)
-                
-                //TODO: return errors for unexected error, account not found, wrong password
-                return completion(nil)
+                return completion(nil, error)
             }
             
             guard let firUser = result?.user else {
@@ -76,7 +73,7 @@ struct UserService {
             }
             
             UserService.show(forUID: firUser.uid, completion: { (user) in
-                completion(user)
+                completion(user, nil)
             })
         }
     }
@@ -140,6 +137,24 @@ struct UserService {
     }
     
     /**
+     send a password reset email
+     
+     - ToDo: decide what to do with the error
+     */
+    static func resetPassword(for email: String, completion: @escaping (Bool) -> ()) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            guard error == nil else {
+                assertionFailure(error!.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            return completion(true)
+        }
+    }
+    
+    /**
      After collecting the missing information about the user after signing in from
      a provider, use this method to push the information to the database
      
@@ -176,13 +191,12 @@ struct UserService {
             guard let downloadURL = url else { return completion(nil) }
             let imageURL = downloadURL.absoluteString
             
-            let newUser = User(
-                username: username,
-                uid: uid,
-                imageURL: imageURL,
-                contributionPoints: 0,
-                contactNumber: contactNumber
-            )
+            let newUser = User(username: username,
+                               uid: uid,
+                               imageURL: imageURL,
+                               contributionPoints: 0,
+                               contactNumber: contactNumber,
+                               isVerified: false)
             
             let ref = Database.database().reference().child("users").child(uid)
             
@@ -209,7 +223,11 @@ struct UserService {
         case .missingEmail:
             return "Missing email."
         case .invalidEmail:
-            return "This email is invalid"
+            return "This email is invalid."
+        case .wrongPassword:
+            return "Password Wrong."
+        case .userNotFound:
+            return "No matching account with this credentials."
         default:
             return "Something went wront, please try again."
         }
@@ -229,6 +247,7 @@ struct UserService {
      update the given user in the user subtree
      
      - ToDo: write a cloud function to update denormalized instances of the given user
+     - ToDo: decide what to do with the error
      */
     static func update(user: User, completion: @escaping (Bool) -> Void) {
         let refDonation = Database.database().reference().child("users").child(user.uid)

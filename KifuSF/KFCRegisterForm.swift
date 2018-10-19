@@ -103,11 +103,9 @@ class KFCRegisterForm: UIViewController {
             let contactNumber = phoneNumberTextFieldContainer.textField.text, contactNumber.count != 0,
             let email = emailTextFieldContainer.textField.text, email.count != 0,
             let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
-                let errorAlertController = UIAlertController(errorMessage: "Please complete all the fields")
-                return present(errorAlertController, animated: true)
+                return showErrorMessage("Please complete all the fields")
         }
         
-        //TODO: maybe validate phone number
         //TODO: check for unique username
         
         UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
@@ -118,24 +116,23 @@ class KFCRegisterForm: UIViewController {
                 guard let error = error else {
                     fatalError(KFErrorMessage.seriousBug)
                 }
-
-                return self.showError(error)
+                
+                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                return self.showErrorMessage(errorMessage)
             }
             
-            User.setCurrent(user, writeToUserDefaults: false)
+            User.setCurrent(user, writeToUserDefaults: true)
             
-            let disclaimerViewController = UINavigationController(rootViewController: KFCLocationServiceDisclaimer())
-            self.present(disclaimerViewController, animated: true)
+            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+            self.present(phoneNumberValidationViewController, animated: true)
         }
-        
-        
     }
     
-    private func showError(_ error: Error) {
+    private func showErrorMessage(_ errorMessage: String) {
         
         errorLabel.isHidden = false
-        errorLabel.text = UserService.retrieveAuthErrorMessage(for: error)
-        UIView.animate(withDuration: 0.25, animations: { [unowned self] in
+        errorLabel.text = errorMessage
+        UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
         
