@@ -8,30 +8,49 @@
 
 import UIKit
 
-class KFButton: UIButton, Configurable {
-
+class KFButton: UIButton, UIConfigurable {
+    
+    static let animationDuration = 0.025
+    
+    override var isUserInteractionEnabled: Bool {
+        didSet {
+            currentState = isUserInteractionEnabled ? .idle : .disabled
+        }
+    }
+    
     private(set) var mainBackgroundColor = UIColor.kfPrimary
     private(set) var mainTitleColor = UIColor.kfSuperWhite
     private(set) var currentState = AnimationState.idle {
         didSet {
-            updateBackgroundColor()
             updateAnimator()
+            updateBackgroundColor()
+            layoutIfNeeded()
         }
     }
 
     private(set) var heightConstraint: NSLayoutConstraint!
 
     var buttonAnimator: UIViewPropertyAnimator?
-
+    var autoReset = true
+    
     enum AnimationState {
-        case shrinking, expanding, idle
-
+        case shrinking, idle, pressed, disabled
+        
         func getScale() -> CGFloat {
             switch self {
-            case .shrinking:
+            case .shrinking, .pressed:
                 return 0.99
-            case .expanding, .idle:
+            case .idle, .disabled:
                 return 1
+            }
+        }
+        
+        func isInteractable() -> Bool {
+            switch self {
+            case .shrinking, .idle:
+                return true
+            default:
+                return false
             }
         }
     }
@@ -63,8 +82,7 @@ class KFButton: UIButton, Configurable {
 
     func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
-        layer.setUpShadow()
-
+        
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         titleLabel?.adjustsFontForContentSizeCategory = true
 
@@ -78,25 +96,31 @@ class KFButton: UIButton, Configurable {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-
-        currentState = .shrinking
-        buttonAnimator?.startAnimation()
+        
+        if currentState.isInteractable() {
+            currentState = .shrinking
+            buttonAnimator?.startAnimation()
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+        //execute the logic before sending the signal to the other observers on this button
 
         let touch = touches.first
-        guard let touchLocation = touch?.location(in: self) else {
+        guard let touchLocation = touch?.location(in: self), currentState != .pressed else {
             return
         }
 
         //TODO: make this animation uniform
         if !bounds.contains(touchLocation)  {
             buttonAnimator?.stopAnimation(true)
-            currentState = .expanding
+            currentState = .idle
             buttonAnimator?.startAnimation()
+        } else {
+            currentState = autoReset ? .idle : .pressed
         }
+        
+        super.touchesEnded(touches, with: event)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -106,19 +130,36 @@ class KFButton: UIButton, Configurable {
     }
 
     private func updateAnimator() {
-        let animator = UIViewPropertyAnimator(duration: 0.025, curve: .linear, animations: { [unowned self] in
-            self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
-        })
-
-        buttonAnimator = animator
+        switch currentState {
+        case .idle, .disabled:
+            transform = .identity
+            buttonAnimator = nil
+        case .pressed:
+            buttonAnimator = nil
+        default:
+            let animator = UIViewPropertyAnimator(duration: KFButton.animationDuration, curve: .linear, animations: { [unowned self] in
+                self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
+            })
+            
+            buttonAnimator = animator
+        }
     }
-
+    
+    func resetState() {
+        currentState = .idle
+    }
+    
     private func updateBackgroundColor() {
         switch currentState {
-        case .shrinking:
-            backgroundColor = mainBackgroundColor.darker(by: 5)
-        case .expanding, .idle:
+        case .shrinking, .pressed:
+            backgroundColor = mainBackgroundColor.darker()
+        case .idle:
             backgroundColor = mainBackgroundColor
+        case .disabled:
+            UIView.animate(withDuration: KFButton.animationDuration) { [unowned self] in
+                self.backgroundColor = self.mainBackgroundColor.withAlphaComponent(0.8)
+            }
+            
         }
     }
 

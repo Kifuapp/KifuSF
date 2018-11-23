@@ -67,8 +67,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         configureFirebase()
 
     }
-
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableViewWithRoundedCells.reloadData()

@@ -42,11 +42,11 @@ extension UIColor {
                                           "body2": kfBody2,
                                           "button": kfButton]
     
-    func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
+    func lighter(by percentage: CGFloat = 5) -> UIColor? {
         return self.adjust(by: abs(percentage) )
     }
     
-    func darker(by percentage: CGFloat = 30.0) -> UIColor? {
+    func darker(by percentage: CGFloat = 5) -> UIColor? {
         return self.adjust(by: -1 * abs(percentage) )
     }
     

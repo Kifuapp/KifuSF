@@ -143,5 +143,6 @@ extension User {
         static let flag = "flag"
         static let flaggedReportUid = "flagged-report-uid"
         static let currentLocation = "current-location"
+        static let isVerified = "is-verified"
     }
 }

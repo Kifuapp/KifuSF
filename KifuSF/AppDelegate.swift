@@ -11,8 +11,8 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConfigurable {
+        
     var window: UIWindow?
     
     var alertWindow: UIWindow?
@@ -27,55 +27,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        if Auth.auth().currentUser != nil,
-            let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
-            let user = try? JSONDecoder().decode(User.self, from: userData) {
-            
-            User.setCurrent(user)
-        }
-
         window = UIWindow(frame: UIScreen.main.bounds)
-
-        window?.rootViewController = KFCTabBar()
-        window?.makeKeyAndVisible()
-
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.kfPrimary]
-        UINavigationBar.appearance().tintColor = .kfPrimary
-        UINavigationBar.appearance().barTintColor = .kfSuperWhite
-        UINavigationBar.appearance().isTranslucent = false
-
-        UITabBar.appearance().tintColor = .kfPrimary
-        UITabBar.appearance().barTintColor = .kfSuperWhite
-        UITabBar.appearance().isTranslucent = false
-
+        
+        setInitalViewController()
+        configureStyling()
+        
         return true
     }
 
     //TODO: alex-login logic
     private func setInitalViewController() {
+        //TODO: if user does not have a verified account than go to the 2FA screens
+        //TODO: if location service is disabled prompt the required activation screen
+        
         if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
             let user = try? JSONDecoder().decode(User.self, from: userData) {
 
             User.setCurrent(user)
-
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "initialTabBar")
-
-            window?.rootViewController = initialVC
-            window?.makeKeyAndVisible()
+            
+            window?.setRootViewController(KFCTabBar())
         } else {
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "kfLogin")
-            window?.rootViewController = initialVC
-            window?.makeKeyAndVisible()
+            window?.setRootViewController(UINavigationController(rootViewController: KFCFrontPage()))
         }
+        
+        window?.makeKeyAndVisible()
     }
 
     func application(
         _ app: UIApplication,
         open url: URL,
         options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        
         return GIDSignIn.sharedInstance().handle(
             url,
             sourceApplication: options[.sourceApplication] as? String,
@@ -84,8 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            return assertionFailure(error.localizedDescription)
+        if let _ = error {
+            //error.localizedDescription usually the user cancelled the sign in flow
+            return
         }
 
         guard let authentication = user.authentication else { return }
@@ -94,7 +78,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let credentialDict = ["credentials": credential] as [String: Any]
         NotificationCenter.default.post(name: .userDidLoginWithGoogle, object: nil, userInfo: credentialDict)
     }
-
+    
+    func configureStyling() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
+        UINavigationBar.appearance().tintColor = .kfPrimary
+        UINavigationBar.appearance().barTintColor = .kfSuperWhite
+        UINavigationBar.appearance().isTranslucent = false
+        
+        UITabBar.appearance().tintColor = .kfPrimary
+        UITabBar.appearance().barTintColor = .kfSuperWhite
+        UITabBar.appearance().isTranslucent = false
+    }
+    
     //TODO: Handle disconnect logic
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
 

@@ -9,8 +9,8 @@
 import UIKit
 import PureLayout
 
-class KFVDescriptor: UIView, Configurable {
-
+class KFVDescriptor: UIView, UIConfigurable {
+    
     let contentsStackView = UIStackView(axis: .vertical, alignment: .fill,
                                         spacing: KFPadding.StackView, distribution: .fill)
     let topStackView = UIStackView(axis: .horizontal, alignment: .fill,
@@ -50,11 +50,14 @@ class KFVDescriptor: UIView, Configurable {
     func configureStyling() {
         configureDescriptorStyling()
         configureSubtitleStickyLabelStyling()
+        
+        imageView.makeItKifuStyle()
     }
 
     private func configureSubtitleStickyLabelStyling() {
         subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        subtitleStickyLabel.contentView.makeItKifuStyle()
     }
     private func configureDescriptorStyling() {
         backgroundColor = UIColor.kfSuperWhite

@@ -21,11 +21,14 @@ enum FlaggedContentType: Int {
     case flaggedPhoneNumber = 100
     case flaggedCommunication
     
-    var title: String {
+    func getDescription() -> String {
         switch self {
+        case .flaggedImage:
+            return "Inapropiate Image"
+        case .flaggedPickupLocation:
+            return "Wrong pickup location"
         default:
-            //TODO: erick-switch cases
-            fatalError()
+            return "poof"
         }
     }
 }

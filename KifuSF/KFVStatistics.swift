@@ -8,16 +8,16 @@
 
 import UIKit
 
-class KFVStatistics: UIView, Configurable {
+class KFVStatistics: UIView, UIConfigurable {
     let contentStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fillEqually)
     
     let deliveryStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
     let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
-    let deliveryCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let deliveryCountLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     let donationStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
     let donationIconView = KFVIcon(image: .kfDonationIcon)
-    let donationCountLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let donationCountLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

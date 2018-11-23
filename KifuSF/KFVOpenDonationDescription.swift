@@ -88,7 +88,7 @@ class KFVOpenDonationDescription: KFVDescriptor {
     }
     
     func reloadData(for data: KFMOpenDonationDescriptionItem) {
-        imageView.imageView.kf.setImage(with: data.imageURL)
+        imageView.kf.setImage(with: data.imageURL)
     
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"

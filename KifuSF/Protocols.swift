@@ -8,12 +8,16 @@
 
 import Foundation
 
-protocol Configurable {
+protocol UIConfigurable {
     func configureStyling()
     func configureLayoutConstraints()
+    func configureGestures()
+    func configureDelegates()
 }
 
-extension Configurable {
+extension UIConfigurable {
     func configureStyling() { }
     func configureLayoutConstraints() { }
+    func configureGestures() { }
+    func configureDelegates() { }
 }

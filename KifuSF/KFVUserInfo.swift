@@ -36,7 +36,7 @@ class KFVUserInfo: KFVDescriptor {
     }
     
     func reloadData(for data: KFMUserInfo) {
-        imageView.imageView.kf.setImage(with: data.profileImageURL)
+        imageView.kf.setImage(with: data.profileImageURL)
         titleLabel.text = data.name
         subtitleStickyLabel.contentView.text = "@\(data.username)"
         descriptionLabel.text = "Reputation: \(data.userReputation)%"

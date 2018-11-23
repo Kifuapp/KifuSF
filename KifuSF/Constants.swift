@@ -23,4 +23,5 @@ struct KFErrorMessage {
     static let nibFileNotFound = "could not load nib file"
     static let textStyleNotFount = "could not load text style"
     static let unknownIdentifier = "unknown identifier"
+    static let seriousBug = "Somebody is dumb"
 }

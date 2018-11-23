@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVModularCell<T: UIView>: UITableViewCell, Configurable {
+class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
     let descriptorView = T()
 
     static var identifier: String {

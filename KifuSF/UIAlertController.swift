@@ -20,5 +20,12 @@ extension UIAlertController {
         self.addAction(dismissAction)
     }
     
+    static func show(inViewController viewController: UIViewController, withTitle title: String = "Oops!", errorMessage: String?, dismissTitle: String = "Dismiss") {
+        
+        let ac = UIAlertController(title: title, errorMessage: errorMessage, dismissTitle: dismissTitle)
+        viewController.present(ac, animated: true)
+        
+    }
+    
     
 }
