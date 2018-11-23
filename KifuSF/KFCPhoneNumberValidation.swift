@@ -50,11 +50,12 @@ class KFCPhoneNumberValidation: UIViewController {
                 
                 var user = User.current
                 user.isVerified = true
-                
-                UserService.update(user: user, completion: { (succes) in
-                    //TODO: do something else
-                    print(succes)
-                })
+
+                //TODO: create update function in userservice
+//                UserService.update(user: user, completion: { (succes) in
+//                    //TODO: do something else
+//                    print(succes)
+//                })
                 
                 let mainViewControllers = KFCTabBar()
                 self.present(mainViewControllers, animated: true)

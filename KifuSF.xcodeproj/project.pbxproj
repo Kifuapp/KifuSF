@@ -260,8 +260,8 @@
 			children = (
 				C50182EC2142AC9A00257412 /* KFCStatus.swift */,
 				C50182EF2142AD4E00257412 /* KFCDelivery.swift */,
-				C54284152152BFAD00373586 /* KFCDonation.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
+				C54284152152BFAD00373586 /* KFCDonation.swift */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
 				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,

@@ -189,8 +189,9 @@ extension KFCCreateDonation {
         )
         donationImageView.isUserInteractionEnabled = true
         donationImageView.addGestureRecognizer(tapGesture)
-        
-        let tintableImage = UIImage.kfPlusIcon.withRenderingMode(.alwaysTemplate)
+
+
+        let tintableImage = UIImage.kfPlusImage.withRenderingMode(.alwaysTemplate)
         donationImageView.image = tintableImage
         donationImageView.tintColor = .kfPrimary
         

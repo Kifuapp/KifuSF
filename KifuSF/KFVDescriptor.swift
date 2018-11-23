@@ -16,13 +16,13 @@ class KFVDescriptor: UIView, UIConfigurable {
     let topStackView = UIStackView(axis: .horizontal, alignment: .fill,
                                    spacing: KFPadding.StackView, distribution: .fill)
 
-    let imageView = KFVImage()
+    let imageView = UIImageView()
     var imageConstraints = [NSLayoutConstraint]()
 
     let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
 
-    let titleLabel = KFLabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let subtitleStickyLabel = KFVSticky<KFLabel>()
+    let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let subtitleStickyLabel = KFVSticky<UILabel>()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
