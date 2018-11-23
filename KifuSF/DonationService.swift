@@ -16,13 +16,15 @@ struct DonationService {
         notes: String,
         image: UIImage,
         pickUpAddress: String,
-        longitude: Double, latitude: Double, completion: @escaping (Donation) -> Void) {
+        longitude: Double, latitude: Double, completion: @escaping (Donation?) -> Void) {
 
         //upload image to storage and get back url
         let donationImageRef = StorageReference.newDonationImageReference()
         StorageService.uploadImage(image, at: donationImageRef) { (url) in
             guard let storageUrl = url else {
-                return assertionFailure("failed to upload image")
+                assertionFailure("failed to upload image")
+                
+                return completion(nil)
             }
 
             //get ref for new donation
@@ -30,7 +32,7 @@ struct DonationService {
 
             //create donation and get dict value
             let donation = Donation(
-                uid: ref.key,
+                uid: ref.key!,
                 title: title,
                 notes: notes,
                 imageUrl: storageUrl.absoluteString,
@@ -46,11 +48,31 @@ struct DonationService {
             let donationDict = donation.dictValue
 
             //send request
-            ref.updateChildValues(donationDict) { _, _ in
-
-                //and return the object
+            ref.updateChildValues(donationDict) { error, _ in
+                if let error = error {
+                    assertionFailure(error.localizedDescription)
+                    
+                    return completion(nil)
+                }
+                
                 completion(donation)
             }
+        }
+    }
+    
+    static func attach(report: Report, to donation: Donation, completion: @escaping (Bool) -> Void) {
+        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
+        let updatedDict: [String: Any] = [
+            Donation.Keys.flaggedReportUid: report.uid,
+            Donation.Keys.flag: report.flag.rawValue
+        ]
+        refDonation.updateChildValues(updatedDict) { error, _ in
+            if let error = error {
+                assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
+                return completion(false)
+            }
+            
+            completion(true)
         }
     }
 
@@ -59,20 +81,20 @@ struct DonationService {
      
      - ToDo: write a cloud function to update denormalized instances of the given donation
      */
-    static func update(donation: Donation, completion: @escaping (Bool) -> Void) {
-        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
-        refDonation.updateChildValues(donation.dictValue) { (error, _) in
-            guard error == nil else {
-                assertionFailure(error!.localizedDescription)
-                
-                return completion(false)
-            }
-            
-            completion(true)
-        }
-    }
+//    static func update(donation: Donation, completion: @escaping (Bool) -> Void) {
+//        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
+//        refDonation.updateChildValues(donation.dictValue) { (error, _) in
+//            guard error == nil else {
+//                assertionFailure(error!.localizedDescription)
+//
+//                return completion(false)
+//            }
+//
+//            completion(true)
+//        }
+//    }
     
-    static func showTimelineDonations(completion: @escaping ([Donation]) -> Void) {
+    static func observeTimelineDonations(completion: @escaping ([Donation]) -> Void) {
 
         //get donations ref
         let ref = Database.database().reference().child("open-donations")
@@ -108,7 +130,7 @@ struct DonationService {
         }
     }
 
-    static func observeOpenDontationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
+    static func observeOpenDonationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
         let ref = Database.database().reference().child("open-donations")
 
         ref.observe(.value) { (snapshot) in
@@ -173,7 +195,13 @@ struct DonationService {
         let dg = DispatchGroup() // swiftlint:disable:this identifier_name
         
         dg.enter()
-        ref.updateChildValues(updatedDonation.dictValue) { error, _ in
+        
+        //update only the keys needed to conform to db write rules
+        let updatedDict: [String: Any] = [
+            Donation.Keys.status: updatedDonation.status.rawValue,
+            Donation.Keys.volunteer: volunteer.dictValue
+        ]
+        ref.updateChildValues(updatedDict) { error, _ in
             if let error = error {
                 print("there was an error \(error.localizedDescription)")
                 
@@ -218,8 +246,12 @@ struct DonationService {
 
         var updatedDonation = donation
         updatedDonation.status = .awaitingDelivery
-
-        ref.updateChildValues(updatedDonation.dictValue) { (error, _) in
+        
+        //update only the keys needed to conform to db write rules
+        let updatedDict: [String: Any] = [
+            Donation.Keys.status: updatedDonation.status.rawValue
+        ]
+        ref.updateChildValues(updatedDict) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 return completion(false)
@@ -243,7 +275,13 @@ struct DonationService {
             updatedDonation.verificationUrl = downloadURL.absoluteString
             
             let ref = Database.database().reference().child("open-donations").child(donation.uid)
-            ref.updateChildValues(updatedDonation.dictValue, withCompletionBlock: { (error, _) in
+            
+            //update only the keys needed to conform to db write rules
+            let updatedDict: [String: Any] = [
+                Donation.Keys.status: updatedDonation.status.rawValue,
+                Donation.Keys.verificationUrl: updatedDonation.verificationUrl!
+            ]
+            ref.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure("failed to update donation for confirming the delivery, error: \(error.localizedDescription)") // swiftlint:disable:this line_length
                     return completion(false)
@@ -251,7 +289,6 @@ struct DonationService {
                 completion(true)
             })
         }
-        
     }
 
     static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> Void) {

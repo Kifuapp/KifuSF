@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIAlertController
 
 extension UIAlertController {
     convenience init(title: String = "Oops!", errorMessage: String?, dismissTitle: String = "Dismiss") {
@@ -19,4 +19,6 @@ extension UIAlertController {
         let dismissAction = UIAlertAction(title: dismissTitle, style: .default, handler: nil)
         self.addAction(dismissAction)
     }
+    
+    
 }

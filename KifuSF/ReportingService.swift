@@ -11,38 +11,35 @@ import FirebaseDatabase
 
 struct ReportingService {
     
+    /**
+     Creates and uploads the new report while also update the donation's properties
+     with the new report info.
+     */
     static func createReport(
         for donation: Donation,
         flaggingType: FlaggedContentType,
         userMessage: String,
-        completion: @escaping (Bool) -> Void) {
+        completion: @escaping (Report?) -> Void) {
         
         //ref for report
         let refReport = Database.database().reference().child("reports").childByAutoId()
         
         //create report
-        let report = Report(flag: donation, for: flaggingType, message: userMessage, uid: refReport.key)
+        let report = Report(flag: donation, for: flaggingType, message: userMessage, uid: refReport.key!)
         
         //set value
         refReport.setValue(report.dictValue) { (error, _) in
             guard error == nil else {
                 assertionFailure(error!.localizedDescription)
                 
-                return completion(false)
+                return completion(nil)
             }
             
-            var flaggedDonation = donation
-            flaggedDonation.flag(with: report)
-            
             //update donation using DonationService
-            DonationService.update(donation: flaggedDonation, completion: { (success) in
-                guard success else {
-                    assertionFailure("there was an error updating donation: \(donation)")
-                    
-                    return completion(false)
-                }
+            DonationService.attach(report: report, to: donation, completion: { (success) in
+                assert(success, "there was an error updating donation: \(donation)")
                 
-                completion(true)
+                completion(report)
             })
         }
     }
@@ -51,34 +48,31 @@ struct ReportingService {
         for user: User,
         flaggingType: FlaggedContentType,
         userMessage: String,
-        completion: @escaping (Bool) -> Void) {
+        completion: @escaping (Report?) -> Void) {
         
         //ref for report
         let refReport = Database.database().reference().child("reports").childByAutoId()
         
         //create report
-        let report = Report(flag: user, for: flaggingType, message: userMessage, uid: refReport.key)
+        let report = Report(flag: user, for: flaggingType, message: userMessage, uid: refReport.key!)
         
         //set value
         refReport.setValue(report.dictValue) { (error, _) in
             guard error == nil else {
                 assertionFailure(error!.localizedDescription)
                 
-                return completion(false)
+                return completion(nil)
             }
             
-            var flaggedUser = user
-            flaggedUser.flag(with: report)
-            
             //update donation using DonationService
-            UserService.update(user: flaggedUser, completion: { (success) in
+            UserService.attach(report: report, to: user, completion: { (success) in
                 guard success else {
                     assertionFailure("there was an error updating donation: \(user)")
                     
-                    return completion(false)
+                    return completion(nil)
                 }
                 
-                completion(true)
+                completion(report)
             })
         }
         

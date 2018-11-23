@@ -20,6 +20,14 @@ enum FlaggedContentType: Int {
     //Flagging the user
     case flaggedPhoneNumber = 100
     case flaggedCommunication
+    
+    var title: String {
+        switch self {
+        default:
+            //TODO: erick-switch cases
+            fatalError()
+        }
+    }
 }
 
 struct Report: KeyedStoredProperties {
