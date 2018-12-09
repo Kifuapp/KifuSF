@@ -262,21 +262,22 @@ struct UserService {
     /**
      update the given user in the user subtree
      
-     - ToDo: write a cloud function to update denormalized instances of the given user
+     - TODO: write a cloud function to update denormalized instances of the given user
      */
-//    static func update(user: User, completion: @escaping (Bool) -> Void) {
-//        let refDonation = Database.database().reference().child("users").child(user.uid)
-//        refDonation.updateChildValues(user.dictValue) { (error, _) in
-//            guard error == nil else {
-//                assertionFailure(error!.localizedDescription)
-//                
-//                return completion(false)
-//            }
-//            
-//            completion(true)
-//        }
-//    }
-    
+    //TODO: fix update function
+    static func update(user: User, completion: @escaping (Bool) -> Void) {
+        let refDonation = Database.database().reference().child("users").child(user.uid)
+        refDonation.updateChildValues(user.dictValue) { (error, _) in
+            guard error == nil else {
+                assertionFailure(error!.localizedDescription)
+
+                return completion(false)
+            }
+
+            completion(true)
+        }
+    }
+
     public static func calculateDistance(long: Double, lat: Double) -> String {
         let location = CLLocation(latitude: lat, longitude: long)
         if let myCurrentLocation = User.current.currentLocation {
