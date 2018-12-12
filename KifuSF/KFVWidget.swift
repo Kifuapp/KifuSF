@@ -249,7 +249,6 @@ final class KFVWidget: UIView, UIConfigurable {
 
         case .ended:
             updateState(for: touchLocation)
-            //TODO: check if it's inside
             if let type = touchedViewType, containerStackView.frame.contains(touchLocation), touchLocation.x != 0 {
                 delegate?.widgetView(self, didSelectCellForType: type)
                 touchedViewType = nil
