@@ -9,7 +9,8 @@
 import UIKit
 
 final class KFVWidget: UIView, UIConfigurable {
-    
+
+    // MARK: - Variables
     enum TouchedViewType {
         case donation
         case delivery
@@ -73,6 +74,7 @@ final class KFVWidget: UIView, UIConfigurable {
         }
     }
 
+    // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -88,6 +90,7 @@ final class KFVWidget: UIView, UIConfigurable {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+
         if isAccessibilityCategory {
             deliverySubtitleLabel.isHidden = true
             donationSubtitleLabel.isHidden = true
@@ -96,10 +99,10 @@ final class KFVWidget: UIView, UIConfigurable {
             donationSubtitleLabel.isHidden = false
         }
 
-        layoutIfNeeded()
         delegate?.widgetView(self, heightDidChange: frame.height)
     }
 
+    // MARK: - Functions
     func configureLayoutConstraints() {
         configureDeliveryStackViewLayout()
         configureDonationStackViewLayout()
@@ -289,7 +292,6 @@ final class KFVWidget: UIView, UIConfigurable {
             donationBackgroundView.isHidden = true
         }
 
-        self.layoutIfNeeded()
         delegate?.widgetView(self, heightDidChange: frame.height)
     }
 
@@ -299,13 +301,24 @@ final class KFVWidget: UIView, UIConfigurable {
 
 }
 
-//MARK: KFPWidgetDataSource
+//MARK: - KFPWidgetDataSource
 protocol KFPWidgetDataSource: class {
     func widgetView(_ widgetView: KFVWidget, cellInfoForType type: KFVWidget.TouchedViewType) -> KFPWidgetInfo?
 }
 
-//MARK: KFPWidgetDelegate
+//MARK: - KFPWidgetDelegate
 protocol KFPWidgetDelegate: class {
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType)
+
+    /**
+        Call layoutIfNeeded on the widgetView object if you override the default implementation
+    */
     func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat)
+}
+
+//MARK: - KFPWidgetDelegate Extension
+extension KFPWidgetDelegate {
+    func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
+        widgetView.layoutIfNeeded()
+    }
 }
