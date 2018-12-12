@@ -20,39 +20,39 @@ final class KFVWidget: UIView, UIConfigurable {
         let subtitle: String
     }
 
-    let containerStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
+    private let containerStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
 
-    let backgroundsStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    let deliveryBackgroundView = UIView()
-    let donationBackgroundView = UIView()
+    private let backgroundsStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
+    private let deliveryBackgroundView = UIView()
+    private let donationBackgroundView = UIView()
 
-    let deliveryStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
-    let deliveryContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
+    private let deliveryStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
+    private let deliveryContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
 
-    let deliveryLeftEmptyView = UIView()
-    let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
+    private let deliveryLeftEmptyView = UIView(forAutoLayout: ())
+    private let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
 
-    let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
+    private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
 
-    let deliveryDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
-    let deliveryRightEmptyView = UIView()
-    let deliverySpacer = UIView()
+    private let deliveryDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    private let deliveryRightEmptyView = UIView(forAutoLayout: ())
+    private let deliverySpacer = UIView(forAutoLayout: ())
 
-    let donationStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
-    let donationContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
+    private let donationStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fill)
+    private let donationContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
 
-    let donationLeftEmptyView = UIView()
-    let donationIconView = KFVIcon(image: .kfDonationIcon)
+    private let donationLeftEmptyView = UIView(forAutoLayout: ())
+    private let donationIconView = KFVIcon(image: .kfDonationIcon)
 
-    let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
+    private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
 
-    let donationDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
-    let donationRightEmptyView = UIView()
-    let donationSpacer = UIView()
+    private let donationDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    private let donationRightEmptyView = UIView(forAutoLayout: ())
+    private let donationSpacer = UIView(forAutoLayout: ())
 
     weak var dataSource: KFPWidgetDataSource?
     weak var delegate: KFPWidgetDelegate?
@@ -124,25 +124,16 @@ final class KFVWidget: UIView, UIConfigurable {
     }
 
     private func configureDeliveryEmptyViewConstraints() {
-        deliveryLeftEmptyView.translatesAutoresizingMaskIntoConstraints = false
-        deliveryRightEmptyView.translatesAutoresizingMaskIntoConstraints = false
-
         deliveryLeftEmptyView.autoSetDimension(.width, toSize: 0)
         deliveryRightEmptyView.autoSetDimension(.width, toSize: 0)
     }
 
     private func configureDonationEmptyViewConstraints() {
-        donationLeftEmptyView.translatesAutoresizingMaskIntoConstraints = false
-        donationRightEmptyView.translatesAutoresizingMaskIntoConstraints = false
-
         donationLeftEmptyView.autoSetDimension(.width, toSize: 0)
         donationRightEmptyView.autoSetDimension(.width, toSize: 0)
     }
 
     private func configureSpacersConstraints() {
-        deliverySpacer.translatesAutoresizingMaskIntoConstraints = false
-        donationSpacer.translatesAutoresizingMaskIntoConstraints = false
-
         deliverySpacer.autoSetDimension(.height, toSize: 0.5)
         donationSpacer.autoSetDimension(.height, toSize: 0.5)
     }
@@ -154,24 +145,16 @@ final class KFVWidget: UIView, UIConfigurable {
         donationIconView.translatesAutoresizingMaskIntoConstraints = false
         donationDisclosureImageView.translatesAutoresizingMaskIntoConstraints = false
 
+        deliveryDisclosureImageView.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
+        donationDisclosureImageView.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
+
         configureAspectRatioForIcons()
-        configureSameSizeForIcons()
     }
 
     private func configureAspectRatioForIcons() {
         //aspect ratio 1:1 for all icons
-        deliveryDisclosureImageView.autoMatch(.height, to: .width, of: deliveryDisclosureImageView)
-        donationDisclosureImageView.autoMatch(.height, to: .width, of: donationDisclosureImageView)
-
         deliveryIconView.autoMatch(.height, to: .width, of: deliveryIconView)
         donationIconView.autoMatch(.height, to: .width, of: donationIconView)
-    }
-
-    private func configureSameSizeForIcons() {
-        //makes the width and height of all the icons to be bonded, therefore making all icons to have the same size
-        deliveryDisclosureImageView.autoMatch(.height, to: .height, of: deliveryIconView, withMultiplier: 0.75)
-        donationDisclosureImageView.autoMatch(.height, to: .height, of: donationIconView, withMultiplier: 0.75)
-        donationIconView.autoMatch(.height, to: .height, of: deliveryIconView)
     }
 
     private func configureTextPadding() {
