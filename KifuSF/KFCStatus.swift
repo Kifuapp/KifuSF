@@ -165,8 +165,6 @@ extension Donation.Status {
             return .stepThree
 //        case .awaitingFeedback: ???
 //            return .stepFour
-        default:
-            fatalError("no other steps are available for \(self)")
         }
     }
 }
