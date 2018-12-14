@@ -65,7 +65,7 @@ class KFCDelivery: KFCModularTableView {
             case .awaitingPickup:
                 actionButton.setTitle("Directions", for: .normal)
             case .awaitingDelivery:
-                actionButton.setTitle("Directions", for: .normal)
+                actionButton.setTitle("Submit Dropoff", for: .normal)
             case .awaitingApproval:
                 actionButton.isHidden = true
             }
@@ -196,9 +196,7 @@ class KFCDelivery: KFCModularTableView {
                 self.openDirectionsToPickUpLocation(for: delivery)
             case .awaitingDelivery:
                 
-                //Directions to charity
-//                self.openDirectionsToCharity(for: delivery)
-                
+                //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
             }
             
