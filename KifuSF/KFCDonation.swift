@@ -77,7 +77,7 @@ class KFCDonation: KFCModularTableView {
             return nil
         }
         
-        return KFMProgress(currentStep: donationStep, ofType: .delivery)
+        return KFMProgress(currentStep: donationStep, ofType: .donation)
     }
 
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
