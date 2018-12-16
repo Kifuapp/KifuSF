@@ -37,6 +37,15 @@ class KFVDestinationMap: UIView, UIConfigurable {
     func configureStyling() {
         mapView.layer.cornerRadius = CALayer.kfCornerRadius
     }
+    
+    
+    func reloadData(for data: CLLocationCoordinate2D){
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = data
+        mapView.addAnnotation(annotation)
+        mapView.showAnnotations(mapView.annotations, animated: true)
+        
+    }
 
 
     required init?(coder aDecoder: NSCoder) {
