@@ -195,7 +195,7 @@ extension KFCCreateDonation {
         donationImageView.image = tintableImage
         donationImageView.tintColor = .kfPrimary
         
-        donationInfoButton.setTitle("Donating?", with: .subheader1)
+        donationInfoButton.setTitle(" Donating?", with: .subheader1)
         donationInfoLabel.setUp(with: .body1)
         donationTitleLabel.setUp(with: .subheader1)
         
