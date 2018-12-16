@@ -29,7 +29,7 @@ class UIInputView: UIView {
         textFieldContainer.textField.returnKeyType = returnKeyType
         textFieldContainer.textField.placeholder = placeholder
 
-        if textContentType == .password {
+        if textContentType == .password || textContentType == .newPassword {
             textFieldContainer.textField.isSecureTextEntry = true
         }
     }
