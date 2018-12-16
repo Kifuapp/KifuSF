@@ -10,9 +10,7 @@ import UIKit
 import PureLayout
 import FirebaseAuth
 
-
 class KFCRegisterForm: UIViewController {
-    
     let contentScrollView = UIScrollView()
     
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
@@ -98,16 +96,15 @@ class KFCRegisterForm: UIViewController {
         //unwrap all values and make sure the string is not empty
         guard let image = profileImageView.image,
             let _ = userSelectedAProfileImage,
-            let fullName = fullNameTextFieldContainer.textField.text, fullName.count != 0,
-            let username = usernameTextFieldContainer.textField.text, username.count != 0,
-            let contactNumber = phoneNumberTextFieldContainer.textField.text, contactNumber.count != 0,
-            let email = emailTextFieldContainer.textField.text, email.count != 0,
-            let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
+            let fullName = fullNameTextFieldContainer.textField.text, !fullName.isEmpty,
+            let username = usernameTextFieldContainer.textField.text, !username.isEmpty,
+            let contactNumber = phoneNumberTextFieldContainer.textField.text, !contactNumber.isEmpty,
+            let email = emailTextFieldContainer.textField.text, !email.isEmpty,
+            let password = passwordTextFieldContainer.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
         
         //TODO: check for unique username
-        
         UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
             
             //error handling
@@ -144,11 +141,11 @@ class KFCRegisterForm: UIViewController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let adjustmentHeight = (keyboardFrame.height + 20)
-        
-        contentScrollView.updateBottomPadding(adjustmentHeight)
+        guard let keyboardHeight = notification.getKeyboardHeight() else {
+            return assertionFailure("Could not retrieve keyboard height")
+        }
+
+        contentScrollView.updateBottomPadding(keyboardHeight + 20)
     }
     
     //TODO: this method gets called twice find out why

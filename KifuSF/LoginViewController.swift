@@ -8,26 +8,27 @@
 
 import UIKit
 
-class KFCLogin: UIViewController {
+class LoginViewController: UIViewController {
+    //MARK: - Variables
+    private let contentScrollView = UIScrollView()
     
-    let contentScrollView = UIScrollView()
+    private let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
+    private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
-    let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
-    let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
-    
-    let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
-    let emailInputView = UIInputView(title: "Email", placeholder: "me@example.com",
+    private let emailInputView = UIInputView(title: "Email", placeholder: "me@example.com",
                                      textContentType: .emailAddress, returnKeyType: .next)
 
-    let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
+    private let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
                                         textContentType: .password, returnKeyType: .done)
     
-    let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
-    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
     
-    let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+    private let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +37,6 @@ class KFCLogin: UIViewController {
         
         configureStyling()
         configureLayoutConstraints()
-        
         configureGestures()
         configureDelegates()
     }
@@ -59,33 +59,21 @@ class KFCLogin: UIViewController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let adjustmentHeight = (keyboardFrame.height + 20)
+        guard let keyboardHeight = notification.getKeyboardHeight() else {
+            return assertionFailure("Could not retrieve keyboard height")
+        }
         
-        contentScrollView.updateBottomPadding(adjustmentHeight)
+        contentScrollView.updateBottomPadding(keyboardHeight + 20)
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
-    
-    func configureGestures() {
-        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        keyboardTap.cancelsTouchesInView = false
-        view.addGestureRecognizer(keyboardTap)
-        
-        let forgotPasswordTapped = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordButtonTapped))
-        forgotPasswordTapped.cancelsTouchesInView = false
-        forgotPasswordLabel.addGestureRecognizer(forgotPasswordTapped)
-        
-        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
-    }
-    
+
+    //MARK: - Functions
     @objc func logInButtonTapped() {
-        
-        guard let email = emailInputView.textFieldContainer.textField.text, email.count != 0,
-            let password = passwordInputView.textFieldContainer.textField.text, password.count != 0 else {
+        guard let email = emailInputView.textFieldContainer.textField.text, !email.isEmpty,
+            let password = passwordInputView.textFieldContainer.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
         
@@ -101,9 +89,7 @@ class KFCLogin: UIViewController {
             }
             
             User.setCurrent(user, writeToUserDefaults: true)
-            
-            //TODO: if account not verified show KFCPhoneNumberValidation
-            
+
             if User.current.isVerified {
                 let mainViewControllers = KFCTabBar()
                 self.present(mainViewControllers, animated: true)
@@ -111,7 +97,6 @@ class KFCLogin: UIViewController {
                 let phoneNumberValidationViewController = KFCPhoneNumberValidation()
                 self.present(phoneNumberValidationViewController, animated: true)
             }
-            
         }
     }
     
@@ -139,19 +124,19 @@ class KFCLogin: UIViewController {
     }
     
     private func showErrorMessage(_ errorMessage: String) {
-        
         errorLabel.isHidden = false
         errorLabel.text = errorMessage
+
         UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
         
         logInButton.resetState()
     }
-
 }
 
-extension KFCLogin: UITextFieldDelegate {
+//MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == emailInputView.textFieldContainer.textField {
@@ -165,7 +150,20 @@ extension KFCLogin: UITextFieldDelegate {
     }
 }
 
-extension KFCLogin: UIConfigurable {
+//MARK: - UIConfigurable
+extension LoginViewController: UIConfigurable {
+
+    func configureGestures() {
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(keyboardTap)
+
+        let forgotPasswordTapped = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordButtonTapped))
+        forgotPasswordTapped.cancelsTouchesInView = false
+        forgotPasswordLabel.addGestureRecognizer(forgotPasswordTapped)
+
+        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
+    }
     
     func configureDelegates() {
         emailInputView.textFieldContainer.textField.delegate = self

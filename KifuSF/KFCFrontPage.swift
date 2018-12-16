@@ -40,7 +40,7 @@ class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
     }
     
     @objc func logInButtonTapped() {
-        navigationController?.pushViewController(KFCLogin(), animated: true)
+        navigationController?.pushViewController(LoginViewController(), animated: true)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
