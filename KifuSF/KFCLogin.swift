@@ -16,14 +16,12 @@ class KFCLogin: UIViewController {
     let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
-    
-    let emailStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let emailLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let emailTextFieldContainer = KFTextFieldContainer(textContentType: .emailAddress, returnKeyType: .next, placeholder: "me@example.com")
-    
-    let passwordStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let passwordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .password, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
+
+    let emailInputView = UIInputView(title: "Email", placeholder: "me@example.com",
+                                     textContentType: .emailAddress, returnKeyType: .next)
+
+    let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
+                                        textContentType: .password, returnKeyType: .done)
     
     let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
@@ -86,8 +84,8 @@ class KFCLogin: UIViewController {
     
     @objc func logInButtonTapped() {
         
-        guard let email = emailTextFieldContainer.textField.text, email.count != 0,
-            let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
+        guard let email = emailInputView.textFieldContainer.textField.text, email.count != 0,
+            let password = passwordInputView.textFieldContainer.textField.text, password.count != 0 else {
                 return showErrorMessage("Please complete all the fields")
         }
         
@@ -156,29 +154,26 @@ class KFCLogin: UIViewController {
 extension KFCLogin: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == emailTextFieldContainer.textField {
-            passwordTextFieldContainer.textField.becomeFirstResponder()
+        if textField == emailInputView.textFieldContainer.textField {
+            passwordInputView.textFieldContainer.textField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
             logInButtonTapped()
         }
         
         return true
-        
     }
 }
 
 extension KFCLogin: UIConfigurable {
     
     func configureDelegates() {
-        emailTextFieldContainer.textField.delegate = self
-        passwordTextFieldContainer.textField.delegate = self
+        emailInputView.textFieldContainer.textField.delegate = self
+        passwordInputView.textFieldContainer.textField.delegate = self
     }
     
     func configureStyling() {
         title = "Log In"
-        emailLabel.text = "Email"
-        passwordLabel.text = "Password"
         
         configureContentScrollViewStyling()
         configureForgotPasswordLabelStyling()
@@ -203,10 +198,6 @@ extension KFCLogin: UIConfigurable {
     }
     
     func configureLayoutConstraints() {
-        
-        configureLayoutForEmailStackView()
-        configureLayoutForPasswordStackView()
-        
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
@@ -227,20 +218,10 @@ extension KFCLogin: UIConfigurable {
     }
     
     func configureLayoutForInputStackView() {
-        inputStackView.addArrangedSubview(emailStackView)
-        inputStackView.addArrangedSubview(passwordStackView)
+        inputStackView.addArrangedSubview(emailInputView)
+        inputStackView.addArrangedSubview(passwordInputView)
     }
-    
-    func configureLayoutForEmailStackView() {
-        emailStackView.addArrangedSubview(emailLabel)
-        emailStackView.addArrangedSubview(emailTextFieldContainer)
-    }
-    
-    func configureLayoutForPasswordStackView() {
-        passwordStackView.addArrangedSubview(passwordLabel)
-        passwordStackView.addArrangedSubview(passwordTextFieldContainer)
-    }
-    
+
     func configureConstraintsForOuterStackView() {
         outerStackView.translatesAutoresizingMaskIntoConstraints = false
         
