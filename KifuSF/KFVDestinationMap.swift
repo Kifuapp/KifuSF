@@ -19,10 +19,10 @@ class KFVDestinationMap: UIView, UIConfigurable {
         addSubview(mapView)
 
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
 
-    func configureLayoutConstraints() {
+    func configureLayout() {
         mapView.clipsToBounds = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
 

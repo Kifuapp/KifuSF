@@ -78,7 +78,7 @@ final class KFVWidget: UIView, UIConfigurable {
         super.init(frame: frame)
 
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
 
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(updateWidgetView))
         longPress.minimumPressDuration = 0
@@ -102,7 +102,7 @@ final class KFVWidget: UIView, UIConfigurable {
     }
 
     // MARK: - Functions
-    func configureLayoutConstraints() {
+    func configureLayout() {
         configureDeliveryStackViewLayout()
         configureDonationStackViewLayout()
         configureOuterStackViewsLayout()

@@ -42,7 +42,7 @@ class KFTextFieldContainer: UIView, UIConfigurable {
         addSubview(textField)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
     
     func setTag(_ tag: Int) {
@@ -63,7 +63,7 @@ class KFTextFieldContainer: UIView, UIConfigurable {
         textField.adjustsFontForContentSizeCategory = true
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         textField.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.ContentView)

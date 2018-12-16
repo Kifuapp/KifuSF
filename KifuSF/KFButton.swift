@@ -70,12 +70,12 @@ class KFButton: UIButton, UIConfigurable {
     override init(frame: CGRect) {
         super.init(frame: CGRect())
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
 
 
     }
 
-    func configureLayoutConstraints() {
+    func configureLayout() {
         translatesAutoresizingMaskIntoConstraints = false
         heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
     }

@@ -30,7 +30,7 @@ class KFCPhoneNumberValidation: UIViewController {
         contentScrollView.addSubview(outerStackView)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         configureGestures()
         
         TwoFactorAuthService.sendTextMessage(to: User.current.contactNumber) { [unowned self] (authy) in
@@ -83,7 +83,7 @@ extension KFCPhoneNumberValidation: UIConfigurable {
         noCodeLabel.textAlignment = .right
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()

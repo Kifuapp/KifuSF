@@ -22,8 +22,8 @@ class KFVOpenDonationDescription: KFVDescriptor {
     let donationDescriptionTitleLabel = UILabel()
     let donationDescriptionContentLabel = UILabel()
     
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         
         infoStackView.addArrangedSubview(secondSubtitleLabel)
         infoStackView.addArrangedSubview(statisticsStickyView)

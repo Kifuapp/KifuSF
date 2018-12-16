@@ -28,7 +28,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         
@@ -62,7 +62,6 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
 
 //MARK: - UIConfigurable
 extension FrontPageViewController: UIConfigurable {
-    
     func configureStyling() {
         title = "Front Page"
         view.backgroundColor = .kfSuperWhite
@@ -78,7 +77,10 @@ extension FrontPageViewController: UIConfigurable {
         signInLabel.numberOfLines = 1
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
+        view.directionalLayoutMargins.leading = 16
+        view.directionalLayoutMargins.trailing = 16
+
         view.addSubview(logoImageView)
         view.addSubview(bottomStackView)
         
@@ -95,9 +97,9 @@ extension FrontPageViewController: UIConfigurable {
     private func configureConstraintsForLogoImageView() {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        logoImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
-        logoImageView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        logoImageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        logoImageView.autoPinEdge(toSuperviewMargin: .top)
+        logoImageView.autoPinEdge(toSuperviewMargin: .leading)
+        logoImageView.autoPinEdge(toSuperviewMargin: .trailing)
     }
     
     private func configureLayoutForLabelsStackView() {
@@ -113,9 +115,9 @@ extension FrontPageViewController: UIConfigurable {
     
     private func configureConstraintsForBottomStackView() {
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        bottomStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        bottomStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
+
+        bottomStackView.autoPinEdge(toSuperviewMargin: .bottom)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .leading)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .trailing)
     }
 }

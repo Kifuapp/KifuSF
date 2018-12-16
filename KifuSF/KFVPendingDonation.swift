@@ -16,8 +16,8 @@ class KFVPendingDonation: KFVDescriptor {
 
     weak var delegate: KFPPendingDonationCellDelegate?
 
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         cancelStickyButton.translatesAutoresizingMaskIntoConstraints = false
 
         infoStackView.addArrangedSubview(cancelStickyButton)

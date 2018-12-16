@@ -21,10 +21,10 @@ class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
         contentView.addSubview(descriptorView)
 
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
 
-    func configureLayoutConstraints() {
+    func configureLayout() {
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
 
         descriptorView.autoPinEdge(toSuperviewEdge: .top, withInset: 4)

@@ -31,12 +31,9 @@ class LoginViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(contentScrollView)
-        contentScrollView.addSubview(outerStackView)
-        
+
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         configureGestures()
         configureDelegates()
     }
@@ -152,7 +149,6 @@ extension LoginViewController: UITextFieldDelegate {
 
 //MARK: - UIConfigurable
 extension LoginViewController: UIConfigurable {
-
     func configureGestures() {
         let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         keyboardTap.cancelsTouchesInView = false
@@ -195,7 +191,14 @@ extension LoginViewController: UIConfigurable {
         forgotPasswordLabel.isUserInteractionEnabled = true
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
+        view.addSubview(contentScrollView)
+
+        contentScrollView.addSubview(outerStackView)
+        contentScrollView.directionalLayoutMargins.top = 8
+        contentScrollView.directionalLayoutMargins.leading = 16
+        contentScrollView.directionalLayoutMargins.trailing = 16
+        
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
@@ -223,11 +226,12 @@ extension LoginViewController: UIConfigurable {
     func configureConstraintsForOuterStackView() {
         outerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        outerStackView.autoMatch(.width, to: .width, of: view, withOffset: -32)
-        
-        outerStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.SuperView)
+        outerStackView.autoMatch(.width, to: .width, of: view,
+                                 withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
+
+        outerStackView.autoPinEdge(toSuperviewMargin: .top)
+        outerStackView.autoPinEdge(toSuperviewMargin: .leading)
+        outerStackView.autoPinEdge(toSuperviewMargin: .trailing)
         outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
     }
     

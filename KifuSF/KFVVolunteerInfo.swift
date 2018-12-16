@@ -24,8 +24,8 @@ class KFVVolunteerInfo: KFVDescriptor {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         confirmationStickyButton.translatesAutoresizingMaskIntoConstraints = false
 
         infoStackView.addArrangedSubview(statisticsView)
