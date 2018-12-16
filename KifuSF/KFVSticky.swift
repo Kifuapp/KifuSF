@@ -33,7 +33,7 @@ class KFVSticky<T: UIView>: UIView, UIConfigurable {
         
         super.init(frame: frame)
         addSubview(contentView)
-        configureLayoutConstraints()
+        configureLayout()
     }
     
     convenience init(stickySide: ALEdge) {
@@ -46,10 +46,10 @@ class KFVSticky<T: UIView>: UIView, UIConfigurable {
         
         super.init(frame: UIScreen.main.bounds)
         addSubview(contentView)
-        configureLayoutConstraints()
+        configureLayout()
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         layoutConstraints = [
@@ -73,7 +73,7 @@ class KFVSticky<T: UIView>: UIView, UIConfigurable {
         self.stickySide = side
         
         NSLayoutConstraint.deactivate(layoutConstraints)
-        configureLayoutConstraints()
+        configureLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {

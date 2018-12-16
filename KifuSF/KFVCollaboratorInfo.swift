@@ -14,10 +14,10 @@ class KFVCollaboratorInfo: KFVDescriptor {
     let descriptionLabel = UILabel()
     let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     
-    override func configureLayoutConstraints() {
+    override func configureLayout() {
         contentsStackView.addArrangedSubview(headlineLabel)
         
-        super.configureLayoutConstraints()
+        super.configureLayout()
         
         infoStackView.addArrangedSubview(descriptionLabel)
         infoStackView.addArrangedSubview(statisticsStickyView)

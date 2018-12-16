@@ -23,14 +23,14 @@ class KFVStatistics: UIView, UIConfigurable {
         super.init(frame: frame)
         
         addSubview(contentStackView)
-        configureLayoutConstraints()
+        configureLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         configureStackViewsLayout()
         
         contentStackView.translatesAutoresizingMaskIntoConstraints = false

@@ -24,7 +24,7 @@ class KFCLocationServiceDisclaimer: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         configureGestures()
     }
     
@@ -61,7 +61,7 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
         }
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         
         view.addSubview(contentScrollView)
         contentScrollView.addSubview(outerStackView)

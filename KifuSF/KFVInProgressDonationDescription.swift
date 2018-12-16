@@ -18,8 +18,8 @@ class KFVInProgressDonationDescription: KFVDescriptor {
     let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let donationDescriptionContentLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         
         subtitleStickyLabel.updateStickySide(to: .top)
         subtitleStickyLabel.autoSetDimension(.height, toSize: KFPadding.ContentView)

@@ -30,7 +30,7 @@ class KFVDescriptor: UIView, UIConfigurable {
         addSubview(contentsStackView)
 
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +66,7 @@ class KFVDescriptor: UIView, UIConfigurable {
         layer.setUpShadow()
     }
 
-    func configureLayoutConstraints() {
+    func configureLayout() {
         configureStackViewsLayout()
         configureContentsStackViewConstraints()
 

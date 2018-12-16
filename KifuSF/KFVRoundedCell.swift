@@ -21,10 +21,10 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell, UIConfigurable {
         contentView.addSubview(descriptorView)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         configureDescriptorViewLayoutConstraints()
     }
     

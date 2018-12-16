@@ -8,37 +8,32 @@
 
 import UIKit
 
-class KFCLogin: UIViewController {
+class LoginViewController: UIViewController {
+    //MARK: - Variables
+    private let contentScrollView = UIScrollView()
     
-    let contentScrollView = UIScrollView()
+    private let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
+    private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
-    let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
-    let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
-    
-    let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
-    
-    let emailStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let emailLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let emailTextFieldContainer = KFTextFieldContainer(textContentType: .emailAddress, returnKeyType: .next, placeholder: "me@example.com")
-    
-    let passwordStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    let passwordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let passwordTextFieldContainer = KFTextFieldContainer(textContentType: .password, returnKeyType: .done, isSecureTextEntry: true, placeholder: "Password")
-    
-    let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
-    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
-    
-    let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+    private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
+    private let emailInputView = UIInputView(title: "Email", placeholder: "me@example.com",
+                                     textContentType: .emailAddress, returnKeyType: .next)
+
+    private let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
+                                        textContentType: .password, returnKeyType: .done)
+    
+    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    
+    private let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(contentScrollView)
-        contentScrollView.addSubview(outerStackView)
-        
+
         configureStyling()
-        configureLayoutConstraints()
-        
+        configureLayout()
         configureGestures()
         configureDelegates()
     }
@@ -61,33 +56,21 @@ class KFCLogin: UIViewController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let adjustmentHeight = (keyboardFrame.height + 20)
+        guard let keyboardHeight = notification.getKeyboardHeight() else {
+            return assertionFailure("Could not retrieve keyboard height")
+        }
         
-        contentScrollView.updateBottomPadding(adjustmentHeight)
+        contentScrollView.updateBottomPadding(keyboardHeight + 20)
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
-    
-    func configureGestures() {
-        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        keyboardTap.cancelsTouchesInView = false
-        view.addGestureRecognizer(keyboardTap)
-        
-        let forgotPasswordTapped = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordButtonTapped))
-        forgotPasswordTapped.cancelsTouchesInView = false
-        forgotPasswordLabel.addGestureRecognizer(forgotPasswordTapped)
-        
-        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
-    }
-    
+
+    //MARK: - Functions
     @objc func logInButtonTapped() {
-        
-        guard let email = emailTextFieldContainer.textField.text, email.count != 0,
-            let password = passwordTextFieldContainer.textField.text, password.count != 0 else {
+        guard let email = emailInputView.textFieldContainer.textField.text, !email.isEmpty,
+            let password = passwordInputView.textFieldContainer.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
         
@@ -103,9 +86,7 @@ class KFCLogin: UIViewController {
             }
             
             User.setCurrent(user, writeToUserDefaults: true)
-            
-            //TODO: if account not verified show KFCPhoneNumberValidation
-            
+
             if User.current.isVerified {
                 let mainViewControllers = KFCTabBar()
                 self.present(mainViewControllers, animated: true)
@@ -113,7 +94,6 @@ class KFCLogin: UIViewController {
                 let phoneNumberValidationViewController = KFCPhoneNumberValidation()
                 self.present(phoneNumberValidationViewController, animated: true)
             }
-            
         }
     }
     
@@ -141,44 +121,53 @@ class KFCLogin: UIViewController {
     }
     
     private func showErrorMessage(_ errorMessage: String) {
-        
         errorLabel.isHidden = false
         errorLabel.text = errorMessage
+
         UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
         
         logInButton.resetState()
     }
-
 }
 
-extension KFCLogin: UITextFieldDelegate {
+//MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == emailTextFieldContainer.textField {
-            passwordTextFieldContainer.textField.becomeFirstResponder()
+        if textField == emailInputView.textFieldContainer.textField {
+            passwordInputView.textFieldContainer.textField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
             logInButtonTapped()
         }
         
         return true
-        
     }
 }
 
-extension KFCLogin: UIConfigurable {
+//MARK: - UIConfigurable
+extension LoginViewController: UIConfigurable {
+    func configureGestures() {
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(keyboardTap)
+
+        let forgotPasswordTapped = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordButtonTapped))
+        forgotPasswordTapped.cancelsTouchesInView = false
+        forgotPasswordLabel.addGestureRecognizer(forgotPasswordTapped)
+
+        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
+    }
     
     func configureDelegates() {
-        emailTextFieldContainer.textField.delegate = self
-        passwordTextFieldContainer.textField.delegate = self
+        emailInputView.textFieldContainer.textField.delegate = self
+        passwordInputView.textFieldContainer.textField.delegate = self
     }
     
     func configureStyling() {
         title = "Log In"
-        emailLabel.text = "Email"
-        passwordLabel.text = "Password"
         
         configureContentScrollViewStyling()
         configureForgotPasswordLabelStyling()
@@ -202,10 +191,13 @@ extension KFCLogin: UIConfigurable {
         forgotPasswordLabel.isUserInteractionEnabled = true
     }
     
-    func configureLayoutConstraints() {
-        
-        configureLayoutForEmailStackView()
-        configureLayoutForPasswordStackView()
+    func configureLayout() {
+        view.addSubview(contentScrollView)
+
+        contentScrollView.addSubview(outerStackView)
+        contentScrollView.directionalLayoutMargins.top = 8
+        contentScrollView.directionalLayoutMargins.leading = 16
+        contentScrollView.directionalLayoutMargins.trailing = 16
         
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
@@ -227,28 +219,19 @@ extension KFCLogin: UIConfigurable {
     }
     
     func configureLayoutForInputStackView() {
-        inputStackView.addArrangedSubview(emailStackView)
-        inputStackView.addArrangedSubview(passwordStackView)
+        inputStackView.addArrangedSubview(emailInputView)
+        inputStackView.addArrangedSubview(passwordInputView)
     }
-    
-    func configureLayoutForEmailStackView() {
-        emailStackView.addArrangedSubview(emailLabel)
-        emailStackView.addArrangedSubview(emailTextFieldContainer)
-    }
-    
-    func configureLayoutForPasswordStackView() {
-        passwordStackView.addArrangedSubview(passwordLabel)
-        passwordStackView.addArrangedSubview(passwordTextFieldContainer)
-    }
-    
+
     func configureConstraintsForOuterStackView() {
         outerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        outerStackView.autoMatch(.width, to: .width, of: view, withOffset: -32)
-        
-        outerStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.SuperView)
+        outerStackView.autoMatch(.width, to: .width, of: view,
+                                 withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
+
+        outerStackView.autoPinEdge(toSuperviewMargin: .top)
+        outerStackView.autoPinEdge(toSuperviewMargin: .leading)
+        outerStackView.autoPinEdge(toSuperviewMargin: .trailing)
         outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
     }
     
