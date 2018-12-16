@@ -52,7 +52,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
 
     //MARK: - Functions
     @objc func registerButtonPressed() {
-        navigationController?.pushViewController(KFCRegisterForm(), animated: true)
+        navigationController?.pushViewController(RegisterFormViewController(), animated: true)
     }
     
     @objc func logInButtonTapped() {

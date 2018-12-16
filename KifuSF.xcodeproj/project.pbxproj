@@ -55,7 +55,7 @@
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
 		C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EE213579F1008A9DF1 /* KFVWidget.swift */; };
-		C564187A216A089F00664DDB /* KFCRegisterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5641879216A089F00664DDB /* KFCRegisterForm.swift */; };
+		C564187A216A089F00664DDB /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5641879216A089F00664DDB /* RegisterFormViewController.swift */; };
 		C564187C216A456400664DDB /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564187B216A456400664DDB /* FrontPageViewController.swift */; };
 		C564187E216A86BA00664DDB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564187D216A86BA00664DDB /* UIColor.swift */; };
 		C576EFDC21C65A1500F96922 /* UIInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFDB21C65A1500F96922 /* UIInputView.swift */; };
@@ -168,7 +168,7 @@
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		C560B7EE213579F1008A9DF1 /* KFVWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVWidget.swift; sourceTree = "<group>"; };
-		C5641879216A089F00664DDB /* KFCRegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCRegisterForm.swift; sourceTree = "<group>"; };
+		C5641879216A089F00664DDB /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
 		C564187B216A456400664DDB /* FrontPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPageViewController.swift; sourceTree = "<group>"; };
 		C564187D216A86BA00664DDB /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C564187F216A872B00664DDB /* KeyedProperties.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KeyedProperties.stencil; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				C564187B216A456400664DDB /* FrontPageViewController.swift */,
-				C5641879216A089F00664DDB /* KFCRegisterForm.swift */,
+				C5641879216A089F00664DDB /* RegisterFormViewController.swift */,
 				C53D92B72171E42500AE3882 /* LoginViewController.swift */,
 				C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */,
 				C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */,
@@ -942,7 +942,7 @@
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
 				C58D9EBD216008D900B180B3 /* KFButton.swift in Sources */,
-				C564187A216A089F00664DDB /* KFCRegisterForm.swift in Sources */,
+				C564187A216A089F00664DDB /* RegisterFormViewController.swift in Sources */,
 				C50182F62142E3F100257412 /* KFVDescriptor.swift in Sources */,
 				C58D9ED62163B09300B180B3 /* KFVIcon.swift in Sources */,
 				C5DD40522136F05900ECC819 /* Enums.swift in Sources */,
