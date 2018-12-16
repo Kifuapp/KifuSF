@@ -9,20 +9,21 @@
 import UIKit
 import GoogleSignIn
 
-class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
+class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
+    //MARK: - Variables
+    private let logoImageView = UIImageView(image: UIImage.kfLogo)
     
-    let logoImageView = UIImageView(image: UIImage.kfLogo)
+    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    private let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let googleSignInButton = GIDSignInButton()
     
-    let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
-    let googleSignInButton = GIDSignInButton()
+    private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     
-    let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    
-    let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
+    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,33 +34,34 @@ class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
         
         GIDSignIn.sharedInstance().uiDelegate = self
     }
-    
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        if isAccessibilityCategory {
+            labelsStackView.axis = .vertical
+
+            oldUserLabel.numberOfLines = 0
+            signInLabel.numberOfLines = 0
+        } else {
+            labelsStackView.axis = .horizontal
+
+            oldUserLabel.numberOfLines = 1
+            signInLabel.numberOfLines = 1
+        }
+    }
+
+    //MARK: - Functions
     @objc func registerButtonPressed() {
         navigationController?.pushViewController(KFCRegisterForm(), animated: true)
-        
     }
     
     @objc func logInButtonTapped() {
         navigationController?.pushViewController(LoginViewController(), animated: true)
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        if isAccessibilityCategory {
-            labelsStackView.axis = .vertical
-            
-            oldUserLabel.numberOfLines = 0
-            signInLabel.numberOfLines = 0
-        } else {
-            labelsStackView.axis = .horizontal
-            
-            oldUserLabel.numberOfLines = 1
-            signInLabel.numberOfLines = 1
-        }
-    }
 }
 
-extension KFCFrontPage: UIConfigurable {
+//MARK: - UIConfigurable
+extension FrontPageViewController: UIConfigurable {
     
     func configureStyling() {
         title = "Front Page"
