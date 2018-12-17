@@ -9,6 +9,21 @@
 import UIKit.UIImageView
 
 extension UIImageView {
+    enum Size: String {
+        case small, medium, big
+
+        func get() -> CGFloat {
+            switch self {
+            case .small:
+                return 112
+            case .medium:
+                return 128
+            case .big:
+                return 224
+            }
+        }
+    }
+
     func makeItKifuStyle() {
         layer.cornerRadius = CALayer.kfCornerRadius
         contentMode = .scaleAspectFill

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVCollaboratorInfo: KFVDescriptor {
+class KFVCollaboratorInfo: DescriptorView {
     
     let headlineLabel = UILabel()
     let descriptionLabel = UILabel()

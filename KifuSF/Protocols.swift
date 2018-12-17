@@ -9,6 +9,9 @@
 import Foundation
 
 protocol UIConfigurable {
+    /**
+     Poof
+     */
     func configureStyling()
     func configureLayout()
     func configureGestures()

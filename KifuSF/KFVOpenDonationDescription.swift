@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class KFVOpenDonationDescription: KFVDescriptor {
+class KFVOpenDonationDescription: DescriptorView {
     
     let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     let secondSubtitleLabel = KFVSticky<UILabel>()
@@ -45,10 +45,8 @@ class KFVOpenDonationDescription: KFVDescriptor {
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         statisticsStickyView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
-        
-        for constraint in imageConstraints {
-            constraint.constant = 128
-        }
+
+        defaultImageViewSize = .medium
         
         subtitleStickyLabel.updateStickySide()
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVUserInfo: KFVDescriptor {
+class KFVUserInfo: DescriptorView {
     let descriptionLabel = UILabel()
     let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
     

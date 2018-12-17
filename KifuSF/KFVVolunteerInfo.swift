@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVVolunteerInfo: KFVDescriptor {
+class KFVVolunteerInfo: DescriptorView {
 
     let statisticsView = KFVStatistics()
     let confirmationStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
