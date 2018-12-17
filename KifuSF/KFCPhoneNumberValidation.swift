@@ -16,7 +16,7 @@ class KFCPhoneNumberValidation: UIViewController {
     let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
-    let authenticationCodeTextFieldContainer = KFTextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     
     let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")

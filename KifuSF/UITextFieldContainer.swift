@@ -8,10 +8,11 @@
 
 import UIKit
 
-class KFTextFieldContainer: UIView, UIConfigurable {
-    
-    let textField = UITextField()
-    
+class UITextFieldContainer: UIView {
+    //MARK: - Variables
+    let textField = UITextField(forAutoLayout: ())
+
+    //MARK: - Initializers
     convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, isSecureTextEntry: Bool ,placeholder: String) {
         self.init(textContentType: textContentType, returnKeyType: returnKeyType, placeholder: placeholder)
         
@@ -38,41 +39,45 @@ class KFTextFieldContainer: UIView, UIConfigurable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        addSubview(textField)
-        
+
         configureStyling()
         configureLayout()
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    //MARK: - Methods
     func setTag(_ tag: Int) {
         self.tag = tag
         textField.tag = tag
     }
-    
+}
+
+//MARK: - UIConfigurable
+extension UITextFieldContainer: UIConfigurable {
     func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
         backgroundColor = .kfGray
         textField.backgroundColor = .clear
-        
+
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .none
         textField.enablesReturnKeyAutomatically = true
-        
+
         textField.font = UIFont.preferredFont(forTextStyle: .title3)
         textField.adjustsFontForContentSizeCategory = true
     }
-    
+
     func configureLayout() {
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        textField.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.ContentView)
-        textField.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.ContentView)
-        textField.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.ContentView)
-        textField.autoPinEdge(toSuperviewEdge: .bottom, withInset: KFPadding.ContentView)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+
+        addSubview(textField) 
+
+        textField.autoPinEdge(toSuperviewMargin: .top)
+        textField.autoPinEdge(toSuperviewMargin: .leading)
+        textField.autoPinEdge(toSuperviewMargin: .trailing)
+        textField.autoPinEdge(toSuperviewMargin: .bottom)
     }
 }

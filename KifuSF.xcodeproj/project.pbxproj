@@ -36,7 +36,7 @@
 		C515B2302175257100051FFD /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C515B22F2175257100051FFD /* AuthenticationServices.framework */; };
 		C53D92B82171E42500AE3882 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B72171E42500AE3882 /* LoginViewController.swift */; };
 		C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B92171E46700AE3882 /* UIViewController.swift */; };
-		C53D92BC21724B2900AE3882 /* KFTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */; };
+		C53D92BC21724B2900AE3882 /* UITextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */; };
 		C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BD217341FB00AE3882 /* UIScrollView.swift */; };
 		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */; };
@@ -149,7 +149,7 @@
 		C515B22F2175257100051FFD /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		C53D92B72171E42500AE3882 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C53D92B92171E46700AE3882 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFTextFieldContainer.swift; sourceTree = "<group>"; };
+		C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldContainer.swift; sourceTree = "<group>"; };
 		C53D92BD217341FB00AE3882 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLocationServiceDisclaimer.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 				C50182FD2143B8F600257412 /* KFVStatistics.swift */,
 				C50182F52142E3F100257412 /* KFVDescriptor.swift */,
 				C58D9EBC216008D900B180B3 /* KFButton.swift */,
-				C53D92BB21724B2900AE3882 /* KFTextFieldContainer.swift */,
+				C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */,
 				C576EFDB21C65A1500F96922 /* UIInputView.swift */,
 			);
 			name = CustomUI;
@@ -936,7 +936,7 @@
 				C50E472D2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift in Sources */,
 				C53D92C02173438300AE3882 /* UIImageView.swift in Sources */,
 				C58B05D2213DBD380086124B /* UIView.swift in Sources */,
-				C53D92BC21724B2900AE3882 /* KFTextFieldContainer.swift in Sources */,
+				C53D92BC21724B2900AE3882 /* UITextFieldContainer.swift in Sources */,
 				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,

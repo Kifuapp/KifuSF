@@ -13,7 +13,7 @@ class UIInputView: UIView {
     private let contentStackView = UIStackView(axis: .vertical, alignment: .fill,
                                                spacing: KFPadding.Body, distribution: .fill)
     let headerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let textFieldContainer = KFTextFieldContainer()
+    let textFieldContainer = UITextFieldContainer()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
