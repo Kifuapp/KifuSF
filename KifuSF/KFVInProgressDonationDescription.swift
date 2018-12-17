@@ -12,7 +12,7 @@ class KFVInProgressDonationDescription: UIDescriptorView {
     
     let statusStackView = UIStackView(axis: .vertical)
     let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let statusDescriptionStickyLabel = KFVSticky<UILabel>(stickySide: .top)
+    let statusDescriptionStickyLabel = UIStickyView<UILabel>(stickySide: .top)
     
     let donationDescriptionStackView = UIStackView(axis: .vertical)
     let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)

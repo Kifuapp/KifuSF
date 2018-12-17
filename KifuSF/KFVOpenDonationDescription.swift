@@ -11,8 +11,8 @@ import Kingfisher
 
 class KFVOpenDonationDescription: UIDescriptorView {
     
-    let statisticsStickyView = KFVSticky<UIStatisticsView>(stickySide: .top)
-    let secondSubtitleLabel = KFVSticky<UILabel>()
+    let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
+    let secondSubtitleLabel = UIStickyView<UILabel>()
     
     let statusStackView = UIStackView()
     let statusTitleLabel = UILabel()

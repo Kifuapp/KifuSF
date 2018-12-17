@@ -13,11 +13,11 @@ class UIStatisticsView: UIView {
     private let contentStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fillEqually)
     
     private let deliveryStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
-    private let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
+    private let deliveryIconView = UIIconView(image: .kfDeliveryIcon)
     private let deliveryCountLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
     
     private let donationStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body)
-    private let donationIconView = KFVIcon(image: .kfDonationIcon)
+    private let donationIconView = UIIconView(image: .kfDonationIcon)
     private let donationCountLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
 
     //MARK: Initializers

@@ -22,7 +22,7 @@ class UIDescriptorView: UIView, UIConfigurable {
     let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
 
     let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let subtitleStickyLabel = KFVSticky<UILabel>()
+    let subtitleStickyLabel = UIStickyView<UILabel>()
 
     //MARK: - Initializers
     override init(frame: CGRect) {

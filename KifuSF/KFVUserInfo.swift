@@ -10,7 +10,7 @@ import UIKit
 
 class KFVUserInfo: UIDescriptorView {
     let descriptionLabel = UILabel()
-    let statisticsStickyView = KFVSticky<UIStatisticsView>(stickySide: .top)
+    let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
     
     override func configureLayout() {
         super.configureLayout()
