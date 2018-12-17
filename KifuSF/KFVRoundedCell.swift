@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVRoundedCell<T: DescriptorView>: UITableViewCell, UIConfigurable {
+class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
     let descriptorView = T()
     
     static var identifier: String {

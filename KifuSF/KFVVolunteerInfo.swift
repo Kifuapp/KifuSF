@@ -8,9 +8,9 @@
 
 import UIKit
 
-class KFVVolunteerInfo: DescriptorView {
+class KFVVolunteerInfo: UIDescriptorView {
 
-    let statisticsView = KFVStatistics()
+    let statisticsView = UIStatisticsView()
     let confirmationStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
     var indexPath: IndexPath?
 
@@ -64,8 +64,8 @@ class KFVVolunteerInfo: DescriptorView {
         titleLabel.text = "@\(data.username)"
         subtitleStickyLabel.contentView.text = "Reputation: \(data.userReputation)%"
 
-        statisticsView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+        statisticsView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
     }
 }
 

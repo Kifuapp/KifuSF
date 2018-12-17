@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVInProgressDonationDescription: DescriptorView {
+class KFVInProgressDonationDescription: UIDescriptorView {
     
     let statusStackView = UIStackView(axis: .vertical)
     let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)

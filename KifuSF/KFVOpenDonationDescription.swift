@@ -9,9 +9,9 @@
 import UIKit
 import Kingfisher
 
-class KFVOpenDonationDescription: DescriptorView {
+class KFVOpenDonationDescription: UIDescriptorView {
     
-    let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
+    let statisticsStickyView = KFVSticky<UIStatisticsView>(stickySide: .top)
     let secondSubtitleLabel = KFVSticky<UILabel>()
     
     let statusStackView = UIStackView()
@@ -92,9 +92,9 @@ class KFVOpenDonationDescription: DescriptorView {
         subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"
         
         secondSubtitleLabel.contentView.text = "Reputation \(data.userReputation)%"
-        
-        statisticsStickyView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsStickyView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+
+        statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
         
         statusDescription.text = "\(data.distance) Miles away from your current location"
         donationDescriptionContentLabel.text = data.description
