@@ -15,13 +15,13 @@ class UITextFieldContainer: UIView {
     //MARK: - Initializers
     convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, isSecureTextEntry: Bool ,placeholder: String) {
         self.init(textContentType: textContentType, returnKeyType: returnKeyType, placeholder: placeholder)
-        
+
         textField.isSecureTextEntry = isSecureTextEntry
     }
     
     convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, keyboardType: UIKeyboardType ,placeholder: String) {
         self.init(textContentType: textContentType, returnKeyType: returnKeyType, placeholder: placeholder)
-        
+
         textField.keyboardType = keyboardType
     }
     

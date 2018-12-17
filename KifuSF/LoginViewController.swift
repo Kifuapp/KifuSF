@@ -17,11 +17,17 @@ class LoginViewController: UIViewController {
     
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
-    private let emailInputView = UIInputView(title: "Email", placeholder: "me@example.com",
-                                     textContentType: .emailAddress, returnKeyType: .next)
+    private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
+                                                                   content: UITextFieldContainer(textContentType: .emailAddress,
+                                                                                                 returnKeyType: .next,
+                                                                                                 keyboardType: .emailAddress,
+                                                                                                 placeholder: "example@kifu.com"))
 
-    private let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
-                                        textContentType: .password, returnKeyType: .done)
+    private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
+                                                                   content: UITextFieldContainer(textContentType: .password,
+                                                                                                 returnKeyType: .done,
+                                                                                                 isSecureTextEntry: true,
+                                                                                                 placeholder: "Password"))
     
     private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
@@ -69,8 +75,8 @@ class LoginViewController: UIViewController {
 
     //MARK: - Functions
     @objc func logInButtonTapped() {
-        guard let email = emailInputView.textFieldContainer.textField.text, !email.isEmpty,
-            let password = passwordInputView.textFieldContainer.textField.text, !password.isEmpty else {
+        guard let email = emailInputView.contentView.textField.text, !email.isEmpty,
+            let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
         
@@ -88,7 +94,7 @@ class LoginViewController: UIViewController {
             User.setCurrent(user, writeToUserDefaults: true)
 
             if User.current.isVerified {
-                let mainViewControllers = KifuTabBarController()
+                let mainViewControllers = KifuTabBarViewController()
                 self.present(mainViewControllers, animated: true)
             } else {
                 let phoneNumberValidationViewController = KFCPhoneNumberValidation()
@@ -136,8 +142,8 @@ class LoginViewController: UIViewController {
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == emailInputView.textFieldContainer.textField {
-            passwordInputView.textFieldContainer.textField.becomeFirstResponder()
+        if textField == emailInputView.contentView.textField {
+            passwordInputView.contentView.textField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
             logInButtonTapped()
@@ -162,8 +168,8 @@ extension LoginViewController: UIConfigurable {
     }
     
     func configureDelegates() {
-        emailInputView.textFieldContainer.textField.delegate = self
-        passwordInputView.textFieldContainer.textField.delegate = self
+        emailInputView.contentView.textField.delegate = self
+        passwordInputView.contentView.textField.delegate = self
     }
     
     func configureStyling() {

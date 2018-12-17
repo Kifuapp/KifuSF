@@ -56,7 +56,7 @@ class KFCPhoneNumberValidation: UIViewController {
                     print(succes)
                 })
 
-                let mainViewControllers = KifuTabBarController()
+                let mainViewControllers = KifuTabBarViewController()
                 self.present(mainViewControllers, animated: true)
             } else {
                 //TODO: show error
