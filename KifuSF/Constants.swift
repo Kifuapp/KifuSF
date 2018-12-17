@@ -24,4 +24,6 @@ struct KFErrorMessage {
     static let textStyleNotFount = "could not load text style"
     static let unknownIdentifier = "unknown identifier"
     static let seriousBug = "Somebody is dumb"
+    static let inputValidationFailed = "Input Validation Failed"
+    static func inputValidationFailed(_ message: String) -> String { return "Input Validation Failed: \(message)" }
 }
