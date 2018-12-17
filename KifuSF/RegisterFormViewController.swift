@@ -47,7 +47,7 @@ class RegisterFormViewController: UIViewController {
     private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
     
-    private let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
+    private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
 
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {

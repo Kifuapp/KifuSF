@@ -11,7 +11,7 @@ import UIKit
 class KFVVolunteerInfo: UIDescriptorView {
 
     let statisticsView = UIStatisticsView()
-    let confirmationStickyButton = UIStickyView<KFButton>(stickySide: .bottom)
+    let confirmationStickyButton = UIStickyView<UIAnimatedButton>(stickySide: .bottom)
     var indexPath: IndexPath?
 
     weak var delegate: KFPVolunteerInfoCellDelegate?

@@ -18,7 +18,7 @@ class KFCDelivery: KFCModularTableView {
         }
     }
     
-    private let actionButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    private let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     private lazy var photoHelper: PhotoHelper = {
         let helper = PhotoHelper()

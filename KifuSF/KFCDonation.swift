@@ -18,7 +18,7 @@ class KFCDonation: KFCModularTableView {
         }
     }
 
-    let actionButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     private func updateUI() {
         reloadData()

@@ -19,7 +19,7 @@ class KFCPhoneNumberValidation: UIViewController {
     let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     
-    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
     
@@ -56,7 +56,7 @@ class KFCPhoneNumberValidation: UIViewController {
                     print(succes)
                 })
 
-                let mainViewControllers = KFCTabBar()
+                let mainViewControllers = KifuTabBarController()
                 self.present(mainViewControllers, animated: true)
             } else {
                 //TODO: show error

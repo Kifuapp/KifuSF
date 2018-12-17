@@ -27,7 +27,7 @@ class KFCDetailedDonation: KFCModularTableView {
     }
     
     /** this can say Reqeust Item or Cancel Request */
-    private let actionButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    private let actionButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
     
     // MARK: - RETURN VALUES
     

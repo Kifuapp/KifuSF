@@ -15,7 +15,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     
     private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    private let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Register")
     private let googleSignInButton = GIDSignInButton()
     
     private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
