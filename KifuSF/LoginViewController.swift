@@ -8,26 +8,22 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIScrollableViewController {
     //MARK: - Variables
-    private let contentScrollView = UIScrollView()
-    
-    private let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
     private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
-                                                                   content: UITextFieldContainer(textContentType: .emailAddress,
+                                                                   contentView: UITextFieldContainer(textContentType: .emailAddress,
                                                                                                  returnKeyType: .next,
                                                                                                  keyboardType: .emailAddress,
                                                                                                  placeholder: "example@kifu.com"))
-
     private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
-                                                                   content: UITextFieldContainer(textContentType: .password,
-                                                                                                 returnKeyType: .done,
-                                                                                                 isSecureTextEntry: true,
-                                                                                                 placeholder: "Password"))
+                                                                      contentView: UITextFieldContainer(textContentType: .password,
+                                                                                                        returnKeyType: .done,
+                                                                                                        isSecureTextEntry: true,
+                                                                                                        placeholder: "Password"))
     
     private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
@@ -174,22 +170,14 @@ extension LoginViewController: UIConfigurable {
     
     func configureStyling() {
         title = "Log In"
-        
-        configureContentScrollViewStyling()
-        configureForgotPasswordLabelStyling()
-        
-        view.backgroundColor = .kfSuperWhite
-        
-        logInButton.autoReset = false
-        
-        errorLabel.textAlignment = .center
-    }
-    
-    func configureContentScrollViewStyling() {
-        contentScrollView.keyboardDismissMode = .interactive
-        contentScrollView.alwaysBounceVertical = true
         contentScrollView.updateBottomPadding(KFPadding.StackView)
+        view.backgroundColor = .kfSuperWhite
+        logInButton.autoReset = false
+        errorLabel.textAlignment = .center
+
+        configureForgotPasswordLabelStyling()
     }
+
     
     func configureForgotPasswordLabelStyling() {
         forgotPasswordLabel.text = "Forgot Password?"
@@ -198,19 +186,9 @@ extension LoginViewController: UIConfigurable {
     }
     
     func configureLayout() {
-        view.addSubview(contentScrollView)
-
-        contentScrollView.addSubview(outerStackView)
-        contentScrollView.directionalLayoutMargins.top = 8
-        contentScrollView.directionalLayoutMargins.leading = 16
-        contentScrollView.directionalLayoutMargins.trailing = 16
-        
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
-        
-        configureConstraintsForContentScrollView()
-        configureConstraintsForOuterStackView()
     }
     
     func configureLayoutForUpperStackView() {
@@ -227,22 +205,5 @@ extension LoginViewController: UIConfigurable {
     func configureLayoutForInputStackView() {
         inputStackView.addArrangedSubview(emailInputView)
         inputStackView.addArrangedSubview(passwordInputView)
-    }
-
-    func configureConstraintsForOuterStackView() {
-        outerStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        outerStackView.autoMatch(.width, to: .width, of: view,
-                                 withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
-
-        outerStackView.autoPinEdge(toSuperviewMargin: .top)
-        outerStackView.autoPinEdge(toSuperviewMargin: .leading)
-        outerStackView.autoPinEdge(toSuperviewMargin: .trailing)
-        outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
-    }
-    
-    func configureConstraintsForContentScrollView() {
-        contentScrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentScrollView.autoPinEdgesToSuperviewEdges()
     }
 }

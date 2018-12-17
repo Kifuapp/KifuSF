@@ -13,22 +13,27 @@ class UITextFieldContainer: UIView {
     let textField = UITextField(forAutoLayout: ())
 
     //MARK: - Initializers
-    convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, isSecureTextEntry: Bool ,placeholder: String) {
+    convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, isSecureTextEntry: Bool, placeholder: String) {
         self.init(textContentType: textContentType, returnKeyType: returnKeyType, placeholder: placeholder)
 
         textField.isSecureTextEntry = isSecureTextEntry
     }
     
-    convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, keyboardType: UIKeyboardType ,placeholder: String) {
+    convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, keyboardType: UIKeyboardType, placeholder: String) {
         self.init(textContentType: textContentType, returnKeyType: returnKeyType, placeholder: placeholder)
 
         textField.keyboardType = keyboardType
     }
     
     convenience init(textContentType: UITextContentType, returnKeyType: UIReturnKeyType, placeholder: String) {
-        self.init()
+        self.init(returnKeyType: returnKeyType, placeholder: placeholder)
         
         textField.textContentType = textContentType
+    }
+
+    convenience init(returnKeyType: UIReturnKeyType, placeholder: String) {
+        self.init()
+
         textField.returnKeyType = returnKeyType
         textField.placeholder = placeholder
     }
@@ -72,12 +77,7 @@ extension UITextFieldContainer: UIConfigurable {
 
     func configureLayout() {
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-
-        addSubview(textField) 
-
-        textField.autoPinEdge(toSuperviewMargin: .top)
-        textField.autoPinEdge(toSuperviewMargin: .leading)
-        textField.autoPinEdge(toSuperviewMargin: .trailing)
-        textField.autoPinEdge(toSuperviewMargin: .bottom)
+        addSubview(textField)
+        textField.autoPinEdgesToSuperviewMargins()
     }
 }

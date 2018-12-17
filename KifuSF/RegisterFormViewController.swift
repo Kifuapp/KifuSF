@@ -10,11 +10,8 @@ import UIKit
 import PureLayout
 import FirebaseAuth
 
-class RegisterFormViewController: UIViewController {
+class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Variables
-    private let contentScrollView = UIScrollView()
-    
-    private let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
@@ -29,20 +26,28 @@ class RegisterFormViewController: UIViewController {
     private let profileImageHelper = PhotoHelper()
     private var userSelectedAProfileImage: Bool? = nil
 
-    private let fullNameInputView = UIInputView(title: "Full Name", placeholder: "Kifu SF",
-                                             textContentType: .name, returnKeyType: .next)
-
-    private let usernameInputView = UIInputView(title: "Username", placeholder: "@Pondorasti",
-                                                textContentType: .nickname, returnKeyType: .next)
-
-    private let phoneNumberInputView = UIInputView(title: "Phone Number", placeholder: "+12345678",
-                                                textContentType: .telephoneNumber, returnKeyType: .next)
-
-    private let emailInputView = UIInputView(title: "Email", placeholder: "example@kifu.com",
-                                                   textContentType: .emailAddress, returnKeyType: .next)
-
-    private let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
-                                                   textContentType: .newPassword, returnKeyType: .done)
+    private let fullNameInputView = UIGroupView<UITextFieldContainer>(title: "Full Name",
+                                                                      contentView: UITextFieldContainer(textContentType: .name,
+                                                                                                    returnKeyType: .next,
+                                                                                                    placeholder: "Kifu SF"))
+    private let usernameInputView = UIGroupView<UITextFieldContainer>(title: "Username",
+                                                                      contentView: UITextFieldContainer(textContentType: .nickname,
+                                                                                                    returnKeyType: .next,
+                                                                                                    placeholder: "@Pondorasti"))
+    private let phoneNumberInputView = UIGroupView<UITextFieldContainer>(title: "Phone Number",
+                                                                         contentView: UITextFieldContainer(textContentType: .telephoneNumber,
+                                                                                                       returnKeyType: .next,
+                                                                                                       placeholder: "+12345678"))
+    private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
+                                                                   contentView: UITextFieldContainer(textContentType: .emailAddress,
+                                                                                                 returnKeyType: .next,
+                                                                                                 keyboardType: .emailAddress,
+                                                                                                 placeholder: "example@kifu.com"))
+    private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
+                                                                      contentView: UITextFieldContainer(textContentType: .newPassword,
+                                                                                                    returnKeyType: .done,
+                                                                                                    isSecureTextEntry: true,
+                                                                                                    placeholder: "Password"))
     
     private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
@@ -52,7 +57,7 @@ class RegisterFormViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow(_:)),
                                                name: .UIKeyboardWillShow, object: nil)
         
@@ -103,13 +108,16 @@ class RegisterFormViewController: UIViewController {
         //unwrap all values and make sure the string is not empty
         guard let image = profileImageView.image,
             let _ = userSelectedAProfileImage,
-            let fullName = fullNameInputView.textFieldContainer.textField.text, !fullName.isEmpty,
-            let username = usernameInputView.textFieldContainer.textField.text, !username.isEmpty,
-            let contactNumber = phoneNumberInputView.textFieldContainer.textField.text, !contactNumber.isEmpty,
-            let email = emailInputView.textFieldContainer.textField.text, !email.isEmpty,
-            let password = passwordInputView.textFieldContainer.textField.text, !password.isEmpty else {
+            let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
+            let username = usernameInputView.contentView.textField.text, !username.isEmpty,
+            let contactNumber = phoneNumberInputView.contentView.textField.text, !contactNumber.isEmpty,
+            let email = emailInputView.contentView.textField.text, !email.isEmpty,
+            let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
+
+        let resultString = contactNumber
+        contactNumber.map { resultString = resultString.stringByReplacingOccurrencesOfString($0, withString: "")
         
         //TODO: check for unique username
         UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
@@ -155,13 +163,13 @@ extension RegisterFormViewController: UITextFieldDelegate {
         
         switch nextTextFieldTag {
         case 1:
-            usernameInputView.textFieldContainer.textField.becomeFirstResponder()
+            usernameInputView.contentView.textField.becomeFirstResponder()
         case 2:
-            phoneNumberInputView.textFieldContainer.textField.becomeFirstResponder()
+            phoneNumberInputView.contentView.textField.becomeFirstResponder()
         case 3:
-            emailInputView.textFieldContainer.textField.becomeFirstResponder()
+            emailInputView.contentView.textField.becomeFirstResponder()
         case 4:
-            passwordInputView.textFieldContainer.textField.becomeFirstResponder()
+            passwordInputView.contentView.textField.becomeFirstResponder()
         case 5:
             continueButtonTapped()
             fallthrough
@@ -176,18 +184,16 @@ extension RegisterFormViewController: UITextFieldDelegate {
 //MARK: - UIConfigurable
 extension RegisterFormViewController: UIConfigurable {
     func configureDelegates() {
-        fullNameInputView.textFieldContainer.textField.delegate = self
-        usernameInputView.textFieldContainer.textField.delegate = self
-        phoneNumberInputView.textFieldContainer.textField.delegate = self
-        emailInputView.textFieldContainer.textField.delegate = self
-        passwordInputView.textFieldContainer.textField.delegate = self
+        fullNameInputView.contentView.textField.delegate = self
+        usernameInputView.contentView.textField.delegate = self
+        phoneNumberInputView.contentView.textField.delegate = self
+        emailInputView.contentView.textField.delegate = self
+        passwordInputView.contentView.textField.delegate = self
     }
     
     func configureStyling() {
-        
         view.backgroundColor = .kfSuperWhite
-        
-        configureContentScrollView()
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
         
         profileImageView.makeItKifuStyle()
         profileImageView.isUserInteractionEnabled = true
@@ -197,19 +203,13 @@ extension RegisterFormViewController: UIConfigurable {
         
         continueButton.autoReset = false
         
-        fullNameInputView.textFieldContainer.setTag(0)
-        usernameInputView.textFieldContainer.setTag(1)
-        phoneNumberInputView.textFieldContainer.setTag(2)
-        emailInputView.textFieldContainer.setTag(3)
-        passwordInputView.textFieldContainer.setTag(4)
+        fullNameInputView.contentView.setTag(0)
+        usernameInputView.contentView.setTag(1)
+        phoneNumberInputView.contentView.setTag(2)
+        emailInputView.contentView.setTag(3)
+        passwordInputView.contentView.setTag(4)
         
         configureText()
-    }
-    
-    func configureContentScrollView() {
-        contentScrollView.keyboardDismissMode = .interactive
-        contentScrollView.alwaysBounceVertical = true
-        contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
     
     func configureText() {
@@ -231,21 +231,12 @@ extension RegisterFormViewController: UIConfigurable {
     }
     
     func configureLayout() {
-        view.addSubview(contentScrollView)
-
-        contentScrollView.addSubview(outerStackView)
-        contentScrollView.directionalLayoutMargins.top = 8
-        contentScrollView.directionalLayoutMargins.leading = 16
-        contentScrollView.directionalLayoutMargins.trailing = 16
-        
         configureLayoutForProfileImageView()
         
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
-        
-        configureConstraintsForContentScrollView()
-        configureConstraintsForOuterStackView()
+
         configureConstraintsForProfileImageView()
     }
     
@@ -256,23 +247,6 @@ extension RegisterFormViewController: UIConfigurable {
         profileImageView.autoSetDimension(.height, toSize: KFPadding.SmallPictureLength)
         
         profileImageSpacer.setContentCompressionResistancePriority(.init(rawValue: 249), for: .horizontal)
-    }
-    
-    func configureConstraintsForOuterStackView() {
-        outerStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        outerStackView.autoMatch(.width, to: .width, of: view,
-                                 withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
-
-        outerStackView.autoPinEdge(toSuperviewMargin: .top)
-        outerStackView.autoPinEdge(toSuperviewMargin: .leading)
-        outerStackView.autoPinEdge(toSuperviewMargin: .trailing)
-        outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
-    }
-    
-    func configureConstraintsForContentScrollView() {
-        contentScrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentScrollView.autoPinEdgesToSuperviewEdges()
     }
     
     func configureLayoutForOuterStackView() {

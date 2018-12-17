@@ -16,8 +16,8 @@ class UIGroupView<T: UIView>: UIView {
     let contentView: T
 
     //MARK: - Initializers
-    init(title: String, content: T) {
-        self.contentView = content
+    init(title: String, contentView: T) {
+        self.contentView = contentView
 
         super.init(frame: CGRect.zero)
 
