@@ -16,8 +16,8 @@ class KFCLocationServiceDisclaimer: UIViewController {
     
     let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
     
-    let activateLocationButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
-    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let activateLocationButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
+    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     let locationManager = CLLocationManager()
 

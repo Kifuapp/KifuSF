@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KFVDonationInfo: KFVDescriptor {
-    let descriptionStickyTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
+class KFVDonationInfo: UIDescriptorView {
+    let descriptionStickyTextView = UIStickyView<UILabel>(stickySide: .top, withOffset: 8)
     
     override func configureLayout() {
         super.configureLayout()

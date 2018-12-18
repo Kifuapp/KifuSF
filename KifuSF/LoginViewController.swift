@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
     
-    private let logInButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+    private let logInButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Log In")
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
             User.setCurrent(user, writeToUserDefaults: true)
 
             if User.current.isVerified {
-                let mainViewControllers = KFCTabBar()
+                let mainViewControllers = KifuTabBarController()
                 self.present(mainViewControllers, animated: true)
             } else {
                 let phoneNumberValidationViewController = KFCPhoneNumberValidation()

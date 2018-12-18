@@ -16,15 +16,15 @@ class KFVEntityInfo: UIView {
     let infoStackView = UIStackView()
     
     let nameStackView = UIStackView()
-    let nameTitleLabel = KFVSticky<UILabel>(stickySide: .top)
+    let nameTitleLabel = UIStickyView<UILabel>(stickySide: .top)
     let nameDescriptionLabel = UILabel()
     
     let phoneNumberStackView = UIStackView()
-    let phoneNumberTitleLabel = KFVSticky<UILabel>(stickySide: .top)
+    let phoneNumberTitleLabel = UIStickyView<UILabel>(stickySide: .top)
     let phoneNumberDescriptionLabel = UILabel()
     
     let addressStackView = UIStackView()
-    let addressTitleLabel = KFVSticky<UILabel>(stickySide: .top)
+    let addressTitleLabel = UIStickyView<UILabel>(stickySide: .top)
     let addressDescriptionLabel = UILabel()
     
     override init(frame: CGRect) {

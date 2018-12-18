@@ -8,11 +8,11 @@
 
 import UIKit
 
-class KFVInProgressDonationDescription: KFVDescriptor {
+class KFVInProgressDonationDescription: UIDescriptorView {
     
     let statusStackView = UIStackView(axis: .vertical)
     let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let statusDescriptionStickyLabel = KFVSticky<UILabel>(stickySide: .top)
+    let statusDescriptionStickyLabel = UIStickyView<UILabel>(stickySide: .top)
     
     let donationDescriptionStackView = UIStackView(axis: .vertical)
     let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
@@ -32,8 +32,8 @@ class KFVInProgressDonationDescription: KFVDescriptor {
         
         infoStackView.addArrangedSubview(statusStackView)
         contentsStackView.addArrangedSubview(donationDescriptionStackView)
-        
-        let _ = imageConstraints.map() { $0.constant = 128 }
+
+        defaultImageViewSize = .medium
     }
     
     override func configureStyling() {

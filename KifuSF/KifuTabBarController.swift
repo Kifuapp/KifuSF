@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KFCTabBar: UITabBarController {
-
+class KifuTabBarController: UITabBarController {
+    //MARK: - Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +27,4 @@ class KFCTabBar: UITabBarController {
         viewControllers = [homeVC, statusVC, leaderboardVC]
         viewControllers = viewControllers?.map { UINavigationController(rootViewController: $0) }
     }
-
-
 }

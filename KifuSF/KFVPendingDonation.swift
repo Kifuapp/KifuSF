@@ -8,9 +8,9 @@
 
 import UIKit
 
-class KFVPendingDonation: KFVDescriptor {
+class KFVPendingDonation: UIDescriptorView {
 
-    let cancelStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
+    let cancelStickyButton = UIStickyView<UIAnimatedButton>(stickySide: .bottom)
 
     var indexPath: IndexPath?
 

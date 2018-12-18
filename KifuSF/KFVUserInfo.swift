@@ -8,9 +8,9 @@
 
 import UIKit
 
-class KFVUserInfo: KFVDescriptor {
+class KFVUserInfo: UIDescriptorView {
     let descriptionLabel = UILabel()
-    let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
+    let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
     
     override func configureLayout() {
         super.configureLayout()
@@ -40,9 +40,9 @@ class KFVUserInfo: KFVDescriptor {
         titleLabel.text = data.name
         subtitleStickyLabel.contentView.text = "@\(data.username)"
         descriptionLabel.text = "Reputation: \(data.userReputation)%"
-        
-        statisticsStickyView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsStickyView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+
+        statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
     }
 }
 

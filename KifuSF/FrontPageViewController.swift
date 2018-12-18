@@ -15,7 +15,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     
     private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    private let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Register")
     private let googleSignInButton = GIDSignInButton()
     
     private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
@@ -80,6 +80,7 @@ extension FrontPageViewController: UIConfigurable {
     func configureLayout() {
         view.directionalLayoutMargins.leading = 16
         view.directionalLayoutMargins.trailing = 16
+        view.directionalLayoutMargins.bottom = 16
 
         view.addSubview(logoImageView)
         view.addSubview(bottomStackView)

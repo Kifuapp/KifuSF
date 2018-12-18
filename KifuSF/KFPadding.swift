@@ -17,4 +17,5 @@ struct KFPadding {
     static let BigSpacing: CGFloat = 24.0
     
     static let SmallPictureLength: CGFloat = 112
+    static let BigPictureLength: CGFloat = 224
 }

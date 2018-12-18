@@ -30,13 +30,13 @@ final class KFVWidget: UIView, UIConfigurable {
     private let deliveryContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
 
     private let deliveryLeftEmptyView = UIView(forAutoLayout: ())
-    private let deliveryIconView = KFVIcon(image: .kfDeliveryIcon)
+    private let deliveryIconView = UIIconView(image: .kfDeliveryIcon)
 
     private let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
     private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
 
-    private let deliveryDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    private let deliveryDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let deliveryRightEmptyView = UIView(forAutoLayout: ())
     private let deliverySpacer = UIView(forAutoLayout: ())
 
@@ -44,13 +44,13 @@ final class KFVWidget: UIView, UIConfigurable {
     private let donationContentsStackView = UIStackView(axis: .horizontal, alignment: .center, spacing: 16, distribution: .fill)
 
     private let donationLeftEmptyView = UIView(forAutoLayout: ())
-    private let donationIconView = KFVIcon(image: .kfDonationIcon)
+    private let donationIconView = UIIconView(image: .kfDonationIcon)
 
     private let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
     private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
 
-    private let donationDisclosureImageView = KFVIcon(image: .kfDisclosureIcon)
+    private let donationDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let donationRightEmptyView = UIView(forAutoLayout: ())
     private let donationSpacer = UIView(forAutoLayout: ())
 

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class KFVCollaboratorInfo: KFVDescriptor {
+class KFVCollaboratorInfo: UIDescriptorView {
     
     let headlineLabel = UILabel()
     let descriptionLabel = UILabel()
-    let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
+    let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
     
     override func configureLayout() {
         contentsStackView.addArrangedSubview(headlineLabel)
@@ -53,8 +53,8 @@ class KFVCollaboratorInfo: KFVDescriptor {
         titleLabel.text = data.name
         subtitleStickyLabel.contentView.text = "@\(data.username)"
         descriptionLabel.text = "Reputation: \(data.userReputation)%"
-        
-        statisticsStickyView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsStickyView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+
+        statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
     }
 }
