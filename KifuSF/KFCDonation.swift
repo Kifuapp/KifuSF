@@ -123,6 +123,20 @@ class KFCDonation: KFCModularTableView {
         return KFMDestinationMap(coordinate: location)
     }
     
+    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+        switch cellType {
+        case .destinationMap:
+            guard let donation = self.donation else {
+                return assertionFailure("No donation given while map was tappable")
+            }
+            
+            MapHelper(long: donation.longitude, lat: donation.latitude)
+                .open()
+        default:
+            break
+        }
+    }
+    
     @objc func pressActionButton(_ sender: Any) {
         if let donation = self.donation {
             switch donation.status {
