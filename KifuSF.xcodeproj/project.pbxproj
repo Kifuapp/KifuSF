@@ -58,11 +58,11 @@
 		C564187A216A089F00664DDB /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5641879216A089F00664DDB /* RegisterFormViewController.swift */; };
 		C564187C216A456400664DDB /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564187B216A456400664DDB /* FrontPageViewController.swift */; };
 		C564187E216A86BA00664DDB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564187D216A86BA00664DDB /* UIColor.swift */; };
-		C576EFDC21C65A1500F96922 /* UIInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFDB21C65A1500F96922 /* UIInputView.swift */; };
 		C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFDD21C66A0D00F96922 /* Notification.swift */; };
 		C576EFE821C7AE0600F96922 /* CreateDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFE721C7AE0600F96922 /* CreateDonationViewController.swift */; };
 		C576EFEA21C7AE9400F96922 /* UIGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFE921C7AE9400F96922 /* UIGroupView.swift */; };
 		C576EFEC21C7EAA000F96922 /* UIScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFEB21C7EAA000F96922 /* UIScrollableViewController.swift */; };
+		C576EFEE21C82A4E00F96922 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576EFED21C82A4E00F96922 /* String.swift */; };
 		C58B05D2213DBD380086124B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58B05D1213DBD380086124B /* UIView.swift */; };
 		C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */; };
 		C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */; };
@@ -175,11 +175,11 @@
 		C564187B216A456400664DDB /* FrontPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPageViewController.swift; sourceTree = "<group>"; };
 		C564187D216A86BA00664DDB /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C564187F216A872B00664DDB /* KeyedProperties.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KeyedProperties.stencil; sourceTree = "<group>"; };
-		C576EFDB21C65A1500F96922 /* UIInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputView.swift; sourceTree = "<group>"; };
 		C576EFDD21C66A0D00F96922 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		C576EFE721C7AE0600F96922 /* CreateDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController.swift; sourceTree = "<group>"; };
 		C576EFE921C7AE9400F96922 /* UIGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGroupView.swift; sourceTree = "<group>"; };
 		C576EFEB21C7EAA000F96922 /* UIScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollableViewController.swift; sourceTree = "<group>"; };
+		C576EFED21C82A4E00F96922 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C58B05D1213DBD380086124B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		C58D9EB1215E0FC800B180B3 /* KFVEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVEntityInfo.swift; sourceTree = "<group>"; };
 		C58D9EB3215E137A00B180B3 /* KFMEntityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMEntityInfo.swift; sourceTree = "<group>"; };
@@ -337,7 +337,6 @@
 				C50182F52142E3F100257412 /* UIDescriptorView.swift */,
 				C58D9EBC216008D900B180B3 /* UIAnimatedButton.swift */,
 				C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */,
-				C576EFDB21C65A1500F96922 /* UIInputView.swift */,
 				C576EFE921C7AE9400F96922 /* UIGroupView.swift */,
 				C576EFEB21C7EAA000F96922 /* UIScrollableViewController.swift */,
 			);
@@ -403,8 +402,8 @@
 				C564187B216A456400664DDB /* FrontPageViewController.swift */,
 				C5641879216A089F00664DDB /* RegisterFormViewController.swift */,
 				C53D92B72171E42500AE3882 /* LoginViewController.swift */,
-				C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */,
 				C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */,
+				C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */,
 			);
 			name = Login/Register;
 			sourceTree = "<group>";
@@ -556,6 +555,7 @@
 				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
 				E9BA57A8217161F6002A1C37 /* URL+Images.swift */,
 				C576EFDD21C66A0D00F96922 /* Notification.swift */,
+				C576EFED21C82A4E00F96922 /* String.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -897,6 +897,7 @@
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */,
 				C50515C9213694F900718AE5 /* KFCDetailedDonation.swift in Sources */,
+				C576EFEE21C82A4E00F96922 /* String.swift in Sources */,
 				C564187C216A456400664DDB /* FrontPageViewController.swift in Sources */,
 				E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */,
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
@@ -936,7 +937,6 @@
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				C58D9EC02162650000B180B3 /* KFCLeaderboard.swift in Sources */,
 				7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */,
-				C576EFDC21C65A1500F96922 /* UIInputView.swift in Sources */,
 				C58D9EC02162650000B180B3 /* KFCLeaderboard.swift in Sources */,
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C576EFEC21C7EAA000F96922 /* UIScrollableViewController.swift in Sources */,

@@ -100,7 +100,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 
         let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
         if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-            present(createDonationVC, animated: true)
+            present(CreateDonationViewController(), animated: true)
         } else {
             assertionFailure("error")
         }

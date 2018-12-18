@@ -37,6 +37,7 @@ class RegisterFormViewController: UIScrollableViewController {
     private let phoneNumberInputView = UIGroupView<UITextFieldContainer>(title: "Phone Number",
                                                                          contentView: UITextFieldContainer(textContentType: .telephoneNumber,
                                                                                                        returnKeyType: .next,
+                                                                                                       keyboardType: .phonePad,
                                                                                                        placeholder: "+12345678"))
     private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
                                                                    contentView: UITextFieldContainer(textContentType: .emailAddress,
@@ -110,17 +111,15 @@ class RegisterFormViewController: UIScrollableViewController {
             let _ = userSelectedAProfileImage,
             let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
             let username = usernameInputView.contentView.textField.text, !username.isEmpty,
-            let contactNumber = phoneNumberInputView.contentView.textField.text, !contactNumber.isEmpty,
+            let phoneNumber = phoneNumberInputView.contentView.textField.text, !phoneNumber.isEmpty,
             let email = emailInputView.contentView.textField.text, !email.isEmpty,
             let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
 
-        let resultString = contactNumber
-        contactNumber.map { resultString = resultString.stringByReplacingOccurrencesOfString($0, withString: "")
-        
+        let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
-        UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
+        UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
             
             //error handling
             guard let user = user else {

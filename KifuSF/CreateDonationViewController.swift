@@ -8,11 +8,8 @@
 
 import UIKit
 
-class CreateDonationViewController: UIViewController {
-
-    private let contentScrollView = UIScrollView()
-    private let outerStackView = UIStackView()
-
+class CreateDonationViewController: UIScrollableViewController {
+    //MARK: - Variables
     private let descriptorView = UIDescriptorView()
     private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Title",
                                                                    contentView: UITextFieldContainer(returnKeyType: .next,
@@ -23,6 +20,7 @@ class CreateDonationViewController: UIViewController {
     private let pickUpAddressButton = UIAnimatedButton(backgroundColor: .kfInformative,
                                                        andTitle: "Choose pick-up address")
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,21 +36,10 @@ extension CreateDonationViewController: UIConfigurable {
     }
 
     func configureLayout() {
-        view.addSubview(contentScrollView)
         view.addSubview(pickUpAddressButton)
-
-        contentScrollView.directionalLayoutMargins.leading = 16
-        contentScrollView.directionalLayoutMargins.trailing = 16
-
-        contentScrollView.addSubview(outerStackView)
 
         outerStackView.addArrangedSubview(descriptorView)
         outerStackView.addArrangedSubview(titleInputView)
         outerStackView.addArrangedSubview(descriptionInputView)
-
-        outerStackView.autoMatch(.width, to: .width, of: view, withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
-        outerStackView.autoPinEdgesToSuperviewMargins()
-
-
     }
 }

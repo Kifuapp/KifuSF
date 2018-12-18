@@ -14,7 +14,9 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
     let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
-    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: .oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+
+    //TODO: implement function to resend code and recheck phone number
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     
     let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
@@ -34,7 +36,6 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
     }
     
     @objc func continueButtonTapped() {
-        
         guard let code = authenticationCodeTextFieldContainer.textField.text,
             let authy = authentificator else {
             return
@@ -62,7 +63,6 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
 }
 
 extension KFCPhoneNumberValidation: UIConfigurable {
-    
     func configureGestures() {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
