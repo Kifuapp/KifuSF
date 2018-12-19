@@ -408,13 +408,61 @@ struct DonationService {
     }
 
     static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> Void) {
-        let ref = Database.database().reference().child("open-donations").child(donation.uid)
-        ref.setValue(nil) { (error, _) in
+        
+        /**
+         TODO: only update donator's donation and set status to .awaitingReview
+         */
+        
+        guard let volunteerUid = donation.volunteer?.uid else {
+            assertionFailure(KFErrorMessage.inputValidationFailed("donation does not have a volunteer"))
+            
+            return completion(false)
+        }
+        
+        var updatedDonation = donation
+        updatedDonation.status = .awaitingDelivery
+        
+        //TODO: erick-adding a review
+        //update only the keys needed to conform to db write rules
+//        let updatedDict: [String: Any] = [
+//            Donation.Keys.status: updatedDonation.status.rawValue
+//        ]
+        
+        let dg = DispatchGroup() // swiftlint:disable:this identifier_name
+        var isSuccessful = true
+        
+        dg.enter()
+        let donatorDonationsRef = Database.database().reference()
+            .child("donator-donations")
+                .child(donation.donator.uid)
+                    .child(donation.uid)
+        donatorDonationsRef.removeValue { (error, _) in
             if let error = error {
-                assertionFailure("failed to remove donation from the branch, error: \(error.localizedDescription)")
-                return completion(false)
+                assertionFailure(error.localizedDescription)
+                
+                isSuccessful = false
             }
-            completion(true)
+            
+            dg.leave()
+        }
+        
+        dg.enter()
+        let volunteerDonationsRef = Database.database().reference()
+            .child("volunteer-donations")
+                .child(volunteerUid)
+                    .child(donation.uid)
+        volunteerDonationsRef.removeValue { (error, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        dg.notify(queue: DispatchQueue.main) {
+            completion(isSuccessful)
         }
     }
     
