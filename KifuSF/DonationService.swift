@@ -339,11 +339,19 @@ struct DonationService {
     }
     
     static func confirmDelivery(for donation: Donation, image: UIImage, completion: @escaping (Bool) -> Void) {
+        
+        guard let volunteerUid = donation.volunteer?.uid else {
+            assertionFailure(KFErrorMessage.inputValidationFailed("donation does not have a volunteer"))
+            
+            return completion(false)
+        }
+        
         let imageRef = StorageReference.newDeliveryVerificationImageReference(from: donation)
         
         StorageService.uploadImage(image, at: imageRef) { (downloadURL) in
             guard let downloadURL = downloadURL else {
                 assertionFailure("failed to upload")
+                
                 return completion(false)
             }
             
@@ -351,19 +359,50 @@ struct DonationService {
             updatedDonation.status = .awaitingApproval
             updatedDonation.verificationUrl = downloadURL.absoluteString
             
-            let ref = Database.database().reference().child("open-donations").child(donation.uid)
+            let dg = DispatchGroup() // swiftlint:disable:this identifier_name
+            var isSuccessful = true
+            
+            dg.enter()
             
             //update only the keys needed to conform to db write rules
-            let updatedDict: [String: Any] = [
+            var updatedDict: [String: Any] = [
                 Donation.Keys.status: updatedDonation.status.rawValue,
                 Donation.Keys.verificationUrl: updatedDonation.verificationUrl!
             ]
-            ref.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
+            let donatorDonationsRef = Database.database().reference()
+                .child("donator-donations")
+                    .child(donation.donator.uid)
+                        .child(donation.uid)
+            donatorDonationsRef.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
                 if let error = error {
-                    assertionFailure("failed to update donation for confirming the delivery, error: \(error.localizedDescription)") // swiftlint:disable:this line_length
-                    return completion(false)
+                    assertionFailure(error.localizedDescription)
+                    
+                    isSuccessful = false
                 }
-                completion(true)
+                
+                dg.leave()
+            })
+            
+            //TODO: erick-adding a review (mark awaiting for review for the volunteer)
+            updatedDict[Donation.Keys.status] = Donation.Status.awaitingApproval.rawValue
+            
+            dg.enter()
+            let volunteerDonationsRef = Database.database().reference()
+                .child("volunteer-donations")
+                    .child(volunteerUid)
+                        .child(donation.uid)
+            volunteerDonationsRef.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
+                if let error = error {
+                    assertionFailure(error.localizedDescription)
+                    
+                    isSuccessful = false
+                }
+                
+                dg.leave()
+            })
+            
+            dg.notify(queue: DispatchQueue.main, execute: {
+                completion(isSuccessful)
             })
         }
     }
