@@ -129,36 +129,49 @@ struct DonationService {
             completion(openDonations)
         }
     }
-
-    static func observeOpenDonationAndDelivery(completion: @escaping (Donation?, Donation?) -> Void) {
-        let ref = Database.database().reference().child("open-donations")
-
-        ref.observe(.value) { (snapshot) in
+    
+    static func observeCurrentDonation(completion: @escaping (Donation?) -> Void) {
+        let donatorDonationsRef = Database.database().reference()
+            .child("donator-donations")
+                .child(User.current.uid)
+        donatorDonationsRef.observe(.value) { (snapshot) in
             
-            //TODO: execute in background thread ---
-            guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else {
-                fatalError("could not decode")
+            //TODO: execute in background thread
+            guard
+                let deliverySnapshot = snapshot.children.allObjects.first as? DataSnapshot else {
+                return completion(nil)
             }
-
-            var openDelivery: Donation?
-            var openDonation: Donation?
-
-            for aDonationSnapshot in snapshots {
-                guard let aDonation = Donation(from: aDonationSnapshot) else {
-                    fatalError("could not decode")
-                }
-
-                if aDonation.donator.uid == User.current.uid {
-                    openDonation = aDonation
-                } else if let donationVolunteer = aDonation.volunteer {
-                    if donationVolunteer.uid == User.current.uid {
-                        openDelivery = aDonation
-                    }
-                }
+            
+            guard let donation = Donation(from: deliverySnapshot) else {
+                return assertionFailure(KFErrorMessage.failedToDecode)
             }
+            
             //TODO: execute in background thread ^^^
-
-            completion(openDonation, openDelivery)
+            
+            completion(donation)
+        }
+    }
+    
+    static func observeCurrentDelivery(completion: @escaping (Donation?) -> Void) {
+        let volunteerDonationsRef = Database.database().reference()
+            .child("volunteer-donations")
+                .child(User.current.uid)
+        volunteerDonationsRef.observe(.value) { (snapshot) in
+            
+            //TODO: execute in background thread
+            guard
+                !(snapshot.value is NSNull),
+                let deliverySnapshot = snapshot.children.allObjects.first as? DataSnapshot else {
+                return completion(nil)
+            }
+            
+            guard let delivery = Donation(from: deliverySnapshot) else {
+                return assertionFailure(KFErrorMessage.failedToDecode)
+            }
+            
+            //TODO: execute in background thread ^^^
+            
+            completion(delivery)
         }
     }
 
