@@ -203,8 +203,9 @@ class KFCDonation: KFCModularTableView {
     
     private func viewConfirmationImage(for donation: Donation) {
         
-        //TODO: alex-present the donation verification image vc
-        
+        let verifyVc = KFCVerifyDropoffImage()
+        verifyVc.donation = donation
+        verifyVc.presentModally(in: self)
     }
 }
 
