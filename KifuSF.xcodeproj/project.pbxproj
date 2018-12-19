@@ -106,7 +106,7 @@
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
-		E98036E221CACD37002344C7 /* KFCVerifyDropoffImagesss.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImagesss.xib */; };
+		E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */; };
 		E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
 		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
@@ -224,7 +224,7 @@
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
-		E98036E021CACD37002344C7 /* KFCVerifyDropoffImagesss.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImagesss.xib; sourceTree = "<group>"; };
+		E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImage.xib; sourceTree = "<group>"; };
 		E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KFCVerifyDropoffImage.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
 		E98B003521378F68008FD75A /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
@@ -687,7 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */,
-				E98036E021CACD37002344C7 /* KFCVerifyDropoffImagesss.xib */,
+				E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */,
 			);
 			name = VerifyDropoffImage;
 			sourceTree = "<group>";
@@ -777,7 +777,7 @@
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
 				7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
-				E98036E221CACD37002344C7 /* KFCVerifyDropoffImagesss.xib in Resources */,
+				E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
 				C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */,
 				C5475D0921542084006BA324 /* KFVProgress.xib in Resources */,
