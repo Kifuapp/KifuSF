@@ -9,15 +9,18 @@
 import Foundation
 
 protocol UIConfigurable {
+    /**
+     Poof
+     */
     func configureStyling()
-    func configureLayoutConstraints()
+    func configureLayout()
     func configureGestures()
     func configureDelegates()
 }
 
 extension UIConfigurable {
     func configureStyling() { }
-    func configureLayoutConstraints() { }
+    func configureLayout() { }
     func configureGestures() { }
     func configureDelegates() { }
 }

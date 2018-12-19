@@ -8,11 +8,11 @@
 
 import UIKit
 
-class KFVDonationInfo: KFVDescriptor {
-    let descriptionStickyTextView = KFVSticky<UILabel>(stickySide: .top, withOffset: 8)
+class KFVDonationInfo: UIDescriptorView {
+    let descriptionStickyTextView = UIStickyView<UILabel>(stickySide: .top, withOffset: 8)
     
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         
         infoStackView.addArrangedSubview(descriptionStickyTextView)
     }

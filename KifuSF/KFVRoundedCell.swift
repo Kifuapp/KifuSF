@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell, UIConfigurable {
+class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
     let descriptorView = T()
     
     static var identifier: String {
@@ -21,10 +21,10 @@ class KFVRoundedCell<T: KFVDescriptor>: UITableViewCell, UIConfigurable {
         contentView.addSubview(descriptorView)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         configureDescriptorViewLayoutConstraints()
     }
     

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class KFVVolunteerInfo: KFVDescriptor {
+class KFVVolunteerInfo: UIDescriptorView {
 
-    let statisticsView = KFVStatistics()
-    let confirmationStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
+    let statisticsView = UIStatisticsView()
+    let confirmationStickyButton = UIStickyView<UIAnimatedButton>(stickySide: .bottom)
     var indexPath: IndexPath?
 
     weak var delegate: KFPVolunteerInfoCellDelegate?
@@ -24,8 +24,8 @@ class KFVVolunteerInfo: KFVDescriptor {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         confirmationStickyButton.translatesAutoresizingMaskIntoConstraints = false
 
         infoStackView.addArrangedSubview(statisticsView)
@@ -64,8 +64,8 @@ class KFVVolunteerInfo: KFVDescriptor {
         titleLabel.text = "@\(data.username)"
         subtitleStickyLabel.contentView.text = "Reputation: \(data.userReputation)%"
 
-        statisticsView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+        statisticsView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
     }
 }
 

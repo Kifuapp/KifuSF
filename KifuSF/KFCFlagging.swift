@@ -31,7 +31,7 @@ class KFCFlagging: UIViewController, UIConfigurable {
         view.addSubview(flaggingOptionsTableView)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
 
         flaggingOptionsTableView.dataSource = self
         flaggingOptionsTableView.delegate = self
@@ -50,7 +50,7 @@ class KFCFlagging: UIViewController, UIConfigurable {
         flaggingInfoLabel.text = "Help us understand the problem. What is wrong with this?"
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         flaggingInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         
         flaggingInfoLabel.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.StackView)

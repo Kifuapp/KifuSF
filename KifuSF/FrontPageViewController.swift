@@ -9,58 +9,59 @@
 import UIKit
 import GoogleSignIn
 
-class KFCFrontPage: UIViewController, GIDSignInUIDelegate {
+class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
+    //MARK: - Variables
+    private let logoImageView = UIImageView(image: UIImage.kfLogo)
     
-    let logoImageView = UIImageView(image: UIImage.kfLogo)
+    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let googleSignInButton = GIDSignInButton()
     
-    let registerButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Register")
-    let googleSignInButton = GIDSignInButton()
+    private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     
-    let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    
-    let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
+    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         
         GIDSignIn.sharedInstance().uiDelegate = self
     }
-    
-    @objc func registerButtonPressed() {
-        navigationController?.pushViewController(KFCRegisterForm(), animated: true)
-        
-    }
-    
-    @objc func logInButtonTapped() {
-        navigationController?.pushViewController(KFCLogin(), animated: true)
-    }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         if isAccessibilityCategory {
             labelsStackView.axis = .vertical
-            
+
             oldUserLabel.numberOfLines = 0
             signInLabel.numberOfLines = 0
         } else {
             labelsStackView.axis = .horizontal
-            
+
             oldUserLabel.numberOfLines = 1
             signInLabel.numberOfLines = 1
         }
     }
+
+    //MARK: - Functions
+    @objc func registerButtonPressed() {
+        navigationController?.pushViewController(RegisterFormViewController(), animated: true)
+    }
+    
+    @objc func logInButtonTapped() {
+        navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
 }
 
-extension KFCFrontPage: UIConfigurable {
-    
+//MARK: - UIConfigurable
+extension FrontPageViewController: UIConfigurable {
     func configureStyling() {
         title = "Front Page"
         view.backgroundColor = .kfSuperWhite
@@ -76,7 +77,11 @@ extension KFCFrontPage: UIConfigurable {
         signInLabel.numberOfLines = 1
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
+        view.directionalLayoutMargins.leading = 16
+        view.directionalLayoutMargins.trailing = 16
+        view.directionalLayoutMargins.bottom = 16
+
         view.addSubview(logoImageView)
         view.addSubview(bottomStackView)
         
@@ -93,9 +98,9 @@ extension KFCFrontPage: UIConfigurable {
     private func configureConstraintsForLogoImageView() {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        logoImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
-        logoImageView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        logoImageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        logoImageView.autoPinEdge(toSuperviewMargin: .top)
+        logoImageView.autoPinEdge(toSuperviewMargin: .leading)
+        logoImageView.autoPinEdge(toSuperviewMargin: .trailing)
     }
     
     private func configureLayoutForLabelsStackView() {
@@ -111,9 +116,9 @@ extension KFCFrontPage: UIConfigurable {
     
     private func configureConstraintsForBottomStackView() {
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        bottomStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        bottomStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        bottomStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24)
+
+        bottomStackView.autoPinEdge(toSuperviewMargin: .bottom)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .leading)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .trailing)
     }
 }

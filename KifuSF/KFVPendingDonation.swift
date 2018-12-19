@@ -8,16 +8,16 @@
 
 import UIKit
 
-class KFVPendingDonation: KFVDescriptor {
+class KFVPendingDonation: UIDescriptorView {
 
-    let cancelStickyButton = KFVSticky<KFButton>(stickySide: .bottom)
+    let cancelStickyButton = UIStickyView<UIAnimatedButton>(stickySide: .bottom)
 
     var indexPath: IndexPath?
 
     weak var delegate: KFPPendingDonationCellDelegate?
 
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         cancelStickyButton.translatesAutoresizingMaskIntoConstraints = false
 
         infoStackView.addArrangedSubview(cancelStickyButton)

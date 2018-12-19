@@ -18,7 +18,7 @@ class KFCDelivery: KFCModularTableView {
         }
     }
     
-    private let actionButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    private let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     private lazy var photoHelper: PhotoHelper = {
         let helper = PhotoHelper()
@@ -65,7 +65,7 @@ class KFCDelivery: KFCModularTableView {
             case .awaitingPickup:
                 actionButton.setTitle("Directions", for: .normal)
             case .awaitingDelivery:
-                actionButton.setTitle("Directions", for: .normal)
+                actionButton.setTitle("Submit Dropoff", for: .normal)
             case .awaitingApproval:
                 actionButton.isHidden = true
             }
@@ -151,12 +151,38 @@ class KFCDelivery: KFCModularTableView {
         } else if delivery.status.isAwaitingDelivery {
             
             //TODO: get location of selected charity of donation
-            return nil
+            location = CLLocationCoordinate2D(
+                latitude: delivery.latitude,
+                longitude: delivery.longitude
+            )
         } else {
             return nil
         }
         
         return KFMDestinationMap(coordinate: location)
+    }
+    
+    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+        switch cellType {
+        case .destinationMap:
+            guard let delivery = self.delivery else {
+                return assertionFailure("No delivery given while map was tappable")
+            }
+            
+            if delivery.status.isAwaitingPickup {
+                
+                //pickup Location
+                MapHelper(long: delivery.longitude, lat: delivery.latitude)
+                    .open()
+            } else if delivery.status.isAwaitingDelivery {
+                
+                //TODO: charity location
+                MapHelper(long: delivery.longitude, lat: delivery.latitude)
+                    .open()
+            }
+        default:
+            break
+        }
     }
     
     @objc func pressActionButton(_ sender: Any) {
@@ -170,9 +196,7 @@ class KFCDelivery: KFCModularTableView {
                 self.openDirectionsToPickUpLocation(for: delivery)
             case .awaitingDelivery:
                 
-                //Directions to charity
-//                self.openDirectionsToCharity(for: delivery)
-                
+                //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
             }
             

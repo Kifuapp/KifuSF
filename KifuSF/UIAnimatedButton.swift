@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KFButton: UIButton, UIConfigurable {
-    
+class UIAnimatedButton: UIButton {
+    //MARK: - Variables
     static let animationDuration = 0.025
     
     override var isUserInteractionEnabled: Bool {
@@ -55,6 +55,7 @@ class KFButton: UIButton, UIConfigurable {
         }
     }
 
+    //MARK: - Initializers
     convenience init() {
         self.init(frame: CGRect())
     }
@@ -69,31 +70,16 @@ class KFButton: UIButton, UIConfigurable {
 
     override init(frame: CGRect) {
         super.init(frame: CGRect())
+
         configureStyling()
-        configureLayoutConstraints()
-
-
-    }
-
-    func configureLayoutConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
-        heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
-    }
-
-    func configureStyling() {
-        layer.cornerRadius = CALayer.kfCornerRadius
-        
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-        titleLabel?.adjustsFontForContentSizeCategory = true
-
-        backgroundColor = mainBackgroundColor
-        setTitleColor(mainTitleColor, for: .normal)
+        configureLayout()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    //MARK: - Lifecycle
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
@@ -105,7 +91,6 @@ class KFButton: UIButton, UIConfigurable {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //execute the logic before sending the signal to the other observers on this button
-
         let touch = touches.first
         guard let touchLocation = touch?.location(in: self), currentState != .pressed else {
             return
@@ -129,6 +114,7 @@ class KFButton: UIButton, UIConfigurable {
         print("touch cancellled")
     }
 
+    //MARK: - Methods
     private func updateAnimator() {
         switch currentState {
         case .idle, .disabled:
@@ -137,7 +123,7 @@ class KFButton: UIButton, UIConfigurable {
         case .pressed:
             buttonAnimator = nil
         default:
-            let animator = UIViewPropertyAnimator(duration: KFButton.animationDuration, curve: .linear, animations: { [unowned self] in
+            let animator = UIViewPropertyAnimator(duration: UIAnimatedButton.animationDuration, curve: .linear, animations: { [unowned self] in
                 self.transform = CGAffineTransform(scaleX: self.currentState.getScale(), y: self.currentState.getScale())
             })
             
@@ -156,7 +142,7 @@ class KFButton: UIButton, UIConfigurable {
         case .idle:
             backgroundColor = mainBackgroundColor
         case .disabled:
-            UIView.animate(withDuration: KFButton.animationDuration) { [unowned self] in
+            UIView.animate(withDuration: UIAnimatedButton.animationDuration) { [unowned self] in
                 self.backgroundColor = self.mainBackgroundColor.withAlphaComponent(0.8)
             }
             
@@ -166,5 +152,23 @@ class KFButton: UIButton, UIConfigurable {
     func setMainBackgroundColor(_ color: UIColor) {
         mainBackgroundColor = color
         updateBackgroundColor()
+    }
+}
+
+//MARK: - UIConfigurable
+extension UIAnimatedButton: UIConfigurable {
+    func configureLayout() {
+        translatesAutoresizingMaskIntoConstraints = false
+        heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
+    }
+
+    func configureStyling() {
+        layer.cornerRadius = CALayer.kfCornerRadius
+
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        titleLabel?.adjustsFontForContentSizeCategory = true
+
+        backgroundColor = mainBackgroundColor
+        setTitleColor(mainTitleColor, for: .normal)
     }
 }

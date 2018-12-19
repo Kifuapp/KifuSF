@@ -16,15 +16,15 @@ class KFCLocationServiceDisclaimer: UIViewController {
     
     let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
     
-    let activateLocationButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
-    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let activateLocationButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
+    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         configureGestures()
     }
     
@@ -61,7 +61,7 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
         }
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         
         view.addSubview(contentScrollView)
         contentScrollView.addSubview(outerStackView)

@@ -60,12 +60,10 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.delegate = self
 
-
-        configureDonationTableView()
         configureWidgetView()
+        configureDonationTableView()
         configureNavBar()
         configureFirebase()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +116,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         case UIStoryboardSegue.kfShowDetailedDonation:
 
             //TODO: fix this crap
+            //Victor: Hayir
 
             if let cell = lastSelectedCell {
                 cell.setSelected(false, animated: true)
@@ -126,7 +125,6 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
             fatalError(KFErrorMessage.unknownIdentifier)
         }
     }
-
 
 }
 
@@ -215,10 +213,6 @@ extension KFCOpenDonations: KFPWidgetDataSource {
 
 //MARK: KFPWidgetDelegate
 extension KFCOpenDonations: KFPWidgetDelegate {
-    func widgetView(_ widgetView: KFVWidget, heightDidChange height: CGFloat) {
-        tableViewWithRoundedCells.contentInset.top = height + KFPadding.ContentView
-        tableViewWithRoundedCells.scrollIndicatorInsets.top = height + KFPadding.ContentView
-    }
 
     func widgetView(_ widgetView: KFVWidget, didSelectCellForType type: KFVWidget.TouchedViewType) {
 
@@ -295,6 +289,19 @@ extension KFCOpenDonations {
         tableViewWithRoundedCells.delegate = self
 
         tableViewWithRoundedCells.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
+
+        configureDonationTableViewConstraints()
+    }
+
+    func configureDonationTableViewConstraints() {
+        for constraint in tableViewWithRoundedCellsConstraints {
+            constraint.autoRemove()
+        }
+
+        tableViewWithRoundedCells.autoPinEdge(.top, to: .bottom, of: widgetView)
+        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .bottom)
+        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .leading)
+        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .trailing)
     }
 
     func configureNavBar() {

@@ -63,6 +63,7 @@ class KFVProgress: UITableViewCell {
         stepThreeDescriptionLabel.adjustsFontSizeToFitWidth = true
         
         stepFourTitleLabel.textColor = .kfTitle
+        selectionStyle = .none
     }
     
     private func highlightCurrentStep(for currentStep: KFMProgress.Step) {

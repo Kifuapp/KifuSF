@@ -130,7 +130,6 @@ class KFCCreateDonation: UIViewController {
         
         if let location = self.pickupLocation {
             
-            //TODO: alex-present a loading indicator while uploading the donation and disable the view
             let loadingVc = KFCLoading(style: .whiteLarge)
             loadingVc.present()
             
@@ -151,8 +150,6 @@ class KFCCreateDonation: UIViewController {
                 latitude: location.coordinate.latitude) { donation in
                     loadingVc.dismiss {
                         if donation == nil {
-                            //TODO: alex-remove the loading indicator
-                            
                             let errorAlert = UIAlertController(errorMessage: nil)
                             self.present(errorAlert, animated: true)
                         } else {

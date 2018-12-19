@@ -18,7 +18,7 @@ class KFCDonation: KFCModularTableView {
         }
     }
 
-    let actionButton = KFButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
     
     private func updateUI() {
         reloadData()
@@ -77,7 +77,7 @@ class KFCDonation: KFCModularTableView {
             return nil
         }
         
-        return KFMProgress(currentStep: donationStep, ofType: .delivery)
+        return KFMProgress(currentStep: donationStep, ofType: .donation)
     }
 
     override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
@@ -121,6 +121,20 @@ class KFCDonation: KFCModularTableView {
         )
         
         return KFMDestinationMap(coordinate: location)
+    }
+    
+    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+        switch cellType {
+        case .destinationMap:
+            guard let donation = self.donation else {
+                return assertionFailure("No donation given while map was tappable")
+            }
+            
+            MapHelper(long: donation.longitude, lat: donation.latitude)
+                .open()
+        default:
+            break
+        }
     }
     
     @objc func pressActionButton(_ sender: Any) {

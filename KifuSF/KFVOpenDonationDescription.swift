@@ -9,10 +9,10 @@
 import UIKit
 import Kingfisher
 
-class KFVOpenDonationDescription: KFVDescriptor {
+class KFVOpenDonationDescription: UIDescriptorView {
     
-    let statisticsStickyView = KFVSticky<KFVStatistics>(stickySide: .top)
-    let secondSubtitleLabel = KFVSticky<UILabel>()
+    let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
+    let secondSubtitleLabel = UIStickyView<UILabel>()
     
     let statusStackView = UIStackView()
     let statusTitleLabel = UILabel()
@@ -22,8 +22,8 @@ class KFVOpenDonationDescription: KFVDescriptor {
     let donationDescriptionTitleLabel = UILabel()
     let donationDescriptionContentLabel = UILabel()
     
-    override func configureLayoutConstraints() {
-        super.configureLayoutConstraints()
+    override func configureLayout() {
+        super.configureLayout()
         
         infoStackView.addArrangedSubview(secondSubtitleLabel)
         infoStackView.addArrangedSubview(statisticsStickyView)
@@ -45,10 +45,8 @@ class KFVOpenDonationDescription: KFVDescriptor {
         titleLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         subtitleStickyLabel.setContentHuggingPriority(.init(rawValue: 250), for: .vertical)
         statisticsStickyView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
-        
-        for constraint in imageConstraints {
-            constraint.constant = 128
-        }
+
+        defaultImageViewSize = .medium
         
         subtitleStickyLabel.updateStickySide()
     }
@@ -94,9 +92,9 @@ class KFVOpenDonationDescription: KFVDescriptor {
         subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"
         
         secondSubtitleLabel.contentView.text = "Reputation \(data.userReputation)%"
-        
-        statisticsStickyView.contentView.donationCountLabel.text = "\(data.userDonationsCount)"
-        statisticsStickyView.contentView.deliveryCountLabel.text = "\(data.userDeliveriesCount)"
+
+        statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
+                                                    deliveries: data.userDeliveriesCount)
         
         statusDescription.text = "\(data.distance) Miles away from your current location"
         donationDescriptionContentLabel.text = data.description

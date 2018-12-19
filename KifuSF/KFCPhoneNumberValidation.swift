@@ -16,10 +16,10 @@ class KFCPhoneNumberValidation: UIViewController {
     let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
-    let authenticationCodeTextFieldContainer = KFTextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: UITextContentType.oneTimeCode, returnKeyType: .continue, placeholder: "1234")
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     
-    let continueButton = KFButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
     
     var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
     
@@ -30,7 +30,7 @@ class KFCPhoneNumberValidation: UIViewController {
         contentScrollView.addSubview(outerStackView)
         
         configureStyling()
-        configureLayoutConstraints()
+        configureLayout()
         configureGestures()
         
         TwoFactorAuthService.sendTextMessage(to: User.current.contactNumber) { [unowned self] (authy) in
@@ -56,7 +56,7 @@ class KFCPhoneNumberValidation: UIViewController {
                     print(succes)
                 })
 
-                let mainViewControllers = KFCTabBar()
+                let mainViewControllers = KifuTabBarController()
                 self.present(mainViewControllers, animated: true)
             } else {
                 //TODO: show error
@@ -83,7 +83,7 @@ extension KFCPhoneNumberValidation: UIConfigurable {
         noCodeLabel.textAlignment = .right
     }
     
-    func configureLayoutConstraints() {
+    func configureLayout() {
         
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()

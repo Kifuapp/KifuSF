@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KFVIcon: UIImageView {
-    
+class UIIconView: UIImageView {
+    //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

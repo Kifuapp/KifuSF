@@ -63,14 +63,14 @@ extension KFCPendingDonations: KFPPendingDonationCellDelegate {
         let selectedDonation = self.donations[indexPath.row]
         sender.descriptorView.cancelStickyButton.contentView.isEnabled = false
         
-        RequestService.cancelRequest(for: selectedDonation) { (isSuccessfull) in
+        RequestService.cancelRequest(for: selectedDonation) { [unowned self] (isSuccessfull) in
             if isSuccessfull {
                 guard let index = self.donations.firstIndex(where: { $0.uid == selectedDonation.uid }) else {
                     return assertionFailure("donation to delete not found")
                 }
                 
                 self.donations.remove(at: index)
-                self.tableViewWithRoundedCells.reloadData()
+                self.tableViewWithRoundedCells.deleteRows(at: [indexPath], with: .right)
             } else {
                 sender.descriptorView.cancelStickyButton.contentView.isEnabled = true
             }
