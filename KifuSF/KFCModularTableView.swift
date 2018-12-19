@@ -177,9 +177,10 @@ extension KFCModularTableView: UITableViewDataSource {
                 let castedItem = item as? KFMDestinationMap else {
                     fatalError(KFErrorMessage.unknownCell)
             }
-            
+          
+            cell.descriptorView.reloadData(for: castedItem.coordinate)
             cell.descriptorView.isUserInteractionEnabled = false
-
+          
             return cell
         }
     }

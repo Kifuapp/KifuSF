@@ -14,7 +14,7 @@ struct MapHelper {
     let lat: Double
     
     func open() {
-        let url = "http://maps.apple.com/maps?saddr=&daddr=\(self.long),\(self.lat)"
+        let url = "http://maps.apple.com/maps?saddr=&daddr=\(self.lat),\(self.long)"
         UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
 }
