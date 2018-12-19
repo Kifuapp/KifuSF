@@ -285,7 +285,12 @@ struct DonationService {
      this updates the status of a donation to the delivering process aka "awaiting delivery"
      */
     static func confirmPickup(for donation: Donation, completion: @escaping (Bool) -> Void) {
-        let ref = Database.database().reference().child("open-donations").child(donation.uid)
+        
+        guard let volunteerUid = donation.volunteer?.uid else {
+            assertionFailure(KFErrorMessage.inputValidationFailed("donation does not have a volunteer"))
+            
+            return completion(false)
+        }
 
         var updatedDonation = donation
         updatedDonation.status = .awaitingDelivery
@@ -294,14 +299,43 @@ struct DonationService {
         let updatedDict: [String: Any] = [
             Donation.Keys.status: updatedDonation.status.rawValue
         ]
-        ref.updateChildValues(updatedDict) { (error, _) in
+        
+        let dg = DispatchGroup() // swiftlint:disable:this identifier_name
+        var isSuccessful = true
+        
+        dg.enter()
+        let donatorDonationsRef = Database.database().reference()
+            .child("donator-donations")
+                .child(donation.donator.uid)
+                    .child(donation.uid)
+        donatorDonationsRef.updateChildValues(updatedDict) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
-                return completion(false)
+                
+                isSuccessful = false
             }
-            completion(true)
+            
+            dg.leave()
+        }
+        
+        dg.enter()
+        let volunteerDonationsRef = Database.database().reference()
+            .child("volunteer-donations")
+                .child(volunteerUid)
+                    .child(donation.uid)
+        volunteerDonationsRef.updateChildValues(updatedDict) { (error, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                isSuccessful = false
+            }
+            
+            dg.leave()
         }
 
+        dg.notify(queue: DispatchQueue.main) {
+            completion(isSuccessful)
+        }
     }
     
     static func confirmDelivery(for donation: Donation, image: UIImage, completion: @escaping (Bool) -> Void) {
