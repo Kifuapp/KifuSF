@@ -177,37 +177,67 @@ struct DonationService {
      requests from the requets sub-tree
      */
     static func accept(volunteer: User, for donation: Donation, completion: @escaping (Bool) -> Void) {
-        //
-        // - warning: each request is fired independant of one another
-        //
+        /**
+         - warning: each request is fired independant of one another
+         */
         
-        //get donation ref
-        let ref = Database.database().reference().child("open-donations").child(donation.uid)
-
         var updatedDonation = donation
 
         //update the status of the donation
         //set the volunteer value of the dontaion to the given user
+        let donator = updatedDonation.donator
         updatedDonation.status = .awaitingPickup
         updatedDonation.volunteer = volunteer
         
         var isSuccessful = true
         let dg = DispatchGroup() // swiftlint:disable:this identifier_name
         
-        dg.enter()
+        //copy the updated donation in both locations (donator-donations, volunteer-donations)
+        let donatorDonationsRef = Database.database().reference()
+            .child("donator-donations")
+                .child(donator.uid)
+                    .child(donation.uid)
         
-        //update only the keys needed to conform to db write rules
-        let updatedDict: [String: Any] = [
-            Donation.Keys.status: updatedDonation.status.rawValue,
-            Donation.Keys.volunteer: volunteer.dictValue
-        ]
-        ref.updateChildValues(updatedDict) { error, _ in
+        dg.enter()
+        donatorDonationsRef.setValue(updatedDonation.dictValue) { (error, _) in
             if let error = error {
-                print("there was an error \(error.localizedDescription)")
+                assertionFailure("there was an error \(error.localizedDescription)")
                 
                 isSuccessful = false
             }
-
+            
+            dg.leave()
+        }
+        
+        let volunteerDonationsRef = Database.database().reference()
+            .child("volunteer-donations")
+                .child(volunteer.uid)
+                    .child(donation.uid)
+        
+        dg.enter()
+        volunteerDonationsRef.setValue(updatedDonation.dictValue) { (error, _) in
+            if let error = error {
+                assertionFailure("there was an error \(error.localizedDescription)")
+                
+                isSuccessful = false
+            }
+            
+            dg.leave()
+        }
+        
+        //remove the donation from the open-donations
+        let openDonationsRef = Database.database().reference()
+            .child("open-donations")
+                .child(donation.uid)
+        
+        dg.enter()
+        openDonationsRef.removeValue { (error, _) in
+            if let error = error {
+                assertionFailure("there was an error \(error.localizedDescription)")
+                
+                isSuccessful = false
+            }
+            
             dg.leave()
         }
 
