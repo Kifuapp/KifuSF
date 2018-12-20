@@ -36,6 +36,8 @@ class KFCDonation: KFCModularTableView {
                 actionButton.isHidden = true
             case .awaitingApproval:
                 actionButton.setTitle("View Confirmation", for: .normal)
+            case .awaitingReview:
+                actionButton.setTitle("Submit Review", for: .normal)
             }
         } else {
             actionButton.setTitle("Post a New Donation", for: .normal)
@@ -162,6 +164,12 @@ class KFCDonation: KFCModularTableView {
                 assertionFailure("action button should not be tappable here")
             case .awaitingApproval:
                 self.viewConfirmationImage(for: donation)
+            case .awaitingReview:
+                guard let volunteer = donation.volunteer else {
+                    fatalError("no volunteer to review")
+                }
+                
+                self.presentReview(for: volunteer)
             }
         } else {
             
@@ -206,6 +214,10 @@ class KFCDonation: KFCModularTableView {
         let verifyVc = KFCVerifyDropoffImage()
         verifyVc.donation = donation
         verifyVc.presentModally(in: self)
+    }
+    
+    private func presentReview(for user: User) {
+        //TODO: erick-adding a reivew (present the ReviewVc)
     }
 }
 

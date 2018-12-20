@@ -39,7 +39,7 @@ class KFCDelivery: KFCModularTableView {
                 //TODO: alex-dismiss loading indicator
                 loadingVc.dismiss {
                     if isSuccessful {
-                        unwrappedSelf.delivery?.status = .awaitingApproval
+                        unwrappedSelf.delivery?.status = .awaitingReview
                         unwrappedSelf.updateUI()
                     } else {
                         let errorAlert = UIAlertController(errorMessage: nil)
@@ -57,7 +57,6 @@ class KFCDelivery: KFCModularTableView {
         
         //update the actionButton
         actionButton.isHidden = false
-        
         if let delivery = self.delivery {
             switch delivery.status {
             case .open:
@@ -67,7 +66,9 @@ class KFCDelivery: KFCModularTableView {
             case .awaitingDelivery:
                 actionButton.setTitle("Submit Dropoff", for: .normal)
             case .awaitingApproval:
-                actionButton.isHidden = true
+                assertionFailure("this step should not occur, skip to awaitingReview")
+            case .awaitingReview:
+                actionButton.setTitle("Submit Review", for: .normal)
             }
         } else {
             actionButton.setTitle("View Open Donations", for: .normal)
@@ -198,6 +199,8 @@ class KFCDelivery: KFCModularTableView {
                 
                 //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
+            case .awaitingReview:
+                self.presentReview(for: delivery.donator)
             }
             
         } else {
@@ -216,6 +219,10 @@ class KFCDelivery: KFCModularTableView {
     
     private func presentConfirmationImage(for deliver: Donation) {
         photoHelper.presentActionSheet(from: self)
+    }
+    
+    private func presentReview(for user: User) {
+        //TODO: erick-adding a reivew (present the ReviewVc)
     }
     
     private func openDirectionsToCharity(for delivery: Donation) {
