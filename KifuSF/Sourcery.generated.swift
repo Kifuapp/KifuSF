@@ -49,6 +49,15 @@ extension Donation.Status {
         }
     }
 
+    var isAwaitingReview: Bool {
+        switch self {
+        case .awaitingReview:
+            return true
+        default:
+            return false
+        }
+    }
+
 }
 extension DonationOption {
     enum Errors: Error {
@@ -135,14 +144,17 @@ extension Report {
 
 extension User {
     enum Keys {
-        static let contributionPoints = "contribution-points"
         static let uid = "uid"
         static let imageURL = "image-url"
         static let username = "username"
         static let contactNumber = "contact-number"
+        static let isVerified = "is-verified"
+        static let contributionPoints = "contribution-points"
+        static let reputation = "reputation"
+        static let numberOfDonations = "number-of-donations"
+        static let numberOfDeliveries = "number-of-deliveries"
         static let flag = "flag"
         static let flaggedReportUid = "flagged-report-uid"
         static let currentLocation = "current-location"
-        static let isVerified = "is-verified"
     }
 }

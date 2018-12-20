@@ -194,7 +194,6 @@ struct UserService {
             let newUser = User(username: username,
                                uid: uid,
                                imageURL: imageURL,
-                               contributionPoints: 0,
                                contactNumber: contactNumber,
                                isVerified: false)
             
@@ -257,6 +256,12 @@ struct UserService {
             
             completion(true)
         }
+    }
+    
+    static func review(user: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
+        //using transactions,
+        
+        //load the user's current ratings
     }
     
     /**
