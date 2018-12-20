@@ -258,10 +258,42 @@ struct UserService {
         }
     }
     
-    static func review(user: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
-        //using transactions,
+    static func review(donator: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
+        review(user: donator, rating: rating, keyPathToIncrement: \User.numberOfDonations, completion: completion)
+    }
+    
+    static func review(volunteer: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
+        review(user: volunteer, rating: rating, keyPathToIncrement: \User.numberOfDeliveries, completion: completion)
+    }
+    
+    private static func review(user: User, rating: UserRating, keyPathToIncrement keyPath: WritableKeyPath<User, Int>, completion: @escaping (Bool) -> Void) {
         
-        //load the user's current ratings
+        let ref = DatabaseReference.user(at: user.uid)
+        
+        //using transactions
+        ref.runTransactionBlock({ (snapshot) -> TransactionResult in
+            guard
+                let userDict = snapshot.value as? [String: Any],
+                var user = User(from: userDict) else {
+                    return .success(withValue: snapshot)
+            }
+            
+            //load the user's current ratings
+            user.addNewRating(rating, increment: keyPath)
+            
+            snapshot.value = user.dictValue
+            
+            return .success(withValue: snapshot)
+            
+        }, andCompletionBlock: { (error, successful, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(successful)
+        })
     }
     
     /**

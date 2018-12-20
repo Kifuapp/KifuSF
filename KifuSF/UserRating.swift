@@ -11,7 +11,7 @@ import Foundation
 struct UserRating {
     
     enum Stars: Int {
-        case one
+        case one = 1
         case two
         case three
         case four
@@ -60,7 +60,13 @@ struct UserRating {
 }
 
 extension User {
-    func addNewRating(_ rating: UserRating) {
+    mutating func addNewRating(_ rating: UserRating, increment keyPath: WritableKeyPath<User, Int>) {
         
+        //mutate the current user by updating their new reputation
+        let nReviews = self.numberOfDeliveries + self.numberOfDonations
+        let newStars = rating.rating.rawValue
+        self.reputation = (reputation * Float(nReviews) + Float(newStars)) / Float(nReviews + 1)
+        
+        self[keyPath: keyPath] += 1
     }
 }
