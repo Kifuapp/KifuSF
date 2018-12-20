@@ -26,13 +26,12 @@ struct DonationService {
                 
                 return completion(nil)
             }
-
-            //get ref for new donation
-            let ref = Database.database().reference().child("open-donations").childByAutoId()
-
+            
             //create donation and get dict value
+            let newDonationsRef = DatabaseReference.openDonations().childByAutoId()
+            
             let donation = Donation(
-                uid: ref.key!,
+                uid: newDonationsRef.key!,
                 title: title,
                 notes: notes,
                 imageUrl: storageUrl.absoluteString,
@@ -44,23 +43,31 @@ struct DonationService {
                 status: .open,
                 volunteer: nil
             )
-
+            
             let donationDict = donation.dictValue
-
-            //send request
-            ref.updateChildValues(donationDict) { error, _ in
-                if let error = error {
-                    assertionFailure(error.localizedDescription)
-                    
-                    return completion(nil)
+            
+            let fbDg = FirebaseDispatchGroup()
+            
+            newDonationsRef.updateChildValues(donationDict, withCompletionBlock: fbDg.handleErrorCase)
+            
+            let donatorRef = DatabaseReference.donation(for: User.current.uid, donation: donation.uid)
+            donatorRef.updateChildValues(donationDict, withCompletionBlock: fbDg.handleErrorCase)
+            
+            fbDg.notify(work: { (isSuccessful) in
+                if isSuccessful {
+                    completion(donation)
+                } else {
+                    completion(nil)
                 }
-                
-                completion(donation)
-            }
+            })
         }
     }
     
     static func attach(report: Report, to donation: Donation, completion: @escaping (Bool) -> Void) {
+        /**
+         FIXME: refactoring open-dontaions: now that the donation can be in multiple locations (open-donations, donator-donation, or volunteer-donation) this is now broken
+         */
+        
         let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
         let updatedDict: [String: Any] = [
             Donation.Keys.flaggedReportUid: report.uid,
@@ -97,7 +104,7 @@ struct DonationService {
     static func observeTimelineDonations(completion: @escaping ([Donation]) -> Void) {
 
         //get donations ref
-        let ref = Database.database().reference().child("open-donations")
+        let ref = DatabaseReference.openDonations()
 
         //download snapshot
         ref.observe(.value) { (snapshot) in
@@ -131,9 +138,7 @@ struct DonationService {
     }
     
     static func observeCurrentDonation(completion: @escaping (Donation?) -> Void) {
-        let donatorDonationsRef = Database.database().reference()
-            .child("donator-donations")
-                .child(User.current.uid)
+        let donatorDonationsRef = DatabaseReference.donatorDonations(for: User.current.uid)
         donatorDonationsRef.observe(.value) { (snapshot) in
             
             //TODO: execute in background thread
@@ -153,14 +158,11 @@ struct DonationService {
     }
     
     static func observeCurrentDelivery(completion: @escaping (Donation?) -> Void) {
-        let volunteerDonationsRef = Database.database().reference()
-            .child("volunteer-donations")
-                .child(User.current.uid)
+        let volunteerDonationsRef = DatabaseReference.volunteerDonations(for: User.current.uid)
         volunteerDonationsRef.observe(.value) { (snapshot) in
             
             //TODO: execute in background thread
             guard
-                !(snapshot.value is NSNull),
                 let deliverySnapshot = snapshot.children.allObjects.first as? DataSnapshot else {
                 return completion(nil)
             }
@@ -176,7 +178,7 @@ struct DonationService {
     }
 
     static func getNumberOfVolunteers(for donation: Donation, completion: @escaping (Int) -> Void) {
-        let ref = Database.database().reference().child("donation-requests").child(donation.uid)
+        let ref = DatabaseReference.usersWhoHaveRequested(for: donation.uid)
         
         ref.observe(.value) { (dataSnapshot) in
             let childrenCount = dataSnapshot.childrenCount
@@ -206,10 +208,7 @@ struct DonationService {
         let dg = DispatchGroup() // swiftlint:disable:this identifier_name
         
         //copy the updated donation in both locations (donator-donations, volunteer-donations)
-        let donatorDonationsRef = Database.database().reference()
-            .child("donator-donations")
-                .child(donator.uid)
-                    .child(donation.uid)
+        let donatorDonationsRef = DatabaseReference.donation(for: donator.uid, donation: donation.uid)
         
         dg.enter()
         donatorDonationsRef.setValue(updatedDonation.dictValue) { (error, _) in
@@ -222,10 +221,7 @@ struct DonationService {
             dg.leave()
         }
         
-        let volunteerDonationsRef = Database.database().reference()
-            .child("volunteer-donations")
-                .child(volunteer.uid)
-                    .child(donation.uid)
+        let volunteerDonationsRef = DatabaseReference.delivery(for: volunteer.uid, donation: donation.uid)
         
         dg.enter()
         volunteerDonationsRef.setValue(updatedDonation.dictValue) { (error, _) in
@@ -239,9 +235,7 @@ struct DonationService {
         }
         
         //remove the donation from the open-donations
-        let openDonationsRef = Database.database().reference()
-            .child("open-donations")
-                .child(donation.uid)
+        let openDonationsRef = DatabaseReference.openDonation(donation.uid)
         
         dg.enter()
         openDonationsRef.removeValue { (error, _) in
@@ -304,10 +298,7 @@ struct DonationService {
         var isSuccessful = true
         
         dg.enter()
-        let donatorDonationsRef = Database.database().reference()
-            .child("donator-donations")
-                .child(donation.donator.uid)
-                    .child(donation.uid)
+        let donatorDonationsRef = DatabaseReference.donation(for: donation.donator.uid, donation: donation.uid)
         donatorDonationsRef.updateChildValues(updatedDict) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -319,10 +310,7 @@ struct DonationService {
         }
         
         dg.enter()
-        let volunteerDonationsRef = Database.database().reference()
-            .child("volunteer-donations")
-                .child(volunteerUid)
-                    .child(donation.uid)
+        let volunteerDonationsRef = DatabaseReference.delivery(for: volunteerUid, donation: donation.uid)
         volunteerDonationsRef.updateChildValues(updatedDict) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -369,10 +357,7 @@ struct DonationService {
                 Donation.Keys.status: updatedDonation.status.rawValue,
                 Donation.Keys.verificationUrl: updatedDonation.verificationUrl!
             ]
-            let donatorDonationsRef = Database.database().reference()
-                .child("donator-donations")
-                    .child(donation.donator.uid)
-                        .child(donation.uid)
+            let donatorDonationsRef = DatabaseReference.donation(for: donation.donator.uid, donation: donation.uid)
             donatorDonationsRef.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure(error.localizedDescription)
@@ -387,10 +372,7 @@ struct DonationService {
             updatedDict[Donation.Keys.status] = Donation.Status.awaitingApproval.rawValue
             
             dg.enter()
-            let volunteerDonationsRef = Database.database().reference()
-                .child("volunteer-donations")
-                    .child(volunteerUid)
-                        .child(donation.uid)
+            let volunteerDonationsRef = DatabaseReference.delivery(for: volunteerUid, donation: donation.uid)
             volunteerDonationsRef.updateChildValues(updatedDict, withCompletionBlock: { (error, _) in
                 if let error = error {
                     assertionFailure(error.localizedDescription)
@@ -432,10 +414,7 @@ struct DonationService {
         var isSuccessful = true
         
         dg.enter()
-        let donatorDonationsRef = Database.database().reference()
-            .child("donator-donations")
-                .child(donation.donator.uid)
-                    .child(donation.uid)
+        let donatorDonationsRef = DatabaseReference.donation(for: donation.donator.uid, donation: donation.uid)
         donatorDonationsRef.removeValue { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -447,10 +426,7 @@ struct DonationService {
         }
         
         dg.enter()
-        let volunteerDonationsRef = Database.database().reference()
-            .child("volunteer-donations")
-                .child(volunteerUid)
-                    .child(donation.uid)
+        let volunteerDonationsRef = DatabaseReference.delivery(for: volunteerUid, donation: donation.uid)
         volunteerDonationsRef.removeValue { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -471,6 +447,9 @@ struct DonationService {
     }
 
     static func cancel(donation: Donation, completion: @escaping (Bool) -> Void) {
+        /**
+         FIXME: refactoring open-dontaions: now that the donation can be in multiple locations (open-donations, donator-donation, or volunteer-donation) this is now broken
+         */
         
         //remove all requests
         RequestService.clearRequests(for: donation) { (success) in
