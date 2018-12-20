@@ -9,6 +9,7 @@
 import Foundation
 
 protocol UIConfigurable {
+    func configureData()
     func configureStyling()
     func configureLayout()
     func configureGestures()
@@ -16,6 +17,7 @@ protocol UIConfigurable {
 }
 
 extension UIConfigurable {
+    func configureData() { }
     func configureStyling() { }
     func configureLayout() { }
     func configureGestures() { }

@@ -76,6 +76,7 @@ class RegisterFormViewController: UIScrollableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureData()
         configureStyling()
         configureLayout()
         configureDelegates()
@@ -207,11 +208,9 @@ extension RegisterFormViewController: UIConfigurable {
         phoneNumberInputView.contentView.setTag(2)
         emailInputView.contentView.setTag(3)
         passwordInputView.contentView.setTag(4)
-        
-        configureText()
     }
     
-    func configureText() {
+    func configureData() {
         title = "Register Form"
         profileImageLabel.text = "Profile Image"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."

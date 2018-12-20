@@ -35,8 +35,8 @@ class KFCModularTableView: UIViewController {
         modularTableView.scrollIndicatorInsets.top = 0
 
         modularTableView.dataSource = self
-        modularTableView.register(KFVModularCell<KFVOpenDonationDescription>.self,
-                           forCellReuseIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier)
+        modularTableView.register(KFVModularCell<OpenDonationDetailedDescriptorView>.self,
+                           forCellReuseIdentifier: KFVModularCell<OpenDonationDetailedDescriptorView>.identifier)
         modularTableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier)
         modularTableView.register(KFVModularCell<KFVEntityInfo>.self,
@@ -121,8 +121,8 @@ extension KFCModularTableView: UITableViewDataSource {
 
         switch item.type {
         case .openDonationDescription:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVOpenDonationDescription>.identifier,
-                                                           for: indexPath) as? KFVModularCell<KFVOpenDonationDescription>,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<OpenDonationDetailedDescriptorView>.identifier,
+                                                           for: indexPath) as? KFVModularCell<OpenDonationDetailedDescriptorView>,
                 let castedItem = item as? KFMOpenDonationDescriptionItem else {
                 fatalError(KFErrorMessage.unknownCell)
             }

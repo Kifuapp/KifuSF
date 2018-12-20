@@ -31,8 +31,18 @@ class CreateDonationViewController: UIScrollableViewController {
 
 //MARK: - UIConfigurable
 extension CreateDonationViewController: UIConfigurable {
+    func configureData() {
+        title = "Create Donation"
+    }
+    
     func configureStyling() {
 
+        view.backgroundColor = UIColor.kfWhite
+
+        descriptionInputView.contentView.backgroundColor = .kfGray
+        descriptorView.imageView.image = .kfPlusImage
+        descriptorView.titleLabel.text = "Take a photo"
+        descriptorView.subtitleStickyLabel.contentView.text = "I don't know"
     }
 
     func configureLayout() {

@@ -28,6 +28,7 @@ class UIDescriptorView: UIView, UIConfigurable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        configureData()
         configureStyling()
         configureLayout()
     }
@@ -67,6 +68,8 @@ class UIDescriptorView: UIView, UIConfigurable {
     }
 
     //MARK: - UIConfigurable
+    func configureData() { }
+
     func configureStyling() {
         configureDescriptorStyling()
         configureSubtitleStickyLabelStyling()

@@ -82,7 +82,7 @@
 		C5983C1E2134643F00303ABB /* KFCOpenDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5983C1D2134643F00303ABB /* KFCOpenDonations.swift */; };
 		C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DB210D0CE500A717D3 /* Assets.xcassets */; };
 		C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
-		C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E19D21501A1B00A8412C /* KFVOpenDonationDescription.swift */; };
+		C5B0E19E21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E19D21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift */; };
 		C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E1A121501AC800A8412C /* KFCModularTableView.swift */; };
 		C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B0E1A32150262B00A8412C /* KFVModularCell.swift */; };
 		C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */; };
@@ -202,7 +202,7 @@
 		C5A351DB210D0CE500A717D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5A351DE210D0CE500A717D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5A351E0210D0CE500A717D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5B0E19D21501A1B00A8412C /* KFVOpenDonationDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVOpenDonationDescription.swift; sourceTree = "<group>"; };
+		C5B0E19D21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDonationDetailedDescriptorView.swift; sourceTree = "<group>"; };
 		C5B0E1A121501AC800A8412C /* KFCModularTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCModularTableView.swift; sourceTree = "<group>"; };
 		C5B0E1A32150262B00A8412C /* KFVModularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVModularCell.swift; sourceTree = "<group>"; };
 		C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		C50E472B21518228008A8C36 /* KFOpenDonationDescription */ = {
 			isa = PBXGroup;
 			children = (
-				C5B0E19D21501A1B00A8412C /* KFVOpenDonationDescription.swift */,
+				C5B0E19D21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift */,
 				C50E472C2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift */,
 			);
 			name = KFOpenDonationDescription;
@@ -915,7 +915,7 @@
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C564187E216A86BA00664DDB /* UIColor.swift in Sources */,
-				C5B0E19E21501A1B00A8412C /* KFVOpenDonationDescription.swift in Sources */,
+				C5B0E19E21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift in Sources */,
 				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
 				C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */,
 				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
