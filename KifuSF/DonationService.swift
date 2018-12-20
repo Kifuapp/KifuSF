@@ -387,7 +387,7 @@ struct DonationService {
             })
         }
     }
-
+    
     static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> Void) {
         
         var updatedDonation = donation
@@ -408,6 +408,33 @@ struct DonationService {
         }
     }
     
+    static func archive(donation: Donation, completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.donation(for: User.current.uid, donation: donation.uid)
+        archive(donation, databaseSourceReference: ref, completion: completion)
+    }
+    
+    static func archive(delivery: Donation, completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.delivery(for: User.current.uid, donation: delivery.uid)
+        archive(delivery, databaseSourceReference: ref, completion: completion)
+    }
+    
+    private static func archive(_ donation: Donation, databaseSourceReference: DatabaseReference, completion: @escaping (Bool) -> Void) {
+        
+//        var updatedDonation = donation
+        
+        //TODO: archiving donations (archived status)
+//        updatedDonation.status = .awaitingReview
+        
+        let fbDg = FirebaseDispatchGroup() // swiftlint:disable:this identifier_name
+        
+        //TODO: archiving donations (move to acrhived-donations vs deleting it)
+        databaseSourceReference.removeValue(completionBlock: fbDg.handleErrorCase)
+        
+        fbDg.notify { isSuccessful in
+            completion(isSuccessful)
+        }
+    }
+
     static func getDistance(for donation: Donation, completion: @escaping (String) -> Void) {
         
     }

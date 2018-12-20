@@ -200,7 +200,7 @@ class KFCDelivery: KFCModularTableView {
                 //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
             case .awaitingReview:
-                self.presentReview(for: delivery.donator)
+                self.presentReview(for: delivery.donator, delivery: delivery)
             }
             
         } else {
@@ -221,8 +221,28 @@ class KFCDelivery: KFCModularTableView {
         photoHelper.presentActionSheet(from: self)
     }
     
-    private func presentReview(for user: User) {
-        //TODO: erick-adding a reivew (present the ReviewVc)
+    private func presentReview(for user: User, delivery: Donation) {
+        let testRating = UserRating.fiveStar
+        UserService.review(donator: user, rating: testRating) { (isSuccessful) in
+            if isSuccessful {
+                DonationService.archive(delivery: delivery, completion: { (isSuccessful) in
+                    if isSuccessful == false {
+                        UIAlertController(errorMessage: "Failed to archive the delivery")
+                            .present(in: self)
+                    }
+                })
+                
+                UIAlertController(
+                    title: "Reviewing User",
+                    message: "Thanks for reviewing the donator!",
+                    preferredStyle: .alert)
+                    .addDismissButton()
+                    .present(in: self)
+            } else {
+                UIAlertController(errorMessage: nil)
+                    .present(in: self)
+            }
+        }
     }
     
     private func openDirectionsToCharity(for delivery: Donation) {
