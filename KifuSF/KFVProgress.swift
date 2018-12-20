@@ -89,7 +89,7 @@ class KFVProgress: UITableViewCell {
         case .delivery:
             stepOneDescriptionLabel.text = "Pick up item from Donator"
             stepTwoDescriptionLabel.text = "Deliver item to charity and validate donation by taking a picture with the item"
-            stepThreeDescriptionLabel.text = "Review Donator and wait for their approval about you"
+            stepThreeDescriptionLabel.text = "After delivery, review the Donator"
         case .donation:
             stepOneDescriptionLabel.text = "Waiting for volunteer to pick up item"
             stepTwoDescriptionLabel.text = "Waiting for volunteer to deliver the item"
