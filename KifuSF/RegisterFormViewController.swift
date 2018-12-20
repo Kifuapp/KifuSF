@@ -1,167 +1,305 @@
 //
-//  RegisterFormViewController.swift
+//  KFCRegisterForm.swift
 //  KifuSF
 //
-//  Created by Shutaro Aoyama on 2018/07/28.
-//  Copyright © 2018年 Alexandru Turcanu. All rights reserved.
+//  Created by Alexandru Turcanu on 07/10/2018.
+//  Copyright © 2018 Alexandru Turcanu. All rights reserved.
 //
 
 import UIKit
+import PureLayout
 import FirebaseAuth
 
-class RegisterFormViewController: UIViewController, UITextFieldDelegate {
+class RegisterFormViewController: UIViewController {
+    //MARK: - Variables
+    private let contentScrollView = UIScrollView()
     
-    let plusImage = UIImage(named: "PlusSquare")
+    private let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.BigSpacing, distribution: .fill)
+    private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
-    let photoHelper = PhotoHelper()
+    private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
     
-    /** this also disables the view's isUserInteractive */
-    private var isRegisterButtonEnabled: Bool {
-        set {
-            buttonViewRegister.alpha = newValue ? 1.0 : 0.45
-            buttonViewRegister.isUserInteractionEnabled = newValue
-            view.isUserInteractionEnabled = newValue
-        }
-        get {
-            return view.isUserInteractionEnabled
-        }
+    private let profileImageStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
+    private let profileImageLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    
+    private let horizontalImageStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
+    private let profileImageView = UIImageView(image: .kfPlusImage)
+    private let profileImageSpacer = UIView()
+    
+    private let profileImageHelper = PhotoHelper()
+    private var userSelectedAProfileImage: Bool? = nil
+
+    private let fullNameInputView = UIInputView(title: "Full Name", placeholder: "Kifu SF",
+                                             textContentType: .name, returnKeyType: .next)
+
+    private let usernameInputView = UIInputView(title: "Username", placeholder: "@Pondorasti",
+                                                textContentType: .nickname, returnKeyType: .next)
+
+    private let phoneNumberInputView = UIInputView(title: "Phone Number", placeholder: "+12345678",
+                                                textContentType: .telephoneNumber, returnKeyType: .next)
+
+    private let emailInputView = UIInputView(title: "Email", placeholder: "example@kifu.com",
+                                                   textContentType: .emailAddress, returnKeyType: .next)
+
+    private let passwordInputView = UIInputView(title: "Password", placeholder: "Password",
+                                                   textContentType: .newPassword, returnKeyType: .done)
+    
+    private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    
+    private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
+
+    //MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow(_:)),
+                                               name: .UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)),
+                                               name: .UIKeyboardWillHide, object: nil)
     }
     
-    // MARK: - RETURN VALUES
-    
-    // MARK: - VOID METHODS
-    
-    private func clearErrorMessage() {
-        errorMessageLabel.text = ""
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        configureStyling()
+        configureLayout()
+        configureDelegates()
+        configureGestures()
+        
+        profileImageHelper.completionHandler = { [unowned self] (image) in
+            self.profileImageView.image = image
+            self.userSelectedAProfileImage = true
+        }
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardHeight = notification.getKeyboardHeight() else {
+            return assertionFailure("Could not retrieve keyboard height")
+        }
+
+        contentScrollView.updateBottomPadding(keyboardHeight + 20)
+    }
+
+    //TODO: this method gets called twice find out why
+    @objc func keyboardWillHide(_ notification: Notification) {
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
+    }
+
+    //MARK: - Functions
+    @objc func profileImageTapped() {
+        profileImageHelper.presentActionSheet(from: self)
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += 190//keyboardSize.height
+    @objc func continueButtonTapped() {
+        //unwrap all values and make sure the string is not empty
+        guard let image = profileImageView.image,
+            let _ = userSelectedAProfileImage,
+            let fullName = fullNameInputView.textFieldContainer.textField.text, !fullName.isEmpty,
+            let username = usernameInputView.textFieldContainer.textField.text, !username.isEmpty,
+            let contactNumber = phoneNumberInputView.textFieldContainer.textField.text, !contactNumber.isEmpty,
+            let email = emailInputView.textFieldContainer.textField.text, !email.isEmpty,
+            let password = passwordInputView.textFieldContainer.textField.text, !password.isEmpty else {
+                return showErrorMessage("Please complete all the fields")
+        }
+        
+        //TODO: check for unique username
+        UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
+            
+            //error handling
+            guard let user = user else {
+                //check if we have an error when the user is nil
+                guard let error = error else {
+                    fatalError(KFErrorMessage.seriousBug)
+                }
+                
+                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                return self.showErrorMessage(errorMessage)
             }
+            
+            User.setCurrent(user, writeToUserDefaults: true)
+            
+            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+            self.present(phoneNumberValidationViewController, animated: true)
         }
+    }
+    
+    private func showErrorMessage(_ errorMessage: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = errorMessage
+
+        UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        })
+        
+        continueButton.resetState()
     }
     
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
-    func isValidEmail(testStr:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+}
+
+//MARK: - UITextFieldDelegate
+extension RegisterFormViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTextFieldTag = textField.tag + 1
         
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+        switch nextTextFieldTag {
+        case 1:
+            usernameInputView.textFieldContainer.textField.becomeFirstResponder()
+        case 2:
+            phoneNumberInputView.textFieldContainer.textField.becomeFirstResponder()
+        case 3:
+            emailInputView.textFieldContainer.textField.becomeFirstResponder()
+        case 4:
+            passwordInputView.textFieldContainer.textField.becomeFirstResponder()
+        case 5:
+            continueButtonTapped()
+            fallthrough
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+}
+
+//MARK: - UIConfigurable
+extension RegisterFormViewController: UIConfigurable {
+    func configureDelegates() {
+        fullNameInputView.textFieldContainer.textField.delegate = self
+        usernameInputView.textFieldContainer.textField.delegate = self
+        phoneNumberInputView.textFieldContainer.textField.delegate = self
+        emailInputView.textFieldContainer.textField.delegate = self
+        passwordInputView.textFieldContainer.textField.delegate = self
     }
     
-    // MARK: TextFieldDelegate
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.clearErrorMessage()
+    func configureStyling() {
+        
+        view.backgroundColor = .kfSuperWhite
+        
+        configureContentScrollView()
+        
+        profileImageView.makeItKifuStyle()
+        profileImageView.isUserInteractionEnabled = true
+        
+        errorLabel.isHidden = true
+        errorLabel.textAlignment = .center
+        
+        continueButton.autoReset = false
+        
+        fullNameInputView.textFieldContainer.setTag(0)
+        usernameInputView.textFieldContainer.setTag(1)
+        phoneNumberInputView.textFieldContainer.setTag(2)
+        emailInputView.textFieldContainer.setTag(3)
+        passwordInputView.textFieldContainer.setTag(4)
+        
+        configureText()
     }
     
-    // MARK: - IBACTIONS
-    
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var phoneAddressTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var buttonViewRegister: GradientView!
-    
-    @IBAction func registerButtonTapped(_ sender: Any) {
-        clearErrorMessage()
-        dismissKeyboard()
-        
-        if nameTextField.text!.isEmpty || usernameTextField.text!.isEmpty || phoneAddressTextField.text!.isEmpty || emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            errorMessageLabel.text = "Fill in everything"
-            return
-        }
-        if !(isValidEmail(testStr: emailTextField.text!)) {
-            errorMessageLabel.text = "Email is not valid"
-            return
-        }
-        if passwordTextField.text!.count < 6 {
-            errorMessageLabel.text = "Password have to be more than 6 letters"
-            return
-        }
-        if profileImage.image == plusImage {
-            errorMessageLabel.text = "Set your image"
-            return
-        }
-        
-        guard let email = emailTextField.text,
-            let password = passwordTextField.text
-            else { return }
-        
-        isRegisterButtonEnabled = false
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                let alert = UIAlertController(errorMessage: error.localizedDescription)
-                self.present(alert, animated: true)
-                
-                self.isRegisterButtonEnabled = true
-                
-                return
-            }
-            
-            guard let firUser = result?.user,
-                let username = self.usernameTextField.text,
-                let contactNumber = self.phoneAddressTextField.text,
-                let image = self.profileImage.image
-                else {
-                    fatalError("no user from result but no error was found or, validation failed with register button")
-            }
-            
-            UserService.create(firUser: firUser, username: username, image: image, contactNumber: contactNumber, completion: { (user) in
-                guard let user = user else {
-                    let alert = UIAlertController(errorMessage: nil)
-                    self.present(alert, animated: true)
-                    
-                    self.isRegisterButtonEnabled = true
-                    
-                    return
-                }
-                
-                User.setCurrent(user, writeToUserDefaults: true)
-                
-                //succeeded regiestration
-                self.performSegue(withIdentifier: "registerToHome", sender: nil)
-            })
-        }
+    func configureContentScrollView() {
+        contentScrollView.keyboardDismissMode = .interactive
+        contentScrollView.alwaysBounceVertical = true
+        contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
     
-    @IBAction func imageSelectionButtonTapped(_ sender: Any) {
-        photoHelper.presentActionSheet(from: self)
+    func configureText() {
+        title = "Register Form"
+        profileImageLabel.text = "Profile Image"
+        disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= 190//keyboardSize.height
-            }
-        }
+    func configureGestures() {
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(keyboardTap)
+        
+        let profileImageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageTap.cancelsTouchesInView = false
+        profileImageView.addGestureRecognizer(profileImageTap)
+        
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
-    // MARK: - LIFE CYCLE
+    func configureLayout() {
+        view.addSubview(contentScrollView)
+
+        contentScrollView.addSubview(outerStackView)
+        contentScrollView.directionalLayoutMargins.top = 8
+        contentScrollView.directionalLayoutMargins.leading = 16
+        contentScrollView.directionalLayoutMargins.trailing = 16
+        
+        configureLayoutForProfileImageView()
+        
+        configureLayoutForInputStackView()
+        configureLayoutForUpperStackView()
+        configureLayoutForOuterStackView()
+        
+        configureConstraintsForContentScrollView()
+        configureConstraintsForOuterStackView()
+        configureConstraintsForProfileImageView()
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func configureConstraintsForProfileImageView() {
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        profileImage.image = plusImage
-        photoHelper.completionHandler = { [weak self] image in
-            self?.profileImage.image = image
-            self?.clearErrorMessage()
-        }
+        profileImageView.autoMatch(.width, to: .height, of: profileImageView)
+        profileImageView.autoSetDimension(.height, toSize: KFPadding.SmallPictureLength)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterFormViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        profileImageSpacer.setContentCompressionResistancePriority(.init(rawValue: 249), for: .horizontal)
+    }
+    
+    func configureConstraintsForOuterStackView() {
+        outerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        outerStackView.autoMatch(.width, to: .width, of: view,
+                                 withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
+
+        outerStackView.autoPinEdge(toSuperviewMargin: .top)
+        outerStackView.autoPinEdge(toSuperviewMargin: .leading)
+        outerStackView.autoPinEdge(toSuperviewMargin: .trailing)
+        outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
+    }
+    
+    func configureConstraintsForContentScrollView() {
+        contentScrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentScrollView.autoPinEdgesToSuperviewEdges()
+    }
+    
+    func configureLayoutForOuterStackView() {
+        outerStackView.addArrangedSubview(upperStackView)
+        outerStackView.addArrangedSubview(errorLabel)
+        outerStackView.addArrangedSubview(continueButton)
+    }
+    
+    func configureLayoutForUpperStackView() {
+        upperStackView.addArrangedSubview(inputStackView)
+        upperStackView.addArrangedSubview(disclaimerLabel)
+    }
+    
+    func configureLayoutForInputStackView() {
+        inputStackView.addArrangedSubview(profileImageStackView)
+        inputStackView.addArrangedSubview(fullNameInputView)
+        inputStackView.addArrangedSubview(usernameInputView)
+        inputStackView.addArrangedSubview(phoneNumberInputView)
+        inputStackView.addArrangedSubview(emailInputView)
+        inputStackView.addArrangedSubview(passwordInputView)
+    }
+    
+    func configureLayoutForProfileImageView() {
+        horizontalImageStackView.addArrangedSubview(profileImageView)
+        horizontalImageStackView.addArrangedSubview(profileImageSpacer)
+        
+        profileImageStackView.addArrangedSubview(profileImageLabel)
+        profileImageStackView.addArrangedSubview(horizontalImageStackView)
     }
 }

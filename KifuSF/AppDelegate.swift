@@ -8,57 +8,116 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConfigurable {
+        
     var window: UIWindow?
+    
+    var alertWindow: UIWindow?
 
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions
+        launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()!.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
         setInitalViewController()
+        configureStyling()
         
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
+    //TODO: alex-login logic
     private func setInitalViewController() {
-        if let _  = Auth.auth().currentUser,
+        //TODO: if user does not have a verified account than go to the 2FA screens
+        //TODO: if location service is disabled prompt the required activation screen
+        
+        if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
             let user = try? JSONDecoder().decode(User.self, from: userData) {
-            
+
             User.setCurrent(user)
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "tabBar")
-            
-            window?.rootViewController = initialVC
-            window?.makeKeyAndVisible()
+            window?.setRootViewController(KifuTabBarController())
+        } else {
+            window?.setRootViewController(UINavigationController(rootViewController: FrontPageViewController()))
         }
+        
+        window?.makeKeyAndVisible()
     }
 
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        
+        return GIDSignIn.sharedInstance().handle(
+            url,
+            sourceApplication: options[.sourceApplication] as? String,
+            annotation: [:])
 
+    }
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let _ = error {
+            //error.localizedDescription usually the user cancelled the sign in flow
+            return
+        }
+
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        let credentialDict = ["credentials": credential] as [String: Any]
+        NotificationCenter.default.post(name: .userDidLoginWithGoogle, object: nil, userInfo: credentialDict)
+    }
+    
+    func configureStyling() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
+        UINavigationBar.appearance().tintColor = .kfPrimary
+        UINavigationBar.appearance().barTintColor = .kfSuperWhite
+        UINavigationBar.appearance().isTranslucent = false
+        
+        UITabBar.appearance().tintColor = .kfPrimary
+        UITabBar.appearance().barTintColor = .kfSuperWhite
+        UITabBar.appearance().isTranslucent = false
+    }
+    
+    //TODO: Handle disconnect logic
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+
+    }
 }
 
+extension UIWindow {
+    static var applicationAlertWindow: UIWindow {
+        
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("¯\\_(ツ)_/¯")
+        }
+        
+        let alertWindow: UIWindow
+        if let window = appDelegate.alertWindow {
+            alertWindow = window
+        } else {
+            
+            guard let appDelegateWindow = appDelegate.window else {
+                fatalError("¯\\_(ツ)_/¯")
+            }
+            
+            alertWindow = UIWindow(frame: appDelegateWindow.bounds)
+            appDelegate.alertWindow = alertWindow
+            alertWindow.windowLevel = UIWindowLevelAlert + 1
+        }
+        
+        return alertWindow
+    }
+}
