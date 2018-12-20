@@ -165,8 +165,8 @@ extension Donation.Status {
             return .stepTwo
         case .awaitingApproval:
             return .stepThree
-//        case .awaitingFeedback: ???
-//            return .stepFour
+        case .awaitingReview:
+            return .stepFour
         }
     }
 }

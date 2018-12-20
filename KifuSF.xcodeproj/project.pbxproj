@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		441BE51E210DAE24004A6A7A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		44339C35210D477700E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		44339C39210D4D5400E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		441BE51E210DAE24004A6A7A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		44339C35210D477700E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		44339C39210D4D5400E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A49CFBF213E3BDD001A48FD /* Login.storyboard */; };
 		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
@@ -105,6 +105,7 @@
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
+		E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */; };
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
@@ -223,6 +224,7 @@
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
+		E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Firebase.swift"; sourceTree = "<group>"; };
 		E9439F7121350F0600261370 /* CasableVars.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = CasableVars.stencil; sourceTree = "<group>"; };
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				7A695A0A215AE9CC00D4696D /* NotificationName.swift */,
 				E9BA57A8217161F6002A1C37 /* URL+Images.swift */,
 				C576EFDD21C66A0D00F96922 /* Notification.swift */,
+				E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -813,6 +817,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -895,6 +900,7 @@
 				C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */,
 				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
+				E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */,
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
@@ -982,15 +988,15 @@
 				C58D9EC5216275CF00B180B3 /* KFMDestinationMap.swift in Sources */,
 				E9BA57A9217161F6002A1C37 /* URL+Images.swift in Sources */,
 				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
-				C505BD792146F73A00A5195B /* KFCTabBar.swift in Sources */,
-				44339C39210D4D5400E6663E /* BuildFile in Sources */,
+				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
+				44339C39210D4D5400E6663E /* (null) in Sources */,
 				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
-				441BE51E210DAE24004A6A7A /* BuildFile in Sources */,
+				441BE51E210DAE24004A6A7A /* (null) in Sources */,
 				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
 				C58D9ED42163AD7D00B180B3 /* KFPadding.swift in Sources */,
 				C5475D0F21556ADB006BA324 /* KFVInProgressDonationDescription.swift in Sources */,
-				44339C35210D477700E6663E /* BuildFile in Sources */,
+				44339C35210D477700E6663E /* (null) in Sources */,
 				C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */,
 				C58D9ECE21635E3A00B180B3 /* PureLayout.swift in Sources */,
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
@@ -1139,7 +1145,10 @@
 				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1159,7 +1168,10 @@
 				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

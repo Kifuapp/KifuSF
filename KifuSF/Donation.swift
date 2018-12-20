@@ -34,6 +34,7 @@ struct Donation: KeyedStoredProperties {
         case awaitingPickup
         case awaitingDelivery
         case awaitingApproval
+        case awaitingReview
         
         //TODO: Flagging, add a flag case here?
 //        case flagged
@@ -48,6 +49,8 @@ struct Donation: KeyedStoredProperties {
                 return "Awaiting verification photo"
             case .awaitingApproval:
                 return "Awaiting your approval"
+            case .awaitingReview:
+                return "Awaiting your review"
             }
         }
         
@@ -61,6 +64,8 @@ struct Donation: KeyedStoredProperties {
                 return "Awaiting your verification"
             case .awaitingApproval:
                 return "Awaiting donator's approval"
+            case .awaitingReview:
+                return "Awaiting your review"
             }
         }
     }

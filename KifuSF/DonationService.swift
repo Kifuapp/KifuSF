@@ -368,8 +368,7 @@ struct DonationService {
                 dg.leave()
             })
             
-            //TODO: erick-adding a review (mark awaiting for review for the volunteer)
-            updatedDict[Donation.Keys.status] = Donation.Status.awaitingApproval.rawValue
+            updatedDict[Donation.Keys.status] = Donation.Status.awaitingReview.rawValue
             
             dg.enter()
             let volunteerDonationsRef = DatabaseReference.delivery(for: volunteerUid, donation: donation.uid)
@@ -391,53 +390,20 @@ struct DonationService {
 
     static func verifyDelivery(for donation: Donation, completion: @escaping (Bool) -> Void) {
         
-        /**
-         TODO: only update donator's donation and set status to .awaitingReview
-         */
-        
-        guard let volunteerUid = donation.volunteer?.uid else {
-            assertionFailure(KFErrorMessage.inputValidationFailed("donation does not have a volunteer"))
-            
-            return completion(false)
-        }
-        
         var updatedDonation = donation
-        updatedDonation.status = .awaitingDelivery
+        updatedDonation.status = .awaitingReview
         
-        //TODO: erick-adding a review
         //update only the keys needed to conform to db write rules
-//        let updatedDict: [String: Any] = [
-//            Donation.Keys.status: updatedDonation.status.rawValue
-//        ]
+        let updatedDict: [String: Any] = [
+            Donation.Keys.status: updatedDonation.status.rawValue
+        ]
         
-        let dg = DispatchGroup() // swiftlint:disable:this identifier_name
-        var isSuccessful = true
+        let fbDg = FirebaseDispatchGroup() // swiftlint:disable:this identifier_name
         
-        dg.enter()
         let donatorDonationsRef = DatabaseReference.donation(for: donation.donator.uid, donation: donation.uid)
-        donatorDonationsRef.removeValue { (error, _) in
-            if let error = error {
-                assertionFailure(error.localizedDescription)
-                
-                isSuccessful = false
-            }
-            
-            dg.leave()
-        }
+        donatorDonationsRef.updateChildValues(updatedDict, withCompletionBlock: fbDg.handleErrorCase)
         
-        dg.enter()
-        let volunteerDonationsRef = DatabaseReference.delivery(for: volunteerUid, donation: donation.uid)
-        volunteerDonationsRef.removeValue { (error, _) in
-            if let error = error {
-                assertionFailure(error.localizedDescription)
-                
-                isSuccessful = false
-            }
-            
-            dg.leave()
-        }
-        
-        dg.notify(queue: DispatchQueue.main) {
+        fbDg.notify { isSuccessful in
             completion(isSuccessful)
         }
     }
