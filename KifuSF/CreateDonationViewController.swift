@@ -10,7 +10,7 @@ import UIKit
 
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
-    private let descriptorView = UIDescriptorView()
+    private let descriptorView = UIDescriptorView(defaultImageViewSize: .big)
     private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Title",
                                                                    contentView: UITextFieldContainer(returnKeyType: .next,
                                                                                                      placeholder: "Keep it simple"))
@@ -24,6 +24,7 @@ class CreateDonationViewController: UIScrollableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureData()
         configureStyling()
         configureLayout()
     }
@@ -33,21 +34,31 @@ class CreateDonationViewController: UIScrollableViewController {
 extension CreateDonationViewController: UIConfigurable {
     func configureData() {
         title = "Create Donation"
+        descriptorView.titleLabel.text = "Take a photo"
+        descriptorView.subtitleStickyLabel.contentView.text = "I don't know"
     }
     
     func configureStyling() {
+        view.backgroundColor = .kfWhite
 
-        view.backgroundColor = UIColor.kfWhite
+        descriptorView.layer.shadowOpacity = 0
 
         descriptionInputView.contentView.backgroundColor = .kfGray
         descriptorView.imageView.image = .kfPlusImage
-        descriptorView.titleLabel.text = "Take a photo"
-        descriptorView.subtitleStickyLabel.contentView.text = "I don't know"
+        
     }
 
     func configureLayout() {
         view.addSubview(pickUpAddressButton)
 
+        configureOuterStackViewLayout()
+
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .leading)
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .trailing)
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .bottom)
+    }
+
+    private func configureOuterStackViewLayout() {
         outerStackView.addArrangedSubview(descriptorView)
         outerStackView.addArrangedSubview(titleInputView)
         outerStackView.addArrangedSubview(descriptionInputView)

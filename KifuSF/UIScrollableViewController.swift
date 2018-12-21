@@ -18,6 +18,7 @@ class UIScrollableViewController: UIViewController {
         super.viewDidLoad()
 
         view.addSubview(contentScrollView)
+        view.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
         
         contentScrollView.addSubview(outerStackView)
         contentScrollView.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(8, 16, 8, 16)

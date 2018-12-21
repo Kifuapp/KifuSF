@@ -75,9 +75,7 @@ extension FrontPageViewController: UIConfigurable {
     }
     
     func configureLayout() {
-        view.directionalLayoutMargins.leading = 16
-        view.directionalLayoutMargins.trailing = 16
-        view.directionalLayoutMargins.bottom = 16
+        view.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
 
         view.addSubview(logoImageView)
         view.addSubview(bottomStackView)

@@ -33,6 +33,12 @@ class UIDescriptorView: UIView, UIConfigurable {
         configureLayout()
     }
 
+    convenience init(defaultImageViewSize: UIImageView.Size) {
+        self.init(frame: CGRect.zero)
+
+        self.defaultImageViewSize = defaultImageViewSize
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -57,7 +63,6 @@ class UIDescriptorView: UIView, UIConfigurable {
             case .medium where defaultImageViewSize == .medium:
                 priority = (isAccessibilityCategory) ? 249 : 751
             case .small where defaultImageViewSize == .small:
-                constraint.priority = UILayoutPriority(rawValue: 249)
                 priority = (isAccessibilityCategory) ? 249 : 751
             default:
                 priority = 249
@@ -84,7 +89,7 @@ class UIDescriptorView: UIView, UIConfigurable {
     }
 
     private func configureDescriptorStyling() {
-        backgroundColor = UIColor.kfSuperWhite
+        backgroundColor = .kfSuperWhite
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()

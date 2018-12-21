@@ -242,7 +242,7 @@ extension RegisterFormViewController: UIConfigurable {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
         profileImageView.autoMatch(.width, to: .height, of: profileImageView)
-        profileImageView.autoSetDimension(.height, toSize: KFPadding.SmallPictureLength)
+        profileImageView.autoSetDimension(.height, toSize: UIImageView.Size.small.get())
         
         profileImageSpacer.setContentCompressionResistancePriority(.init(rawValue: 249), for: .horizontal)
     }
