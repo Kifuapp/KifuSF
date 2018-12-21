@@ -108,9 +108,12 @@
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
+		E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */; };
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
+		E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */; };
+		E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
 		E98B003621378F68008FD75A /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
@@ -227,10 +230,13 @@
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
+		E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Firebase.swift"; sourceTree = "<group>"; };
 		E9439F7121350F0600261370 /* CasableVars.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = CasableVars.stencil; sourceTree = "<group>"; };
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
+		E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImage.xib; sourceTree = "<group>"; };
+		E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KFCVerifyDropoffImage.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
 		E98B003521378F68008FD75A /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
 		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -270,6 +276,7 @@
 				C50182EF2142AD4E00257412 /* KFCDelivery.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
 				C54284152152BFAD00373586 /* KFCDonation.swift */,
+				E98036DF21CACD2C002344C7 /* VerifyDropoffImage */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
 				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
@@ -556,6 +563,7 @@
 				E9BA57A8217161F6002A1C37 /* URL+Images.swift */,
 				C576EFDD21C66A0D00F96922 /* Notification.swift */,
 				C576EFED21C82A4E00F96922 /* String.swift */,
+				E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -690,6 +698,15 @@
 			path = Templates;
 			sourceTree = "<group>";
 		};
+		E98036DF21CACD2C002344C7 /* VerifyDropoffImage */ = {
+			isa = PBXGroup;
+			children = (
+				E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */,
+				E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */,
+			);
+			name = VerifyDropoffImage;
+			sourceTree = "<group>";
+		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +792,7 @@
 				C5A351DF210D0CE500A717D3 /* LaunchScreen.storyboard in Resources */,
 				7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
+				E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
 				C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */,
 				C5475D0921542084006BA324 /* KFVProgress.xib in Resources */,
@@ -891,6 +909,7 @@
 				C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */,
 				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
+				E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */,
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
@@ -962,6 +981,7 @@
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */,
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
+				E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */,
 				C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */,
 				C5475D1121556EA1006BA324 /* KFMInProgressDonationDescription.swift in Sources */,
 				C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */,
@@ -982,6 +1002,7 @@
 				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
 				C505BD792146F73A00A5195B /* KifuTabBarViewController.swift in Sources */,
 				44339C39210D4D5400E6663E /* (null) in Sources */,
+				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* (null) in Sources */,
 				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
@@ -1133,14 +1154,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -1156,14 +1177,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.codingbytes.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

@@ -37,7 +37,17 @@ class KFVDestinationMap: UIView, UIConfigurable {
     func configureStyling() {
         mapView.layer.cornerRadius = CALayer.kfCornerRadius
     }
+    
+    func reloadData(for data: CLLocationCoordinate2D) {
+        guard CLLocationCoordinate2DIsValid(data) else {
+            return assertionFailure(KFErrorMessage.inputValidationFailed("Corrdinate is invalid"))
+        }
 
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = data
+        mapView.addAnnotation(annotation)
+        mapView.showAnnotations(mapView.annotations, animated: false)
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -29,12 +29,13 @@ class KFCModularTableView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        modularTableView.allowsSelection = false
+        modularTableView.allowsSelection = true
         modularTableView.backgroundColor = UIColor.kfSuperWhite
         modularTableView.contentInset.top = 0
         modularTableView.scrollIndicatorInsets.top = 0
 
         modularTableView.dataSource = self
+       modularTableView.delegate = self
         modularTableView.register(KFVModularCell<OpenDonationDetailedDescriptorView>.self,
                            forCellReuseIdentifier: KFVModularCell<OpenDonationDetailedDescriptorView>.identifier)
         modularTableView.register(KFVModularCell<KFVInProgressDonationDescription>.self,
@@ -104,7 +105,8 @@ class KFCModularTableView: UIViewController {
     func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
         return nil
     }
-
+    
+    func didSelect(_ cellType: CellTypes, at indexPath: IndexPath) { }
 }
 
 extension KFCModularTableView: UITableViewDataSource {
@@ -175,10 +177,19 @@ extension KFCModularTableView: UITableViewDataSource {
                 let castedItem = item as? KFMDestinationMap else {
                     fatalError(KFErrorMessage.unknownCell)
             }
-
-
+          
+            cell.descriptorView.reloadData(for: castedItem.coordinate)
+            cell.descriptorView.isUserInteractionEnabled = false
+          
             return cell
         }
+    }
+}
+
+extension KFCModularTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellType = items[indexPath.section].type
+        self.didSelect(cellType, at: indexPath)
     }
 }
 

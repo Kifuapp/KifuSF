@@ -109,12 +109,14 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
                 fatalError("either the indexes of these elements in this array are out of order or the class types have changed for one of the view controllers")
         }
         
-        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
+        DonationService.observeCurrentDelivery { (delivery) in
             deliveryVc.delivery = delivery
+        }
+        
+        DonationService.observeCurrentDonation { (donation) in
             donationVc.donation = donation
         }
     }
-
 }
 
 extension User {
@@ -163,8 +165,8 @@ extension Donation.Status {
             return .stepTwo
         case .awaitingApproval:
             return .stepThree
-//        case .awaitingFeedback: ???
-//            return .stepFour
+        case .awaitingReview:
+            return .stepFour
         }
     }
 }

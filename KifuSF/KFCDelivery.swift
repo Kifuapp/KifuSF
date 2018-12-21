@@ -39,7 +39,7 @@ class KFCDelivery: KFCModularTableView {
                 //TODO: alex-dismiss loading indicator
                 loadingVc.dismiss {
                     if isSuccessful {
-                        unwrappedSelf.delivery?.status = .awaitingApproval
+                        unwrappedSelf.delivery?.status = .awaitingReview
                         unwrappedSelf.updateUI()
                     } else {
                         let errorAlert = UIAlertController(errorMessage: nil)
@@ -57,7 +57,6 @@ class KFCDelivery: KFCModularTableView {
         
         //update the actionButton
         actionButton.isHidden = false
-        
         if let delivery = self.delivery {
             switch delivery.status {
             case .open:
@@ -65,9 +64,11 @@ class KFCDelivery: KFCModularTableView {
             case .awaitingPickup:
                 actionButton.setTitle("Directions", for: .normal)
             case .awaitingDelivery:
-                actionButton.setTitle("Directions", for: .normal)
+                actionButton.setTitle("Submit Dropoff", for: .normal)
             case .awaitingApproval:
-                actionButton.isHidden = true
+                assertionFailure("this step should not occur, skip to awaitingReview")
+            case .awaitingReview:
+                actionButton.setTitle("Submit Review", for: .normal)
             }
         } else {
             actionButton.setTitle("View Open Donations", for: .normal)
@@ -151,12 +152,38 @@ class KFCDelivery: KFCModularTableView {
         } else if delivery.status.isAwaitingDelivery {
             
             //TODO: get location of selected charity of donation
-            return nil
+            location = CLLocationCoordinate2D(
+                latitude: delivery.latitude,
+                longitude: delivery.longitude
+            )
         } else {
             return nil
         }
         
         return KFMDestinationMap(coordinate: location)
+    }
+    
+    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+        switch cellType {
+        case .destinationMap:
+            guard let delivery = self.delivery else {
+                return assertionFailure("No delivery given while map was tappable")
+            }
+            
+            if delivery.status.isAwaitingPickup {
+                
+                //pickup Location
+                MapHelper(long: delivery.longitude, lat: delivery.latitude)
+                    .open()
+            } else if delivery.status.isAwaitingDelivery {
+                
+                //TODO: charity location
+                MapHelper(long: delivery.longitude, lat: delivery.latitude)
+                    .open()
+            }
+        default:
+            break
+        }
     }
     
     @objc func pressActionButton(_ sender: Any) {
@@ -170,10 +197,10 @@ class KFCDelivery: KFCModularTableView {
                 self.openDirectionsToPickUpLocation(for: delivery)
             case .awaitingDelivery:
                 
-                //Directions to charity
-//                self.openDirectionsToCharity(for: delivery)
-                
+                //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
+            case .awaitingReview:
+                self.presentReview(for: delivery.donator)
             }
             
         } else {
@@ -192,6 +219,10 @@ class KFCDelivery: KFCModularTableView {
     
     private func presentConfirmationImage(for deliver: Donation) {
         photoHelper.presentActionSheet(from: self)
+    }
+    
+    private func presentReview(for user: User) {
+        //TODO: erick-adding a reivew (present the ReviewVc)
     }
     
     private func openDirectionsToCharity(for delivery: Donation) {

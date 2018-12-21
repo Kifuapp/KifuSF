@@ -79,10 +79,13 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
             self.openDonations = donations
         }
         
-        DonationService.observeOpenDonationAndDelivery { (donation, delivery) in
-            self.currentDonation = donation
+        DonationService.observeCurrentDelivery { (delivery) in
             self.currentDelivery = delivery
-            
+            self.widgetView.reloadData()
+        }
+        
+        DonationService.observeCurrentDonation { (donation) in
+            self.currentDonation = donation
             self.widgetView.reloadData()
         }
         
