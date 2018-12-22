@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocationPicker
 
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
@@ -14,7 +15,9 @@ class CreateDonationViewController: UIScrollableViewController {
     private let imageHelper = PhotoHelper()
     private var userSelectedAProfileImage: Bool? = nil
 
-    private let descriptorView = UIDescriptorView(defaultImageViewSize: .big)
+    private var pickupLocation: Location?
+
+    private let descriptorView = UIDescriptorView(defaultImageViewSize: .medium)
     private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Title",
                                                                    contentView: UITextFieldContainer(returnKeyType: .next,
                                                                                                      placeholder: "Keep it simple"))
@@ -38,10 +41,6 @@ class CreateDonationViewController: UIScrollableViewController {
             self.descriptorView.imageView.image = image
             self.userSelectedAProfileImage = true
         }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,22 +98,23 @@ class CreateDonationViewController: UIScrollableViewController {
                 return showErrorMessage("Please complete all the fields")
         }
 
-//        DonationService.createDonation(
-//            title: title,
-//            notes: description,
-//            image: image,
-//            pickUpAddress: location.address,
-//            longitude: location.coordinate.longitude,
-//            latitude: location.coordinate.latitude) { donation in
-//                loadingVc.dismiss {
-//                    if donation == nil {
-//                        let errorAlert = UIAlertController(errorMessage: nil)
-//                        self.present(errorAlert, animated: true)
-//                    } else {
-//                        self.presentingViewController?.dismiss(animated: true, completion: nil)
-//                    }
-//                }
-//        }
+        let locationPicker = LocationPickerViewController()
+
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.searchBarPlaceholder = "Choose Pickup location"
+        locationPicker.mapType = .standard
+
+        locationPicker.showCurrentLocationButton = true
+
+        locationPicker.completion = { location in
+            guard let location = location else {
+                return print("no location selected")
+            }
+
+            self.pickupLocation = location
+        }
+
+        self.navigationController?.pushViewController(locationPicker, animated: true)
     }
 
     private func showErrorMessage(_ errorMessage: String) {
@@ -225,8 +225,6 @@ extension CreateDonationViewController: UIConfigurable {
 
         descriptorView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         descriptorView.subtitleStickyLabel.updateStickySide(to: .top)
-
-        descriptionInputView.contentView.autoSetDimension(.height, toSize: 112, relation: .greaterThanOrEqual)
     }
 
     func configureGestures() {

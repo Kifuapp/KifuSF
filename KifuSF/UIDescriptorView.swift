@@ -58,12 +58,14 @@ class UIDescriptorView: UIView, UIConfigurable {
 
             let priority: Float
             switch size {
-            case .big:
-                priority = (isAccessibilityCategory) ? 751 : 249
+            case .big where defaultImageViewSize == .big:
+                priority = (isAccessibilityCategory) ? 249 : 751
             case .medium where defaultImageViewSize == .medium:
                 priority = (isAccessibilityCategory) ? 249 : 751
             case .small where defaultImageViewSize == .small:
                 priority = (isAccessibilityCategory) ? 249 : 751
+            case .big:
+                priority = (isAccessibilityCategory) ? 751 : 249
             default:
                 priority = 249
             }
