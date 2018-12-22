@@ -407,10 +407,6 @@ struct DonationService {
             completion(isSuccessful)
         }
     }
-    
-    static func getDistance(for donation: Donation, completion: @escaping (String) -> Void) {
-        
-    }
 
     static func cancel(donation: Donation, completion: @escaping (Bool) -> Void) {
         /**
