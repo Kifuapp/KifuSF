@@ -13,18 +13,10 @@ import FirebaseAuth
 class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Variables
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
-    
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
-    
-    private let profileImageStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    private let profileImageLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    
-    private let horizontalImageStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
-    private let profileImageView = UIImageView(image: .kfPlusImage)
-    private let profileImageSpacer = UIView()
-    
-    private let profileImageHelper = PhotoHelper()
-    private var userSelectedAProfileImage: Bool? = nil
+
+    private let profileImageInputView = UIGroupView<UIImageView>(title: "Profile Image",
+                                                                      contentView: UIImageView(image: .kfPlusImage))
 
     private let fullNameInputView = UIGroupView<UITextFieldContainer>(title: "Full Name",
                                                                       contentView: UITextFieldContainer(textContentType: .name,
@@ -55,6 +47,9 @@ class RegisterFormViewController: UIScrollableViewController {
     
     private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
 
+    private let profileImageHelper = PhotoHelper()
+    private var userSelectedAProfileImage: Bool? = nil
+
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,7 +78,7 @@ class RegisterFormViewController: UIScrollableViewController {
         configureGestures()
         
         profileImageHelper.completionHandler = { [unowned self] (image) in
-            self.profileImageView.image = image
+            self.profileImageInputView.contentView.image = image
             self.userSelectedAProfileImage = true
         }
     }
@@ -102,14 +97,10 @@ class RegisterFormViewController: UIScrollableViewController {
     }
 
     //MARK: - Functions
-    @objc func profileImageTapped() {
-        profileImageHelper.presentActionSheet(from: self)
-    }
-    
     @objc func continueButtonTapped() {
         //unwrap all values and make sure the string is not empty
-        guard let image = profileImageView.image,
-            let _ = userSelectedAProfileImage,
+        guard let _ = userSelectedAProfileImage,
+            let image = profileImageInputView.contentView.image,
             let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
             let username = usernameInputView.contentView.textField.text, !username.isEmpty,
             let phoneNumber = phoneNumberInputView.contentView.textField.text, !phoneNumber.isEmpty,
@@ -181,22 +172,32 @@ extension RegisterFormViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - UIGroupViewDelegate
+extension RegisterFormViewController: UIGroupViewDelegate {
+    func didSelectContentView() {
+        profileImageHelper.presentActionSheet(from: self)
+    }
+}
+
 //MARK: - UIConfigurable
 extension RegisterFormViewController: UIConfigurable {
     func configureDelegates() {
+        profileImageInputView.delegate = self
         fullNameInputView.contentView.textField.delegate = self
         usernameInputView.contentView.textField.delegate = self
         phoneNumberInputView.contentView.textField.delegate = self
         emailInputView.contentView.textField.delegate = self
         passwordInputView.contentView.textField.delegate = self
+
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
     func configureStyling() {
         view.backgroundColor = .kfSuperWhite
         contentScrollView.updateBottomPadding(KFPadding.StackView)
-        
-        profileImageView.makeItKifuStyle()
-        profileImageView.isUserInteractionEnabled = true
+
+        profileImageInputView.contentView.makeItKifuStyle()
+        profileImageInputView.contentView.isUserInteractionEnabled = true
         
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center
@@ -212,7 +213,6 @@ extension RegisterFormViewController: UIConfigurable {
     
     func configureData() {
         title = "Register Form"
-        profileImageLabel.text = "Profile Image"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
     }
     
@@ -220,31 +220,25 @@ extension RegisterFormViewController: UIConfigurable {
         let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         keyboardTap.cancelsTouchesInView = false
         view.addGestureRecognizer(keyboardTap)
-        
-        let profileImageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
-        profileImageTap.cancelsTouchesInView = false
-        profileImageView.addGestureRecognizer(profileImageTap)
-        
-        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+
+        profileImageInputView.configureGestures()
     }
     
     func configureLayout() {
-        configureLayoutForProfileImageView()
-        
         configureLayoutForInputStackView()
         configureLayoutForUpperStackView()
         configureLayoutForOuterStackView()
 
         configureConstraintsForProfileImageView()
     }
-    
+
     func configureConstraintsForProfileImageView() {
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        profileImageView.autoMatch(.width, to: .height, of: profileImageView)
-        profileImageView.autoSetDimension(.height, toSize: UIImageView.Size.small.get())
-        
-        profileImageSpacer.setContentCompressionResistancePriority(.init(rawValue: 249), for: .horizontal)
+        profileImageInputView.contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        profileImageInputView.contentView.autoMatch(.width, to: .height, of: profileImageInputView.contentView)
+        profileImageInputView.contentView.autoSetDimension(.height, toSize: UIImageView.Size.medium.get())
+
+        profileImageInputView.horizontalStackView.addArrangedSubview(UIView())
     }
     
     func configureLayoutForOuterStackView() {
@@ -259,19 +253,11 @@ extension RegisterFormViewController: UIConfigurable {
     }
     
     func configureLayoutForInputStackView() {
-        inputStackView.addArrangedSubview(profileImageStackView)
+        inputStackView.addArrangedSubview(profileImageInputView)
         inputStackView.addArrangedSubview(fullNameInputView)
         inputStackView.addArrangedSubview(usernameInputView)
         inputStackView.addArrangedSubview(phoneNumberInputView)
         inputStackView.addArrangedSubview(emailInputView)
         inputStackView.addArrangedSubview(passwordInputView)
-    }
-    
-    func configureLayoutForProfileImageView() {
-        horizontalImageStackView.addArrangedSubview(profileImageView)
-        horizontalImageStackView.addArrangedSubview(profileImageSpacer)
-        
-        profileImageStackView.addArrangedSubview(profileImageLabel)
-        profileImageStackView.addArrangedSubview(horizontalImageStackView)
     }
 }

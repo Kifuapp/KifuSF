@@ -11,6 +11,8 @@ import UIKit
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
     private static let descriptionPlaceholder = "Additional Info about pick up address, hour, item, etc."
+    private let imageHelper = PhotoHelper()
+    private var userSelectedAProfileImage: Bool? = nil
 
     private let descriptorView = UIDescriptorView(defaultImageViewSize: .big)
     private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Title",
@@ -18,9 +20,9 @@ class CreateDonationViewController: UIScrollableViewController {
                                                                                                      placeholder: "Keep it simple"))
     private let descriptionInputView = UIGroupView<UITextView>(title: "Description",
                                                                contentView: UITextView(forAutoLayout: ()))
-
     private let pickUpAddressButton = UIAnimatedButton(backgroundColor: .kfInformative,
                                                        andTitle: "Choose pick-up address")
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,6 +33,11 @@ class CreateDonationViewController: UIScrollableViewController {
         configureLayout()
         configureGestures()
         configureDelegates()
+
+        imageHelper.completionHandler = { [unowned self] (image) in
+            self.descriptorView.imageView.image = image
+            self.userSelectedAProfileImage = true
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -80,8 +87,47 @@ class CreateDonationViewController: UIScrollableViewController {
         view.endEditing(true)
     }
 
+    @objc private func imageViewTapped() {
+        imageHelper.presentActionSheet(from: self)
+    }
+
     @objc private func pickUpAddressButtonTapped() {
-        print("poof")
+        guard let _ = userSelectedAProfileImage,
+            let image = descriptorView.imageView.image,
+            let title = titleInputView.contentView.textField.text, !title.isEmpty,
+            let description = descriptionInputView.contentView.text, description != CreateDonationViewController.descriptionPlaceholder else {
+                return showErrorMessage("Please complete all the fields")
+        }
+
+//        DonationService.createDonation(
+//            title: title,
+//            notes: description,
+//            image: image,
+//            pickUpAddress: location.address,
+//            longitude: location.coordinate.longitude,
+//            latitude: location.coordinate.latitude) { donation in
+//                loadingVc.dismiss {
+//                    if donation == nil {
+//                        let errorAlert = UIAlertController(errorMessage: nil)
+//                        self.present(errorAlert, animated: true)
+//                    } else {
+//                        self.presentingViewController?.dismiss(animated: true, completion: nil)
+//                    }
+//                }
+//        }
+    }
+
+    private func showErrorMessage(_ errorMessage: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = errorMessage
+
+        UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        }, completion: { [unowned self] (_) in
+            self.contentScrollView.scrollToBottom()
+        })
+
+        pickUpAddressButton.resetState()
     }
 }
 
@@ -145,11 +191,18 @@ extension CreateDonationViewController: UIConfigurable {
     func configureStyling() {
         view.backgroundColor = .kfSuperWhite
 
-        descriptorView.layer.shadowOpacity = 0
+        pickUpAddressButton.autoReset = false
 
-        descriptionInputView.contentView.backgroundColor = .kfGray
+        errorLabel.isHidden = true
+        errorLabel.textAlignment = .center
+
+        descriptorView.layer.shadowOpacity = 0
         descriptorView.imageView.image = .kfPlusImage
 
+        configureDescriptionInputViewStyling()
+    }
+
+    private func configureDescriptionInputViewStyling() {
         descriptionInputView.contentView.isScrollEnabled = false
         descriptionInputView.contentView.enablesReturnKeyAutomatically = true
         descriptionInputView.contentView.adjustsFontForContentSizeCategory = true
@@ -158,6 +211,7 @@ extension CreateDonationViewController: UIConfigurable {
         descriptionInputView.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         descriptionInputView.contentView.font = UIFont.preferredFont(forTextStyle: .title3)
         descriptionInputView.contentView.textColor = .kfPlaceholderText
+        descriptionInputView.contentView.backgroundColor = .kfGray
     }
 
     func configureLayout() {
@@ -179,11 +233,16 @@ extension CreateDonationViewController: UIConfigurable {
         let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         keyboardTap.cancelsTouchesInView = false
         view.addGestureRecognizer(keyboardTap)
+
+        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        descriptorView.imageView.isUserInteractionEnabled = true
+        descriptorView.imageView.addGestureRecognizer(imageTapGesture)
     }
 
     private func configureOuterStackViewLayout() {
         outerStackView.addArrangedSubview(descriptorView)
         outerStackView.addArrangedSubview(titleInputView)
         outerStackView.addArrangedSubview(descriptionInputView)
+        outerStackView.addArrangedSubview(errorLabel)
     }
 }

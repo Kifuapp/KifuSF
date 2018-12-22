@@ -10,8 +10,10 @@ import UIKit
 
 class UIGroupView<T: UIView>: UIView {
     //MARK: - Variables
-    private let contentStackView = UIStackView(axis: .vertical, alignment: .fill,
+    private(set) var contentStackView = UIStackView(axis: .vertical, alignment: .fill,
                                                spacing: KFPadding.Body, distribution: .fill)
+    private(set) var horizontalStackView = UIStackView(axis: .horizontal, alignment: .leading, spacing: 0)
+
     let headerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let contentView: T
 
@@ -32,7 +34,6 @@ class UIGroupView<T: UIView>: UIView {
     }
 
     @objc private func contentViewTapped() {
-        print("Recognized touch")
         delegate?.didSelectContentView()
     }
 }
@@ -45,8 +46,10 @@ protocol UIGroupViewDelegate: class {
 //MARK: - UIConfigurable
 extension UIGroupView: UIConfigurable {
     func configureLayout() {
+        horizontalStackView.addArrangedSubview(contentView)
+
         contentStackView.addArrangedSubview(headerLabel)
-        contentStackView.addArrangedSubview(contentView)
+        contentStackView.addArrangedSubview(horizontalStackView)
 
         addSubview(contentStackView)
 
