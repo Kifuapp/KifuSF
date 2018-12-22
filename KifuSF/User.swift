@@ -19,6 +19,7 @@ struct User: Codable, KeyedStoredProperties {
         case username
         case contactNumber
         case isVerified
+        case hasApprovedConditions
     }
     
     // MARK: - VARS
@@ -29,6 +30,7 @@ struct User: Codable, KeyedStoredProperties {
     let contactNumber: String
     
     var isVerified: Bool
+    var hasApprovedConditions: Bool
     var contributionPoints: Int
     
     //check out this post on why Report cannot be a stored property in Donation
@@ -54,6 +56,7 @@ struct User: Codable, KeyedStoredProperties {
             Keys.contributionPoints: contributionPoints,
             Keys.contactNumber: contactNumber,
             Keys.isVerified: isVerified,
+            Keys.hasApprovedConditions: hasApprovedConditions,
             Keys.flag: flag?.rawValue as Any,
             Keys.flaggedReportUid: flaggedReportUid as Any
         ]
@@ -75,6 +78,7 @@ struct User: Codable, KeyedStoredProperties {
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = false
     }
     
     init?(from snapshot: DataSnapshot) {
@@ -92,7 +96,8 @@ struct User: Codable, KeyedStoredProperties {
             let imageURL = dictionary[Keys.imageURL] as? String,
             let contributionPoints = dictionary[Keys.contributionPoints] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
-            let isVerified = dictionary[Keys.isVerified] as? Bool
+            let isVerified = dictionary[Keys.isVerified] as? Bool,
+            let hasApprovedConditions = dictionary[Keys.hasApprovedConditions] as? Bool
             else { return nil }
         
         self.username = username
@@ -101,6 +106,7 @@ struct User: Codable, KeyedStoredProperties {
         self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = hasApprovedConditions
         
         //flagging
         if let flagInt = dictionary[Keys.flag] as? Int,
