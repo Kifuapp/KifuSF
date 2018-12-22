@@ -296,7 +296,7 @@ struct UserService {
     static func markHasApprovedConditionsTrue(completion: @escaping (Bool) -> Void) {
         let ref = DatabaseReference.currentUser()
         let changes: [String: Any] = [
-            User.Keys.isVerified: true
+            User.Keys.hasApprovedConditions: true
         ]
         
         ref.updateChildValues(changes) { error, _ in
