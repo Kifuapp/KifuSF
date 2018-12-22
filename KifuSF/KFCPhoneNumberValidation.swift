@@ -47,17 +47,15 @@ class KFCPhoneNumberValidation: UIViewController {
         
         TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (succes) in
             if succes {
-                
-                var user = User.current
-                user.isVerified = true
-
-                UserService.update(user: user, completion: { (succes) in
-                    //TODO: do something else
-                    print(succes)
+                UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
+                    if isSuccessful {
+                        let mainViewControllers = KifuTabBarController()
+                        self.present(mainViewControllers, animated: true)
+                    } else {
+                        UIAlertController(errorMessage: nil)
+                            .present(in: self)
+                    }
                 })
-
-                let mainViewControllers = KifuTabBarController()
-                self.present(mainViewControllers, animated: true)
             } else {
                 //TODO: show error
             }
