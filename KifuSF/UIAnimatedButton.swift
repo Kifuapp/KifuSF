@@ -11,6 +11,7 @@ import UIKit
 class UIAnimatedButton: UIButton {
     //MARK: - Variables
     static let animationDuration = 0.025
+    static let height: CGFloat = 44
     
     override var isUserInteractionEnabled: Bool {
         didSet {
@@ -159,7 +160,7 @@ class UIAnimatedButton: UIButton {
 extension UIAnimatedButton: UIConfigurable {
     func configureLayout() {
         translatesAutoresizingMaskIntoConstraints = false
-        heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
+        heightConstraint = autoSetDimension(.height, toSize: UIAnimatedButton.height, relation: .greaterThanOrEqual)
     }
 
     func configureStyling() {

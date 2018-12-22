@@ -151,8 +151,8 @@
 		C50E472E21518692008A8C36 /* KFMDonationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMDonationInfo.swift; sourceTree = "<group>"; };
 		C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMVolunteerInfo.swift; sourceTree = "<group>"; };
 		C50E473421518977008A8C36 /* KFMPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMPendingDonation.swift; sourceTree = "<group>"; };
-		C515B22E21751C6E00051FFD /* KifuSF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KifuSF.entitlements; sourceTree = "<group>"; };
 		C515B22F2175257100051FFD /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		C52B1A4121CE830600839B38 /* KifuSF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KifuSF.entitlements; sourceTree = "<group>"; };
 		C53D92B72171E42500AE3882 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C53D92B92171E46700AE3882 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldContainer.swift; sourceTree = "<group>"; };
@@ -484,6 +484,7 @@
 		C5A351D3210D0CE500A717D3 /* KifuSF */ = {
 			isa = PBXGroup;
 			children = (
+				C52B1A4121CE830600839B38 /* KifuSF.entitlements */,
 				C5B0E1A021501A6700A8412C /* Junk */,
 				C510A4DB21359EDD00E8FC78 /* CustomUI */,
 				C5CA7BAF210D24CF0052D440 /* Services */,
@@ -571,7 +572,6 @@
 		C5A351ED210D0E5100A717D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C515B22E21751C6E00051FFD /* KifuSF.entitlements */,
 				C5A351D4210D0CE500A717D3 /* AppDelegate.swift */,
 				C5A351E0210D0CE500A717D3 /* Info.plist */,
 				C5CA7BAA210D1E2D0052D440 /* GoogleService-Info.plist */,
@@ -1002,7 +1002,7 @@
 				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
 				C505BD792146F73A00A5195B /* KifuTabBarViewController.swift in Sources */,
 				44339C39210D4D5400E6663E /* (null) in Sources */,
-				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
+				C505BD792146F73A00A5195B /* KifuTabBarViewController.swift in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				441BE51E210DAE24004A6A7A /* (null) in Sources */,
 				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
@@ -1154,14 +1154,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8U3L6K9JA6;
+				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codingBytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -1177,14 +1177,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8U3L6K9JA6;
+				DEVELOPMENT_TEAM = UALV34MRH2;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.linniergames.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codingBytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

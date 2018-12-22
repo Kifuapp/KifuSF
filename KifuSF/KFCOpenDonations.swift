@@ -99,15 +99,9 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
 
     @objc func createDonation() {
-        //TODO: segue to create donation VC
-
-        let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
-        if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-            present(CreateDonationViewController(), animated: true)
-        } else {
-            assertionFailure("error")
-        }
-
+        let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
+        createDonationViewController.modalTransitionStyle = .coverVertical
+        present(createDonationViewController, animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

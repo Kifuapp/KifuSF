@@ -94,7 +94,8 @@ class LoginViewController: UIScrollableViewController {
                 self.present(mainViewControllers, animated: true)
             } else {
                 let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                self.present(phoneNumberValidationViewController, animated: true)
+                //TODO: fix this
+                self.present(KifuTabBarViewController(), animated: true)
             }
         }
     }

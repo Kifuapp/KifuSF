@@ -15,6 +15,8 @@ class UIGroupView<T: UIView>: UIView {
     let headerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
     let contentView: T
 
+    weak var delegate: UIGroupViewDelegate?
+
     //MARK: - Initializers
     init(title: String, contentView: T) {
         self.contentView = contentView
@@ -28,6 +30,16 @@ class UIGroupView<T: UIView>: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    @objc private func contentViewTapped() {
+        print("Recognized touch")
+        delegate?.didSelectContentView()
+    }
+}
+
+//MARK: - UIGroupViewDelegate
+protocol UIGroupViewDelegate: class {
+    func didSelectContentView()
 }
 
 //MARK: - UIConfigurable
@@ -40,5 +52,15 @@ extension UIGroupView: UIConfigurable {
 
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.autoPinEdgesToSuperviewEdges()
+    }
+
+    func configureGestures() {
+        let contentViewTouchGesture = UITapGestureRecognizer(target: self, action: #selector(contentViewTapped))
+        contentViewTouchGesture.cancelsTouchesInView = false
+        contentView.isUserInteractionEnabled = true
+        contentViewTouchGesture.numberOfTapsRequired = 1
+        contentViewTouchGesture.numberOfTouchesRequired = 1
+
+        contentView.addGestureRecognizer(contentViewTouchGesture)
     }
 }
