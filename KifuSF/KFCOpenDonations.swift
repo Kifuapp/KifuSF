@@ -144,11 +144,11 @@ extension KFCOpenDonations: UITableViewDataSource {
 
         let openDonation = self.openDonations[indexPath.row]
 
-        //TODO: populate distance
+        let distance = UserService.calculateDistance(donation: openDonation)
         let newData = KFMDonationInfo(
             imageURL: URL(string: openDonation.imageUrl)!,
             title: openDonation.title,
-            distance: 12.3,
+            distance: distance,
             description: openDonation.notes
         )
         donationCell.descriptorView.reloadData(for: newData)

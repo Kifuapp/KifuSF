@@ -96,7 +96,7 @@ class KFVOpenDonationDescription: UIDescriptorView {
         statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
                                                     deliveries: data.userDeliveriesCount)
         
-        statusDescription.text = "\(data.distance) Miles away from your current location"
+        statusDescription.text = data.distance.description
         donationDescriptionContentLabel.text = data.description
     }
 }
