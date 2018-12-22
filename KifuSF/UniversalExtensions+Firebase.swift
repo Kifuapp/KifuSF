@@ -15,6 +15,29 @@ extension DatabaseReference {
     }
     
     /**
+     `/users`
+     */
+    static func users() -> DatabaseReference {
+        return rootDirectory
+            .child("users")
+    }
+    
+    /**
+     `/users/:user_uid`
+     */
+    static func user(_ user: String) -> DatabaseReference {
+        return users()
+            .child(user)
+    }
+    
+    /**
+     `/users/<current_user>`
+     */
+    static func currentUser() -> DatabaseReference {
+        return user(User.current.uid)
+    }
+    
+    /**
      `/open-donations`
      */
     static func openDonations() -> DatabaseReference {
