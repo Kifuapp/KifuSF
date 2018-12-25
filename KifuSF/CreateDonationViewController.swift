@@ -12,10 +12,12 @@ import LocationPicker
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
     private static let descriptionPlaceholder = "Additional Info about pick up address, hour, item, etc."
+
     private lazy var imageHelper = PhotoHelper()
     private lazy var locationPicker = LocationPickerViewController()
-    private var userSelectedAProfileImage: Bool? = nil
+    private let keyboardStack = KeyboardStack()
 
+    private var userSelectedAProfileImage: Bool? = nil
     private var pickupLocation: Location?
 
     private let descriptorView = UIDescriptorView(defaultImageViewSize: .medium)
@@ -44,41 +46,11 @@ class CreateDonationViewController: UIScrollableViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow(_:)),
-                                               name: .UIKeyboardWillShow, object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)),
-                                               name: .UIKeyboardWillHide, object: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         contentScrollView.updateBottomPadding(pickUpAddressButton.frame.height + 24)
     }
 
     //MARK: - Methods
-    @objc func keyboardWillShow(_ notification: Notification) {
-        guard let keyboardHeight = notification.getKeyboardHeight() else {
-            return assertionFailure("Could not retrieve keyboard height")
-        }
-
-        contentScrollView.updateBottomPadding(keyboardHeight + 20)
-    }
-
-    //TODO: this method gets called twice find out why
-    @objc private  func keyboardWillHide(_ notification: Notification) {
-        contentScrollView.updateBottomPadding(pickUpAddressButton.frame.height + 24)
-    }
-
     @objc private func dismissVC() {
         dismiss(animated: true)
     }
@@ -178,6 +150,17 @@ extension CreateDonationViewController: UITextViewDelegate {
     }
 }
 
+//MARK: - KeyboardStackDelegate
+extension CreateDonationViewController: KeyboardStackDelegate {
+    func keyboard(_ keyboard: KeyboardStack, didChangeTo newHeight: CGFloat) {
+        if newHeight == 0 {
+            contentScrollView.updateBottomPadding(pickUpAddressButton.frame.height + 24)
+        } else {
+            contentScrollView.updateBottomPadding(newHeight + 20)
+        }
+    }
+}
+
 //MARK: - UIConfigurable
 extension CreateDonationViewController: UIConfigurable {
     func configureDelegates() {
@@ -191,6 +174,7 @@ extension CreateDonationViewController: UIConfigurable {
 
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self
+        keyboardStack.delegate = self
     }
 
     func configureData() {

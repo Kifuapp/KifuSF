@@ -100,6 +100,7 @@
 		C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405B2137F42E00ECC819 /* KFCCreateDonation.swift */; };
 		C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405E21381AD100ECC819 /* UIButton.swift */; };
 		C5DD406121382C5000ECC819 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD406021382C5000ECC819 /* UITextField.swift */; };
+		C5E4A35921D28C9900530C75 /* KeyboardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4A35821D28C9800530C75 /* KeyboardStack.swift */; };
 		C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */; };
 		E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A351D4210D0CE500A717D3 /* AppDelegate.swift */; };
 		E90B247F210E1DAE009B9E0B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B247E210E1DAE009B9E0B /* UIAlertController.swift */; };
@@ -223,6 +224,7 @@
 		C5DD405B2137F42E00ECC819 /* KFCCreateDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCCreateDonation.swift; sourceTree = "<group>"; };
 		C5DD405E21381AD100ECC819 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C5DD406021382C5000ECC819 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		C5E4A35821D28C9800530C75 /* KeyboardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStack.swift; sourceTree = "<group>"; };
 		C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCVolunteerList.swift; sourceTree = "<group>"; };
 		E90B247E210E1DAE009B9E0B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		E92527C621548E65004556E0 /* TwoFactorAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthService.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				C5DD40512136F05900ECC819 /* Enums.swift */,
 				C58D9ECF216361E800B180B3 /* Protocols.swift */,
 				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
+				C5E4A35821D28C9800530C75 /* KeyboardStack.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				C5CA7BB1210D24F50052D440 /* UserService.swift in Sources */,
 				C576EFEC21C7EAA000F96922 /* UIScrollableViewController.swift in Sources */,
 				C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */,
+				C5E4A35921D28C9900530C75 /* KeyboardStack.swift in Sources */,
 				C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */,
 				C50182FC21430FE800257412 /* KFVDonationInfo.swift in Sources */,
 				C50E472D2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift in Sources */,
