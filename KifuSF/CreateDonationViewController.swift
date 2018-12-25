@@ -12,7 +12,8 @@ import LocationPicker
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
     private static let descriptionPlaceholder = "Additional Info about pick up address, hour, item, etc."
-    private let imageHelper = PhotoHelper()
+    private lazy var imageHelper = PhotoHelper()
+    private lazy var locationPicker = LocationPickerViewController()
     private var userSelectedAProfileImage: Bool? = nil
 
     private var pickupLocation: Location?
@@ -98,20 +99,31 @@ class CreateDonationViewController: UIScrollableViewController {
                 return showErrorMessage("Please complete all the fields")
         }
 
-        let locationPicker = LocationPickerViewController()
-
-        locationPicker.showCurrentLocationInitially = true
-        locationPicker.searchBarPlaceholder = "Choose Pickup location"
-        locationPicker.mapType = .standard
-
-        locationPicker.showCurrentLocationButton = true
-
-        locationPicker.completion = { location in
+        locationPicker.completion = { [unowned self] location in
             guard let location = location else {
-                return print("no location selected")
+                return assertionFailure(KFErrorMessage.seriousBug)
             }
 
             self.pickupLocation = location
+
+            let loadingVc = KFCLoading(style: .whiteLarge)
+            loadingVc.present()
+
+            //TODO: handle loading animation
+            DonationService.createDonation(
+                title: title,
+                notes: description,
+                image: image,
+                pickUpAddress: location.address,
+                longitude: location.coordinate.longitude,
+                latitude: location.coordinate.latitude) { [unowned self] donation in
+                    guard let _ = donation else {
+                        let errorAlert = UIAlertController(errorMessage: nil)
+                        return self.present(errorAlert, animated: true)
+                    }
+
+                    self.presentingViewController?.dismiss(animated: true)
+            }
         }
 
         self.navigationController?.pushViewController(locationPicker, animated: true)
@@ -191,8 +203,6 @@ extension CreateDonationViewController: UIConfigurable {
     func configureStyling() {
         view.backgroundColor = .kfSuperWhite
 
-        pickUpAddressButton.autoReset = false
-
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center
 
@@ -200,6 +210,14 @@ extension CreateDonationViewController: UIConfigurable {
         descriptorView.imageView.image = .kfPlusImage
 
         configureDescriptionInputViewStyling()
+        configureLocationPickerStyling()
+    }
+
+    private func configureLocationPickerStyling() {
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.searchBarPlaceholder = "Choose Pickup location"
+        locationPicker.mapType = .standard
+        locationPicker.showCurrentLocationButton = true
     }
 
     private func configureDescriptionInputViewStyling() {
@@ -218,10 +236,9 @@ extension CreateDonationViewController: UIConfigurable {
         view.addSubview(pickUpAddressButton)
 
         configureOuterStackViewLayout()
+        configurePickUpAddressButtonConstraints()
 
-        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .leading)
-        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .trailing)
-        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .bottom)
+        descriptionInputView.contentView.autoSetDimension(.height, toSize: 64, relation: .greaterThanOrEqual)
 
         descriptorView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         descriptorView.subtitleStickyLabel.updateStickySide(to: .top)
@@ -242,5 +259,11 @@ extension CreateDonationViewController: UIConfigurable {
         outerStackView.addArrangedSubview(titleInputView)
         outerStackView.addArrangedSubview(descriptionInputView)
         outerStackView.addArrangedSubview(errorLabel)
+    }
+
+    private func configurePickUpAddressButtonConstraints() {
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .leading)
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .trailing)
+        pickUpAddressButton.autoPinEdge(toSuperviewMargin: .bottom)
     }
 }
