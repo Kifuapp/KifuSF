@@ -49,6 +49,8 @@ class UIDescriptorView: UIView, UIConfigurable {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
 
         topStackView.axis = (isAccessibilityCategory) ? .vertical : .horizontal
+
+        //TODO: this needs to be refactored
         imageView.constraints.forEach { (constraint) in
             guard let identifier = constraint.identifier,
                 let size = UIImageView.Size(rawValue: identifier) else {

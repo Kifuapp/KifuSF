@@ -14,7 +14,6 @@ class CreateDonationViewController: UIScrollableViewController {
     private static let descriptionPlaceholder = "Additional Info about pick up address, hour, item, etc."
 
     private lazy var imageHelper = PhotoHelper()
-    private lazy var locationPicker = LocationPickerViewController()
     private let keyboardStack = KeyboardStack()
 
     private var userSelectedAProfileImage: Bool? = nil
@@ -70,6 +69,12 @@ class CreateDonationViewController: UIScrollableViewController {
             let description = descriptionInputView.contentView.text, description != CreateDonationViewController.descriptionPlaceholder else {
                 return showErrorMessage("Please complete all the fields")
         }
+
+        let locationPicker = LocationPickerViewController()
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.searchBarPlaceholder = "Choose Pickup location"
+        locationPicker.mapType = .standard
+        locationPicker.showCurrentLocationButton = true
 
         locationPicker.completion = { [unowned self] location in
             guard let location = location else {
@@ -194,14 +199,6 @@ extension CreateDonationViewController: UIConfigurable {
         descriptorView.imageView.image = .kfPlusImage
 
         configureDescriptionInputViewStyling()
-        configureLocationPickerStyling()
-    }
-
-    private func configureLocationPickerStyling() {
-        locationPicker.showCurrentLocationInitially = true
-        locationPicker.searchBarPlaceholder = "Choose Pickup location"
-        locationPicker.mapType = .standard
-        locationPicker.showCurrentLocationButton = true
     }
 
     private func configureDescriptionInputViewStyling() {

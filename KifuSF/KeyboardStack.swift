@@ -35,6 +35,7 @@ class KeyboardStack: NSObject {
 
     @objc private func keyboardWillChange(notification: Notification) {
         guard let keyboardHeight = notification.getKeyboardHeight() else {
+            //maybe make an assert here?
             return
         }
 
