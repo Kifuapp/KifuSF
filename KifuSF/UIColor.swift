@@ -19,7 +19,9 @@ extension UIColor {
     
     
     static let kfShadow: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)
-    
+
+    static let kfPlaceholderText = #colorLiteral(red: 0.7333333333, green: 0.7333333333, blue: 0.7490196078, alpha: 1)
+
     static let kfTitle = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
     static let kfSubtitle = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
     static let kfBody = #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1)
