@@ -78,10 +78,10 @@ class CreateDonationViewController: UIScrollableViewController {
 
             self.pickupLocation = location
 
-            let loadingVc = KFCLoading(style: .whiteLarge)
-            loadingVc.present()
+            //TODO: loading screen
+//            let loadingVc = KFCLoading(style: .whiteLarge)
+//            loadingVc.present()
 
-            //TODO: handle loading animation
             DonationService.createDonation(
                 title: title,
                 notes: description,
@@ -93,7 +93,7 @@ class CreateDonationViewController: UIScrollableViewController {
                         let errorAlert = UIAlertController(errorMessage: nil)
                         return self.present(errorAlert, animated: true)
                     }
-
+                    
                     self.presentingViewController?.dismiss(animated: true)
             }
         }
