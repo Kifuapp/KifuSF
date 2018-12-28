@@ -97,7 +97,6 @@
 		C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404F2136EF8200ECC819 /* UITextView.swift */; };
 		C5DD40522136F05900ECC819 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD40512136F05900ECC819 /* Enums.swift */; };
 		C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */; };
-		C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405B2137F42E00ECC819 /* KFCCreateDonation.swift */; };
 		C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405E21381AD100ECC819 /* UIButton.swift */; };
 		C5DD406121382C5000ECC819 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD406021382C5000ECC819 /* UITextField.swift */; };
 		C5E4A35921D28C9900530C75 /* KeyboardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4A35821D28C9800530C75 /* KeyboardStack.swift */; };
@@ -221,7 +220,6 @@
 		C5DD404F2136EF8200ECC819 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C5DD40512136F05900ECC819 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDonation.storyboard; sourceTree = "<group>"; };
-		C5DD405B2137F42E00ECC819 /* KFCCreateDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCCreateDonation.swift; sourceTree = "<group>"; };
 		C5DD405E21381AD100ECC819 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C5DD406021382C5000ECC819 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C5E4A35821D28C9800530C75 /* KeyboardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStack.swift; sourceTree = "<group>"; };
@@ -453,14 +451,14 @@
 			name = KFUserInfo;
 			sourceTree = "<group>";
 		};
-		C5983C1F2134644A00303ABB /* Home */ = {
+		C5983C1F2134644A00303ABB /* Home Tab */ = {
 			isa = PBXGroup;
 			children = (
 				C5B0E19F21501A4D00A8412C /* OpenDonations */,
 				C5B0E1A721502D9700A8412C /* DetailedOpenDonation */,
 				C576EFE721C7AE0600F96922 /* CreateDonationViewController.swift */,
 			);
-			name = Home;
+			name = "Home Tab";
 			sourceTree = "<group>";
 		};
 		C5A351C8210D0CE500A717D3 = {
@@ -528,10 +526,9 @@
 			isa = PBXGroup;
 			children = (
 				C564185A2169FE2400664DDB /* Login/Register */,
-				C5983C1F2134644A00303ABB /* Home */,
+				C5983C1F2134644A00303ABB /* Home Tab */,
 				C50182EE2142ACA600257412 /* Status */,
 				C50E472721517D4E008A8C36 /* Leaderboard */,
-				C5DD405D2137F43D00ECC819 /* CreateDonation */,
 				C54FDBEC2141A7D000BC89B8 /* PendingDonations */,
 				C5F78C84214E82F900B5395E /* VolunteerList */,
 				E9B88959217543B0004B6976 /* KFCLoading.swift */,
@@ -661,14 +658,6 @@
 				C555F8F321766897000CC299 /* UIWindow.swift */,
 			);
 			name = UIKit;
-			sourceTree = "<group>";
-		};
-		C5DD405D2137F43D00ECC819 /* CreateDonation */ = {
-			isa = PBXGroup;
-			children = (
-				C5DD405B2137F42E00ECC819 /* KFCCreateDonation.swift */,
-			);
-			name = CreateDonation;
 			sourceTree = "<group>";
 		};
 		C5F78C84214E82F900B5395E /* VolunteerList */ = {
@@ -909,7 +898,6 @@
 				C555F8F421766897000CC299 /* UIWindow.swift in Sources */,
 				C50182FA2142FB1B00257412 /* UIStickyView.swift in Sources */,
 				E90B2479210D8F48009B9E0B /* AppDelegate.swift in Sources */,
-				C5DD405C2137F42E00ECC819 /* KFCCreateDonation.swift in Sources */,
 				E98B0038213791D6008FD75A /* Report.swift in Sources */,
 				C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */,
 				E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */,
@@ -1158,14 +1146,13 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -1181,14 +1168,13 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.codingbytes.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
