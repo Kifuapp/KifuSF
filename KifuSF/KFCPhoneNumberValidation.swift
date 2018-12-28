@@ -53,6 +53,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                 })
 
                 let mainViewControllers = KifuTabBarViewController()
+                
                 self.present(mainViewControllers, animated: true)
             } else {
                 //TODO: show error
