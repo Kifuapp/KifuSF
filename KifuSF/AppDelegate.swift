@@ -82,11 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
     func configureStyling() {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
         UINavigationBar.appearance().tintColor = .kfPrimary
-        UINavigationBar.appearance().barTintColor = .kfSuperWhite
+        UINavigationBar.appearance().barTintColor = .kfWhite
         UINavigationBar.appearance().isTranslucent = false
         
         UITabBar.appearance().tintColor = .kfPrimary
-        UITabBar.appearance().barTintColor = .kfSuperWhite
+        UITabBar.appearance().barTintColor = .kfWhite
         UITabBar.appearance().isTranslucent = false
     }
     

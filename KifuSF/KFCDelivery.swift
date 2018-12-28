@@ -246,7 +246,7 @@ extension KFCDelivery {
     }
     
     private func configureStyling() {
-        view.backgroundColor = UIColor.kfSuperWhite
+        view.backgroundColor = UIColor.kfWhite
     }
     
     private func configureDynamicButtonConstraints() {

@@ -30,7 +30,7 @@ class KFCModularTableView: UIViewController {
         super.viewDidLoad()
 
         modularTableView.allowsSelection = true
-        modularTableView.backgroundColor = UIColor.kfSuperWhite
+        modularTableView.backgroundColor = UIColor.kfWhite
         modularTableView.contentInset.top = 0
         modularTableView.scrollIndicatorInsets.top = 0
 

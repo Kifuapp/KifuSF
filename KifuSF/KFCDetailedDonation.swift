@@ -69,7 +69,7 @@ class KFCDetailedDonation: KFCModularTableView {
         super.viewDidLoad()
 
         title = "Donation"
-        view.backgroundColor = UIColor.kfSuperWhite
+        view.backgroundColor = UIColor.kfWhite
         modularTableView.separatorStyle = .none
 
         view.addSubview(actionButton)

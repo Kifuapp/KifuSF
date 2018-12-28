@@ -193,7 +193,7 @@ extension RegisterFormViewController: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         contentScrollView.updateBottomPadding(KFPadding.StackView)
 
         profileImageInputView.contentView.makeItKifuStyle()

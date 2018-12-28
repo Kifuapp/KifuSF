@@ -69,7 +69,7 @@ extension KFCPhoneNumberValidation: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         
         title = "Phone Number Validation"
         informationLabel.text = "Almost Done! We've sent a message to your phone number that contains a 4 digit code. Please enter the code below in verify your phone number."

@@ -62,7 +62,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
 //MARK: - UIConfigurable
 extension FrontPageViewController: UIConfigurable {
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         logoImageView.contentMode = .scaleAspectFit
         googleSignInButton.style = .wide
 

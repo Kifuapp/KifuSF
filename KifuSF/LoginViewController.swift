@@ -172,7 +172,7 @@ extension LoginViewController: UIConfigurable {
     func configureStyling() {
         title = "Log In"
         contentScrollView.updateBottomPadding(KFPadding.StackView)
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         logInButton.autoReset = false
         errorLabel.textAlignment = .center
 

@@ -195,7 +195,7 @@ extension CreateDonationViewController: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
 
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center

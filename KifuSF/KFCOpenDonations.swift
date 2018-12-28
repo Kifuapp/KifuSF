@@ -99,7 +99,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
 
     @objc func createDonation() {
-        let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
+        let createDonationViewController = UINavigationController(rootViewController: VerifyDropoffViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
         present(createDonationViewController, animated: true)
     }
