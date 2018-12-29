@@ -272,10 +272,20 @@ struct UserService {
         
         //using transactions
         ref.runTransactionBlock({ (snapshot) -> TransactionResult in
-            guard
-                let userDict = snapshot.value as? [String: Any],
-                var user = User(from: userDict) else {
-                    return .abort()
+            
+            /**
+             since snapshots can come back as null in transactions, return success if
+             that is the case.
+             
+             Only return abort if validation of a non-null snapshot occurs
+             */
+            
+            guard let userDict = snapshot.value as? [String: Any] else {
+                return .success(withValue: snapshot)
+            }
+            
+            guard var user = User(from: userDict) else {
+                return .abort()
             }
             
             //load the user's current ratings
