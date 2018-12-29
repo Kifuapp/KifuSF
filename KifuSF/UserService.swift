@@ -194,7 +194,6 @@ struct UserService {
             let newUser = User(username: username,
                                uid: uid,
                                imageURL: imageURL,
-                               contributionPoints: 0,
                                contactNumber: contactNumber,
                                isVerified: false)
             
@@ -243,13 +242,18 @@ struct UserService {
         }
     }
     
+    /**
+     Add a flagging report to the given user
+     
+     - Attention: conforms to firebase rules
+     */
     static func attach(report: Report, to user: User, completion: @escaping (Bool) -> Void) {
-        let refUser = Database.database().reference().child("users").child(user.uid)
-        let updatedDict: [String: Any] = [
+        let refUser = DatabaseReference.user(at: user.uid)
+        let changes: [String: Any] = [
             User.Keys.flaggedReportUid: report.uid,
             User.Keys.flag: report.flag.rawValue
         ]
-        refUser.updateChildValues(updatedDict) { error, _ in
+        refUser.updateChildValues(changes) { error, _ in
             if let error = error {
                 assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
                 return completion(false)
@@ -259,8 +263,105 @@ struct UserService {
         }
     }
     
+    static func review(donator: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
+        review(user: donator, rating: rating, keyPathToIncrement: \User.numberOfDonations, completion: completion)
+    }
+    
+    static func review(volunteer: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
+        review(user: volunteer, rating: rating, keyPathToIncrement: \User.numberOfDeliveries, completion: completion)
+    }
+    
+    private static func review(user: User, rating: UserReview, keyPathToIncrement keyPath: WritableKeyPath<User, Int>, completion: @escaping (Bool) -> Void) {
+        
+        let ref = DatabaseReference.user(at: user.uid)
+        
+        //using transactions
+        ref.runTransactionBlock({ (snapshot) -> TransactionResult in
+            
+            /**
+             since snapshots can come back as null in transactions, return success if
+             that is the case.
+             
+             Only return abort if validation of a non-null snapshot occurs
+             */
+            
+            guard let userDict = snapshot.value as? [String: Any] else {
+                return .success(withValue: snapshot)
+            }
+            
+            guard var user = User(from: userDict) else {
+                return .abort()
+            }
+            
+            //load the user's current ratings
+            user.addNewRating(rating, increment: keyPath)
+            
+            snapshot.value = user.dictValue
+            
+            return .success(withValue: snapshot)
+            
+        }, andCompletionBlock: { (error, successful, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(successful)
+        })
+    }
+    
     /**
-     update the given user in the user subtree
+     Mark the current user's isVerified to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markIsVerifiedTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.isVerified: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            updateCurrentUser(key: \User.isVerified, to: true)
+            
+            completion(true)
+        }
+    }
+    
+    /**
+     Mark the current user's hasApprovedConditions to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markHasApprovedConditionsTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.hasApprovedConditions: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            updateCurrentUser(key: \User.hasApprovedConditions, to: true)
+            
+            completion(true)
+        }
+    }
+    
+    /**
+     update the given user in the user subtree. This also writes the given user
+     to User Defaults
      
      - TODO: write a cloud function to update denormalized instances of the given user
      */
@@ -273,6 +374,8 @@ struct UserService {
 
                 return completion(false)
             }
+            
+            User.setCurrent(user, writeToUserDefaults: true)
 
             completion(true)
         }
@@ -300,5 +403,36 @@ struct UserService {
         let meters = myCurrentLocation.distance(from: location)
         
         return .available(meters: meters)
+    }
+    
+    // MARK: Update and persist user
+    
+    /**
+     updates and writes the user in User Defaults. Local persistence only
+     
+     - parameter key: Using WritableKeyPath, define what you'd like to update
+     - parameter value: the new value to set the given key path
+     
+     - returns: Updated User
+     */
+    @discardableResult
+    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T) -> User {
+        var updatedUser = User.current
+        updatedUser[keyPath: key] = value
+        User.setCurrent(updatedUser, writeToUserDefaults: true)
+        
+        return updatedUser
+    }
+}
+
+fileprivate extension User {
+    mutating func addNewRating(_ rating: UserReview, increment keyPath: WritableKeyPath<User, Int>) {
+        
+        //mutate the current user by updating their new reputation
+        let nReviews = self.numberOfDeliveries + self.numberOfDonations
+        let newStars = rating.rating.rawValue
+        self.reputation = (reputation * Float(nReviews) + Float(newStars)) / Float(nReviews + 1)
+        
+        self[keyPath: keyPath] += 1
     }
 }

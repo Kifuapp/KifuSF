@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KifuTabBarController: UITabBarController {
+class KifuTabBarViewController: UITabBarController {
     //MARK: - Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()

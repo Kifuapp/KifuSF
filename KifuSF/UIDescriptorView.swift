@@ -28,8 +28,15 @@ class UIDescriptorView: UIView, UIConfigurable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        configureData()
         configureStyling()
         configureLayout()
+    }
+
+    convenience init(defaultImageViewSize: UIImageView.Size) {
+        self.init(frame: CGRect.zero)
+
+        self.defaultImageViewSize = defaultImageViewSize
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,6 +49,8 @@ class UIDescriptorView: UIView, UIConfigurable {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
 
         topStackView.axis = (isAccessibilityCategory) ? .vertical : .horizontal
+
+        //TODO: this needs to be refactored
         imageView.constraints.forEach { (constraint) in
             guard let identifier = constraint.identifier,
                 let size = UIImageView.Size(rawValue: identifier) else {
@@ -51,13 +60,14 @@ class UIDescriptorView: UIView, UIConfigurable {
 
             let priority: Float
             switch size {
-            case .big:
-                priority = (isAccessibilityCategory) ? 751 : 249
+            case .big where defaultImageViewSize == .big:
+                priority = (isAccessibilityCategory) ? 249 : 751
             case .medium where defaultImageViewSize == .medium:
                 priority = (isAccessibilityCategory) ? 249 : 751
             case .small where defaultImageViewSize == .small:
-                constraint.priority = UILayoutPriority(rawValue: 249)
                 priority = (isAccessibilityCategory) ? 249 : 751
+            case .big:
+                priority = (isAccessibilityCategory) ? 751 : 249
             default:
                 priority = 249
             }
@@ -67,6 +77,8 @@ class UIDescriptorView: UIView, UIConfigurable {
     }
 
     //MARK: - UIConfigurable
+    func configureData() { }
+
     func configureStyling() {
         configureDescriptorStyling()
         configureSubtitleStickyLabelStyling()
@@ -81,7 +93,7 @@ class UIDescriptorView: UIView, UIConfigurable {
     }
 
     private func configureDescriptorStyling() {
-        backgroundColor = UIColor.kfSuperWhite
+        backgroundColor = .kfSuperWhite
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()

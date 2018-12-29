@@ -13,4 +13,12 @@ extension UIScrollView {
         scrollIndicatorInsets.bottom = padding
         contentInset.bottom = padding
     }
+
+    func scrollToBottom() {
+        let yOffset = contentSize.height - bounds.size.height + contentInset.bottom
+        if yOffset > 0 {
+            let bottomOffset = CGPoint(x: 0, y: yOffset)
+            setContentOffset(bottomOffset, animated: true)
+        }
+    }
 }

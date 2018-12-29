@@ -13,12 +13,15 @@ import CoreLocation
 struct User: Codable, KeyedStoredProperties {
     
     enum CodingKeys: String, CodingKey {
-        case contributionPoints
         case uid
         case imageURL
         case username
         case contactNumber
         case isVerified
+        case hasApprovedConditions
+        case reputation
+        case numberOfDonations
+        case numberOfDeliveries
     }
     
     // MARK: - VARS
@@ -29,7 +32,11 @@ struct User: Codable, KeyedStoredProperties {
     let contactNumber: String
     
     var isVerified: Bool
-    var contributionPoints: Int
+    var hasApprovedConditions: Bool
+    
+    var reputation: Float = 0
+    var numberOfDonations: Int = 0
+    var numberOfDeliveries: Int = 0
     
     //check out this post on why Report cannot be a stored property in Donation
     //https://medium.com/@leandromperez/bidirectional-associations-using-value-types-in-swift-548840734047
@@ -51,11 +58,14 @@ struct User: Codable, KeyedStoredProperties {
             Keys.username: username,
             Keys.uid: uid,
             Keys.imageURL: imageURL,
-            Keys.contributionPoints: contributionPoints,
             Keys.contactNumber: contactNumber,
             Keys.isVerified: isVerified,
+            Keys.hasApprovedConditions: hasApprovedConditions,
             Keys.flag: flag?.rawValue as Any,
-            Keys.flaggedReportUid: flaggedReportUid as Any
+            Keys.flaggedReportUid: flaggedReportUid as Any,
+            Keys.reputation: reputation,
+            Keys.numberOfDonations: numberOfDonations,
+            Keys.numberOfDeliveries: numberOfDeliveries
         ]
     }
     
@@ -68,13 +78,13 @@ struct User: Codable, KeyedStoredProperties {
     
     private static var _current: User?
     
-    init(username: String, uid: String, imageURL: String, contributionPoints: Int, contactNumber: String, isVerified: Bool) {
+    init(username: String, uid: String, imageURL: String, contactNumber: String, isVerified: Bool) {
         self.username = username
         self.uid = uid
         self.imageURL = imageURL
-        self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = false
     }
     
     init?(from snapshot: DataSnapshot) {
@@ -90,17 +100,23 @@ struct User: Codable, KeyedStoredProperties {
             let username = dictionary[Keys.username] as? String,
             let uid = dictionary[Keys.uid] as? String,
             let imageURL = dictionary[Keys.imageURL] as? String,
-            let contributionPoints = dictionary[Keys.contributionPoints] as? Int,
+            let reputation = dictionary[Keys.reputation] as? Float,
+            let nDonations = dictionary[Keys.numberOfDonations] as? Int,
+            let nDeliveries = dictionary[Keys.numberOfDeliveries] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
-            let isVerified = dictionary[Keys.isVerified] as? Bool
+            let isVerified = dictionary[Keys.isVerified] as? Bool,
+            let hasApprovedConditions = dictionary[Keys.hasApprovedConditions] as? Bool
             else { return nil }
         
         self.username = username
         self.uid = uid
         self.imageURL = imageURL
-        self.contributionPoints = contributionPoints
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = hasApprovedConditions
+        self.reputation = reputation
+        self.numberOfDonations = nDonations
+        self.numberOfDeliveries = nDeliveries
         
         //flagging
         if let flagInt = dictionary[Keys.flag] as? Int,
