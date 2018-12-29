@@ -215,7 +215,7 @@ struct DonationService {
         volunteerDonationsRef.setValue(updatedDonation.dictValue, withCompletionBlock: fbDg.handleErrorCase)
         
         //remove the donation from the open-donations
-        let openDonationsRef = DatabaseReference.openDonation(donation.uid)
+        let openDonationsRef = DatabaseReference.openDonation(at: donation.uid)
         openDonationsRef.removeValue(completionBlock: fbDg.handleErrorCase)
 
         //remove all requests

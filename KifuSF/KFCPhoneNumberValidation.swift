@@ -45,7 +45,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
             if succes {
                 UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
                     if isSuccessful {
-                        let mainViewControllers = KifuTabBarController()
+                        let mainViewControllers = KifuTabBarViewController()
                         self.present(mainViewControllers, animated: true)
                     } else {
                         UIAlertController(errorMessage: nil)

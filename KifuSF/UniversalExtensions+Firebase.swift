@@ -10,24 +10,33 @@ import Foundation
 import Firebase
 
 extension DatabaseReference {
+    private enum Keys {
+        static let openDonations = "open-donations"
+        static let volunteerDonations = "volunteer-donations"
+        static let donatorDonations = "donator-donations"
+        static let users = "users"
+        static let donationRequests = "donation-requests"
+        static let volunteerRequests = "volunteer-requests"
+    }
+    
     static var rootDirectory: DatabaseReference {
         return Database.database().reference()
     }
     
-    /**
-     `/users`
-     */
-    static func users() -> DatabaseReference {
-        return rootDirectory
-            .child("users")
-    }
+//    /**
+//     `/users`
+//     */
+//    static func users() -> DatabaseReference {
+//        return rootDirectory
+//            .child("users")
+//    }
     
     /**
      `/users/:user_uid`
      */
     static func user(at uid: String) -> DatabaseReference {
         return rootDirectory
-            .child("users")
+            .child(Keys.users)
                 .child(uid)
     }
     
@@ -35,7 +44,7 @@ extension DatabaseReference {
      `/users/<current_user>`
      */
     static func currentUser() -> DatabaseReference {
-        return user(User.current.uid)
+        return user(at: User.current.uid)
     }
     
     /**
@@ -43,7 +52,7 @@ extension DatabaseReference {
      */
     static func openDonations() -> DatabaseReference {
         return rootDirectory
-            .child("open-donations")
+            .child(Keys.openDonations)
     }
     
     /**
@@ -59,7 +68,7 @@ extension DatabaseReference {
      */
     static func donatorDonations(for user: String) -> DatabaseReference {
         return rootDirectory
-            .child("donator-donations")
+            .child(Keys.donatorDonations)
                 .child(user)
     }
     
@@ -76,7 +85,7 @@ extension DatabaseReference {
      */
     static func volunteerDonations(for user: String) -> DatabaseReference {
         return rootDirectory
-            .child("volunteer-donations")
+            .child(Keys.volunteerDonations)
                 .child(user)
     }
     
@@ -93,8 +102,8 @@ extension DatabaseReference {
      */
     static func usersWhoHaveRequested(for donation: String) -> DatabaseReference {
         return rootDirectory
-            .child("donation-requests")
-            .child(donation)
+            .child(Keys.donationRequests)
+                .child(donation)
     }
     
     /**
@@ -102,7 +111,7 @@ extension DatabaseReference {
      */
     static func donationsRequested(by user: String) -> DatabaseReference {
         return rootDirectory
-            .child("volunteer-requests")
+            .child(Keys.volunteerRequests)
                 .child(user)
     }
 }
