@@ -15,6 +15,15 @@ extension DatabaseReference {
     }
     
     /**
+     `/users/:user_uid`
+     */
+    static func user(at uid: String) -> DatabaseReference {
+        return rootDirectory
+            .child("users")
+                .child(uid)
+    }
+    
+    /**
      `/open-donations`
      */
     static func openDonations() -> DatabaseReference {
@@ -85,19 +94,21 @@ extension DatabaseReference {
 
 class FirebaseDispatchGroup {
     
+    enum Errors: Error {
+        case message(String)
+        
+        var localizedDescription: String {
+            switch self {
+            case .message(let message):
+                return message
+            }
+        }
+    }
+    
+    // MARK: - VARS
+    
     var isSuccessful: Bool {
         return errors.count == 0
-    }
-    
-    private var dispatchGroup: DispatchGroup
-    private var errors: [Error] = []
-    
-    init(_ dispatchGroup: DispatchGroup = DispatchGroup.init()) {
-        self.dispatchGroup = dispatchGroup
-    }
-    
-    deinit {
-        print("GONE")
     }
     
     var handleErrorCase: (Error?, DatabaseReference) -> Void {
@@ -114,10 +125,37 @@ class FirebaseDispatchGroup {
         }
     }
     
+    private var dispatchGroup: DispatchGroup
+    private var errors: [Error] = []
+    
+    init(_ dispatchGroup: DispatchGroup = DispatchGroup.init()) {
+        self.dispatchGroup = dispatchGroup
+    }
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
     func notify(_ queue: DispatchQueue = DispatchQueue.main, work: @escaping (Bool) -> Void) {
         dispatchGroup.notify(queue: queue) {
             work(self.isSuccessful)
         }
+    }
+    
+    func enter() {
+        self.dispatchGroup.enter()
+    }
+    
+    func leaveBy(validating successful: Bool, errorMessage: String = #function) {
+        if successful == false {
+            self.errors.append(Errors.message(errorMessage))
+        }
+        
+        self.dispatchGroup.leave()
+    }
+    
+    func leaveSuccessfully() {
+        self.dispatchGroup.leave()
     }
 }
 

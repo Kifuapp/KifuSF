@@ -194,7 +194,6 @@ struct UserService {
             let newUser = User(username: username,
                                uid: uid,
                                imageURL: imageURL,
-                               contributionPoints: 0,
                                contactNumber: contactNumber,
                                isVerified: false)
             
@@ -259,6 +258,54 @@ struct UserService {
         }
     }
     
+    static func review(donator: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
+        review(user: donator, rating: rating, keyPathToIncrement: \User.numberOfDonations, completion: completion)
+    }
+    
+    static func review(volunteer: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
+        review(user: volunteer, rating: rating, keyPathToIncrement: \User.numberOfDeliveries, completion: completion)
+    }
+    
+    private static func review(user: User, rating: UserReview, keyPathToIncrement keyPath: WritableKeyPath<User, Int>, completion: @escaping (Bool) -> Void) {
+        
+        let ref = DatabaseReference.user(at: user.uid)
+        
+        //using transactions
+        ref.runTransactionBlock({ (snapshot) -> TransactionResult in
+            
+            /**
+             since snapshots can come back as null in transactions, return success if
+             that is the case.
+             
+             Only return abort if validation of a non-null snapshot occurs
+             */
+            
+            guard let userDict = snapshot.value as? [String: Any] else {
+                return .success(withValue: snapshot)
+            }
+            
+            guard var user = User(from: userDict) else {
+                return .abort()
+            }
+            
+            //load the user's current ratings
+            user.addNewRating(rating, increment: keyPath)
+            
+            snapshot.value = user.dictValue
+            
+            return .success(withValue: snapshot)
+            
+        }, andCompletionBlock: { (error, successful, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(successful)
+        })
+    }
+    
     /**
      update the given user in the user subtree
      
@@ -286,5 +333,17 @@ struct UserService {
         }
         
         return "Distance not available"
+    }
+}
+
+fileprivate extension User {
+    mutating func addNewRating(_ rating: UserReview, increment keyPath: WritableKeyPath<User, Int>) {
+        
+        //mutate the current user by updating their new reputation
+        let nReviews = self.numberOfDeliveries + self.numberOfDonations
+        let newStars = rating.rating.rawValue
+        self.reputation = (reputation * Float(nReviews) + Float(newStars)) / Float(nReviews + 1)
+        
+        self[keyPath: keyPath] += 1
     }
 }
