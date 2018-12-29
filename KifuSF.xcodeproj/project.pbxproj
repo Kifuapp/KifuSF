@@ -281,8 +281,7 @@
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
 				C58D9EC1216274E100B180B3 /* DestinationMapView */,
 				C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */,
-				C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */,
-				C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */,
+				C541E60C21D7A80C0024E437 /* ReviewCollaborator */,
 			);
 			name = "Status Tab";
 			sourceTree = "<group>";
@@ -349,6 +348,15 @@
 				C576EFEB21C7EAA000F96922 /* UIScrollableViewController.swift */,
 			);
 			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		C541E60C21D7A80C0024E437 /* ReviewCollaborator */ = {
+			isa = PBXGroup;
+			children = (
+				C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */,
+				C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */,
+			);
+			name = ReviewCollaborator;
 			sourceTree = "<group>";
 		};
 		C5475D0A215426DC006BA324 /* KFProgress */ = {

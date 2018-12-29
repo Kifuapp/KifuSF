@@ -17,7 +17,7 @@ class ReviewCollaboratorDescriptorView: CollaboratorDescriptorView {
                                     .scaledFont(for: UIFont.italicSystemFont(ofSize: 22)),
                                     textColor: .kfBody)
 
-    static let motivationalMessages = ["'Rate your friend'",
+    static let motivationalMessages = ["Rate your friend",
                                        "'Horrific'",
                                        "'Awful'",
                                        "'Suboptimal'",

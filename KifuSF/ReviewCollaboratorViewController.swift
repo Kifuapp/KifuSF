@@ -66,11 +66,10 @@ extension ReviewCollaboratorViewController: UIConfigurable {
 
     func configureStyling() {
         view.backgroundColor = .kfGray
+        contentScrollView.alwaysBounceVertical = false
     }
 
     func configureLayout() {
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
-
         outerStackView.addArrangedSubview(reviewCollaboratorInfoDescriptorView)
         view.addSubview(sumbitAnimatedButton)
 

@@ -8,8 +8,9 @@
 
 import UIKit
 
-class VerifyDropoffViewController: UIViewController {
+class VerifyDropoffViewController: UIScrollableViewController {
     //MARK: - Variables
+    private let backgroundView = UIView(forAutoLayout: ())
     private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
                                        textColor: .kfTitle)
     private let dropoffImageView = UIImageView(forAutoLayout: ())
@@ -25,6 +26,8 @@ class VerifyDropoffViewController: UIViewController {
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
+        contentDirectionalLayoutMargins = NSDirectionalEdgeInsetsMake(32, 32, 32, 32)
+
         super.viewDidLoad()
 
         configureData()
@@ -35,7 +38,8 @@ class VerifyDropoffViewController: UIViewController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        
+
+        contentScrollView.updateBottomPadding(bottomStackView.frame.height + 24)
         if isAccessibilityCategory {
             labelsStackView.axis = .vertical
 
@@ -89,7 +93,7 @@ extension VerifyDropoffViewController: UIConfigurable {
     }
 
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = .kfGray
         titleLabel.textAlignment = .center
 
         dropoffImageView.makeItKifuStyle()
@@ -97,13 +101,23 @@ extension VerifyDropoffViewController: UIConfigurable {
         //set default styling when accessibility is not present
         flagDescriptionLabel.numberOfLines = 1
         flagLabel.numberOfLines = 1
+
+        configureBackgroundViewStyling()
+    }
+
+    func configureBackgroundViewStyling() {
+        backgroundView.layer.zPosition = -1
+        backgroundView.backgroundColor = .kfWhite
+        backgroundView.layer.setUpShadow()
+        backgroundView.clipsToBounds = false
+        backgroundView.layer.cornerRadius = CALayer.kfCornerRadius
     }
 
     func configureLayout() {
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        outerStackView.addArrangedSubview(titleLabel)
+        outerStackView.addArrangedSubview(dropoffImageView)
+        outerStackView.addSubview(backgroundView)
 
-        view.addSubview(titleLabel)
-        view.addSubview(dropoffImageView)
         view.addSubview(bottomStackView)
 
         labelsStackView.addArrangedSubview(flagDescriptionLabel)
@@ -113,36 +127,30 @@ extension VerifyDropoffViewController: UIConfigurable {
         bottomStackView.addArrangedSubview(labelsStackView)
 
         flagLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        flagLabel.setContentCompressionResistancePriority(.init(751), for: .horizontal)
 
-        configureTitleLabelConstraints()
+        configureBackgroundViewConstraints()
         configureDropoffImageViewConstraints()
         configureBottomStackViewConstraints()
     }
 
-    private func configureTitleLabelConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        titleLabel.autoPinEdge(toSuperviewMargin: .top)
-        titleLabel.autoPinEdge(toSuperviewMargin: .leading)
-        titleLabel.autoPinEdge(toSuperviewMargin: .trailing)
-        titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+    private func configureBackgroundViewConstraints() {
+        backgroundView.autoPinEdge(.top, to: .top, of: contentScrollView, withOffset: 16)
+        backgroundView.autoPinEdge(.leading, to: .leading, of: contentScrollView, withOffset: 16)
+        backgroundView.autoPinEdge(.trailing, to: .trailing, of: contentScrollView, withOffset: -16)
+        backgroundView.autoPinEdge(.bottom, to: .bottom, of: contentScrollView, withOffset: -16)
     }
 
     private func configureDropoffImageViewConstraints() {
-        dropoffImageView.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 64)
-        dropoffImageView.autoPinEdge(toSuperviewMargin: .leading, withInset: 32)
-        dropoffImageView.autoPinEdge(toSuperviewMargin: .trailing, withInset: 32)
-
-        dropoffImageView.autoAlignAxis(toSuperviewAxis: .vertical)
         dropoffImageView.autoMatch(.height, to: .width, of: dropoffImageView)
     }
 
     private func configureBottomStackViewConstraints() {
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        bottomStackView.autoPinEdge(toSuperviewMargin: .leading)
-        bottomStackView.autoPinEdge(toSuperviewMargin: .trailing)
-        bottomStackView.autoPinEdge(toSuperviewMargin: .bottom)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .leading, withInset: -16)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .trailing, withInset: -16)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .bottom, withInset: -16)
     }
 }
 
