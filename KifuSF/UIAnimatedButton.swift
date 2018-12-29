@@ -8,9 +8,15 @@
 
 import UIKit
 
+/**
+    Custom UIButton class with integrated animation
+
+    - Parameter autoReset: set this value to false if you don't want the button to get reseted after a touchUpInside tap
+ */
 class UIAnimatedButton: UIButton {
     //MARK: - Variables
     static let animationDuration = 0.025
+    static let height: CGFloat = 44
     
     override var isUserInteractionEnabled: Bool {
         didSet {
@@ -159,7 +165,7 @@ class UIAnimatedButton: UIButton {
 extension UIAnimatedButton: UIConfigurable {
     func configureLayout() {
         translatesAutoresizingMaskIntoConstraints = false
-        heightConstraint = autoSetDimension(.height, toSize: 44, relation: .greaterThanOrEqual)
+        heightConstraint = autoSetDimension(.height, toSize: UIAnimatedButton.height, relation: .greaterThanOrEqual)
     }
 
     func configureStyling() {

@@ -13,11 +13,8 @@ import CoreLocation
  - warning: This ViewController requires that the current user is set (see -continueButtonTapped
  for more)
  */
-class KFCLocationServiceDisclaimer: UIViewController {
-    
-    let contentScrollView = UIScrollView()
-    let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
-    
+class KFCLocationServiceDisclaimer: UIScrollableViewController {
+    //MARK: - Variables
     let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
     
     let activateLocationButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
@@ -53,7 +50,6 @@ class KFCLocationServiceDisclaimer: UIViewController {
 }
 
 extension KFCLocationServiceDisclaimer: UIConfigurable {
-    
     func configureGestures() {
         activateLocationButton.addTarget(self, action: #selector(activateLocationButtonTapped), for: .touchUpInside)
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
@@ -61,8 +57,6 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
     
     func configureStyling() {
         view.backgroundColor = .kfSuperWhite
-        
-        contentScrollView.alwaysBounceVertical = true
         
         title = "Location Privacy"
         locationServiceDisclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app."
@@ -80,30 +74,11 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
         contentScrollView.addSubview(outerStackView)
         
         configureLayoutForOuterStackView()
-        
-        configureConstraintsForContentScrollView()
-        configureConstraintsForOuterStackView()
     }
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(locationServiceDisclaimerLabel)
         outerStackView.addArrangedSubview(activateLocationButton)
         outerStackView.addArrangedSubview(continueButton)
-    }
-    
-    func configureConstraintsForOuterStackView() {
-        outerStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        outerStackView.autoMatch(.width, to: .width, of: view, withOffset: -32)
-        
-        outerStackView.autoPinEdge(toSuperviewEdge: .top, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .leading, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .trailing, withInset: KFPadding.SuperView)
-        outerStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
-    }
-    
-    func configureConstraintsForContentScrollView() {
-        contentScrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentScrollView.autoPinEdgesToSuperviewEdges()
     }
 }
