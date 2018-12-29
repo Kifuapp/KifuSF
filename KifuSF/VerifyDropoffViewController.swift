@@ -14,11 +14,9 @@ class VerifyDropoffViewController: UIViewController {
                                        textColor: .kfTitle)
     private let dropoffImageView = UIImageView(forAutoLayout: ())
 
-    private let buttonsStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: 16, distribution: .fill)
+    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: 16, distribution: .fill)
     private let confirmationAnimatedButton = UIAnimatedButton(backgroundColor: .kfPrimary,
                                                               andTitle: "Confirm dropoff")
-    private let flagAnimatedButton = UIAnimatedButton(backgroundColor: .kfDestructive,
-                                                      andTitle: "Flag Image")
 
     private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: 4, distribution: .fill)
 
@@ -52,8 +50,19 @@ class VerifyDropoffViewController: UIViewController {
     }
 
     //MARK: - Methods
-    @objc private func dismissVC() {
+    @objc private func dismissViewController() {
         dismiss(animated: true)
+    }
+
+    @objc private func confirmationAnimatedButtonTapped() {
+        //TODO: erick - do whatever is needed
+        print("confirm")
+    }
+
+    @objc private func reportButtonTapped() {
+        //TODO: erick - update the flagging initializers to also pass the donation object
+        let flaggingViewController = KFCFlagging(flaggableItems: [.flaggedVerificationImage])
+        navigationController?.pushViewController(flaggingViewController, animated: true)
     }
 }
 
@@ -63,8 +72,11 @@ extension VerifyDropoffViewController: UIConfigurable {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .stop,
             target: self,
-            action: #selector(dismissVC)
+            action: #selector(dismissViewController)
         )
+
+        confirmationAnimatedButton.addTarget(self, action: #selector(confirmationAnimatedButtonTapped), for: .touchUpInside)
+        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportButtonTapped)))
     }
 
     func configureData() {
@@ -78,11 +90,11 @@ extension VerifyDropoffViewController: UIConfigurable {
 
     func configureStyling() {
         view.backgroundColor = .kfWhite
-
         titleLabel.textAlignment = .center
 
         dropoffImageView.makeItKifuStyle()
 
+        //set default styling when accessibility is not present
         flagDescriptionLabel.numberOfLines = 1
         flagLabel.numberOfLines = 1
     }
@@ -92,23 +104,19 @@ extension VerifyDropoffViewController: UIConfigurable {
 
         view.addSubview(titleLabel)
         view.addSubview(dropoffImageView)
-        view.addSubview(buttonsStackView)
+        view.addSubview(bottomStackView)
 
         labelsStackView.addArrangedSubview(flagDescriptionLabel)
         labelsStackView.addArrangedSubview(flagLabel)
 
-        buttonsStackView.addArrangedSubview(confirmationAnimatedButton)
-        buttonsStackView.addArrangedSubview(labelsStackView)
+        bottomStackView.addArrangedSubview(confirmationAnimatedButton)
+        bottomStackView.addArrangedSubview(labelsStackView)
 
         flagLabel.setContentHuggingPriority(.init(249), for: .horizontal)
 
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsStackView.autoPinEdge(toSuperviewMargin: .leading)
-        buttonsStackView.autoPinEdge(toSuperviewMargin: .trailing)
-        buttonsStackView.autoPinEdge(toSuperviewMargin: .bottom)
-
         configureTitleLabelConstraints()
         configureDropoffImageViewConstraints()
+        configureBottomStackViewConstraints()
     }
 
     private func configureTitleLabelConstraints() {
@@ -127,6 +135,14 @@ extension VerifyDropoffViewController: UIConfigurable {
 
         dropoffImageView.autoAlignAxis(toSuperviewAxis: .vertical)
         dropoffImageView.autoMatch(.height, to: .width, of: dropoffImageView)
+    }
+
+    private func configureBottomStackViewConstraints() {
+        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        bottomStackView.autoPinEdge(toSuperviewMargin: .leading)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .trailing)
+        bottomStackView.autoPinEdge(toSuperviewMargin: .bottom)
     }
 }
 

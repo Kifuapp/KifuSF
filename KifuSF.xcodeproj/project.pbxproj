@@ -41,6 +41,7 @@
 		C541E60121D6445A0024E437 /* KFCLeaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D9EBF216264FF00B180B3 /* KFCLeaderboard.swift */; };
 		C541E60321D66E9A0024E437 /* VerifyDropoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */; };
 		C541E60521D675530024E437 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
+		C541E60721D76DB90024E437 /* ReviewCollaboratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */; };
 		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
@@ -156,6 +157,7 @@
 		C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPhoneNumberValidation.swift; sourceTree = "<group>"; };
 		C53D92C521738F0C00AE3882 /* KFCFlagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCFlagging.swift; sourceTree = "<group>"; };
 		C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyDropoffViewController.swift; sourceTree = "<group>"; };
+		C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorViewController.swift; sourceTree = "<group>"; };
 		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
 				C58D9EC1216274E100B180B3 /* DestinationMapView */,
 				C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */,
+				C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */,
 			);
 			name = "Status Tab";
 			sourceTree = "<group>";
@@ -925,6 +928,7 @@
 				C58D9EC82162991C00B180B3 /* KFVUserInfo.swift in Sources */,
 				C576EFE821C7AE0600F96922 /* CreateDonationViewController.swift in Sources */,
 				C5B0E1A221501AC800A8412C /* KFCModularTableView.swift in Sources */,
+				C541E60721D76DB90024E437 /* ReviewCollaboratorViewController.swift in Sources */,
 				E9B8895A217543B0004B6976 /* KFCLoading.swift in Sources */,
 				E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */,
 				7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */,

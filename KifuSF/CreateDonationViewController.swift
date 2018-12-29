@@ -50,7 +50,7 @@ class CreateDonationViewController: UIScrollableViewController {
     }
 
     //MARK: - Methods
-    @objc private func dismissVC() {
+    @objc private func dismissViewController() {
         dismiss(animated: true)
     }
 
@@ -177,7 +177,7 @@ extension CreateDonationViewController: UIConfigurable {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .cancel,
             target: self,
-            action: #selector(dismissVC)
+            action: #selector(dismissViewController)
         )
 
         pickUpAddressButton.addTarget(self, action: #selector(pickUpAddressButtonTapped), for: .touchUpInside)
