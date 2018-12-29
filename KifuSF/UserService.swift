@@ -258,15 +258,15 @@ struct UserService {
         }
     }
     
-    static func review(donator: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
+    static func review(donator: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
         review(user: donator, rating: rating, keyPathToIncrement: \User.numberOfDonations, completion: completion)
     }
     
-    static func review(volunteer: User, rating: UserRating, completion: @escaping (Bool) -> Void) {
+    static func review(volunteer: User, rating: UserReview, completion: @escaping (Bool) -> Void) {
         review(user: volunteer, rating: rating, keyPathToIncrement: \User.numberOfDeliveries, completion: completion)
     }
     
-    private static func review(user: User, rating: UserRating, keyPathToIncrement keyPath: WritableKeyPath<User, Int>, completion: @escaping (Bool) -> Void) {
+    private static func review(user: User, rating: UserReview, keyPathToIncrement keyPath: WritableKeyPath<User, Int>, completion: @escaping (Bool) -> Void) {
         
         let ref = DatabaseReference.user(at: user.uid)
         
@@ -275,7 +275,7 @@ struct UserService {
             guard
                 let userDict = snapshot.value as? [String: Any],
                 var user = User(from: userDict) else {
-                    return .success(withValue: snapshot)
+                    return .abort()
             }
             
             //load the user's current ratings
@@ -323,5 +323,17 @@ struct UserService {
         }
         
         return "Distance not available"
+    }
+}
+
+fileprivate extension User {
+    mutating func addNewRating(_ rating: UserReview, increment keyPath: WritableKeyPath<User, Int>) {
+        
+        //mutate the current user by updating their new reputation
+        let nReviews = self.numberOfDeliveries + self.numberOfDonations
+        let newStars = rating.rating.rawValue
+        self.reputation = (reputation * Float(nReviews) + Float(newStars)) / Float(nReviews + 1)
+        
+        self[keyPath: keyPath] += 1
     }
 }

@@ -222,7 +222,7 @@ class KFCDelivery: KFCModularTableView {
     }
     
     private func presentReview(for user: User, delivery: Donation) {
-        let testRating = UserRating.fiveStar
+        let testRating = UserReview(rating: .five)
         UserService.review(donator: user, rating: testRating) { (isSuccessful) in
             if isSuccessful {
                 DonationService.archive(delivery: delivery, completion: { (isSuccessful) in
