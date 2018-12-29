@@ -18,6 +18,7 @@ struct User: Codable, KeyedStoredProperties {
         case username
         case contactNumber
         case isVerified
+        case hasApprovedConditions
         case reputation
         case numberOfDonations
         case numberOfDeliveries
@@ -31,6 +32,7 @@ struct User: Codable, KeyedStoredProperties {
     let contactNumber: String
     
     var isVerified: Bool
+    var hasApprovedConditions: Bool
     
     var reputation: Float = 0
     var numberOfDonations: Int = 0
@@ -58,6 +60,7 @@ struct User: Codable, KeyedStoredProperties {
             Keys.imageURL: imageURL,
             Keys.contactNumber: contactNumber,
             Keys.isVerified: isVerified,
+            Keys.hasApprovedConditions: hasApprovedConditions,
             Keys.flag: flag?.rawValue as Any,
             Keys.flaggedReportUid: flaggedReportUid as Any,
             Keys.reputation: reputation,
@@ -81,6 +84,7 @@ struct User: Codable, KeyedStoredProperties {
         self.imageURL = imageURL
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = false
     }
     
     init?(from snapshot: DataSnapshot) {
@@ -100,7 +104,8 @@ struct User: Codable, KeyedStoredProperties {
             let nDonations = dictionary[Keys.numberOfDonations] as? Int,
             let nDeliveries = dictionary[Keys.numberOfDeliveries] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
-            let isVerified = dictionary[Keys.isVerified] as? Bool
+            let isVerified = dictionary[Keys.isVerified] as? Bool,
+            let hasApprovedConditions = dictionary[Keys.hasApprovedConditions] as? Bool
             else { return nil }
         
         self.username = username
@@ -108,6 +113,7 @@ struct User: Codable, KeyedStoredProperties {
         self.imageURL = imageURL
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasApprovedConditions = hasApprovedConditions
         self.reputation = reputation
         self.numberOfDonations = nDonations
         self.numberOfDeliveries = nDeliveries

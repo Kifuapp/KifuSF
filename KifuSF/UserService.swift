@@ -242,13 +242,18 @@ struct UserService {
         }
     }
     
+    /**
+     Add a flagging report to the given user
+     
+     - Attention: conforms to firebase rules
+     */
     static func attach(report: Report, to user: User, completion: @escaping (Bool) -> Void) {
-        let refUser = Database.database().reference().child("users").child(user.uid)
-        let updatedDict: [String: Any] = [
+        let refUser = DatabaseReference.user(at: user.uid)
+        let changes: [String: Any] = [
             User.Keys.flaggedReportUid: report.uid,
             User.Keys.flag: report.flag.rawValue
         ]
-        refUser.updateChildValues(updatedDict) { error, _ in
+        refUser.updateChildValues(changes) { error, _ in
             if let error = error {
                 assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
                 return completion(false)
@@ -307,7 +312,56 @@ struct UserService {
     }
     
     /**
-     update the given user in the user subtree
+     Mark the current user's isVerified to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markIsVerifiedTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.isVerified: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            updateCurrentUser(key: \User.isVerified, to: true)
+            
+            completion(true)
+        }
+    }
+    
+    /**
+     Mark the current user's hasApprovedConditions to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markHasApprovedConditionsTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.hasApprovedConditions: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            updateCurrentUser(key: \User.hasApprovedConditions, to: true)
+            
+            completion(true)
+        }
+    }
+    
+    /**
+     update the given user in the user subtree. This also writes the given user
+     to User Defaults
      
      - TODO: write a cloud function to update denormalized instances of the given user
      */
@@ -320,6 +374,8 @@ struct UserService {
 
                 return completion(false)
             }
+            
+            User.setCurrent(user, writeToUserDefaults: true)
 
             completion(true)
         }
@@ -333,6 +389,25 @@ struct UserService {
         }
         
         return "Distance not available"
+    }
+    
+    // MARK: Update and persist user
+    
+    /**
+     updates and writes the user in User Defaults. Local persistence only
+     
+     - parameter key: Using WritableKeyPath, define what you'd like to update
+     - parameter value: the new value to set the given key path
+     
+     - returns: Updated User
+     */
+    @discardableResult
+    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T) -> User {
+        var updatedUser = User.current
+        updatedUser[keyPath: key] = value
+        User.setCurrent(updatedUser, writeToUserDefaults: true)
+        
+        return updatedUser
     }
 }
 
