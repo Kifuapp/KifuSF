@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 
             User.setCurrent(user)
             
-            window?.setRootViewController(KifuTabBarController())
+            window?.setRootViewController(KifuTabBarViewController())
         } else {
             window?.setRootViewController(UINavigationController(rootViewController: FrontPageViewController()))
         }

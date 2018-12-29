@@ -26,12 +26,11 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureStyling()
         configureLayout()
         
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
-        
         GIDSignIn.sharedInstance().uiDelegate = self
     }
 
@@ -63,13 +62,11 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
 //MARK: - UIConfigurable
 extension FrontPageViewController: UIConfigurable {
     func configureStyling() {
-        title = "Front Page"
         view.backgroundColor = .kfSuperWhite
-        
         logoImageView.contentMode = .scaleAspectFit
-        
         googleSignInButton.style = .wide
-        
+
+        title = "Front Page"
         oldUserLabel.text = "Already have an account?"
         signInLabel.text = "Sign in"
         
@@ -78,9 +75,7 @@ extension FrontPageViewController: UIConfigurable {
     }
     
     func configureLayout() {
-        view.directionalLayoutMargins.leading = 16
-        view.directionalLayoutMargins.trailing = 16
-        view.directionalLayoutMargins.bottom = 16
+        view.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
 
         view.addSubview(logoImageView)
         view.addSubview(bottomStackView)
