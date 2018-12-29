@@ -8,26 +8,49 @@
 
 import Foundation
 
-enum UserDistance: CustomStringConvertible {
-    case available(String)
-    case notAvailable
+struct UserDistance: CustomStringConvertible {
+    
+    static func available(meters: Double) -> UserDistance {
+        return UserDistance(meters: meters)
+    }
+    
+    static func notAvailable() -> UserDistance {
+        return UserDistance(meters: nil)
+    }
     
     var isAvailable: Bool {
-        switch self {
-        case .available:
-            return true
-        default:
-            return false
-        }
+        return self.distance != nil
     }
     
     /** returns a user friendly string of the user's location */
     var description: String {
-        switch self {
-        case .available(let miles):
-            return "\(miles) miles away"
-        default:
+        guard let distance = self.distance else {
             return "Distance is not available"
+        }
+        
+        let unit = Locale.current.usesMetricSystem ? "meters" : "miles"
+        
+        return "\(distance) \(unit) away"
+    }
+    
+    private let distance: String?
+    
+    init(meters: Double?) {
+        if let meters = meters {
+            /**
+             -distance(from: ...) returns in meters and 1609.344 converts it to miles
+             */
+            
+            if Locale.current.usesMetricSystem {
+                distance = String(format: "%.2f", meters)
+            } else {
+                let formatter = MeasurementFormatter()
+                let userMeasurement = UnitLength.miles
+                
+                distance = formatter.string(from: userMeasurement)
+            }
+        } else {
+            distance = nil
         }
     }
 }

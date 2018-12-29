@@ -294,11 +294,11 @@ struct UserService {
     public static func calculateDistance(long: Double, lat: Double) -> UserDistance {
         let location = CLLocation(latitude: lat, longitude: long)
         guard let myCurrentLocation = User.current.currentLocation else {
-            return .notAvailable
+            return .notAvailable()
         }
         
-        let distance = myCurrentLocation.distance(from: location) / 1609.344 //conversion came from google
+        let meters = myCurrentLocation.distance(from: location)
         
-        return .available(String(format: "%.2f", distance))
+        return .available(meters: meters)
     }
 }
