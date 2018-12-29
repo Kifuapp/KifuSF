@@ -42,8 +42,8 @@ class KFCModularTableView: UIViewController {
                            forCellReuseIdentifier: KFVModularCell<KFVInProgressDonationDescription>.identifier)
         modularTableView.register(KFVModularCell<KFVEntityInfo>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVEntityInfo>.identifier)
-        modularTableView.register(KFVModularCell<KFVCollaboratorInfo>.self,
-                           forCellReuseIdentifier: KFVModularCell<KFVCollaboratorInfo>.identifier)
+        modularTableView.register(KFVModularCell<CollaboratorDescriptorView>.self,
+                           forCellReuseIdentifier: KFVModularCell<CollaboratorDescriptorView>.identifier)
         modularTableView.register(KFVModularCell<KFVDestinationMap>.self,
                            forCellReuseIdentifier: KFVModularCell<KFVDestinationMap>.identifier)
 
@@ -162,8 +162,8 @@ extension KFCModularTableView: UITableViewDataSource {
             return cell
 
         case .collaboratorInfo:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<KFVCollaboratorInfo>.identifier,
-                                                           for: indexPath) as? KFVModularCell<KFVCollaboratorInfo>,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: KFVModularCell<CollaboratorDescriptorView>.identifier,
+                                                           for: indexPath) as? KFVModularCell<CollaboratorDescriptorView>,
                 let castedItem = item as? KFMCollaboratorInfo else {
                     fatalError(KFErrorMessage.unknownCell)
             }

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.3)
+  - Cosmos (16.0.0)
   - Firebase/Auth (5.8.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.4)
@@ -104,6 +105,7 @@ PODS:
   - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
+  - Cosmos (~> 16.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -120,6 +122,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Cosmos
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -147,6 +150,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Cosmos: 7bcee0fa858a9355a214f2a181be5dffcee42c81
   Firebase: 25812f43e7a53b11ae2f0a5f4c6d12faeb1f7cd7
   FirebaseAnalytics: df15839e9c6ca6bd14d2e8ab6b0c672e6c49097e
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
@@ -172,6 +176,6 @@ SPEC CHECKSUMS:
   Sourcery: 51332d15c2fc40e4ac5956e149a5d95607c63154
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: db30b3f6f5574b0e9b6a060d4a8d215a24a3a2e3
+PODFILE CHECKSUM: 27eb8338951e44964f55a5f2d5a33455bc0db1c0
 
 COCOAPODS: 1.5.3
