@@ -43,6 +43,8 @@
 		C541E60521D675530024E437 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A351DD210D0CE500A717D3 /* LaunchScreen.storyboard */; };
 		C541E60721D76DB90024E437 /* ReviewCollaboratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */; };
 		C541E60921D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */; };
+		C541E60F21D7D53D0024E437 /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60E21D7D53D0024E437 /* SlideView.swift */; };
+		C541E61121D7D7A00024E437 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E61021D7D7A00024E437 /* TutorialViewController.swift */; };
 		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
@@ -160,6 +162,8 @@
 		C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyDropoffViewController.swift; sourceTree = "<group>"; };
 		C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorViewController.swift; sourceTree = "<group>"; };
 		C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorDescriptorView.swift; sourceTree = "<group>"; };
+		C541E60E21D7D53D0024E437 /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
+		C541E61021D7D7A00024E437 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
@@ -359,6 +363,15 @@
 			name = ReviewCollaborator;
 			sourceTree = "<group>";
 		};
+		C541E60D21D7D52B0024E437 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				C541E60E21D7D53D0024E437 /* SlideView.swift */,
+				C541E61021D7D7A00024E437 /* TutorialViewController.swift */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		C5475D0A215426DC006BA324 /* KFProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +425,7 @@
 				C53D92B72171E42500AE3882 /* LoginViewController.swift */,
 				C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */,
 				C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */,
+				C541E60D21D7D52B0024E437 /* Tutorial */,
 			);
 			name = "OnBoarding Screens";
 			sourceTree = "<group>";
@@ -913,6 +927,7 @@
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */,
 				C50515C9213694F900718AE5 /* KFCDetailedDonation.swift in Sources */,
+				C541E60F21D7D53D0024E437 /* SlideView.swift in Sources */,
 				C576EFEE21C82A4E00F96922 /* String.swift in Sources */,
 				C564187C216A456400664DDB /* FrontPageViewController.swift in Sources */,
 				C541E60321D66E9A0024E437 /* VerifyDropoffViewController.swift in Sources */,
@@ -969,6 +984,7 @@
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
 				E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */,
 				C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */,
+				C541E61121D7D7A00024E437 /* TutorialViewController.swift in Sources */,
 				C5475D1121556EA1006BA324 /* KFMInProgressDonationDescription.swift in Sources */,
 				C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */,
 				C58D9EB9215E20A500B180B3 /* KFMCollaboratorInfo.swift in Sources */,

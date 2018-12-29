@@ -60,8 +60,6 @@ class ReviewCollaboratorDescriptorView: CollaboratorDescriptorView {
 
     func configureMotivationalLabelStyling() {
         motivationalLabel.textAlignment = .center
-        motivationalLabel.adjustsFontForContentSizeCategory = true
-        motivationalLabel.numberOfLines = 0
     }
 
     func configureCosmosViewStyling() {

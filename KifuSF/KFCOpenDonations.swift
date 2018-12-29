@@ -99,9 +99,9 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
 
     @objc func createDonation() {
-        let createDonationViewController = UINavigationController(rootViewController: ReviewCollaboratorViewController())
+        let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
-        present(createDonationViewController, animated: true)
+        present(TutorialViewController(), animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -25,24 +25,6 @@ extension UIColor {
     static let kfSubtitle = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
     static let kfBody = #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1)
     
-    static let kfButton = #colorLiteral(red: 0.9960784314, green: 0.9960784314, blue: 0.9960784314, alpha: 1)
-    static let kfHeader1 = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-    static let kfHeader2 = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-    static let kfSubheader1 = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-    static let kfSubheader2 = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-    static let kfSubheader3 = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-    static let kfBody1 = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-    static let kfBody2 = #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1)
-    
-    static let colors: [String: UIColor] = ["header1": kfHeader1,
-                                          "header2": kfHeader2,
-                                          "subheader1": kfSubheader1,
-                                          "subheader2": kfSubheader2,
-                                          "subheader3": kfSubheader3,
-                                          "body1": kfBody1,
-                                          "body2": kfBody2,
-                                          "button": kfButton]
-    
     func lighter(by percentage: CGFloat = 5) -> UIColor? {
         return self.adjust(by: abs(percentage) )
     }

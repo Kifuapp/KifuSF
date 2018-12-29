@@ -10,8 +10,9 @@ import UIKit
 
 class CollaboratorDescriptorView: UIDescriptorView {
     //MARK: - Variables
-    let headlineLabel = UILabel()
-    let descriptionLabel = UILabel()
+    let headlineLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                   textColor: .kfSubtitle)
     let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
 
     //MARK: - Methods
@@ -44,19 +45,8 @@ class CollaboratorDescriptorView: UIDescriptorView {
     
     override func configureStyling() {
         super.configureStyling()
-        
+    
         layer.shadowOpacity = 0
-        
-        headlineLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        headlineLabel.numberOfLines = 0
-        headlineLabel.textColor = UIColor.kfTitle
-        headlineLabel.adjustsFontForContentSizeCategory = true
-        
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor = UIColor.kfSubtitle
-        descriptionLabel.adjustsFontForContentSizeCategory = true
-        
         headlineLabel.text = "Collaborator Info"
     }
 }
