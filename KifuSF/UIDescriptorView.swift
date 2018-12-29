@@ -86,13 +86,13 @@ class UIDescriptorView: UIView, UIConfigurable {
         imageView.makeItKifuStyle()
     }
 
-    private func configureSubtitleStickyLabelStyling() {
+    func configureSubtitleStickyLabelStyling() {
         subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
         subtitleStickyLabel.contentView.makeItKifuStyle()
     }
 
-    private func configureDescriptorStyling() {
+    func configureDescriptorStyling() {
         backgroundColor = .kfWhite
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
@@ -112,7 +112,7 @@ class UIDescriptorView: UIView, UIConfigurable {
         subtitleStickyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
 
-    private func configureStackViewsLayout() {
+    func configureStackViewsLayout() {
         infoStackView.addArrangedSubview(titleLabel)
         infoStackView.addArrangedSubview(subtitleStickyLabel)
 
@@ -122,7 +122,7 @@ class UIDescriptorView: UIView, UIConfigurable {
         contentsStackView.addArrangedSubview(topStackView)
     }
 
-    private func configureContentsStackViewConstraints() {
+    func configureContentsStackViewConstraints() {
         contentsStackView.translatesAutoresizingMaskIntoConstraints = false
 
         contentsStackView.autoPinEdge(toSuperviewMargin: .top)
@@ -131,7 +131,7 @@ class UIDescriptorView: UIView, UIConfigurable {
         contentsStackView.autoPinEdge(toSuperviewMargin: .bottom)
     }
 
-    private func configureImageViewConstraints() {
+    func configureImageViewConstraints() {
         imageView.autoSetDimension(.height, toSize: UIImageView.Size.small.get())
             .autoIdentify(UIImageView.Size.small.rawValue).priority = UILayoutPriority(rawValue: 751)
         imageView.autoSetDimension(.width, toSize: UIImageView.Size.small.get())

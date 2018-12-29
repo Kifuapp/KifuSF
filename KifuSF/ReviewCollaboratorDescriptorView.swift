@@ -13,38 +13,64 @@ class ReviewCollaboratorDescriptorView: CollaboratorDescriptorView {
     //MARK: - Variables
     let cosmosContainerView = UIView()
     let cosmosView = CosmosView(forAutoLayout: ())
-    let motivationalLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title1),
+    let motivationalLabel = UILabel(font: UIFontMetrics(forTextStyle: .title2)
+                                    .scaledFont(for: UIFont.italicSystemFont(ofSize: 22)),
                                     textColor: .kfBody)
+
+    static let motivationalMessages = ["'Rate your friend'",
+                                       "'Horrific'",
+                                       "'Awful'",
+                                       "'Suboptimal'",
+                                       "'Good'",
+                                       "'Great!'"]
 
     //MARK: - UIConfigurable
     override func configureLayout() {
         super.configureLayout()
-
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
 
         contentsStackView.addArrangedSubview(cosmosContainerView)
-        contentsStackView.addArrangedSubview(motivationalLabel)
-
         cosmosContainerView.addSubview(cosmosView)
+        cosmosContainerView.addSubview(motivationalLabel)
+
         cosmosView.autoPinEdge(toSuperviewEdge: .top)
-        cosmosView.autoPinEdge(toSuperviewEdge: .bottom)
         cosmosView.autoAlignAxis(toSuperviewAxis: .vertical)
+
+        configureMotivationalLabelConstraints()
+    }
+
+    func configureMotivationalLabelConstraints() {
+        motivationalLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        motivationalLabel.autoPinEdge(.top, to: .bottom, of: cosmosView, withOffset: 8)
+        motivationalLabel.autoPinEdge(toSuperviewMargin: .leading)
+        motivationalLabel.autoPinEdge(toSuperviewMargin: .trailing)
+        motivationalLabel.autoPinEdge(toSuperviewMargin: .bottom)
     }
 
     override func configureStyling() {
         super.configureStyling()
 
         layer.shadowOpacity = CALayer.kfShadowOpacity
-
         headlineLabel.textAlignment = .center
 
-        motivationalLabel.textAlignment = .center
-        motivationalLabel.text = "Horrific"
-
-        cosmosContainerView.isUserInteractionEnabled = true
-
-        cosmosView.settings.starSize = 30
+        configureMotivationalLabelStyling()
+        configureCosmosViewStyling()
     }
-    
 
+    func configureMotivationalLabelStyling() {
+        motivationalLabel.textAlignment = .center
+        motivationalLabel.adjustsFontForContentSizeCategory = true
+        motivationalLabel.numberOfLines = 0
+    }
+
+    func configureCosmosViewStyling() {
+        cosmosContainerView.isUserInteractionEnabled = true
+        cosmosView.settings.starSize = 32
+        cosmosView.rating = 0
+
+        cosmosView.didTouchCosmos = { [unowned self] rating in
+            self.motivationalLabel.text = ReviewCollaboratorDescriptorView.motivationalMessages[Int(rating)]
+        }
+    }
 }

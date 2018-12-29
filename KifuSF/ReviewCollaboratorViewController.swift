@@ -9,23 +9,34 @@
 import UIKit
 import Cosmos
 
-class ReviewCollaboratorViewController: UIViewController {
-
-    private let collaboratorInfoDescriptorView = ReviewCollaboratorDescriptorView(forAutoLayout: ())
+class ReviewCollaboratorViewController: UIScrollableViewController {
+    //MARK: - Variables
+    private let reviewCollaboratorInfoDescriptorView = ReviewCollaboratorDescriptorView(forAutoLayout: ())
     private let sumbitAnimatedButton = UIAnimatedButton(backgroundColor: .kfPrimary,
                                                         andTitle: "Submit")
 
+    private var rating: Double? = nil
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureDelegates()
         configureData()
         configureStyling()
         configureLayout()
-
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        contentScrollView.updateBottomPadding(sumbitAnimatedButton.frame.height + 24)
+    }
+
+    //MARK: - Methods
     @objc private func dismissViewController() {
         dismiss(animated: true)
+    }
+
+    @objc private func submitAnimatedButtonTapped() {
+        //make sure the user has made a review
     }
 }
 
@@ -37,12 +48,20 @@ extension ReviewCollaboratorViewController: UIConfigurable {
             target: self,
             action: #selector(dismissViewController)
         )
+
+        sumbitAnimatedButton.addTarget(self, action: #selector(submitAnimatedButtonTapped), for: .touchUpInside)
+
+        reviewCollaboratorInfoDescriptorView.cosmosView.didFinishTouchingCosmos = { [unowned self] rating in
+            self.rating = rating
+        }
     }
 
     func configureData() {
         title = "Review"
+        reviewCollaboratorInfoDescriptorView.motivationalLabel.text =
+            ReviewCollaboratorDescriptorView.motivationalMessages.first
 
-        collaboratorInfoDescriptorView.reloadData(for: KFMCollaboratorInfo(profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, name: "Alex", username: "Pondorasti", userReputation: 12, userDonationsCount: 12, userDeliveriesCount: 12))
+        reviewCollaboratorInfoDescriptorView.reloadData(for: KFMCollaboratorInfo(profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, name: "Alex", username: "Pondorasti", userReputation: 12, userDonationsCount: 12, userDeliveriesCount: 12))
     }
 
     func configureStyling() {
@@ -52,12 +71,12 @@ extension ReviewCollaboratorViewController: UIConfigurable {
     func configureLayout() {
         view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
 
-        view.addSubview(collaboratorInfoDescriptorView)
+        outerStackView.addArrangedSubview(reviewCollaboratorInfoDescriptorView)
         view.addSubview(sumbitAnimatedButton)
 
-        collaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .leading)
-        collaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .trailing)
-        collaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .top)
+        reviewCollaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .leading)
+        reviewCollaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .trailing)
+        reviewCollaboratorInfoDescriptorView.autoPinEdge(toSuperviewMargin: .top)
 
 
         configureSumbitAnimatedButtonConstraints()
