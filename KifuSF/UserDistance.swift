@@ -8,6 +8,7 @@
 
 import Foundation
 
+//TODO: use MeasurementFormatter
 struct UserDistance: CustomStringConvertible {
     
     static func available(meters: Double) -> UserDistance {
@@ -44,10 +45,14 @@ struct UserDistance: CustomStringConvertible {
             if Locale.current.usesMetricSystem {
                 distance = String(format: "%.2f", meters)
             } else {
-                let formatter = MeasurementFormatter()
-                let userMeasurement = UnitLength.miles
+                //TODO: handle the error better; currently the formatter returns
+                //the unit.symbol when it can't format
+//                let formatter = MeasurementFormatter()
+//                let userMeasurement = UnitLength.miles
+//
+//                distance = formatter.string(from: userMeasurement)
                 
-                distance = formatter.string(from: userMeasurement)
+                distance = String(format: "%.2f", meters / 1609.344)
             }
         } else {
             distance = nil
