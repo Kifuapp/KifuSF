@@ -162,22 +162,17 @@ struct UserService {
      */
     static func completeSigninProviderLogin(// swiftlint:disable:this function_parameter_count
         withUid uid: String,
-        name: String,
         username: String,
-        image: UIImage,
+        imageLink: URL,
         contactNumber: String,
-        email: String,
-        password: String,
         completion: @escaping (_ user: User?) -> Void) {
-        
-        self.create(
-            uid: uid,
-            username: username,
-            image: image,
-            contactNumber: contactNumber,
-            completion: completion
-        )
+        self.create(uid: uid,
+                    username: username,
+                    imageURL: imageLink,
+                    contactNumber: contactNumber,
+                    completion: completion)
     }
+    
     
     private static func create(
         uid: String,
@@ -208,6 +203,34 @@ struct UserService {
                 return completion(newUser)
             })
         }
+    }
+    
+    private static func create(
+        uid: String,
+        username: String,
+        imageURL: URL,
+        contactNumber: String,
+        completion: @escaping (User?) -> Void) {
+        
+            let stringURL = imageURL.absoluteString
+            
+            let newUser = User(username: username,
+                               uid: uid,
+                               imageURL: stringURL,
+                               contributionPoints: 0,
+                               contactNumber: contactNumber,
+                               isVerified: false)
+            
+            let ref = Database.database().reference().child("users").child(uid)
+            
+            ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
+                if error != nil {
+                    return completion(nil)
+                }
+                
+                return completion(newUser)
+            })
+        
     }
     
     static func retrieveAuthErrorMessage(for error: Error) -> String {

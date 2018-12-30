@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
+        
         let credentialDict = ["credentials": credential] as [String: Any]
         NotificationCenter.default.post(name: .userDidLoginWithGoogle, object: nil, userInfo: credentialDict)
     }
