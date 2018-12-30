@@ -118,8 +118,8 @@ extension TutorialViewController: UIConfigurable {
         pageControl.numberOfPages = slidesView.count
         pageControl.currentPage = 0
         pageControl.isEnabled = false
-        pageControl.currentPageIndicatorTintColor = .black
-        pageControl.pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.1)
+        pageControl.currentPageIndicatorTintColor = UIColor.Text.Headline
+        pageControl.pageIndicatorTintColor = UIColor.Text.Headline.withAlphaComponent(0.1)
     }
 
     func configureSkipButtonStyling() {

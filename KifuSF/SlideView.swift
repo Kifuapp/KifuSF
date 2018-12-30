@@ -16,7 +16,7 @@ class SlideView: UIView {
                                      textColor: UIColor.Text.Headline)
     private let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
                                            textColor: UIColor.Text.SubHeadline)
-    // MARK: - Lifecycle
+    //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -24,7 +24,6 @@ class SlideView: UIView {
         configureLayout()
     }
 
-    //MARK: - Initializers
     convenience init(image: UIImage, title: String, description: String) {
         self.init()
 
@@ -38,6 +37,7 @@ class SlideView: UIView {
     }
 }
 
+// MARK: - UIConfigurable
 extension SlideView: UIConfigurable {
     func configureStyling() {
         backgroundColor = UIColor.Pallete.White
@@ -59,21 +59,21 @@ extension SlideView: UIConfigurable {
         configureDescriptionLabelConstraints()
     }
 
-    private func configureImageViewConstraints() {
+    func configureImageViewConstraints() {
         imageView.autoAlignAxis(toSuperviewAxis: .vertical)
         imageView.autoAlignAxis(.horizontal, toSameAxisOf: self, withOffset: -48)
         imageView.autoMatch(.width, to: .width, of: self, withMultiplier: 0.5)
         imageView.autoMatch(.height, to: .width, of: imageView)
     }
 
-    private func configureTitleLabelConstraints() {
+    func configureTitleLabelConstraints() {
         titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
 
         let screenHeight = UIScreen.main.bounds.height
         titleLabel.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: screenHeight * 0.2)
     }
 
-    private func configureDescriptionLabelConstraints() {
+    func configureDescriptionLabelConstraints() {
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 8)
         descriptionLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 72)
         descriptionLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 72)
