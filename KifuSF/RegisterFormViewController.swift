@@ -74,7 +74,7 @@ class RegisterFormViewController: UIViewController {
 
         configureStyling()
         configureLayout()
-        autoPopulatetextfield()
+        configureData()
         configureDelegates()
         configureGestures()
         
@@ -215,18 +215,18 @@ extension RegisterFormViewController: UIConfigurable {
         contentScrollView.updateBottomPadding(KFPadding.StackView)
     }
     
-    func configureText() {
+    func configureData() {
         title = "Register Form"
         profileImageLabel.text = "Profile Image"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
-    }
-    
-    func autoPopulatetextfield(){
-        guard let signInProviderInfo = signInProvderInfo else {return}
+        
+        guard let signInProviderInfo = signInProvderInfo else { return }
+        
         if let fullName = signInProvderInfo?.displayName {
             fullNameInputView.textFieldContainer.textField.text = fullName
             fullNameInputView.textFieldContainer.isUserInteractionEnabled = false
         }
+        
         if let email = signInProvderInfo?.email{
             emailInputView.textFieldContainer.textField.text = email
             emailInputView.textFieldContainer.isUserInteractionEnabled = false
@@ -239,11 +239,7 @@ extension RegisterFormViewController: UIConfigurable {
         if let phoneNumber = signInProviderInfo.phoneNumber{
             phoneNumberInputView.textFieldContainer.textField.text = phoneNumber
             phoneNumberInputView.textFieldContainer.isUserInteractionEnabled = false
-        }
-        
-        
-        
-        
+        } 
     }
     
     func configureGestures() {
