@@ -30,7 +30,7 @@ class KFVDonationInfo: UIDescriptorView {
     func reloadData(for data: KFMDonationInfo) {
         imageView.kf.setImage(with: data.imageURL)
         titleLabel.text = data.title
-        subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
+        subtitleStickyLabel.contentView.text = data.distance.description
         descriptionStickyTextView.contentView.text = data.description
     }
 }

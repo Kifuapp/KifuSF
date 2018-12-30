@@ -54,7 +54,7 @@ class KFVPendingDonation: UIDescriptorView {
         imageView.kf.setImage(with: data.imageURL)
         
         titleLabel.text = data.title
-        subtitleStickyLabel.contentView.text = "\(data.distance) Miles away"
+        subtitleStickyLabel.contentView.text = data.distance.description
     }
 }
 
