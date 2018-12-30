@@ -158,7 +158,6 @@ class KFCDonation: KFCModularTableView {
                     }
                 }
             case .awaitingPickup:
-                
                 //Confirm drop off
                 self.confirmDropOff(for: donation)
             case .awaitingDelivery:
@@ -173,14 +172,9 @@ class KFCDonation: KFCModularTableView {
                 self.presentReview(for: volunteer, donation: donation)
             }
         } else {
-            
-            //present new donation editor
-            let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
-            if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-                present(createDonationVC, animated: true)
-            } else {
-                assertionFailure("error")
-            }
+            let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
+            createDonationViewController.modalTransitionStyle = .coverVertical
+            present(createDonationViewController, animated: true)
         }
     }
     
