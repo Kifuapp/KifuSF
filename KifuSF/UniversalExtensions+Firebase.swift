@@ -10,8 +10,41 @@ import Foundation
 import Firebase
 
 extension DatabaseReference {
+    private enum Keys {
+        static let openDonations = "open-donations"
+        static let volunteerDonations = "volunteer-donations"
+        static let donatorDonations = "donator-donations"
+        static let users = "users"
+        static let donationRequests = "donation-requests"
+        static let volunteerRequests = "volunteer-requests"
+    }
+    
     static var rootDirectory: DatabaseReference {
         return Database.database().reference()
+    }
+    
+//    /**
+//     `/users`
+//     */
+//    static func users() -> DatabaseReference {
+//        return rootDirectory
+//            .child("users")
+//    }
+    
+    /**
+     `/users/:user_uid`
+     */
+    static func user(at uid: String) -> DatabaseReference {
+        return rootDirectory
+            .child(Keys.users)
+                .child(uid)
+    }
+    
+    /**
+     `/users/<current_user>`
+     */
+    static func currentUser() -> DatabaseReference {
+        return user(at: User.current.uid)
     }
     
     /**
@@ -19,13 +52,13 @@ extension DatabaseReference {
      */
     static func openDonations() -> DatabaseReference {
         return rootDirectory
-            .child("open-donations")
+            .child(Keys.openDonations)
     }
     
     /**
      `/open-donations/:donation_uid`
      */
-    static func openDonation(_ donation: String) -> DatabaseReference {
+    static func openDonation(at donation: String) -> DatabaseReference {
         return openDonations()
             .child(donation)
     }
@@ -35,7 +68,7 @@ extension DatabaseReference {
      */
     static func donatorDonations(for user: String) -> DatabaseReference {
         return rootDirectory
-            .child("donator-donations")
+            .child(Keys.donatorDonations)
                 .child(user)
     }
     
@@ -52,7 +85,7 @@ extension DatabaseReference {
      */
     static func volunteerDonations(for user: String) -> DatabaseReference {
         return rootDirectory
-            .child("volunteer-donations")
+            .child(Keys.volunteerDonations)
                 .child(user)
     }
     
@@ -69,8 +102,8 @@ extension DatabaseReference {
      */
     static func usersWhoHaveRequested(for donation: String) -> DatabaseReference {
         return rootDirectory
-            .child("donation-requests")
-            .child(donation)
+            .child(Keys.donationRequests)
+                .child(donation)
     }
     
     /**
@@ -78,26 +111,28 @@ extension DatabaseReference {
      */
     static func donationsRequested(by user: String) -> DatabaseReference {
         return rootDirectory
-            .child("volunteer-requests")
+            .child(Keys.volunteerRequests)
                 .child(user)
     }
 }
 
 class FirebaseDispatchGroup {
     
+    enum Errors: Error {
+        case message(String)
+        
+        var localizedDescription: String {
+            switch self {
+            case .message(let message):
+                return message
+            }
+        }
+    }
+    
+    // MARK: - VARS
+    
     var isSuccessful: Bool {
         return errors.count == 0
-    }
-    
-    private var dispatchGroup: DispatchGroup
-    private var errors: [Error] = []
-    
-    init(_ dispatchGroup: DispatchGroup = DispatchGroup.init()) {
-        self.dispatchGroup = dispatchGroup
-    }
-    
-    deinit {
-        print("GONE")
     }
     
     var handleErrorCase: (Error?, DatabaseReference) -> Void {
@@ -114,10 +149,37 @@ class FirebaseDispatchGroup {
         }
     }
     
+    private var dispatchGroup: DispatchGroup
+    private var errors: [Error] = []
+    
+    init(_ dispatchGroup: DispatchGroup = DispatchGroup.init()) {
+        self.dispatchGroup = dispatchGroup
+    }
+    
+    // MARK: - RETURN VALUES
+    
+    // MARK: - METHODS
+    
     func notify(_ queue: DispatchQueue = DispatchQueue.main, work: @escaping (Bool) -> Void) {
         dispatchGroup.notify(queue: queue) {
             work(self.isSuccessful)
         }
+    }
+    
+    func enter() {
+        self.dispatchGroup.enter()
+    }
+    
+    func leaveBy(validating successful: Bool, errorMessage: String = #function) {
+        if successful == false {
+            self.errors.append(Errors.message(errorMessage))
+        }
+        
+        self.dispatchGroup.leave()
+    }
+    
+    func leaveSuccessfully() {
+        self.dispatchGroup.leave()
     }
 }
 
