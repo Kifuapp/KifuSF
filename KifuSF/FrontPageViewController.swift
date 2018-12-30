@@ -14,15 +14,24 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Variables
     private let logoImageView = UIImageView(image: UIImage.kfLogo)
     
-    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    private let bottomStackView = UIStackView(axis: .vertical,
+                                              alignment: .fill,
+                                              spacing: KFPadding.StackView,
+                                              distribution: .fill)
     
-    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary,
+                                                  andTitle: "Register")
     private let googleSignInButton = GIDSignInButton()
     
-    private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
+    private let labelsStackView = UIStackView(axis: .horizontal,
+                                              alignment: .fill,
+                                              spacing: KFPadding.Body,
+                                              distribution: .fill)
     
-    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
+    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                       textColor: .kfBody)
+    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                      textColor: .kfPrimary)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -35,39 +44,10 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didSignInWithGoogle), name: .userDidLoginWithGoogle, object: nil)
-        
-    }
-    
-    @objc func didSignInWithGoogle(_ notification: NSNotification){
-        if let credentials = notification.userInfo?["credentials"] as? AuthCredential {
-            UserService.login(with: credentials, completion: { (user) in
-                guard let user = user else {fatalError("Did not correctly get back a user when signed in with google")}
-                
-                if(user.isVerified){
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    let mainViewControllers = KifuTabBarController()
-                    self.present(mainViewControllers, animated: true)
-                }
-                else{
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                    self.present(phoneNumberValidationViewController, animated: true)
-                }
-
-            }) { (loginInfo) in
- 
-                    let registerVC = RegisterFormViewController()
-                    registerVC.signInProvderInfo = loginInfo
-                    self.navigationController?.pushViewController(registerVC, animated: true)
-                
-            }
-        }
-        else{
-            fatalError("Did not have any login credentials passed")
-        }
-        
+        NotificationCenter.default.addObserver(self, 
+                                               selector: #selector(didSignInWithGoogle),
+                                               name: .userDidLoginWithGoogle,
+                                               object: nil)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -86,12 +66,38 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     }
 
     //MARK: - Functions
-    @objc func registerButtonPressed() {
+    @objc private func registerButtonPressed() {
         navigationController?.pushViewController(RegisterFormViewController(), animated: true)
     }
     
-    @objc func logInButtonTapped() {
+    @objc private func logInButtonTapped() {
         navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
+    
+    @objc private func didSignInWithGoogle(_ notification: NSNotification){
+        if let credentials = notification.userInfo?["credentials"] as? AuthCredential {
+            UserService.login(with: credentials, completion: { (user) in
+                guard let user = user else { 
+                    fatalError("Did not correctly get back a user when signed in with google")
+                }
+                
+                if user.isVerified {
+                    User.setCurrent(user, writeToUserDefaults: true)
+                    let mainViewControllers = KifuTabBarController()
+                    self.present(mainViewControllers, animated: true)
+                } else {
+                    User.setCurrent(user, writeToUserDefaults: true)
+                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                    self.present(phoneNumberValidationViewController, animated: true)
+                }
+            }) { (loginInfo) in
+                    let registerVC = RegisterFormViewController()
+                    registerVC.signInProvderInfo = loginInfo
+                    self.navigationController?.pushViewController(registerVC, animated: true)  
+            }
+        } else {
+            fatalError("Did not have any login credentials passed")
+        }
     }
 }
 
