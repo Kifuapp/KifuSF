@@ -122,6 +122,7 @@
 		E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */; };
 		E9B8895A217543B0004B6976 /* KFCLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B88959217543B0004B6976 /* KFCLoading.swift */; };
 		E9BA57A9217161F6002A1C37 /* URL+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA57A8217161F6002A1C37 /* URL+Images.swift */; };
+		E9F4238F21CEDFB500F1DB5D /* UserDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F4238E21CEDFB500F1DB5D /* UserDistance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,6 +249,7 @@
 		E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMWidgetDescriptor.swift; sourceTree = "<group>"; };
 		E9B88959217543B0004B6976 /* KFCLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLoading.swift; sourceTree = "<group>"; };
 		E9BA57A8217161F6002A1C37 /* URL+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Images.swift"; sourceTree = "<group>"; };
+		E9F4238E21CEDFB500F1DB5D /* UserDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDistance.swift; sourceTree = "<group>"; };
 		F635C86907ADA56FDC08B3BE /* Pods-KifuSF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KifuSF.release.xcconfig"; path = "Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -552,6 +554,7 @@
 				C5DD40512136F05900ECC819 /* Enums.swift */,
 				C58D9ECF216361E800B180B3 /* Protocols.swift */,
 				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
+				E9F4238E21CEDFB500F1DB5D /* UserDistance.swift */,
 				C5E4A35821D28C9800530C75 /* KeyboardStack.swift */,
 			);
 			name = Helpers;
@@ -978,6 +981,7 @@
 				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
 				C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */,
+				E9F4238F21CEDFB500F1DB5D /* UserDistance.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
 				C58D9EBD216008D900B180B3 /* UIAnimatedButton.swift in Sources */,
 				C564187A216A089F00664DDB /* RegisterFormViewController.swift in Sources */,

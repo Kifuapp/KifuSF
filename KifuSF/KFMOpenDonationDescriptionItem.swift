@@ -21,13 +21,13 @@ class KFMOpenDonationDescriptionItem: KFPModularTableViewItem {
     let userDonationsCount: Int
     let userDeliveriesCount: Int
     
-    let distance: Double
+    let distance: UserDistance
     
     let description: String
     
     init(imageURL: URL, title: String, username: String,
          creationDate: String, userReputation: Double, userDonationsCount: Int,
-         userDeliveriesCount: Int, distance: Double, description: String) {
+         userDeliveriesCount: Int, distance: UserDistance, description: String) {
         
         self.imageURL = imageURL
         self.title = title
