@@ -18,7 +18,8 @@ class KFCDonation: KFCModularTableView {
         }
     }
 
-    let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
+                                        andTitle: "Directions")
     
     private func updateUI() {
         reloadData()
@@ -62,7 +63,7 @@ class KFCDonation: KFCModularTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
     }
 
     override func viewDidAppear(_ animated: Bool) {

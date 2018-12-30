@@ -104,7 +104,7 @@ extension TutorialViewController: UIConfigurable {
     }
 
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
 
         contentScrollView.delegate = self
         contentScrollView.showsHorizontalScrollIndicator = false

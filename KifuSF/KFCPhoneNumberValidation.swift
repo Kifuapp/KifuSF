@@ -11,7 +11,10 @@ import Moya
 
 class KFCPhoneNumberValidation: UIScrollableViewController {
     //MARK: - Variables
-    let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
+    let upperStackView = UIStackView(axis: .vertical,
+                                     alignment: .fill,
+                                     spacing: KFPadding.ContentView,
+                                     distribution: .fill)
     
     let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
                                    textColor: UIColor.Text.SubHeadline)
@@ -21,9 +24,9 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
 
     //TODO: implement function to resend code and recheck phone number
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
-                              textColor: .kfPrimary)
+                              textColor: UIColor.Pallete.Green)
     
-    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary,
+    let continueButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
                                           andTitle: "Continue")
     
     var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
@@ -75,7 +78,7 @@ extension KFCPhoneNumberValidation: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         
         title = "Phone Number Validation"
         informationLabel.text = "Almost Done! We've sent a message to your phone number that contains a 4 digit code. Please enter the code below in verify your phone number."

@@ -80,13 +80,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
     }
     
     func configureStyling() {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.kfPrimary]
-        UINavigationBar.appearance().tintColor = .kfPrimary
-        UINavigationBar.appearance().barTintColor = .kfWhite
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedStringKey.foregroundColor : UIColor.Pallete.Green]
+        UINavigationBar.appearance().tintColor = UIColor.Pallete.Green
+        UINavigationBar.appearance().barTintColor = UIColor.Pallete.White
         UINavigationBar.appearance().isTranslucent = false
         
-        UITabBar.appearance().tintColor = .kfPrimary
-        UITabBar.appearance().barTintColor = .kfWhite
+        UITabBar.appearance().tintColor = UIColor.Pallete.Green
+        UITabBar.appearance().barTintColor = UIColor.Pallete.White
         UITabBar.appearance().isTranslucent = false
     }
     

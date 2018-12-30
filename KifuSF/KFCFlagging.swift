@@ -39,7 +39,7 @@ class KFCFlagging: UIViewController, UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         
         flaggingOptionsTableView.tableFooterView = UIView()
         flaggingOptionsTableView.addTableHeaderViewLine()

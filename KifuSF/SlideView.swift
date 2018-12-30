@@ -15,7 +15,7 @@ class SlideView: UIView {
     private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
                                      textColor: UIColor.Text.Headline)
     private let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
-                                           textColor: UIColor.Text.Body)
+                                           textColor: UIColor.Text.SubHeadline)
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +40,7 @@ class SlideView: UIView {
 
 extension SlideView: UIConfigurable {
     func configureStyling() {
-        backgroundColor = .kfWhite
+        backgroundColor = UIColor.Pallete.White
         configureDescriptionLabelStyling()
     }
 

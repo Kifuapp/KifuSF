@@ -15,15 +15,22 @@ class VerifyDropoffViewController: UIScrollableViewController {
                                        textColor: UIColor.Text.Headline)
     private let dropoffImageView = UIImageView(forAutoLayout: ())
 
-    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: 16, distribution: .fill)
-    private let confirmationAnimatedButton = UIAnimatedButton(backgroundColor: .kfPrimary,
+    private let bottomStackView = UIStackView(axis: .vertical,
+                                              alignment: .fill,
+                                              spacing: 16,
+                                              distribution: .fill)
+    private let confirmationAnimatedButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
                                                               andTitle: "Confirm dropoff")
 
-    private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: 4, distribution: .fill)
+    private let labelsStackView = UIStackView(axis: .horizontal,
+                                              alignment: .fill,
+                                              spacing: 4,
+                                              distribution: .fill)
 
     private let flagDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
                                                textColor: UIColor.Text.Body)
-    private let flagLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let flagLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                    textColor: UIColor.Pallete.Red)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -94,7 +101,7 @@ extension VerifyDropoffViewController: UIConfigurable {
     }
 
     func configureStyling() {
-        view.backgroundColor = .kfGray
+        view.backgroundColor = UIColor.Pallete.Gray
         titleLabel.textAlignment = .center
 
         dropoffImageView.makeItKifuStyle()
@@ -108,7 +115,7 @@ extension VerifyDropoffViewController: UIConfigurable {
 
     func configureBackgroundViewStyling() {
         backgroundView.layer.zPosition = -1
-        backgroundView.backgroundColor = .kfWhite
+        backgroundView.backgroundColor = UIColor.Pallete.White
         backgroundView.layer.setUpShadow()
         backgroundView.clipsToBounds = false
         backgroundView.layer.cornerRadius = CALayer.kfCornerRadius

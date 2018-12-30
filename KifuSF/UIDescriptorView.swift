@@ -94,7 +94,7 @@ class UIDescriptorView: UIView, UIConfigurable {
     }
 
     func configureDescriptorStyling() {
-        backgroundColor = .kfWhite
+        backgroundColor = UIColor.Pallete.White
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()

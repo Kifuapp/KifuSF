@@ -45,9 +45,10 @@ class RegisterFormViewController: UIScrollableViewController {
     private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
                                           textColor: UIColor.Text.Body)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
-                                     textColor: .kfDestructive)
+                                     textColor: UIColor.Pallete.Red)
     
-    private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
+    private let continueButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                                  andTitle: "Sign up")
 
     private let profileImageHelper = PhotoHelper()
     private var userSelectedAProfileImage: Bool? = nil
@@ -195,7 +196,7 @@ extension RegisterFormViewController: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         contentScrollView.updateBottomPadding(KFPadding.StackView)
 
         profileImageInputView.contentView.makeItKifuStyle()

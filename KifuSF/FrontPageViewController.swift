@@ -13,17 +13,24 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Variables
     private let logoImageView = UIImageView(image: UIImage.kfLogo)
     
-    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    private let bottomStackView = UIStackView(axis: .vertical,
+                                              alignment: .fill,
+                                              spacing: KFPadding.StackView,
+                                              distribution: .fill)
     
-    private let registerButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Register")
+    private let registerButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                                  andTitle: "Register")
     private let googleSignInButton = GIDSignInButton()
     
-    private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
+    private let labelsStackView = UIStackView(axis: .horizontal,
+                                              alignment: .fill,
+                                              spacing: KFPadding.Body,
+                                              distribution: .fill)
     
     private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
                                        textColor: UIColor.Text.Body)
     private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
-                                      textColor: .kfPrimary)
+                                      textColor: UIColor.Pallete.Green)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -64,7 +71,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
 //MARK: - UIConfigurable
 extension FrontPageViewController: UIConfigurable {
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         logoImageView.contentMode = .scaleAspectFit
         googleSignInButton.style = .wide
 

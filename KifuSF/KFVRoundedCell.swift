@@ -31,7 +31,7 @@ class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
     func configureStyling() {
         self.selectionStyle = .none
         layer.masksToBounds = false
-        contentView.backgroundColor = UIColor.kfGray
+        contentView.backgroundColor = UIColor.Pallete.Gray
     }
     
     func configureDescriptorViewLayoutConstraints() {
@@ -46,13 +46,13 @@ class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        descriptorView.backgroundColor = selected ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = selected ? UIColor.Pallete.Highlight : UIColor.Pallete.White
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        descriptorView.backgroundColor = highlighted ? .kfHighlight : .kfWhite
+        descriptorView.backgroundColor = highlighted ? UIColor.Pallete.Highlight : UIColor.Pallete.White
     }
     
     required init?(coder aDecoder: NSCoder) {

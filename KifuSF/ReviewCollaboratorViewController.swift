@@ -12,7 +12,7 @@ import Cosmos
 class ReviewCollaboratorViewController: UIScrollableViewController {
     //MARK: - Variables
     private let reviewCollaboratorInfoDescriptorView = ReviewCollaboratorDescriptorView(forAutoLayout: ())
-    private let sumbitAnimatedButton = UIAnimatedButton(backgroundColor: .kfPrimary,
+    private let sumbitAnimatedButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
                                                         andTitle: "Submit")
 
     private var rating: Double? = nil
@@ -65,7 +65,7 @@ extension ReviewCollaboratorViewController: UIConfigurable {
     }
 
     func configureStyling() {
-        view.backgroundColor = .kfGray
+        view.backgroundColor = UIColor.Pallete.Gray
         contentScrollView.alwaysBounceVertical = false
     }
 

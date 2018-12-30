@@ -65,14 +65,14 @@ final class KFVWidget: UIView, UIConfigurable {
         didSet {
             switch touchedViewType {
             case .donation?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White.darker(by: 5)
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White
             case .delivery?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White.darker(by: 5)
             case .none:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White
             }
         }
     }
@@ -233,8 +233,8 @@ final class KFVWidget: UIView, UIConfigurable {
         deliverySpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
         donationSpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
 
-        deliveryDisclosureImageView.tintColor = .kfPrimary
-        donationDisclosureImageView.tintColor = .kfPrimary
+        deliveryDisclosureImageView.tintColor = UIColor.Pallete.Green
+        donationDisclosureImageView.tintColor = UIColor.Pallete.Green
 
         touchedViewType = nil
     }

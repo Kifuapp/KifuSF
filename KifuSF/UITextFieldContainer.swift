@@ -64,7 +64,7 @@ class UITextFieldContainer: UIView {
 extension UITextFieldContainer: UIConfigurable {
     func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
-        backgroundColor = .kfGray
+        backgroundColor = UIColor.Pallete.Gray
         textField.backgroundColor = .clear
 
         textField.clearButtonMode = .whileEditing
