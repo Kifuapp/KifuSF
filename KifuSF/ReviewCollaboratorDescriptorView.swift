@@ -15,7 +15,7 @@ class ReviewCollaboratorDescriptorView: CollaboratorDescriptorView {
     let cosmosView = CosmosView(forAutoLayout: ())
     let motivationalLabel = UILabel(font: UIFontMetrics(forTextStyle: .title2)
                                     .scaledFont(for: UIFont.italicSystemFont(ofSize: 22)),
-                                    textColor: .kfBody)
+                                    textColor: UIColor.Text.Body)
 
     static let motivationalMessages = ["Rate your friend",
                                        "'Horrific'",

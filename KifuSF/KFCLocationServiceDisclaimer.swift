@@ -15,7 +15,8 @@ import CoreLocation
  */
 class KFCLocationServiceDisclaimer: UIScrollableViewController {
     //MARK: - Variables
-    let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
+    let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                                 textColor: UIColor.Text.SubHeadline)
     
     let activateLocationButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
     let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")

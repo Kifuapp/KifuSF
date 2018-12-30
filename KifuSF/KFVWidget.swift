@@ -33,8 +33,10 @@ final class KFVWidget: UIView, UIConfigurable {
     private let deliveryIconView = UIIconView(image: .kfDeliveryIcon)
 
     private let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                             textColor: UIColor.Text.Headline)
+    private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                textColor: UIColor.Text.SubHeadline)
 
     private let deliveryDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let deliveryRightEmptyView = UIView(forAutoLayout: ())
@@ -47,8 +49,10 @@ final class KFVWidget: UIView, UIConfigurable {
     private let donationIconView = UIIconView(image: .kfDonationIcon)
 
     private let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                             textColor: UIColor.Text.Headline)
+    private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                textColor: UIColor.Text.SubHeadline)
 
     private let donationDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let donationRightEmptyView = UIView(forAutoLayout: ())

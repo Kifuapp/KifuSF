@@ -10,9 +10,10 @@ import UIKit
 
 class CollaboratorDescriptorView: UIDescriptorView {
     //MARK: - Variables
-    let headlineLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let headlineLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                textColor: UIColor.Text.Headline)
     let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
-                                   textColor: .kfSubtitle)
+                                   textColor: UIColor.Text.SubHeadline)
     let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
 
     //MARK: - Methods

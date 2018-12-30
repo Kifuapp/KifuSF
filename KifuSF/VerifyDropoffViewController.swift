@@ -12,7 +12,7 @@ class VerifyDropoffViewController: UIScrollableViewController {
     //MARK: - Variables
     private let backgroundView = UIView(forAutoLayout: ())
     private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
-                                       textColor: .kfTitle)
+                                       textColor: UIColor.Text.Headline)
     private let dropoffImageView = UIImageView(forAutoLayout: ())
 
     private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: 16, distribution: .fill)
@@ -21,7 +21,8 @@ class VerifyDropoffViewController: UIScrollableViewController {
 
     private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: 4, distribution: .fill)
 
-    private let flagDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
+    private let flagDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                               textColor: UIColor.Text.Body)
     private let flagLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
 
     //MARK: - Lifecycle

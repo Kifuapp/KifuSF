@@ -97,7 +97,7 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .kfTitle
+            oldCell?.label.textColor = UIColor.Text.Headline
             newCell?.label.textColor = .kfPrimary
         }
     }

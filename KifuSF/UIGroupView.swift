@@ -14,7 +14,8 @@ class UIGroupView<T: UIView>: UIView {
                                                spacing: KFPadding.Body, distribution: .fill)
     private(set) var horizontalStackView = UIStackView(axis: .horizontal, alignment: .leading, spacing: 0)
 
-    let headerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let headerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                              textColor: UIColor.Text.Headline)
     let contentView: T
 
     weak var delegate: UIGroupViewDelegate?

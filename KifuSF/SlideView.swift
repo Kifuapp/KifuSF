@@ -13,9 +13,9 @@ class SlideView: UIView {
     // MARK: - Variables
     private let imageView = UIIconView(image: .kfBoxIcon)
     private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
-                                     textColor: .kfTitle)
+                                     textColor: UIColor.Text.Headline)
     private let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
-                                           textColor: .kfBody)
+                                           textColor: UIColor.Text.Body)
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)

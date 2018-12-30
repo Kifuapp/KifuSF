@@ -21,7 +21,7 @@ class KFVDonationInfo: UIDescriptorView {
         super.configureStyling()
         
         descriptionStickyTextView.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        descriptionStickyTextView.contentView.textColor = UIColor.kfBody
+        descriptionStickyTextView.contentView.textColor = UIColor.Text.Body
         descriptionStickyTextView.contentView.numberOfLines = 2
         descriptionStickyTextView.contentView.adjustsFontForContentSizeCategory = true
     }

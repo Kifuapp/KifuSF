@@ -12,15 +12,19 @@ import Kingfisher
 class OpenDonationDetailedDescriptorView: UIDescriptorView {
     //MARK: - Variables
     private let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
-    let secondSubtitleLabel = UIStickyView<UILabel>()
+    let secondSubtitleStickyLabel = UIStickyView<UILabel>()
     
     let statusStackView = UIStackView()
-    let statusTitleLabel = UILabel()
-    let statusDescription = UILabel()
+    let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                   textColor: UIColor.Text.Headline)
+    let statusDescription = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                    textColor: UIColor.Text.SubHeadline)
     
     let donationDescriptionStackView = UIStackView()
-    let donationDescriptionTitleLabel = UILabel()
-    let donationDescriptionContentLabel = UILabel()
+    let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                                textColor: UIColor.Text.Headline)
+    let donationDescriptionContentLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                  textColor: UIColor.Text.SubHeadline)
 
     //MARK: - Methods
     func reloadData(for data: KFMOpenDonationDescriptionItem) {
@@ -29,7 +33,7 @@ class OpenDonationDetailedDescriptorView: UIDescriptorView {
         titleLabel.text = data.title
         subtitleStickyLabel.contentView.text = "@\(data.username) at \(data.timestamp)"
 
-        secondSubtitleLabel.contentView.text = "Reputation \(data.userReputation)%"
+        secondSubtitleStickyLabel.contentView.text = "Reputation \(data.userReputation)%"
 
         statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
                                                     deliveries: data.userDeliveriesCount)
@@ -62,7 +66,7 @@ class OpenDonationDetailedDescriptorView: UIDescriptorView {
     }
 
     private func configureInfoStackViewLayout() {
-        infoStackView.addArrangedSubview(secondSubtitleLabel)
+        infoStackView.addArrangedSubview(secondSubtitleStickyLabel)
         infoStackView.addArrangedSubview(statisticsStickyView)
     }
 
@@ -89,46 +93,12 @@ class OpenDonationDetailedDescriptorView: UIDescriptorView {
         layer.shadowOpacity = 0
         
         configureSecondSubtitleStyling()
-        configureStatusTitleLabelStyling()
-        configureStatusDescriptionStyling()
-        configureDonationDescriptionTitleLabelStyling()
-        configureDonationDescriptionTitleLabelStyling()
-        configureDonationDescriptionContentLabelStyling()
     }
 
     private func configureSecondSubtitleStyling() {
-        secondSubtitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        secondSubtitleLabel.contentView.numberOfLines = 0
-        secondSubtitleLabel.contentView.textColor = .kfSubtitle
-        secondSubtitleLabel.contentView.adjustsFontForContentSizeCategory = true
-    }
-
-    private func configureStatusTitleLabelStyling() {
-        statusTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        statusTitleLabel.numberOfLines = 0
-        statusTitleLabel.textColor = UIColor.kfTitle
-        statusTitleLabel.adjustsFontForContentSizeCategory = true
-    }
-
-    private func configureStatusDescriptionStyling() {
-        statusDescription.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        statusDescription.numberOfLines = 0
-        statusDescription.textColor = UIColor.kfSubtitle
-        statusDescription.adjustsFontForContentSizeCategory = true
-    }
-
-    private func configureDonationDescriptionTitleLabelStyling() {
-        donationDescriptionTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        donationDescriptionTitleLabel.numberOfLines = 0
-        donationDescriptionTitleLabel.textColor = UIColor.kfTitle
-        donationDescriptionTitleLabel.adjustsFontForContentSizeCategory = true
-    }
-
-    private func configureDonationDescriptionContentLabelStyling() {
-        donationDescriptionContentLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        donationDescriptionContentLabel.numberOfLines = 0
-        donationDescriptionContentLabel.textColor = UIColor.kfSubtitle
-        donationDescriptionContentLabel.adjustsFontForContentSizeCategory = true
+        secondSubtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        secondSubtitleStickyLabel.contentView.textColor = UIColor.Text.SubHeadline
+        secondSubtitleStickyLabel.contentView.activateDynamicType()
     }
 
     override func configureData() {

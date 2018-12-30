@@ -13,13 +13,18 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
     //MARK: - Variables
     let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     
-    let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
-    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: .oneTimeCode, returnKeyType: .continue, placeholder: "1234")
+    let informationLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                   textColor: UIColor.Text.SubHeadline)
+    let authenticationCodeTextFieldContainer = UITextFieldContainer(textContentType: .oneTimeCode,
+                                                                    returnKeyType: .continue,
+                                                                    placeholder: "1234")
 
     //TODO: implement function to resend code and recheck phone number
-    let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
+    let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                              textColor: .kfPrimary)
     
-    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary,
+                                          andTitle: "Continue")
     
     var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
     

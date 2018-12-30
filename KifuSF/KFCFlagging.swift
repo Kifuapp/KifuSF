@@ -10,7 +10,8 @@ import UIKit
 
 class KFCFlagging: UIViewController, UIConfigurable {
     
-    let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title2), textColor: .kfSubtitle)
+    let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title2),
+                                    textColor: UIColor.Text.SubHeadline)
     let flaggingOptionsTableView = UITableView()
     
     var flaggableItems = [FlaggedContentType]()
@@ -76,7 +77,7 @@ extension KFCFlagging: UITableViewDataSource {
         
         cell.layoutMargins = UIEdgeInsets.zero
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        cell.textLabel?.textColor = .kfTitle
+        cell.textLabel?.textColor = UIColor.Text.Headline
         
         cell.textLabel?.text = flaggableItems[indexPath.row].getDescription()
         cell.tag = flaggableItems[indexPath.row].rawValue

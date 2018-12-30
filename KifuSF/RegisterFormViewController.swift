@@ -42,8 +42,10 @@ class RegisterFormViewController: UIScrollableViewController {
                                                                                                     isSecureTextEntry: true,
                                                                                                     placeholder: "Password"))
     
-    private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                          textColor: UIColor.Text.Body)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                     textColor: .kfDestructive)
     
     private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
 

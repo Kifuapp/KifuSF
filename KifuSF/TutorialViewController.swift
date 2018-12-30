@@ -124,7 +124,7 @@ extension TutorialViewController: UIConfigurable {
 
     func configureSkipButtonStyling() {
         skipButton.setTitle("Skip", for: .normal)
-        skipButton.setTitleColor(.kfBody, for: .normal)
+        skipButton.setTitleColor(UIColor.Text.Body, for: .normal)
         skipButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
 
         skipButton.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
@@ -132,7 +132,7 @@ extension TutorialViewController: UIConfigurable {
 
     func configureNextButtonStyling() {
         nextButton.setTitle(FinishButtonState.next.rawValue, for: .normal)
-        nextButton.setTitleColor(.kfTitle, for: .normal)
+        nextButton.setTitleColor(UIColor.Text.Headline, for: .normal)
         nextButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
 
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)

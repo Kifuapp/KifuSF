@@ -20,8 +20,10 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     
     private let labelsStackView = UIStackView(axis: .horizontal, alignment: .fill, spacing: KFPadding.Body, distribution: .fill)
     
-    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
-    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfPrimary)
+    private let oldUserLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                       textColor: UIColor.Text.Body)
+    private let signInLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                      textColor: .kfPrimary)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
