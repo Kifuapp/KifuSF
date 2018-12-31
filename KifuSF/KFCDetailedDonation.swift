@@ -96,6 +96,7 @@ class KFCDetailedDonation: KFCModularTableView {
     override func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
         let imageUrl = URL(string: donation.imageUrl) ?? URL.brokenUrlImage
         let donator = donation.donator
+        let distance = UserService.calculateDistance(donation: self.donation)
         
         return KFMOpenDonationDescriptionItem(
             imageURL: imageUrl,
@@ -105,7 +106,7 @@ class KFCDetailedDonation: KFCModularTableView {
             userReputation: 22, //TODO: alex-reputation
             userDonationsCount: 12, //TODO: alex-reputation
             userDeliveriesCount: 12, //TODO: alex-reputation
-            distance: 5, //TODO: erick-distance
+            distance: distance,
             description: donation.notes
         )
     }

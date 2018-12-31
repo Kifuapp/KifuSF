@@ -169,7 +169,7 @@ class KFCDonation: KFCModularTableView {
                     fatalError("no volunteer to review")
                 }
                 
-                self.presentReview(for: volunteer)
+                self.presentReview(for: volunteer, donation: donation)
             }
         } else {
             
@@ -216,8 +216,28 @@ class KFCDonation: KFCModularTableView {
         present(navVerifyVc, animated: true)
     }
     
-    private func presentReview(for user: User) {
-        //TODO: erick-adding a reivew (present the ReviewVc)
+    private func presentReview(for user: User, donation: Donation) {
+        let testRating = UserReview(rating: .five)
+        UserService.review(volunteer: user, rating: testRating) { (isSuccessful) in
+            if isSuccessful {
+                DonationService.archive(donation: donation, completion: { (isSuccessful) in
+                    if isSuccessful == false {
+                        UIAlertController(errorMessage: "Failed to archive the donation")
+                            .present(in: self)
+                    }
+                })
+                
+                UIAlertController(
+                    title: "Reviewing User",
+                    message: "Thanks for reviewing the donator!",
+                    preferredStyle: .alert)
+                    .addDismissButton()
+                    .present(in: self)
+            } else {
+                UIAlertController(errorMessage: nil)
+                    .present(in: self)
+            }
+        }
     }
 }
 

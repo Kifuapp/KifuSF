@@ -9,6 +9,10 @@
 import UIKit
 import CoreLocation
 
+/**
+ - warning: This ViewController requires that the current user is set (see -continueButtonTapped
+ for more)
+ */
 class KFCLocationServiceDisclaimer: UIScrollableViewController {
     //MARK: - Variables
     let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
@@ -26,9 +30,18 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
     }
     
     @objc func continueButtonTapped() {
-        let disclaimerViewController = KFCPhoneNumberValidation()
-        disclaimerViewController.modalPresentationStyle = .currentContext
-        present(disclaimerViewController, animated: true)
+        
+        //update firebase
+        UserService.markHasApprovedConditionsTrue { (isSuccessful) in
+            if isSuccessful {
+                let disclaimerViewController = KFCPhoneNumberValidation()
+                disclaimerViewController.modalPresentationStyle = .currentContext
+                self.present(disclaimerViewController, animated: true)
+            } else {
+                UIAlertController(errorMessage: nil)
+                    .present(in: self)
+            }
+        }
     }
     
     @objc func activateLocationButtonTapped() {
