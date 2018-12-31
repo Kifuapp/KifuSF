@@ -169,7 +169,7 @@ class KFCDonation: KFCModularTableView {
                     fatalError("no volunteer to review")
                 }
                 
-                self.presentReview(for: volunteer, donation: donation)
+                self.presentReview(for: volunteer)
             }
         } else {
             
@@ -216,28 +216,28 @@ class KFCDonation: KFCModularTableView {
         present(navVerifyVc, animated: true)
     }
     
-    private func presentReview(for user: User, donation: Donation) {
-        let testRating = UserReview(rating: .five)
-        UserService.review(volunteer: user, rating: testRating) { (isSuccessful) in
-            if isSuccessful {
-                DonationService.archive(donation: donation, completion: { (isSuccessful) in
-                    if isSuccessful == false {
-                        UIAlertController(errorMessage: "Failed to archive the donation")
-                            .present(in: self)
-                    }
-                })
-                
-                UIAlertController(
-                    title: "Reviewing User",
-                    message: "Thanks for reviewing the donator!",
-                    preferredStyle: .alert)
-                    .addDismissButton()
-                    .present(in: self)
-            } else {
-                UIAlertController(errorMessage: nil)
+    private func presentReview(for user: User) {
+        let reviewVc = ReviewCollaboratorViewController()
+        reviewVc.volunteer = user
+        reviewVc.delegate = self
+        let navReviewVc = UINavigationController(rootViewController: reviewVc)
+        present(navReviewVc, animated: true)
+    }
+}
+
+//MARK: ReviewCollaboratorViewControllerDelegate
+extension KFCDonation: ReviewCollaboratorViewControllerDelegate {
+    func review(_ reviewCollaborator: ReviewCollaboratorViewController, didFinishReview review: UserReview) {
+        guard let donation = self.donation else {
+            return assertionFailure("delivery is missing after a review")
+        }
+        
+        DonationService.archive(donation: donation, completion: { (isSuccessful) in
+            if isSuccessful == false {
+                UIAlertController(errorMessage: "Failed to archive the donation")
                     .present(in: self)
             }
-        }
+        })
     }
 }
 
