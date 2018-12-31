@@ -80,13 +80,18 @@ class ReviewCollaboratorViewController: UIScrollableViewController {
 //MARK: - UIConfigurable
 extension ReviewCollaboratorViewController: UIConfigurable {
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
             action: #selector(dismissViewController)
         )
 
-        sumbitAnimatedButton.addTarget(self, action: #selector(submitAnimatedButtonTapped), for: .touchUpInside)
+        sumbitAnimatedButton.addTarget(
+            self,
+            action: #selector(submitAnimatedButtonTapped),
+            for: .touchUpInside
+        )
 
         reviewCollaboratorInfoDescriptorView.cosmosView.didFinishTouchingCosmos = { [unowned self] rating in
             self.rating = rating

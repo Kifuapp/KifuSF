@@ -17,7 +17,12 @@ class VerifyDropoffViewController: UIScrollableViewController {
                                        textColor: .kfTitle)
     private let dropoffImageView = UIImageView(forAutoLayout: ())
 
-    private let bottomStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: 16, distribution: .fill)
+    private let bottomStackView =
+        UIStackView(axis: .vertical,
+                    alignment: .fill,
+                    spacing: 16,
+                    distribution: .fill)
+
     private let confirmationAnimatedButton = UIAnimatedButton(backgroundColor: .kfPrimary,
                                                               andTitle: "Confirm dropoff")
 
@@ -89,14 +94,24 @@ class VerifyDropoffViewController: UIScrollableViewController {
 //MARK: - UIConfigurable
 extension VerifyDropoffViewController: UIConfigurable {
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
             action: #selector(dismissViewController)
         )
 
-        confirmationAnimatedButton.addTarget(self, action: #selector(confirmationAnimatedButtonTapped), for: .touchUpInside)
-        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportButtonTapped)))
+        confirmationAnimatedButton.addTarget(
+            self,
+            action: #selector(confirmationAnimatedButtonTapped),
+            for: .touchUpInside
+
+        )
+
+        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(reportButtonTapped))
+        )
     }
 
     func configureData() {

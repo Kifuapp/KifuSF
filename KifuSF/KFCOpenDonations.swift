@@ -302,7 +302,13 @@ extension KFCOpenDonations {
     }
 
     func configureNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createDonation))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfPlusIcon,
+            style: .plain,
+            target: self,
+            action: #selector(createDonation)
+        )
+        
         title = "Home"
     }
 }
