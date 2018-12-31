@@ -101,7 +101,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     @objc func createDonation() {
         let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
-        present(TutorialViewController(), animated: true)
+        present(createDonationViewController, animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -138,11 +138,11 @@ extension KFCOpenDonations: UITableViewDataSource {
 
         let openDonation = self.openDonations[indexPath.row]
 
-        //TODO: populate distance
+        let distance = UserService.calculateDistance(donation: openDonation)
         let newData = KFMDonationInfo(
             imageURL: URL(string: openDonation.imageUrl)!,
             title: openDonation.title,
-            distance: 12.3,
+            distance: distance,
             description: openDonation.notes
         )
         donationCell.descriptorView.reloadData(for: newData)

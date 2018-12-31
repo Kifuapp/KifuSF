@@ -380,15 +380,29 @@ struct UserService {
             completion(true)
         }
     }
+    
+    /**
+     - returns: double in miles if user's location is available
+     */
+    public static func calculateDistance(donation: Donation) -> UserDistance {
+        return calculateDistance(long: donation.longitude, lat: donation.latitude)
+    }
 
-    public static func calculateDistance(long: Double, lat: Double) -> String {
+    /**
+     This distance is a striaght line between two distances (vs using roads, thus
+     long distances will be vastly different than shorter ones)
+     
+     - returns: double in miles if user's location is available
+     */
+    public static func calculateDistance(long: Double, lat: Double) -> UserDistance {
         let location = CLLocation(latitude: lat, longitude: long)
-        if let myCurrentLocation = User.current.currentLocation {
-            let distance = myCurrentLocation.distance(from: location) / 1000 * 1.6
-            return String(format: "%.2f miles to pickup", arguments: [distance])
+        guard let myCurrentLocation = User.current.currentLocation else {
+            return .notAvailable()
         }
         
-        return "Distance not available"
+        let meters = myCurrentLocation.distance(from: location)
+        
+        return .available(meters: meters)
     }
     
     // MARK: Update and persist user

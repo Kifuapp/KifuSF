@@ -18,11 +18,11 @@ class ReviewCollaboratorDescriptorView: CollaboratorDescriptorView {
                                     textColor: .kfBody)
 
     static let motivationalMessages = ["Rate your friend",
-                                       "'Horrific'",
-                                       "'Awful'",
-                                       "'Suboptimal'",
-                                       "'Good'",
-                                       "'Great!'"]
+                                       "\"Horrific\"",
+                                       "\"Awful\"",
+                                       "\"Suboptimal\"",
+                                       "\"Good\"",
+                                       "\"Great!\""]
 
     //MARK: - UIConfigurable
     override func configureLayout() {
