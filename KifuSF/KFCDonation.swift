@@ -210,10 +210,10 @@ class KFCDonation: KFCModularTableView {
     }
     
     private func viewConfirmationImage(for donation: Donation) {
-        
-        let verifyVc = KFCVerifyDropoffImage()
+        let verifyVc = VerifyDropoffViewController()
         verifyVc.donation = donation
-        verifyVc.presentModally(in: self)
+        let navVerifyVc = UINavigationController(rootViewController: verifyVc)
+        present(navVerifyVc, animated: true)
     }
     
     private func presentReview(for user: User) {
