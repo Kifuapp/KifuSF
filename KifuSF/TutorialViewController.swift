@@ -98,8 +98,8 @@ extension TutorialViewController: UIConfigurable {
                                 title: "Volunteer",
                                 description: "Deliver items to charities"),
                       SlideView(image: .kfDonationIcon,
-                                title: "Donate",
-                                description: "Offer for delivery stuff that could help homeless people"),]
+                                title: "Give for a good cause",
+                                description: "Find an item, choose a pickup location and we will sent somebody to get it"),]
 
     }
 

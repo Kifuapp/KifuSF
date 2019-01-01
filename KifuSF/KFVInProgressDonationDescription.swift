@@ -51,6 +51,7 @@ class KFVInProgressDonationDescription: UIDescriptorView {
         
         statusDescriptionStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         statusDescriptionStickyLabel.contentView.textColor = UIColor.Text.SubHeadline
+        statusDescriptionStickyLabel.contentView.activateDynamicType()
     }
     
     func reloadData(for data: KFMInProgressDonationDescription) {
