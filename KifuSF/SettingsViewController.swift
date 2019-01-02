@@ -10,30 +10,69 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     // MARK: - Variables
-    static let settingsItemModels = [SettingsItemModel(name: "Donation Regulations")]
+    private let settingsItemModels = [
+        SettingsItemModel(name: "Donation Regulations"),
+        SettingsItemModel(name: "Submit Feedback"),
+        SettingsItemModel(name: "St. Anthony's Charity"),
+        SettingsItemModel(name: "Terms of Service"),
+        SettingsItemModel(name: "Privacy Policy"),
+        SettingsItemModel(name: "Contact Us"),]
 
-    private let tableView = UITableView()
+    private let tableView = UITableView(forAutoLayout: ())
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configureDelegates()
+        configureStyling()
+        configureLayout()
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+// Mark: - UITableViewDelegate
+extension SettingsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return settingsItemModels.count
     }
-    */
+
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default,
+                                   reuseIdentifier: nil)
+
+        settingsItemModels[indexPath.row].configureCell(cell)
+
+        return cell
+    }
+}
+
+// Mark: - UITableViewDelegate
+extension SettingsViewController: UITableViewDelegate {
 
 }
 
+// MARK: - UIConfigurable
 extension SettingsViewController: UIConfigurable {
+    func configureData() {
+        title = "Settings"
+    }
     
+    func configureDelegates() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
+    func configureStyling() {
+        view.backgroundColor = UIColor.Pallete.White
+    }
+
+    func configureLayout() {
+        view.addSubview(tableView)
+
+        tableView.autoPinEdgesToSuperviewEdges()
+    }
 }
+
+

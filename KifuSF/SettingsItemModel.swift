@@ -21,4 +21,14 @@ struct SettingsItemModel {
         self.viewControllerToPush = viewControllerToPush
         self.selector = selector
     }
+
+    func configureCell(_ cell: UITableViewCell) {
+        cell.textLabel?.text = name
+
+        if let _ = viewControllerToPush {
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell.accessoryType = .none
+        }
+    }
 }
