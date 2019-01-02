@@ -11,7 +11,7 @@ import LocationPicker
 
 class CreateDonationViewController: UIScrollableViewController {
     //MARK: - Variables
-    private static let descriptionPlaceholder = "Additional Info about pick up address, hour, item, etc."
+    private static let descriptionPlaceholder = "Additional info about pick up address, hours of availability, item description."
 
     private lazy var imageHelper = PhotoHelper()
     private let keyboardStack = KeyboardStack()
@@ -20,7 +20,7 @@ class CreateDonationViewController: UIScrollableViewController {
     private var pickupLocation: Location?
 
     private let descriptorView = UIDescriptorView(defaultImageViewSize: .medium)
-    private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Title",
+    private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Item Name",
                                                                    contentView: UITextFieldContainer(returnKeyType: .next,
                                                                                                      placeholder: "Keep it simple"))
     private let descriptionInputView = UIGroupView<UITextView>(title: "Description",
@@ -50,7 +50,7 @@ class CreateDonationViewController: UIScrollableViewController {
     }
 
     //MARK: - Methods
-    @objc private func dismissVC() {
+    @objc private func dismissViewController() {
         dismiss(animated: true)
     }
 
@@ -70,12 +70,7 @@ class CreateDonationViewController: UIScrollableViewController {
                 return showErrorMessage("Please complete all the fields")
         }
 
-        let locationPicker = LocationPickerViewController()
-        locationPicker.showCurrentLocationInitially = true
-        locationPicker.searchBarPlaceholder = "Choose Pickup location"
-        locationPicker.mapType = .standard
-        locationPicker.showCurrentLocationButton = true
-
+        let locationPicker = retrieveLocationPicker()
         locationPicker.completion = { [unowned self] location in
             guard let location = location else {
                 return assertionFailure(KFErrorMessage.seriousBug)
@@ -168,14 +163,29 @@ extension CreateDonationViewController: KeyboardStackDelegate {
 
 //MARK: - UIConfigurable
 extension CreateDonationViewController: UIConfigurable {
+    private func retrieveLocationPicker() -> LocationPickerViewController {
+        let locationPicker = LocationPickerViewController()
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.searchBarPlaceholder = "Choose Pickup location"
+        locationPicker.mapType = .standard
+        locationPicker.showCurrentLocationButton = true
+
+        return locationPicker
+    }
+
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
-            action: #selector(dismissVC)
+            action: #selector(dismissViewController)
         )
 
-        pickUpAddressButton.addTarget(self, action: #selector(pickUpAddressButtonTapped), for: .touchUpInside)
+        pickUpAddressButton.addTarget(
+            self,
+            action: #selector(pickUpAddressButtonTapped),
+            for: .touchUpInside
+        )
 
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self
@@ -184,13 +194,13 @@ extension CreateDonationViewController: UIConfigurable {
 
     func configureData() {
         title = "Create Donation"
-        descriptorView.titleLabel.text = "Take a photo"
-        descriptorView.subtitleStickyLabel.contentView.text = "I don't know"
+        descriptorView.titleLabel.text = "How this works?"
+        descriptorView.subtitleStickyLabel.contentView.text = "Regulations"
         descriptionInputView.contentView.text = CreateDonationViewController.descriptionPlaceholder
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
 
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center

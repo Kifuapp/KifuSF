@@ -9,27 +9,6 @@
 import UIKit.UIButton
 
 extension UIButton {
-    
-    func setUp(with style: TextStyle, andColor color: UIColor) {
-        let textStyle = style.retrieve()
-        
-        backgroundColor = color
-        layer.cornerRadius = CALayer.kfCornerRadius
-        
-        setTitleColor(textStyle.color, for: .normal)
-        titleLabel?.font = textStyle.font
-    }
-    
-    func setTitle(_ title: String, with style: TextStyle) {
-        let textStyle = style.retrieve()
-        
-        let attributedString = NSAttributedString(string: title,
-                                                  attributes: [NSAttributedStringKey.font: textStyle.font])
-        setAttributedTitle(attributedString, for: .normal)
-        
-        tintColor = textStyle.color
-    }
-    
     func showLoadingIndicator(_ shouldShow: Bool) {
         let tag = 9876
         

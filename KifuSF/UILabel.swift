@@ -9,13 +9,6 @@
 import UIKit.UILabel
 
 extension UILabel {
-    func setUp(with style: TextStyle) {
-        let textStyle = style.retrieve()
-        
-        self.font = textStyle.font
-        self.textColor = textStyle.color
-    }
-    
     public var requiredHeight: CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0

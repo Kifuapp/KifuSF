@@ -34,7 +34,7 @@ class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
     }
 
     func configureStyling() {
-        contentView.backgroundColor = .kfSuperWhite
+        contentView.backgroundColor = .kfWhite
         selectionStyle = .none
         layer.masksToBounds = false
     }

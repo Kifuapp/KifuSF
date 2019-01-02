@@ -56,7 +56,7 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         
         title = "Location Privacy"
         locationServiceDisclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app."

@@ -13,14 +13,13 @@ target 'KifuSF' do
   pod 'Firebase/Storage'
 
   pod 'Kingfisher', '~> 4.0'
-  pod 'LocationPicker'
-  pod 'GoogleSignIn'
-  pod 'Moya'
-
-  pod 'Sourcery'
-  pod 'XLPagerTabStrip', '~> 8.0'
   pod 'PureLayout'
   pod 'GoogleSignIn'
   pod 'Moya'
+  pod 'Sourcery'
+  pod 'Cosmos', '~> 16.0' # version 18 after changing the project swift version
+
+  pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'LocationPicker'
 
 end

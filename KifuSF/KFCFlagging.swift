@@ -10,7 +10,7 @@ import UIKit
 
 class KFCFlagging: UIViewController, UIConfigurable {
     
-    let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title3), textColor: .kfSubtitle)
+    let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title2), textColor: .kfSubtitle)
     let flaggingOptionsTableView = UITableView()
     
     var flaggableItems = [FlaggedContentType]()
@@ -38,7 +38,7 @@ class KFCFlagging: UIViewController, UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfSuperWhite
+        view.backgroundColor = .kfWhite
         
         flaggingOptionsTableView.tableFooterView = UIView()
         flaggingOptionsTableView.addTableHeaderViewLine()
@@ -46,7 +46,6 @@ class KFCFlagging: UIViewController, UIConfigurable {
         flaggingOptionsTableView.separatorInset = UIEdgeInsets.zero
         
         title = "Report an issue"
-        
         flaggingInfoLabel.text = "Help us understand the problem. What is wrong with this?"
     }
     
@@ -91,12 +90,4 @@ extension KFCFlagging: UITableViewDelegate {
     
 }
 
-extension UITableView {
-    func addTableHeaderViewLine() {
-        self.tableHeaderView = {
-            let line = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: 1 / UIScreen.main.scale))
-            line.backgroundColor = self.separatorColor
-            return line
-        }()
-    }
-}
+

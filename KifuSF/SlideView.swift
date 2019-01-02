@@ -1,0 +1,81 @@
+//
+//  SlideView.swift
+//  KifuSF
+//
+//  Created by Alexandru Turcanu on 29/12/2018.
+//  Copyright © 2018 Alexandru Turcanu. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class SlideView: UIView {
+    // MARK: - Variables
+    private let imageView = UIIconView(image: .kfBoxIcon)
+    private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                     textColor: .kfTitle)
+    private let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                           textColor: .kfBody)
+    // MARK: - Lifecycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        configureStyling()
+        configureLayout()
+    }
+
+    //MARK: - Initializers
+    convenience init(image: UIImage, title: String, description: String) {
+        self.init()
+
+        imageView.image = image
+        titleLabel.text = title
+        descriptionLabel.text = description
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension SlideView: UIConfigurable {
+    func configureStyling() {
+        backgroundColor = .kfWhite
+        configureDescriptionLabelStyling()
+    }
+
+    func configureDescriptionLabelStyling() {
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.alpha = 0.5
+    }
+
+    func configureLayout() {
+        addSubview(imageView)
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+
+        configureImageViewConstraints()
+        configureTitleLabelConstraints()
+        configureDescriptionLabelConstraints()
+    }
+
+    private func configureImageViewConstraints() {
+        imageView.autoAlignAxis(toSuperviewAxis: .vertical)
+        imageView.autoAlignAxis(.horizontal, toSameAxisOf: self, withOffset: -48)
+        imageView.autoMatch(.width, to: .width, of: self, withMultiplier: 0.5)
+        imageView.autoMatch(.height, to: .width, of: imageView)
+    }
+
+    private func configureTitleLabelConstraints() {
+        titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+
+        let screenHeight = UIScreen.main.bounds.height
+        titleLabel.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: screenHeight * 0.2)
+    }
+
+    private func configureDescriptionLabelConstraints() {
+        descriptionLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 8)
+        descriptionLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 72)
+        descriptionLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 72)
+    }
+}

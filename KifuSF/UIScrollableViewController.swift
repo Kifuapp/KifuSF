@@ -12,16 +12,17 @@ class UIScrollableViewController: UIViewController {
     //MARK: - Variables
     let contentScrollView = UIScrollView(forAutoLayout: ())
     let outerStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
+    var contentDirectionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(contentScrollView)
-        view.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
+        view.directionalLayoutMargins = contentDirectionalLayoutMargins
         
         contentScrollView.addSubview(outerStackView)
-        contentScrollView.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
+        contentScrollView.directionalLayoutMargins = contentDirectionalLayoutMargins
         contentScrollView.autoPinEdgesToSuperviewSafeArea()
 
         contentScrollView.keyboardDismissMode = .interactive
@@ -31,6 +32,7 @@ class UIScrollableViewController: UIViewController {
 
         outerStackView.autoMatch(.width, to: .width, of: view,
                                  withOffset: -(contentScrollView.directionalLayoutMargins.leading + contentScrollView.directionalLayoutMargins.trailing))
+                                .autoIdentify(String(describing: outerStackView))
 
         outerStackView.autoPinEdgesToSuperviewMargins()
     }

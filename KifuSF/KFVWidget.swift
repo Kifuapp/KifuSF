@@ -61,14 +61,14 @@ final class KFVWidget: UIView, UIConfigurable {
         didSet {
             switch touchedViewType {
             case .donation?:
-                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite.darker(by: 5)
-                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite
+                donationBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
+                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
             case .delivery?:
-                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite.darker(by: 5)
+                donationBackgroundView.backgroundColor = UIColor.kfWhite
+                deliveryBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
             case .none:
-                donationBackgroundView.backgroundColor = UIColor.kfSuperWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfSuperWhite
+                donationBackgroundView.backgroundColor = UIColor.kfWhite
+                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
             }
         }
     }
@@ -147,8 +147,10 @@ final class KFVWidget: UIView, UIConfigurable {
         donationIconView.translatesAutoresizingMaskIntoConstraints = false
         donationDisclosureImageView.translatesAutoresizingMaskIntoConstraints = false
 
-        deliveryDisclosureImageView.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
-        donationDisclosureImageView.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
+        deliveryIconView.autoSetDimension(.height, toSize: 32)
+        donationIconView.autoSetDimension(.height, toSize: 32)
+        deliveryDisclosureImageView.autoSetDimension(.height, toSize: 25)
+        donationDisclosureImageView.autoSetDimension(.height, toSize: 25)
 
         configureAspectRatioForIcons()
     }
@@ -157,6 +159,8 @@ final class KFVWidget: UIView, UIConfigurable {
         //aspect ratio 1:1 for all icons
         deliveryIconView.autoMatch(.height, to: .width, of: deliveryIconView)
         donationIconView.autoMatch(.height, to: .width, of: donationIconView)
+        deliveryDisclosureImageView.autoMatch(.height, to: .width, of: deliveryDisclosureImageView)
+        donationDisclosureImageView.autoMatch(.height, to: .width, of: donationDisclosureImageView)
     }
 
     private func configureTextPadding() {

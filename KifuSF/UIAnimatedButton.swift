@@ -15,7 +15,7 @@ import UIKit
  */
 class UIAnimatedButton: UIButton {
     //MARK: - Variables
-    static let animationDuration = 0.025
+    static let animationDuration = 0.1
     static let height: CGFloat = 44
     
     override var isUserInteractionEnabled: Bool {
@@ -25,7 +25,7 @@ class UIAnimatedButton: UIButton {
     }
     
     private(set) var mainBackgroundColor = UIColor.kfPrimary
-    private(set) var mainTitleColor = UIColor.kfSuperWhite
+    private(set) var mainTitleColor = UIColor.kfWhite
     private(set) var currentState = AnimationState.idle {
         didSet {
             updateAnimator()
@@ -45,7 +45,7 @@ class UIAnimatedButton: UIButton {
         func getScale() -> CGFloat {
             switch self {
             case .shrinking, .pressed:
-                return 0.99
+                return 0.98
             case .idle, .disabled:
                 return 1
             }
@@ -170,6 +170,7 @@ extension UIAnimatedButton: UIConfigurable {
 
     func configureStyling() {
         layer.cornerRadius = CALayer.kfCornerRadius
+        layer.setUpShadow()
 
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         titleLabel?.adjustsFontForContentSizeCategory = true
