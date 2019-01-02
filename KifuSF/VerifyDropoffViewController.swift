@@ -10,6 +10,8 @@ import UIKit
 
 class VerifyDropoffViewController: UIScrollableViewController {
     //MARK: - Variables
+    var donation: Donation!
+    
     private let backgroundView = UIView(forAutoLayout: ())
     private let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
                                        textColor: UIColor.Text.Headline)
@@ -67,13 +69,27 @@ class VerifyDropoffViewController: UIScrollableViewController {
     }
 
     @objc private func confirmationAnimatedButtonTapped() {
-        //TODO: erick - do whatever is needed
-        print("confirm")
+        UIAlertController(title: "Confirm Dropoff Image", message: "Are you sure you want to confrim this image?", preferredStyle: .actionSheet)
+            .addButton(title: "Confirm Delivery", style: .destructive) { [weak self] _ in
+                self?.confirmDropoffImage()
+            }
+            .addCancelButton()
+            .present(in: self)
+    }
+    
+    private func confirmDropoffImage() {
+        DonationService.verifyDelivery(for: self.donation) { (isSuccessful) in
+            if isSuccessful {
+                self.presentingViewController?.dismiss(animated: true)
+            } else {
+                UIAlertController(errorMessage: nil)
+                    .present(in: self)
+            }
+        }
     }
 
     @objc private func reportButtonTapped() {
-        //TODO: erick - update the flagging initializers to also pass the donation object
-        let flaggingViewController = KFCFlagging(flaggableItems: [.flaggedVerificationImage])
+        let flaggingViewController = KFCFlagging(flaggableItems: [.flaggedVerificationImage], donation: self.donation)
         navigationController?.pushViewController(flaggingViewController, animated: true)
     }
 }
@@ -81,20 +97,37 @@ class VerifyDropoffViewController: UIScrollableViewController {
 //MARK: - UIConfigurable
 extension VerifyDropoffViewController: UIConfigurable {
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
             action: #selector(dismissViewController)
         )
 
-        confirmationAnimatedButton.addTarget(self, action: #selector(confirmationAnimatedButtonTapped), for: .touchUpInside)
-        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportButtonTapped)))
+        confirmationAnimatedButton.addTarget(
+            self,
+            action: #selector(confirmationAnimatedButtonTapped),
+            for: .touchUpInside
+
+        )
+
+        labelsStackView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(reportButtonTapped))
+        )
     }
 
     func configureData() {
         title = "Security Step"
         titleLabel.text = "Validate Volunteer's image"
-        dropoffImageView.kf.setImage(with: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!)
+        
+        guard
+            let verificationUrlString = donation.verificationUrl,
+            let verificationUrl = URL(string: verificationUrlString) else {
+            fatalError("validation needs to happen before this view controller")
+        }
+        
+        dropoffImageView.kf.setImage(with: verificationUrl)
 
         flagDescriptionLabel.text = "Image not looking right?"
         flagLabel.text = "Tap here to report."

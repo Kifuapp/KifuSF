@@ -9,8 +9,17 @@
 import UIKit
 import Cosmos
 
+protocol ReviewCollaboratorViewControllerDelegate: class {
+    func review(_ reviewCollaborator: ReviewCollaboratorViewController, didFinishReview review: UserReview)
+}
+
 class ReviewCollaboratorViewController: UIScrollableViewController {
     //MARK: - Variables
+    var volunteer: User?
+    var donator: User?
+    
+    weak var delegate: ReviewCollaboratorViewControllerDelegate?
+    
     private let reviewCollaboratorInfoDescriptorView = ReviewCollaboratorDescriptorView(forAutoLayout: ())
     private let sumbitAnimatedButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
                                                         andTitle: "Submit")
@@ -36,20 +45,53 @@ class ReviewCollaboratorViewController: UIScrollableViewController {
     }
 
     @objc private func submitAnimatedButtonTapped() {
-        //make sure the user has made a review
+        
+        // validate rating
+        guard let rating = self.rating else {
+            return
+        }
+        
+        let roundedInt = Int(rating)
+        guard let review = UserReview(numberOfStars: roundedInt) else {
+            fatalError("invalid number of stars")
+        }
+        
+        // upload review
+        let callback: (Bool) -> Void = { (isSuccessful) in
+            if isSuccessful {
+                self.delegate?.review(self, didFinishReview: review)
+                self.presentingViewController?.dismiss(animated: true)
+            } else {
+                UIAlertController(errorMessage: nil)
+                    .present(in: self)
+            }
+        }
+        
+        if let volunteer = self.volunteer {
+            UserService.review(volunteer: volunteer, rating: review, completion: callback)
+        } else if let donator = self.donator {
+            UserService.review(donator: donator, rating: review, completion: callback)
+        } else {
+            fatalError("need to inject either a donator or volunteer")
+        }
     }
 }
 
 //MARK: - UIConfigurable
 extension ReviewCollaboratorViewController: UIConfigurable {
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
             action: #selector(dismissViewController)
         )
 
-        sumbitAnimatedButton.addTarget(self, action: #selector(submitAnimatedButtonTapped), for: .touchUpInside)
+        sumbitAnimatedButton.addTarget(
+            self,
+            action: #selector(submitAnimatedButtonTapped),
+            for: .touchUpInside
+        )
 
         reviewCollaboratorInfoDescriptorView.cosmosView.didFinishTouchingCosmos = { [unowned self] rating in
             self.rating = rating
@@ -60,8 +102,18 @@ extension ReviewCollaboratorViewController: UIConfigurable {
         title = "Review"
         reviewCollaboratorInfoDescriptorView.motivationalLabel.text =
             ReviewCollaboratorDescriptorView.motivationalMessages.first
-
-        reviewCollaboratorInfoDescriptorView.reloadData(for: KFMCollaboratorInfo(profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!, name: "Alex", username: "Pondorasti", userReputation: 12, userDonationsCount: 12, userDeliveriesCount: 12))
+        
+        let collaborator: User
+        if let volunteer = self.volunteer {
+            collaborator = volunteer
+        } else if let donator = self.donator {
+            collaborator = donator
+        } else {
+            fatalError("need to inject either a donator or volunteer")
+        }
+        
+        let info = KFMCollaboratorInfo(from: collaborator)
+        reviewCollaboratorInfoDescriptorView.reloadData(for: info)
     }
 
     func configureStyling() {

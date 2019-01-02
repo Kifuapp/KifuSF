@@ -175,13 +175,18 @@ extension CreateDonationViewController: UIConfigurable {
     }
 
     func configureDelegates() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfCloseIcon,
+            style: .plain,
             target: self,
             action: #selector(dismissViewController)
         )
 
-        pickUpAddressButton.addTarget(self, action: #selector(pickUpAddressButtonTapped), for: .touchUpInside)
+        pickUpAddressButton.addTarget(
+            self,
+            action: #selector(pickUpAddressButtonTapped),
+            for: .touchUpInside
+        )
 
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self

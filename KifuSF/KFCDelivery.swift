@@ -201,7 +201,7 @@ class KFCDelivery: KFCModularTableView {
                 //Submit Dropoff
                 self.presentConfirmationImage(for: delivery)
             case .awaitingReview:
-                self.presentReview(for: delivery.donator, delivery: delivery)
+                self.presentReview(for: delivery.donator)
             }
             
         } else {
@@ -222,28 +222,12 @@ class KFCDelivery: KFCModularTableView {
         photoHelper.presentActionSheet(from: self)
     }
     
-    private func presentReview(for user: User, delivery: Donation) {
-        let testRating = UserReview(rating: .five)
-        UserService.review(donator: user, rating: testRating) { (isSuccessful) in
-            if isSuccessful {
-                DonationService.archive(delivery: delivery, completion: { (isSuccessful) in
-                    if isSuccessful == false {
-                        UIAlertController(errorMessage: "Failed to archive the delivery")
-                            .present(in: self)
-                    }
-                })
-                
-                UIAlertController(
-                    title: "Reviewing User",
-                    message: "Thanks for reviewing the donator!",
-                    preferredStyle: .alert)
-                    .addDismissButton()
-                    .present(in: self)
-            } else {
-                UIAlertController(errorMessage: nil)
-                    .present(in: self)
-            }
-        }
+    private func presentReview(for user: User) {
+        let reviewVc = ReviewCollaboratorViewController()
+        reviewVc.donator = user
+        reviewVc.delegate = self
+        let navReviewVc = UINavigationController(rootViewController: reviewVc)
+        present(navReviewVc, animated: true)
     }
     
     private func openDirectionsToCharity(for delivery: Donation) {
@@ -257,6 +241,22 @@ class KFCDelivery: KFCModularTableView {
 extension KFCDelivery: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Delivery")
+    }
+}
+
+//MARK: ReviewCollaboratorViewControllerDelegate
+extension KFCDelivery: ReviewCollaboratorViewControllerDelegate {
+    func review(_ reviewCollaborator: ReviewCollaboratorViewController, didFinishReview review: UserReview) {
+        guard let delivery = self.delivery else {
+            return assertionFailure("delivery is missing after a review")
+        }
+        
+        DonationService.archive(delivery: delivery, completion: { (isSuccessful) in
+            if isSuccessful == false {
+                UIAlertController(errorMessage: "Failed to archive the delivery")
+                    .present(in: self)
+            }
+        })
     }
 }
 

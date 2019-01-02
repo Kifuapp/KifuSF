@@ -72,6 +72,22 @@ extension UIImage {
         
         return image
     }()
+
+    static let kfCloseIcon: UIImage = {
+        guard let image = UIImage(named: "CloseIcon")?.withRenderingMode(.alwaysTemplate) else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+
+        return image
+    }()
+
+    static let kfPlusIcon: UIImage = {
+        guard let image = UIImage(named: "PlusIcon")?.withRenderingMode(.alwaysTemplate) else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+
+        return image
+    }()
     
     static let kfLogo: UIImage = {
         guard let image = UIImage(named: "Logo") else {
