@@ -114,6 +114,23 @@ class RegisterFormViewController: UIViewController {
                 return showErrorMessage("Please complete all the fields")
         }
         
+        if let signInProvider = signInProvderInfo {
+            guard let photoURL = signInProvider.photoUrl else {fatalError("No valid photo url passed in the signInProviderInfo")}
+            UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: contactNumber) { (user) in
+                guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
+                User.setCurrent(user,writeToUserDefaults: true)
+                
+                if user.isVerified {
+                    let mainViewControllers = KifuTabBarController()
+                    self.present(mainViewControllers, animated: true)
+                }
+                else{
+                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                    self.present(phoneNumberValidationViewController, animated: true)
+                }
+            }
+        }
+        
         //TODO: check for unique username
         UserService.register(with: fullName, username: username, image: image, contactNumber: contactNumber, email: email, password: password) { [unowned self] (user, error) in
             
@@ -206,7 +223,7 @@ extension RegisterFormViewController: UIConfigurable {
         emailInputView.textFieldContainer.setTag(3)
         passwordInputView.textFieldContainer.setTag(4)
         
-        configureText()
+//        configureText()
     }
     
     func configureContentScrollView() {
@@ -234,6 +251,7 @@ extension RegisterFormViewController: UIConfigurable {
         
         if let profileUrl = signInProviderInfo.photoUrl{
             profileImageView.kf.setImage(with: profileUrl)
+            userSelectedAProfileImage = true
         }
         
         if let phoneNumber = signInProviderInfo.phoneNumber{

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		441BE51E210DAE24004A6A7A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		44339C35210D477700E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
-		44339C39210D4D5400E6663E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		441BE51E210DAE24004A6A7A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		44339C35210D477700E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		44339C39210D4D5400E6663E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */; };
 		7A49CFC0213E3BDD001A48FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A49CFBF213E3BDD001A48FD /* Login.storyboard */; };
 		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
@@ -783,6 +783,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KifuSF/Pods-KifuSF-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -798,6 +799,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -967,14 +969,14 @@
 				E9BA57A9217161F6002A1C37 /* URL+Images.swift in Sources */,
 				C58D9EB7215E209C00B180B3 /* KFVCollaboratorInfo.swift in Sources */,
 				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
-				44339C39210D4D5400E6663E /* (null) in Sources */,
+				44339C39210D4D5400E6663E /* BuildFile in Sources */,
 				C505BD792146F73A00A5195B /* KifuTabBarController.swift in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
-				441BE51E210DAE24004A6A7A /* (null) in Sources */,
+				441BE51E210DAE24004A6A7A /* BuildFile in Sources */,
 				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
 				C58D9ED42163AD7D00B180B3 /* KFPadding.swift in Sources */,
 				C5475D0F21556ADB006BA324 /* KFVInProgressDonationDescription.swift in Sources */,
-				44339C35210D477700E6663E /* (null) in Sources */,
+				44339C35210D477700E6663E /* BuildFile in Sources */,
 				C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */,
 				C58D9ECE21635E3A00B180B3 /* PureLayout.swift in Sources */,
 				C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */,
@@ -1123,10 +1125,7 @@
 				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noahjwoodward.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1146,10 +1145,7 @@
 				DEVELOPMENT_TEAM = QBGPXWFD5T;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noahjwoodward.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
