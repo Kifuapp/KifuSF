@@ -41,9 +41,7 @@ extension SettingsViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default,
                                    reuseIdentifier: nil)
 
-        //TODO: reimplement configureCell
-//        settingsItems[indexPath.row].configureCell(cell)
-        cell.textLabel?.text = "poof"
+        settingsItems[indexPath.row].configureCell(cell)
 
         return cell
     }
@@ -76,45 +74,5 @@ extension SettingsViewController: UIConfigurable {
         view.addSubview(tableView)
 
         tableView.autoPinEdgesToSuperviewEdges()
-    }
-}
-
-// MARK: - SettingsItemProtocol
-protocol SettingsItemProtocol {
-    var cellTitle: String { get }
-    var viewController: UIViewController { get }
-
-    func didSelectItem(in viewController: UIViewController)
-}
-
-// MARK: - WebsiteModel
-struct WebsiteModel {
-    // MARK: - Variables
-    private let website: URL.Websites
-
-    // MARK: - Initializers
-    init(website: URL.Websites) {
-        self.website = website
-    }
-}
-
-// MARK: - SettingsItemProtocol
-extension WebsiteModel: SettingsItemProtocol {
-    // MARK: - Variables
-    var cellTitle: String {
-        return "Website"
-    }
-
-    var viewController: UIViewController {
-        guard let safariViewController = SFSafariViewController(website: website) else {
-            return UIAlertController(errorMessage: "Something went wrong")
-        }
-
-        return safariViewController
-    }
-
-    // MARK: - Methods
-    func didSelectItem(in viewController: UIViewController) {
-        viewController.present(self.viewController, animated: true, completion: nil)
     }
 }
