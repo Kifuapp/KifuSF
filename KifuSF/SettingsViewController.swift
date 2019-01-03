@@ -9,15 +9,29 @@
 import UIKit
 import SafariServices
 
+extension SFSafariViewController {
+    convenience init?(website: URL.Websites) {
+        guard let url = URL(website: website) else {
+            return nil
+        }
+
+        self.init(url: url)
+    }
+}
+
 class SettingsViewController: UIViewController {
     // MARK: - Variables
     private let settingsItemModels = [
-        SettingsItemModel(name: "Donation Regulations"),
-        SettingsItemModel(name: "Submit Feedback"),
-        SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),
-        SettingsItemModel(name: "Terms of Service"),
-        SettingsItemModel(name: "Privacy Policy"),
-        SettingsItemModel(name: "Contact Us"),]
+        SettingsItemModel(name: "Test", viewControllerToShow: SFSafariViewController(website: .stAnthony)),
+        SettingsItemModel(name: "Test", viewControllerToShow: KFCFlagging(flaggableItems: [FlaggedContentType.flaggedCommunication]))
+        ]
+
+//    SettingsItemModel(name: "Donation Regulations"),
+//    SettingsItemModel(name: "Submit Feedback"),
+//    SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),
+//    SettingsItemModel(name: "Terms of Service"),
+//    SettingsItemModel(name: "Privacy Policy"),
+//    SettingsItemModel(name: "Contact Us"),
 
     private let tableView = UITableView(forAutoLayout: ())
 
@@ -50,7 +64,11 @@ extension SettingsViewController: UITableViewDataSource {
 // Mark: - UITableViewDelegate
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        settingsItemModels[indexPath.row].handleTap(in: self)
+//        settingsItemModels[indexPath.row].handleTap(in: self)
+//        tableView.deselectRow(at: indexPath, animated: true)
+
+        present(SFSafariViewController(website: .stAnthony)!, animated: true, completion: nil) //this works
+        present(settingsItemModels[indexPath.row].viewControllerToShow!, animated: true, completion: nil) //this doesn't work :(
     }
 }
 

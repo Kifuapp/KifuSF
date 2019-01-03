@@ -11,16 +11,16 @@ import SafariServices
 
 struct SettingsItemModel {
     let name: String
-    let websiteToShow: URL.Websites?
+    let viewControllerToShow: UIViewController?
     let selector: Selector?
 
     init(name: String,
-         websiteToShow: URL.Websites? = nil,
-         selector: Selector? = nil) {
-        
+         viewControllerToShow: UIViewController? = nil) {
+
         self.name = name
-        self.websiteToShow = websiteToShow
-        self.selector = selector
+        self.viewControllerToShow = viewControllerToShow
+        self.selector = nil
+
     }
 
     func configureCell(_ cell: UITableViewCell) {
@@ -30,12 +30,22 @@ struct SettingsItemModel {
         cell.accessoryType = .disclosureIndicator
     }
 
+    //ignore this function
     func handleTap(in viewController: UIViewController) {
-        if let website = websiteToShow,
-            let url = URL(website: website) {
+//        if let website = websiteToShow,
 
-            let safariViewController = SFSafariViewController(url: url)
-            viewController.present(safariViewController, animated: true, completion: nil)
-        }
+//        let url = URL(website: .stAnthony)!
+////            let url = URL(website: .stAnthony) {
+//
+//            let safariViewController = SFSafariViewController(website: URL.Websites.stAnthony)
+//            viewController.present(safariViewController, animated: true, completion: nil)
+//
+//        }
+
+//        print(safariViewController == viewControllerToShow)
+
+//        if let viewControllerToShow = viewControllerToShow as? SFSafariViewController {
+//            viewController.present(viewControllerToShow!, animated: true, completion: nil)
+//        }
     }
 }
