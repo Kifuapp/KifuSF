@@ -9,23 +9,9 @@
 import UIKit
 import SafariServices
 
-extension SFSafariViewController {
-    convenience init?(website: URL.Websites) {
-        guard let url = URL(website: website) else {
-            return nil
-        }
-
-        self.init(url: url)
-    }
-}
-
 class SettingsViewController: UIViewController {
     // MARK: - Variables
-    private let settingsItemModels = [
-        SettingsItemModel(name: "Test", viewControllerToShow: SFSafariViewController(website: .stAnthony)),
-        SettingsItemModel(name: "Test", viewControllerToShow: KFCFlagging(flaggableItems: [FlaggedContentType.flaggedCommunication]))
-        ]
-
+    private let settingsItems: [SettingsItemProtocol] = [WebsiteModel(website: .stAnthony)]
 //    SettingsItemModel(name: "Donation Regulations"),
 //    SettingsItemModel(name: "Submit Feedback"),
 //    SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),
@@ -35,7 +21,7 @@ class SettingsViewController: UIViewController {
 
     private let tableView = UITableView(forAutoLayout: ())
 
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,30 +31,29 @@ class SettingsViewController: UIViewController {
     }
 }
 
-// Mark: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsItemModels.count
+        return settingsItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default,
                                    reuseIdentifier: nil)
 
-        settingsItemModels[indexPath.row].configureCell(cell)
+        //TODO: reimplement configureCell
+//        settingsItems[indexPath.row].configureCell(cell)
+        cell.textLabel?.text = "poof"
 
         return cell
     }
 }
 
-// Mark: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        settingsItemModels[indexPath.row].handleTap(in: self)
-//        tableView.deselectRow(at: indexPath, animated: true)
-
-        present(SFSafariViewController(website: .stAnthony)!, animated: true, completion: nil) //this works
-        present(settingsItemModels[indexPath.row].viewControllerToShow!, animated: true, completion: nil) //this doesn't work :(
+        tableView.deselectRow(at: indexPath, animated: true) //maybe move this in viewWillAppear/didAppear
+        settingsItems[indexPath.row].didSelectItem(in: self)
     }
 }
 
@@ -94,4 +79,42 @@ extension SettingsViewController: UIConfigurable {
     }
 }
 
+// MARK: - SettingsItemProtocol
+protocol SettingsItemProtocol {
+    var cellTitle: String { get }
+    var viewController: UIViewController { get }
 
+    func didSelectItem(in viewController: UIViewController)
+}
+
+// MARK: - WebsiteModel
+struct WebsiteModel {
+    // MARK: - Variables
+    private let website: URL.Websites
+
+    // MARK: - Initializers
+    init(website: URL.Websites) {
+        self.website = website
+    }
+}
+
+// MARK: - SettingsItemProtocol
+extension WebsiteModel: SettingsItemProtocol {
+    // MARK: - Variables
+    var cellTitle: String {
+        return "Website"
+    }
+
+    var viewController: UIViewController {
+        guard let safariViewController = SFSafariViewController(website: website) else {
+            return UIAlertController(errorMessage: "Something went wrong")
+        }
+
+        return safariViewController
+    }
+
+    // MARK: - Methods
+    func didSelectItem(in viewController: UIViewController) {
+        viewController.present(self.viewController, animated: true, completion: nil)
+    }
+}

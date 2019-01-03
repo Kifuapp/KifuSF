@@ -11,7 +11,12 @@ import UIKit
 class KFCModularTableView: UIViewController {
 
     enum CellTypes {
-        case openDonationDescription, progress, entityInfo, inProgressDonationDescription, collaboratorInfo, destinationMap // done
+        case openDonationDescription
+        case progress
+        case entityInfo
+        case inProgressDonationDescription
+        case collaboratorInfo
+        case destinationMap
     }
 
     let modularTableView = UITableView()

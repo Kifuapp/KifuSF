@@ -11,16 +11,13 @@ import SafariServices
 
 struct SettingsItemModel {
     let name: String
-    let viewControllerToShow: UIViewController?
-    let selector: Selector?
+    let settingsItem: SettingsItemProtocol
 
     init(name: String,
-         viewControllerToShow: UIViewController? = nil) {
+         settingsItem: SettingsItemProtocol) {
 
         self.name = name
-        self.viewControllerToShow = viewControllerToShow
-        self.selector = nil
-
+        self.settingsItem = settingsItem
     }
 
     func configureCell(_ cell: UITableViewCell) {
