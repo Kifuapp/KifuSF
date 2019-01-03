@@ -9,22 +9,12 @@
 import UIKit
 import SafariServices
 
-//extension URL {
-//    enum ImportantLinks { //TODO: find better name
-//        case stAnthonayCharity
-//
-//        func get() -> URL {
-//
-//        }
-//    }
-//}
-
 class SettingsViewController: UIViewController {
     // MARK: - Variables
     private let settingsItemModels = [
         SettingsItemModel(name: "Donation Regulations"),
         SettingsItemModel(name: "Submit Feedback"),
-        SettingsItemModel(name: "St. Anthony's Charity"),
+        SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),
         SettingsItemModel(name: "Terms of Service"),
         SettingsItemModel(name: "Privacy Policy"),
         SettingsItemModel(name: "Contact Us"),]
@@ -34,7 +24,6 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        SFSafariViewController(url: URL.Websites.create(for: .stAnthony))
 
         configureDelegates()
         configureStyling()
@@ -44,13 +33,11 @@ class SettingsViewController: UIViewController {
 
 // Mark: - UITableViewDelegate
 extension SettingsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsItemModels.count
     }
 
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default,
                                    reuseIdentifier: nil)
 
@@ -62,9 +49,9 @@ extension SettingsViewController: UITableViewDataSource {
 
 // Mark: - UITableViewDelegate
 extension SettingsViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        settingsItemModels[indexPath.row].handleTap(in: self)
+    }
 }
 
 // MARK: - UIConfigurable

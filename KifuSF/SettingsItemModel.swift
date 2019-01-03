@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import SafariServices
 
 struct SettingsItemModel {
     let name: String
-    let viewControllerToPush: UIViewController?
+    let websiteToShow: URL.Websites?
     let selector: Selector?
 
     init(name: String,
-         viewControllerToPush: UIViewController? = nil,
+         websiteToShow: URL.Websites? = nil,
          selector: Selector? = nil) {
         
         self.name = name
-        self.viewControllerToPush = viewControllerToPush
+        self.websiteToShow = websiteToShow
         self.selector = selector
     }
 
@@ -26,12 +27,15 @@ struct SettingsItemModel {
         cell.textLabel?.text = name
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.textLabel?.textColor = UIColor.Text.Headline
-//        cell.layoutMargins = UIEdgeInsets.zero
+        cell.accessoryType = .disclosureIndicator
+    }
 
-        if let _ = viewControllerToPush {
-            cell.accessoryType = .disclosureIndicator
-        } else {
-            cell.accessoryType = .none
+    func handleTap(in viewController: UIViewController) {
+        if let website = websiteToShow,
+            let url = URL(website: website) {
+
+            let safariViewController = SFSafariViewController(url: url)
+            viewController.present(safariViewController, animated: true, completion: nil)
         }
     }
 }
