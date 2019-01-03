@@ -7,6 +7,17 @@
 //
 
 import UIKit
+import SafariServices
+
+//extension URL {
+//    enum ImportantLinks { //TODO: find better name
+//        case stAnthonayCharity
+//
+//        func get() -> URL {
+//
+//        }
+//    }
+//}
 
 class SettingsViewController: UIViewController {
     // MARK: - Variables
@@ -23,6 +34,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        SFSafariViewController(url: URL.Websites.create(for: .stAnthony))
 
         configureDelegates()
         configureStyling()
@@ -50,7 +62,9 @@ extension SettingsViewController: UITableViewDataSource {
 
 // Mark: - UITableViewDelegate
 extension SettingsViewController: UITableViewDelegate {
-
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
 }
 
 // MARK: - UIConfigurable

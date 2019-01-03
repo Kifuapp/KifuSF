@@ -24,6 +24,9 @@ struct SettingsItemModel {
 
     func configureCell(_ cell: UITableViewCell) {
         cell.textLabel?.text = name
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        cell.textLabel?.textColor = UIColor.Text.Headline
+//        cell.layoutMargins = UIEdgeInsets.zero
 
         if let _ = viewControllerToPush {
             cell.accessoryType = .disclosureIndicator
