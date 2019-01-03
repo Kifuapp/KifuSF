@@ -11,7 +11,7 @@ import SafariServices
 
 class SettingsViewController: UIViewController {
     // MARK: - Variables
-    private let settingsItems: [SettingsItemProtocol] = [WebsiteModel(website: .stAnthony)]
+    private let settingsItems: [SettingsItemProtocol] = [WebsiteModel(cellTitle: "St. Anthony Charity", website: .stAnthony)]
 //    SettingsItemModel(name: "Donation Regulations"),
 //    SettingsItemModel(name: "Submit Feedback"),
 //    SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),

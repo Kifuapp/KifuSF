@@ -13,9 +13,11 @@ import SafariServices
 struct WebsiteModel {
     // MARK: - Variables
     private let website: URL.Websites
+    private let _cellTitle: String
 
     // MARK: - Initializers
-    init(website: URL.Websites) {
+    init(cellTitle: String, website: URL.Websites) {
+        self._cellTitle = cellTitle
         self.website = website
     }
 }
@@ -24,7 +26,7 @@ struct WebsiteModel {
 extension WebsiteModel: SettingsItemProtocol {
     // MARK: - Variables
     var cellTitle: String {
-        return "Website"
+        return _cellTitle
     }
 
     var viewController: UIViewController {
