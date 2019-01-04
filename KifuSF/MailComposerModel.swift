@@ -14,7 +14,7 @@ import MessageUI
 // MARK: - MailComposerModel
 class MailComposerModel: NSObject {
     // MARK: - Variables
-    private let errorAlert = UIAlertController(errorMessage: "Something went wrong")
+    private let errorAlert = UIAlertController(errorMessage: nil)
     private var composeViewController: MFMailComposeViewController {
         let viewController = MFMailComposeViewController()
 
