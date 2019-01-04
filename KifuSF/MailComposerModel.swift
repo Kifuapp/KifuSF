@@ -14,7 +14,6 @@ import MessageUI
 // MARK: - MailComposerModel
 class MailComposerModel: NSObject {
     // MARK: - Variables
-    private let errorAlert = UIAlertController(errorMessage: nil)
     private var composeViewController: MFMailComposeViewController {
         let viewController = MFMailComposeViewController()
 
@@ -31,16 +30,22 @@ class MailComposerModel: NSObject {
     private let body: String
 
     var cellTitle: String
+    var errorAlertController: UIAlertController
 
     // MARK: - Initializers
-    init(cellTitle: String, recipients: [String], subject: String, body: String) {
-        self.cellTitle = cellTitle
+    init(cellTitle: String,
+         recipients: [String],
+         subject: String,
+         body: String,
+         errorMessage: String? = nil) {
 
         self.recipients = recipients
         self.subject = subject
         self.body = body
-    }
 
+        self.cellTitle = cellTitle
+        self.errorAlertController = UIAlertController(errorMessage: errorMessage)
+    }
 }
 
 // MARK: - MFMailComposeViewControllerDelegate
@@ -58,7 +63,7 @@ extension MailComposerModel: SettingsItemProtocol {
         if MFMailComposeViewController.canSendMail() {
             return composeViewController
         } else {
-            return errorAlert
+            return errorAlertController
         }
     }
 }

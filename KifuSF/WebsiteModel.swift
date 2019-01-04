@@ -13,12 +13,15 @@ import SafariServices
 struct WebsiteModel {
     // MARK: - Variables
     private let website: URL.Websites
+    
     var cellTitle: String
+    var errorAlertController: UIAlertController
 
     // MARK: - Initializers
-    init(cellTitle: String, website: URL.Websites) {
+    init(cellTitle: String, website: URL.Websites, errorMessage: String? = nil) {
         self.cellTitle = cellTitle
         self.website = website
+        self.errorAlertController = UIAlertController(errorMessage: errorMessage)
     }
 }
 
@@ -27,7 +30,7 @@ extension WebsiteModel: SettingsItemProtocol {
     // MARK: - Variables
     var viewControllerToShow: UIViewController {
         guard let safariViewController = SFSafariViewController(website: website) else {
-            return UIAlertController(errorMessage: "Something went wrong")
+            return errorAlertController
         }
 
         return safariViewController

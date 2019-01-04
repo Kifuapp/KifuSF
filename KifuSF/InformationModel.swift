@@ -12,14 +12,16 @@ import UIKit
 struct InformationModel {
     // MARK: - Variables
     private let information: String
-    var cellTitle: String
 
+    var cellTitle: String
+    var errorAlertController: UIAlertController
+    
     // MARK: - Initializers
-    init(cellTitle: String, information: String) {
+    init(cellTitle: String, information: String, errorMessage: String? = nil) {
         self.cellTitle = cellTitle
         self.information = information
+        self.errorAlertController = UIAlertController(errorMessage: errorMessage)
     }
-
 }
 
 // MARK: - SettingsItemProtocol

@@ -12,6 +12,7 @@ import UIKit
 protocol SettingsItemProtocol {
     var cellTitle: String { get }
     var viewControllerToShow: UIViewController { get }
+    var errorAlertController: UIAlertController { get }
 
     func configureCell(_ cell: UITableViewCell)
     func didSelectItem(in viewController: UIViewController)

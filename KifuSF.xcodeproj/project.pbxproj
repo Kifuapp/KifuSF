@@ -376,8 +376,8 @@
 				C5231EF121DD63A1001D9A7D /* SettingsViewController.swift */,
 				C5231EFA21DEB9EE001D9A7D /* WebsiteModel.swift */,
 				C5231EFE21DF82C1001D9A7D /* MailComposerModel.swift */,
-				C5231EFC21DEBAA9001D9A7D /* SettingsItemProtocol.swift */,
 				C5231F0021DF9550001D9A7D /* InformationModel.swift */,
+				C5231EFC21DEBAA9001D9A7D /* SettingsItemProtocol.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
