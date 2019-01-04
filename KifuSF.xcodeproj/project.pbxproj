@@ -30,6 +30,7 @@
 		C5231EF821DEB620001D9A7D /* SFSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5231EF721DEB620001D9A7D /* SFSafariViewController.swift */; };
 		C5231EFB21DEB9EE001D9A7D /* WebsiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5231EFA21DEB9EE001D9A7D /* WebsiteModel.swift */; };
 		C5231EFD21DEBAA9001D9A7D /* SettingsItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5231EFC21DEBAA9001D9A7D /* SettingsItemProtocol.swift */; };
+		C5231EFF21DF82C1001D9A7D /* MailComposerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5231EFE21DF82C1001D9A7D /* MailComposerModel.swift */; };
 		C53D92B82171E42500AE3882 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B72171E42500AE3882 /* LoginViewController.swift */; };
 		C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92B92171E46700AE3882 /* UIViewController.swift */; };
 		C53D92BC21724B2900AE3882 /* UITextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BB21724B2900AE3882 /* UITextFieldContainer.swift */; };
@@ -160,6 +161,7 @@
 		C5231EF721DEB620001D9A7D /* SFSafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewController.swift; sourceTree = "<group>"; };
 		C5231EFA21DEB9EE001D9A7D /* WebsiteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteModel.swift; sourceTree = "<group>"; };
 		C5231EFC21DEBAA9001D9A7D /* SettingsItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemProtocol.swift; sourceTree = "<group>"; };
+		C5231EFE21DF82C1001D9A7D /* MailComposerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerModel.swift; sourceTree = "<group>"; };
 		C52B1A4121CE830600839B38 /* KifuSF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KifuSF.entitlements; sourceTree = "<group>"; };
 		C53D92B72171E42500AE3882 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C53D92B92171E46700AE3882 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			children = (
 				C5231EF121DD63A1001D9A7D /* SettingsViewController.swift */,
 				C5231EFA21DEB9EE001D9A7D /* WebsiteModel.swift */,
+				C5231EFE21DF82C1001D9A7D /* MailComposerModel.swift */,
 				C5231EFC21DEBAA9001D9A7D /* SettingsItemProtocol.swift */,
 			);
 			name = Settings;
@@ -963,6 +966,7 @@
 				E92994EE210D27CC00A32924 /* Donation.swift in Sources */,
 				E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */,
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
+				C5231EFF21DF82C1001D9A7D /* MailComposerModel.swift in Sources */,
 				E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,

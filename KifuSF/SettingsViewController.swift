@@ -7,50 +7,6 @@
 //
 
 import UIKit
-import MessageUI
-
-// MARK: - MailComposerModel
-struct MailComposerModel {
-    // MARK: - Variables
-    private let errorAlert = UIAlertController(errorMessage: "Something went wrong")
-    private var composeViewController: MFMailComposeViewController {
-        let viewController = MFMailComposeViewController()
-
-        viewController.setToRecipients(recipients)
-        viewController.setSubject(subject)
-        viewController.setMessageBody(body, isHTML: false)
-
-        return viewController
-    }
-
-    private let recipients: [String]
-    private let subject: String
-    private let body: String
-
-    var cellTitle: String
-
-    // MARK: - Initializers
-    init(cellTitle: String, recipients: [String], subject: String, body: String) {
-        self.cellTitle = cellTitle
-
-        self.recipients = recipients
-        self.subject = subject
-        self.body = body
-    }
-
-}
-
-// MARK: - SettingsItemProtocol
-extension MailComposerModel: SettingsItemProtocol {
-    // MARK: - Variables
-    var viewControllerToShow: UIViewController {
-        if MFMailComposeViewController.canSendMail() {
-            return composeViewController
-        } else {
-            return errorAlert
-        }
-    }
-}
 
 class SettingsViewController: UIViewController {
     // MARK: - Variables
@@ -58,19 +14,19 @@ class SettingsViewController: UIViewController {
         WebsiteModel(cellTitle: "St. Anthony Charity",
                      website: .stAnthony),
         MailComposerModel(cellTitle: "Submit Feedback",
-                          recipients: ["alexandru_turcanu@ymailc.com"],
+                          recipients: ["alexandru_turcanu@ymail.com"],
                           subject: "Feedback",
+                          body: "Don't be shy 😉"),
+        MailComposerModel(cellTitle: "Contact Us",
+                          recipients: ["alexandru_turcanu@ymail.com"],
+                          subject: "Contact Us",
                           body: "Don't be shy 😉")
-
     ]
 //    SettingsItemModel(name: "Donation Regulations"),
-//    SettingsItemModel(name: "Submit Feedback"),
-//    SettingsItemModel(name: "St. Anthony's Charity", websiteToShow: .stAnthony),
 //    SettingsItemModel(name: "Terms of Service"),
 //    SettingsItemModel(name: "Privacy Policy"),
-//    SettingsItemModel(name: "Contact Us"),
 
-    private(set) var tableView = UITableView(forAutoLayout: ())
+    private let tableView = UITableView(forAutoLayout: ())
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -89,11 +45,12 @@ extension SettingsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default,
-                                   reuseIdentifier: nil)
+        let cell = UITableViewCell(
+            style: .default,
+            reuseIdentifier: nil
+        )
 
         settingsItems[indexPath.row].configureCell(cell)
-
         return cell
     }
 }
