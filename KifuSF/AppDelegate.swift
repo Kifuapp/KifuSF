@@ -81,7 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
     
     func configureStyling() {
         UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedStringKey.foregroundColor : UIColor.Pallete.Green]
+            [NSAttributedStringKey.foregroundColor: UIColor.Text.Headline]
+        UINavigationBar.appearance().largeTitleTextAttributes =
+            [NSAttributedStringKey.foregroundColor: UIColor.Text.Headline]
         UINavigationBar.appearance().tintColor = UIColor.Pallete.Green
         UINavigationBar.appearance().barTintColor = UIColor.Pallete.White
         UINavigationBar.appearance().isTranslucent = false
