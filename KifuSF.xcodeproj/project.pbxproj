@@ -356,7 +356,7 @@
 			children = (
 				C54FDBD421402A0900BC89B8 /* KFWidget */,
 				C5B0E1A62150264300A8412C /* KFRoundedTable */,
-				C5B0E1A52150263100A8412C /* KFModularTable */,
+				C5B0E1A52150263100A8412C /* ModularTable */,
 				C505BD782146F73A00A5195B /* KifuTabBarViewController.swift */,
 				C50182F92142FB1B00257412 /* UIStickyView.swift */,
 				C58D9ED52163B09300B180B3 /* UIIconView.swift */,
@@ -642,14 +642,14 @@
 			name = Junk;
 			sourceTree = "<group>";
 		};
-		C5B0E1A52150263100A8412C /* KFModularTable */ = {
+		C5B0E1A52150263100A8412C /* ModularTable */ = {
 			isa = PBXGroup;
 			children = (
 				C552162F21DFCCD7005D85F0 /* ModularTableViewController.swift */,
 				C5B0E1A32150262B00A8412C /* ModularTableViewCell.swift */,
 				C5231F0221DFC56F001D9A7D /* ModularTableViewItem.swift */,
 			);
-			name = KFModularTable;
+			name = ModularTable;
 			sourceTree = "<group>";
 		};
 		C5B0E1A62150264300A8412C /* KFRoundedTable */ = {
