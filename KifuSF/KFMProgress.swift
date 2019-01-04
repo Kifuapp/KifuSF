@@ -8,7 +8,7 @@
 
 import Foundation
 
-class KFMProgress: KFPModularTableViewItem {
+class KFMProgress: ModularTableViewItem {
     
     enum ItemType {
         case donation, delivery
@@ -24,7 +24,7 @@ class KFMProgress: KFPModularTableViewItem {
         case stepOne = 0, stepTwo, stepThree, stepFour, stepNone
     }
     
-    let type: KFCModularTableView.CellTypes = .progress
+    let type: ModularTableViewController.CellTypes = .progress
     
     let actionType: ItemType
     let currentStep: Step

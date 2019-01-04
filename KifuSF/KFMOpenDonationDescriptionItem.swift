@@ -8,8 +8,8 @@
 
 import Foundation
 
-class KFMOpenDonationDescriptionItem: KFPModularTableViewItem {
-    let type: KFCModularTableView.CellTypes = .openDonationDescription
+class KFMOpenDonationDescriptionItem: ModularTableViewItem {
+    let type: ModularTableViewController.CellTypes = .openDonationDescription
     
     let imageURL: URL
     let title: String

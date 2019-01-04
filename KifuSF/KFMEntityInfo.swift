@@ -8,8 +8,8 @@
 
 import Foundation
 
-class KFMEntityInfo: KFPModularTableViewItem {
-    let type: KFCModularTableView.CellTypes = .entityInfo
+class KFMEntityInfo: ModularTableViewItem {
+    let type: ModularTableViewController.CellTypes = .entityInfo
     
     enum EntityType: String {
         case charity, donator, deliverer

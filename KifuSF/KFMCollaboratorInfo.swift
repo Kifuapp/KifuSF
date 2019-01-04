@@ -8,8 +8,8 @@
 
 import Foundation
 
-class KFMCollaboratorInfo: KFPModularTableViewItem {
-    let type: KFCModularTableView.CellTypes = .collaboratorInfo
+class KFMCollaboratorInfo: ModularTableViewItem {
+    let type: ModularTableViewController.CellTypes = .collaboratorInfo
     
     let profileImageURL: URL
     let username: String

@@ -9,8 +9,8 @@
 import Foundation
 import CoreLocation
 
-class KFMDestinationMap: KFPModularTableViewItem {
-    let type: KFCModularTableView.CellTypes = .destinationMap
+class KFMDestinationMap: ModularTableViewItem {
+    let type: ModularTableViewController.CellTypes = .destinationMap
     
     let coordinate: CLLocationCoordinate2D
     

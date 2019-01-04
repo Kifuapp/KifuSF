@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFCDetailedDonation: KFCModularTableView {
+class KFCDetailedDonation: ModularTableViewController {
     
     // MARK: - VARS
     
@@ -94,7 +94,7 @@ class KFCDetailedDonation: KFCModularTableView {
         //TODO: alex-flagging
     }
 
-    override func retrieveOpenDonationDescriptionItem() -> KFPModularTableViewItem? {
+    override func retrieveOpenDonationDescriptionItem() -> ModularTableViewItem? {
         let imageUrl = URL(string: donation.imageUrl) ?? URL.brokenUrlImage
         let donator = donation.donator
         let distance = UserService.calculateDistance(donation: self.donation)

@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import CoreLocation
 
-class KFCDonation: KFCModularTableView {
+class KFCDonation: ModularTableViewController {
     
     var donation: Donation? {
         didSet {
@@ -73,7 +73,7 @@ class KFCDonation: KFCModularTableView {
         modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
     }
 
-    override func retrieveProgressItem() -> KFPModularTableViewItem? {
+    override func retrieveProgressItem() -> ModularTableViewItem? {
         guard
             let donationStep = self.donation?.status.step,
             donationStep != .stepNone else {
@@ -83,7 +83,7 @@ class KFCDonation: KFCModularTableView {
         return KFMProgress(currentStep: donationStep, ofType: .donation)
     }
 
-    override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
+    override func retrieveInProgressDonationDescription() -> ModularTableViewItem? {
         guard let donationDescription = self.donation?.inProgressDescriptionForDonator else {
             return nil
         }
@@ -91,7 +91,7 @@ class KFCDonation: KFCModularTableView {
         return donationDescription
     }
 
-    override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
+    override func retrieveEntityInfoItem() -> ModularTableViewItem? {
         guard let delivery = self.donation else {
             return nil
         }
@@ -105,7 +105,7 @@ class KFCDonation: KFCModularTableView {
         )
     }
 
-    override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
+    override func retrieveCollaboratorInfoItem() -> ModularTableViewItem? {
         guard let volunteer = donation?.volunteer else {
             return nil
         }
@@ -113,7 +113,7 @@ class KFCDonation: KFCModularTableView {
         return volunteer.collaboratorInfo
     }
 
-    override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
+    override func retrieveDestinationMapItem() -> ModularTableViewItem? {
         guard let donation = donation else {
             return nil
         }
@@ -126,7 +126,7 @@ class KFCDonation: KFCModularTableView {
         return KFMDestinationMap(coordinate: location)
     }
     
-    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+    override func didSelect(_ cellType: ModularTableViewController.CellTypes, at indexPath: IndexPath) {
         switch cellType {
         case .destinationMap:
             guard let donation = self.donation else {

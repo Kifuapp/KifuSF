@@ -10,8 +10,8 @@ import UIKit
 import XLPagerTabStrip
 import CoreLocation
 
-class KFCDelivery: KFCModularTableView {
-    
+class DeliveryModularTableViewController: ModularTableViewController {
+    // MARK: - Variables
     var delivery: Donation? {
         didSet {
             updateUI()
@@ -52,10 +52,19 @@ class KFCDelivery: KFCModularTableView {
         
         return helper
     }()
-    
+
+    // MARK: - Lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        modularTableView.contentInset.bottom = actionButton.frame.height + 16
+        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
+    }
+
+    // MARK: - Methods
     private func updateUI() {
         reloadData()
-        
+
         //update the actionButton
         actionButton.isHidden = false
         if let delivery = self.delivery {
@@ -76,32 +85,7 @@ class KFCDelivery: KFCModularTableView {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        view.addSubview(actionButton)
-        configureLayoutConstraints()
-        actionButton.addTarget(
-            self,
-            action: #selector(pressActionButton(_:)),
-            for: .touchUpInside
-        )
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureStyling()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        modularTableView.contentInset.bottom = actionButton.frame.height + 16
-        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
-    }
-    
-    override func retrieveProgressItem() -> KFPModularTableViewItem? {
+    override func retrieveProgressItem() -> ModularTableViewItem? {
         guard let deliveryStep = self.delivery?.status.step else {
             return nil
         }
@@ -109,7 +93,7 @@ class KFCDelivery: KFCModularTableView {
         return KFMProgress(currentStep: deliveryStep, ofType: .delivery)
     }
     
-    override func retrieveInProgressDonationDescription() -> KFPModularTableViewItem? {
+    override func retrieveInProgressDonationDescription() -> ModularTableViewItem? {
         guard let deliveryDescription = self.delivery?.inProgressDescriptionForVolunteer else {
             return nil
         }
@@ -117,8 +101,8 @@ class KFCDelivery: KFCModularTableView {
         return deliveryDescription
     }
     
-    override func retrieveEntityInfoItem() -> KFPModularTableViewItem? {
-        guard let delivery = self.delivery else {
+    override func retrieveEntityInfoItem() -> ModularTableViewItem? {
+        guard let _ = self.delivery else {
             return nil
         }
         
@@ -131,7 +115,7 @@ class KFCDelivery: KFCModularTableView {
         )
     }
     
-    override func retrieveCollaboratorInfoItem() -> KFPModularTableViewItem? {
+    override func retrieveCollaboratorInfoItem() -> ModularTableViewItem? {
         guard let donatorInfo = self.delivery?.donator.collaboratorInfo else {
             return nil
         }
@@ -139,7 +123,7 @@ class KFCDelivery: KFCModularTableView {
         return donatorInfo
     }
     
-    override func retrieveDestinationMapItem() -> KFPModularTableViewItem? {
+    override func retrieveDestinationMapItem() -> ModularTableViewItem? {
         guard let delivery = self.delivery else {
             return nil
         }
@@ -164,7 +148,7 @@ class KFCDelivery: KFCModularTableView {
         return KFMDestinationMap(coordinate: location)
     }
     
-    override func didSelect(_ cellType: KFCModularTableView.CellTypes, at indexPath: IndexPath) {
+    override func didSelect(_ cellType: ModularTableViewController.CellTypes, at indexPath: IndexPath) {
         switch cellType {
         case .destinationMap:
             guard let delivery = self.delivery else {
@@ -203,7 +187,6 @@ class KFCDelivery: KFCModularTableView {
             case .awaitingReview:
                 self.presentReview(for: delivery.donator)
             }
-            
         } else {
             guard let tabBar = self.tabBarController else {
                 return assertionFailure("no tabbar found")
@@ -231,21 +214,47 @@ class KFCDelivery: KFCModularTableView {
     }
     
     private func openDirectionsToCharity(for delivery: Donation) {
-        
         //TODO: erick-find charity location
         let map = MapHelper(long: delivery.longitude, lat: delivery.latitude)
         map.open()
     }
+
+    // MARK: - UIConfigurable
+    override func configureStyling() {
+        super.configureStyling()
+        view.backgroundColor = UIColor.Pallete.White
+    }
+
+    override func configureLayout() {
+        super.configureLayout()
+
+        view.addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+    }
+
+    override func configureDelegates() {
+        super.configureDelegates()
+
+        actionButton.addTarget(
+            self,
+            action: #selector(pressActionButton(_:)),
+            for: .touchUpInside
+        )
+    }
 }
 
-extension KFCDelivery: IndicatorInfoProvider {
+// MARK: - IndicatorInfoProvider
+extension DeliveryModularTableViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Delivery")
     }
 }
 
-//MARK: ReviewCollaboratorViewControllerDelegate
-extension KFCDelivery: ReviewCollaboratorViewControllerDelegate {
+// MARK: ReviewCollaboratorViewControllerDelegate
+extension DeliveryModularTableViewController: ReviewCollaboratorViewControllerDelegate {
     func review(_ reviewCollaborator: ReviewCollaboratorViewController, didFinishReview review: UserReview) {
         guard let delivery = self.delivery else {
             return assertionFailure("delivery is missing after a review")
@@ -259,22 +268,3 @@ extension KFCDelivery: ReviewCollaboratorViewControllerDelegate {
         })
     }
 }
-
-//MARK: Styling & LayoutConstraints
-extension KFCDelivery {
-    private func configureLayoutConstraints() {
-        configureDynamicButtonConstraints()
-    }
-    
-    private func configureStyling() {
-        view.backgroundColor = UIColor.Pallete.White
-    }
-    
-    private func configureDynamicButtonConstraints() {
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-    }
-}
-
