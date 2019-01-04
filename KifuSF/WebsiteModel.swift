@@ -13,11 +13,11 @@ import SafariServices
 struct WebsiteModel {
     // MARK: - Variables
     private let website: URL.Websites
-    private let _cellTitle: String
+    var cellTitle: String
 
     // MARK: - Initializers
     init(cellTitle: String, website: URL.Websites) {
-        self._cellTitle = cellTitle
+        self.cellTitle = cellTitle
         self.website = website
     }
 }
@@ -25,20 +25,11 @@ struct WebsiteModel {
 // MARK: - SettingsItemProtocol
 extension WebsiteModel: SettingsItemProtocol {
     // MARK: - Variables
-    var cellTitle: String {
-        return _cellTitle
-    }
-
-    var viewController: UIViewController {
+    var viewControllerToShow: UIViewController {
         guard let safariViewController = SFSafariViewController(website: website) else {
             return UIAlertController(errorMessage: "Something went wrong")
         }
 
         return safariViewController
-    }
-
-    // MARK: - Methods
-    func didSelectItem(in viewController: UIViewController) {
-        viewController.present(self.viewController, animated: true, completion: nil)
     }
 }

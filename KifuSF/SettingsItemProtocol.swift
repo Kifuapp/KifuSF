@@ -11,7 +11,7 @@ import UIKit
 // MARK: - SettingsItemProtocol
 protocol SettingsItemProtocol {
     var cellTitle: String { get }
-    var viewController: UIViewController { get }
+    var viewControllerToShow: UIViewController { get }
 
     func configureCell(_ cell: UITableViewCell)
     func didSelectItem(in viewController: UIViewController)
@@ -24,5 +24,9 @@ extension SettingsItemProtocol {
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.textColor = UIColor.Text.Headline
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+    }
+
+    func didSelectItem(in viewController: UIViewController) {
+        viewController.present(viewControllerToShow, animated: true)
     }
 }
