@@ -57,7 +57,7 @@ extension MailComposerModel: MFMailComposeViewControllerDelegate {
 }
 
 // MARK: - SettingsItemProtocol
-extension MailComposerModel: SettingsItemProtocol {
+extension MailComposerModel: SettingsItem {
     // MARK: - Variables
     var viewControllerToShow: UIViewController {
         if MFMailComposeViewController.canSendMail() {

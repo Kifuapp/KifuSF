@@ -25,7 +25,7 @@ struct InformationModel {
 }
 
 // MARK: - SettingsItemProtocol
-extension InformationModel: SettingsItemProtocol {
+extension InformationModel: SettingsItem {
     var viewControllerToShow: UIViewController {
         let viewController = UIViewController()
         let textView = UITextView(

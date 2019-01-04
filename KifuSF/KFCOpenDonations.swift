@@ -101,8 +101,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     @objc func createDonation() {
         let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
-//        present(KFCFlagging(flaggableItems: [.flaggedImage, .flaggedNotes, .flaggedPhoneNumber]), animated: true)
-        navigationController?.pushViewController(SettingsViewController(), animated: true)
+        present(KFCFlagging(flaggableItems: [.flaggedImage, .flaggedNotes, .flaggedPhoneNumber]), animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

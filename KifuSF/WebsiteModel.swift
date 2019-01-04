@@ -26,7 +26,7 @@ struct WebsiteModel {
 }
 
 // MARK: - SettingsItemProtocol
-extension WebsiteModel: SettingsItemProtocol {
+extension WebsiteModel: SettingsItem {
     // MARK: - Variables
     var viewControllerToShow: UIViewController {
         guard let safariViewController = SFSafariViewController(website: website) else {

@@ -10,23 +10,24 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     // MARK: - Variables
-    private let settingsItems: [SettingsItemProtocol] = [
+    private let settingsItems: [SettingsItem] = [
+        InformationModel(cellTitle: "Donation Regulations",
+                         information: KifuLocalization.regulations),
         WebsiteModel(cellTitle: "St. Anthony Charity",
                      website: .stAnthony),
         MailComposerModel(cellTitle: "Submit Feedback",
-                          recipients: ["alexandru_turcanu@ymail.com"],
+                          recipients: [KifuLocalization.feedbackMail],
                           subject: "Feedback",
                           body: "Don't be shy 😉"),
         MailComposerModel(cellTitle: "Contact Us",
-                          recipients: ["alexandru_turcanu@ymail.com"],
+                          recipients: [KifuLocalization.contactUsMail],
                           subject: "Contact Us",
                           body: "Don't be shy 😉"),
-        InformationModel(cellTitle: "Terms of Service", information: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+        WebsiteModel(cellTitle: "Terms of Service",
+                     website: .termsOfService),
+        WebsiteModel(cellTitle: "Privacy Policy",
+                     website: .privacyPolicy)
     ]
-    
-//    SettingsItemModel(name: "Donation Regulations"),
-//    SettingsItemModel(name: "Terms of Service"),
-//    SettingsItemModel(name: "Privacy Policy"),
 
     private let tableView = UITableView(forAutoLayout: ())
 
@@ -83,7 +84,6 @@ extension SettingsViewController: UIConfigurable {
 
     func configureLayout() {
         view.addSubview(tableView)
-
         tableView.autoPinEdgesToSuperviewEdges()
     }
 }

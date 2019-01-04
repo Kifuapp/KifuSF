@@ -13,6 +13,8 @@ extension URL {
 
     enum Websites: String {
         case stAnthony = "https://github.com/apple/swift/blob/master/docs/ABIStabilityManifesto.md"
+        case termsOfService = "https://docs.google.com/document/d/e/2PACX-1vRRbR91VeL6B_jyFlHWvTwMw815PzWCxACZWi2eFQCBr_fyyAALtBYx-xH_fkw2Saa0VXzEDYEWxA9E/pub"
+        case privacyPolicy = "https://docs.google.com/document/d/1GVi6VecrJ1u1LZCbRyA2JlQCxJV0PnLlQ__rJeZmYHs/edit"
 
     }
 

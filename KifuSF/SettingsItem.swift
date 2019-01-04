@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - SettingsItemProtocol
-protocol SettingsItemProtocol {
+protocol SettingsItem {
     var cellTitle: String { get }
     var viewControllerToShow: UIViewController { get }
     var errorAlertController: UIAlertController { get }
@@ -19,7 +19,7 @@ protocol SettingsItemProtocol {
 }
 
 // MARK: - Extension
-extension SettingsItemProtocol {
+extension SettingsItem {
     func configureCell(_ cell: UITableViewCell) {
         cell.textLabel?.text = cellTitle
         cell.accessoryType = .disclosureIndicator
@@ -31,3 +31,4 @@ extension SettingsItemProtocol {
         viewController.present(viewControllerToShow, animated: true)
     }
 }
+
