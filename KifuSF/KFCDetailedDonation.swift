@@ -14,14 +14,26 @@ class KFCDetailedDonation: KFCModularTableView {
     
     var donation: Donation!
     
-    var hasUserAlreadyRequested: Bool = false {
+    enum UserRequestingStatus {
+        case userHasNotRequested
+        case userHasRequested
+        case userAlreadyHasCurrentDelivery
+    }
+    
+    /** default is `.userHasNotRequested` */
+    var userRequestingStatus = UserRequestingStatus.userHasNotRequested {
         didSet {
-            if hasUserAlreadyRequested {
-                self.actionButton.setMainBackgroundColor(.kfDestructive)
-                self.actionButton.setTitle("Cancel Reqeust", for: .normal)
-            } else {
+            switch userRequestingStatus {
+            case .userHasNotRequested:
                 self.actionButton.setMainBackgroundColor(.kfPrimary)
                 self.actionButton.setTitle("Request Item", for: .normal)
+                self.actionButton.isHidden = false
+            case .userHasRequested:
+                self.actionButton.setMainBackgroundColor(.kfDestructive)
+                self.actionButton.setTitle("Cancel Reqeust", for: .normal)
+                self.actionButton.isHidden = false
+            case .userAlreadyHasCurrentDelivery:
+                self.actionButton.isHidden = true
             }
         }
     }
@@ -38,28 +50,31 @@ class KFCDetailedDonation: KFCModularTableView {
     @objc func pressActionButton(_ sender: Any) {
         actionButton.isEnabled = false
         
-        if hasUserAlreadyRequested {
-            RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
-                self.actionButton.isEnabled = true
-                
-                if isSuccessful {
-                    self.hasUserAlreadyRequested = false
-                } else {
-                    let errorAlert = UIAlertController(errorMessage: nil)
-                    self.present(errorAlert, animated: true)
-                }
-            }
-        } else {
+        switch userRequestingStatus {
+        case .userHasNotRequested:
             RequestService.createRequest(for: self.donation) { (isSuccessful) in
                 self.actionButton.isEnabled = true
                 
                 if isSuccessful {
-                    self.hasUserAlreadyRequested = true
+                    self.userRequestingStatus = .userHasRequested
                 } else {
                     let errorAlert = UIAlertController(errorMessage: nil)
                     self.present(errorAlert, animated: true)
                 }
             }
+        case .userHasRequested:
+            RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
+                self.actionButton.isEnabled = true
+                
+                if isSuccessful {
+                    self.userRequestingStatus = .userHasNotRequested
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    self.present(errorAlert, animated: true)
+                }
+            }
+        case .userAlreadyHasCurrentDelivery:
+            fatalError("this button should be hidden in this state")
         }
     }
     

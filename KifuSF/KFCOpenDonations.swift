@@ -99,6 +99,13 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
     }
 
     @objc func createDonation() {
+        guard self.currentDonation == nil else {
+            UIAlertController(errorMessage: "You cannot create more than one donation at a time")
+                .present(in: self)
+            
+            return
+        }
+        
         let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
         present(createDonationViewController, animated: true)
@@ -167,8 +174,10 @@ extension KFCOpenDonations: UITableViewDelegate {
         switch self.currentDeliveryState {
         case .pendingRequests(let requestedDonations):
             if requestedDonations.contains(selectedDonation) {
-                detailedOpenDonationVC.hasUserAlreadyRequested = true
+                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
             }
+        case .deliveringDonation:
+            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
         default:
             break
         }
