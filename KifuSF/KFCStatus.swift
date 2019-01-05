@@ -124,7 +124,7 @@ extension User {
         
         return KFMCollaboratorInfo(
             profileImageURL: URL(string: self.imageURL) ?? URL.brokenUrlImage,
-            name: self.username, //TODO: erick-collect their full name
+            name: self.username, //TODO: erick-collect their fullname
             username: self.username,
             userReputation: self.reputation,
             userDonationsCount: self.numberOfDonations,
