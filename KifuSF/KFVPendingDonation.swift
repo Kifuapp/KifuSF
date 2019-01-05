@@ -35,7 +35,7 @@ class KFVPendingDonation: UIDescriptorView {
         super.configureStyling()
 
         cancelStickyButton.contentView.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
-        cancelStickyButton.contentView.setMainBackgroundColor(.kfDestructive)
+        cancelStickyButton.contentView.setMainBackgroundColor(UIColor.Pallete.Red)
         cancelStickyButton.contentView.setTitle("Cancel", for: .normal)
         cancelStickyButton.contentView.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cancelStickyButton.contentView.titleLabel?.adjustsFontForContentSizeCategory = true

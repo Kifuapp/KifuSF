@@ -33,8 +33,10 @@ final class KFVWidget: UIView, UIConfigurable {
     private let deliveryIconView = UIIconView(image: .kfDeliveryIcon)
 
     private let deliveryTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let deliveryTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                             textColor: UIColor.Text.Headline)
+    private let deliverySubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                textColor: UIColor.Text.SubHeadline)
 
     private let deliveryDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let deliveryRightEmptyView = UIView(forAutoLayout: ())
@@ -47,8 +49,10 @@ final class KFVWidget: UIView, UIConfigurable {
     private let donationIconView = UIIconView(image: .kfDonationIcon)
 
     private let donationTextBodyStackView = UIStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually)
-    private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    private let donationTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                             textColor: UIColor.Text.Headline)
+    private let donationSubtitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                textColor: UIColor.Text.SubHeadline)
 
     private let donationDisclosureImageView = UIIconView(image: .kfDisclosureIcon)
     private let donationRightEmptyView = UIView(forAutoLayout: ())
@@ -61,14 +65,14 @@ final class KFVWidget: UIView, UIConfigurable {
         didSet {
             switch touchedViewType {
             case .donation?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White.darker(by: 5)
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White
             case .delivery?:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite.darker(by: 5)
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White.darker(by: 5)
             case .none:
-                donationBackgroundView.backgroundColor = UIColor.kfWhite
-                deliveryBackgroundView.backgroundColor = UIColor.kfWhite
+                donationBackgroundView.backgroundColor = UIColor.Pallete.White
+                deliveryBackgroundView.backgroundColor = UIColor.Pallete.White
             }
         }
     }
@@ -233,8 +237,8 @@ final class KFVWidget: UIView, UIConfigurable {
         deliverySpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
         donationSpacer.backgroundColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
 
-        deliveryDisclosureImageView.tintColor = .kfPrimary
-        donationDisclosureImageView.tintColor = .kfPrimary
+        deliveryDisclosureImageView.tintColor = UIColor.Pallete.Green
+        donationDisclosureImageView.tintColor = UIColor.Pallete.Green
 
         touchedViewType = nil
     }

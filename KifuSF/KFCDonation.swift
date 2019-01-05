@@ -18,7 +18,8 @@ class KFCDonation: KFCModularTableView {
         }
     }
 
-    let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
+                                        andTitle: "Directions")
     
     private func updateUI() {
         reloadData()
@@ -62,7 +63,7 @@ class KFCDonation: KFCModularTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -157,7 +158,6 @@ class KFCDonation: KFCModularTableView {
                     }
                 }
             case .awaitingPickup:
-                
                 //Confirm drop off
                 self.confirmDropOff(for: donation)
             case .awaitingDelivery:
@@ -172,14 +172,9 @@ class KFCDonation: KFCModularTableView {
                 self.presentReview(for: volunteer)
             }
         } else {
-            
-            //present new donation editor
-            let createDonationStoryboard = UIStoryboard(name: "CreateDonation", bundle: nil)
-            if let createDonationVC = createDonationStoryboard.instantiateInitialViewController() {
-                present(createDonationVC, animated: true)
-            } else {
-                assertionFailure("error")
-            }
+            let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
+            createDonationViewController.modalTransitionStyle = .coverVertical
+            present(createDonationViewController, animated: true)
         }
     }
     

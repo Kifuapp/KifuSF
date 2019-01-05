@@ -31,7 +31,7 @@ class KFCTableViewWithRoundedCells: UIViewController {
     
     func configureStyling() {
         tableViewWithRoundedCells.separatorStyle = .none
-        tableViewWithRoundedCells.backgroundColor = UIColor.kfGray
+        tableViewWithRoundedCells.backgroundColor = UIColor.Pallete.Gray
         
         tableViewWithRoundedCells.contentInset.bottom = 8
         tableViewWithRoundedCells.scrollIndicatorInsets.bottom = 8

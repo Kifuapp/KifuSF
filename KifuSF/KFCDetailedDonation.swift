@@ -17,17 +17,18 @@ class KFCDetailedDonation: KFCModularTableView {
     var hasUserAlreadyRequested: Bool = false {
         didSet {
             if hasUserAlreadyRequested {
-                self.actionButton.setMainBackgroundColor(.kfDestructive)
+                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Red)
                 self.actionButton.setTitle("Cancel Reqeust", for: .normal)
             } else {
-                self.actionButton.setMainBackgroundColor(.kfPrimary)
+                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Green)
                 self.actionButton.setTitle("Request Item", for: .normal)
             }
         }
     }
     
     /** this can say Reqeust Item or Cancel Request */
-    private let actionButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                                andTitle: "Request Item")
     
     // MARK: - RETURN VALUES
     
@@ -69,7 +70,7 @@ class KFCDetailedDonation: KFCModularTableView {
         super.viewDidLoad()
 
         title = "Donation"
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         modularTableView.separatorStyle = .none
 
         view.addSubview(actionButton)

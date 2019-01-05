@@ -25,9 +25,10 @@ class CreateDonationViewController: UIScrollableViewController {
                                                                                                      placeholder: "Keep it simple"))
     private let descriptionInputView = UIGroupView<UITextView>(title: "Description",
                                                                contentView: UITextView(forAutoLayout: ()))
-    private let pickUpAddressButton = UIAnimatedButton(backgroundColor: .kfInformative,
+    private let pickUpAddressButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                                        andTitle: "Choose pick-up address")
-    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                     textColor: UIColor.Pallete.Red)
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -127,7 +128,7 @@ extension CreateDonationViewController: UITextFieldDelegate {
 //MARK: - UITextViewDelegate
 extension CreateDonationViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .kfPlaceholderText {
+        if textView.textColor == UIColor.Text.Placeholder {
             textView.textColor = .black
             textView.text = nil
         }
@@ -135,7 +136,7 @@ extension CreateDonationViewController: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.textColor = .kfPlaceholderText
+            textView.textColor = UIColor.Text.Placeholder
             textView.text = CreateDonationViewController.descriptionPlaceholder
         }
     }
@@ -200,7 +201,7 @@ extension CreateDonationViewController: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
 
         errorLabel.isHidden = true
         errorLabel.textAlignment = .center
@@ -219,8 +220,8 @@ extension CreateDonationViewController: UIConfigurable {
 
         descriptionInputView.contentView.layer.cornerRadius = CALayer.kfCornerRadius
         descriptionInputView.contentView.font = UIFont.preferredFont(forTextStyle: .title3)
-        descriptionInputView.contentView.textColor = .kfPlaceholderText
-        descriptionInputView.contentView.backgroundColor = .kfGray
+        descriptionInputView.contentView.textColor = UIColor.Text.Placeholder
+        descriptionInputView.contentView.backgroundColor = UIColor.Pallete.Gray
     }
 
     func configureLayout() {

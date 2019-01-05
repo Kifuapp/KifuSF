@@ -24,8 +24,8 @@ class UIAnimatedButton: UIButton {
         }
     }
     
-    private(set) var mainBackgroundColor = UIColor.kfPrimary
-    private(set) var mainTitleColor = UIColor.kfWhite
+    private(set) var mainBackgroundColor = UIColor.Pallete.Green
+    private(set) var mainTitleColor = UIColor.Pallete.White
     private(set) var currentState = AnimationState.idle {
         didSet {
             updateAnimator()
@@ -66,7 +66,7 @@ class UIAnimatedButton: UIButton {
         self.init(frame: CGRect())
     }
 
-    convenience init(backgroundColor: UIColor, andTitle title: String) {
+    convenience init(backgroundColor: UIColor = UIColor.Pallete.Green, andTitle title: String) {
         self.init(frame: CGRect())
 
         mainBackgroundColor = backgroundColor

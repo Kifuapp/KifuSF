@@ -13,7 +13,7 @@ class KFCLeaderboard: KFCTableViewWithRoundedCells {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Leaderboard"
-        view.backgroundColor = .kfGray
+        view.backgroundColor = UIColor.Pallete.Gray
 
 //        let _ = tableViewWithRoundedCellsConstraints.map() { $0.autoRemove() }
 //        tableViewWithRoundedCells.autoPinEdge(toSuperviewEdge: .top)

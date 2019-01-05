@@ -25,10 +25,13 @@ class LoginViewController: UIScrollableViewController {
                                                                                                         isSecureTextEntry: true,
                                                                                                         placeholder: "Password"))
     
-    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
-    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                              textColor: UIColor.Pallete.Green)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                     textColor: UIColor.Pallete.Red)
     
-    private let logInButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+    private let logInButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                               andTitle: "Log In")
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -172,7 +175,7 @@ extension LoginViewController: UIConfigurable {
     func configureStyling() {
         title = "Log In"
         contentScrollView.updateBottomPadding(KFPadding.StackView)
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         logInButton.autoReset = false
         errorLabel.textAlignment = .center
 

@@ -21,7 +21,8 @@ class UIDescriptorView: UIView, UIConfigurable {
 
     let infoStackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill)
 
-    let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let titleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                             textColor: UIColor.Text.Headline)
     let subtitleStickyLabel = UIStickyView<UILabel>()
 
     //MARK: - Initializers
@@ -88,12 +89,12 @@ class UIDescriptorView: UIView, UIConfigurable {
 
     func configureSubtitleStickyLabelStyling() {
         subtitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        subtitleStickyLabel.contentView.textColor = UIColor.kfSubtitle
-        subtitleStickyLabel.contentView.makeItKifuStyle()
+        subtitleStickyLabel.contentView.textColor = UIColor.Text.SubHeadline
+        subtitleStickyLabel.contentView.activateDynamicType()
     }
 
     func configureDescriptorStyling() {
-        backgroundColor = .kfWhite
+        backgroundColor = UIColor.Pallete.White
         layer.masksToBounds = false
         layer.cornerRadius = CALayer.kfCornerRadius
         layer.setUpShadow()

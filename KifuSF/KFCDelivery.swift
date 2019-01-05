@@ -18,7 +18,8 @@ class KFCDelivery: KFCModularTableView {
         }
     }
     
-    private let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
+                                                andTitle: "Directions")
     
     private lazy var photoHelper: PhotoHelper = {
         let helper = PhotoHelper()
@@ -266,7 +267,7 @@ extension KFCDelivery {
     }
     
     private func configureStyling() {
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
     }
     
     private func configureDynamicButtonConstraints() {

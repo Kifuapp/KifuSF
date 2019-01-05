@@ -18,7 +18,7 @@ class UIIconView: UIImageView {
         self.init(frame: CGRect.zero)
         
         self.image = image
-        tintColor = .kfPrimary
+        tintColor = UIColor.Pallete.Green
         contentMode = .scaleAspectFit
         adjustsImageSizeForAccessibilityContentSizeCategory = true
     }

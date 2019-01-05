@@ -98,13 +98,13 @@ extension TutorialViewController: UIConfigurable {
                                 title: "Volunteer",
                                 description: "Deliver items to charities"),
                       SlideView(image: .kfDonationIcon,
-                                title: "Donate",
-                                description: "Offer for delivery stuff that could help homeless people"),]
+                                title: "Give for a good cause",
+                                description: "Find an item, choose a pickup location and we will sent somebody to get it"),]
 
     }
 
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
 
         contentScrollView.delegate = self
         contentScrollView.showsHorizontalScrollIndicator = false
@@ -118,13 +118,13 @@ extension TutorialViewController: UIConfigurable {
         pageControl.numberOfPages = slidesView.count
         pageControl.currentPage = 0
         pageControl.isEnabled = false
-        pageControl.currentPageIndicatorTintColor = .black
-        pageControl.pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.1)
+        pageControl.currentPageIndicatorTintColor = UIColor.Text.Headline
+        pageControl.pageIndicatorTintColor = UIColor.Text.Headline.withAlphaComponent(0.1)
     }
 
     func configureSkipButtonStyling() {
         skipButton.setTitle("Skip", for: .normal)
-        skipButton.setTitleColor(.kfBody, for: .normal)
+        skipButton.setTitleColor(UIColor.Text.Body, for: .normal)
         skipButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
 
         skipButton.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
@@ -132,7 +132,7 @@ extension TutorialViewController: UIConfigurable {
 
     func configureNextButtonStyling() {
         nextButton.setTitle(FinishButtonState.next.rawValue, for: .normal)
-        nextButton.setTitleColor(.kfTitle, for: .normal)
+        nextButton.setTitleColor(UIColor.Text.Headline, for: .normal)
         nextButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
 
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
