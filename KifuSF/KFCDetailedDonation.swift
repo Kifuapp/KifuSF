@@ -103,9 +103,9 @@ class KFCDetailedDonation: KFCModularTableView {
             title: donation.title,
             username: donator.username,
             creationDate: donation.creationDate.stringValue(),
-            userReputation: 22, //TODO: alex-reputation
-            userDonationsCount: 12, //TODO: alex-reputation
-            userDeliveriesCount: 12, //TODO: alex-reputation
+            userReputation: Double(donator.reputation),
+            userDonationsCount: donator.numberOfDonations,
+            userDeliveriesCount: donator.numberOfDeliveries,
             distance: distance,
             description: donation.notes
         )

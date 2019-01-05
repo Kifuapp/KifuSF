@@ -122,14 +122,13 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
 extension User {
     var collaboratorInfo: KFMCollaboratorInfo {
         
-        //TODO: alex-reputation points
         return KFMCollaboratorInfo(
             profileImageURL: URL(string: self.imageURL) ?? URL.brokenUrlImage,
             name: self.username, //TODO: erick-collect their full name
             username: self.username,
-            userReputation: 0,
-            userDonationsCount: 0,
-            userDeliveriesCount: 0
+            userReputation: self.reputation,
+            userDonationsCount: self.numberOfDonations,
+            userDeliveriesCount: self.numberOfDeliveries
         )
     }
 }

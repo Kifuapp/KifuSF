@@ -431,7 +431,7 @@ fileprivate extension User {
         //mutate the current user by updating their new reputation
         let nReviews = self.numberOfDeliveries + self.numberOfDonations
         let newStars = rating.rating.rawValue
-        self.reputation = (reputation * Float(nReviews) + Float(newStars)) / Float(nReviews + 1)
+        self.reputation = (reputation * Double(nReviews) + Double(newStars)) / Double(nReviews + 1)
         
         self[keyPath: keyPath] += 1
     }
