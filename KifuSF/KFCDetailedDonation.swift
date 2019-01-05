@@ -56,7 +56,7 @@ class KFCDetailedDonation: KFCModularTableView {
                 self.actionButton.isEnabled = true
                 
                 if isSuccessful {
-                    self.userRequestingStatus = .userHasRequested
+                    self.navigationController!.popViewController(animated: true)
                 } else {
                     let errorAlert = UIAlertController(errorMessage: nil)
                     self.present(errorAlert, animated: true)
@@ -67,7 +67,7 @@ class KFCDetailedDonation: KFCModularTableView {
                 self.actionButton.isEnabled = true
                 
                 if isSuccessful {
-                    self.userRequestingStatus = .userHasNotRequested
+                    self.navigationController!.popViewController(animated: true)
                 } else {
                     let errorAlert = UIAlertController(errorMessage: nil)
                     self.present(errorAlert, animated: true)
