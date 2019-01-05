@@ -36,15 +36,15 @@ extension KFCLeaderboard: UITableViewDataSource {
         guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVUserInfo>.identifier) as? KFVRoundedCell<KFVUserInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
-
-        //TODO: self explanatory
+        
+        let user = User.current
         let newData = KFMUserInfo(
-            profileImageURL: URL(string: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&h=350")!,
-            name: "Alexandru Turcanu",
-            username: "Pondorasti",
-            userReputation: 100.0,
-            userDonationsCount: 99,
-            userDeliveriesCount: 99
+            profileImageURL: URL(string: user.imageURL)!,
+            name: "", //TODO: user's fullname
+            username: user.username,
+            userReputation: user.reputation,
+            userDonationsCount: user.numberOfDonations,
+            userDeliveriesCount: user.numberOfDeliveries
         )
         donationCell.descriptorView.reloadData(for: newData)
 
