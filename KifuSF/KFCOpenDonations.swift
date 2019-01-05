@@ -28,9 +28,16 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         }
     }
 
+
+    /** updated by firebase observe a method */
     private var currentDonation: Donation?
-    private var pendingRequests: [Donation] = []
+    
+    /** updated by firebase observe a method */
     private var currentDelivery: Donation?
+    
+    /** updated by firebase observe a method */
+    private var pendingRequests: [Donation] = []
+    
     private var currentDeliveryState: DonationOption {
         if let donation = currentDelivery {
             return .deliveringDonation(donation)
