@@ -14,16 +14,29 @@ class LoginViewController: UIScrollableViewController {
     
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
-    private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
-                                                                   contentView: UITextFieldContainer(textContentType: .emailAddress,
-                                                                                                 returnKeyType: .next,
-                                                                                                 keyboardType: .emailAddress,
-                                                                                                 placeholder: "example@kifu.com"))
-    private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
-                                                                      contentView: UITextFieldContainer(textContentType: .password,
-                                                                                                        returnKeyType: .done,
-                                                                                                        isSecureTextEntry: true,
-                                                                                                        placeholder: "Password"))
+    private let emailInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .emailAddress,
+                                             returnKeyType: .next,
+                                             keyboardType: .emailAddress,
+                                             placeholder: "example@kifu.com")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Email",
+                                                 contentView: container)
+    }()
+    
+    private let passwordInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .password,
+                                             returnKeyType: .done,
+                                             isSecureTextEntry: true,
+                                             placeholder: "Password")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Password",
+                                                 contentView: container)
+    }()
     
     private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)

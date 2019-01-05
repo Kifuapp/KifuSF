@@ -20,9 +20,16 @@ class CreateDonationViewController: UIScrollableViewController {
     private var pickupLocation: Location?
 
     private let descriptorView = UIDescriptorView(defaultImageViewSize: .medium)
-    private let titleInputView = UIGroupView<UITextFieldContainer>(title: "Item Name",
-                                                                   contentView: UITextFieldContainer(returnKeyType: .next,
-                                                                                                     placeholder: "Keep it simple"))
+    private let titleInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(returnKeyType: .next,
+                                             placeholder: "Keep it simple")
+        container.textField.autocorrectionType = .default
+        container.textField.autocapitalizationType = .words
+        
+        return UIGroupView<UITextFieldContainer>(title: "Item Name",
+                                                 contentView: container)
+    }()
+    
     private let descriptionInputView = UIGroupView<UITextView>(title: "Description",
                                                                contentView: UITextView(forAutoLayout: ()))
     private let pickUpAddressButton = UIAnimatedButton(backgroundColor: .kfInformative,

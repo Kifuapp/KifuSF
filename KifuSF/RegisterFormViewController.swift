@@ -18,29 +18,63 @@ class RegisterFormViewController: UIScrollableViewController {
     private let profileImageInputView = UIGroupView<UIImageView>(title: "Profile Image",
                                                                       contentView: UIImageView(image: .kfPlusImage))
 
-    private let fullNameInputView = UIGroupView<UITextFieldContainer>(title: "Full Name",
-                                                                      contentView: UITextFieldContainer(textContentType: .name,
-                                                                                                    returnKeyType: .next,
-                                                                                                    placeholder: "Kifu SF"))
-    private let usernameInputView = UIGroupView<UITextFieldContainer>(title: "Username",
-                                                                      contentView: UITextFieldContainer(textContentType: .nickname,
-                                                                                                    returnKeyType: .next,
-                                                                                                    placeholder: "@Pondorasti"))
-    private let phoneNumberInputView = UIGroupView<UITextFieldContainer>(title: "Phone Number",
-                                                                         contentView: UITextFieldContainer(textContentType: .telephoneNumber,
-                                                                                                       returnKeyType: .next,
-                                                                                                       keyboardType: .phonePad,
-                                                                                                       placeholder: "+12345678"))
-    private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
-                                                                   contentView: UITextFieldContainer(textContentType: .emailAddress,
-                                                                                                 returnKeyType: .next,
-                                                                                                 keyboardType: .emailAddress,
-                                                                                                 placeholder: "example@kifu.com"))
-    private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
-                                                                      contentView: UITextFieldContainer(textContentType: .newPassword,
-                                                                                                    returnKeyType: .done,
-                                                                                                    isSecureTextEntry: true,
-                                                                                                    placeholder: "Password"))
+    private let fullNameInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .name,
+                                             returnKeyType: .next,
+                                             placeholder: "Kifu SF")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .words
+        
+        return UIGroupView<UITextFieldContainer>(title: "Full Name",
+                                                 contentView: container)
+    }()
+
+    private let usernameInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .nickname,
+                                             returnKeyType: .next,
+                                             placeholder: "@Pondorasti")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Username",
+                                                 contentView: container)
+    }()
+    
+    private let phoneNumberInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .telephoneNumber,
+                                             returnKeyType: .next,
+                                             keyboardType: .phonePad,
+                                             placeholder: "+12345678")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Phone Number",
+                                                 contentView: container)
+    }()
+    
+    private let emailInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .emailAddress,
+                                             returnKeyType: .next,
+                                             keyboardType: .emailAddress,
+                                             placeholder: "example@kifu.com")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Email",
+                                                 contentView: container)
+    }()
+    
+    private let passwordInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .newPassword,
+                                             returnKeyType: .done,
+                                             isSecureTextEntry: true,
+                                             placeholder: "Password")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Password",
+                                                 contentView: container)
+    }()
     
     private let disclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfBody)
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
