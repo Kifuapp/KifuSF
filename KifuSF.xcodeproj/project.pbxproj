@@ -60,6 +60,7 @@
 		C54FDBD82141756000BC89B8 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBD72141756000BC89B8 /* UITableView.swift */; };
 		C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */; };
 		C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */; };
+		C552163221E0C462005D85F0 /* TutorialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552163121E0C462005D85F0 /* TutorialModel.swift */; };
 		C555F8F421766897000CC299 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C555F8F321766897000CC299 /* UIWindow.swift */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
@@ -186,6 +187,7 @@
 		C54FDBD72141756000BC89B8 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPWidgetInfo.swift; sourceTree = "<group>"; };
 		C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPendingDonations.swift; sourceTree = "<group>"; };
+		C552163121E0C462005D85F0 /* TutorialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialModel.swift; sourceTree = "<group>"; };
 		C555F8F321766897000CC299 /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				C5231EFA21DEB9EE001D9A7D /* WebsiteModel.swift */,
 				C5231EFE21DF82C1001D9A7D /* MailComposerModel.swift */,
 				C5231F0021DF9550001D9A7D /* InformationModel.swift */,
+				C552163121E0C462005D85F0 /* TutorialModel.swift */,
 				C5231EFC21DEBAA9001D9A7D /* SettingsItem.swift */,
 			);
 			name = Settings;
@@ -1009,6 +1012,7 @@
 				E9F4238F21CEDFB500F1DB5D /* UserDistance.swift in Sources */,
 				C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */,
 				C58D9EBD216008D900B180B3 /* UIAnimatedButton.swift in Sources */,
+				C552163221E0C462005D85F0 /* TutorialModel.swift in Sources */,
 				C564187A216A089F00664DDB /* RegisterFormViewController.swift in Sources */,
 				C50182F62142E3F100257412 /* UIDescriptorView.swift in Sources */,
 				C58D9ED62163B09300B180B3 /* UIIconView.swift in Sources */,
