@@ -67,19 +67,13 @@ extension SlideView: UIConfigurable {
     }
 
     func configureTitleLabelConstraints() {
-        titleLabel
         titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-
-        let screenHeight = UIScreen.main.bounds.height
-        titleLabel.autoPinEdge(.bottom, to: .top, of: descriptionLabel, withOffset: 8)
-//        titleLabel.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: screenHeight * 0.2)
+        titleLabel.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: 120)
     }
 
     func configureDescriptionLabelConstraints() {
-        let screenHeight = UIScreen.main.bounds.height
-//        descriptionLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 8)
-        descriptionLabel.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: screenHeight * 0.1)
-        descriptionLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 72)
-        descriptionLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 72)
+        descriptionLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        descriptionLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 8)
+        descriptionLabel.autoMatch(.width, to: .width, of: self, withMultiplier: 0.75)
     }
 }

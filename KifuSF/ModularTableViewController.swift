@@ -132,8 +132,11 @@ extension ModularTableViewController: UITableViewDataSource {
                                       description: "Go to...")
             tableView.backgroundView = slideView
 
-            slideView.translatesAutoresizingMaskIntoConstraints = false
-            slideView.autoCenterInSuperview()
+            slideView.frame = CGRect(x: tableView.frame.width, y: 0,
+                                     width: tableView.frame.width, height: tableView.frame.height)
+//            slideView.translatesAutoresizingMaskIntoConstraints = false
+//            slideView.autoCenterInSuperview()
+//            slideView.autoPinEdgesToSuperviewMargins()
         } else {
             tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
