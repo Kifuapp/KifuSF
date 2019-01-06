@@ -14,7 +14,7 @@ class CreateDonationViewController: UIScrollableViewController {
     private static let descriptionPlaceholder = "Additional info about pick up address, hours of availability, item description."
 
     private lazy var imageHelper = PhotoHelper()
-    private let keyboardStack = KeyboardStack()
+    private let keyboardStack = KeyboardHandler()
 
     private var userSelectedAProfileImage: Bool? = nil
     private var pickupLocation: Location?
@@ -158,9 +158,9 @@ extension CreateDonationViewController: UITextViewDelegate {
     }
 }
 
-//MARK: - KeyboardStackDelegate
-extension CreateDonationViewController: KeyboardStackDelegate {
-    func keyboard(_ keyboard: KeyboardStack, didChangeTo newHeight: CGFloat) {
+//MARK: - KeyboardHandlerDelegate
+extension CreateDonationViewController: KeyboardHandlerDelegate {
+    func keyboard(_ keyboard: KeyboardHandler, didChangeTo newHeight: CGFloat) {
         if newHeight == 0 {
             contentScrollView.updateBottomPadding(pickUpAddressButton.frame.height + 24)
         } else {

@@ -88,6 +88,14 @@ extension UIImage {
 
         return image
     }()
+
+    static let kfSettingsIcon: UIImage = {
+        guard let image = UIImage(named: "SettingsIcon")?.withRenderingMode(.alwaysTemplate) else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+
+        return image
+    }()
     
     static let kfLogo: UIImage = {
         guard let image = UIImage(named: "Logo") else {

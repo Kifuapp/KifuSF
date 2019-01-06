@@ -29,7 +29,6 @@ extension UILabel {
     }
 
     func activateDynamicType() {
-        font.withSize(UIFont.buttonFontSize)
         adjustsFontForContentSizeCategory = true
         numberOfLines = 0
     }

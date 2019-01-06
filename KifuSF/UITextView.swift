@@ -7,3 +7,17 @@
 //
 
 import UIKit.UITextView
+
+extension UITextView {
+    convenience init(font: UIFont, textColor: UIColor) {
+        self.init()
+
+        self.font = font
+        self.textColor = textColor
+        activateDynamicType()
+    }
+
+    func activateDynamicType() {
+        adjustsFontForContentSizeCategory = true
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  KeyboardStack.swift
+//  KeyboardHandler.swift
 //  KifuSF
 //
 //  Created by Alexandru Turcanu on 25/12/2018.
@@ -9,12 +9,12 @@
 import Foundation
 import UIKit.UIWindow
 
-protocol KeyboardStackDelegate: class {
-    func keyboard(_ keyboard: KeyboardStack, didChangeTo newHeight: CGFloat)
+protocol KeyboardHandlerDelegate: class {
+    func keyboard(_ keyboard: KeyboardHandler, didChangeTo newHeight: CGFloat)
 }
 
-class KeyboardStack: NSObject {
-    weak var delegate: KeyboardStackDelegate?
+class KeyboardHandler: NSObject {
+    weak var delegate: KeyboardHandlerDelegate?
 
     override init() {
         super.init()

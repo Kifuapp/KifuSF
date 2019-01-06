@@ -15,16 +15,44 @@ class KifuTabBarViewController: UITabBarController {
         
         //TODO: check if for location acces
         
-        let homeVC = KFCOpenDonations()
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: .kfBoxIcon, tag: 0)
+        let homeViewController = KFCOpenDonations()
+        let settingViewController = SettingsViewController()
+        let statusViewController = KFCStatus()
+        let leaderboardViewController = KFCLeaderboard()
+
+        homeViewController.tabBarItem = UITabBarItem(
+            title: "Home",
+            image: .kfBoxIcon,
+            tag: 0
+        )
+
+        statusViewController.tabBarItem = UITabBarItem(
+            title: "Status",
+            image: .kfStatusIcon,
+            tag: 1
+        )
+
+        leaderboardViewController.tabBarItem = UITabBarItem(
+            title: "Leaderboard",
+            image: .kfLeaderboardIcon,
+            tag: 2
+        )
+
+        settingViewController.tabBarItem = UITabBarItem(
+            title: "Settings",
+            image: .kfSettingsIcon,
+            tag: 3
+        )
         
-        let statusVC = KFCStatus()
-        statusVC.tabBarItem = UITabBarItem(title: "Status", image: .kfStatusIcon, tag: 1)
-        
-        let leaderboardVC = KFCLeaderboard()
-        leaderboardVC.tabBarItem = UITabBarItem(title: "Leaderboard", image: .kfLeaderboardIcon, tag: 2)
-        
-        viewControllers = [homeVC, statusVC, leaderboardVC]
-        viewControllers = viewControllers?.map { UINavigationController(rootViewController: $0) }
+        viewControllers = [
+            homeViewController,
+            statusViewController,
+            leaderboardViewController,
+            settingViewController
+        ]
+
+        viewControllers = viewControllers?.map {
+            UINavigationController(rootViewController: $0)
+        }
     }
 }
