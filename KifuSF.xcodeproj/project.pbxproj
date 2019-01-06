@@ -118,6 +118,7 @@
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
+		E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */; };
 		E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */; };
 		E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
@@ -253,6 +254,7 @@
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
+		E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Date.swift"; sourceTree = "<group>"; };
 		E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImage.xib; sourceTree = "<group>"; };
 		E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KFCVerifyDropoffImage.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				C576EFED21C82A4E00F96922 /* String.swift */,
 				E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */,
 				C5231EF721DEB620001D9A7D /* SFSafariViewController.swift */,
+				E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				C50182F62142E3F100257412 /* UIDescriptorView.swift in Sources */,
 				C58D9ED62163B09300B180B3 /* UIIconView.swift in Sources */,
 				C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */,
+				E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */,
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,

@@ -8,6 +8,8 @@
 
 import UIKit
 
+//TODO: alex-remove this file?
+
 class KFCVerifyDropoffImage: UIViewController {
 
     // MARK: - VARS
