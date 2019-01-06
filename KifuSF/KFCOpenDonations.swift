@@ -107,7 +107,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 
     @objc func createDonation() {
         guard self.currentDonation == nil else {
-            UIAlertController(errorMessage: "You cannot create more than one donation at a time")
+            UIAlertController(errorMessage: "You cannot create another donation while having a donation in progress. Please complete your current donation before creating another.")
                 .present(in: self)
             
             return

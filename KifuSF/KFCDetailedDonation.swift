@@ -24,16 +24,12 @@ class KFCDetailedDonation: KFCModularTableView {
     var userRequestingStatus = UserRequestingStatus.userHasNotRequested {
         didSet {
             switch userRequestingStatus {
-            case .userHasNotRequested:
+            case .userHasNotRequested, .userAlreadyHasCurrentDelivery:
                 self.actionButton.setMainBackgroundColor(.kfPrimary)
                 self.actionButton.setTitle("Request Item", for: .normal)
-                self.actionButton.isHidden = false
             case .userHasRequested:
                 self.actionButton.setMainBackgroundColor(.kfDestructive)
                 self.actionButton.setTitle("Cancel Reqeust", for: .normal)
-                self.actionButton.isHidden = false
-            case .userAlreadyHasCurrentDelivery:
-                self.actionButton.isHidden = true
             }
         }
     }
@@ -74,7 +70,8 @@ class KFCDetailedDonation: KFCModularTableView {
                 }
             }
         case .userAlreadyHasCurrentDelivery:
-            fatalError("this button should be hidden in this state")
+            UIAlertController(errorMessage: "You cannot request another donation while having a delivery in progress. Please complete your current delivery before requesting another.")
+                .present(in: self)
         }
     }
     
