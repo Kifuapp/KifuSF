@@ -124,6 +124,21 @@ class ModularTableViewController: UIViewController, UIConfigurable {
 // MARK: - UITableViewDataSource
 extension ModularTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        if items.isEmpty {
+            tableView.separatorStyle = .none
+
+            let slideView = SlideView(image: .kfNoDataIcon,
+                                      title: "No Data",
+                                      description: "Go to...")
+            tableView.backgroundView = slideView
+
+            slideView.translatesAutoresizingMaskIntoConstraints = false
+            slideView.autoCenterInSuperview()
+        } else {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView = nil
+        }
+
         return items.count
     }
 
