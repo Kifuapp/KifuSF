@@ -34,7 +34,7 @@ struct User: Codable, KeyedStoredProperties {
     var isVerified: Bool
     var hasApprovedConditions: Bool
     
-    var reputation: Float = 0
+    var reputation: Double = 0
     var numberOfDonations: Int = 0
     var numberOfDeliveries: Int = 0
     
@@ -100,7 +100,7 @@ struct User: Codable, KeyedStoredProperties {
             let username = dictionary[Keys.username] as? String,
             let uid = dictionary[Keys.uid] as? String,
             let imageURL = dictionary[Keys.imageURL] as? String,
-            let reputation = dictionary[Keys.reputation] as? Float,
+            let reputation = dictionary[Keys.reputation] as? Double,
             let nDonations = dictionary[Keys.numberOfDonations] as? Int,
             let nDeliveries = dictionary[Keys.numberOfDeliveries] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
