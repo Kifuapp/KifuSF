@@ -14,14 +14,22 @@ class KFCDetailedDonation: KFCModularTableView {
     
     var donation: Donation!
     
-    var hasUserAlreadyRequested: Bool = false {
+    enum UserRequestingStatus {
+        case userHasNotRequested
+        case userHasRequested
+        case userAlreadyHasCurrentDelivery
+    }
+    
+    /** default is `.userHasNotRequested` */
+    var userRequestingStatus = UserRequestingStatus.userHasNotRequested {
         didSet {
-            if hasUserAlreadyRequested {
-                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Red)
-                self.actionButton.setTitle("Cancel Reqeust", for: .normal)
-            } else {
+            switch userRequestingStatus {
+            case .userHasNotRequested, .userAlreadyHasCurrentDelivery:
                 self.actionButton.setMainBackgroundColor(UIColor.Pallete.Green)
                 self.actionButton.setTitle("Request Item", for: .normal)
+            case .userHasRequested:
+                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Red)
+                self.actionButton.setTitle("Cancel Reqeust", for: .normal)
             }
         }
     }
@@ -39,28 +47,32 @@ class KFCDetailedDonation: KFCModularTableView {
     @objc func pressActionButton(_ sender: Any) {
         actionButton.isEnabled = false
         
-        if hasUserAlreadyRequested {
-            RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
-                self.actionButton.isEnabled = true
-                
-                if isSuccessful {
-                    self.hasUserAlreadyRequested = false
-                } else {
-                    let errorAlert = UIAlertController(errorMessage: nil)
-                    self.present(errorAlert, animated: true)
-                }
-            }
-        } else {
+        switch userRequestingStatus {
+        case .userHasNotRequested:
             RequestService.createRequest(for: self.donation) { (isSuccessful) in
                 self.actionButton.isEnabled = true
                 
                 if isSuccessful {
-                    self.hasUserAlreadyRequested = true
+                    self.navigationController!.popViewController(animated: true)
                 } else {
                     let errorAlert = UIAlertController(errorMessage: nil)
                     self.present(errorAlert, animated: true)
                 }
             }
+        case .userHasRequested:
+            RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
+                self.actionButton.isEnabled = true
+                
+                if isSuccessful {
+                    self.navigationController!.popViewController(animated: true)
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    self.present(errorAlert, animated: true)
+                }
+            }
+        case .userAlreadyHasCurrentDelivery:
+            UIAlertController(errorMessage: "You cannot request another item while having a delivery in progress. Please complete your current delivery before requesting another.")
+                .present(in: self)
         }
     }
     
