@@ -9,7 +9,8 @@
 import UIKit
 
 class KFVUserInfo: UIDescriptorView {
-    let descriptionLabel = UILabel()
+    let descriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                   textColor: UIColor.Text.SubHeadline)
     let statisticsStickyView = UIStickyView<UIStatisticsView>(stickySide: .top)
     
     override func configureLayout() {
@@ -24,15 +25,6 @@ class KFVUserInfo: UIDescriptorView {
         statisticsStickyView.setContentHuggingPriority(.init(rawValue: 249), for: .vertical)
         
         subtitleStickyLabel.updateStickySide()
-    }
-    
-    override func configureStyling() {
-        super.configureStyling()
-        
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor = UIColor.kfSubtitle
-        descriptionLabel.adjustsFontForContentSizeCategory = true
     }
     
     func reloadData(for data: KFMUserInfo) {

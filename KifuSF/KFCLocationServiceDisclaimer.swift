@@ -15,10 +15,13 @@ import CoreLocation
  */
 class KFCLocationServiceDisclaimer: UIScrollableViewController {
     //MARK: - Variables
-    let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfSubtitle)
+    let locationServiceDisclaimerLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                                 textColor: UIColor.Text.SubHeadline)
     
-    let activateLocationButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Activate Location")
-    let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Continue")
+    let activateLocationButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                                  andTitle: "Activate Location")
+    let continueButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                          andTitle: "Continue")
     
     let locationManager = CLLocationManager()
 
@@ -56,7 +59,7 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
     }
     
     func configureStyling() {
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         
         title = "Location Privacy"
         locationServiceDisclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app."

@@ -18,7 +18,8 @@ class KFCDelivery: KFCModularTableView {
         }
     }
     
-    private let actionButton = UIAnimatedButton(backgroundColor: .kfInformative, andTitle: "Directions")
+    private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
+                                                andTitle: "Directions")
     
     private lazy var photoHelper: PhotoHelper = {
         let helper = PhotoHelper()
@@ -31,12 +32,10 @@ class KFCDelivery: KFCModularTableView {
                 return assertionFailure("shouldn't select an image without a delivery")
             }
             
-            //TODO: alex-show loading indicator
             let loadingVc = KFCLoading(style: .whiteLarge)
             loadingVc.present()
             
             DonationService.confirmDelivery(for: delivery, image: image, completion: { (isSuccessful) in
-                //TODO: alex-dismiss loading indicator
                 loadingVc.dismiss {
                     if isSuccessful {
                         unwrappedSelf.delivery?.status = .awaitingReview
@@ -266,7 +265,7 @@ extension KFCDelivery {
     }
     
     private func configureStyling() {
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
     }
     
     private func configureDynamicButtonConstraints() {

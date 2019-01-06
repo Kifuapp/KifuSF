@@ -11,12 +11,15 @@ import UIKit
 class KFVInProgressDonationDescription: UIDescriptorView {
     
     let statusStackView = UIStackView(axis: .vertical)
-    let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
+    let statusTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                   textColor: UIColor.Text.Headline)
     let statusDescriptionStickyLabel = UIStickyView<UILabel>(stickySide: .top)
     
     let donationDescriptionStackView = UIStackView(axis: .vertical)
-    let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline), textColor: .kfTitle)
-    let donationDescriptionContentLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline), textColor: .kfSubtitle)
+    let donationDescriptionTitleLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                                textColor: UIColor.Text.Headline)
+    let donationDescriptionContentLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .subheadline),
+                                                  textColor: UIColor.Text.SubHeadline)
     
     override func configureLayout() {
         super.configureLayout()
@@ -47,7 +50,8 @@ class KFVInProgressDonationDescription: UIDescriptorView {
         subtitleStickyLabel.contentView.text = " "
         
         statusDescriptionStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        statusDescriptionStickyLabel.contentView.textColor = UIColor.kfSubtitle
+        statusDescriptionStickyLabel.contentView.textColor = UIColor.Text.SubHeadline
+        statusDescriptionStickyLabel.contentView.activateDynamicType()
     }
     
     func reloadData(for data: KFMInProgressDonationDescription) {

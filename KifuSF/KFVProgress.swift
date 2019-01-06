@@ -45,24 +45,24 @@ class KFVProgress: UITableViewCell {
     }
     
     private func setUpStyling() {
-        currentStepLabel.textColor = .kfTitle
+        currentStepLabel.textColor = UIColor.Text.Headline
         
-        stepOneTitleLabel.textColor = .kfTitle
-        stepOneDescriptionLabel.textColor = .kfSubtitle
+        stepOneTitleLabel.textColor = UIColor.Text.Headline
+        stepOneDescriptionLabel.textColor = UIColor.Text.SubHeadline
         stepOneDescriptionLabel.numberOfLines = 2
         stepOneDescriptionLabel.adjustsFontSizeToFitWidth = true
         
-        stepTwoTitleLabel.textColor = .kfTitle
-        stepTwoDescriptionLabel.textColor = .kfSubtitle
+        stepTwoTitleLabel.textColor = UIColor.Text.Headline
+        stepTwoDescriptionLabel.textColor = UIColor.Text.SubHeadline
         stepTwoDescriptionLabel.numberOfLines = 2
         stepTwoDescriptionLabel.adjustsFontSizeToFitWidth = true
         
-        stepThreeTitleLabel.textColor = .kfTitle
-        stepThreeDescriptionLabel.textColor = .kfSubtitle
+        stepThreeTitleLabel.textColor = UIColor.Text.Headline
+        stepThreeDescriptionLabel.textColor = UIColor.Text.SubHeadline
         stepThreeDescriptionLabel.numberOfLines = 2
         stepThreeDescriptionLabel.adjustsFontSizeToFitWidth = true
         
-        stepFourTitleLabel.textColor = .kfTitle
+        stepFourTitleLabel.textColor = UIColor.Text.Headline
         selectionStyle = .none
     }
     

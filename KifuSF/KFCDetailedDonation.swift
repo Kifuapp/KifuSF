@@ -25,17 +25,18 @@ class KFCDetailedDonation: KFCModularTableView {
         didSet {
             switch userRequestingStatus {
             case .userHasNotRequested, .userAlreadyHasCurrentDelivery:
-                self.actionButton.setMainBackgroundColor(.kfPrimary)
+                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Green)
                 self.actionButton.setTitle("Request Item", for: .normal)
             case .userHasRequested:
-                self.actionButton.setMainBackgroundColor(.kfDestructive)
+                self.actionButton.setMainBackgroundColor(UIColor.Pallete.Red)
                 self.actionButton.setTitle("Cancel Reqeust", for: .normal)
             }
         }
     }
     
     /** this can say Reqeust Item or Cancel Request */
-    private let actionButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Request Item")
+    private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                                andTitle: "Request Item")
     
     // MARK: - RETURN VALUES
     
@@ -81,7 +82,7 @@ class KFCDetailedDonation: KFCModularTableView {
         super.viewDidLoad()
 
         title = "Donation"
-        view.backgroundColor = UIColor.kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         modularTableView.separatorStyle = .none
 
         view.addSubview(actionButton)
@@ -114,10 +115,10 @@ class KFCDetailedDonation: KFCModularTableView {
             imageURL: imageUrl,
             title: donation.title,
             username: donator.username,
-            creationDate: String(describing: donation.creationDate), //TODO: format date
-            userReputation: 22, //TODO: alex-reputation
-            userDonationsCount: 12, //TODO: alex-reputation
-            userDeliveriesCount: 12, //TODO: alex-reputation
+            creationDate: donation.creationDate.stringValue(),
+            userReputation: Double(donator.reputation),
+            userDonationsCount: donator.numberOfDonations,
+            userDeliveriesCount: donator.numberOfDeliveries,
             distance: distance,
             description: donation.notes
         )

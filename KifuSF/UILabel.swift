@@ -25,10 +25,10 @@ extension UILabel {
         
         self.font = font
         self.textColor = textColor
-        makeItKifuStyle()
+        activateDynamicType()
     }
 
-    func makeItKifuStyle() {
+    func activateDynamicType() {
         font.withSize(UIFont.buttonFontSize)
         adjustsFontForContentSizeCategory = true
         numberOfLines = 0

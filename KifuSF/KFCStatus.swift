@@ -17,7 +17,7 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         title = "Status"
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -82,9 +82,9 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     }
     
     private func setUpTopBar() {
-        settings.style.buttonBarBackgroundColor = .kfWhite
-        settings.style.buttonBarItemBackgroundColor = .kfWhite
-        settings.style.selectedBarBackgroundColor = .kfPrimary
+        settings.style.buttonBarBackgroundColor = UIColor.Pallete.White
+        settings.style.buttonBarItemBackgroundColor = UIColor.Pallete.White
+        settings.style.selectedBarBackgroundColor = UIColor.Pallete.Green
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
         settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
@@ -97,8 +97,8 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .kfTitle
-            newCell?.label.textColor = .kfPrimary
+            oldCell?.label.textColor = UIColor.Text.Headline
+            newCell?.label.textColor = UIColor.Pallete.Green
         }
     }
 
@@ -122,14 +122,13 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
 extension User {
     var collaboratorInfo: KFMCollaboratorInfo {
         
-        //TODO: alex-reputation points
         return KFMCollaboratorInfo(
             profileImageURL: URL(string: self.imageURL) ?? URL.brokenUrlImage,
-            name: self.username, //TODO: erick-collect their full name
+            name: self.username, //TODO: erick-collect their fullname
             username: self.username,
-            userReputation: 0,
-            userDonationsCount: 0,
-            userDeliveriesCount: 0
+            userReputation: self.reputation,
+            userDonationsCount: self.numberOfDonations,
+            userDeliveriesCount: self.numberOfDeliveries
         )
     }
 }

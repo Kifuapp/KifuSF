@@ -14,21 +14,37 @@ class LoginViewController: UIScrollableViewController {
     
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
-    private let emailInputView = UIGroupView<UITextFieldContainer>(title: "Email",
-                                                                   contentView: UITextFieldContainer(textContentType: .emailAddress,
-                                                                                                 returnKeyType: .next,
-                                                                                                 keyboardType: .emailAddress,
-                                                                                                 placeholder: "example@kifu.com"))
-    private let passwordInputView = UIGroupView<UITextFieldContainer>(title: "Password",
-                                                                      contentView: UITextFieldContainer(textContentType: .password,
-                                                                                                        returnKeyType: .done,
-                                                                                                        isSecureTextEntry: true,
-                                                                                                        placeholder: "Password"))
+    private let emailInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .emailAddress,
+                                             returnKeyType: .next,
+                                             keyboardType: .emailAddress,
+                                             placeholder: "example@kifu.com")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Email",
+                                                 contentView: container)
+    }()
     
-    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body), textColor: .kfPrimary)
-    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote), textColor: .kfDestructive)
+    private let passwordInputView: UIGroupView<UITextFieldContainer> = {
+        let container = UITextFieldContainer(textContentType: .password,
+                                             returnKeyType: .done,
+                                             isSecureTextEntry: true,
+                                             placeholder: "Password")
+        container.textField.autocorrectionType = .no
+        container.textField.autocapitalizationType = .none
+        
+        return UIGroupView<UITextFieldContainer>(title: "Password",
+                                                 contentView: container)
+    }()
     
-    private let logInButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Log In")
+    private let forgotPasswordLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                              textColor: UIColor.Pallete.Green)
+    private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                     textColor: UIColor.Pallete.Red)
+    
+    private let logInButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
+                                               andTitle: "Log In")
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -172,7 +188,7 @@ extension LoginViewController: UIConfigurable {
     func configureStyling() {
         title = "Log In"
         contentScrollView.updateBottomPadding(KFPadding.StackView)
-        view.backgroundColor = .kfWhite
+        view.backgroundColor = UIColor.Pallete.White
         logInButton.autoReset = false
         errorLabel.textAlignment = .center
 

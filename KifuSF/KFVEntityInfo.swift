@@ -11,21 +11,25 @@ import UIKit
 class KFVEntityInfo: UIView {
 
     let contentsStackView = UIStackView()
-    let headlineLabel = UILabel()
+    let headlineLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .headline),
+                                textColor: UIColor.Text.Headline)
     
     let infoStackView = UIStackView()
     
     let nameStackView = UIStackView()
-    let nameTitleLabel = UIStickyView<UILabel>(stickySide: .top)
-    let nameDescriptionLabel = UILabel()
+    let nameTitleStickyLabel = UIStickyView<UILabel>(stickySide: .top)
+    let nameDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                       textColor: UIColor.Text.Body)
     
     let phoneNumberStackView = UIStackView()
-    let phoneNumberTitleLabel = UIStickyView<UILabel>(stickySide: .top)
-    let phoneNumberDescriptionLabel = UILabel()
+    let phoneNumberTitleStickyLabel = UIStickyView<UILabel>(stickySide: .top)
+    let phoneNumberDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                              textColor: UIColor.Text.Body)
     
     let addressStackView = UIStackView()
-    let addressTitleLabel = UIStickyView<UILabel>(stickySide: .top)
-    let addressDescriptionLabel = UILabel()
+    let addressTitleStickyLabel = UIStickyView<UILabel>(stickySide: .top)
+    let addressDescriptionLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
+                                          textColor: UIColor.Text.Body)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,19 +48,19 @@ class KFVEntityInfo: UIView {
         nameStackView.spacing = 4
         nameStackView.axis = .horizontal
         
-        nameStackView.addArrangedSubview(nameTitleLabel)
+        nameStackView.addArrangedSubview(nameTitleStickyLabel)
         nameStackView.addArrangedSubview(nameDescriptionLabel)
         
         phoneNumberStackView.spacing = 4
         phoneNumberStackView.axis = .horizontal
         
-        phoneNumberStackView.addArrangedSubview(phoneNumberTitleLabel)
+        phoneNumberStackView.addArrangedSubview(phoneNumberTitleStickyLabel)
         phoneNumberStackView.addArrangedSubview(phoneNumberDescriptionLabel)
         
         addressStackView.spacing = 4
         addressStackView.axis = .horizontal
         
-        addressStackView.addArrangedSubview(addressTitleLabel)
+        addressStackView.addArrangedSubview(addressTitleStickyLabel)
         addressStackView.addArrangedSubview(addressDescriptionLabel)
         
         infoStackView.axis = .vertical
@@ -82,48 +86,26 @@ class KFVEntityInfo: UIView {
     }
     
     func setUpStyling() {
-        headlineLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        headlineLabel.numberOfLines = 0
-        headlineLabel.textColor = UIColor.kfTitle
-        headlineLabel.adjustsFontForContentSizeCategory = true
+        nameTitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
+        nameTitleStickyLabel.contentView.textColor = UIColor.Text.Headline
+        nameTitleStickyLabel.contentView.activateDynamicType()
         
-        nameTitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
-        nameTitleLabel.contentView.numberOfLines = 0
-        nameTitleLabel.contentView.textColor = UIColor.kfTitle
-        nameTitleLabel.contentView.adjustsFontForContentSizeCategory = true
+        phoneNumberTitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
+        phoneNumberTitleStickyLabel.contentView.textColor = UIColor.Text.Headline
+        phoneNumberTitleStickyLabel.contentView.activateDynamicType()
         
-        phoneNumberTitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
-        phoneNumberTitleLabel.contentView.numberOfLines = 0
-        phoneNumberTitleLabel.contentView.textColor = UIColor.kfTitle
-        phoneNumberTitleLabel.contentView.adjustsFontForContentSizeCategory = true
-        
-        addressTitleLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
-        addressTitleLabel.contentView.numberOfLines = 0
-        addressTitleLabel.contentView.textColor = UIColor.kfTitle
-        addressTitleLabel.contentView.adjustsFontForContentSizeCategory = true
-        
-        nameDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        nameDescriptionLabel.numberOfLines = 0
-        nameDescriptionLabel.textColor = UIColor.kfBody
-        nameDescriptionLabel.adjustsFontForContentSizeCategory = true
+        addressTitleStickyLabel.contentView.font = UIFont.preferredFont(forTextStyle: .body)
+        addressTitleStickyLabel.contentView.textColor = UIColor.Text.Headline
+        addressTitleStickyLabel.contentView.activateDynamicType()
+
         nameDescriptionLabel.textAlignment = .right
-        
-        phoneNumberDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        phoneNumberDescriptionLabel.numberOfLines = 0
-        phoneNumberDescriptionLabel.textColor = UIColor.kfBody
-        phoneNumberDescriptionLabel.adjustsFontForContentSizeCategory = true
         phoneNumberDescriptionLabel.textAlignment = .right
-        
-        addressDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        addressDescriptionLabel.numberOfLines = 0
-        addressDescriptionLabel.textColor = UIColor.kfBody
-        addressDescriptionLabel.adjustsFontForContentSizeCategory = true
         addressDescriptionLabel.textAlignment = .right
         
         headlineLabel.text = "Entity Info"
-        nameTitleLabel.contentView.text = "Name"
-        phoneNumberTitleLabel.contentView.text = "Phone Number"
-        addressTitleLabel.contentView.text = "Address"
+        nameTitleStickyLabel.contentView.text = "Name"
+        phoneNumberTitleStickyLabel.contentView.text = "Phone Number"
+        addressTitleStickyLabel.contentView.text = "Address"
     }
     
     func reloadData(for data: KFMEntityInfo) {
