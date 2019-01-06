@@ -70,7 +70,7 @@ class KFCDetailedDonation: KFCModularTableView {
                 }
             }
         case .userAlreadyHasCurrentDelivery:
-            UIAlertController(errorMessage: "You cannot request another donation while having a delivery in progress. Please complete your current delivery before requesting another.")
+            UIAlertController(errorMessage: "You cannot request another item while having a delivery in progress. Please complete your current delivery before requesting another.")
                 .present(in: self)
         }
     }
