@@ -19,6 +19,12 @@ class ModularTableViewController: UIViewController, UIConfigurable {
         case destinationMap
     }
 
+    var slideView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No poof",
+                         description: "Go to...")
+    }
+
     let modularTableView = UITableView()
     var items = [ModularTableViewItem]()
 
@@ -86,6 +92,14 @@ class ModularTableViewController: UIViewController, UIConfigurable {
         view.addSubview(modularTableView)
         modularTableView.translatesAutoresizingMaskIntoConstraints = false
         modularTableView.autoPinEdgesToSuperviewEdges()
+
+        modularTableView.backgroundView = slideView
+        slideView.frame = CGRect(
+            x: modularTableView.frame.width,
+            y: 0,
+            width: modularTableView.frame.width,
+            height: modularTableView.frame.height
+        )
     }
 
     func configureDelegates() {
@@ -126,20 +140,10 @@ extension ModularTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if items.isEmpty {
             tableView.separatorStyle = .none
-
-            let slideView = SlideView(image: .kfNoDataIcon,
-                                      title: "No Data",
-                                      description: "Go to...")
-            tableView.backgroundView = slideView
-
-            slideView.frame = CGRect(x: tableView.frame.width, y: 0,
-                                     width: tableView.frame.width, height: tableView.frame.height)
-//            slideView.translatesAutoresizingMaskIntoConstraints = false
-//            slideView.autoCenterInSuperview()
-//            slideView.autoPinEdgesToSuperviewMargins()
+            tableView.backgroundView?.isHidden = false
         } else {
             tableView.separatorStyle = .singleLine
-            tableView.backgroundView = nil
+            tableView.backgroundView?.isHidden = true
         }
 
         return items.count

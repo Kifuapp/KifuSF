@@ -17,6 +17,13 @@ class DeliveryModularTableViewController: ModularTableViewController {
             updateUI()
         }
     }
+
+    override var slideView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No poof",
+                         description: "Go to...")
+
+    }
     
     private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                                 andTitle: "Directions")
