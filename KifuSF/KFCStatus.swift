@@ -13,7 +13,7 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     
     weak var barView: ButtonBarView!
     weak var ownContainerView: UIScrollView!
-    var controllerArray = [DeliveryModularTableViewController(), KFCDonation()]
+    var controllerArray = [DeliveryModularTableViewController(), DonationModularTableViewController()]
     
     override func viewDidLoad() {
         title = "Status"
@@ -105,7 +105,7 @@ class KFCStatus: ButtonBarPagerTabStripViewController {
     private func setUpFirebase() {
         guard
             let deliveryVc = controllerArray[0] as? DeliveryModularTableViewController,
-            let donationVc = controllerArray[1] as? KFCDonation else {
+            let donationVc = controllerArray[1] as? DonationModularTableViewController else {
                 fatalError("either the indexes of these elements in this array are out of order or the class types have changed for one of the view controllers")
         }
         

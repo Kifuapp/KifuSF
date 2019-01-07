@@ -52,7 +52,7 @@
 		C541E60921D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */; };
 		C541E60F21D7D53D0024E437 /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E60E21D7D53D0024E437 /* SlideView.swift */; };
 		C541E61121D7D7A00024E437 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C541E61021D7D7A00024E437 /* TutorialViewController.swift */; };
-		C54284162152BFAD00373586 /* KFCDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* KFCDonation.swift */; };
+		C54284162152BFAD00373586 /* DonationModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54284152152BFAD00373586 /* DonationModularTableViewController.swift */; };
 		C5475D0721541FF1006BA324 /* KFVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0621541FF1006BA324 /* KFVProgress.swift */; };
 		C5475D0921542084006BA324 /* KFVProgress.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5475D0821542084006BA324 /* KFVProgress.xib */; };
 		C5475D0C21542796006BA324 /* KFMProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5475D0B21542796006BA324 /* KFMProgress.swift */; };
@@ -179,7 +179,7 @@
 		C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorDescriptorView.swift; sourceTree = "<group>"; };
 		C541E60E21D7D53D0024E437 /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		C541E61021D7D7A00024E437 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		C54284152152BFAD00373586 /* KFCDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCDonation.swift; sourceTree = "<group>"; };
+		C54284152152BFAD00373586 /* DonationModularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationModularTableViewController.swift; sourceTree = "<group>"; };
 		C5475D0621541FF1006BA324 /* KFVProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVProgress.swift; sourceTree = "<group>"; };
 		C5475D0821542084006BA324 /* KFVProgress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFVProgress.xib; sourceTree = "<group>"; };
 		C5475D0B21542796006BA324 /* KFMProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMProgress.swift; sourceTree = "<group>"; };
@@ -292,9 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				C50182EC2142AC9A00257412 /* KFCStatus.swift */,
+				C54284152152BFAD00373586 /* DonationModularTableViewController.swift */,
 				C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
-				C54284152152BFAD00373586 /* KFCDonation.swift */,
 				E98036DF21CACD2C002344C7 /* VerifyDropoffImage */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
 				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
@@ -988,7 +988,7 @@
 				C576EFEA21C7AE9400F96922 /* UIGroupView.swift in Sources */,
 				C50182F02142AD4E00257412 /* DeliveryModularTableViewController.swift in Sources */,
 				C50182FE2143B8F600257412 /* UIStatisticsView.swift in Sources */,
-				C54284162152BFAD00373586 /* KFCDonation.swift in Sources */,
+				C54284162152BFAD00373586 /* DonationModularTableViewController.swift in Sources */,
 				C5231EF221DD63A1001D9A7D /* SettingsViewController.swift in Sources */,
 				C53D92B82171E42500AE3882 /* LoginViewController.swift in Sources */,
 				C58D9ED0216361E800B180B3 /* Protocols.swift in Sources */,
