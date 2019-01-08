@@ -43,7 +43,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         }
     }
 
-    private var lastSelectedCell: KFVRoundedCell<KFVDonationInfo>?
+    private var lastSelectedCell: RoundedTableViewCell<KFVDonationInfo>?
     private var widgetView = KFVWidget()
 
     override func viewDidLoad() {
@@ -132,7 +132,7 @@ extension KFCOpenDonations: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier) as? KFVRoundedCell<KFVDonationInfo> else {
+        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: RoundedTableViewCell<KFVDonationInfo>.identifier) as? RoundedTableViewCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -154,7 +154,7 @@ extension KFCOpenDonations: UITableViewDataSource {
 extension KFCOpenDonations: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? KFVRoundedCell<KFVDonationInfo> else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? RoundedTableViewCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -285,7 +285,7 @@ extension KFCOpenDonations {
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.delegate = self
 
-        tableViewWithRoundedCells.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
+        tableViewWithRoundedCells.register(RoundedTableViewCell<KFVDonationInfo>.self, forCellReuseIdentifier: RoundedTableViewCell<KFVDonationInfo>.identifier)
 
         configureDonationTableViewConstraints()
     }

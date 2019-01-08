@@ -8,14 +8,19 @@
 
 import UIKit
 
-class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
+class RoundedTableViewCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
     // MARK: - Variables
     let descriptorView = T()
     
     static var identifier: String {
         return String(describing: T.self)
     }
-    
+
+    // MARK: - Initializers
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -24,7 +29,21 @@ class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
         configureStyling()
         configureLayout()
     }
-    
+
+    // MARK: - Methods
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        descriptorView.backgroundColor = selected ? UIColor.Pallete.Highlight : UIColor.Pallete.White
+    }
+
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+
+        descriptorView.backgroundColor = highlighted ? UIColor.Pallete.Highlight : UIColor.Pallete.White
+    }
+
+    // MARK: - UIConfigurable
     func configureLayout() {
         configureDescriptorViewLayoutConstraints()
     }
@@ -42,21 +61,5 @@ class KFVRoundedCell<T: UIDescriptorView>: UITableViewCell, UIConfigurable {
         descriptorView.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
         descriptorView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
         descriptorView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 8)
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        descriptorView.backgroundColor = selected ? UIColor.Pallete.Highlight : UIColor.Pallete.White
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        
-        descriptorView.backgroundColor = highlighted ? UIColor.Pallete.Highlight : UIColor.Pallete.White
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

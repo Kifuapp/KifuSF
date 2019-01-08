@@ -18,8 +18,8 @@ class KFCPendingDonations: KFCTableViewWithRoundedCells {
         title = "Requested Donations"
 
         tableViewWithRoundedCells.register(
-          KFVRoundedCell<KFVPendingDonation>.self,
-          forCellReuseIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier
+          RoundedTableViewCell<KFVPendingDonation>.self,
+          forCellReuseIdentifier: RoundedTableViewCell<KFVPendingDonation>.identifier
           )
 
         tableViewWithRoundedCells.dataSource = self
@@ -34,9 +34,9 @@ extension KFCPendingDonations: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let pendingDonationCell = tableView.dequeueReusableCell(
-            withIdentifier: KFVRoundedCell<KFVPendingDonation>.identifier,
+            withIdentifier: RoundedTableViewCell<KFVPendingDonation>.identifier,
             for: indexPath
-            ) as? KFVRoundedCell<KFVPendingDonation> else {
+            ) as? RoundedTableViewCell<KFVPendingDonation> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -55,7 +55,7 @@ extension KFCPendingDonations: UITableViewDataSource {
 }
 
 extension KFCPendingDonations: KFPPendingDonationCellDelegate {
-    func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>) {
+    func didPressButton(_ sender: RoundedTableViewCell<KFVPendingDonation>) {
         guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {
             return assertionFailure("no cell found")
         }

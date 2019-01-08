@@ -20,8 +20,8 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
         title = "Volunteers"
 
         tableViewWithRoundedCells.register(
-          KFVRoundedCell<KFVVolunteerInfo>.self,
-          forCellReuseIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier
+          RoundedTableViewCell<KFVVolunteerInfo>.self,
+          forCellReuseIdentifier: RoundedTableViewCell<KFVVolunteerInfo>.identifier
           )
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.allowsSelection = false
@@ -40,8 +40,8 @@ extension KFCVolunteerList: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let volunteerInfoCell = tableView.dequeueReusableCell(
-            withIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier,
-            for: indexPath) as? KFVRoundedCell<KFVVolunteerInfo> else {
+            withIdentifier: RoundedTableViewCell<KFVVolunteerInfo>.identifier,
+            for: indexPath) as? RoundedTableViewCell<KFVVolunteerInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -69,7 +69,7 @@ extension KFCVolunteerList: UITableViewDataSource {
 }
 
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
-    func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
+    func didPressButton(_ sender: RoundedTableViewCell<KFVVolunteerInfo>) {
         guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {
             return assertionFailure("no cell found")
         }

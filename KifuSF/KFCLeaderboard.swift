@@ -23,7 +23,7 @@ class KFCLeaderboard: KFCTableViewWithRoundedCells {
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.isScrollEnabled = false
         tableViewWithRoundedCells.allowsSelection = false
-        tableViewWithRoundedCells.register(KFVRoundedCell<KFVUserInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVUserInfo>.identifier)
+        tableViewWithRoundedCells.register(RoundedTableViewCell<KFVUserInfo>.self, forCellReuseIdentifier: RoundedTableViewCell<KFVUserInfo>.identifier)
     }
 }
 
@@ -33,7 +33,7 @@ extension KFCLeaderboard: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVUserInfo>.identifier) as? KFVRoundedCell<KFVUserInfo> else {
+        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: RoundedTableViewCell<KFVUserInfo>.identifier) as? RoundedTableViewCell<KFVUserInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 

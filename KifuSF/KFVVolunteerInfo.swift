@@ -51,7 +51,7 @@ class KFVVolunteerInfo: UIDescriptorView {
     }
 
     @objc func confirmationButtonPressed() {
-        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVVolunteerInfo> else {
+        guard let tableViewCell = superview?.superview as? RoundedTableViewCell<KFVVolunteerInfo> else {
             fatalError("you are using this view the wrong way :]")
         }
 
@@ -71,5 +71,5 @@ class KFVVolunteerInfo: UIDescriptorView {
 
 
 protocol KFPVolunteerInfoCellDelegate: class {
-    func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>)
+    func didPressButton(_ sender: RoundedTableViewCell<KFVVolunteerInfo>)
 }

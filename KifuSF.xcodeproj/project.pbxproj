@@ -20,7 +20,7 @@
 		C50182FE2143B8F600257412 /* UIStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FD2143B8F600257412 /* UIStatisticsView.swift */; };
 		C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */; };
 		C501830221447B7300257412 /* KFVPendingDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C501830121447B7300257412 /* KFVPendingDonation.swift */; };
-		C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C501830321447FD900257412 /* KFVRoundedCell.swift */; };
+		C501830421447FD900257412 /* RoundedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C501830321447FD900257412 /* RoundedTableViewCell.swift */; };
 		C50515C9213694F900718AE5 /* DetailedDonationModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50515C8213694F900718AE5 /* DetailedDonationModularTableViewController.swift */; };
 		C505BD7B214700D400A5195B /* KFCTableViewWithRoundedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */; };
 		C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E4731215187C4008A8C36 /* KFMVolunteerInfo.swift */; };
@@ -150,7 +150,7 @@
 		C50182FD2143B8F600257412 /* UIStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStatisticsView.swift; sourceTree = "<group>"; };
 		C50182FF2143BBD400257412 /* KFVVolunteerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVVolunteerInfo.swift; sourceTree = "<group>"; };
 		C501830121447B7300257412 /* KFVPendingDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVPendingDonation.swift; sourceTree = "<group>"; };
-		C501830321447FD900257412 /* KFVRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFVRoundedCell.swift; sourceTree = "<group>"; };
+		C501830321447FD900257412 /* RoundedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTableViewCell.swift; sourceTree = "<group>"; };
 		C50515C8213694F900718AE5 /* DetailedDonationModularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDonationModularTableViewController.swift; sourceTree = "<group>"; };
 		C505BD782146F73A00A5195B /* KifuTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KifuTabBarViewController.swift; sourceTree = "<group>"; };
 		C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCTableViewWithRoundedCells.swift; sourceTree = "<group>"; };
@@ -658,7 +658,7 @@
 		C5B0E1A62150264300A8412C /* KFRoundedTable */ = {
 			isa = PBXGroup;
 			children = (
-				C501830321447FD900257412 /* KFVRoundedCell.swift */,
+				C501830321447FD900257412 /* RoundedTableViewCell.swift */,
 				C505BD7A214700D400A5195B /* KFCTableViewWithRoundedCells.swift */,
 			);
 			name = KFRoundedTable;
@@ -981,7 +981,7 @@
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C564187E216A86BA00664DDB /* UIColor.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift in Sources */,
-				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
+				C501830421447FD900257412 /* RoundedTableViewCell.swift in Sources */,
 				C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */,
 				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
