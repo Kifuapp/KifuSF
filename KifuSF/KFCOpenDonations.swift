@@ -161,7 +161,7 @@ extension KFCOpenDonations: UITableViewDelegate {
         lastSelectedCell = cell
 
         let selectedDonation = self.openDonations[indexPath.row]
-        let detailedOpenDonationVC = KFCDetailedDonation()
+        let detailedOpenDonationVC = DetailedDonationModularTableViewController()
         detailedOpenDonationVC.donation = selectedDonation
         
         switch self.currentDeliveryState {
