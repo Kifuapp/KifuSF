@@ -19,12 +19,6 @@ class ModularTableViewController: UIViewController, UIConfigurable {
         case destinationMap
     }
 
-    var slideView: SlideView {
-        return SlideView(image: .kfNoDataIcon,
-                         title: "No poof",
-                         description: "Go to...")
-    }
-
     let modularTableView = UITableView()
     var items = [ModularTableViewItem]()
 
@@ -93,8 +87,8 @@ class ModularTableViewController: UIViewController, UIConfigurable {
         modularTableView.translatesAutoresizingMaskIntoConstraints = false
         modularTableView.autoPinEdgesToSuperviewEdges()
 
-        modularTableView.backgroundView = slideView
-        slideView.frame = CGRect(
+        modularTableView.backgroundView = noDataView
+        noDataView.frame = CGRect(
             x: modularTableView.frame.width,
             y: 0,
             width: modularTableView.frame.width,
@@ -228,3 +222,6 @@ extension ModularTableViewController: UITableViewDelegate {
         self.didSelect(cellType, at: indexPath)
     }
 }
+
+// MARK: - NoDataItem
+extension ModularTableViewController: NoDataItem { }

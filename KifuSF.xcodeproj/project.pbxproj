@@ -62,6 +62,7 @@
 		C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */; };
 		C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */; };
 		C552163021DFCCD7005D85F0 /* ModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552162F21DFCCD7005D85F0 /* ModularTableViewController.swift */; };
+		C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552163321E49CAD005D85F0 /* NoDataItem.swift */; };
 		C555F8F421766897000CC299 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C555F8F321766897000CC299 /* UIWindow.swift */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
@@ -189,6 +190,7 @@
 		C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPWidgetInfo.swift; sourceTree = "<group>"; };
 		C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPendingDonations.swift; sourceTree = "<group>"; };
 		C552162F21DFCCD7005D85F0 /* ModularTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModularTableViewController.swift; sourceTree = "<group>"; };
+		C552163321E49CAD005D85F0 /* NoDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataItem.swift; sourceTree = "<group>"; };
 		C555F8F321766897000CC299 /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C552163321E49CAD005D85F0 /* NoDataItem.swift */,
 				C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */,
 				E96F11EB21294016004D549A /* MapHelper.swift */,
 				C5CA7BB2210D26CF0052D440 /* Constants.swift */,
@@ -958,6 +961,7 @@
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
 				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
+				C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */,
 				C50515C9213694F900718AE5 /* DetailedDonationModularTableViewController.swift in Sources */,
