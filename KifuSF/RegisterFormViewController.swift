@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Variables
+       var signInProvderInfo: UserService.SignInProviderInfo?
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
@@ -111,6 +112,22 @@ class RegisterFormViewController: UIScrollableViewController {
 
         let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
+        if let signInProvider = signInProvderInfo {
+            guard let photoURL = signInProvider.photoUrl else {fatalError("No valid photo url passed in the signInProviderInfo")}
+            UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
+                guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
+                User.setCurrent(user,writeToUserDefaults: true)
+                
+                if user.isVerified {
+                    let mainViewControllers = KifuTabBarViewController()
+                    self.present(mainViewControllers, animated: true)
+                }
+                else{
+                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                    self.present(phoneNumberValidationViewController, animated: true)
+                }
+            }
+        }
         UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
             
             //error handling
@@ -214,6 +231,28 @@ extension RegisterFormViewController: UIConfigurable {
     func configureData() {
         title = "Register Form"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
+        
+        guard let signInProviderInfo = signInProvderInfo else { return }
+        
+        if let fullName = signInProvderInfo?.displayName {
+            fullNameInputView.contentView.textField.text = fullName
+            fullNameInputView.contentView.isUserInteractionEnabled = false
+        }
+        
+        if let email = signInProvderInfo?.email{
+            emailInputView.contentView.textField.text = email
+            emailInputView.contentView.isUserInteractionEnabled = false
+        }
+        
+        if let profileUrl = signInProviderInfo.photoUrl{
+            profileImageInputView.contentView.kf.setImage(with: profileUrl)
+            userSelectedAProfileImage = true
+        }
+        
+        if let phoneNumber = signInProviderInfo.phoneNumber{
+            phoneNumberInputView.contentView.textField.text = phoneNumber
+            phoneNumberInputView.contentView.isUserInteractionEnabled = false
+        }
     }
     
     func configureGestures() {
