@@ -8,25 +8,35 @@
 
 import UIKit
 
-class KFCTableViewWithRoundedCells: UIViewController {
-    
+class TableViewWithRoundedCellsViewController: UIViewController, UIConfigurable, NoDataItem {
+    // MARK: - Variables
     let tableViewWithRoundedCells = UITableView()
     var tableViewWithRoundedCellsConstraints = [NSLayoutConstraint]()
-    
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableViewWithRoundedCells)
         
-        configureLayoutConstraints()
+        configureLayout()
         configureStyling()
         
         view.layoutIfNeeded()
     }
-    
-    func configureLayoutConstraints() {
+
+    // MARK: - UIConfigurable
+    func configureLayout() {
         tableViewWithRoundedCells.translatesAutoresizingMaskIntoConstraints = false
         tableViewWithRoundedCellsConstraints = tableViewWithRoundedCells.autoPinEdgesToSuperviewEdges()
+
+        tableViewWithRoundedCells.backgroundView = noDataView
+        tableViewWithRoundedCells.frame = CGRect(
+            x: tableViewWithRoundedCells.frame.width,
+            y: 0,
+            width: tableViewWithRoundedCells.frame.width,
+            height: tableViewWithRoundedCells.frame.height
+        )
     }
     
     func configureStyling() {

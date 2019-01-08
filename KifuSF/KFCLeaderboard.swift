@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFCLeaderboard: KFCTableViewWithRoundedCells {
+class KFCLeaderboard: TableViewWithRoundedCellsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,7 +20,7 @@ enum DonationOption: SwitchlessCases {
     case deliveringDonation(Donation)
 }
 
-class KFCOpenDonations: KFCTableViewWithRoundedCells {
+class KFCOpenDonations: TableViewWithRoundedCellsViewController {
 
     private var openDonations: [Donation] = [] {
         didSet {

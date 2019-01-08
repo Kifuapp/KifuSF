@@ -8,12 +8,18 @@
 
 import UIKit
 
-class KFCVolunteerList: KFCTableViewWithRoundedCells {
-    
+class KFCVolunteerList: TableViewWithRoundedCellsViewController {
+    // MARK: - Variables
     var donation: Donation!
 
     var volunteers: [User]!
 
+    // MARK: - NoDataItem
+    var noDataView = SlideView(image: .kfNoDataIcon,
+                               title: "No poof",
+                               description: "Go to...")
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,8 +39,15 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension KFCVolunteerList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if volunteers.isEmpty {
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.backgroundView?.isHidden = true
+        }
+
         return volunteers.count
     }
 
@@ -68,6 +81,7 @@ extension KFCVolunteerList: UITableViewDataSource {
     }
 }
 
+// MARK: - KFPVolunteerInfoCellDelegate
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
     func didPressButton(_ sender: RoundedTableViewCell<KFVVolunteerInfo>) {
         guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {

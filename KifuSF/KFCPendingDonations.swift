@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KFCPendingDonations: KFCTableViewWithRoundedCells {
+class KFCPendingDonations: TableViewWithRoundedCellsViewController {
 
     var donations: [Donation]!
 
