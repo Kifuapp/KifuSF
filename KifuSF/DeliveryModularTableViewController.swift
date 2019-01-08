@@ -32,12 +32,10 @@ class DeliveryModularTableViewController: ModularTableViewController {
                 return assertionFailure("shouldn't select an image without a delivery")
             }
             
-            //TODO: alex-show loading indicator
             let loadingVc = KFCLoading(style: .whiteLarge)
             loadingVc.present()
             
             DonationService.confirmDelivery(for: delivery, image: image, completion: { (isSuccessful) in
-                //TODO: alex-dismiss loading indicator
                 loadingVc.dismiss {
                     if isSuccessful {
                         unwrappedSelf.delivery?.status = .awaitingReview

@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
                            information: KifuLocalization.regulations),
           WebsiteModel(cellTitle: "St. Anthony Charity",
                        website: .stAnthony),
+          TutorialModel(cellTitle: "Tutorial"),
           MailComposerModel(cellTitle: "Submit Feedback",
                             recipients: [KifuLocalization.feedbackMail],
                             subject: "Feedback",

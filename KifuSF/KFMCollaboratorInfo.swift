@@ -37,7 +37,7 @@ class KFMCollaboratorInfo: ModularTableViewItem {
             profileImageURL: URL(string: user.imageURL)!,
             name: "NONAME", //FIXME: store the user's name in the User 
             username: user.username,
-            userReputation: Double(user.reputation),
+            userReputation: user.reputation,
             userDonationsCount: user.numberOfDonations,
             userDeliveriesCount: user.numberOfDeliveries
         )

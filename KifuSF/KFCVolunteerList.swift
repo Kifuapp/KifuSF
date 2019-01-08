@@ -60,16 +60,12 @@ extension KFCVolunteerList: UITableViewDataSource {
 
         let volunteer = self.volunteers[indexPath.row]
 
-        //TODO: alex-reputation values from User Class
-        let volunteerRep: Double = 0
-        let volunteerDonationCount: Int = 0
-        let volunteerDeliveryCount: Int = 0
         let data = KFMVolunteerInfo(
             imageURL: URL(string: volunteer.imageURL)!,
             username: volunteer.username,
-            userReputation: volunteerRep,
-            userDonationsCount: volunteerDonationCount,
-            userDeliveriesCount: volunteerDeliveryCount
+            userReputation: volunteer.reputation,
+            userDonationsCount: volunteer.numberOfDonations,
+            userDeliveriesCount: volunteer.numberOfDeliveries
         )
 
         volunteerInfoCell.descriptorView.reloadData(for: data)

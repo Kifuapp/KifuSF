@@ -28,9 +28,16 @@ class KFCOpenDonations: TableViewWithRoundedCellsViewController {
         }
     }
 
+
+    /** updated by firebase observe a method */
     private var currentDonation: Donation?
-    private var pendingRequests: [Donation] = []
+    
+    /** updated by firebase observe a method */
     private var currentDelivery: Donation?
+    
+    /** updated by firebase observe a method */
+    private var pendingRequests: [Donation] = []
+    
     private var currentDeliveryState: DonationOption {
         if let donation = currentDelivery {
             return .deliveringDonation(donation)
@@ -99,6 +106,13 @@ class KFCOpenDonations: TableViewWithRoundedCellsViewController {
     }
 
     @objc func createDonation() {
+        guard self.currentDonation == nil else {
+            UIAlertController(errorMessage: "You cannot create another donation while having a donation in progress. Please complete your current donation before creating another.")
+                .present(in: self)
+            
+            return
+        }
+        
         let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
         present(TutorialViewController(), animated: true)
@@ -167,8 +181,10 @@ extension KFCOpenDonations: UITableViewDelegate {
         switch self.currentDeliveryState {
         case .pendingRequests(let requestedDonations):
             if requestedDonations.contains(selectedDonation) {
-                detailedOpenDonationVC.hasUserAlreadyRequested = true
+                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
             }
+        case .deliveringDonation:
+            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
         default:
             break
         }
