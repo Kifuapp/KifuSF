@@ -27,44 +27,58 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureStyling()
         configureLayout()
         
         registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didSignInWithGoogle), name: .userDidLoginWithGoogle, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didSignInWithGoogle),
+            name: .userDidLoginWithGoogle,
+            object: nil
+        )
     }
     
-    @objc func didSignInWithGoogle(_ notification: NSNotification){
-        if let credentials = notification.userInfo?["credentials"] as? AuthCredential {
-            UserService.login(with: credentials, completion: { (user) in
-                guard let user = user else {fatalError("Did not correctly get back a user when signed in with google")}
-                
-                if(user.isVerified){
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    let mainViewControllers = KifuTabBarViewController()
-                    self.present(mainViewControllers, animated: true)
-                }
-                else{
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                    self.present(phoneNumberValidationViewController, animated: true)
-                }
-                
-            }) { (loginInfo) in
-                
-                let registerVC = RegisterFormViewController()
-                registerVC.signInProvderInfo = loginInfo
-                self.navigationController?.pushViewController(registerVC, animated: true)
-                
-            }
-        }
-        else{
+    @objc func didSignInWithGoogle(_ notification: NSNotification) {
+        guard let credentials = notification.userInfo?["credentials"] as? AuthCredential else {
             fatalError("Did not have any login credentials passed")
         }
         
+        UserService.login(with: credentials, existingUserHandler: { (user, error) in
+            if let error = error {
+                let message = UserService.retrieveAuthErrorMessage(for: error)
+                
+                let alert = UIAlertController(
+                    title: "Sign in using Google",
+                    errorMessage: message,
+                    dismissTitle: "Dismiss")
+                return self.present(alert, animated: true)
+            }
+            
+            guard let user = user else {
+                fatalError("Did not correctly get back a user when signed in with google")
+            }
+            
+            if user.isVerified {
+                User.setCurrent(user, writeToUserDefaults: true)
+                let mainViewControllers = KifuTabBarViewController()
+                self.present(mainViewControllers, animated: true)
+            } else {
+                User.setCurrent(user, writeToUserDefaults: true)
+                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                self.present(phoneNumberValidationViewController, animated: true)
+            }
+            
+        }, newUserHandler: { (loginInfo) in
+            
+            let registerVC = RegisterFormViewController()
+            registerVC.signInProvderInfo = loginInfo
+            self.navigationController?.pushViewController(registerVC, animated: true)
+            
+        })
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

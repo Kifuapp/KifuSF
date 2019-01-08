@@ -9,6 +9,7 @@
 import UIKit
 import PureLayout
 import FirebaseAuth
+import FirebaseStorage
 
 class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Variables
@@ -113,38 +114,66 @@ class RegisterFormViewController: UIScrollableViewController {
         let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
         if let signInProvider = signInProvderInfo {
-            guard let photoURL = signInProvider.photoUrl else {fatalError("No valid photo url passed in the signInProviderInfo")}
-            UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
-                guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
-                User.setCurrent(user,writeToUserDefaults: true)
+//            guard let photoURL = signInProvider.photoUrl else {
+//                fatalError("No valid photo url passed in the signInProviderInfo")
+//            }
+            
+            let photoURL: URL
+            if let url = signInProvider.photoUrl {
+                photoURL = url
                 
-                if user.isVerified {
-                    let mainViewControllers = KifuTabBarViewController()
-                    self.present(mainViewControllers, animated: true)
+                UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
+                    guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
+                    User.setCurrent(user,writeToUserDefaults: true)
+                    
+                    if user.isVerified {
+                        let mainViewControllers = KifuTabBarViewController()
+                        self.present(mainViewControllers, animated: true)
+                    }
+                    else {
+                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                        self.present(phoneNumberValidationViewController, animated: true)
+                    }
                 }
-                else{
-                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                    self.present(phoneNumberValidationViewController, animated: true)
+            } else {
+                let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
+
+                StorageService.uploadImage(image, at: imageRef) { (url) in
+                    UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
+                        guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
+                        User.setCurrent(user,writeToUserDefaults: true)
+                        
+                        if user.isVerified {
+                            let mainViewControllers = KifuTabBarViewController()
+                            self.present(mainViewControllers, animated: true)
+                        }
+                        else {
+                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                            self.present(phoneNumberValidationViewController, animated: true)
+                        }
+                    }
                 }
             }
-        }
-        UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
             
-            //error handling
-            guard let user = user else {
-                //check if we have an error when the user is nil
-                guard let error = error else {
-                    fatalError(KFErrorMessage.seriousBug)
+        } else {
+            UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
+                
+                //error handling
+                guard let user = user else {
+                    //check if we have an error when the user is nil
+                    guard let error = error else {
+                        fatalError(KFErrorMessage.seriousBug)
+                    }
+                    
+                    let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                    return self.showErrorMessage(errorMessage)
                 }
                 
-                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
-                return self.showErrorMessage(errorMessage)
+                User.setCurrent(user, writeToUserDefaults: true)
+                
+                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                self.present(phoneNumberValidationViewController, animated: true)
             }
-            
-            User.setCurrent(user, writeToUserDefaults: true)
-            
-            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-            self.present(phoneNumberValidationViewController, animated: true)
         }
     }
     
@@ -246,6 +275,7 @@ extension RegisterFormViewController: UIConfigurable {
         
         if let profileUrl = signInProviderInfo.photoUrl{
             profileImageInputView.contentView.kf.setImage(with: profileUrl)
+            profileImageInputView.contentView.isUserInteractionEnabled = false
             userSelectedAProfileImage = true
         }
         

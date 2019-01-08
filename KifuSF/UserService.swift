@@ -99,15 +99,14 @@ struct UserService {
      */
     static func login(
         with credentials: AuthCredential,
-        completion: @escaping (_ user: User?) -> Void,
+        existingUserHandler: @escaping (_ user: User?, Error?) -> Void,
         newUserHandler: @escaping (_ providerInfo: SignInProviderInfo) -> Void) {
         
         Auth.auth().signInAndRetrieveData(with: credentials) { (result, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 
-                //TODO: return errors for unexected error
-                return completion(nil)
+                return existingUserHandler(nil, error)
             }
             
             guard let firUser = result?.user else {
@@ -121,7 +120,7 @@ struct UserService {
             
             UserService.show(forUID: firUser.uid, completion: { (user) in
                 if user != nil {
-                    completion(user)
+                    existingUserHandler(user, nil)
                 } else {
                     let providerInfo = SignInProviderInfo(
                         uid: firUser.uid,
