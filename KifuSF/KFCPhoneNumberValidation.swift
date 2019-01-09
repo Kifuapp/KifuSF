@@ -29,6 +29,9 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
     let continueButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Green,
                                           andTitle: "Continue")
     
+    let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                                     textColor: UIColor.Pallete.Red)
+    
     var authentificator: TwoFactorAuthService.TwoFactorAuthy? = nil
     
     override func viewDidLoad() {
@@ -47,7 +50,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
         guard let code = authenticationCodeTextFieldContainer.textField.text,
             code.isEmpty == false,
             let authy = authentificator else {
-            return //TODO: show error (can't be empty)
+            return showErrorMessage("The code cannot be empty")//TODO: show error (can't be empty)
         }
         
         TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (success) in
@@ -66,10 +69,22 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                 
                 self.present(mainViewControllers, animated: true)
             } else {
-                //TODO: show error (wrong code)
+                return self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
             }
         }
     }
+    
+    private func showErrorMessage(_ errorMessage: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = errorMessage
+        
+        UIView.animate(withDuration: UIView.microInteractionDuration, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        })
+        
+        continueButton.resetState()
+    }
+    
     
 }
 
@@ -85,6 +100,7 @@ extension KFCPhoneNumberValidation: UIConfigurable {
         informationLabel.text = "Almost Done! We've sent a message to your phone number that contains a 4 digit code. Please enter the code below in verify your phone number."
         noCodeLabel.text = "Didn't get code?"
         noCodeLabel.textAlignment = .right
+        errorLabel.textAlignment = .center
     }
     
     func configureLayout() {
@@ -100,6 +116,8 @@ extension KFCPhoneNumberValidation: UIConfigurable {
     
     func configureLayoutForOuterStackView() {
         outerStackView.addArrangedSubview(upperStackView)
+        outerStackView.addArrangedSubview(errorLabel)
         outerStackView.addArrangedSubview(continueButton)
+        
     }
 }

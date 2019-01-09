@@ -314,13 +314,13 @@ extension RegisterFormViewController: UIConfigurable {
         
         if let fullName = signInProvderInfo?.displayName {
             fullNameInputView.contentView.textField.text = fullName
-            fullNameInputView.contentView.textField.textColor = UIColor.kfGray
+            fullNameInputView.contentView.textField.textColor = UIColor.Pallete.Gray
             fullNameInputView.contentView.textField.isUserInteractionEnabled = false
         }
         
         if let email = signInProvderInfo?.email {
             emailInputView.contentView.textField.text = email
-            emailInputView.contentView.textField.textColor = UIColor.kfGray
+            emailInputView.contentView.textField.textColor = UIColor.Pallete.Gray
             emailInputView.contentView.textField.isUserInteractionEnabled = false
         }
         
