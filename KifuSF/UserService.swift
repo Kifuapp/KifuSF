@@ -99,15 +99,14 @@ struct UserService {
      */
     static func login(
         with credentials: AuthCredential,
-        completion: @escaping (_ user: User?) -> Void,
+        existingUserHandler: @escaping (_ user: User?, Error?) -> Void,
         newUserHandler: @escaping (_ providerInfo: SignInProviderInfo) -> Void) {
         
         Auth.auth().signInAndRetrieveData(with: credentials) { (result, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 
-                //TODO: return errors for unexected error
-                return completion(nil)
+                return existingUserHandler(nil, error)
             }
             
             guard let firUser = result?.user else {
@@ -121,7 +120,7 @@ struct UserService {
             
             UserService.show(forUID: firUser.uid, completion: { (user) in
                 if user != nil {
-                    completion(user)
+                    existingUserHandler(user, nil)
                 } else {
                     let providerInfo = SignInProviderInfo(
                         uid: firUser.uid,
@@ -179,6 +178,19 @@ struct UserService {
         )
     }
     
+    static func completeSigninProviderLogin(// swiftlint:disable:this function_parameter_count
+        withUid uid: String,
+        username: String,
+        imageLink: URL,
+        contactNumber: String,
+        completion: @escaping (_ user: User?) -> Void) {
+        self.create(uid: uid,
+                    username: username,
+                    imageURL: imageLink,
+                    contactNumber: contactNumber,
+                    completion: completion)
+    }
+    
     private static func create(
         uid: String,
         username: String,
@@ -208,6 +220,35 @@ struct UserService {
             })
         }
     }
+    
+    private static func create(
+        uid: String,
+        username: String,
+        imageURL: URL,
+        contactNumber: String,
+        completion: @escaping (User?) -> Void) {
+        
+        let stringURL = imageURL.absoluteString
+        
+        let newUser = User(username: username,
+                           uid: uid,
+                           imageURL: stringURL,
+                           contactNumber: contactNumber,
+                           isVerified: false)
+        
+        let ref = Database.database().reference().child("users").child(uid)
+        
+        ref.setValue(newUser.dictValue, withCompletionBlock: { (error, _) in
+            if error != nil {
+                return completion(nil)
+            }
+            
+            return completion(newUser)
+        })
+        
+    }
+    
+    
     
     static func retrieveAuthErrorMessage(for error: Error) -> String {
         guard let errorCode = AuthErrorCode(rawValue: (error._code)) else {

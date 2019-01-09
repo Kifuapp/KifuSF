@@ -16,7 +16,7 @@ enum TwoFactorAuthEndPoints {
 
 extension TwoFactorAuthEndPoints: TargetType {
     var baseURL: URL {
-        return URL(string: "https://nexmo-verify.glitch.me")!
+        return URL(string: "https://chatter-ton.glitch.me/")!
     }
     
     var path: String {
