@@ -52,13 +52,13 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
             let authy = authentificator else {
             return showErrorMessage("The code cannot be empty")//TODO: show error (can't be empty)
         }
-        let loadingVC = KFCLoading()
+        
+        let loadingVC = KFCLoading(style: .whiteLarge)
         loadingVC.present()
         TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (success) in
-            loadingVC.dismiss {
-                
-                if success {
-                    UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
+            if success {
+                UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
+                    loadingVC.dismiss {
                         if isSuccessful {
                             let mainViewControllers = KifuTabBarViewController()
                             self.present(mainViewControllers, animated: true)
@@ -66,13 +66,11 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                             UIAlertController(errorMessage: nil)
                                 .present(in: self)
                         }
-                    })
-                    
-                    let mainViewControllers = KifuTabBarViewController()
-                    
-                    self.present(mainViewControllers, animated: true)
-                } else {
-                    return self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
+                    }
+                })
+            } else {
+                loadingVC.dismiss {
+                    self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
                 }
             }
         }

@@ -72,7 +72,7 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
         
         let selectedVolunteer = self.volunteers[indexPath.row]
         tableViewWithRoundedCells.isUserInteractionEnabled = false
-        let loadingVC = KFCLoading()
+        let loadingVC = KFCLoading(style: .whiteLarge)
         loadingVC.present()
         DonationService.accept(volunteer: selectedVolunteer, for: self.donation) { (isSuccessfull) in
             loadingVC.dismiss {

@@ -158,10 +158,7 @@ class RegisterFormViewController: UIScrollableViewController {
         let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
         if let signInProvider = signInProvderInfo {
-//            guard let photoURL = signInProvider.photoUrl else {
-//                fatalError("No valid photo url passed in the signInProviderInfo")
-//            }
-            let loadingVC = KFCLoading()
+            let loadingVC = KFCLoading(style: .whiteLarge)
             let continueRegisterHandler: (URL) -> Void = { url in
                 UserService.completeSigninProviderLogin(
                 withUid: signInProvider.uid ,
@@ -201,7 +198,7 @@ class RegisterFormViewController: UIScrollableViewController {
                 continueRegisterHandler(url)
             }
         } else {
-            let loadingVC = KFCLoading()
+            let loadingVC = KFCLoading(style: .whiteLarge)
             loadingVC.present()
             UserService.register(
                 with: fullName,
@@ -210,18 +207,17 @@ class RegisterFormViewController: UIScrollableViewController {
                 contactNumber: normalizedPhoneNumber,
                 email: email,
                 password: password) { [unowned self] (user, error) in
-                    
-                    //error handling
                     loadingVC.dismiss {
                         guard let user = user else {
+                            
                             //check if we have an error when the user is nil
                             guard let error = error else {
                                 fatalError(KFErrorMessage.seriousBug)
                             }
+                            
                             let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
                             return self.showErrorMessage(errorMessage)
                         }
-                        
                         
                         User.setCurrent(user, writeToUserDefaults: true)
                         let phoneNumberValidationViewController = KFCPhoneNumberValidation()

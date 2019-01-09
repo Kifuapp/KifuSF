@@ -91,7 +91,7 @@ class LoginViewController: UIScrollableViewController {
             let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
-        let loadingVC = KFCLoading()
+        let loadingVC = KFCLoading(style: .whiteLarge)
         loadingVC.present()
         UserService.login(email: email, password: password) { (user, error) in
             loadingVC.dismiss {
@@ -115,7 +115,6 @@ class LoginViewController: UIScrollableViewController {
                     self.present(phoneNumberValidationViewController, animated: true)
                 }
             }
-
         }
     }
     

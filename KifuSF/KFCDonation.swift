@@ -144,9 +144,8 @@ class KFCDonation: KFCModularTableView {
         if let donation = self.donation {
             switch donation.status {
             case .open:
-                
                 let loading = KFCLoading(style: .whiteLarge)
-               loading.present()
+                loading.present()
                 
                 //fetch user objects for the given donation
                 RequestService.retrieveVolunteers(for: donation) { (volunteers) in
