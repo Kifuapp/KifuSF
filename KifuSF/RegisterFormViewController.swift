@@ -12,6 +12,12 @@ import FirebaseAuth
 import FirebaseStorage
 
 class RegisterFormViewController: UIScrollableViewController {
+    
+    private enum UserProfileSource {
+        case fromUrl(URL)
+        case fromPhotoLibrary(UIImage)
+    }
+    
     //MARK: - Variables
        var signInProvderInfo: UserService.SignInProviderInfo?
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
@@ -50,7 +56,7 @@ class RegisterFormViewController: UIScrollableViewController {
     private let continueButton = UIAnimatedButton(backgroundColor: .kfPrimary, andTitle: "Sign up")
 
     private let profileImageHelper = PhotoHelper()
-    private var userSelectedAProfileImage: Bool? = nil
+    private var userSelectedAProfileImage: UserProfileSource? = nil
 
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +87,7 @@ class RegisterFormViewController: UIScrollableViewController {
         
         profileImageHelper.completionHandler = { [unowned self] (image) in
             self.profileImageInputView.contentView.image = image
-            self.userSelectedAProfileImage = true
+            self.userSelectedAProfileImage = .fromPhotoLibrary(image)
         }
     }
 
@@ -101,7 +107,7 @@ class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Functions
     @objc func continueButtonTapped() {
         //unwrap all values and make sure the string is not empty
-        guard let _ = userSelectedAProfileImage,
+        guard let userProfileSource = userSelectedAProfileImage,
             let image = profileImageInputView.contentView.image,
             let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
             let username = usernameInputView.contentView.textField.text, !username.isEmpty,
@@ -118,45 +124,51 @@ class RegisterFormViewController: UIScrollableViewController {
 //                fatalError("No valid photo url passed in the signInProviderInfo")
 //            }
             
-            let photoURL: URL
-            if let url = signInProvider.photoUrl {
-                photoURL = url
-                
-                UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
-                    guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
-                    User.setCurrent(user,writeToUserDefaults: true)
+            let continueRegisterHandler: (URL) -> Void = { url in
+                UserService.completeSigninProviderLogin(
+                withUid: signInProvider.uid ,
+                username: username,
+                imageLink: url,
+                contactNumber: normalizedPhoneNumber) { (user) in
+                    
+                    guard let user = user else {
+                        fatalError("User not returned back after trying to completeSigninProviderLogin")
+                    }
+                    
+                    User.setCurrent(user, writeToUserDefaults: true)
                     
                     if user.isVerified {
                         let mainViewControllers = KifuTabBarViewController()
                         self.present(mainViewControllers, animated: true)
-                    }
-                    else {
+                    } else {
                         let phoneNumberValidationViewController = KFCPhoneNumberValidation()
                         self.present(phoneNumberValidationViewController, animated: true)
                     }
                 }
-            } else {
-                let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
-
-                StorageService.uploadImage(image, at: imageRef) { (url) in
-                    UserService.completeSigninProviderLogin(withUid: signInProvider.uid , username: username, imageLink: photoURL, contactNumber: normalizedPhoneNumber) { (user) in
-                        guard let user = user else {fatalError("User not returned back after trying to completeSigninProviderLogin")}
-                        User.setCurrent(user,writeToUserDefaults: true)
-                        
-                        if user.isVerified {
-                            let mainViewControllers = KifuTabBarViewController()
-                            self.present(mainViewControllers, animated: true)
-                        }
-                        else {
-                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                            self.present(phoneNumberValidationViewController, animated: true)
-                        }
-                    }
-                }
             }
             
+            switch userProfileSource {
+            case .fromPhotoLibrary(let image):
+                let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
+                
+                StorageService.uploadImage(image, at: imageRef) { (url) in
+                    guard let url = url else {
+                        return self.showErrorMessage("Something went wrong. Please try again.")
+                    }
+                    
+                    continueRegisterHandler(url)
+                }
+            case .fromUrl(let url):
+                continueRegisterHandler(url)
+            }
         } else {
-            UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
+            UserService.register(
+                with: fullName,
+                username: username,
+                image: image,
+                contactNumber: normalizedPhoneNumber,
+                email: email,
+                password: password) { [unowned self] (user, error) in
                 
                 //error handling
                 guard let user = user else {
@@ -270,13 +282,13 @@ extension RegisterFormViewController: UIConfigurable {
         
         if let email = signInProvderInfo?.email{
             emailInputView.contentView.textField.text = email
+            emailInputView.contentView.textField.textColor = UIColor.kfGray
             emailInputView.contentView.isUserInteractionEnabled = false
         }
         
         if let profileUrl = signInProviderInfo.photoUrl{
             profileImageInputView.contentView.kf.setImage(with: profileUrl)
-            profileImageInputView.contentView.isUserInteractionEnabled = false
-            userSelectedAProfileImage = true
+            userSelectedAProfileImage = .fromUrl(profileUrl)
         }
         
         if let phoneNumber = signInProviderInfo.phoneNumber{
