@@ -9,9 +9,17 @@
 import UIKit
 import PureLayout
 import FirebaseAuth
+import FirebaseStorage
 
 class RegisterFormViewController: UIScrollableViewController {
+    
+    private enum UserProfileSource {
+        case fromUrl(URL)
+        case fromPhotoLibrary(UIImage)
+    }
+    
     //MARK: - Variables
+       var signInProvderInfo: UserService.SignInProviderInfo?
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
@@ -85,7 +93,7 @@ class RegisterFormViewController: UIScrollableViewController {
                                                   andTitle: "Sign up")
 
     private let profileImageHelper = PhotoHelper()
-    private var userSelectedAProfileImage: Bool? = nil
+    private var userSelectedAProfileImage: UserProfileSource? = nil
 
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +124,7 @@ class RegisterFormViewController: UIScrollableViewController {
         
         profileImageHelper.completionHandler = { [unowned self] (image) in
             self.profileImageInputView.contentView.image = image
-            self.userSelectedAProfileImage = true
+            self.userSelectedAProfileImage = .fromPhotoLibrary(image)
         }
     }
 
@@ -136,7 +144,7 @@ class RegisterFormViewController: UIScrollableViewController {
     //MARK: - Functions
     @objc func continueButtonTapped() {
         //unwrap all values and make sure the string is not empty
-        guard let _ = userSelectedAProfileImage,
+        guard let userProfileSource = userSelectedAProfileImage,
             let image = profileImageInputView.contentView.image,
             let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
             let username = usernameInputView.contentView.textField.text, !username.isEmpty,
@@ -148,23 +156,73 @@ class RegisterFormViewController: UIScrollableViewController {
 
         let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
-        UserService.register(with: fullName, username: username, image: image, contactNumber: normalizedPhoneNumber, email: email, password: password) { [unowned self] (user, error) in
+        if let signInProvider = signInProvderInfo {
+//            guard let photoURL = signInProvider.photoUrl else {
+//                fatalError("No valid photo url passed in the signInProviderInfo")
+//            }
             
-            //error handling
-            guard let user = user else {
-                //check if we have an error when the user is nil
-                guard let error = error else {
-                    fatalError(KFErrorMessage.seriousBug)
+            let continueRegisterHandler: (URL) -> Void = { url in
+                UserService.completeSigninProviderLogin(
+                withUid: signInProvider.uid ,
+                username: username,
+                imageLink: url,
+                contactNumber: normalizedPhoneNumber) { (user) in
+                    
+                    guard let user = user else {
+                        fatalError("User not returned back after trying to completeSigninProviderLogin")
+                    }
+                    
+                    User.setCurrent(user, writeToUserDefaults: true)
+                    
+                    if user.isVerified {
+                        let mainViewControllers = KifuTabBarViewController()
+                        self.present(mainViewControllers, animated: true)
+                    } else {
+                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                        self.present(phoneNumberValidationViewController, animated: true)
+                    }
                 }
-                
-                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
-                return self.showErrorMessage(errorMessage)
             }
             
-            User.setCurrent(user, writeToUserDefaults: true)
-            
-            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-            self.present(phoneNumberValidationViewController, animated: true)
+            switch userProfileSource {
+            case .fromPhotoLibrary(let image):
+                let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
+                
+                StorageService.uploadImage(image, at: imageRef) { (url) in
+                    guard let url = url else {
+                        return self.showErrorMessage("Something went wrong. Please try again.")
+                    }
+                    
+                    continueRegisterHandler(url)
+                }
+            case .fromUrl(let url):
+                continueRegisterHandler(url)
+            }
+        } else {
+            UserService.register(
+                with: fullName,
+                username: username,
+                image: image,
+                contactNumber: normalizedPhoneNumber,
+                email: email,
+                password: password) { [unowned self] (user, error) in
+                
+                //error handling
+                guard let user = user else {
+                    //check if we have an error when the user is nil
+                    guard let error = error else {
+                        fatalError(KFErrorMessage.seriousBug)
+                    }
+                    
+                    let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                    return self.showErrorMessage(errorMessage)
+                }
+                
+                User.setCurrent(user, writeToUserDefaults: true)
+                
+                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                self.present(phoneNumberValidationViewController, animated: true)
+            }
         }
     }
     
@@ -251,6 +309,29 @@ extension RegisterFormViewController: UIConfigurable {
     func configureData() {
         title = "Register Form"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
+        
+        guard let signInProviderInfo = signInProvderInfo else { return }
+        
+        if let fullName = signInProvderInfo?.displayName {
+            fullNameInputView.contentView.textField.text = fullName
+            fullNameInputView.contentView.textField.textColor = UIColor.kfGray
+            fullNameInputView.contentView.textField.isUserInteractionEnabled = false
+        }
+        
+        if let email = signInProvderInfo?.email {
+            emailInputView.contentView.textField.text = email
+            emailInputView.contentView.textField.textColor = UIColor.kfGray
+            emailInputView.contentView.textField.isUserInteractionEnabled = false
+        }
+        
+        if let profileUrl = signInProviderInfo.photoUrl {
+            profileImageInputView.contentView.kf.setImage(with: profileUrl)
+            userSelectedAProfileImage = .fromUrl(profileUrl)
+        }
+        
+        if let phoneNumber = signInProviderInfo.phoneNumber {
+            phoneNumberInputView.contentView.textField.text = phoneNumber
+        }
     }
     
     func configureGestures() {
