@@ -37,12 +37,13 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
     
     @objc func continueButtonTapped() {
         guard let code = authenticationCodeTextFieldContainer.textField.text,
+            code.isEmpty == false,
             let authy = authentificator else {
-            return
+            return //TODO: show error (can't be empty)
         }
         
-        TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (succes) in
-            if succes {
+        TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (success) in
+            if success {
                 UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
                     if isSuccessful {
                         let mainViewControllers = KifuTabBarViewController()
@@ -57,7 +58,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                 
                 self.present(mainViewControllers, animated: true)
             } else {
-                //TODO: show error
+                //TODO: show error (wrong code)
             }
         }
     }
