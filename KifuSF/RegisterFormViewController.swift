@@ -19,7 +19,8 @@ class RegisterFormViewController: UIScrollableViewController {
     }
     
     //MARK: - Variables
-       var signInProvderInfo: UserService.SignInProviderInfo?
+    var signInProvderInfo: UserService.SignInProviderInfo?
+
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
@@ -160,30 +161,31 @@ class RegisterFormViewController: UIScrollableViewController {
 //            guard let photoURL = signInProvider.photoUrl else {
 //                fatalError("No valid photo url passed in the signInProviderInfo")
 //            }
-            
+            let loadingVC = KFCLoading()
             let continueRegisterHandler: (URL) -> Void = { url in
                 UserService.completeSigninProviderLogin(
                 withUid: signInProvider.uid ,
                 username: username,
                 imageLink: url,
                 contactNumber: normalizedPhoneNumber) { (user) in
-                    
-                    guard let user = user else {
-                        fatalError("User not returned back after trying to completeSigninProviderLogin")
-                    }
-                    
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    
-                    if user.isVerified {
-                        let mainViewControllers = KifuTabBarViewController()
-                        self.present(mainViewControllers, animated: true)
-                    } else {
-                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                        self.present(phoneNumberValidationViewController, animated: true)
+                    loadingVC.dismiss {
+                        guard let user = user else {
+                            fatalError("User not returned back after trying to completeSigninProviderLogin")
+                        }
+                        
+                        User.setCurrent(user, writeToUserDefaults: true)
+                        
+                        if user.isVerified {
+                            let mainViewControllers = KifuTabBarViewController()
+                            self.present(mainViewControllers, animated: true)
+                        } else {
+                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                            self.present(phoneNumberValidationViewController, animated: true)
+                        }
                     }
                 }
             }
-            
+            loadingVC.present()
             switch userProfileSource {
             case .fromPhotoLibrary(let image):
                 let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
@@ -199,6 +201,8 @@ class RegisterFormViewController: UIScrollableViewController {
                 continueRegisterHandler(url)
             }
         } else {
+            let loadingVC = KFCLoading()
+            loadingVC.present()
             UserService.register(
                 with: fullName,
                 username: username,
@@ -206,22 +210,23 @@ class RegisterFormViewController: UIScrollableViewController {
                 contactNumber: normalizedPhoneNumber,
                 email: email,
                 password: password) { [unowned self] (user, error) in
-                
-                //error handling
-                guard let user = user else {
-                    //check if we have an error when the user is nil
-                    guard let error = error else {
-                        fatalError(KFErrorMessage.seriousBug)
-                    }
                     
-                    let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
-                    return self.showErrorMessage(errorMessage)
-                }
-                
-                User.setCurrent(user, writeToUserDefaults: true)
-                
-                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                self.present(phoneNumberValidationViewController, animated: true)
+                    //error handling
+                    loadingVC.dismiss {
+                        guard let user = user else {
+                            //check if we have an error when the user is nil
+                            guard let error = error else {
+                                fatalError(KFErrorMessage.seriousBug)
+                            }
+                            let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                            return self.showErrorMessage(errorMessage)
+                        }
+                        
+                        
+                        User.setCurrent(user, writeToUserDefaults: true)
+                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                        self.present(phoneNumberValidationViewController, animated: true)
+                    }
             }
         }
     }

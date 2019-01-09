@@ -52,24 +52,28 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
             let authy = authentificator else {
             return showErrorMessage("The code cannot be empty")//TODO: show error (can't be empty)
         }
-        
+        let loadingVC = KFCLoading()
+        loadingVC.present()
         TwoFactorAuthService.validate(code: code, authy: authy) { [unowned self] (success) in
-            if success {
-                UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
-                    if isSuccessful {
-                        let mainViewControllers = KifuTabBarViewController()
-                        self.present(mainViewControllers, animated: true)
-                    } else {
-                        UIAlertController(errorMessage: nil)
-                            .present(in: self)
-                    }
-                })
-
-                let mainViewControllers = KifuTabBarViewController()
+            loadingVC.dismiss {
                 
-                self.present(mainViewControllers, animated: true)
-            } else {
-                return self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
+                if success {
+                    UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
+                        if isSuccessful {
+                            let mainViewControllers = KifuTabBarViewController()
+                            self.present(mainViewControllers, animated: true)
+                        } else {
+                            UIAlertController(errorMessage: nil)
+                                .present(in: self)
+                        }
+                    })
+                    
+                    let mainViewControllers = KifuTabBarViewController()
+                    
+                    self.present(mainViewControllers, animated: true)
+                } else {
+                    return self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
+                }
             }
         }
     }

@@ -79,6 +79,7 @@ class CreateDonationViewController: UIScrollableViewController {
         }
 
         let locationPicker = retrieveLocationPicker()
+        let loadingVC = KFCLoading()
         locationPicker.completion = { [unowned self] location in
             guard let location = location else {
                 return assertionFailure(KFErrorMessage.seriousBug)
@@ -89,7 +90,7 @@ class CreateDonationViewController: UIScrollableViewController {
             //TODO: loading screen
 //            let loadingVc = KFCLoading(style: .whiteLarge)
 //            loadingVc.present()
-
+            loadingVC.present()
             DonationService.createDonation(
                 title: title,
                 notes: description,
@@ -97,12 +98,15 @@ class CreateDonationViewController: UIScrollableViewController {
                 pickUpAddress: location.address,
                 longitude: location.coordinate.longitude,
                 latitude: location.coordinate.latitude) { [unowned self] donation in
-                    guard let _ = donation else {
-                        let errorAlert = UIAlertController(errorMessage: nil)
-                        return self.present(errorAlert, animated: true)
+                    loadingVC.dismiss {
+                        guard let _ = donation else {
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            return self.present(errorAlert, animated: true)
+                        }
+                        self.presentingViewController?.dismiss(animated: true)
                     }
                     
-                    self.presentingViewController?.dismiss(animated: true)
+                    
             }
         }
 
