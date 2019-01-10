@@ -33,6 +33,10 @@ enum FlaggedContentType: Int {
     }
 }
 
+protocol FlaggingContentItems {
+    var flaggableItems: [FlaggedContentType] { get }
+}
+
 struct Report: KeyedStoredProperties {
     let uid: String
     let donation: Donation?

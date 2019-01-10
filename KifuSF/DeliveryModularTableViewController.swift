@@ -58,9 +58,18 @@ class DeliveryModularTableViewController: ModularTableViewController {
     }()
 
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // the first time this view is loaded the height of the button is zero when viewDidAppear gets called
+        // this is just a temporary workaround
+        modularTableView.contentInset.bottom = 44 + 16
+        modularTableView.scrollIndicatorInsets.bottom = 44 + 16
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         modularTableView.contentInset.bottom = actionButton.frame.height + 16
         modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
     }

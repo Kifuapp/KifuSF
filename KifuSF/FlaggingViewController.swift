@@ -16,8 +16,8 @@ class FlaggingViewController: UIViewController {
     
     var flaggableItems = [FlaggedContentType]()
     
-    var userToReport: User? = nil
-    var donationToReport: Donation? = nil
+    var userToReport: User?
+    var donationToReport: Donation?
 
     /**
      <#Lorem ipsum dolor sit amet.#>
@@ -26,10 +26,15 @@ class FlaggingViewController: UIViewController {
      */
 
     // MARK: - Initializers
-    convenience init(flaggableItems: [FlaggedContentType], user: User? = nil, donation: Donation? = nil) {
+    convenience init(
+        flaggableItems: [FlaggedContentType],
+        userToReport: User? = nil,
+        donationToReport: Donation? = nil) {
         self.init()
         
         self.flaggableItems = flaggableItems
+        self.userToReport = userToReport
+        self.donationToReport = donationToReport
     }
 
     // MARK: - Lifecycle
@@ -73,6 +78,7 @@ extension FlaggingViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         // TODO: erick - use flagging service
+        // if there's an error with the service just just an erorr without dismissing the viewcontroller
         let alertController = UIAlertController(
             title: "Thanks for letting us know!",
             message: "We will shortly review your request and take action if needed.",
