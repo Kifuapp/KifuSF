@@ -172,13 +172,8 @@ class RegisterFormViewController: UIScrollableViewController {
                         
                         User.setCurrent(user, writeToUserDefaults: true)
                         
-                        if user.isVerified {
-                            let mainViewControllers = KifuTabBarViewController()
-                            self.present(mainViewControllers, animated: true)
-                        } else {
-                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                            self.present(phoneNumberValidationViewController, animated: true)
-                        }
+                        let nextVc = OnBoardingDistributer.nextStep(for: user)
+                        self.present(nextVc, animated: true)
                     }
                 }
             }
@@ -220,8 +215,9 @@ class RegisterFormViewController: UIScrollableViewController {
                         }
                         
                         User.setCurrent(user, writeToUserDefaults: true)
-                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                        self.present(phoneNumberValidationViewController, animated: true)
+                        
+                        let nextVc = OnBoardingDistributer.nextStep(for: user)
+                        self.present(nextVc, animated: true)
                     }
             }
         }

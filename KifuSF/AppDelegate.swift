@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 
     //TODO: alex-login logic
     private func setInitalViewController() {
-        //TODO: if user does not have a verified account than go to the 2FA screens
         //TODO: if location service is disabled prompt the required activation screen
         
         if Auth.auth().currentUser != nil,
@@ -46,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 
             User.setCurrent(user)
             
-            window?.setRootViewController(KifuTabBarViewController())
+            let vc = OnBoardingDistributer.nextStep(for: user)
+            window?.setRootViewController(vc)
         } else {
             window?.setRootViewController(UINavigationController(rootViewController: FrontPageViewController()))
         }

@@ -71,15 +71,10 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
                 fatalError("Did not correctly get back a user when signed in with google")
             }
             
-            if user.isVerified {
-                User.setCurrent(user, writeToUserDefaults: true)
-                let mainViewControllers = KifuTabBarViewController()
-                self.present(mainViewControllers, animated: true)
-            } else {
-                User.setCurrent(user, writeToUserDefaults: true)
-                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                self.present(phoneNumberValidationViewController, animated: true)
-            }
+            User.setCurrent(user, writeToUserDefaults: true)
+            
+            let nextVc = OnBoardingDistributer.nextStep(for: user)
+            self.present(nextVc, animated: true)
             
         }, newUserHandler: { (loginInfo) in
             
