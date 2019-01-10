@@ -115,7 +115,7 @@ class KFCOpenDonations: TableViewWithRoundedCellsViewController {
         
         let createDonationViewController = UINavigationController(rootViewController: CreateDonationViewController())
         createDonationViewController.modalTransitionStyle = .coverVertical
-        present(TutorialViewController(), animated: true)
+        present(createDonationViewController, animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,16 +178,16 @@ extension KFCOpenDonations: UITableViewDelegate {
         let detailedOpenDonationVC = DetailedDonationModularTableViewController()
         detailedOpenDonationVC.donation = selectedDonation
         
-        switch self.currentDeliveryState {
-        case .pendingRequests(let requestedDonations):
-            if requestedDonations.contains(selectedDonation) {
-                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
-            }
-        case .deliveringDonation:
-            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
-        default:
-            break
-        }
+//        switch self.currentDeliveryState {
+//        case .pendingRequests(let requestedDonations):
+//            if requestedDonations.contains(selectedDonation) {
+//                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
+//            }
+//        case .deliveringDonation:
+//            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
+//        default:
+//            break
+//        }
         navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
 }

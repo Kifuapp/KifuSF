@@ -31,6 +31,7 @@ class TableViewWithRoundedCellsViewController: UIViewController, UIConfigurable,
         tableViewWithRoundedCellsConstraints = tableViewWithRoundedCells.autoPinEdgesToSuperviewEdges()
 
         tableViewWithRoundedCells.backgroundView = noDataView
+        tableViewWithRoundedCells.backgroundView?.isHidden = true
         tableViewWithRoundedCells.frame = CGRect(
             x: tableViewWithRoundedCells.frame.width,
             y: 0,
