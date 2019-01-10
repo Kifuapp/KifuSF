@@ -164,6 +164,7 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
     }
 }
 
+// MARK: - FlaggingContentItems
 extension DetailedDonationModularTableViewController: FlaggingContentItems {
     var flaggableItems: [FlaggedContentType] {
         return [.flaggedImage, .flaggedNotes]

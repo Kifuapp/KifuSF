@@ -89,8 +89,21 @@ class VerifyDropoffViewController: UIScrollableViewController {
     }
 
     @objc private func reportButtonTapped() {
-//        let flaggingViewController = FlaggingViewController(flaggableItems: [.flaggedVerificationImage], donation: self.donation)
-//        navigationController?.pushViewController(flaggingViewController, animated: true)
+        let flaggingViewController = UINavigationController(
+            rootViewController: FlaggingViewController(
+                flaggableItems: flaggableItems,
+                userToReport: donation.donator,
+                donationToReport: donation
+            )
+        )
+        navigationController?.pushViewController(flaggingViewController, animated: true)
+    }
+}
+
+// MARK: - FlaggingContentItems
+extension VerifyDropoffViewController: FlaggingContentItems {
+    var flaggableItems: [FlaggedContentType] {
+        return [.flaggedVerificationImage]
     }
 }
 
