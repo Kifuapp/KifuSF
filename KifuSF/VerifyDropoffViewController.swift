@@ -89,7 +89,7 @@ class VerifyDropoffViewController: UIScrollableViewController {
     }
 
     @objc private func reportButtonTapped() {
-        let flaggingViewController = KFCFlagging(flaggableItems: [.flaggedVerificationImage], donation: self.donation)
+        let flaggingViewController = FlaggingViewController(flaggableItems: [.flaggedVerificationImage], donation: self.donation)
         navigationController?.pushViewController(flaggingViewController, animated: true)
     }
 }

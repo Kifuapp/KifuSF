@@ -40,7 +40,7 @@
 		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */; };
 		C53D92C421736C4400AE3882 /* KFCPhoneNumberValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */; };
-		C53D92C621738F0C00AE3882 /* KFCFlagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C521738F0C00AE3882 /* KFCFlagging.swift */; };
+		C53D92C621738F0C00AE3882 /* FlaggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */; };
 		C541E5FD21D644280024E437 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58B05D1213DBD380086124B /* UIView.swift */; };
 		C541E5FE21D644390024E437 /* KFMOpenDonationDescriptionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E472C2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift */; };
 		C541E5FF21D644400024E437 /* KifuTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD782146F73A00A5195B /* KifuTabBarViewController.swift */; };
@@ -62,8 +62,8 @@
 		C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */; };
 		C54FDBEB2141A7C700BC89B8 /* KFCPendingDonations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */; };
 		C552163021DFCCD7005D85F0 /* ModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552162F21DFCCD7005D85F0 /* ModularTableViewController.swift */; };
-		C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552163321E49CAD005D85F0 /* NoDataItem.swift */; };
 		C552163221E0C462005D85F0 /* TutorialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552163121E0C462005D85F0 /* TutorialModel.swift */; };
+		C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552163321E49CAD005D85F0 /* NoDataItem.swift */; };
 		C555F8F421766897000CC299 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C555F8F321766897000CC299 /* UIWindow.swift */; };
 		C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7E62134732B008A9DF1 /* UIFont.swift */; };
 		C560B7EB21353623008A9DF1 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C560B7EA21353623008A9DF1 /* CALayer.swift */; };
@@ -176,7 +176,7 @@
 		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLocationServiceDisclaimer.swift; sourceTree = "<group>"; };
 		C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPhoneNumberValidation.swift; sourceTree = "<group>"; };
-		C53D92C521738F0C00AE3882 /* KFCFlagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCFlagging.swift; sourceTree = "<group>"; };
+		C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlaggingViewController.swift; sourceTree = "<group>"; };
 		C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyDropoffViewController.swift; sourceTree = "<group>"; };
 		C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorViewController.swift; sourceTree = "<group>"; };
 		C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorDescriptorView.swift; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 		C54FDBE0214199B800BC89B8 /* KFPWidgetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPWidgetInfo.swift; sourceTree = "<group>"; };
 		C54FDBEA2141A7C700BC89B8 /* KFCPendingDonations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPendingDonations.swift; sourceTree = "<group>"; };
 		C552162F21DFCCD7005D85F0 /* ModularTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModularTableViewController.swift; sourceTree = "<group>"; };
-		C552163321E49CAD005D85F0 /* NoDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataItem.swift; sourceTree = "<group>"; };
 		C552163121E0C462005D85F0 /* TutorialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialModel.swift; sourceTree = "<group>"; };
+		C552163321E49CAD005D85F0 /* NoDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataItem.swift; sourceTree = "<group>"; };
 		C555F8F321766897000CC299 /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		C560B7E62134732B008A9DF1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C560B7EA21353623008A9DF1 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
@@ -582,7 +582,7 @@
 				C54FDBEC2141A7D000BC89B8 /* PendingDonations */,
 				C5F78C84214E82F900B5395E /* VolunteerList */,
 				E9B88959217543B0004B6976 /* KFCLoading.swift */,
-				C53D92C521738F0C00AE3882 /* KFCFlagging.swift */,
+				C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */,
 				C5231EF921DEB65C001D9A7D /* Settings */,
 			);
 			name = Screens;
@@ -1028,7 +1028,7 @@
 				C58D9ED62163B09300B180B3 /* UIIconView.swift in Sources */,
 				C552163021DFCCD7005D85F0 /* ModularTableViewController.swift in Sources */,
 				C5B0E1A42150262B00A8412C /* ModularTableViewCell.swift in Sources */,
-				C5B0E1A42150262B00A8412C /* KFVModularCell.swift in Sources */,
+				C5B0E1A42150262B00A8412C /* ModularTableViewCell.swift in Sources */,
 				E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */,
@@ -1064,7 +1064,7 @@
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 				E9333D1E21CB36160031DD9F /* UserReview.swift in Sources */,
 				C5475D0C21542796006BA324 /* KFMProgress.swift in Sources */,
-				C53D92C621738F0C00AE3882 /* KFCFlagging.swift in Sources */,
+				C53D92C621738F0C00AE3882 /* FlaggingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

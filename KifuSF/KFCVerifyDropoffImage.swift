@@ -166,7 +166,7 @@ class KFCVerifyDropoffImage: UIViewController {
     }
     
     @IBAction func pressFlagImage(_ sender: Any) {
-        let flaggingVc = KFCFlagging(flaggableItems: [.flaggedVerificationImage], donation: donation)
+        let flaggingVc = FlaggingViewController(flaggableItems: [.flaggedVerificationImage], donation: donation)
         self.present(flaggingVc, animated: true)
     }
     
