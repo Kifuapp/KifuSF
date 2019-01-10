@@ -113,8 +113,6 @@ class CreateDonationViewController: UIScrollableViewController {
         let requirementsVC = DonationRequirementsViewController()
         self.navigationController?.pushViewController(requirementsVC, animated: true)
     }
-    
-    
 
     private func showErrorMessage(_ errorMessage: String) {
         errorLabel.isHidden = false
@@ -203,7 +201,7 @@ extension CreateDonationViewController: UIConfigurable {
         )
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(donationRequirementsButtonPressed))
-        descriptorView.subtitleStickyLabel.addGestureRecognizer(tapGestureRecognizer)
+        descriptorView.infoStackView.addGestureRecognizer(tapGestureRecognizer)
 
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self
@@ -251,8 +249,6 @@ extension CreateDonationViewController: UIConfigurable {
 
         descriptorView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         descriptorView.subtitleStickyLabel.updateStickySide(to: .top)
-
-        descriptorView.infoStackView.spacing = 8
     }
 
     func configureGestures() {
