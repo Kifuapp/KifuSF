@@ -157,10 +157,12 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
             for: .touchUpInside
         )
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(flagButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfFlagIcon,
+            style: .plain,
+            target: self,
+            action: #selector(flagButtonPressed)
+        )
     }
 }
 

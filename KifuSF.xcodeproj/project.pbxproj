@@ -12,7 +12,7 @@
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C50182E62141B1D400257412 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E52141B1D400257412 /* UIImage.swift */; };
 		C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E72141B24C00257412 /* UIStoryboardSegue.swift */; };
-		C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EC2142AC9A00257412 /* KFCStatus.swift */; };
+		C50182ED2142AC9A00257412 /* StatusPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */; };
 		C50182F02142AD4E00257412 /* DeliveryModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */; };
 		C50182F62142E3F100257412 /* UIDescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F52142E3F100257412 /* UIDescriptorView.swift */; };
 		C50182FA2142FB1B00257412 /* UIStickyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F92142FB1B00257412 /* UIStickyView.swift */; };
@@ -143,7 +143,7 @@
 		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C50182E52141B1D400257412 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C50182E72141B24C00257412 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
-		C50182EC2142AC9A00257412 /* KFCStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCStatus.swift; sourceTree = "<group>"; };
+		C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryModularTableViewController.swift; sourceTree = "<group>"; };
 		C50182F12142AF5300257412 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		C50182F52142E3F100257412 /* UIDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDescriptorView.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 		C50182EE2142ACA600257412 /* Status Tab */ = {
 			isa = PBXGroup;
 			children = (
-				C50182EC2142AC9A00257412 /* KFCStatus.swift */,
+				C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */,
 				C54284152152BFAD00373586 /* DonationModularTableViewController.swift */,
 				C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
@@ -966,7 +966,7 @@
 				E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */,
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
-				C50182ED2142AC9A00257412 /* KFCStatus.swift in Sources */,
+				C50182ED2142AC9A00257412 /* StatusPagerTabStripViewController.swift in Sources */,
 				C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */,
