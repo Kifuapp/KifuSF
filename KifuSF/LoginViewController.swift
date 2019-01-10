@@ -91,27 +91,29 @@ class LoginViewController: UIScrollableViewController {
             let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
                 return showErrorMessage("Please complete all the fields")
         }
-        
+        let loadingVC = KFCLoading(style: .whiteLarge)
+        loadingVC.present()
         UserService.login(email: email, password: password) { (user, error) in
-            guard let user = user else {
-                //check if we have an error when the user is nil
-                guard let error = error else {
-                    fatalError(KFErrorMessage.seriousBug)
+            loadingVC.dismiss {
+                guard let user = user else {
+                    //check if we have an error when the user is nil
+                    guard let error = error else {
+                        fatalError(KFErrorMessage.seriousBug)
+                    }
+                    
+                    let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                    return self.showErrorMessage(errorMessage)
                 }
                 
-                let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
-                return self.showErrorMessage(errorMessage)
-            }
-            
-            User.setCurrent(user, writeToUserDefaults: true)
-
-            if User.current.isVerified {
-                let mainViewControllers = KifuTabBarViewController()
-                self.present(mainViewControllers, animated: true)
-            } else {
-                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                //TODO: fix this
-                self.present(KifuTabBarViewController(), animated: true)
+                User.setCurrent(user, writeToUserDefaults: true)
+                
+                if User.current.isVerified {
+                    let mainViewControllers = KifuTabBarViewController()
+                    self.present(mainViewControllers, animated: true)
+                } else {
+                    let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                    self.present(phoneNumberValidationViewController, animated: true)
+                }
             }
         }
     }

@@ -10,6 +10,12 @@ import UIKit
 
 class KFCFlagging: UIViewController, UIConfigurable {
     
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     TODO: present loading vc
+     */
+    
     let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title2),
                                     textColor: UIColor.Text.SubHeadline)
     let flaggingOptionsTableView = UITableView()

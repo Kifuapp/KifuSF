@@ -72,15 +72,18 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
         
         let selectedVolunteer = self.volunteers[indexPath.row]
         tableViewWithRoundedCells.isUserInteractionEnabled = false
-        
+        let loadingVC = KFCLoading(style: .whiteLarge)
+        loadingVC.present()
         DonationService.accept(volunteer: selectedVolunteer, for: self.donation) { (isSuccessfull) in
-            if isSuccessfull {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                let errorAlert = UIAlertController(errorMessage: nil)
-                self.present(errorAlert, animated: true)
-                
-                self.tableViewWithRoundedCells.isUserInteractionEnabled = false
+            loadingVC.dismiss {
+                if isSuccessfull {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    let errorAlert = UIAlertController(errorMessage: nil)
+                    self.present(errorAlert, animated: true)
+                    
+                    self.tableViewWithRoundedCells.isUserInteractionEnabled = false
+                }
             }
         }
     }
