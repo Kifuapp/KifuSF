@@ -13,10 +13,16 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
     // MARK: - Variables
     weak var barView: ButtonBarView!
     weak var ownContainerView: UIScrollView!
-    var controllerArray = [DeliveryModularTableViewController(), DonationModularTableViewController()]
+
+    private let deliveryModularTableViewController = DeliveryModularTableViewController()
+    private let donationModularTableViewController = DonationModularTableViewController()
+    var controllerArray = [ModularTableViewController]()
 
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
+        controllerArray = [deliveryModularTableViewController, donationModularTableViewController]
+
         configureData()
         configureDelegates()
         configureStyling()
@@ -28,11 +34,59 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
 
     // MARK: - Methods
     @objc func flagButtonPressed() {
-        //TODO: flagging
+        let user: User?
+        let donation: Donation?
+        var title = "Is there anything wrong with this"
+
+        if currentIndex == 0 {
+            title += "delivery"
+
+            user = deliveryModularTableViewController.delivery?.donator
+            donation = deliveryModularTableViewController.delivery
+        } else {
+            title += "donation"
+
+            user = donationModularTableViewController.donation?.donator
+            donation = donationModularTableViewController.donation
+        }
+
+        let flaggingViewController = UINavigationController(
+            rootViewController: FlaggingViewController(
+                flaggableItems: flaggableItems,
+                userToReport: user,
+                donationToReport: donation
+            )
+        )
+
+        let alertController = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        alertController.addButton(
+            title: "Report Donation",
+            style: .default) { (_) in
+                self.present(flaggingViewController, animated: true)
+        }
+        alertController.addCancelButton()
+        present(alertController, animated: true)
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return controllerArray
+    }
+}
+
+extension StatusPagerTabStripViewController: FlaggingContentItems {
+    var flaggableItems: [FlaggedContentType] {
+        return [
+            .flaggedImage,
+            .flaggedNotes,
+            .flaggedPickupLocation,
+            .flaggedPhoneNumber,
+            .flaggedCommunication
+        ]
     }
 }
 

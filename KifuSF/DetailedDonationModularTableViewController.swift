@@ -51,7 +51,7 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
         )
 
         let alertController = UIAlertController(
-            title: "Is anything wrong with this donation?",
+            title: "Is there anything wrong with this donation?",
             message: nil,
             preferredStyle: .actionSheet
         )
