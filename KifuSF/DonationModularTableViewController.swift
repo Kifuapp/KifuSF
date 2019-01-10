@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import CoreLocation
 
 class DonationModularTableViewController: ModularTableViewController {
-    
+    // MARK: - Variables
     var donation: Donation? {
         didSet {
             updateUI()
@@ -21,6 +21,21 @@ class DonationModularTableViewController: ModularTableViewController {
     let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                         andTitle: "Directions")
     
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Current Donation",
+                         description: "")
+    }
+
+    // MARK: - Lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        modularTableView.contentInset.bottom = actionButton.frame.height + 16
+        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
+    }
+
+    // MARK: - Methods
     private func updateUI() {
         reloadData()
         
@@ -43,34 +58,6 @@ class DonationModularTableViewController: ModularTableViewController {
         } else {
             actionButton.setTitle("Post a New Donation", for: .normal)
         }
-    }
-
-    override func loadView() {
-        super.loadView()
-
-        view.addSubview(actionButton)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
-        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
-        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
-        actionButton.addTarget(
-            self,
-            action: #selector(pressActionButton(_:)),
-            for: .touchUpInside
-        )
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = UIColor.Pallete.White
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        modularTableView.contentInset.bottom = actionButton.frame.height + 16
-        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
     }
 
     override func retrieveProgressItem() -> ModularTableViewItem? {
@@ -144,8 +131,9 @@ class DonationModularTableViewController: ModularTableViewController {
         if let donation = self.donation {
             switch donation.status {
             case .open:
+                
                 let loading = KFCLoading(style: .whiteLarge)
-                loading.present()
+               loading.present()
                 
                 //fetch user objects for the given donation
                 RequestService.retrieveVolunteers(for: donation) { (volunteers) in
@@ -217,15 +205,48 @@ class DonationModularTableViewController: ModularTableViewController {
         let navReviewVc = UINavigationController(rootViewController: reviewVc)
         present(navReviewVc, animated: true)
     }
+
+    // MARK: - UIConfigurable
+    override func configureStyling() {
+        super.configureStyling()
+        view.backgroundColor = UIColor.Pallete.White
+    }
+
+    override func configureLayout() {
+        super.configureLayout()
+
+        view.addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+        actionButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+    }
+
+    override func configureDelegates() {
+        super.configureDelegates()
+
+        actionButton.addTarget(
+            self,
+            action: #selector(pressActionButton(_:)),
+            for: .touchUpInside
+        )
+    }
 }
 
-//MARK: ReviewCollaboratorViewControllerDelegate
+// MARK: - IndicatorInfoProvider
+extension DonationModularTableViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Donation")
+    }
+}
+
+// MARK: ReviewCollaboratorViewControllerDelegate
 extension DonationModularTableViewController: ReviewCollaboratorViewControllerDelegate {
     func review(_ reviewCollaborator: ReviewCollaboratorViewController, didFinishReview review: UserReview) {
         guard let donation = self.donation else {
             return assertionFailure("delivery is missing after a review")
         }
-        
+
         DonationService.archive(donation: donation, completion: { (isSuccessful) in
             if isSuccessful == false {
                 UIAlertController(errorMessage: "Failed to archive the donation")
@@ -235,8 +256,3 @@ extension DonationModularTableViewController: ReviewCollaboratorViewControllerDe
     }
 }
 
-extension DonationModularTableViewController: IndicatorInfoProvider {
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Donation")
-    }
-}

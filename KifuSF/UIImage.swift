@@ -96,6 +96,14 @@ extension UIImage {
 
         return image
     }()
+
+    static let kfNoDataIcon: UIImage = {
+        guard let image = UIImage(named: "NoDataIcon")?.withRenderingMode(.alwaysTemplate) else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+
+        return image
+    }()
     
     static let kfLogo: UIImage = {
         guard let image = UIImage(named: "Logo") else {

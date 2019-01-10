@@ -1,5 +1,5 @@
 //
-//  KFVModularCell.swift
+//  ModularTableViewCell.swift
 //  KifuSF
 //
 //  Created by Alexandru Turcanu on 17/09/2018.
@@ -8,13 +8,15 @@
 
 import UIKit
 
-class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
+class ModularTableViewCell<T: UIView>: UITableViewCell, UIConfigurable {
+    // MARK: - Variables
     let descriptorView = T()
 
     static var identifier: String {
         return String(describing: T.self)
     }
 
+    // MARK: - Initializers
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -24,6 +26,11 @@ class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
         configureLayout()
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - UIConfigurable
     func configureLayout() {
         descriptorView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -37,9 +44,5 @@ class KFVModularCell<T: UIView>: UITableViewCell, UIConfigurable {
         contentView.backgroundColor = UIColor.Pallete.White
         selectionStyle = .none
         layer.masksToBounds = false
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

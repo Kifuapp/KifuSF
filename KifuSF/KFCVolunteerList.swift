@@ -8,20 +8,27 @@
 
 import UIKit
 
-class KFCVolunteerList: KFCTableViewWithRoundedCells {
-    
+class KFCVolunteerList: TableViewWithRoundedCellsViewController {
+    // MARK: - Variables
     var donation: Donation!
 
     var volunteers: [User]!
 
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Volunteer Requests",
+                         description: "come back later")
+    }
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Volunteers"
+        title = "Volunteer Requests"
 
         tableViewWithRoundedCells.register(
-          KFVRoundedCell<KFVVolunteerInfo>.self,
-          forCellReuseIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier
+          RoundedTableViewCell<KFVVolunteerInfo>.self,
+          forCellReuseIdentifier: RoundedTableViewCell<KFVVolunteerInfo>.identifier
           )
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.allowsSelection = false
@@ -33,15 +40,22 @@ class KFCVolunteerList: KFCTableViewWithRoundedCells {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension KFCVolunteerList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if volunteers.isEmpty {
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.backgroundView?.isHidden = true
+        }
+
         return volunteers.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let volunteerInfoCell = tableView.dequeueReusableCell(
-            withIdentifier: KFVRoundedCell<KFVVolunteerInfo>.identifier,
-            for: indexPath) as? KFVRoundedCell<KFVVolunteerInfo> else {
+            withIdentifier: RoundedTableViewCell<KFVVolunteerInfo>.identifier,
+            for: indexPath) as? RoundedTableViewCell<KFVVolunteerInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -64,8 +78,9 @@ extension KFCVolunteerList: UITableViewDataSource {
     }
 }
 
+// MARK: - KFPVolunteerInfoCellDelegate
 extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
-    func didPressButton(_ sender: KFVRoundedCell<KFVVolunteerInfo>) {
+    func didPressButton(_ sender: RoundedTableViewCell<KFVVolunteerInfo>) {
         guard let indexPath = tableViewWithRoundedCells.indexPath(for: sender) else {
             return assertionFailure("no cell found")
         }

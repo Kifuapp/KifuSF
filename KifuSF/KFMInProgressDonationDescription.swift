@@ -8,8 +8,8 @@
 
 import Foundation
 
-class KFMInProgressDonationDescription: KFPModularTableViewItem {
-    let type: KFCModularTableView.CellTypes = .inProgressDonationDescription
+class KFMInProgressDonationDescription: ModularTableViewItem {
+    let type: ModularTableViewController.CellTypes = .inProgressDonationDescription
     
     let imageURL: URL
     let title: String
