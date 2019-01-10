@@ -19,7 +19,8 @@ class RegisterFormViewController: UIScrollableViewController {
     }
     
     //MARK: - Variables
-       var signInProvderInfo: UserService.SignInProviderInfo?
+    var signInProvderInfo: UserService.SignInProviderInfo?
+
     private let upperStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.ContentView, distribution: .fill)
     private let inputStackView = UIStackView(axis: .vertical, alignment: .fill, spacing: KFPadding.StackView, distribution: .fill)
 
@@ -157,33 +158,31 @@ class RegisterFormViewController: UIScrollableViewController {
         let normalizedPhoneNumber = phoneNumber.deleteOccurrences(of: ["(", ")", " "])
         //TODO: check for unique username
         if let signInProvider = signInProvderInfo {
-//            guard let photoURL = signInProvider.photoUrl else {
-//                fatalError("No valid photo url passed in the signInProviderInfo")
-//            }
-            
+            let loadingVC = KFCLoading(style: .whiteLarge)
             let continueRegisterHandler: (URL) -> Void = { url in
                 UserService.completeSigninProviderLogin(
                 withUid: signInProvider.uid ,
                 username: username,
                 imageLink: url,
                 contactNumber: normalizedPhoneNumber) { (user) in
-                    
-                    guard let user = user else {
-                        fatalError("User not returned back after trying to completeSigninProviderLogin")
-                    }
-                    
-                    User.setCurrent(user, writeToUserDefaults: true)
-                    
-                    if user.isVerified {
-                        let mainViewControllers = KifuTabBarViewController()
-                        self.present(mainViewControllers, animated: true)
-                    } else {
-                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                        self.present(phoneNumberValidationViewController, animated: true)
+                    loadingVC.dismiss {
+                        guard let user = user else {
+                            fatalError("User not returned back after trying to completeSigninProviderLogin")
+                        }
+                        
+                        User.setCurrent(user, writeToUserDefaults: true)
+                        
+                        if user.isVerified {
+                            let mainViewControllers = KifuTabBarViewController()
+                            self.present(mainViewControllers, animated: true)
+                        } else {
+                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                            self.present(phoneNumberValidationViewController, animated: true)
+                        }
                     }
                 }
             }
-            
+            loadingVC.present()
             switch userProfileSource {
             case .fromPhotoLibrary(let image):
                 let imageRef = StorageReference.newUserImageRefence(with: signInProvider.uid)
@@ -199,6 +198,8 @@ class RegisterFormViewController: UIScrollableViewController {
                 continueRegisterHandler(url)
             }
         } else {
+            let loadingVC = KFCLoading(style: .whiteLarge)
+            loadingVC.present()
             UserService.register(
                 with: fullName,
                 username: username,
@@ -206,22 +207,22 @@ class RegisterFormViewController: UIScrollableViewController {
                 contactNumber: normalizedPhoneNumber,
                 email: email,
                 password: password) { [unowned self] (user, error) in
-                
-                //error handling
-                guard let user = user else {
-                    //check if we have an error when the user is nil
-                    guard let error = error else {
-                        fatalError(KFErrorMessage.seriousBug)
+                    loadingVC.dismiss {
+                        guard let user = user else {
+                            
+                            //check if we have an error when the user is nil
+                            guard let error = error else {
+                                fatalError(KFErrorMessage.seriousBug)
+                            }
+                            
+                            let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
+                            return self.showErrorMessage(errorMessage)
+                        }
+                        
+                        User.setCurrent(user, writeToUserDefaults: true)
+                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
+                        self.present(phoneNumberValidationViewController, animated: true)
                     }
-                    
-                    let errorMessage = UserService.retrieveAuthErrorMessage(for: error)
-                    return self.showErrorMessage(errorMessage)
-                }
-                
-                User.setCurrent(user, writeToUserDefaults: true)
-                
-                let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                self.present(phoneNumberValidationViewController, animated: true)
             }
         }
     }
@@ -314,13 +315,13 @@ extension RegisterFormViewController: UIConfigurable {
         
         if let fullName = signInProvderInfo?.displayName {
             fullNameInputView.contentView.textField.text = fullName
-            fullNameInputView.contentView.textField.textColor = UIColor.kfGray
+            fullNameInputView.contentView.textField.textColor = UIColor.Pallete.DarkGray
             fullNameInputView.contentView.textField.isUserInteractionEnabled = false
         }
         
         if let email = signInProvderInfo?.email {
             emailInputView.contentView.textField.text = email
-            emailInputView.contentView.textField.textColor = UIColor.kfGray
+            emailInputView.contentView.textField.textColor = UIColor.Pallete.DarkGray
             emailInputView.contentView.textField.isUserInteractionEnabled = false
         }
         
