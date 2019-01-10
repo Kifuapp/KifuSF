@@ -14,16 +14,17 @@ class KFCVolunteerList: TableViewWithRoundedCellsViewController {
 
     var volunteers: [User]!
 
-    // MARK: - NoDataItem
-    var noDataView = SlideView(image: .kfNoDataIcon,
-                               title: "No poof",
-                               description: "Go to...")
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Volunteer Requests",
+                         description: "come back later")
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Volunteers"
+        title = "Volunteer Requests"
 
         tableViewWithRoundedCells.register(
           RoundedTableViewCell<KFVVolunteerInfo>.self,

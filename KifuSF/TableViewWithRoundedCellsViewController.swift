@@ -9,9 +9,16 @@
 import UIKit
 
 class TableViewWithRoundedCellsViewController: UIViewController, UIConfigurable, NoDataItem {
+    
     // MARK: - Variables
     let tableViewWithRoundedCells = UITableView()
     var tableViewWithRoundedCellsConstraints = [NSLayoutConstraint]()
+    
+    var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "Nothing Here",
+                         description: "")
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {

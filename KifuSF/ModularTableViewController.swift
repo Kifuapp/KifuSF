@@ -21,6 +21,10 @@ class ModularTableViewController: UIViewController, UIConfigurable {
 
     let modularTableView = UITableView()
     var items = [ModularTableViewItem]()
+    
+    var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon, title: "Nothing Here", description: "")
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {

@@ -21,13 +21,18 @@ enum DonationOption: SwitchlessCases {
 }
 
 class KFCOpenDonations: TableViewWithRoundedCellsViewController {
+    
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Open Donations",
+                         description: "come back later")
+    }
 
     private var openDonations: [Donation] = [] {
         didSet {
             tableViewWithRoundedCells.reloadData()
         }
     }
-
 
     /** updated by firebase observe a method */
     private var currentDonation: Donation?
@@ -142,7 +147,10 @@ class KFCOpenDonations: TableViewWithRoundedCellsViewController {
 //MARK: UITableViewDataSource
 extension KFCOpenDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.openDonations.count
+        let count = self.openDonations.count
+        tableView.backgroundView?.isHidden = count != 0
+        
+        return count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

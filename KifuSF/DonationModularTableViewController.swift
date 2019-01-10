@@ -20,11 +20,12 @@ class DonationModularTableViewController: ModularTableViewController {
 
     let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                         andTitle: "Directions")
-
-    // MARK: - NoDataItem
-    var noDataView = SlideView(image: .kfNoDataIcon,
-                               title: "No poof",
-                               description: "Go to...")
+    
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Current Donation",
+                         description: "")
+    }
 
     // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {

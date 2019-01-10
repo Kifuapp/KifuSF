@@ -18,6 +18,12 @@ class DeliveryModularTableViewController: ModularTableViewController {
         }
     }
     
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Current Delivery",
+                         description: "visit the Open Donations tab to request a delivery")
+    }
+    
     private let actionButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                                 andTitle: "Directions")
     
@@ -50,11 +56,6 @@ class DeliveryModularTableViewController: ModularTableViewController {
         
         return helper
     }()
-
-    // MARK: - NoDataItem
-    var noDataView = SlideView(image: .kfNoDataIcon,
-                               title: "No poof",
-                               description: "Go to...")
 
     // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
