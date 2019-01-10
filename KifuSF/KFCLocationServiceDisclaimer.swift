@@ -37,9 +37,9 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
         //update firebase
         UserService.markHasApprovedConditionsTrue { (isSuccessful) in
             if isSuccessful {
-                let disclaimerViewController = KFCPhoneNumberValidation()
-                disclaimerViewController.modalPresentationStyle = .currentContext
-                self.present(disclaimerViewController, animated: true)
+                let verifyVc = KFCPhoneNumberValidation()
+                self.navigationItem.hidesBackButton = true
+                self.navigationController?.pushViewController(verifyVc, animated: true)
             } else {
                 UIAlertController(errorMessage: nil)
                     .present(in: self)
