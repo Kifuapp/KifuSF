@@ -34,7 +34,33 @@ struct OnBoardingDistributer {
             
             return UINavigationController(rootViewController: verifyNumberVc)
         } else {
-            return KifuTabBarViewController()
+            let tabBarVc = KifuTabBarViewController()
+            tabBarVc.modalTransitionStyle = .flipHorizontal
+            
+            return tabBarVc
         }
+    }
+    
+    /**
+     either presents the FrontPageVc (if the window.root = TabBar), or dismisses
+     to the FrontPageVc (if the window.root = FrontPageVc)
+     
+     - warning: presenting the frontpage controller must occur from the home tab
+     bar controller
+     */
+    static func presentFrontPage(from viewController: UIViewController) {
+        guard let tabBarController = viewController.tabBarController else {
+            fatalError("presenting the frontpage controller must occur from the home tab bar controller")
+        }
+        
+        if tabBarController.presentingViewController != nil {
+            viewController.dismissToRoot(animated: true)
+        } else {
+            tabBarController.present(FrontPageViewController(), animated: true)
+        }
+    }
+    
+    static func presentHomePage(from viewController: UIViewController) {
+        
     }
 }

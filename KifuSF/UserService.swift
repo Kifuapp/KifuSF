@@ -136,6 +136,17 @@ struct UserService {
     }
     
     /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter completion: <#Consectetur adipisicing elit.#>
+     */
+    static func logout() throws {
+        try Auth.auth().signOut()
+        
+        UserDefaults.standard.removeObject(forKey: "currentUser")
+    }
+    
+    /**
      send a password reset email
      
      - ToDo: decide what to do with the error

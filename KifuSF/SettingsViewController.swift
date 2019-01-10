@@ -29,6 +29,13 @@ class SettingsViewController: UIViewController {
                        website: .termsOfService),
           WebsiteModel(cellTitle: "Privacy Policy",
                        website: .privacyPolicy)
+        ],
+        [
+            BasicSettingsItem(title: "Logout") { viewController in
+                try UserService.logout()
+                
+                OnBoardingDistributer.presentFrontPage(from: viewController)
+            }
         ]
     ]
 
