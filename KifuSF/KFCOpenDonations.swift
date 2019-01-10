@@ -186,16 +186,16 @@ extension KFCOpenDonations: UITableViewDelegate {
         let detailedOpenDonationVC = DetailedDonationModularTableViewController()
         detailedOpenDonationVC.donation = selectedDonation
         
-//        switch self.currentDeliveryState {
-//        case .pendingRequests(let requestedDonations):
-//            if requestedDonations.contains(selectedDonation) {
-//                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
-//            }
-//        case .deliveringDonation:
-//            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
-//        default:
-//            break
-//        }
+        switch self.currentDeliveryState {
+        case .pendingRequests(let requestedDonations):
+            if requestedDonations.contains(selectedDonation) {
+                detailedOpenDonationVC.userRequestingStatus = .userHasRequested
+            }
+        case .deliveringDonation:
+            detailedOpenDonationVC.userRequestingStatus = .userAlreadyHasCurrentDelivery
+        default:
+            break
+        }
         navigationController?.pushViewController(detailedOpenDonationVC, animated: true)
     }
 }
