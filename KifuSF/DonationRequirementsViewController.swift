@@ -27,7 +27,7 @@ class DonationRequirementsViewController: UIViewController {
 // MARK: - UIConfigurable
 extension DonationRequirementsViewController: UIConfigurable {
     func configureData() {
-        title = "Requirements"
+        title = "Donation Requirements"
 
         DonationRequirementsService.getRequirementsText { (requirementsText) in
             if let requirementsText = requirementsText {
