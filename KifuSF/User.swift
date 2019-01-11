@@ -22,6 +22,7 @@ struct User: Codable, KeyedStoredProperties {
         case reputation
         case numberOfDonations
         case numberOfDeliveries
+        case hasSeenTutorial
     }
     
     // MARK: - VARS
@@ -33,6 +34,7 @@ struct User: Codable, KeyedStoredProperties {
     
     var isVerified: Bool
     var hasApprovedConditions: Bool
+    var hasSeenTutorial: Bool
     
     var reputation: Double = 0
     var numberOfDonations: Int = 0
@@ -61,6 +63,7 @@ struct User: Codable, KeyedStoredProperties {
             Keys.contactNumber: contactNumber,
             Keys.isVerified: isVerified,
             Keys.hasApprovedConditions: hasApprovedConditions,
+            Keys.hasSeenTutorial: hasSeenTutorial,
             Keys.flag: flag?.rawValue as Any,
             Keys.flaggedReportUid: flaggedReportUid as Any,
             Keys.reputation: reputation,
@@ -105,6 +108,7 @@ struct User: Codable, KeyedStoredProperties {
             let nDeliveries = dictionary[Keys.numberOfDeliveries] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
             let isVerified = dictionary[Keys.isVerified] as? Bool,
+            let hasSeenTutorial = dictionary[Keys.hasSeenTutorial] as? Bool,
             let hasApprovedConditions = dictionary[Keys.hasApprovedConditions] as? Bool
             else { return nil }
         
@@ -113,6 +117,7 @@ struct User: Codable, KeyedStoredProperties {
         self.imageURL = imageURL
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasSeenTutorial = hasSeenTutorial
         self.hasApprovedConditions = hasApprovedConditions
         self.reputation = reputation
         self.numberOfDonations = nDonations

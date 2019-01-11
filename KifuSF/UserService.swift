@@ -408,6 +408,28 @@ struct UserService {
     }
     
     /**
+     Mark the current user's hasSeenTutorial to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markHasSeenTutorialTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.hasSeenTutorial: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
+            
+            completion(true)
+        }
+    }
+    
+    /**
      update the given user in the user subtree. This also writes the given user
      to User Defaults
      
