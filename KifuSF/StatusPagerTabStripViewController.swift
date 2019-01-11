@@ -34,41 +34,50 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
 
     // MARK: - Methods
     @objc func flagButtonPressed() {
-        let user: User?
-        let donation: Donation?
-        var title = "Is there anything wrong with this "
-
-        if currentIndex == 0 {
-            title += "delivery"
-
-            user = deliveryModularTableViewController.delivery?.donator
-            donation = deliveryModularTableViewController.delivery
-        } else {
-            title += "donation"
-
-            user = donationModularTableViewController.donation?.donator
-            donation = donationModularTableViewController.donation
-        }
-
-        let flaggingViewController = UINavigationController(
-            rootViewController: FlaggingViewController(
-                flaggableItems: flaggableItems,
-                userToReport: user,
-                donationToReport: donation
-            )
-        )
-
+        let alertControllerTitle = "Is there anything wrong with this"
+        let buttonTitle: String?
+        let flaggingViewController: FlaggingViewController?
         let alertController = UIAlertController(
-            title: title,
+            title: nil,
             message: nil,
             preferredStyle: .actionSheet
         )
 
-        alertController.addButton(
-            title: "Report Donation",
-            style: .default) { (_) in
-                self.present(flaggingViewController, animated: true)
+        if currentIndex == 0,
+            let delivery = deliveryModularTableViewController.delivery {
+            buttonTitle = "Delivery"
+            alertController.title = "\(alertControllerTitle) delivery?"
+
+            flaggingViewController = FlaggingViewController(
+                flaggableItems: deliveryFlaggableItems,
+                userToReport: delivery.donator,
+                donationToReport: delivery
+            )
+        } else if currentIndex == 1,
+            let user = donationModularTableViewController.donation?.donator {
+            buttonTitle = "Donation"
+            alertController.title = "\(alertControllerTitle) donation?"
+
+            flaggingViewController = FlaggingViewController(
+                flaggableItems: donationFlaggableItems,
+                userToReport: user
+            )
+        } else {
+            alertController.title = "There is nothing to report here."
+            flaggingViewController = nil
+            buttonTitle = nil
         }
+
+        if let flaggingViewController = flaggingViewController,
+            let buttonTitle = buttonTitle {
+            alertController.addButton(
+                title: "Report \(buttonTitle)",
+                style: .default) { [unowned self] (_) in
+                    let navigationController = UINavigationController(rootViewController: flaggingViewController)
+                    self.present(navigationController, animated: true)
+            }
+        }
+
         alertController.addCancelButton()
         present(alertController, animated: true)
     }
@@ -78,6 +87,7 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
     }
 }
 
+// MARK: - FlaggingContentItems
 extension StatusPagerTabStripViewController: FlaggingContentItems {
     var flaggableItems: [FlaggedContentType] {
         return [
@@ -87,6 +97,20 @@ extension StatusPagerTabStripViewController: FlaggingContentItems {
             .flaggedPhoneNumber,
             .flaggedCommunication
         ]
+    }
+
+    // Report items for delivery
+    // image, notes, pickupLocation, phoneNumber, communication (user & donation could be flagged)
+    var deliveryFlaggableItems: [FlaggedContentType] {
+        return flaggableItems
+    }
+
+    // Report items for donation
+    // phoneNumber, communication (only the user should be flagged)
+    var donationFlaggableItems: [FlaggedContentType] {
+        return flaggableItems.filter({ (item) -> Bool in
+            return item.rawValue >= 100
+        })
     }
 }
 
