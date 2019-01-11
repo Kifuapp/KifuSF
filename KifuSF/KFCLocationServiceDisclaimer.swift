@@ -24,12 +24,47 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
                                           andTitle: "Continue")
     
     let locationManager = CLLocationManager()
+    
+    private func updateUI() {
+        
+        // update buttons based on location services
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                activateLocationButton.isUserInteractionEnabled = true
+                continueButton.isUserInteractionEnabled = false
+            case .authorizedAlways, .authorizedWhenInUse:
+                activateLocationButton.isUserInteractionEnabled = false
+                continueButton.isUserInteractionEnabled = true
+            }
+        } else {
+            activateLocationButton.isUserInteractionEnabled = true
+            continueButton.isUserInteractionEnabled = false
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureStyling()
         configureLayout()
         configureGestures()
+        
+        NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
+            self?.updateUI()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func continueButtonTapped() {
@@ -50,7 +85,15 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
     }
     
     @objc func activateLocationButtonTapped() {
-        locationManager.requestWhenInUseAuthorization()
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        default:
+            ApplicationService.presentSettingsAlert(
+                message: "Allow Kifu to use your location while the app is open.",
+                in: self
+            )
+        }
     }
 }
 
@@ -64,13 +107,18 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
         view.backgroundColor = UIColor.Pallete.White
         
         title = "Location Privacy"
-        locationServiceDisclaimerLabel.text = "In order to use Kifu we will need to know you location only while using the app."
+        locationServiceDisclaimerLabel.text = """
+        In order to use Kifu we will need to know your location only while using the app.
         
-        if !CLLocationManager.locationServicesEnabled() {
-            continueButton.isUserInteractionEnabled = false
-        } else {
-            activateLocationButton.isUserInteractionEnabled = false
-        }
+        Your phone number is required to be verified. Phone Numbers are only shown after the following cases:
+        If the donator accepts your request when you request to pick up their donation.
+        
+        If you accept a volunteer's request when you post a donation.
+        
+        Pick up addresses are only shown after you as the donator accepts a volunteer's request.
+        
+        Please allow Kifu to use your location while the app is open.
+        """
     }
     
     func configureLayout() {
