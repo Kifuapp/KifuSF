@@ -170,10 +170,10 @@ class RegisterFormViewController: UIScrollableViewController {
                             fatalError("User not returned back after trying to completeSigninProviderLogin")
                         }
                         
-                        User.setCurrent(user, writeToUserDefaults: true)
+                        // persist the user only in this current session and not in User Defaults
+                        User.setCurrent(user)
                         
-                        let nextVc = OnBoardingDistributer.nextStep(for: user)
-                        self.present(nextVc, animated: true)
+                        OnBoardingDistributer.presentNextStepIfNeeded(from: self)
                     }
                 }
             }
@@ -214,10 +214,10 @@ class RegisterFormViewController: UIScrollableViewController {
                             return self.showErrorMessage(errorMessage)
                         }
                         
-                        User.setCurrent(user, writeToUserDefaults: true)
+                        // persist the user only in this current session and not in User Defaults
+                        User.setCurrent(user)
                         
-                        let nextVc = OnBoardingDistributer.nextStep(for: user)
-                        self.present(nextVc, animated: true)
+                        OnBoardingDistributer.presentNextStepIfNeeded(from: self)
                     }
             }
         }

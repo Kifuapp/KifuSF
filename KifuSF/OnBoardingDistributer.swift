@@ -21,23 +21,54 @@ struct OnBoardingDistributer {
      
      - returns: the view controller needed to be presented (modally) next
      */
-    static func nextStep(for user: User) -> UIViewController {
-        
-        //TODO: tutorial-add user.hasSeenTutorial == false
+//    static func nextStep(for user: User) -> UIViewController {
+//
+//        //TODO: tutorial-add user.hasSeenTutorial == false
+//
+//        if user.hasApprovedConditions == false {
+//            let conditionsVc = KFCLocationServiceDisclaimer()
+//
+//            return UINavigationController(rootViewController: conditionsVc)
+//        } else if user.isVerified == false {
+//            let verifyNumberVc = KFCPhoneNumberValidation()
+//
+//            return UINavigationController(rootViewController: verifyNumberVc)
+//        } else {
+//            let tabBarVc = KifuTabBarViewController()
+//            tabBarVc.modalTransitionStyle = .flipHorizontal
+//
+//            return tabBarVc
+//        }
+//    }
+    
+    /**
+     For the given user, `nextStep(...)` returns either a `UINavigationController`
+     with one of the required steps needed to be completed (phone number verified,
+     disclaimer accepted, etc.) or if all steps required are completed, this returns
+     the HomeTabbar controller
+     
+     - parameter user: check if .isVerified, .hasApprovedConditions, and
+     .hasSeenTutorial
+     
+     - precondition: requires the current user to be set and updated if mutated
+     
+     - returns: the view controller needed to be presented (modally) next
+     */
+    static func presentNextStepIfNeeded(from viewController: UIViewController) {
+        let user = User.current
         
         if user.hasApprovedConditions == false {
             let conditionsVc = KFCLocationServiceDisclaimer()
-            
-            return UINavigationController(rootViewController: conditionsVc)
+            viewController.present(conditionsVc, animated: true)
         } else if user.isVerified == false {
             let verifyNumberVc = KFCPhoneNumberValidation()
-            
-            return UINavigationController(rootViewController: verifyNumberVc)
+            viewController.present(verifyNumberVc, animated: true)
         } else {
-            let tabBarVc = KifuTabBarViewController()
-            tabBarVc.modalTransitionStyle = .flipHorizontal
             
-            return tabBarVc
+            // persist the user in User Defaults
+            User.writeToPersistance()
+            
+            presentHomePage(from: viewController)
         }
     }
     
@@ -61,6 +92,18 @@ struct OnBoardingDistributer {
     }
     
     static func presentHomePage(from viewController: UIViewController) {
+        guard let rootVc = AppDelegate.shared.window?.rootViewController else {
+            fatalError("no root view controller")
+        }
         
+        if let tabBar = rootVc as? KifuTabBarViewController {
+            tabBar.selectedIndex = 0
+            viewController.dismissToRoot(animated: true)
+        } else {
+            let homeTabBar = KifuTabBarViewController()
+            homeTabBar.modalTransitionStyle = .flipHorizontal
+            
+            viewController.present(homeTabBar, animated: true)
+        }
     }
 }

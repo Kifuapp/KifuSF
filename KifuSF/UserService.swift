@@ -381,8 +381,6 @@ struct UserService {
                 return completion(false)
             }
             
-            updateCurrentUser(key: \User.isVerified, to: true)
-            
             completion(true)
         }
     }
@@ -404,8 +402,6 @@ struct UserService {
                 
                 return completion(false)
             }
-            
-            updateCurrentUser(key: \User.hasApprovedConditions, to: true)
             
             completion(true)
         }
@@ -468,10 +464,10 @@ struct UserService {
      - returns: Updated User
      */
     @discardableResult
-    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T) -> User {
+    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T, writeToUserDefaults: Bool = true) -> User {
         var updatedUser = User.current
         updatedUser[keyPath: key] = value
-        User.setCurrent(updatedUser, writeToUserDefaults: true)
+        User.setCurrent(updatedUser, writeToUserDefaults: writeToUserDefaults)
         
         return updatedUser
     }

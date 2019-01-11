@@ -71,16 +71,16 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
                 fatalError("Did not correctly get back a user when signed in with google")
             }
             
-            User.setCurrent(user, writeToUserDefaults: true)
+            // persist the user only in this current session and not in User Defaults
+            User.setCurrent(user)
             
-            let nextVc = OnBoardingDistributer.nextStep(for: user)
-            self.present(nextVc, animated: true)
+            OnBoardingDistributer.presentNextStepIfNeeded(from: self)
             
         }, newUserHandler: { (loginInfo) in
             
             let registerVC = RegisterFormViewController()
             registerVC.signInProvderInfo = loginInfo
-            self.navigationController?.pushViewController(registerVC, animated: true)
+            self.present(registerVC, animated: true)
             
         })
     }

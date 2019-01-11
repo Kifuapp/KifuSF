@@ -12,4 +12,8 @@ extension UIViewController {
     func handleKeyboardActions() {
         
     }
+    
+    func dismissToRoot(animated: Bool, completion: (() -> Void)? = nil) {
+        self.view.window!.rootViewController!.dismiss(animated: animated, completion: completion)
+    }
 }

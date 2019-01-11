@@ -12,6 +12,14 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConfigurable {
+    
+    static var shared: AppDelegate {
+        guard let appDelegate = UIApplication.shared.delegate as! AppDelegate? else {
+            fatalError("Major Bo bo")
+        }
+        
+        return appDelegate
+    }
         
     var window: UIWindow?
     
@@ -45,8 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 
             User.setCurrent(user)
             
-            let vc = OnBoardingDistributer.nextStep(for: user)
-            window?.setRootViewController(vc)
+            window?.setRootViewController(KifuTabBarViewController())
         } else {
             window?.setRootViewController(UINavigationController(rootViewController: FrontPageViewController()))
         }
