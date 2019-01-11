@@ -28,13 +28,13 @@ enum FlaggedContentType: Int, CustomStringConvertible {
         case .flaggedPickupLocation:
             return "Wrong pickup location"
         case .flaggedNotes:
-            return "Inapropiate/Misleading Note"
+            return "Misleading Note"
         case .flaggedVerificationImage:
-            return "Inapropiate/Misleading Verification Image"
+            return "Misleading Verification Image"
         case .flaggedPhoneNumber:
             return "Incorrect Phone Number"
         case .flaggedCommunication:
-            return "Inapropiate/Unresponsive Communication"
+            return "Unresponsive Communication"
         }
     }
 }
