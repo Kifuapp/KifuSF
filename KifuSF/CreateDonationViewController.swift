@@ -108,6 +108,11 @@ class CreateDonationViewController: UIScrollableViewController {
 
         self.navigationController?.pushViewController(locationPicker, animated: true)
     }
+    
+    @objc private func donationRequirementsButtonPressed(){
+        let requirementsVC = DonationRequirementsViewController()
+        self.navigationController?.pushViewController(requirementsVC, animated: true)
+    }
 
     private func showErrorMessage(_ errorMessage: String) {
         errorLabel.isHidden = false
@@ -195,6 +200,9 @@ extension CreateDonationViewController: UIConfigurable {
             for: .touchUpInside
         )
 
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(donationRequirementsButtonPressed))
+        descriptorView.infoStackView.addGestureRecognizer(tapGestureRecognizer)
+
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self
         keyboardStack.delegate = self
@@ -203,7 +211,7 @@ extension CreateDonationViewController: UIConfigurable {
     func configureData() {
         title = "Create Donation"
         descriptorView.titleLabel.text = "How this works?"
-        descriptorView.subtitleStickyLabel.contentView.text = "Regulations"
+        descriptorView.subtitleStickyLabel.contentView.attributedText = NSAttributedString.create(hyperText: "View the regulations", "regulations")
         descriptionInputView.contentView.text = CreateDonationViewController.descriptionPlaceholder
     }
     

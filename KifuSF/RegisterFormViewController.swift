@@ -150,8 +150,7 @@ class RegisterFormViewController: UIScrollableViewController {
             let fullName = fullNameInputView.contentView.textField.text, !fullName.isEmpty,
             let username = usernameInputView.contentView.textField.text, !username.isEmpty,
             let phoneNumber = phoneNumberInputView.contentView.textField.text, !phoneNumber.isEmpty,
-            let email = emailInputView.contentView.textField.text, !email.isEmpty,
-            let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
+            let email = emailInputView.contentView.textField.text, !email.isEmpty else{
                 return showErrorMessage("Please complete all the fields")
         }
 
@@ -198,6 +197,10 @@ class RegisterFormViewController: UIScrollableViewController {
                 continueRegisterHandler(url)
             }
         } else {
+            guard let password = passwordInputView.contentView.textField.text, !password.isEmpty else {
+                return showErrorMessage("Please complete all the fields")
+            }
+            
             let loadingVC = KFCLoading(style: .whiteLarge)
             loadingVC.present()
             UserService.register(
@@ -377,6 +380,8 @@ extension RegisterFormViewController: UIConfigurable {
         inputStackView.addArrangedSubview(usernameInputView)
         inputStackView.addArrangedSubview(phoneNumberInputView)
         inputStackView.addArrangedSubview(emailInputView)
-        inputStackView.addArrangedSubview(passwordInputView)
+        if signInProvderInfo == nil {
+            inputStackView.addArrangedSubview(passwordInputView)
+        }
     }
 }
