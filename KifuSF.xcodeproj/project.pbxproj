@@ -117,6 +117,8 @@
 		E9333D1E21CB36160031DD9F /* UserReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1D21CB36160031DD9F /* UserReview.swift */; };
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
+		E95A948F21E821D300750A68 /* OnBoardingDistributer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */; };
+		E95A949121E8220600750A68 /* BasicSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A949021E8220600750A68 /* BasicSettingsItem.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */; };
 		E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */; };
@@ -253,6 +255,8 @@
 		E9439F7121350F0600261370 /* CasableVars.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = CasableVars.stencil; sourceTree = "<group>"; };
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
+		E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDistributer.swift; sourceTree = "<group>"; };
+		E95A949021E8220600750A68 /* BasicSettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSettingsItem.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Date.swift"; sourceTree = "<group>"; };
 		E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImage.xib; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 				C5231F0021DF9550001D9A7D /* InformationModel.swift */,
 				C552163121E0C462005D85F0 /* TutorialModel.swift */,
 				C5231EFC21DEBAA9001D9A7D /* SettingsItem.swift */,
+				E95A949021E8220600750A68 /* BasicSettingsItem.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
 				E9F4238E21CEDFB500F1DB5D /* UserDistance.swift */,
 				C5E4A35821D28C9800530C75 /* KeyboardHandler.swift */,
+				E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -944,6 +950,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95A948F21E821D300750A68 /* OnBoardingDistributer.swift in Sources */,
 				C541E60121D6445A0024E437 /* KFCLeaderboard.swift in Sources */,
 				C541E60021D644480024E437 /* KFMDonationInfo.swift in Sources */,
 				C541E5FF21D644400024E437 /* KifuTabBarViewController.swift in Sources */,
@@ -981,6 +988,7 @@
 				C5B0E19E21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift in Sources */,
 				C501830421447FD900257412 /* KFVRoundedCell.swift in Sources */,
 				C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */,
+				E95A949121E8220600750A68 /* BasicSettingsItem.swift in Sources */,
 				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
 				C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */,

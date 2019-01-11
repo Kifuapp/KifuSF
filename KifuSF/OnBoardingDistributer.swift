@@ -87,7 +87,10 @@ struct OnBoardingDistributer {
         if tabBarController.presentingViewController != nil {
             viewController.dismissToRoot(animated: true)
         } else {
-            tabBarController.present(FrontPageViewController(), animated: true)
+            tabBarController.present(
+                UINavigationController(rootViewController: FrontPageViewController()),
+                animated: true
+            )
         }
     }
     

@@ -423,7 +423,8 @@ struct UserService {
                 return completion(false)
             }
             
-            User.setCurrent(user, writeToUserDefaults: true)
+            User.setCurrent(user)
+            User.writeToPersistance()
 
             completion(true)
         }
@@ -467,7 +468,11 @@ struct UserService {
     static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T, writeToUserDefaults: Bool = true) -> User {
         var updatedUser = User.current
         updatedUser[keyPath: key] = value
-        User.setCurrent(updatedUser, writeToUserDefaults: writeToUserDefaults)
+        User.setCurrent(updatedUser)
+        
+        if writeToUserDefaults {
+            User.writeToPersistance()
+        }
         
         return updatedUser
     }

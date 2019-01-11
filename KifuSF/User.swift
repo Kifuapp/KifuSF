@@ -131,11 +131,7 @@ struct User: Codable, KeyedStoredProperties {
     
     // MARK: - METHODS
     
-    public static func setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
-        if writeToUserDefaults {
-            writeToPersistance()
-        }
-        
+    public static func setCurrent(_ user: User) {
         _current = user
     }
     
@@ -147,6 +143,10 @@ struct User: Codable, KeyedStoredProperties {
      - returns: <#Sed do eiusmod tempor.#>
      */
     public static func writeToPersistance() {
+        guard User._current != nil else {
+            return
+        }
+        
         if let data = try? JSONEncoder().encode(User.current) {
             UserDefaults.standard.set(data, forKey: "currentUser")
         }

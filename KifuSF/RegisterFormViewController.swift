@@ -74,7 +74,7 @@ class RegisterFormViewController: UIScrollableViewController {
     }()
     
     private let passwordInputView: UIGroupView<UITextFieldContainer> = {
-        let container = UITextFieldContainer(textContentType: .newPassword,
+        let container = UITextFieldContainer(textContentType: .password,
                                              returnKeyType: .done,
                                              isSecureTextEntry: true,
                                              placeholder: "Password")

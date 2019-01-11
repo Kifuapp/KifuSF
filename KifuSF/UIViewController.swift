@@ -14,6 +14,12 @@ extension UIViewController {
     }
     
     func dismissToRoot(animated: Bool, completion: (() -> Void)? = nil) {
-        self.view.window!.rootViewController!.dismiss(animated: animated, completion: completion)
+        let rootVc = AppDelegate.shared.window!.rootViewController!
+        
+        if let navVc = rootVc as? UINavigationController {
+            navVc.popToRootViewController(animated: false)
+        }
+        
+        rootVc.dismiss(animated: animated, completion: completion)
     }
 }
