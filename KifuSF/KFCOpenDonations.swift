@@ -20,14 +20,19 @@ enum DonationOption: SwitchlessCases {
     case deliveringDonation(Donation)
 }
 
-class KFCOpenDonations: KFCTableViewWithRoundedCells {
+class KFCOpenDonations: TableViewWithRoundedCellsViewController {
+    
+    override var noDataView: SlideView {
+        return SlideView(image: .kfNoDataIcon,
+                         title: "No Open Donations",
+                         description: "come back later")
+    }
 
     private var openDonations: [Donation] = [] {
         didSet {
             tableViewWithRoundedCells.reloadData()
         }
     }
-
 
     /** updated by firebase observe a method */
     private var currentDonation: Donation?
@@ -50,7 +55,7 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
         }
     }
 
-    private var lastSelectedCell: KFVRoundedCell<KFVDonationInfo>?
+    private var lastSelectedCell: RoundedTableViewCell<KFVDonationInfo>?
     private var widgetView = KFVWidget()
 
     override func viewDidLoad() {
@@ -142,11 +147,14 @@ class KFCOpenDonations: KFCTableViewWithRoundedCells {
 //MARK: UITableViewDataSource
 extension KFCOpenDonations: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.openDonations.count
+        let count = self.openDonations.count
+        tableView.backgroundView?.isHidden = count != 0
+        
+        return count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier) as? KFVRoundedCell<KFVDonationInfo> else {
+        guard let donationCell = tableView.dequeueReusableCell(withIdentifier: RoundedTableViewCell<KFVDonationInfo>.identifier) as? RoundedTableViewCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
@@ -168,14 +176,14 @@ extension KFCOpenDonations: UITableViewDataSource {
 extension KFCOpenDonations: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? KFVRoundedCell<KFVDonationInfo> else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? RoundedTableViewCell<KFVDonationInfo> else {
             fatalError(KFErrorMessage.unknownCell)
         }
 
         lastSelectedCell = cell
 
         let selectedDonation = self.openDonations[indexPath.row]
-        let detailedOpenDonationVC = KFCDetailedDonation()
+        let detailedOpenDonationVC = DetailedDonationModularTableViewController()
         detailedOpenDonationVC.donation = selectedDonation
         
         switch self.currentDeliveryState {
@@ -301,7 +309,7 @@ extension KFCOpenDonations {
         tableViewWithRoundedCells.dataSource = self
         tableViewWithRoundedCells.delegate = self
 
-        tableViewWithRoundedCells.register(KFVRoundedCell<KFVDonationInfo>.self, forCellReuseIdentifier: KFVRoundedCell<KFVDonationInfo>.identifier)
+        tableViewWithRoundedCells.register(RoundedTableViewCell<KFVDonationInfo>.self, forCellReuseIdentifier: RoundedTableViewCell<KFVDonationInfo>.identifier)
 
         configureDonationTableViewConstraints()
     }

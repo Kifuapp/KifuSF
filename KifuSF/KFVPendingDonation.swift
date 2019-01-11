@@ -42,7 +42,7 @@ class KFVPendingDonation: UIDescriptorView {
     }
 
     @objc func cancelButtonPressed() {
-        guard let tableViewCell = superview?.superview as? KFVRoundedCell<KFVPendingDonation> else {
+        guard let tableViewCell = superview?.superview as? RoundedTableViewCell<KFVPendingDonation> else {
             //TODO: fix this
             fatalError("you are using this view the wrong way :]")
         }
@@ -59,5 +59,5 @@ class KFVPendingDonation: UIDescriptorView {
 }
 
 protocol KFPPendingDonationCellDelegate: class {
-    func didPressButton(_ sender: KFVRoundedCell<KFVPendingDonation>)
+    func didPressButton(_ sender: RoundedTableViewCell<KFVPendingDonation>)
 }
