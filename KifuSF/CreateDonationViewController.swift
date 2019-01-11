@@ -211,7 +211,7 @@ extension CreateDonationViewController: UIConfigurable {
     func configureData() {
         title = "Create Donation"
         descriptorView.titleLabel.text = "How this works?"
-        descriptorView.subtitleStickyLabel.contentView.text = "Regulations"
+        descriptorView.subtitleStickyLabel.contentView.attributedText = NSAttributedString.create(hyperText: "View the regulations", "regulations")
         descriptionInputView.contentView.text = CreateDonationViewController.descriptionPlaceholder
     }
     
