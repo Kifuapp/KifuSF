@@ -54,13 +54,14 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
                 donationToReport: delivery
             )
         } else if currentIndex == 1,
-            let user = donationModularTableViewController.donation?.donator {
+            donationModularTableViewController.donation?.status != .open,
+            let volunteer = donationModularTableViewController.donation?.volunteer {
             buttonTitle = "Donation"
             alertController.title = "\(alertControllerTitle) donation?"
 
             flaggingViewController = FlaggingViewController(
                 flaggableItems: donationFlaggableItems,
-                userToReport: user
+                userToReport: volunteer
             )
         } else {
             alertController.title = "There is nothing to report here."
