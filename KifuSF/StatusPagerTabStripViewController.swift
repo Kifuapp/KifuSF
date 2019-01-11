@@ -109,7 +109,7 @@ extension StatusPagerTabStripViewController: FlaggingContentItems {
     // phoneNumber, communication (only the user should be flagged)
     var donationFlaggableItems: [FlaggedContentType] {
         return flaggableItems.filter({ (item) -> Bool in
-            return item.rawValue >= 100
+            return 100..<199 ~= item.rawValue
         })
     }
 }

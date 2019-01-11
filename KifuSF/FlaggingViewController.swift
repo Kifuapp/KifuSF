@@ -13,6 +13,7 @@ class FlaggingViewController: UIViewController {
     private let flaggingInfoLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .title2),
                                     textColor: UIColor.Text.SubHeadline)
     private let flaggingOptionsTableView = UITableView(forAutoLayout: ())
+    private let loadingViewController = KFCLoading(style: .whiteLarge)
     
     var flaggableItems = [FlaggedContentType]()
     
@@ -51,22 +52,55 @@ class FlaggingViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    private func createdReport(report: Report?) {
+    private func handleCreatedReport(report: Report?) {
+        let alertController: UIAlertController
+
         guard report != nil else {
-            UIAlertController(errorMessage: nil)
-                .present(in: self)
+            alertController = UIAlertController(errorMessage: nil)
             
             return
         }
         
-        UIAlertController(
+        alertController = UIAlertController(
             title: "Thanks for letting us know!",
             message: "We will shortly review your request and take action if needed.",
             preferredStyle: .alert)
             .addCancelButton(title: "Dismiss") { [unowned self] (_) in
                 self.dismissViewController()
+        }
+
+        defer {
+            loadingViewController.dismiss {
+                alertController.present(in: self)
             }
-            .present(in: self)
+        }
+    }
+
+    private func createReport(for selectedItem: FlaggedContentType, with message: String) {
+        switch selectedItem.rawValue {
+        case 0..<99: // flagged a donation
+            guard let donation = self.donationToReport else {
+                fatalError("provided a item from a donation without a donation")
+            }
+
+            ReportingService.createReport(
+                for: donation,
+                flaggingType: selectedItem,
+                userMessage: message, completion: self.handleCreatedReport
+            )
+        case 100..<199: // flagged a user
+            guard let user = self.userToReport else {
+                fatalError("provided a item from a user without a user")
+            }
+
+            ReportingService.createReport(
+                for: user,
+                flaggingType: selectedItem,
+                userMessage: message, completion: self.handleCreatedReport
+            )
+        default:
+            fatalError("unsupported item")
+        }
     }
 }
 
@@ -95,34 +129,30 @@ extension FlaggingViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let selectedItem = flaggableItems[indexPath.row]
-        
-        //TODO: ask the user for a message on why they flagged it
-        let message = "no comment"
-        
-        switch selectedItem.rawValue {
-        case 0..<99: // flagged a donation
-            guard let donation = self.donationToReport else {
-                fatalError("provided a item from a donation without a donation")
-            }
-            
-            ReportingService.createReport(
-                for: donation,
-                flaggingType: selectedItem,
-                userMessage: message, completion: self.createdReport
-            )
-        case 100..<199: // flagged a user
-            guard let user = self.userToReport else {
-                fatalError("provided a item from a user without a user")
-            }
-            
-            ReportingService.createReport(
-                for: user,
-                flaggingType: selectedItem,
-                userMessage: message, completion: self.createdReport
-            )
-        default:
-            fatalError("unsupported item")
+
+        let alertController = UIAlertController(
+            title: flaggableItems[indexPath.row].description,
+            message: "It would be very helpful to get more insight regarding this issue.",
+            preferredStyle: .alert
+        )
+
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Keep it simple"
         }
+        alertController.addConfirmationButton(
+            title: "Submit",
+            style: .default) { [unowned self] (alertAction) in
+
+            self.loadingViewController.present()
+            self.createReport(
+                for: selectedItem,
+                with: alertController.textFields?.first?.text ?? "no comment"
+            )
+        }
+
+        present(alertController, animated: true)
+
+        //TODO: add loading animation
     }
 }
 
