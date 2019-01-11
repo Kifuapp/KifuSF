@@ -136,9 +136,7 @@ struct UserService {
     }
     
     /**
-     <#Lorem ipsum dolor sit amet.#>
-     
-     - parameter completion: <#Consectetur adipisicing elit.#>
+     Logs out the current user and removes it from persistence
      */
     static func logout() throws {
         try Auth.auth().signOut()
@@ -487,7 +485,10 @@ struct UserService {
      - returns: Updated User
      */
     @discardableResult
-    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T, writeToUserDefaults: Bool = true) -> User {
+    static func updateCurrentUser<T>(
+        key: WritableKeyPath<User, T>, to value: T,
+        writeToUserDefaults: Bool = true) -> User {
+        
         var updatedUser = User.current
         updatedUser[keyPath: key] = value
         User.setCurrent(updatedUser)

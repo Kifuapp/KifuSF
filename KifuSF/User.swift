@@ -142,11 +142,7 @@ struct User: Codable, KeyedStoredProperties {
     }
     
     /**
-     <#Lorem ipsum dolor sit amet.#>
-     
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-     
-     - returns: <#Sed do eiusmod tempor.#>
+     if the current user is set, write the User to persistence
      */
     public static func writeToPersistance() {
         guard User._current != nil else {
