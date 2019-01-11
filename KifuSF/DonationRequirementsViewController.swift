@@ -29,6 +29,8 @@ class DonationRequirementsViewController: UIViewController {
     func configureTextViewContent(){
         donationRequirementsTextView.isUserInteractionEnabled = false
         donationRequirementsTextView.font = UIFont.preferredFont(forTextStyle: .body)
+        self.title = "Requirements"
+        
         DonationRequirementsService.getRequirementsText { (requirementsText) in
             if let requirementsText = requirementsText {
                 self.donationRequirementsTextView.text = requirementsText

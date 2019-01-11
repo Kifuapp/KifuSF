@@ -11,6 +11,7 @@
 		7A5663A121E6D46000912729 /* DonationRequirementsService + Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A021E6D46000912729 /* DonationRequirementsService + Moya.swift */; };
 		7A5663A321E6D90000912729 /* DonationRequirementsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A221E6D90000912729 /* DonationRequirementsService.swift */; };
 		7A5663A521E6E67E00912729 /* DonationRequirementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A421E6E67E00912729 /* DonationRequirementsViewController.swift */; };
+		7A5663A721E7D24800912729 /* DonationRequirementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */; };
 		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C50182E62141B1D400257412 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E52141B1D400257412 /* UIImage.swift */; };
@@ -146,6 +147,7 @@
 		7A5663A021E6D46000912729 /* DonationRequirementsService + Moya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DonationRequirementsService + Moya.swift"; sourceTree = "<group>"; };
 		7A5663A221E6D90000912729 /* DonationRequirementsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsService.swift; sourceTree = "<group>"; };
 		7A5663A421E6E67E00912729 /* DonationRequirementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsViewController.swift; sourceTree = "<group>"; };
+		7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsModel.swift; sourceTree = "<group>"; };
 		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C50182E52141B1D400257412 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C50182E72141B24C00257412 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				C5231F0021DF9550001D9A7D /* InformationModel.swift */,
 				C552163121E0C462005D85F0 /* TutorialModel.swift */,
 				C5231EFC21DEBAA9001D9A7D /* SettingsItem.swift */,
+				7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				C5CA7BB3210D26D00052D440 /* Constants.swift in Sources */,
 				C5231EFF21DF82C1001D9A7D /* MailComposerModel.swift in Sources */,
 				E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */,
+				7A5663A721E7D24800912729 /* DonationRequirementsModel.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C564187E216A86BA00664DDB /* UIColor.swift in Sources */,

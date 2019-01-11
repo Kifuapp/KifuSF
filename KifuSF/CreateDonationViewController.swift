@@ -32,8 +32,6 @@ class CreateDonationViewController: UIScrollableViewController {
     
     private let descriptionInputView = UIGroupView<UITextView>(title: "Description",
                                                                contentView: UITextView(forAutoLayout: ()))
-    private let donationRequirementsButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
-                                                       andTitle: "Donation Requirements")
     private let pickUpAddressButton = UIAnimatedButton(backgroundColor: UIColor.Pallete.Blue,
                                                        andTitle: "Choose pick-up address")
     private let errorLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
@@ -115,8 +113,6 @@ class CreateDonationViewController: UIScrollableViewController {
         let requirementsVC = DonationRequirementsViewController()
         self.navigationController?.pushViewController(requirementsVC, animated: true)
     }
-    
-    
 
     private func showErrorMessage(_ errorMessage: String) {
         errorLabel.isHidden = false
@@ -203,13 +199,9 @@ extension CreateDonationViewController: UIConfigurable {
             action: #selector(pickUpAddressButtonTapped),
             for: .touchUpInside
         )
-        
-        donationRequirementsButton.addTarget(
-            self,
-            action: #selector(donationRequirementsButtonPressed),
-            for: .touchUpInside
-        )
-        
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(donationRequirementsButtonPressed))
+        descriptorView.infoStackView.addGestureRecognizer(tapGestureRecognizer)
 
         descriptionInputView.contentView.delegate = self
         titleInputView.contentView.textField.delegate = self
@@ -248,12 +240,10 @@ extension CreateDonationViewController: UIConfigurable {
     }
 
     func configureLayout() {
-        view.addSubview(donationRequirementsButton)
         view.addSubview(pickUpAddressButton)
 
         configureOuterStackViewLayout()
         configurePickUpAddressButtonConstraints()
-        configureDonationRequirementsButtonConstraints()
 
         descriptionInputView.contentView.autoSetDimension(.height, toSize: 64, relation: .greaterThanOrEqual)
 
@@ -282,12 +272,5 @@ extension CreateDonationViewController: UIConfigurable {
         pickUpAddressButton.autoPinEdge(toSuperviewMargin: .leading)
         pickUpAddressButton.autoPinEdge(toSuperviewMargin: .trailing)
         pickUpAddressButton.autoPinEdge(toSuperviewMargin: .bottom)
-    }
-    
-    private func configureDonationRequirementsButtonConstraints() {
-        donationRequirementsButton.autoPinEdge(toSuperviewMargin: .leading)
-        donationRequirementsButton.autoPinEdge(toSuperviewMargin: .trailing)
-        donationRequirementsButton.autoPinEdge(.bottom, to: .top, of: pickUpAddressButton, withOffset: -15.0)
-    
     }
 }
