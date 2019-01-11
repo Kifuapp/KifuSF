@@ -9,9 +9,8 @@
 import Foundation
 import Moya
 
-
 struct DonationRequirementsService{
-    
+    // MARK: - Methods
     static func getRequirementsText(
         completion: @escaping (String?) -> Void) {
         let provider = MoyaProvider<DonationRequirementsEndpoints>()
@@ -28,6 +27,4 @@ struct DonationRequirementsService{
             }
         }
     }
-
-    
 }
