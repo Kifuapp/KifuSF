@@ -50,8 +50,8 @@ class TutorialViewController: UIViewController {
     }
 
     private func changeRootViewController() {
-//        UserDefaults.standard.set(true, forKey: UserDefaults.Keys.completedTutorial.rawValue)
-
+        
+        
         //changing line 56, will modify the logic of dismissing the viewController from settings
         dismiss(animated: true)
     }
