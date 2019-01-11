@@ -88,6 +88,7 @@ struct User: Codable, KeyedStoredProperties {
         self.contactNumber = contactNumber
         self.isVerified = isVerified
         self.hasApprovedConditions = false
+        self.hasSeenTutorial = false
     }
     
     init?(from snapshot: DataSnapshot) {
