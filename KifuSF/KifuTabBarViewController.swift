@@ -55,4 +55,19 @@ class KifuTabBarViewController: UITabBarController {
             UINavigationController(rootViewController: $0)
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
+        // display the tutorial if it hasn't
+        if User.current.hasSeenTutorial == false {
+            present(TutorialViewController(), animated: true)
+            
+            UserService.markHasSeenTutorialTrue { (successful) in
+                if successful {
+                    UserService.updateCurrentUser(key: \.hasSeenTutorial, to: true)
+                }
+            }
+        }
+    }
 }
