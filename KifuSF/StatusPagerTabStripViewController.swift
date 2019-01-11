@@ -36,7 +36,7 @@ class StatusPagerTabStripViewController: ButtonBarPagerTabStripViewController {
     @objc func flagButtonPressed() {
         let user: User?
         let donation: Donation?
-        var title = "Is there anything wrong with this"
+        var title = "Is there anything wrong with this "
 
         if currentIndex == 0 {
             title += "delivery"

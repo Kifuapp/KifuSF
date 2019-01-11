@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-enum FlaggedContentType: Int {
+enum FlaggedContentType: Int, CustomStringConvertible {
     
     //Flagging the donation
     case flaggedImage = 1
@@ -21,14 +21,20 @@ enum FlaggedContentType: Int {
     case flaggedPhoneNumber = 100
     case flaggedCommunication
     
-    func getDescription() -> String {
+    var description: String {
         switch self {
         case .flaggedImage:
             return "Inapropiate Image"
         case .flaggedPickupLocation:
             return "Wrong pickup location"
-        default:
-            return "poof"
+        case .flaggedNotes:
+            return "Inapropiate/Misleading Note"
+        case .flaggedVerificationImage:
+            return "Inapropiate/Misleading Verification Image"
+        case .flaggedPhoneNumber:
+            return "Incorrect Phone Number"
+        case .flaggedCommunication:
+            return "Inapropiate/Unresponsive Communication"
         }
     }
 }

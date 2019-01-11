@@ -83,8 +83,7 @@ extension FlaggingViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.textLabel?.textColor = UIColor.Text.Headline
         
-        cell.textLabel?.text = flaggableItems[indexPath.row].getDescription()
-        cell.tag = flaggableItems[indexPath.row].rawValue
+        cell.textLabel?.text = flaggableItems[indexPath.row].description
         
         return cell
     }

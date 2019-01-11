@@ -45,7 +45,6 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
         let flaggingViewController = UINavigationController(
             rootViewController: FlaggingViewController(
                 flaggableItems: flaggableItems,
-                userToReport: donation.donator,
                 donationToReport: donation
             )
         )

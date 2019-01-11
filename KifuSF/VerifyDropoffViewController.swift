@@ -92,7 +92,6 @@ class VerifyDropoffViewController: UIScrollableViewController {
         let flaggingViewController = UINavigationController(
             rootViewController: FlaggingViewController(
                 flaggableItems: flaggableItems,
-                userToReport: donation.donator,
                 donationToReport: donation
             )
         )
