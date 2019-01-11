@@ -50,6 +50,24 @@ class FlaggingViewController: UIViewController {
     @objc private func dismissViewController() {
         dismiss(animated: true)
     }
+    
+    private func createdReport(report: Report?) {
+        guard report != nil else {
+            UIAlertController(errorMessage: nil)
+                .present(in: self)
+            
+            return
+        }
+        
+        UIAlertController(
+            title: "Thanks for letting us know!",
+            message: "We will shortly review your request and take action if needed.",
+            preferredStyle: .alert)
+            .addCancelButton(title: "Dismiss") { [unowned self] (_) in
+                self.dismissViewController()
+            }
+            .present(in: self)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -76,19 +94,36 @@ extension FlaggingViewController: UITableViewDataSource {
 extension FlaggingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        // TODO: erick - use flagging service
-        // if there's an error with the service just just an erorr without dismissing the viewcontroller
-        let alertController = UIAlertController(
-            title: "Thanks for letting us know!",
-            message: "We will shortly review your request and take action if needed.",
-            preferredStyle: .alert
-        )
-        alertController.addCancelButton(title: "Dismiss") { [unowned self] (_) in
-            self.dismiss(animated: true, completion: nil)
+        
+        let selectedItem = flaggableItems[indexPath.row]
+        
+        //TODO: ask the user for a message on why they flagged it
+        let message = "no comment"
+        
+        switch selectedItem.rawValue {
+        case 0..<99: // flagged a donation
+            guard let donation = self.donationToReport else {
+                fatalError("provided a item from a donation without a donation")
+            }
+            
+            ReportingService.createReport(
+                for: donation,
+                flaggingType: selectedItem,
+                userMessage: message, completion: self.createdReport
+            )
+        case 100..<199: // flagged a user
+            guard let user = self.userToReport else {
+                fatalError("provided a item from a user without a user")
+            }
+            
+            ReportingService.createReport(
+                for: user,
+                flaggingType: selectedItem,
+                userMessage: message, completion: self.createdReport
+            )
+        default:
+            fatalError("unsupported item")
         }
-
-        present(alertController, animated: true)
     }
 }
 
