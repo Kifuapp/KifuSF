@@ -30,7 +30,7 @@ class KFVUserInfo: UIDescriptorView {
     func reloadData(for data: KFMUserInfo) {
         imageView.kf.setImage(with: data.profileImageURL)
         titleLabel.text = data.name
-        subtitleStickyLabel.contentView.text = "@\(data.username)"
+//        subtitleStickyLabel.contentView.text = "@\(data.username)" // TODO: uncomment this after displaying the user's fullname
         descriptionLabel.text = "Reputation: \(data.userReputation)%"
 
         statisticsStickyView.contentView.reloadData(donations: data.userDonationsCount,
