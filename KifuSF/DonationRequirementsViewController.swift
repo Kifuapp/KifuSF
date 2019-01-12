@@ -9,28 +9,26 @@
 import UIKit
 
 class DonationRequirementsViewController: UIViewController {
-    private let donationRequirementsTextView = UITextView()
+    // MARK: - Variables
+    private let donationRequirementsTextView = UITextView(
+        font: UIFont.preferredFont(forTextStyle: .body),
+        textColor: UIColor.Text.Headline
+    )
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureTextViewConstraints()
-        configureTextViewContent()
+        configureData()
+        configureLayout()
     }
-    
-    
-    func configureTextViewConstraints(){
-        view.addSubview(donationRequirementsTextView)
-        donationRequirementsTextView.autoPinEdge(toSuperviewEdge: .top)
-        donationRequirementsTextView.autoPinEdge(toSuperviewEdge: .leading)
-        donationRequirementsTextView.autoPinEdge(toSuperviewEdge: .trailing)
-        donationRequirementsTextView.autoPinEdge(toSuperviewEdge: .bottom)
-    }
-    
-    func configureTextViewContent(){
-        donationRequirementsTextView.isUserInteractionEnabled = false
-        donationRequirementsTextView.font = UIFont.preferredFont(forTextStyle: .body)
-        self.title = "Requirements"
-        
+}
+
+// MARK: - UIConfigurable
+extension DonationRequirementsViewController: UIConfigurable {
+    func configureData() {
+        title = "Donation Requirements"
+
         DonationRequirementsService.getRequirementsText { (requirementsText) in
             if let requirementsText = requirementsText {
                 self.donationRequirementsTextView.text = requirementsText
@@ -38,11 +36,17 @@ class DonationRequirementsViewController: UIViewController {
                 self.donationRequirementsTextView.text = "Unable to Retrieve Requirements Text"
             }
         }
-        
-
-        
     }
-    
 
+    func configureLayout() {
+        view.addSubview(donationRequirementsTextView)
+        view.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(16, 16, 16, 16)
 
+        donationRequirementsTextView.translatesAutoresizingMaskIntoConstraints = false
+        donationRequirementsTextView.autoPinEdgesToSuperviewMargins()
+
+        donationRequirementsTextView.alwaysBounceVertical = true
+
+        view.backgroundColor = UIColor.Pallete.White
+    }
 }

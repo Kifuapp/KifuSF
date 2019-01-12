@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     // MARK: - Variables
     private let settingsItems: [[SettingsItem]] = [
-        [ DonationRequirementsModel(cellTitle:"Requirements"),
+        [ DonationRequirementsModel(cellTitle:"Donation Requirements"),
           WebsiteModel(cellTitle: "St. Anthony Charity",
                        website: .stAnthony),
           TutorialModel(cellTitle: "Tutorial"),

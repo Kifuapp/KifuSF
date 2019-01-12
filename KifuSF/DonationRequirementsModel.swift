@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct DonationRequirementsModel {
-    
+    // MARK: - Variables
     var cellTitle: String
     var errorAlertController: UIAlertController
     
@@ -21,6 +21,7 @@ struct DonationRequirementsModel {
     }
 }
 
+// MARK: - SettingsItem
 extension DonationRequirementsModel: SettingsItem {
     var viewControllerToShow: UIViewController {
         let donationRequirementsVC = DonationRequirementsViewController()

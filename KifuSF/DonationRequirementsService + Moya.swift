@@ -9,17 +9,17 @@
 import Foundation
 import Moya
 
-
+// MARK: - DonationRequirementsEndpoints
 enum DonationRequirementsEndpoints{
     case getRequirements()
 }
 
+// MARK: - TargetType
 extension DonationRequirementsEndpoints: TargetType {
     var baseURL: URL {
         return URL(string: "https://chatter-ton.glitch.me")!
     }
-    
-    
+
     var path: String {
         switch self {
         case .getRequirements:
@@ -42,7 +42,4 @@ extension DonationRequirementsEndpoints: TargetType {
     var headers: [String : String]? {
         return nil
     }
-    
-    
-    
 }
