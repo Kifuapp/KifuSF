@@ -77,11 +77,9 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
             OnBoardingDistributer.presentNextStepIfNeeded(from: self)
             
         }, newUserHandler: { (loginInfo) in
-            
             let registerVC = RegisterFormViewController()
             registerVC.signInProvderInfo = loginInfo
-            self.present(registerVC, animated: true)
-            
+            self.navigationController?.pushViewController(registerVC, animated: true)
         })
     }
 
