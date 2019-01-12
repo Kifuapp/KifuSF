@@ -65,21 +65,34 @@ struct DonationService {
     
     static func attach(report: Report, to donation: Donation, completion: @escaping (Bool) -> Void) {
         /**
-         FIXME: refactoring open-dontaions: now that the donation can be in multiple locations (open-donations, donator-donation, or volunteer-donation) this is now broken
+         FIXME: might override exisiting donations if user is already donating/delivering a different donation
          */
         
-        let refDonation = Database.database().reference().child("open-donations").child(donation.uid)
+        let fbDg = FirebaseDispatchGroup()
+        
         let updatedDict: [String: Any] = [
             Donation.Keys.flaggedReportUid: report.uid,
             Donation.Keys.flag: report.flag.rawValue
         ]
-        refDonation.updateChildValues(updatedDict) { error, _ in
-            if let error = error {
-                assertionFailure("there was an error attaching the report: \(error.localizedDescription)")
-                return completion(false)
-            }
-            
-            completion(true)
+        
+        // update the donators copy
+        let refDonatorDonation = DatabaseReference.donation(for: donation.donator.uid, donation: donation.uid)
+        refDonatorDonation.updateChildValues(updatedDict, withCompletionBlock: fbDg.handleErrorCase)
+        
+        // update the open-donations copy, if needed
+        if donation.status.isOpen {
+            let refOpenDonation = DatabaseReference.openDonation(at: donation.uid)
+            refOpenDonation.updateChildValues(updatedDict, withCompletionBlock: fbDg.handleErrorCase)
+        }
+        
+        // update the volunteer's copy, if needed
+        if let volunteer = donation.volunteer {
+            let refVolunteerDonation = DatabaseReference.delivery(for: volunteer.uid, donation: donation.uid)
+            refVolunteerDonation.updateChildValues(updatedDict, withCompletionBlock: fbDg.handleErrorCase)
+        }
+        
+        fbDg.notify { (isSuccessful) in
+            completion(isSuccessful)
         }
     }
 

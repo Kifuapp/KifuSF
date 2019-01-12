@@ -60,9 +60,17 @@ class DeliveryModularTableViewController: ModularTableViewController {
     // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        modularTableView.contentInset.bottom = actionButton.frame.height + 16
-        modularTableView.scrollIndicatorInsets.bottom = actionButton.frame.height + 16
+        var buttonHeight = actionButton.frame.height + 16
+
+        // the first time this view is loaded the height of the button is zero
+        // therefore the last tableViewCell is overlaping with the button
+        // this is just a temporary workaround
+        if actionButton.frame.height == 0 {
+            buttonHeight += 44
+        }
+
+        modularTableView.contentInset.bottom = buttonHeight
+        modularTableView.scrollIndicatorInsets.bottom = buttonHeight
     }
 
     // MARK: - Methods

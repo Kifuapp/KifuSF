@@ -42,7 +42,26 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
 
     // MARK: - Methods
     @objc func flagButtonPressed() {
-        //TODO: alex-flagging
+        let flaggingViewController = UINavigationController(
+            rootViewController: FlaggingViewController(
+                flaggableItems: flaggableItems,
+                donationToReport: donation
+            )
+        )
+
+        let alertController = UIAlertController(
+            title: "Is there anything wrong with this donation?",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        alertController.addButton(
+            title: "Report Donation",
+            style: .default) { (_) in
+                self.present(flaggingViewController, animated: true)
+        }
+        alertController.addCancelButton()
+        present(alertController, animated: true)
     }
 
     override func retrieveOpenDonationDescriptionItem() -> ModularTableViewItem? {
@@ -137,9 +156,18 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
             for: .touchUpInside
         )
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .kfFlagIcon,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(flagButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .kfFlagIcon,
+            style: .plain,
+            target: self,
+            action: #selector(flagButtonPressed)
+        )
+    }
+}
+
+// MARK: - FlaggingContentItems
+extension DetailedDonationModularTableViewController: FlaggingContentItems {
+    var flaggableItems: [FlaggedContentType] {
+        return [.flaggedImage, .flaggedNotes]
     }
 }
