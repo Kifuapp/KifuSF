@@ -54,6 +54,12 @@ class FlaggingViewController: UIViewController {
     
     private func handleCreatedReport(report: Report?) {
         let alertController: UIAlertController
+        
+        defer {
+            loadingViewController.dismiss {
+                alertController.present(in: self)
+            }
+        }
 
         guard report != nil else {
             alertController = UIAlertController(errorMessage: nil)
@@ -68,17 +74,11 @@ class FlaggingViewController: UIViewController {
             .addCancelButton(title: "Dismiss") { [unowned self] (_) in
                 self.dismissViewController()
         }
-
-        defer {
-            loadingViewController.dismiss {
-                alertController.present(in: self)
-            }
-        }
     }
 
     private func createReport(for selectedItem: FlaggedContentType, with message: String) {
         switch selectedItem.rawValue {
-        case 0..<99: // flagged a donation
+        case 0..<100: // flagged a donation
             guard let donation = self.donationToReport else {
                 fatalError("provided a item from a donation without a donation")
             }
@@ -88,7 +88,7 @@ class FlaggingViewController: UIViewController {
                 flaggingType: selectedItem,
                 userMessage: message, completion: self.handleCreatedReport
             )
-        case 100..<199: // flagged a user
+        case 100..<200: // flagged a user
             guard let user = self.userToReport else {
                 fatalError("provided a item from a user without a user")
             }
