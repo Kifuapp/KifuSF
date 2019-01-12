@@ -19,13 +19,7 @@ class FlaggingViewController: UIViewController {
     
     var userToReport: User?
     var donationToReport: Donation?
-
-    /**
-     <#Lorem ipsum dolor sit amet.#>
-
-     TODO: present loading vc
-     */
-
+    
     // MARK: - Initializers
     convenience init(
         flaggableItems: [FlaggedContentType],
@@ -151,8 +145,6 @@ extension FlaggingViewController: UITableViewDelegate {
         }
 
         present(alertController, animated: true)
-
-        //TODO: add loading animation
     }
 }
 
