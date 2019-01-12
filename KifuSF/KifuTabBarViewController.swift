@@ -17,7 +17,7 @@ class KifuTabBarViewController: UITabBarController {
         
         let homeViewController = KFCOpenDonations()
         let settingViewController = SettingsViewController()
-        let statusViewController = KFCStatus()
+        let statusViewController = StatusPagerTabStripViewController()
         let leaderboardViewController = KFCLeaderboard()
 
         homeViewController.tabBarItem = UITabBarItem(

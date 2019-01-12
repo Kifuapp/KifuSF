@@ -89,8 +89,20 @@ class VerifyDropoffViewController: UIScrollableViewController {
     }
 
     @objc private func reportButtonTapped() {
-        let flaggingViewController = KFCFlagging(flaggableItems: [.flaggedVerificationImage], donation: self.donation)
+        let flaggingViewController = UINavigationController(
+            rootViewController: FlaggingViewController(
+                flaggableItems: flaggableItems,
+                donationToReport: donation
+            )
+        )
         navigationController?.pushViewController(flaggingViewController, animated: true)
+    }
+}
+
+// MARK: - FlaggingContentItems
+extension VerifyDropoffViewController: FlaggingContentItems {
+    var flaggableItems: [FlaggedContentType] {
+        return [.flaggedVerificationImage]
     }
 }
 
