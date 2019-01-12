@@ -31,7 +31,7 @@ struct UserDistance: CustomStringConvertible {
         
         let unit = Locale.current.usesMetricSystem ? "meters" : "miles"
         
-        return "\(distance) \(unit) away"
+        return "\(distance) \(unit) away from your current location"
     }
     
     private let distance: String?
