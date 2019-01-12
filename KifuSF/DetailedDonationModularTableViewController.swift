@@ -73,10 +73,10 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
             imageURL: imageUrl,
             title: donation.title,
             username: donator.username,
-            creationDate: String(describing: donation.creationDate), //TODO: format date
-            userReputation: 22, //TODO: alex-reputation
-            userDonationsCount: 12, //TODO: alex-reputation
-            userDeliveriesCount: 12, //TODO: alex-reputation
+            creationDate: donation.creationDate.stringValue(),
+            userReputation: donator.reputation,
+            userDonationsCount: donator.numberOfDonations,
+            userDeliveriesCount: donator.numberOfDeliveries,
             distance: distance,
             description: donation.notes
         )
