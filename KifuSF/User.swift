@@ -22,6 +22,7 @@ struct User: Codable, KeyedStoredProperties {
         case reputation
         case numberOfDonations
         case numberOfDeliveries
+        case hasSeenTutorial
     }
     
     // MARK: - VARS
@@ -33,6 +34,7 @@ struct User: Codable, KeyedStoredProperties {
     
     var isVerified: Bool
     var hasApprovedConditions: Bool
+    var hasSeenTutorial: Bool
     
     var reputation: Double = 0
     var numberOfDonations: Int = 0
@@ -61,6 +63,7 @@ struct User: Codable, KeyedStoredProperties {
             Keys.contactNumber: contactNumber,
             Keys.isVerified: isVerified,
             Keys.hasApprovedConditions: hasApprovedConditions,
+            Keys.hasSeenTutorial: hasSeenTutorial,
             Keys.flag: flag?.rawValue as Any,
             Keys.flaggedReportUid: flaggedReportUid as Any,
             Keys.reputation: reputation,
@@ -85,6 +88,7 @@ struct User: Codable, KeyedStoredProperties {
         self.contactNumber = contactNumber
         self.isVerified = isVerified
         self.hasApprovedConditions = false
+        self.hasSeenTutorial = false
     }
     
     init?(from snapshot: DataSnapshot) {
@@ -105,6 +109,7 @@ struct User: Codable, KeyedStoredProperties {
             let nDeliveries = dictionary[Keys.numberOfDeliveries] as? Int,
             let contactNumber = dictionary[Keys.contactNumber] as? String,
             let isVerified = dictionary[Keys.isVerified] as? Bool,
+            let hasSeenTutorial = dictionary[Keys.hasSeenTutorial] as? Bool,
             let hasApprovedConditions = dictionary[Keys.hasApprovedConditions] as? Bool
             else { return nil }
         
@@ -113,6 +118,7 @@ struct User: Codable, KeyedStoredProperties {
         self.imageURL = imageURL
         self.contactNumber = contactNumber
         self.isVerified = isVerified
+        self.hasSeenTutorial = hasSeenTutorial
         self.hasApprovedConditions = hasApprovedConditions
         self.reputation = reputation
         self.numberOfDonations = nDonations
@@ -131,14 +137,21 @@ struct User: Codable, KeyedStoredProperties {
     
     // MARK: - METHODS
     
-    public static func setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
-        if writeToUserDefaults {
-            if let data = try? JSONEncoder().encode(user) {
-                UserDefaults.standard.set(data, forKey: "currentUser")
-            }
+    public static func setCurrent(_ user: User) {
+        _current = user
+    }
+    
+    /**
+     if the current user is set, write the User to persistence
+     */
+    public static func writeToPersistance() {
+        guard User._current != nil else {
+            return
         }
         
-        _current = user
+        if let data = try? JSONEncoder().encode(User.current) {
+            UserDefaults.standard.set(data, forKey: "currentUser")
+        }
     }
     
     // MARK: - IBACTIONS

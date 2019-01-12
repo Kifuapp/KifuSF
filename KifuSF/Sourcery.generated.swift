@@ -150,6 +150,7 @@ extension User {
         static let contactNumber = "contact-number"
         static let isVerified = "is-verified"
         static let hasApprovedConditions = "has-approved-conditions"
+        static let hasSeenTutorial = "has-seen-tutorial"
         static let reputation = "reputation"
         static let numberOfDonations = "number-of-donations"
         static let numberOfDeliveries = "number-of-deliveries"

@@ -74,7 +74,7 @@ class RegisterFormViewController: UIScrollableViewController {
     }()
     
     private let passwordInputView: UIGroupView<UITextFieldContainer> = {
-        let container = UITextFieldContainer(textContentType: .newPassword,
+        let container = UITextFieldContainer(textContentType: .password,
                                              returnKeyType: .done,
                                              isSecureTextEntry: true,
                                              placeholder: "Password")
@@ -169,15 +169,10 @@ class RegisterFormViewController: UIScrollableViewController {
                             fatalError("User not returned back after trying to completeSigninProviderLogin")
                         }
                         
-                        User.setCurrent(user, writeToUserDefaults: true)
+                        // persist the user only in this current session and not in User Defaults
+                        User.setCurrent(user)
                         
-                        if user.isVerified {
-                            let mainViewControllers = KifuTabBarViewController()
-                            self.present(mainViewControllers, animated: true)
-                        } else {
-                            let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                            self.present(phoneNumberValidationViewController, animated: true)
-                        }
+                        OnBoardingDistributer.presentNextStepIfNeeded(from: self)
                     }
                 }
             }
@@ -222,9 +217,10 @@ class RegisterFormViewController: UIScrollableViewController {
                             return self.showErrorMessage(errorMessage)
                         }
                         
-                        User.setCurrent(user, writeToUserDefaults: true)
-                        let phoneNumberValidationViewController = KFCPhoneNumberValidation()
-                        self.present(phoneNumberValidationViewController, animated: true)
+                        // persist the user only in this current session and not in User Defaults
+                        User.setCurrent(user)
+                        
+                        OnBoardingDistributer.presentNextStepIfNeeded(from: self)
                     }
             }
         }

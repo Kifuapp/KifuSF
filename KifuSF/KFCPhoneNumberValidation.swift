@@ -22,7 +22,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                                                                     returnKeyType: .continue,
                                                                     placeholder: "1234")
 
-    //TODO: implement function to resend code and recheck phone number
+    //TODO: create a button and invoke -sendTextMessage()
     let noCodeLabel = UILabel(font: UIFont.preferredFont(forTextStyle: .body),
                               textColor: UIColor.Pallete.Green)
     
@@ -41,16 +41,14 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
         configureLayout()
         configureGestures()
         
-        TwoFactorAuthService.sendTextMessage(to: User.current.contactNumber) { [unowned self] (authy) in
-            self.authentificator = authy
-        }
+        sendTextMessage()
     }
     
     @objc func continueButtonTapped() {
         guard let code = authenticationCodeTextFieldContainer.textField.text,
             code.isEmpty == false,
             let authy = authentificator else {
-            return showErrorMessage("The code cannot be empty")//TODO: show error (can't be empty)
+            return showErrorMessage("The code cannot be empty")
         }
         
         let loadingVC = KFCLoading(style: .whiteLarge)
@@ -60,8 +58,11 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                 UserService.markIsVerifiedTrue(completion: { (isSuccessful) in
                     loadingVC.dismiss {
                         if isSuccessful {
-                            let mainViewControllers = KifuTabBarViewController()
-                            self.present(mainViewControllers, animated: true)
+                            UserService.updateCurrentUser(
+                                key: \User.isVerified, to: true,
+                                writeToUserDefaults: false
+                            )
+                            OnBoardingDistributer.presentNextStepIfNeeded(from: self)
                         } else {
                             UIAlertController(errorMessage: nil)
                                 .present(in: self)
@@ -70,7 +71,7 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
                 })
             } else {
                 loadingVC.dismiss {
-                    self.showErrorMessage("Incorrect code") //TODO: show error (wrong code)
+                    self.showErrorMessage("Incorrect code")
                 }
             }
         }
@@ -87,7 +88,11 @@ class KFCPhoneNumberValidation: UIScrollableViewController {
         continueButton.resetState()
     }
     
-    
+    private func sendTextMessage() {
+        TwoFactorAuthService.sendTextMessage(to: User.current.contactNumber) { [unowned self] (authy) in
+            self.authentificator = authy
+        }
+    }
 }
 
 extension KFCPhoneNumberValidation: UIConfigurable {

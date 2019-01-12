@@ -136,6 +136,15 @@ struct UserService {
     }
     
     /**
+     Logs out the current user and removes it from persistence
+     */
+    static func logout() throws {
+        try Auth.auth().signOut()
+        
+        UserDefaults.standard.removeObject(forKey: "currentUser")
+    }
+    
+    /**
      send a password reset email
      
      - ToDo: decide what to do with the error
@@ -370,8 +379,6 @@ struct UserService {
                 return completion(false)
             }
             
-            updateCurrentUser(key: \User.isVerified, to: true)
-            
             completion(true)
         }
     }
@@ -394,7 +401,27 @@ struct UserService {
                 return completion(false)
             }
             
-            updateCurrentUser(key: \User.hasApprovedConditions, to: true)
+            completion(true)
+        }
+    }
+    
+    /**
+     Mark the current user's hasSeenTutorial to true
+     
+     - Attention: conforms to firebase rules
+     */
+    static func markHasSeenTutorialTrue(completion: @escaping (Bool) -> Void) {
+        let ref = DatabaseReference.currentUser()
+        let changes: [String: Any] = [
+            User.Keys.hasSeenTutorial: true
+        ]
+        
+        ref.updateChildValues(changes) { error, _ in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                
+                return completion(false)
+            }
             
             completion(true)
         }
@@ -416,7 +443,8 @@ struct UserService {
                 return completion(false)
             }
             
-            User.setCurrent(user, writeToUserDefaults: true)
+            User.setCurrent(user)
+            User.writeToPersistance()
 
             completion(true)
         }
@@ -457,10 +485,17 @@ struct UserService {
      - returns: Updated User
      */
     @discardableResult
-    static func updateCurrentUser<T>(key: WritableKeyPath<User, T>, to value: T) -> User {
+    static func updateCurrentUser<T>(
+        key: WritableKeyPath<User, T>, to value: T,
+        writeToUserDefaults: Bool = true) -> User {
+        
         var updatedUser = User.current
         updatedUser[keyPath: key] = value
-        User.setCurrent(updatedUser, writeToUserDefaults: true)
+        User.setCurrent(updatedUser)
+        
+        if writeToUserDefaults {
+            User.writeToPersistance()
+        }
         
         return updatedUser
     }
