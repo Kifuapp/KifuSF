@@ -122,8 +122,8 @@
 		E92E6AE221E9AA6600759747 /* ThrottleGlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92E6AE121E9AA6600759747 /* ThrottleGlobalFunctions.swift */; };
 		E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */; };
 		E9333D1E21CB36160031DD9F /* UserReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1D21CB36160031DD9F /* UserReview.swift */; };
-		E93E9D6B21E877C800E600E9 /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E93E9D6A21E86B3200E600E9 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E9D6921E86B3200E600E9 /* NSAttributedString.swift */; };
+		E93E9D6B21E877C800E600E9 /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
 		E95A948F21E821D300750A68 /* OnBoardingDistributer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */; };
@@ -831,6 +831,9 @@
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.AutoFillCredentialProvider = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.SafariKeychain = {
