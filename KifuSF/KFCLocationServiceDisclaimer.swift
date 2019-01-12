@@ -46,6 +46,7 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureData()
         configureStyling()
         configureLayout()
         configureGestures()
@@ -98,14 +99,7 @@ class KFCLocationServiceDisclaimer: UIScrollableViewController {
 }
 
 extension KFCLocationServiceDisclaimer: UIConfigurable {
-    func configureGestures() {
-        activateLocationButton.addTarget(self, action: #selector(activateLocationButtonTapped), for: .touchUpInside)
-        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-    }
-    
-    func configureStyling() {
-        view.backgroundColor = UIColor.Pallete.White
-        
+    func configureData() {
         title = "Location Privacy"
         locationServiceDisclaimerLabel.text = """
         In order to use Kifu we will need to know your location only while using the app.
@@ -119,6 +113,15 @@ extension KFCLocationServiceDisclaimer: UIConfigurable {
         
         Please allow Kifu to use your location while the app is open.
         """
+    }
+    
+    func configureGestures() {
+        activateLocationButton.addTarget(self, action: #selector(activateLocationButtonTapped), for: .touchUpInside)
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+    }
+    
+    func configureStyling() {
+        view.backgroundColor = UIColor.Pallete.White
     }
     
     func configureLayout() {
