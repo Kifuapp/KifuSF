@@ -82,7 +82,7 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
             
         }, newUserHandler: { (loginInfo) in
             let registerVC = RegisterFormViewController()
-            registerVC.signInProvderInfo = loginInfoAd
+            registerVC.signInProvderInfo = loginInfo
 
             loadingViewController.dismiss {}
             self.navigationController?.pushViewController(registerVC, animated: true)
