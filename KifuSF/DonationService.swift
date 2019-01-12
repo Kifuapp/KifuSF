@@ -122,27 +122,25 @@ struct DonationService {
         //download snapshot
         ref.observe(.value) { (snapshot) in
             guard let snapshotValue = snapshot.children.allObjects as? [DataSnapshot] else {
-                fatalError("could not decode into array") //empty array
+                assertionFailure("could not decode into array")
+                
+                return completion([])
             }
 
             //map snapshot into array of donation
-            let openDonations: [Donation] = snapshotValue.compactMap({ (snapshot) -> Donation? in
+            let openDonations: [Donation] = snapshotValue.compactMap({ snapshot in
                 guard let donationFromSnapshot = Donation(from: snapshot) else {
-                    fatalError("could not decode")
-                }
-
-                //only include open donations
-                if case .open = donationFromSnapshot.status {
-
-                    //include donations not from current user
-                    if donationFromSnapshot.donator.uid != User.current.uid {
-                        return donationFromSnapshot
-                    } else {
-                        return nil
-                    }
-                } else {
+                    assertionFailure("could not decode")
+                    
                     return nil
                 }
+                
+                //include donations not from current user
+                if donationFromSnapshot.donator.uid != User.current.uid {
+                    return donationFromSnapshot
+                }
+                
+                return nil
             })
 
             //return

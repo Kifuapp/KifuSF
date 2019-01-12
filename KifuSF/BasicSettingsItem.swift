@@ -26,7 +26,7 @@ extension BasicSettingsItem: SettingsItem {
     }
     
     var errorAlertController: UIAlertController {
-        fatalError("\(#function) is not used for this settings item. An alert is presented if the given action closure throws")
+        fatalError("\(#function) is not used for this settings item. An alert is used if the action closure throws")
     }
     
     func didSelectItem(in viewController: UIViewController) {

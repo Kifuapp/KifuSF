@@ -166,7 +166,9 @@ class RegisterFormViewController: UIScrollableViewController {
                 contactNumber: normalizedPhoneNumber) { (user) in
                     loadingVC.dismiss {
                         guard let user = user else {
-                            fatalError("User not returned back after trying to completeSigninProviderLogin")
+                            assertionFailure("User not returned back after trying to completeSigninProviderLogin")
+                            
+                            return self.showErrorMessage("something went wrong")
                         }
                         
                         // persist the user only in this current session and not in User Defaults

@@ -183,7 +183,9 @@ struct RequestService {
         let ref = Database.database().reference().child("donation-requests").child(donation.uid)
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let volunteersSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
-                fatalError("could not decode")
+                assertionFailure("could not decode")
+                
+                return completion([])
             }
 
             let volunteers = volunteersSnapshot.compactMap(User.init)
@@ -198,7 +200,9 @@ struct RequestService {
         let ref = Database.database().reference().child("user-requests").child(user.uid)
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let donationSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
-                fatalError("could not decode")
+                assertionFailure("could not decode")
+                
+                return completion([])
             }
 
             let requestingDonations = donationSnapshots.compactMap(Donation.init)
@@ -214,7 +218,9 @@ struct RequestService {
         let ref = Database.database().reference().child("user-requests").child(currentUserUid)
         ref.observe(.value) { (snapshot) in
             guard let donationSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
-                fatalError("could not decode")
+                assertionFailure("could not decode")
+                
+                return completion([])
             }
 
             let requestingDonations = donationSnapshots.compactMap(Donation.init)

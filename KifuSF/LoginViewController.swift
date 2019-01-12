@@ -123,9 +123,18 @@ class LoginViewController: UIScrollableViewController {
                 return
             }
             
-            UserService.resetPassword(for: email, completion: { (succes) in
-                //TODO: maybe handle error
-                print(succes)
+            UserService.resetPassword(for: email, completion: { (success) in
+                if success {
+                    UIAlertController(
+                        title: "Reset Password",
+                        message: "if this account exists, an email would be sent on resetting your password",
+                        preferredStyle: .alert)
+                        .addDismissButton()
+                        .present(in: self)
+                } else {
+                    UIAlertController(errorMessage: nil)
+                        .present(in: self)
+                }
             })
         }))
         

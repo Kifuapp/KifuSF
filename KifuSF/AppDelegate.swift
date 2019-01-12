@@ -109,11 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 extension UIWindow {
     static var applicationAlertWindow: UIWindow {
         
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("¯\\_(ツ)_/¯")
-        }
-        
+        let appDelegate = AppDelegate.shared
         let alertWindow: UIWindow
         if let window = appDelegate.alertWindow {
             alertWindow = window
