@@ -52,10 +52,13 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     }
     
     @objc func didSignInWithGoogle(_ notification: NSNotification) {
+        let loadingViewController = KFCLoading(style: .whiteLarge)
+        loadingViewController.present()
+
         guard let credentials = notification.userInfo?["credentials"] as? AuthCredential else {
             fatalError("Did not have any login credentials passed")
         }
-        
+
         UserService.login(with: credentials, existingUserHandler: { (user, error) in
             if let error = error {
                 let message = UserService.retrieveAuthErrorMessage(for: error)
@@ -73,12 +76,15 @@ class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
             
             // persist the user only in this current session and not in User Defaults
             User.setCurrent(user)
-            
+
+            loadingViewController.dismiss { }
             OnBoardingDistributer.presentNextStepIfNeeded(from: self)
             
         }, newUserHandler: { (loginInfo) in
             let registerVC = RegisterFormViewController()
-            registerVC.signInProvderInfo = loginInfo
+            registerVC.signInProvderInfo = loginInfoAd
+
+            loadingViewController.dismiss {}
             self.navigationController?.pushViewController(registerVC, animated: true)
         })
     }
