@@ -29,34 +29,40 @@ struct TwoFactorAuthService {
      
      - Attention: the returned object in the closure is required to be sent when
      the code needs to be verified when using +validate(code:authy:!)
+     
+     - Attention: this implementation contains a throttler for 10 seconds. Thus,
+     this can only send text messages every 10 seconds.
      */
     static func sendTextMessage(
         to number: String,
         completion: @escaping (TwoFactorAuthy?) -> Void) {
-        let provider = MoyaProvider<TwoFactorAuthEndPoints>()
         
-        provider.request(.send(number: number)) { (result) in
-            switch result {
-            case .success(let response):
-                let data = response.data
-                
-                guard
-                    let jsonResponse = try? JSONSerialization.jsonObject(
-                        with: data,
-                        options: .allowFragments
-                        ) as! [String: Any],
-                    let requestId = jsonResponse["request_id"] as! String? else {
-                        assertionFailure("failed to decode data")
-                        
-                        return completion(nil)
+        throttle(for: 10) {
+            let provider = MoyaProvider<TwoFactorAuthEndPoints>()
+            
+            provider.request(.send(number: number)) { (result) in
+                switch result {
+                case .success(let response):
+                    let data = response.data
+                    
+                    guard
+                        let jsonResponse = try? JSONSerialization.jsonObject(
+                            with: data,
+                            options: .allowFragments
+                            ) as! [String: Any],
+                        let requestId = jsonResponse["request_id"] as! String? else {
+                            assertionFailure("failed to decode data")
+                            
+                            return completion(nil)
+                    }
+                    
+                    let authy = TwoFactorAuthy(requestId: requestId)
+                    completion(authy)
+                case .failure(let error):
+                    assertionFailure("something went wrong \(error.localizedDescription)")
+                    
+                    return completion(nil)
                 }
-                
-                let authy = TwoFactorAuthy(requestId: requestId)
-                completion(authy)
-            case .failure(let error):
-                assertionFailure("something went wrong \(error.localizedDescription)")
-                
-                return completion(nil)
             }
         }
     }
