@@ -108,7 +108,6 @@
 		C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */; };
 		C5DD404D2136ED4400ECC819 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404C2136ED4400ECC819 /* UILabel.swift */; };
 		C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD404F2136EF8200ECC819 /* UITextView.swift */; };
-		C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */; };
 		C5DD405F21381AD100ECC819 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD405E21381AD100ECC819 /* UIButton.swift */; };
 		C5E4A35921D28C9900530C75 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4A35821D28C9800530C75 /* KeyboardHandler.swift */; };
 		C5F78C83214E82DF00B5395E /* KFCVolunteerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F78C82214E82DF00B5395E /* KFCVolunteerList.swift */; };
@@ -131,8 +130,6 @@
 		E95A949321E8397000750A68 /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A949221E8397000750A68 /* ApplicationService.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */; };
-		E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */; };
-		E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
 		E98B0038213791D6008FD75A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0037213791D6008FD75A /* Report.swift */; };
 		E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8906C216841A600E71E8D /* KFMWidgetDescriptor.swift */; };
@@ -146,7 +143,6 @@
 		44339C36210D4C4400E6663E /* ItemPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
 		44EE8F11210D88EA00F387A3 /* VolunteerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerCell.swift; sourceTree = "<group>"; };
 		75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KifuSF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A49CFBF213E3BDD001A48FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		7A49CFC3213E3ED6001A48FD /* TwoFactorAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthViewController.swift; sourceTree = "<group>"; };
 		7A49CFC5213E3F04001A48FD /* CollectMissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectMissingInfoViewController.swift; sourceTree = "<group>"; };
 		7A49CFC721434EAC001A48FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +251,6 @@
 		C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		C5DD404C2136ED4400ECC819 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C5DD404F2136EF8200ECC819 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
-		C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDonation.storyboard; sourceTree = "<group>"; };
 		C5DD405E21381AD100ECC819 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C5DD406021382C5000ECC819 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C5E4A35821D28C9800530C75 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
@@ -278,8 +273,6 @@
 		E95A949221E8397000750A68 /* ApplicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Date.swift"; sourceTree = "<group>"; };
-		E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KFCVerifyDropoffImage.xib; sourceTree = "<group>"; };
-		E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KFCVerifyDropoffImage.swift; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
 		E98B003521378F68008FD75A /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
 		E98B0037213791D6008FD75A /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -320,7 +313,6 @@
 				C54284152152BFAD00373586 /* DonationModularTableViewController.swift */,
 				C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
-				E98036DF21CACD2C002344C7 /* VerifyDropoffImage */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
 				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
@@ -670,8 +662,6 @@
 		C5B0E1A021501A6700A8412C /* Junk */ = {
 			isa = PBXGroup;
 			children = (
-				7A49CFBF213E3BDD001A48FD /* Login.storyboard */,
-				C5DD40592137EFA400ECC819 /* CreateDonation.storyboard */,
 			);
 			name = Junk;
 			sourceTree = "<group>";
@@ -775,15 +765,6 @@
 			path = Templates;
 			sourceTree = "<group>";
 		};
-		E98036DF21CACD2C002344C7 /* VerifyDropoffImage */ = {
-			isa = PBXGroup;
-			children = (
-				E98036E121CACD37002344C7 /* KFCVerifyDropoffImage.swift */,
-				E98036E021CACD37002344C7 /* KFCVerifyDropoffImage.xib */,
-			);
-			name = VerifyDropoffImage;
-			sourceTree = "<group>";
-		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,9 +849,7 @@
 			files = (
 				C541E60521D675530024E437 /* LaunchScreen.storyboard in Resources */,
 				C5CA7BAB210D1E2D0052D440 /* GoogleService-Info.plist in Resources */,
-				E98036E221CACD37002344C7 /* KFCVerifyDropoffImage.xib in Resources */,
 				C5A351DC210D0CE500A717D3 /* Assets.xcassets in Resources */,
-				C5DD405A2137EFA400ECC819 /* CreateDonation.storyboard in Resources */,
 				C5475D0921542084006BA324 /* KFVProgress.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1072,7 +1051,6 @@
 				C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */,
 				E95A949321E8397000750A68 /* ApplicationService.swift in Sources */,
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
-				E98036E321CACD37002344C7 /* KFCVerifyDropoffImage.swift in Sources */,
 				C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */,
 				C541E61121D7D7A00024E437 /* TutorialViewController.swift in Sources */,
 				C5231EFB21DEB9EE001D9A7D /* WebsiteModel.swift in Sources */,
