@@ -12,11 +12,17 @@
 		7A5663A321E6D90000912729 /* DonationRequirementsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A221E6D90000912729 /* DonationRequirementsService.swift */; };
 		7A5663A521E6E67E00912729 /* DonationRequirementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A421E6E67E00912729 /* DonationRequirementsViewController.swift */; };
 		7A5663A721E7D24800912729 /* DonationRequirementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */; };
+		7A5B0E5921ED609400B2906C /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
+		7A5B0E5B21ED616A00B2906C /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B0E5A21ED616A00B2906C /* ApplicationService.swift */; };
 		7A695A0B215AE9CC00D4696D /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A695A0A215AE9CC00D4696D /* NotificationName.swift */; };
+		7AB05D0221ED5C2F00705B34 /* FlaggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB05D0121ED5C2F00705B34 /* FlaggingViewController.swift */; };
+		7AB05D0421ED5D2400705B34 /* StatusPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB05D0321ED5D2400705B34 /* StatusPagerTabStripViewController.swift */; };
+		7AB05D0621ED5EDB00705B34 /* ThrottleGlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB05D0521ED5EDB00705B34 /* ThrottleGlobalFunctions.swift */; };
+		7AB05D0821ED5EF300705B34 /* OnBoardingDistributer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB05D0721ED5EF300705B34 /* OnBoardingDistributer.swift */; };
+		7AB05D0A21ED5F7F00705B34 /* BasicSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB05D0921ED5F7F00705B34 /* BasicSettingsItem.swift */; };
 		ACD763F3135C5C1DBAD3E706 /* Pods_KifuSF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75120AF291FB1A99E32061F5 /* Pods_KifuSF.framework */; };
 		C50182E62141B1D400257412 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E52141B1D400257412 /* UIImage.swift */; };
 		C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182E72141B24C00257412 /* UIStoryboardSegue.swift */; };
-		C50182ED2142AC9A00257412 /* StatusPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */; };
 		C50182F02142AD4E00257412 /* DeliveryModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */; };
 		C50182F62142E3F100257412 /* UIDescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F52142E3F100257412 /* UIDescriptorView.swift */; };
 		C50182FA2142FB1B00257412 /* UIStickyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50182F92142FB1B00257412 /* UIStickyView.swift */; };
@@ -44,7 +50,6 @@
 		C53D92C02173438300AE3882 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92BF2173438300AE3882 /* UIImageView.swift */; };
 		C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */; };
 		C53D92C421736C4400AE3882 /* KFCPhoneNumberValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */; };
-		C53D92C621738F0C00AE3882 /* FlaggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */; };
 		C541E5FD21D644280024E437 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58B05D1213DBD380086124B /* UIView.swift */; };
 		C541E5FE21D644390024E437 /* KFMOpenDonationDescriptionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50E472C2151823D008A8C36 /* KFMOpenDonationDescriptionItem.swift */; };
 		C541E5FF21D644400024E437 /* KifuTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C505BD782146F73A00A5195B /* KifuTabBarViewController.swift */; };
@@ -118,16 +123,10 @@
 		E92994EC210D27C100A32924 /* DonationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994EB210D27C100A32924 /* DonationService.swift */; };
 		E92994EE210D27CC00A32924 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994ED210D27CC00A32924 /* Donation.swift */; };
 		E92994F3210D591D00A32924 /* ItemPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92994F2210D591D00A32924 /* ItemPostCell.swift */; };
-		E92E6AE221E9AA6600759747 /* ThrottleGlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92E6AE121E9AA6600759747 /* ThrottleGlobalFunctions.swift */; };
 		E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */; };
 		E9333D1E21CB36160031DD9F /* UserReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9333D1D21CB36160031DD9F /* UserReview.swift */; };
-		E93E9D6A21E86B3200E600E9 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E9D6921E86B3200E600E9 /* NSAttributedString.swift */; };
-		E93E9D6B21E877C800E600E9 /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B003521378F68008FD75A /* ReportingService.swift */; };
 		E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */; };
 		E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */; };
-		E95A948F21E821D300750A68 /* OnBoardingDistributer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */; };
-		E95A949121E8220600750A68 /* BasicSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A949021E8220600750A68 /* BasicSettingsItem.swift */; };
-		E95A949321E8397000750A68 /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A949221E8397000750A68 /* ApplicationService.swift */; };
 		E96F11EC21294016004D549A /* MapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F11EB21294016004D549A /* MapHelper.swift */; };
 		E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */; };
 		E984502D21321E7100096E84 /* PendingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */; };
@@ -150,10 +149,15 @@
 		7A5663A221E6D90000912729 /* DonationRequirementsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsService.swift; sourceTree = "<group>"; };
 		7A5663A421E6E67E00912729 /* DonationRequirementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsViewController.swift; sourceTree = "<group>"; };
 		7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationRequirementsModel.swift; sourceTree = "<group>"; };
+		7A5B0E5A21ED616A00B2906C /* ApplicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		7A695A0A215AE9CC00D4696D /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		7AB05D0121ED5C2F00705B34 /* FlaggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggingViewController.swift; sourceTree = "<group>"; };
+		7AB05D0321ED5D2400705B34 /* StatusPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		7AB05D0521ED5EDB00705B34 /* ThrottleGlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrottleGlobalFunctions.swift; sourceTree = "<group>"; };
+		7AB05D0721ED5EF300705B34 /* OnBoardingDistributer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingDistributer.swift; sourceTree = "<group>"; };
+		7AB05D0921ED5F7F00705B34 /* BasicSettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSettingsItem.swift; sourceTree = "<group>"; };
 		C50182E52141B1D400257412 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C50182E72141B24C00257412 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
-		C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryModularTableViewController.swift; sourceTree = "<group>"; };
 		C50182F12142AF5300257412 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		C50182F52142E3F100257412 /* UIDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDescriptorView.swift; sourceTree = "<group>"; };
@@ -186,7 +190,6 @@
 		C53D92BF2173438300AE3882 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C53D92C121735F4600AE3882 /* KFCLocationServiceDisclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCLocationServiceDisclaimer.swift; sourceTree = "<group>"; };
 		C53D92C321736C4400AE3882 /* KFCPhoneNumberValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFCPhoneNumberValidation.swift; sourceTree = "<group>"; };
-		C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlaggingViewController.swift; sourceTree = "<group>"; };
 		C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyDropoffViewController.swift; sourceTree = "<group>"; };
 		C541E60621D76DB90024E437 /* ReviewCollaboratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorViewController.swift; sourceTree = "<group>"; };
 		C541E60821D77C6F0024E437 /* ReviewCollaboratorDescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollaboratorDescriptorView.swift; sourceTree = "<group>"; };
@@ -261,16 +264,11 @@
 		E92994EB210D27C100A32924 /* DonationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationService.swift; sourceTree = "<group>"; };
 		E92994ED210D27CC00A32924 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		E92994F2210D591D00A32924 /* ItemPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPostCell.swift; sourceTree = "<group>"; };
-		E92E6AE121E9AA6600759747 /* ThrottleGlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrottleGlobalFunctions.swift; sourceTree = "<group>"; };
 		E9333D1B21CB2D980031DD9F /* UniversalExtensions+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Firebase.swift"; sourceTree = "<group>"; };
 		E9333D1D21CB36160031DD9F /* UserReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReview.swift; sourceTree = "<group>"; };
-		E93E9D6921E86B3200E600E9 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		E9439F7121350F0600261370 /* CasableVars.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = CasableVars.stencil; sourceTree = "<group>"; };
 		E9545F2C2135190800D76C26 /* Enum+SwitchlessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enum+SwitchlessCases.swift"; sourceTree = "<group>"; };
 		E9545F3021351DEC00D76C26 /* Sourcery.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sourcery.generated.swift; sourceTree = "<group>"; };
-		E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDistributer.swift; sourceTree = "<group>"; };
-		E95A949021E8220600750A68 /* BasicSettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSettingsItem.swift; sourceTree = "<group>"; };
-		E95A949221E8397000750A68 /* ApplicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		E96F11EB21294016004D549A /* MapHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHelper.swift; sourceTree = "<group>"; };
 		E9700C5621E035A700750787 /* UniversalExtensions+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalExtensions+Date.swift"; sourceTree = "<group>"; };
 		E984502C21321E7100096E84 /* PendingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -309,16 +307,16 @@
 		C50182EE2142ACA600257412 /* Status Tab */ = {
 			isa = PBXGroup;
 			children = (
-				C50182EC2142AC9A00257412 /* StatusPagerTabStripViewController.swift */,
+				7AB05D0321ED5D2400705B34 /* StatusPagerTabStripViewController.swift */,
 				C54284152152BFAD00373586 /* DonationModularTableViewController.swift */,
 				C50182EF2142AD4E00257412 /* DeliveryModularTableViewController.swift */,
 				C5475D0D21556ABD006BA324 /* KFInProgressDonationDescription */,
+				E98036DF21CACD2C002344C7 /* VerifyDropoffImage */,
 				C5475D0A215426DC006BA324 /* KFProgress */,
 				C58D9EB0215E0EEA00B180B3 /* KFEntityInfo */,
 				C58D9EB5215E208000B180B3 /* KFCollaboratorInfo */,
 				C58D9EC1216274E100B180B3 /* DestinationMapView */,
 				C541E60221D66E9A0024E437 /* VerifyDropoffViewController.swift */,
-				C541E60C21D7A80C0024E437 /* ReviewCollaborator */,
 			);
 			name = "Status Tab";
 			sourceTree = "<group>";
@@ -396,7 +394,7 @@
 				C5231F0021DF9550001D9A7D /* InformationModel.swift */,
 				C552163121E0C462005D85F0 /* TutorialModel.swift */,
 				C5231EFC21DEBAA9001D9A7D /* SettingsItem.swift */,
-				E95A949021E8220600750A68 /* BasicSettingsItem.swift */,
+				7AB05D0921ED5F7F00705B34 /* BasicSettingsItem.swift */,
 				7A5663A621E7D24800912729 /* DonationRequirementsModel.swift */,
 			);
 			name = Settings;
@@ -596,7 +594,7 @@
 				C54FDBEC2141A7D000BC89B8 /* PendingDonations */,
 				C5F78C84214E82F900B5395E /* VolunteerList */,
 				E9B88959217543B0004B6976 /* KFCLoading.swift */,
-				C53D92C521738F0C00AE3882 /* FlaggingViewController.swift */,
+				7AB05D0121ED5C2F00705B34 /* FlaggingViewController.swift */,
 				C5231EF921DEB65C001D9A7D /* Settings */,
 			);
 			name = Screens;
@@ -605,7 +603,8 @@
 		C5A351EB210D0E2600A717D3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E95A949221E8397000750A68 /* ApplicationService.swift */,
+				7AB05D0721ED5EF300705B34 /* OnBoardingDistributer.swift */,
+				7AB05D0521ED5EDB00705B34 /* ThrottleGlobalFunctions.swift */,
 				C552163321E49CAD005D85F0 /* NoDataItem.swift */,
 				C5CA7BBB210D4ADF0052D440 /* PhotoHelper.swift */,
 				E96F11EB21294016004D549A /* MapHelper.swift */,
@@ -614,8 +613,6 @@
 				C58D9ED32163AD7D00B180B3 /* KFPadding.swift */,
 				E9F4238E21CEDFB500F1DB5D /* UserDistance.swift */,
 				C5E4A35821D28C9800530C75 /* KeyboardHandler.swift */,
-				E95A948E21E821D300750A68 /* OnBoardingDistributer.swift */,
-				E92E6AE121E9AA6600759747 /* ThrottleGlobalFunctions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -697,6 +694,7 @@
 		C5CA7BAF210D24CF0052D440 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7A5B0E5A21ED616A00B2906C /* ApplicationService.swift */,
 				C5CA7BB0210D24F50052D440 /* UserService.swift */,
 				E92994EB210D27C100A32924 /* DonationService.swift */,
 				C5CA7BB9210D49130052D440 /* RequestService.swift */,
@@ -730,7 +728,6 @@
 				C53D92BD217341FB00AE3882 /* UIScrollView.swift */,
 				C53D92BF2173438300AE3882 /* UIImageView.swift */,
 				C555F8F321766897000CC299 /* UIWindow.swift */,
-				E93E9D6921E86B3200E600E9 /* NSAttributedString.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -763,6 +760,14 @@
 				C564187F216A872B00664DDB /* KeyedProperties.stencil */,
 			);
 			path = Templates;
+			sourceTree = "<group>";
+		};
+		E98036DF21CACD2C002344C7 /* VerifyDropoffImage */ = {
+			isa = PBXGroup;
+			children = (
+				C541E60C21D7A80C0024E437 /* ReviewCollaborator */,
+			);
+			name = VerifyDropoffImage;
 			sourceTree = "<group>";
 		};
 		ED844B4CC71267B714B5E09C /* Pods */ = {
@@ -812,9 +817,6 @@
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.AutoFillCredentialProvider = {
-								enabled = 1;
-							};
-							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.SafariKeychain = {
@@ -960,8 +962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E95A948F21E821D300750A68 /* OnBoardingDistributer.swift in Sources */,
-				E93E9D6B21E877C800E600E9 /* ReportingService.swift in Sources */,
+				7A5B0E5921ED609400B2906C /* ReportingService.swift in Sources */,
 				C541E60121D6445A0024E437 /* KFCLeaderboard.swift in Sources */,
 				C541E60021D644480024E437 /* KFMDonationInfo.swift in Sources */,
 				C541E5FF21D644400024E437 /* KifuTabBarViewController.swift in Sources */,
@@ -978,7 +979,6 @@
 				E9333D1C21CB2D980031DD9F /* UniversalExtensions+Firebase.swift in Sources */,
 				E9A8906D216841A600E71E8D /* KFMWidgetDescriptor.swift in Sources */,
 				C50E4732215187C4008A8C36 /* KFMVolunteerInfo.swift in Sources */,
-				C50182ED2142AC9A00257412 /* StatusPagerTabStripViewController.swift in Sources */,
 				C552163421E49CAD005D85F0 /* NoDataItem.swift in Sources */,
 				E92994EC210D27C100A32924 /* DonationService.swift in Sources */,
 				C576EFDE21C66A0D00F96922 /* Notification.swift in Sources */,
@@ -996,14 +996,14 @@
 				C5231EFF21DF82C1001D9A7D /* MailComposerModel.swift in Sources */,
 				E92527C92154A40D004556E0 /* TwoFactorAuthService+Moya.swift in Sources */,
 				7A5663A721E7D24800912729 /* DonationRequirementsModel.swift in Sources */,
+				7A5B0E5B21ED616A00B2906C /* ApplicationService.swift in Sources */,
 				E9545F3121351DEC00D76C26 /* Sourcery.generated.swift in Sources */,
 				C50182E82141B24C00257412 /* UIStoryboardSegue.swift in Sources */,
 				C564187E216A86BA00664DDB /* UIColor.swift in Sources */,
-				E92E6AE221E9AA6600759747 /* ThrottleGlobalFunctions.swift in Sources */,
 				C5B0E19E21501A1B00A8412C /* OpenDonationDetailedDescriptorView.swift in Sources */,
+				7AB05D0621ED5EDB00705B34 /* ThrottleGlobalFunctions.swift in Sources */,
 				C501830421447FD900257412 /* RoundedTableViewCell.swift in Sources */,
 				C53D92BE217341FB00AE3882 /* UIScrollView.swift in Sources */,
-				E95A949121E8220600750A68 /* BasicSettingsItem.swift in Sources */,
 				7A5663A121E6D46000912729 /* DonationRequirementsService + Moya.swift in Sources */,
 				C58D9ECA21629A9A00B180B3 /* KFMUserInfo.swift in Sources */,
 				C5CA7BBA210D49130052D440 /* RequestService.swift in Sources */,
@@ -1011,6 +1011,7 @@
 				C5CA7BBC210D4ADF0052D440 /* PhotoHelper.swift in Sources */,
 				C5CA7BB5210D2B030052D440 /* StorageService.swift in Sources */,
 				C50E473521518977008A8C36 /* KFMPendingDonation.swift in Sources */,
+				7AB05D0421ED5D2400705B34 /* StatusPagerTabStripViewController.swift in Sources */,
 				C576EFEA21C7AE9400F96922 /* UIGroupView.swift in Sources */,
 				C50182F02142AD4E00257412 /* DeliveryModularTableViewController.swift in Sources */,
 				C50182FE2143B8F600257412 /* UIStatisticsView.swift in Sources */,
@@ -1029,9 +1030,9 @@
 				C54FDBE1214199B800BC89B8 /* KFPWidgetInfo.swift in Sources */,
 				C5E4A35921D28C9900530C75 /* KeyboardHandler.swift in Sources */,
 				C5DD40502136EF8200ECC819 /* UITextView.swift in Sources */,
+				7AB05D0821ED5EF300705B34 /* OnBoardingDistributer.swift in Sources */,
 				C50182FC21430FE800257412 /* KFVDonationInfo.swift in Sources */,
 				C53D92C02173438300AE3882 /* UIImageView.swift in Sources */,
-				E93E9D6A21E86B3200E600E9 /* NSAttributedString.swift in Sources */,
 				C53D92BC21724B2900AE3882 /* UITextFieldContainer.swift in Sources */,
 				E92527C721548E65004556E0 /* TwoFactorAuthService.swift in Sources */,
 				C5CA7BB7210D2BD80052D440 /* StorageRefence.swift in Sources */,
@@ -1049,7 +1050,6 @@
 				E9700C5721E035A700750787 /* UniversalExtensions+Date.swift in Sources */,
 				E9545F2D2135190800D76C26 /* Enum+SwitchlessCases.swift in Sources */,
 				C53D92C221735F4600AE3882 /* KFCLocationServiceDisclaimer.swift in Sources */,
-				E95A949321E8397000750A68 /* ApplicationService.swift in Sources */,
 				C58D9EB2215E0FC800B180B3 /* KFVEntityInfo.swift in Sources */,
 				C53D92BA2171E46700AE3882 /* UIViewController.swift in Sources */,
 				C541E61121D7D7A00024E437 /* TutorialViewController.swift in Sources */,
@@ -1057,6 +1057,7 @@
 				C5475D1121556EA1006BA324 /* KFMInProgressDonationDescription.swift in Sources */,
 				7A5663A521E6E67E00912729 /* DonationRequirementsViewController.swift in Sources */,
 				C58D9EB4215E137A00B180B3 /* KFMEntityInfo.swift in Sources */,
+				7AB05D0A21ED5F7F00705B34 /* BasicSettingsItem.swift in Sources */,
 				C58D9EB9215E20A500B180B3 /* KFMCollaboratorInfo.swift in Sources */,
 				C54FDBD82141756000BC89B8 /* UITableView.swift in Sources */,
 				C50183002143BBD400257412 /* KFVVolunteerInfo.swift in Sources */,
@@ -1075,6 +1076,7 @@
 				C58D9EB7215E209C00B180B3 /* CollaboratorDescriptorView.swift in Sources */,
 				C560B7E72134732B008A9DF1 /* UIFont.swift in Sources */,
 				C58D9EC32162752A00B180B3 /* KFVDestinationMap.swift in Sources */,
+				7AB05D0221ED5C2F00705B34 /* FlaggingViewController.swift in Sources */,
 				C58D9ED42163AD7D00B180B3 /* KFPadding.swift in Sources */,
 				C5475D0F21556ADB006BA324 /* KFVInProgressDonationDescription.swift in Sources */,
 				C560B7EF213579F1008A9DF1 /* KFVWidget.swift in Sources */,
@@ -1083,7 +1085,6 @@
 				44EE8F12210D88EA00F387A3 /* VolunteerCell.swift in Sources */,
 				E9333D1E21CB36160031DD9F /* UserReview.swift in Sources */,
 				C5475D0C21542796006BA324 /* KFMProgress.swift in Sources */,
-				C53D92C621738F0C00AE3882 /* FlaggingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,14 +1224,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.codingbytes.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = org.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -1246,14 +1247,14 @@
 				CODE_SIGN_ENTITLEMENTS = KifuSF/KifuSF.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UALV34MRH2;
+				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = KifuSF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.codingbytes.KifuSF;
+				PRODUCT_BUNDLE_IDENTIFIER = org.linniergames.KifuSF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
