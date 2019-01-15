@@ -24,10 +24,10 @@ struct OnBoardingDistributer {
         
         if user.hasApprovedConditions == false {
             let conditionsVc = KFCLocationServiceDisclaimer()
-            viewController.present(conditionsVc, animated: true)
+            viewController.present(UINavigationController(rootViewController: conditionsVc), animated: true)
         } else if user.isVerified == false {
             let verifyNumberVc = KFCPhoneNumberValidation()
-            viewController.present(verifyNumberVc, animated: true)
+            viewController.present(UINavigationController(rootViewController: verifyNumberVc), animated: true)
         } else {
             
             // persist the user in User Defaults
