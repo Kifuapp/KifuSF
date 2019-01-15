@@ -112,4 +112,12 @@ extension UIImage {
         
         return image
     }()
+    
+    static let kfLogoRegister: UIImage = {
+        guard let image = UIImage(named: "Logo_login") else {
+            fatalError(KFErrorMessage.imageNotFound)
+        }
+        
+        return image
+    }()
 }
