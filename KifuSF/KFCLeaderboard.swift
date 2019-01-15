@@ -40,7 +40,7 @@ extension KFCLeaderboard: UITableViewDataSource {
         let user = User.current
         let newData = KFMUserInfo(
             profileImageURL: URL(string: user.imageURL)!,
-            name: "", //TODO: user's fullname
+            name: user.username, //TODO: user's fullname
             username: user.username,
             userReputation: user.reputation,
             userDonationsCount: user.numberOfDonations,

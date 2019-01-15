@@ -28,15 +28,15 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string> 6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>We need to use your camera in order to take pictures of donation items or to take a profile picture</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to calculate the distance between the nearast pick-up places and you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>We need access to your photos to be able to select a profile picture or a donation picture</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

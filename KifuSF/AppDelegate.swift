@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import GoogleSignIn
 
 @UIApplicationMain
@@ -43,10 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
         return true
     }
 
-    //TODO: alex-login logic
     private func setInitalViewController() {
-        //TODO: if location service is disabled prompt the required activation screen
-        
         if Auth.auth().currentUser != nil,
             let userData = UserDefaults.standard.object(forKey: "currentUser") as? Data,
             let user = try? JSONDecoder().decode(User.self, from: userData) {
@@ -108,7 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UIConf
 
 extension UIWindow {
     static var applicationAlertWindow: UIWindow {
-        
         let appDelegate = AppDelegate.shared
         let alertWindow: UIWindow
         if let window = appDelegate.alertWindow {

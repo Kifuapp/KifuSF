@@ -13,8 +13,6 @@ class KifuTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO: check if for location acces
-        
         let homeViewController = KFCOpenDonations()
         let settingViewController = SettingsViewController()
         let statusViewController = StatusPagerTabStripViewController()
