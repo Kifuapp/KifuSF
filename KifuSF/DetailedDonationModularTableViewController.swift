@@ -87,16 +87,27 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
         
         switch userRequestingStatus {
         case .userHasNotRequested:
-            RequestService.createRequest(for: self.donation) { (isSuccessful) in
-                self.actionButton.isEnabled = true
-
-                if isSuccessful {
-                    self.userRequestingStatus = .userHasRequested
-                } else {
-                    let errorAlert = UIAlertController(errorMessage: nil)
-                    self.present(errorAlert, animated: true)
+            
+            // confirm with user about exposing their phone number if approved
+            UIAlertController(
+                title: nil,
+                message: "By pressing ok, you are consenting to share your phone number with the donator if they approve your request.",
+                preferredStyle: .actionSheet)
+                .addConfirmationButton(title: "OK", style: .destructive) { _ in
+                    
+                    //send
+                    RequestService.createRequest(for: self.donation) { (isSuccessful) in
+                        self.actionButton.isEnabled = true
+                        
+                        if isSuccessful {
+                            self.userRequestingStatus = .userHasRequested
+                        } else {
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            self.present(errorAlert, animated: true)
+                        }
+                    }
                 }
-            }
+                .present(in: self)
         case .userHasRequested:
             RequestService.cancelRequest(for: self.donation) { (isSuccessful) in
                 self.actionButton.isEnabled = true
