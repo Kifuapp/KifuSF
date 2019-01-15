@@ -116,7 +116,7 @@ extension TutorialViewController: UIConfigurable {
                       description: "Gain points by donating and volunteering, and show off your score!"),
             SlideView(image: .kfDeliveryIcon, //Happy
                       title: "Start Donating",
-                      description: "Donating and delivery delivery are fast and simple.")
+                      description: "Donating and delivery are fast and simple.")
         ]
 
     }
