@@ -110,10 +110,10 @@ extension TutorialViewController: UIConfigurable {
                       description: "Donations are delivered via volunteers."),
             SlideView(image: .kfDeliveryIcon, //Safe
                       title: "Donate with Trust",
-                      description: "Deliveries are complete after a verification process"),
+                      description: "Deliveries are complete after a verification process."),
             SlideView(image: .kfDeliveryIcon, //Something
                       title: "Everyone Gains Reputation",
-                      description: "Gain points by donating and volunteering, and show off your score!"),
+                      description: "Gain reputation by donating and volunteering, and become a trusted member!"),
             SlideView(image: .kfDeliveryIcon, //Happy
                       title: "Start Donating",
                       description: "Donating and delivery are fast and simple.")
