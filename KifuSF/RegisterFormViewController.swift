@@ -61,6 +61,13 @@ class RegisterFormViewController: UIScrollableViewController {
                                                  contentView: container)
     }()
     
+    private let phoneNumberDisclaimerLabel: UILabel = {
+        let label = UILabel(font: UIFont.preferredFont(forTextStyle: .footnote),
+                            textColor: UIColor.Text.Body)
+        
+        return label
+    }()
+    
     private let emailInputView: UIGroupView<UITextFieldContainer> = {
         let container = UITextFieldContainer(textContentType: .emailAddress,
                                              returnKeyType: .next,
@@ -310,6 +317,9 @@ extension RegisterFormViewController: UIConfigurable {
         title = "Register Form"
         disclaimerLabel.text = "By signing up you agree to our Terms and Privacy Policy."
         
+        phoneNumberDisclaimerLabel.text = "for verifcation and communication purposes in the app"
+        phoneNumberDisclaimerLabel.numberOfLines = 0
+        
         guard let signInProviderInfo = signInProvderInfo else { return }
         
         if let fullName = signInProvderInfo?.displayName {
@@ -375,6 +385,7 @@ extension RegisterFormViewController: UIConfigurable {
         inputStackView.addArrangedSubview(fullNameInputView)
         inputStackView.addArrangedSubview(usernameInputView)
         inputStackView.addArrangedSubview(phoneNumberInputView)
+        inputStackView.addArrangedSubview(phoneNumberDisclaimerLabel)
         inputStackView.addArrangedSubview(emailInputView)
         if signInProvderInfo == nil {
             inputStackView.addArrangedSubview(passwordInputView)
