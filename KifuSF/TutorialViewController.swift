@@ -98,25 +98,25 @@ extension TutorialViewController: UIConfigurable {
         slidesView = [
             SlideView(image: .kfDeliveryIcon,
                       title: "Welcome to KifuSF",
-                      description: "KifuSF aims to foster a community of people who care about donating to their local charities."),
+                      description: "KifuSF is an app that aims to simplify the donation process."),
             SlideView(image: .kfDeliveryIcon, //Hand + Heart Symbol
                       title: "Make a gift",
-                      description: "Donating is as easy as uploading an image of the item, adding a short description, and selecting a pickup location of your choosing."),
+                      description: "Just take a picture, add a location/description."),
             SlideView(image: .kfDeliveryIcon, //Map Pin
                       title: "Pick up Locations",
-                      description: "Your pick up location can be right outside of your work, thus making it easy to meet with your volunteer. Your donation will then be on its way to helping the community!"), // swiftlint:disable:this line_length
+                      description: "Donate from where its convenients for you. No hassle necessary."), // swiftlint:disable:this line_length
             SlideView(image: .kfDeliveryIcon, //Car Symbol
                       title: "Volunteers",
                       description: "Donations are delivered via volunteers."),
             SlideView(image: .kfDeliveryIcon, //Safe
                       title: "Donate with Trust",
-                      description: "Deliveries are verified by you the donator! If something doesn't look right, you have the option to report it!"),
+                      description: "Deliveries are complete after a verification process."),
             SlideView(image: .kfDeliveryIcon, //Something
                       title: "Everyone Gains Reputation",
-                      description: "A completed donation will earn you the donator points. This also earns points to your volunteer."),
+                      description: "Gain reputation by donating and volunteering, and become a trusted member!"),
             SlideView(image: .kfDeliveryIcon, //Happy
                       title: "Start Donating",
-                      description: "Donating and delivery delivery are fast and simple.")
+                      description: "Donating and delivery are fast and simple.")
         ]
 
     }

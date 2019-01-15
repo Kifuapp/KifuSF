@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleSignIn
-import Firebase
+import FirebaseAuth
 
 class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Variables

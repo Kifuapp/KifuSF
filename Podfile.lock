@@ -119,6 +119,35 @@ DEPENDENCIES:
   - Sourcery
   - XLPagerTabStrip (~> 8.0)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Cosmos
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - FirebaseStorage
+    - FirebaseUI
+    - GoogleAppMeasurement
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMOAuth2
+    - GTMSessionFetcher
+    - Kingfisher
+    - leveldb-library
+    - LocationPicker
+    - Moya
+    - nanopb
+    - PureLayout
+    - Result
+    - Sourcery
+    - XLPagerTabStrip
+    
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Cosmos: 7bcee0fa858a9355a214f2a181be5dffcee42c81
@@ -149,4 +178,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f2b676d52ffa38f467f4b4affa83242bdf1325c5
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
