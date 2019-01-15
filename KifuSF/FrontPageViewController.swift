@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class FrontPageViewController: UIViewController, GIDSignInUIDelegate {
     //MARK: - Variables
-    private let logoImageView = UIImageView(image: UIImage.kfLogo)
+    private let logoImageView = UIImageView(image: UIImage.kfLogoRegister)
     
     private let bottomStackView = UIStackView(axis: .vertical,
                                               alignment: .fill,
