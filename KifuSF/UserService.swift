@@ -152,8 +152,8 @@ struct UserService {
     static func resetPassword(for email: String, completion: @escaping (Bool) -> ()) {
         
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            guard error == nil else {
-                assertionFailure(error!.localizedDescription)
+            if let error = error {
+                assertionFailure(error.localizedDescription)
                 
                 return completion(false)
             }

@@ -136,7 +136,7 @@ extension VerifyDropoffViewController: UIConfigurable {
         guard
             let verificationUrlString = donation.verificationUrl,
             let verificationUrl = URL(string: verificationUrlString) else {
-            fatalError("validation needs to happen before this view controller")
+            fatalError("ensure data validation occurs before this view controller")
         }
         
         dropoffImageView.kf.setImage(with: verificationUrl)

@@ -240,9 +240,8 @@ extension KFCOpenDonations: KFPWidgetDelegate {
         switch type {
         case .donation:
             guard let donation = self.currentDonation else {
-                fatalError("the widget view needs to be hidden if there is no current donation")
+                return assertionFailure("the widget view needs to be hidden if there is no current donation")
             }
-            
             
             switch donation.status {
             case .open:
@@ -279,7 +278,7 @@ extension KFCOpenDonations: KFPWidgetDelegate {
 
                 tabbarVc.selectedIndex = 1
             case .none:
-                fatalError("widget view should be hidden if there are no pending requests or a current delivery")
+                assertionFailure("widget view should be hidden if there are no pending requests or a current delivery")
             }
         }
     }

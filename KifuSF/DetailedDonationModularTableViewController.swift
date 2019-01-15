@@ -120,7 +120,7 @@ class DetailedDonationModularTableViewController: ModularTableViewController {
                 }
             }
         case .userAlreadyHasCurrentDelivery:
-            fatalError("this button should be hidden in this state")
+            assertionFailure("this button should be hidden in this state")
         }
     }
 

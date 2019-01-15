@@ -63,8 +63,7 @@ struct OnBoardingDistributer {
      either presents the HomeTabBar (if the window.root = FrontPageVc), or dismisses
      to the HomeTabBar (if the window.root = HomeTabBar)
      
-     - warning: presenting the frontpage controller must occur from the home tab
-     bar controller
+     - warning: presenting the home page must require the window to have a root view controller
      */
     static func presentHomePage(from viewController: UIViewController) {
         guard let rootVc = AppDelegate.shared.window?.rootViewController else {
