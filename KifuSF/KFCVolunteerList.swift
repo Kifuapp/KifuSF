@@ -87,19 +87,31 @@ extension KFCVolunteerList: KFPVolunteerInfoCellDelegate {
         
         let selectedVolunteer = self.volunteers[indexPath.row]
         tableViewWithRoundedCells.isUserInteractionEnabled = false
-        let loadingVC = KFCLoading(style: .whiteLarge)
-        loadingVC.present()
-        DonationService.accept(volunteer: selectedVolunteer, for: self.donation) { (isSuccessfull) in
-            loadingVC.dismiss {
-                if isSuccessfull {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    let errorAlert = UIAlertController(errorMessage: nil)
-                    self.present(errorAlert, animated: true)
-                    
-                    self.tableViewWithRoundedCells.isUserInteractionEnabled = false
+        
+        
+        // confirm with user about exposing their phone number if approved
+        UIAlertController(
+            title: nil,
+            message: "By pressing ok, you are consenting to share your phone number with this volunteer.",
+            preferredStyle: .actionSheet)
+            .addConfirmationButton(title: "OK", style: .destructive) { _ in
+                
+                //send
+                let loadingVC = KFCLoading(style: .whiteLarge)
+                loadingVC.present()
+                DonationService.accept(volunteer: selectedVolunteer, for: self.donation) { (isSuccessfull) in
+                    loadingVC.dismiss {
+                        if isSuccessfull {
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            let errorAlert = UIAlertController(errorMessage: nil)
+                            self.present(errorAlert, animated: true)
+                            
+                            self.tableViewWithRoundedCells.isUserInteractionEnabled = false
+                        }
+                    }
                 }
             }
-        }
+            .present(in: self)
     }
 }
